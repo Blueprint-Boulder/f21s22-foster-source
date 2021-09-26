@@ -7,7 +7,6 @@ develop within a virtual Linux environment if you are on Windows)
 1) Ensure that you have Node and NPM (node package manager) installed.
 2) Make sure that your npm version is 7.5.2 with `sudo npm install npm@7.5.2 -g`
 3) Install the Angular command line tool with `sudo npm install -g @angular/cli`
-4)
 
 The following is automatically generated documentation by Angular:
 
