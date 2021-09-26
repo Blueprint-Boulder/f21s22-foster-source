@@ -1,4 +1,15 @@
-# F21s22FosterSource
+# Foster Source Respite App
+### System Set-Up
+This project is going to be built in angular, so to develop you will need to properly set up your environment.
+The commands that I'll write in this document will be geared towards Linux, but should also work on MacOS.
+If you are running Windows, there are equivalent commands that you will need to translate to. (It may be easier to
+develop within a virtual Linux environment if you are on Windows)
+1) Ensure that you have Node and NPM (node package manager) installed.
+2) Make sure that your npm version is 7.5.2 with `sudo npm install npm@7.5.2 -g`
+3) Install the Angular command line tool with `sudo npm install -g @angular/cli`
+4)
+
+The following is automatically generated documentation by Angular:
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
