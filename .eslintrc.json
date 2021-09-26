@@ -28,16 +28,19 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "class-methods-use-this": "error",
+        "eqeqeq": "error"
       }
     },
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended", "prettier"],
       "rules": {
-        "prettier/prettier": ["error"]
+        "prettier/prettier": ["error"],
+        "@typescript-eslint/no-explicit-any": ["error"]
       },
-      "plugins": ["prettier"]
+      "plugins": ["prettier", "@typescript-eslint"]
     }
   ]
 }

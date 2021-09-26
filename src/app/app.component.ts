@@ -9,6 +9,6 @@ export class AppComponent {
   title = 'f21s22-foster-source';
 }
 
-function test() {
+function test(): any {
   return '';
 }
