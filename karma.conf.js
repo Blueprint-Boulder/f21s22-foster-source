@@ -28,6 +28,14 @@ module.exports = function (config) {
       dir: require("path").join(__dirname, "./coverage/f21s22-foster-source"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
+      check: {
+        global: {
+          statements: 100,
+          branches: 100,
+          functions: 100,
+          lines: 100,
+        },
+      },
     },
     reporters: ["progress", "kjhtml"],
     port: 9876,
