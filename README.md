@@ -29,6 +29,10 @@ attempt to commit. If there are errors, you will not be able to commit until you
 I understand this will probably be pretty annoying, but it ensures consistency and readability across our code-base. If there are
 errors that you believe are a result of an issue in the setup and configurations of these tools, please let Jett know.
 
+Make sure to commit often! It will be much easier to fix errors incrementally rather than all at once before pushing.
+
+When pushing, the test suite will be run. You will not be able to push until all tests pass.
+
 - `git add .`
 - `git commit -m "WHAT CHANGED?"`
 - `git push --set-upstream origin [your branch name]` (only needs to be run the first time you push off of this branch. Subsequent pushes can be made with `git push`)
