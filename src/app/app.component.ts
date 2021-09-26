@@ -8,7 +8,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'f21s22-foster-source';
 }
-
-function test(): any {
-  return '';
-}

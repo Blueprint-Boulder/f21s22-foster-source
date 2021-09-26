@@ -11,7 +11,9 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier",
+        "plugin:@typescript-eslint/recommended"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -31,21 +33,15 @@
           }
         ],
         "class-methods-use-this": "error",
-        "eqeqeq": "error"
-      }
+        "eqeqeq": "error",
+        "@typescript-eslint/no-explicit-any": ["error"],
+        "prettier/prettier": ["error", {}]
+      },
+      "plugins": ["prettier", "@typescript-eslint"]
     },
     {
       "files": ["*.html"],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended",
-        "prettier",
-        "plugin:@typescript-eslint/recommended"
-      ],
-      "rules": {
-        "prettier/prettier": ["error"],
-        "@typescript-eslint/no-explicit-any": ["error"]
-      },
-      "plugins": ["prettier", "@typescript-eslint"]
+      "extends": ["plugin:@angular-eslint/template/recommended"]
     }
   ]
 }
