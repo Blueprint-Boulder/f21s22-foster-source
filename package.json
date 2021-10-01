@@ -2,7 +2,7 @@
   "name": "f21s22-foster-source",
   "version": "0.0.0",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "npx husky install",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

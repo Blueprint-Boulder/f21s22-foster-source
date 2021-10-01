@@ -34,8 +34,14 @@
         ],
         "class-methods-use-this": "error",
         "eqeqeq": "error",
+        "camelcase": "error",
         "@typescript-eslint/no-explicit-any": ["error"],
-        "prettier/prettier": ["error", {}]
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
       },
       "plugins": ["prettier", "@typescript-eslint"]
     },
