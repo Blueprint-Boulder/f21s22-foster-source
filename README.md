@@ -5,11 +5,13 @@
 This project is going to be built in angular, so to develop you will need to properly set up your environment.
 The commands that I'll write in this document will be geared towards Linux, but should also work on MacOS.
 If you are running Windows, there are equivalent commands that you will need to translate to. (It may be easier to
-develop within a virtual Linux environment if you are on Windows)
+develop within a virtual Linux environment if you are on Windows).
 
 1. Ensure that you have Node and NPM (node package manager) installed.
 2. Make sure that your npm version is 7.5.2 with `sudo npm install npm@7.5.2 -g`
-3. Install the Angular command line tool with `sudo npm install -g @angular/cli`
+3. Ensure that `npx` is installed globally on your machine with `sudo npm install -g npx`
+4. Install the Angular command line tool with `sudo npm install -g @angular/cli`
+5. Run `npm install` when cloning the fresh repository.
 
 ## Git
 
@@ -52,7 +54,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate module [module name]` to generate a module.  
+Run `ng generate component [module name]/component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate service services/[service name]/[service name]` to generate a service. The two service names are intentional to place the service in a subdirectory with the same name.
 
 ## Build
 
