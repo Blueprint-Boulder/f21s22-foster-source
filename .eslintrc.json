@@ -32,7 +32,6 @@
             "style": "kebab-case"
           }
         ],
-        "class-methods-use-this": "error",
         "eqeqeq": "error",
         "camelcase": "error",
         "@typescript-eslint/no-explicit-any": ["error"],
