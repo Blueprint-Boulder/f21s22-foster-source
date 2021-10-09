@@ -1,3 +1,6 @@
 <h2>This is the landing page!</h2>
 
-<div *ngIf=""></div>
+<div *ngIf="latestAnnouncement">
+  <p>There is an announcement!</p>
+  <app-announcement [announcement]="latestAnnouncement"></app-announcement>
+</div>

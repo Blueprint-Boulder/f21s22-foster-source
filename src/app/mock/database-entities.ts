@@ -6,8 +6,7 @@ const announcements: Announcement[] = [
     author: 'Tim Cook',
     title: 'This is the first announcement!',
     bodyHTML: `
-    <i>this shoud be some italic text...</i>
-    <hr>
+    <b>this should be some bold text...</b>
     <div>Also it has a div!</div>
     `,
   },

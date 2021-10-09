@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingPageComponent } from './landing-page.component';
+import { AnnouncementComponent } from './announcement.component';
 import {HttpClientModule} from "@angular/common/http";
 
-describe('LandingPageComponent', () => {
-  let component: LandingPageComponent;
-  let fixture: ComponentFixture<LandingPageComponent>;
+describe('AnnouncementComponent', () => {
+  let component: AnnouncementComponent;
+  let fixture: ComponentFixture<AnnouncementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingPageComponent ],
-      imports: [HttpClientModule]
+      declarations: [ AnnouncementComponent ],
+      imports: [ HttpClientModule ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture = TestBed.createComponent(AnnouncementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
