@@ -8,6 +8,6 @@ export class EmailMockService implements EmailService {
   public sendAccountVerificationEmail(
     email: string
   ): Observable<SendAccountVerificationResponse> {
-    return of({});
+    return of({ email: 'test@gmail.com' });
   }
 }
