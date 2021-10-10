@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Announcement } from '../../models/announcement.model';
 import { DatabaseService } from '../../services/database-service/database.service';
 import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
-import { tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,18 +11,24 @@ import { tap } from 'rxjs/operators';
   providers: [databaseServiceProvider],
 })
 export class LandingPageComponent implements OnInit {
-  public latestAnnouncement: Announcement | null = null;
-
-  constructor(private dbService: DatabaseService) {}
+  public latestAnnouncement: Announcement;
+  @ViewChild('toast') toast: ElementRef;
+  constructor(
+    private dbService: DatabaseService,
+    private toastService: ToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.dbService
-      .getLatestAnnouncement()
-      .pipe(
-        tap((a: Announcement) => {
-          this.latestAnnouncement = a;
-        })
-      )
-      .subscribe();
+    this.dbService.getLatestAnnouncement().subscribe(
+      (a: Announcement) => {
+        this.latestAnnouncement = a;
+      },
+      (error) => {
+        this.toastService.error(
+          'Failed to fetch latest announcement. Try reloading the page.',
+          'Error'
+        );
+      }
+    );
   }
 }
