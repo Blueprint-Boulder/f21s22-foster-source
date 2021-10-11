@@ -1,4 +1,5 @@
 import { Announcement } from '../models/announcement.model';
+import { User } from '../models/user.model';
 
 const announcements: Announcement[] = [
   {
@@ -12,4 +13,12 @@ const announcements: Announcement[] = [
   },
 ];
 
-export { announcements };
+const users: User[] = [
+  {
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+  },
+];
+
+export { announcements, users };

@@ -4,6 +4,7 @@ import { Announcement } from '../../models/announcement.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
+import { User } from '../../models/user.model';
 
 export class DatabaseImplService implements DatabaseService {
   constructor(private http: HttpClient) {}
@@ -16,6 +17,22 @@ export class DatabaseImplService implements DatabaseService {
       .pipe(
         catchError((error) => {
           console.log('Error getting latest announcement.');
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getUserById(id: number): Observable<User> {
+    return this.http
+      .get<User>(
+        `${environment.backendHost}/api/db/getUserById?id=${encodeURIComponent(
+          id
+        )}`
+      )
+      .pipe(
+        catchError((error) => {
+          console.log('Error getting user by ID.');
           console.log(error);
           return throwError(error);
         })
