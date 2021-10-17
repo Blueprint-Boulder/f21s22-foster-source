@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BlacklistTableComponent } from './blacklist-table.component';
+import {HttpClientModule} from "@angular/common/http";
 
 describe('BlacklistTableComponent', () => {
   let component: BlacklistTableComponent;
@@ -8,7 +9,8 @@ describe('BlacklistTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BlacklistTableComponent ]
+      declarations: [ BlacklistTableComponent ],
+      imports: [HttpClientModule]
     })
     .compileComponents();
   });
