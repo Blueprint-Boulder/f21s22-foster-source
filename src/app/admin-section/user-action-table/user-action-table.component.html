@@ -1,19 +1,90 @@
 <div class="table-container">
-  <div
-    *ngFor="let user of users"
-    class="row fs-tan-background user-row p-4 m-2"
-  >
-    <div class="col-8 m-auto">
-      <span><b>Tim Cook</b></span
-      ><br />
-      <span>tim.cook@apple.com</span><br />
-      <span><i>Case Worker: Gina White, gina.white@colorado.gov</i></span>
+  <div *ngFor="let user of users; index as i">
+    <div
+      class="row fs-tan-background user-row p-4"
+      [ngClass]="{ 'mt-4': i != 0 }"
+    >
+      <div class="col-sm-8 m-auto">
+        <span><b>Tim Cook</b></span
+        ><br />
+        <span>tim.cook@apple.com</span><br />
+        <span><i>Case Worker: Gina White, gina.white@colorado.gov</i></span>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-auto">
+        <button
+          *ngIf="users[i].isCollapsed"
+          [@inOutAnimation]
+          class="btn btn-primary mr-5 text-white w-100 my-2"
+        >
+          Approve
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-auto">
+        <button
+          *ngIf="users[i].isCollapsed"
+          [@inOutAnimation]
+          class="btn btn-secondary w-100 my-2"
+          (click)="collapse.toggle()"
+          [attr.aria-expanded]="!users[i].isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Deny
+        </button>
+      </div>
     </div>
-    <div class="col-2 m-auto">
-      <button class="btn btn-primary mr-5 text-white w-100">Approve</button>
-    </div>
-    <div class="col-2 m-auto">
-      <button class="btn btn-secondary w-100">Deny</button>
+    <div
+      class="row fs-tan-background user-row p-4"
+      #collapse="ngbCollapse"
+      [(ngbCollapse)]="users[i].isCollapsed"
+      [attr.aria-expanded]="!users[i].isCollapsed"
+      aria-controls="collapseExample"
+    >
+      <div class="col-12">
+        <form>
+          <div class="form-group">
+            <label for="denialReasonTextArea"
+              >Reason for denial of application.</label
+            >
+            <textarea
+              class="form-control"
+              id="denialReasonTextArea"
+              rows="2"
+              required
+            ></textarea>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="sendCopyCheck"
+            />
+            <label class="form-check-label" for="sendCopyCheck">
+              Send a copy of this response to the applicant's provided email
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="blacklistCheck"
+            />
+            <label class="form-check-label" for="blacklistCheck">
+              Blacklist user to prevent future applications
+            </label>
+          </div>
+          <button class="btn btn-secondary float-right ml-3">
+            Deny Applicant
+          </button>
+        </form>
+        <button
+          (click)="collapse.toggle()"
+          class="btn btn-light btn-outline-dark float-right"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   </div>
 </div>

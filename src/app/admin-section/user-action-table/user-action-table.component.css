@@ -1,4 +1,10 @@
 .table-container {
   width: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 0px; /* width of the entire scrollbar */
 }
