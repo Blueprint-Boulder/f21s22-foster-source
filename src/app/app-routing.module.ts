@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       import('./admin-section/admin-section.module').then(
         (m) => m.AdminSectionModule
       ),
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];
 
