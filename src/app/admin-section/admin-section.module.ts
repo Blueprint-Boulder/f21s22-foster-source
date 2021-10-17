@@ -7,18 +7,20 @@ import { UserActionTableComponent } from './user-action-table/user-action-table.
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: AdminPageComponent,
-  },
-];
-
-export const adminRouting = RouterModule.forChild(routes);
+import { AdminSectionRoutingModule } from './admin-section-routing.module';
+import { BlacklistTableComponent } from './blacklist-table/blacklist-table.component';
 
 @NgModule({
-  declarations: [AdminPageComponent, UserActionTableComponent],
-  imports: [CommonModule, adminRouting, NgbCollapseModule, ReactiveFormsModule],
+  declarations: [
+    AdminPageComponent,
+    UserActionTableComponent,
+    BlacklistTableComponent,
+  ],
+  imports: [
+    CommonModule,
+    AdminSectionRoutingModule,
+    NgbCollapseModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminSectionModule {}
