@@ -1,6 +1,7 @@
 import { Announcement } from '../models/announcement.model';
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
+import { BlacklistedUser } from '../models/blacklisted-user.model';
 
 const announcements: Announcement[] = [
   {
@@ -46,4 +47,28 @@ const applicants: Applicant[] = [
   },
 ];
 
-export { announcements, users, applicants };
+const blacklist: BlacklistedUser[] = [
+  {
+    name: 'Josh Smith',
+    email: 'josh.smith@aol.com',
+    phone: '(720) 822-9918',
+    bannedBy: 'Jett Crowson',
+    banDate: new Date(),
+  },
+  {
+    name: 'Amy Green',
+    email: 'amygirl1111@aol.com',
+    phone: '(720) 221-9887',
+    bannedBy: 'Jett Crowson',
+    banDate: new Date(),
+  },
+  {
+    name: 'Bill Gates',
+    email: 'bill@microsoft.com',
+    phone: '(315) 883-1182',
+    bannedBy: 'Jett Crowson',
+    banDate: new Date(),
+  },
+];
+
+export { announcements, users, applicants, blacklist };

@@ -1,11 +1,17 @@
 import { DatabaseService } from './database.service';
 import { Observable, of } from 'rxjs';
 import { Announcement } from '../../models/announcement.model';
-import { announcements, users, applicants } from '../../mock/database-entities';
+import {
+  announcements,
+  users,
+  applicants,
+  blacklist,
+} from '../../mock/database-entities';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { Applicant } from '../../models/applicant.model';
+import { BlacklistedUser } from '../../models/blacklisted-user.model';
 
 export class DatabaseMockService implements DatabaseService {
   constructor(private http: HttpClient) {}
@@ -20,5 +26,9 @@ export class DatabaseMockService implements DatabaseService {
 
   public getApplicants(): Observable<Applicant[]> {
     return of(applicants);
+  }
+
+  public getBlacklist(): Observable<BlacklistedUser[]> {
+    return of(blacklist);
   }
 }

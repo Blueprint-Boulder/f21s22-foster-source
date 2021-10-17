@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 import { Applicant } from '../../models/applicant.model';
+import { BlacklistedUser } from '../../models/blacklisted-user.model';
 
 export class DatabaseImplService implements DatabaseService {
   constructor(private http: HttpClient) {}
@@ -46,6 +47,18 @@ export class DatabaseImplService implements DatabaseService {
       .pipe(
         catchError((error) => {
           console.log('Error getting applicants.');
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getBlacklist(): Observable<BlacklistedUser[]> {
+    return this.http
+      .get<BlacklistedUser[]>(`${environment.backendHost}/api/db/getBlacklist`)
+      .pipe(
+        catchError((error) => {
+          console.log('Error getting blacklisted users.');
           console.log(error);
           return throwError(error);
         })

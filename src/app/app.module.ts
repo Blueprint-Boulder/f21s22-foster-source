@@ -8,9 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
+import { ToastContainerComponent } from './common/toast-container/toast-container.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent],
+  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

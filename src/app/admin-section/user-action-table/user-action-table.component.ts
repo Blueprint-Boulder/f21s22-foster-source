@@ -5,6 +5,9 @@ import { DatabaseService } from '../../services/database-service/database.servic
 import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
 import { formatDate } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-user-action-table',
@@ -30,18 +33,23 @@ export class UserActionTableComponent implements OnInit {
 
   constructor(
     private dbService: DatabaseService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
     this.dbService.getApplicants().subscribe(
       (applicants: Applicant[]) => {
+        this.users = [];
         for (let i = 0; i < applicants.length; i++) {
           this.users.push({ ...applicants[i], isCollapsed: true });
         }
       },
-      (error) => {
-        // TODO
+      (error: HttpErrorResponse) => {
+        this.toastService.show({
+          body: `Something went wrong trying to fetch the list of applicants.`,
+          preset: ToastPresets.ERROR,
+        });
       }
     );
   }
@@ -51,10 +59,20 @@ export class UserActionTableComponent implements OnInit {
   }
 
   public denyApplicant(index: number) {
+    const toDelete: Applicant = this.users[index];
     this.users.splice(index, 1);
+    this.toastService.show({
+      body: `Successfully denied applicant ${toDelete.name}.`,
+      preset: ToastPresets.SUCCESS,
+    });
   }
 
   public approveApplicant(index: number) {
+    const toDelete: Applicant = this.users[index];
     this.users.splice(index, 1);
+    this.toastService.show({
+      body: `Successfully approved applicant ${toDelete.name}.`,
+      preset: ToastPresets.SUCCESS,
+    });
   }
 }
