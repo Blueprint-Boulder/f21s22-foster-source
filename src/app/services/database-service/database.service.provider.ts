@@ -4,7 +4,7 @@ import { DatabaseMockService } from './database.mock.service';
 import { DatabaseImplService } from './database.impl.service';
 
 const databaseServiceFactory = (http: HttpClient) => {
-  return new DatabaseImplService(http);
+  return new DatabaseMockService(http);
 };
 
 export const databaseServiceProvider = {

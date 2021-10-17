@@ -5,16 +5,25 @@
       [ngClass]="{ 'mt-4': i != 0 }"
     >
       <div class="col-sm-8 m-auto">
-        <span><b>Tim Cook</b></span
+        <span
+          ><b>{{ users[i].name }}</b></span
         ><br />
-        <span>tim.cook@apple.com</span><br />
-        <span><i>Case Worker: Gina White, gina.white@colorado.gov</i></span>
+        <span>{{ users[i].email }}</span
+        ><br />
+        <span
+          >Case Worker: {{ users[i].caseWorkerName }},
+          {{ users[i].caseWorkerEmail }}</span
+        ><br />
+        <small
+          ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small
+        >
       </div>
       <div class="col-xs-6 col-sm-2 m-auto">
         <button
           *ngIf="users[i].isCollapsed"
           [@inOutAnimation]
           class="btn btn-primary mr-5 text-white w-100 my-2"
+          (click)="approveApplicant(i)"
         >
           Approve
         </button>
@@ -40,7 +49,7 @@
       aria-controls="collapseExample"
     >
       <div class="col-12">
-        <form>
+        <form [formGroup]="denyFormGroup" (ngSubmit)="denyApplicant(i)">
           <div class="form-group">
             <label for="denialReasonTextArea"
               >Reason for denial of application.</label
@@ -49,6 +58,7 @@
               class="form-control"
               id="denialReasonTextArea"
               rows="2"
+              formControlName="reason"
               required
             ></textarea>
           </div>
@@ -58,6 +68,7 @@
               type="checkbox"
               value=""
               id="sendCopyCheck"
+              formControlName="sendCopy"
             />
             <label class="form-check-label" for="sendCopyCheck">
               Send a copy of this response to the applicant's provided email
@@ -69,6 +80,7 @@
               type="checkbox"
               value=""
               id="blacklistCheck"
+              formControlName="ban"
             />
             <label class="form-check-label" for="blacklistCheck">
               Blacklist user to prevent future applications

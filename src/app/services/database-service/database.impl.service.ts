@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { User } from '../../models/user.model';
+import { Applicant } from '../../models/applicant.model';
 
 export class DatabaseImplService implements DatabaseService {
   constructor(private http: HttpClient) {}
@@ -33,6 +34,18 @@ export class DatabaseImplService implements DatabaseService {
       .pipe(
         catchError((error) => {
           console.log('Error getting user by ID.');
+          console.log(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  public getApplicants(): Observable<Applicant[]> {
+    return this.http
+      .get<Applicant[]>(`${environment.backendHost}/api/db/getApplicants?`)
+      .pipe(
+        catchError((error) => {
+          console.log('Error getting applicants.');
           console.log(error);
           return throwError(error);
         })
