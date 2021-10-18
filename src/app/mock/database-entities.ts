@@ -54,6 +54,7 @@ const blacklist: BlacklistedUser[] = [
     phone: '(720) 822-9918',
     bannedBy: 'Jett Crowson',
     banDate: new Date(),
+    details: 'Josh is not even from Colorado, but will not stop applying.',
   },
   {
     name: 'Amy Green',
@@ -61,6 +62,7 @@ const blacklist: BlacklistedUser[] = [
     phone: '(720) 221-9887',
     bannedBy: 'Jett Crowson',
     banDate: new Date(),
+    details: 'Amy is honestly just not a vibe.',
   },
   {
     name: 'Bill Gates',
@@ -68,6 +70,8 @@ const blacklist: BlacklistedUser[] = [
     phone: '(315) 883-1182',
     bannedBy: 'Jett Crowson',
     banDate: new Date(),
+    details:
+      'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
   },
 ];
 

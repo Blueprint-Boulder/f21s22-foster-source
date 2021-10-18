@@ -4,4 +4,5 @@ export interface BlacklistedUser {
   phone: string;
   banDate: Date;
   bannedBy: string;
+  details: string;
 }

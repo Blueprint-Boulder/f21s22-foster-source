@@ -4,6 +4,7 @@ import { databaseServiceProvider } from '../../services/database-service/databas
 import { ToastService } from '../../services/toast-service/toast.service';
 import { BlacklistedUser } from '../../models/blacklisted-user.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-blacklist-table',
@@ -30,5 +31,9 @@ export class BlacklistTableComponent implements OnInit {
         });
       }
     );
+  }
+
+  public getFormattedDateForUser(index: number): string {
+    return formatDate(this.blacklist[index].banDate, 'dd/MM/yyyy', 'en-US');
   }
 }
