@@ -6,3 +6,12 @@ export interface BlacklistedUser {
   bannedBy: string;
   details: string;
 }
+
+export interface RemoveFromBlacklistRequest {
+  email: string;
+  phone: string;
+}
+
+export interface RemoveFromBlacklistResponse {
+  error?: string;
+}

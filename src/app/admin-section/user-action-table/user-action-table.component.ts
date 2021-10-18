@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Applicant, ApprovalTableUser } from '../../models/applicant.model';
+import {
+  Applicant,
+  ApprovalTableUser,
+  ApproveApplicantRequest,
+  ApproveApplicantResponse,
+  DenyApplicantRequest,
+  DenyApplicantResponse,
+} from '../../models/applicant.model';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { DatabaseService } from '../../services/database-service/database.service';
 import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
@@ -58,21 +65,72 @@ export class UserActionTableComponent implements OnInit {
     return formatDate(this.users[index].dateApplied, 'dd/MM/yyyy', 'en-US');
   }
 
-  public denyApplicant(index: number) {
-    const toDelete: Applicant = this.users[index];
-    this.users.splice(index, 1);
-    this.toastService.show({
-      body: `Successfully denied applicant ${toDelete.name}.`,
-      preset: ToastPresets.SUCCESS,
-    });
+  public denyApplicant(index: number): void {
+    const denied: Applicant = this.getAndRemoveApplicantByIndex(index);
+    const params = this.denyFormGroup.value;
+    const denyRequest: DenyApplicantRequest = {
+      //TODO: include banned by in some manor
+      id: denied.id,
+      reason: params.reason,
+      shouldNotifyApplicant: params.sendCopy,
+      shouldBlacklist: params.shouldBan,
+    };
+
+    this.dbService.denyApplicant(denyRequest).subscribe(
+      (res: DenyApplicantResponse) => {
+        if (res.error) {
+          this.toastService.show({
+            body: 'Something went wrong trying to deny the user.',
+            preset: ToastPresets.ERROR,
+          });
+        } else {
+          this.toastService.show({
+            body: `Successfully denied applicant ${denied.name}.`,
+            preset: ToastPresets.SUCCESS,
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.toastService.show({
+          body: 'Something went wrong trying to deny the user.',
+          preset: ToastPresets.ERROR,
+        });
+      }
+    );
   }
 
-  public approveApplicant(index: number) {
-    const toDelete: Applicant = this.users[index];
+  public approveApplicant(index: number): void {
+    const approved: Applicant = this.getAndRemoveApplicantByIndex(index);
+    const approveParams: ApproveApplicantRequest = {
+      id: approved.id,
+    };
+
+    this.dbService.approveApplicant(approveParams).subscribe(
+      (res: ApproveApplicantResponse) => {
+        if (res.error) {
+          this.toastService.show({
+            body: 'Something went wrong trying to approve the user.',
+            preset: ToastPresets.ERROR,
+          });
+        } else {
+          this.toastService.show({
+            body: `Successfully approved applicant ${approved.name}.`,
+            preset: ToastPresets.SUCCESS,
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.toastService.show({
+          body: 'Something went wrong trying to approve the user.',
+          preset: ToastPresets.ERROR,
+        });
+      }
+    );
+  }
+
+  private getAndRemoveApplicantByIndex(index: number): Applicant {
+    const toGet: Applicant = this.users[index];
     this.users.splice(index, 1);
-    this.toastService.show({
-      body: `Successfully approved applicant ${toDelete.name}.`,
-      preset: ToastPresets.SUCCESS,
-    });
+    return toGet;
   }
 }

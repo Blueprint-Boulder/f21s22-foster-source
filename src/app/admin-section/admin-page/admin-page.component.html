@@ -27,12 +27,22 @@
     </li>
     <li class="nav-item">
       <a
-        class="nav-link"
+        class="nav-link disabled"
         [ngClass]="{ active: router.url === '/admin/bugs' }"
         [routerLink]="'/admin/bugs'"
         >Bug Reports</a
       >
     </li>
+    <li class="nav-item">
+      <a
+        class="nav-link disabled"
+        [ngClass]="{ active: router.url === '/admin/analytics' }"
+        [routerLink]="'/admin/analytics'"
+        >Analytics</a
+      >
+    </li>
   </ul>
-  <router-outlet></router-outlet>
+  <div class="router-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

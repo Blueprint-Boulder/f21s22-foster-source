@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserActionTableComponent } from './user-action-table/user-action-table.component';
 import { BlacklistTableComponent } from './blacklist-table/blacklist-table.component';
+import { AnnouncementsComponent } from './announcements/announcements.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'blacklist',
         component: BlacklistTableComponent,
+      },
+      {
+        path: 'announcements',
+        component: AnnouncementsComponent,
       },
     ],
   },

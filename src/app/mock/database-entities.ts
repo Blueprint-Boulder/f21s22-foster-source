@@ -5,6 +5,7 @@ import { BlacklistedUser } from '../models/blacklisted-user.model';
 
 const announcements: Announcement[] = [
   {
+    id: 1,
     date: new Date(),
     author: 'Tim Cook',
     title: 'This is the first announcement!',
@@ -25,6 +26,7 @@ const users: User[] = [
 
 const applicants: Applicant[] = [
   {
+    id: 1,
     name: 'Tim Cook',
     email: 'tim.cook@apple.com',
     caseWorkerName: 'Gina White',
@@ -32,6 +34,7 @@ const applicants: Applicant[] = [
     dateApplied: new Date(),
   },
   {
+    id: 2,
     name: 'John Denver',
     email: 'jdenver2@gmail.com',
     caseWorkerName: 'Sam Smith',
@@ -39,6 +42,31 @@ const applicants: Applicant[] = [
     dateApplied: new Date(),
   },
   {
+    id: 3,
+    name: 'Michelle Obama',
+    email: 'mobama@whitehouse.gov',
+    caseWorkerName: 'Gina White',
+    caseWorkerEmail: 'gwhite@colorado.gov',
+    dateApplied: new Date(),
+  },
+  {
+    id: 4,
+    name: 'Tim Cook',
+    email: 'tim.cook@apple.com',
+    caseWorkerName: 'Gina White',
+    caseWorkerEmail: 'gwhite@colorado.gov',
+    dateApplied: new Date(),
+  },
+  {
+    id: 5,
+    name: 'John Denver',
+    email: 'jdenver2@gmail.com',
+    caseWorkerName: 'Sam Smith',
+    caseWorkerEmail: 'sam.smith@colorado.gov',
+    dateApplied: new Date(),
+  },
+  {
+    id: 6,
     name: 'Michelle Obama',
     email: 'mobama@whitehouse.gov',
     caseWorkerName: 'Gina White',
