@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+.fs-tan-background {
+  background-color: #fef4e8;
+}
+
+$theme-colors: (
+  "primary": #ea8a40,
+  "secondary": #49306b,
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";

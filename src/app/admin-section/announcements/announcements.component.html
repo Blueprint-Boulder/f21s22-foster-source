@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row post-announcement-container">
+    <h2>Post an announcement</h2>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <!--        <label for="announcement-title-field">Announcement Title</label>-->
+        <input
+          [(ngModel)]="title"
+          type="text"
+          class="form-control"
+          id="announcement-title-field"
+          aria-describedby="emailHelp"
+          placeholder="Enter an interesting title..."
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <app-editor
+        id="rich-editor"
+        (richTextChange)="textChange($event)"
+        [characterLimit]="characterLimit"
+      ></app-editor>
+    </div>
+  </div>
+  <div class="row">
+    <button
+      class="btn btn-primary"
+      [class]="{ disabled: richText.length > characterLimit }"
+      (click)="postAnnouncement()"
+      [disabled]="richText.length > characterLimit"
+    >
+      Post Announcement
+    </button>
+  </div>
+  <div class="row past-announcements">
+    <p>Here's where all the old announcements will go!</p>
+  </div>
+</div>
