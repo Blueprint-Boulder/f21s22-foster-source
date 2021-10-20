@@ -7,6 +7,7 @@ export interface Announcement {
 }
 
 export interface PostAnnouncementRequest {
+  title: string;
   bodyHtml: string;
 }
 

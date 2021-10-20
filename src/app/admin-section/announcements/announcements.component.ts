@@ -17,6 +17,7 @@ import { databaseServiceProvider } from '../../services/database-service/databas
 export class AnnouncementsComponent {
   public characterLimit = 2000;
   public richText = '';
+  public title = '';
 
   constructor(
     private dbService: DatabaseService,
@@ -24,8 +25,16 @@ export class AnnouncementsComponent {
   ) {}
 
   public postAnnouncement(): void {
+    if (this.title.length === 0 || this.richText.length === 0) {
+      this.toastService.show({
+        body: 'Please enter a title and some body text.',
+        preset: ToastPresets.ERROR,
+      });
+      return;
+    }
     this.dbService
       .postAnnouncement({
+        title: this.title,
         bodyHtml: this.richText,
       } as PostAnnouncementRequest)
       .subscribe(

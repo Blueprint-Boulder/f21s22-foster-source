@@ -30,7 +30,7 @@ export class DatabaseImplService implements DatabaseService {
   public getLatestAnnouncement(): Observable<Announcement> {
     return this.http
       .get<Announcement>(
-        `${environment.backendHost}/api/db/getLatestAnnouncement`
+        `${environment.backendHost}/api/db/latest-announcement`
       )
       .pipe(
         catchError((error) => {
@@ -44,9 +44,7 @@ export class DatabaseImplService implements DatabaseService {
   public getUserById(id: number): Observable<User> {
     return this.http
       .get<User>(
-        `${environment.backendHost}/api/db/getUserById?id=${encodeURIComponent(
-          id
-        )}`
+        `${environment.backendHost}/api/db/user/${encodeURIComponent(id)}`
       )
       .pipe(
         catchError((error) => {
@@ -59,7 +57,7 @@ export class DatabaseImplService implements DatabaseService {
 
   public getApplicants(): Observable<Applicant[]> {
     return this.http
-      .get<Applicant[]>(`${environment.backendHost}/api/db/getApplicants?`)
+      .get<Applicant[]>(`${environment.backendHost}/api/db/applicants`)
       .pipe(
         catchError((error) => {
           console.log('Error getting applicants.');
@@ -71,7 +69,7 @@ export class DatabaseImplService implements DatabaseService {
 
   public getBlacklist(): Observable<BlacklistedUser[]> {
     return this.http
-      .get<BlacklistedUser[]>(`${environment.backendHost}/api/db/getBlacklist`)
+      .get<BlacklistedUser[]>(`${environment.backendHost}/api/db/blacklist`)
       .pipe(
         catchError((error) => {
           console.log('Error getting blacklisted users.');
@@ -85,8 +83,8 @@ export class DatabaseImplService implements DatabaseService {
     params: DenyApplicantRequest
   ): Observable<DenyApplicantResponse> {
     return this.http
-      .post<DenyApplicantResponse>(
-        `${environment.backendHost}/api/db/denyUser`,
+      .put<DenyApplicantResponse>(
+        `${environment.backendHost}/api/db/applicant-status/deny`,
         params
       )
       .pipe(
@@ -137,7 +135,7 @@ export class DatabaseImplService implements DatabaseService {
   ): Observable<PostAnnouncementResponse> {
     return this.http
       .post<PostAnnouncementResponse>(
-        `${environment.backendHost}/api/db/postAnnouncement`,
+        `${environment.backendHost}/api/db/announcements`,
         params
       )
       .pipe(
@@ -153,9 +151,8 @@ export class DatabaseImplService implements DatabaseService {
     params: DeleteAnnouncementRequest
   ): Observable<DeleteAnnouncementResponse> {
     return this.http
-      .post<DeleteAnnouncementResponse>(
-        `${environment.backendHost}/api/db/deleteAnnouncement`,
-        params
+      .delete<DeleteAnnouncementResponse>(
+        `${environment.backendHost}/api/db/announcements/${params.id}`
       )
       .pipe(
         catchError((error) => {
