@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-create-account-modal',
   templateUrl: './create-account-modal.component.html',
@@ -34,6 +35,7 @@ export class CreateAccountModalComponent implements OnInit {
     return;
   }
   public createAccountSubmit(): void {
-    console.log(this.createAccountForm.value.firstname);
+    console.log(this.createAccountForm.value.fname);
+    console.log(this.createAccountForm.value.lname);
   }
 }

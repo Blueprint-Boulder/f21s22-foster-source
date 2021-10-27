@@ -10,7 +10,7 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
 import { ToastContainerComponent } from './common/toast-container/toast-container.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
   imports: [
@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     NgxEditorModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -16,6 +16,6 @@ export const loginRouting = RouterModule.forChild(routes);
 
 @NgModule({
   declarations: [LoginPageComponent, LoginModalComponent],
-  imports: [CommonModule, loginRouting, ReactiveFormsModule],
+  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule],
 })
 export class LoginModule {}
