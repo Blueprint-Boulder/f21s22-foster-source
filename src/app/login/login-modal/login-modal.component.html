@@ -1,36 +1,39 @@
-<div class="container"></div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-3 float-md-center">
+<div class="d-flex justify-content-center">
   <div class="jumbotron" id="login-modal">
-    <form action="action_page.php" method="post">
-      <label for="uname"><b>Username</b></label>
-      <input
-        type="text"
-        id="user"
-        placeholder="Enter Username"
-        name="uname"
-        required
-      />
-      <div class="container"></div>
-      <label for="psw"><b>Password</b></label>
-      <input
-        type="password"
-        id="pass"
-        placeholder="Enter Password"
-        name="psw"
-        required
-      />
-      <div class="container"></div>
-      <button type="submit">Login</button>
+    <h1 class="mb-5" style="text-align: center">Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+      <div class="form-group">
+        <label for="user"><b>Username</b></label>
+        <input
+          class="form-control p-1 m-0"
+          id="user"
+          placeholder="Enter Username"
+          formControlName="username"
+          required
+        />
+      </div>
+      <div class="container p-3"></div>
+      <div class="form-group">
+        <label for="pass"><b>Password</b></label>
+        <input
+          class="form-control p-1 m-0"
+          type="password"
+          id="pass"
+          placeholder="Enter Password"
+          formControlName="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100 p-2 m-1">Login</button>
       <label>
         <input type="checkbox" checked="checked" name="remember" /> Remember me
       </label>
-
-      <div class="container">
-        <span class="psw"
-          >Don't have an account?
-          <a href="/createAccount">Sign up here</a></span
-        >
-      </div>
     </form>
+    <div class="container">
+      <span class="psw p-2 float-right"
+        >Don't have an account?
+        <a [routerLink]="['/login/create-account']">Sign up here</a></span
+      >
+    </div>
   </div>
 </div>

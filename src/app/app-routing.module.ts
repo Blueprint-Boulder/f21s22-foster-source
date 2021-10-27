@@ -14,9 +14,9 @@ const routes: Routes = [
       import('./login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'createAccount',
+    path: 'login/create-account',
     loadChildren: () =>
-      import('./create-account/create-account.module').then(
+      import('./login/create-account.module').then(
         (m) => m.CreateAccountModule
       ),
   },
