@@ -10,6 +10,7 @@ export class LoginModalComponent implements OnInit {
   public loginForm = this.formBuilder.group({
     username: '',
     password: '',
+    remember: false,
   });
 
   constructor(private formBuilder: FormBuilder) {}
@@ -17,7 +18,6 @@ export class LoginModalComponent implements OnInit {
     return;
   }
   public loginSubmit(): void {
-    console.log(this.loginForm.value.username);
-    console.log(this.loginForm.value.password);
+    console.log(this.loginForm.value);
   }
 }

@@ -28,6 +28,7 @@ export class CreateAccountModalComponent implements OnInit {
     caseworkerphone: '',
     user: '',
     password: '',
+    confirmpassword: '',
   });
   constructor(private formBuilder: FormBuilder) {}
 

@@ -1,10 +1,4 @@
-/* Bordered form */
-.jumbotron {
-  width: 600px;
-  background-color: white;
-}
-
-.form-control {
+.bottom-border-input {
   background-color: transparent;
   color: #1b1613;
   outline: none;
@@ -12,24 +6,4 @@
   border-left: none;
   border-right: none;
   border-bottom: solid #1b1613 1px;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #ea8a40;
-  color: white;
-  border: none;
-}
-
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
 }

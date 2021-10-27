@@ -1,142 +1,78 @@
-<form [formGroup]="createAccountForm" (ngSubmit)="createAccountSubmit()">
-  <h1 class="mt-5" style="text-align: center">Create Account</h1>
-  <div class="row">
-    <div class="container col-5">
-      <div class="jumbotron ml-5">
+<div class="container">
+  <h1 class="mt-5 text-center">Create Account</h1>
+  <form [formGroup]="createAccountForm" (ngSubmit)="createAccountSubmit()">
+    <div class="row name-row">
+      <div class="col-sm-12 col-md-6">
         <div class="form-group">
           <label for="fname"><b>First Name</b></label>
           <input
-            class="form-control p-1 m-0"
+            class="form-control p-1 m-0 bottom-border-input"
             id="fname"
-            placeholder="Enter First Name"
+            placeholder="Enter first name"
             formControlName="fname"
             required
           />
         </div>
-        <div class="form-group">
-          <label for="user"><b>Username</b></label>
-          <input
-            class="form-control p-1 m-0"
-            id="user"
-            placeholder="Enter Username"
-            formControlName="user"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="email"><b>Email</b></label>
-          <input
-            class="form-control p-1 m-0"
-            id="email"
-            placeholder="Enter Email"
-            formControlName="email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <div class="container float-left w-75">
-            <label for="primaryPhone"><b>Enter Primary Phone Number</b></label>
-            <input
-              class="form-control p-1 ml-0"
-              type="tel"
-              id="primaryPhone"
-              placeholder="Enter Phone Number"
-              formControlName="primaryPhone"
-              required
-            />
-          </div>
-          <div class="container float-right w-25">
-            <label for="primaryType"><b>Type</b></label>
-            <div class="container"></div>
-            <select
-              class="m-3"
-              name="type"
-              id="primaryType"
-              formControlName="primaryType"
-              style="border-top: 0px; border-right: 0px; border-left: 0px"
-            >
-              <option value="Home">Home</option>
-              <option value="Mobile">Mobile</option>
-              <option value="Work">Work</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="mt-4" for="address"><b>Address Line 1</b></label>
-          <input
-            class="form-control p-1 m-0"
-            id="address"
-            placeholder="Address Line 1"
-            formControlName="address"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <div class="container float-left w-75">
-            <label for="city"><b>City</b></label>
-            <input
-              class="form-control p-1 m-0"
-              type="text"
-              id="city"
-              placeholder="Enter City"
-              formControlName="city"
-              required
-            />
-          </div>
-          <div class="container float-right w-25">
-            <label for="zipCode"><b>Zip Code</b></label>
-            <div class="container"></div>
-            <input
-              class="form-control p-1 m-0"
-              type="number"
-              id="zipCode"
-              placeholder="Enter Zip"
-              formControlName="zip"
-              required
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="mt-4" for="caseworkerfname"
-            ><b>Case Worker First Name</b></label
-          >
-          <input
-            class="form-control p-1 m-0"
-            id="caseworkerfname"
-            placeholder="Enter Case Worker's First Name"
-            formControlName="caseworkerfname"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="caseworkeremail"><b>Case Worker Email</b></label>
-          <input
-            type="email"
-            class="form-control p-1 m-0"
-            id="caseworkeremail"
-            placeholder="Enter Case Worker's Email"
-            formControlName="caseworkeremail"
-            required
-          />
-        </div>
       </div>
-    </div>
-    <div class="container col-5">
-      <div class="jumbotron float-right mr-5">
+      <div class="col-sm-12 col-md-6">
         <div class="form-group">
-          <label for="lname"><b>Last name</b></label>
+          <label for="lname"><b>Last Name</b></label>
           <input
-            class="form-control p-1 m-0"
+            class="form-control p-1 m-0 bottom-border-input"
             id="lname"
             placeholder="Enter Last Name"
             formControlName="lname"
             required
           />
         </div>
+      </div>
+    </div>
+    <div class="row username-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="user"><b>Username</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="user"
+            placeholder="Enter Username"
+            formControlName="user"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row email-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email"><b>Email</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="email"
+            placeholder="Enter Email"
+            formControlName="email"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="confirmEmail"><b>Confirm Email</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="confirmEmail"
+            placeholder="Confirm Email"
+            formControlName="confirmEmail"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row pass-row">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="password"><b>Password</b></label>
           <input
-            class="form-control p-1 m-0"
+            class="form-control p-1 m-0 bottom-border-input"
             type="password"
             id="password"
             placeholder="Enter Password"
@@ -144,96 +80,197 @@
             required
           />
         </div>
+      </div>
+      <div class="col-md-6">
+        <label for="confirmpassword"><b>Confirm Password</b></label>
+        <input
+          class="form-control p-1 m-0 bottom-border-input"
+          type="password"
+          id="confirmpassword"
+          placeholder="Enter Password"
+          formControlName="confirmpassword"
+          required
+        />
+      </div>
+    </div>
+    <div class="row phones-row">
+      <div class="col-xs-8 col-md-4">
+        <label for="primaryPhone"><b>Enter Primary Phone Number</b></label>
+        <input
+          class="form-control p-1 ml-0 bottom-border-input"
+          type="tel"
+          id="primaryPhone"
+          placeholder="Enter Phone Number"
+          formControlName="primaryPhone"
+          required
+        />
+      </div>
+      <div class="col-xs-4 col-md-2">
         <div class="form-group">
-          <label for="confirmEmail"><b>Confirm Email</b></label>
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="primaryType"
+            formControlName="primaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Home">Home</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Work">Work</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-8 col-md-4">
+        <div class="form-group">
+          <label for="secondaryPhone"
+            ><b>Enter Secondary Phone Number</b></label
+          >
           <input
-            class="form-control p-1 m-0"
-            id="confirmEmail"
-            placeholder="Confirm Email"
-            formControlName="confirmEmail"
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="secondaryPhone"
+            placeholder="Enter Phone Number"
+            formControlName="secondaryPhone"
+          />
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="secondaryType"
+            formControlName="primaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Home">Home</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Work">Work</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row address-1-row">
+      <div class="col-xs-12 col-sm-12 col-12">
+        <div class="form-group">
+          <label class="mt-4" for="address"><b>Address Line 1</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="address"
+            placeholder="Address Line 1"
+            formControlName="address"
             required
           />
         </div>
-        <div class="form-group">
-          <div class="container float-left w-75">
-            <label for="secondaryPhone"
-              ><b>Enter Secondary Phone Number</b></label
-            >
-            <input
-              class="form-control p-1 m-0"
-              type="tel"
-              id="secondaryPhone"
-              placeholder="Enter Phone Number"
-              formControlName="secondaryPhone"
-            />
-          </div>
-          <div class="container float-right w-25">
-            <label for="secondaryType"><b>Type</b></label>
-            <div class="container"></div>
-            <select
-              class="m-3"
-              name="type"
-              id="secondaryType"
-              formControlName="secondaryType"
-              style="border-top: 0px; border-right: 0px; border-left: 0px"
-            >
-              <option value="Home">Home</option>
-              <option value="Mobile">Mobile</option>
-              <option value="Work">Work</option>
-            </select>
-          </div>
-        </div>
+      </div>
+    </div>
+    <div class="row address-2-row">
+      <div class="col-sm-12">
         <div class="form-group">
           <label class="mt-4" for="address2"><b>Address Line 2</b></label>
           <input
-            class="form-control p-1"
+            class="form-control p-1 bottom-border-input"
             id="address2"
             placeholder="Address Line 2"
             formControlName="address2"
             required
           />
         </div>
+      </div>
+    </div>
+    <div class="row address-info-row">
+      <div class="col-md-5">
         <div class="form-group">
-          <div class="container float-left w-50">
-            <label for="state"><b>State</b></label>
-            <input
-              class="form-control p-1 m-0"
-              type="state"
-              id="state"
-              placeholder="Enter State"
-              formControlName="state"
-              required
-            />
-          </div>
-          <div class="container float-right w-50">
-            <label for="country"><b>Country</b></label>
-            <div class="container"></div>
-            <input
-              class="form-control p-1 m-0"
-              type="country"
-              id="country"
-              placeholder="Enter Country"
-              formControlName="country"
-              required
-            />
-          </div>
+          <label for="city"><b>City</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="city"
+            placeholder="Enter City"
+            formControlName="city"
+            required
+          />
         </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="state"><b>State</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="state"
+            id="state"
+            placeholder="Enter State"
+            formControlName="state"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="zipCode"><b>Zip Code</b></label>
+          <div class="container"></div>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="number"
+            id="zipCode"
+            placeholder="Enter Zip"
+            formControlName="zip"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row cw-name-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="caseworkerfname"
+            ><b>Case Worker First Name</b></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkerfname"
+            placeholder="Enter Case Worker's First Name"
+            formControlName="caseworkerfname"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group">
           <label class="mt-4" for="caseworkerlname"
             ><b>Case Worker Last Name</b></label
           >
           <input
-            class="form-control p-1 m-0"
+            class="form-control p-1 m-0 bottom-border-input"
             id="caseworkerlname"
             placeholder="Enter Case Worker's First Name"
             formControlName="caseworkerlname"
             required
           />
         </div>
+      </div>
+    </div>
+    <div class="row cw-contact-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="caseworkeremail"><b>Case Worker Email</b></label>
+          <input
+            type="email"
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkeremail"
+            placeholder="Enter Case Worker's Email"
+            formControlName="caseworkeremail"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
         <div class="form-group">
           <label for="caseworkerphone"><b>Case Worker Phone Number</b></label>
           <input
-            class="form-control p-1 m-0"
+            class="form-control p-1 m-0 bottom-border-input"
             type="tel"
             id="caseworkerphone"
             placeholder="Enter Case Worker's Phone Number"
@@ -242,10 +279,16 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="container w-50 justify-content-center">
-    <button type="submit" class="btn btn-primary w-100 p-2 mb-5">
-      Create Account
-    </button>
-  </div>
-</form>
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <button type="submit" class="btn btn-primary w-100 p-2 mb-5 mt-2">
+          Create Account
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--  <div class="row">-->
+<!--    <div class="container col-5">-->
+<!--      <div class="jumbotron ml-5">-->
