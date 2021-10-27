@@ -14,6 +14,15 @@
   border-bottom: solid #1b1613 1px;
 }
 
+.bg-light-grey {
+  background-color: #f6f6f6;
+}
+
+body,
+html {
+  background-color: #f6f6f6 !important;
+}
+
 $theme-colors: (
   "primary": #ea8a40,
   "secondary": #49306b,
