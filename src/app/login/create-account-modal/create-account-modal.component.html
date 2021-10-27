@@ -348,7 +348,8 @@
             *ngIf="
               createAccountForm.get('secondaryType')?.invalid &&
               (createAccountForm.get('secondaryType')?.dirty ||
-                createAccountForm.get('secondaryType')?.touched)
+                createAccountForm.get('secondaryType')?.touched) &&
+              createAccountForm.get('secondaryType')?.value != ''
             "
           >
             <small

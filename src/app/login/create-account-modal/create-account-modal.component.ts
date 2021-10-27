@@ -81,10 +81,11 @@ export class CreateAccountModalComponent implements OnInit {
     ]);
   }
   public createAccountSubmit(): void {
-    console.log(this.createAccountForm.value);
-    // Check that all required fields are valid, and that all filled out optional fields are valid
-    // There will be some conditional things like you need a secondary type if you have a secondary phone number
-    // Make all required fields dirty to show their errors
+    if (this.createAccountForm.invalid) {
+      this.createAccountForm.markAllAsTouched();
+    } else {
+      console.log(this.createAccountForm.value);
+    }
   }
 
   private confirmEmailValidator(

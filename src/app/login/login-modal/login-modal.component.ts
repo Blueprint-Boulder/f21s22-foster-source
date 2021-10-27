@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-modal',
@@ -8,9 +8,9 @@ import { FormBuilder } from '@angular/forms';
 })
 export class LoginModalComponent implements OnInit {
   public loginForm = this.formBuilder.group({
-    username: '',
-    password: '',
-    remember: false,
+    username: ['', Validators.required],
+    password: ['', Validators.required],
+    remember: true,
   });
 
   constructor(private formBuilder: FormBuilder) {}
@@ -18,6 +18,10 @@ export class LoginModalComponent implements OnInit {
     return;
   }
   public loginSubmit(): void {
-    console.log(this.loginForm.value);
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+    } else {
+      console.log(this.loginForm.value);
+    }
   }
 }
