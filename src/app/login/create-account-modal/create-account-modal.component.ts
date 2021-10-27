@@ -33,19 +33,31 @@ export class CreateAccountModalComponent implements OnInit {
         '',
         Validators.compose([Validators.required, this.validatePhoneNumber]),
       ],
-      primaryType: '',
+      primaryType: ['', Validators.required],
       secondaryPhone: ['', Validators.compose([this.validatePhoneNumber])],
-      secondaryType: '',
-      address: '',
+      secondaryType: ['', Validators.required],
+      address: ['', Validators.required],
       address2: '',
-      city: '',
-      zip: '',
-      state: '',
-      country: '',
-      caseworkerfname: '',
-      caseworkerlname: '',
-      caseworkeremail: '',
-      caseworkerphone: '',
+      city: ['', Validators.required],
+      zip: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/),
+        ]),
+      ],
+      state: ['', Validators.required],
+      county: ['', Validators.required],
+      caseworkerfname: ['', Validators.required],
+      caseworkerlname: ['', Validators.required],
+      caseworkeremail: [
+        '',
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      caseworkerphone: [
+        '',
+        Validators.compose([Validators.required, this.validatePhoneNumber]),
+      ],
       user: [
         '',
         Validators.compose([
@@ -69,8 +81,7 @@ export class CreateAccountModalComponent implements OnInit {
     ]);
   }
   public createAccountSubmit(): void {
-    console.log(this.createAccountForm.value.fname);
-    console.log(this.createAccountForm.value.lname);
+    console.log(this.createAccountForm.value);
   }
 
   private confirmEmailValidator(
