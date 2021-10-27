@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { DatabaseService } from '../database-service/database.service';
 import { environment } from '../../../environments/environment';
 import { AnnouncementImplService } from './announcement.impl.service';
 import { AnnouncementMockService } from './announcement.mock.service';
+import { AnnouncementService } from './announcement.service';
 
 const announcementServiceFactory = (http: HttpClient) => {
   if (environment.useRealAnnouncementService) {
@@ -13,7 +13,7 @@ const announcementServiceFactory = (http: HttpClient) => {
 };
 
 export const announcementServiceProvider = {
-  provide: DatabaseService,
+  provide: AnnouncementService,
   useFactory: announcementServiceFactory,
   deps: [HttpClient],
 };
