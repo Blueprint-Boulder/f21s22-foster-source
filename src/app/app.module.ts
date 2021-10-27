@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
 import { ToastContainerComponent } from './common/toast-container/toast-container.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
+import { HttpDateService } from './services/http-date-service/http-date.service';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
@@ -23,7 +24,13 @@ import { FormsModule } from '@angular/forms';
     NgxEditorModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpDateService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

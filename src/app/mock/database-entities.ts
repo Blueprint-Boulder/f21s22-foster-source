@@ -1,7 +1,12 @@
-import { Announcement } from '../models/announcement.model';
+import {
+  Announcement,
+  GetAnnouncementsRes,
+} from '../models/announcement.model';
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
+import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
+import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
 
 const announcements: Announcement[] = [
   {
@@ -13,6 +18,66 @@ const announcements: Announcement[] = [
     <b>this should be some bold text...</b>
     <div>Also it has a div!</div>
     `,
+  },
+];
+
+const getAnnouncementResponses: GetAnnouncementsRes[] = [
+  { announcements: announcements },
+];
+
+export const createAccountRequests: CreateAccountRequest[] = [
+  {
+    email: 'jcrowson@aol.com',
+    username: 'jman',
+    password: 'hashedpassword',
+    firstName: 'Jett',
+    lastName: 'Crowman',
+    dob: new Date(),
+    cwFirstName: 'George',
+    cwLastName: 'Clooney',
+    cwEmail: 'gCloon@aol.com',
+    primaryPhone: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhone: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+  },
+];
+
+export const cookies: Cookie[] = [
+  {
+    id: 1,
+    privilegeLevel: 3,
+    exp: 12341235,
+    iat: 123412341,
+  },
+];
+
+export const accounts: Account[] = [
+  {
+    id: 1,
+    email: 'jcrowson@colorado.edu',
+    username: 'jword',
+    password: 'pass1234',
+    firstName: 'Jet',
+    lastName: 'Crowman',
+    dob: new Date(),
+    cwFirstName: 'Gina',
+    cwLastName: 'Smith',
+    cwEmail: 'noreply@google.com',
+    primaryPhone: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhone: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+    lastLogin: new Date(),
+    profileCompleted: true,
   },
 ];
 
@@ -103,4 +168,10 @@ const blacklist: BlacklistedUser[] = [
   },
 ];
 
-export { announcements, users, applicants, blacklist };
+export {
+  announcements,
+  getAnnouncementResponses,
+  users,
+  applicants,
+  blacklist,
+};

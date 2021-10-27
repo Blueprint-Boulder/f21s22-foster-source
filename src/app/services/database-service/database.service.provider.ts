@@ -12,3 +12,13 @@ export const databaseServiceProvider = {
   useFactory: databaseServiceFactory,
   deps: [HttpClient],
 };
+
+const databaseTestServiceFactory = (http: HttpClient) => {
+  return new DatabaseImplService(http);
+};
+
+export const databaseServiceTestProvider = {
+  provide: DatabaseService,
+  useFactory: databaseTestServiceFactory,
+  deps: [HttpClient],
+};
