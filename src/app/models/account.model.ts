@@ -1,4 +1,5 @@
 import { PhoneNumber } from './phonenumber.model';
+import { Address, SimpleAddress } from './adress.model';
 
 export interface Account {
   id: number;
@@ -15,6 +16,7 @@ export interface Account {
   secondaryPhone?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
+  address: Address;
 }
 
 export interface CreateAccountRequest {
@@ -29,6 +31,7 @@ export interface CreateAccountRequest {
   cwEmail: string;
   primaryPhone: PhoneNumber;
   secondaryPhone?: PhoneNumber;
+  address: SimpleAddress;
 }
 
 export interface UpdateAccountReq {
@@ -40,6 +43,7 @@ export interface UpdateAccountReq {
   cwEmail?: string;
   primaryPhone?: PhoneNumber;
   secondaryPhone?: PhoneNumber;
+  address?: SimpleAddress;
 }
 
 export interface LoginRequest {

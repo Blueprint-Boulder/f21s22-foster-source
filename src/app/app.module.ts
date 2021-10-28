@@ -11,6 +11,7 @@ import { ToastContainerComponent } from './common/toast-container/toast-containe
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { HttpDateService } from './services/http-date-service/http-date.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
@@ -23,6 +24,7 @@ import { HttpDateService } from './services/http-date-service/http-date.service'
     NgbModule,
     NgxEditorModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

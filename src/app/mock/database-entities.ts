@@ -6,7 +6,9 @@ import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
-import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
+import { PhoneNumberType } from '../models/phonenumber.model';
+import { Profile } from '../models/profile.model';
+import { AvailabilityType } from '../models/availability.model';
 
 const announcements: Announcement[] = [
   {
@@ -44,6 +46,13 @@ export const createAccountRequests: CreateAccountRequest[] = [
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },
+    address: {
+      line1: '1002 fake st.',
+      city: 'Denver',
+      zip: '80210',
+      state: 'CO',
+      county: 'Arapahoe',
+    },
   },
 ];
 
@@ -78,6 +87,15 @@ export const accounts: Account[] = [
     },
     lastLogin: new Date(),
     profileCompleted: true,
+    address: {
+      line1: '1002 fake st.',
+      city: 'Denver',
+      zip: '80210',
+      state: 'CO',
+      county: 'Arapahoe',
+      lat: '1',
+      lon: '1',
+    },
   },
 ];
 
@@ -165,6 +183,51 @@ const blacklist: BlacklistedUser[] = [
     banDate: new Date(),
     details:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
+  },
+];
+
+export const profiles: Profile[] = [
+  {
+    id: 1,
+    biography: 'This is the biography of the profile',
+    profileLargeAWSKey: '121234123234',
+    profileSmallAWSKey: 'asdfasdfasdfas',
+    email: 'test@email.com',
+    username: 'This is the username',
+    firstName: 'Jack',
+    lastName: 'Crowman',
+    dob: new Date(),
+    primaryPhone: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhone: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+    lastLogin: new Date(),
+    profileCompleted: true,
+    address: {
+      line1: '1002 fake st.',
+      city: 'Denver',
+      zip: '80210',
+      state: 'CO',
+      county: 'Arapahoe',
+      lat: '1',
+      lon: '1',
+    },
+    availability: {
+      id: 1,
+      type: AvailabilityType.PRIMARY,
+      monday: [true, true, true, false],
+      tuesday: [false, true, true, false],
+      wednesday: [true, true, true, false],
+      thursday: [true, true, false, false],
+      friday: [true, true, true, false],
+      saturday: [false, true, true, true],
+      sunday: [false, true, true, true],
+    },
+    photoAWSKeys: ['AWSKEY'],
   },
 ];
 
