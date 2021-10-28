@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class VerifyEmailComponent implements OnInit {
   public email: string | null;
-  public countdown = 61;
+  public countdown = 121;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {

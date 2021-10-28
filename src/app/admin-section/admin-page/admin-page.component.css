@@ -1,3 +1,9 @@
 .router-container {
-  height: 500px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.comp {
+  height: 50vh;
 }

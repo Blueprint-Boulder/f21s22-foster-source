@@ -12,9 +12,15 @@ import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { HttpDateService } from './services/http-date-service/http-date.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    ToastContainerComponent,
+    NavBarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
