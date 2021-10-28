@@ -160,28 +160,31 @@ const applicants: Applicant[] = [
 
 const blacklist: BlacklistedUser[] = [
   {
-    name: 'Josh Smith',
+    firstName: 'John',
+    lastName: 'Smith',
     email: 'josh.smith@aol.com',
-    phone: '(720) 822-9918',
+    phoneNumber: '(720) 822-9918',
     bannedBy: 'Jett Crowson',
-    banDate: new Date(),
-    details: 'Josh is not even from Colorado, but will not stop applying.',
+    date: new Date(),
+    reason: 'Josh is not even from Colorado, but will not stop applying.',
   },
   {
-    name: 'Amy Green',
+    firstName: 'amy',
+    lastName: 'green',
     email: 'amygirl1111@aol.com',
-    phone: '(720) 221-9887',
+    phoneNumber: '(720) 221-9887',
     bannedBy: 'Jett Crowson',
-    banDate: new Date(),
-    details: 'Amy is honestly just not a vibe.',
+    date: new Date(),
+    reason: 'Amy is honestly just not a vibe.',
   },
   {
-    name: 'Bill Gates',
+    firstName: 'Bill',
+    lastName: 'Gates',
     email: 'bill@microsoft.com',
-    phone: '(315) 883-1182',
+    phoneNumber: '(315) 883-1182',
     bannedBy: 'Jett Crowson',
-    banDate: new Date(),
-    details:
+    date: new Date(),
+    reason:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
   },
 ];
@@ -227,7 +230,7 @@ export const profiles: Profile[] = [
       saturday: [false, true, true, true],
       sunday: [false, true, true, true],
     },
-    photoAWSKeys: ['AWSKEY'],
+    photoAWSKeys: [{ id: 1, photoAWSKey: 'REAL_AWS_KEY' }],
   },
 ];
 

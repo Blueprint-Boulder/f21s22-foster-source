@@ -41,7 +41,9 @@ export class BlacklistTableComponent implements OnInit {
 
   public removeFromBlacklist(index: number): void {
     if (
-      !confirm(`Are you sure you want to unban ${this.blacklist[index].name}?`)
+      !confirm(
+        `Are you sure you want to unban ${this.blacklist[index].firstName} ${this.blacklist[index].lastName}?`
+      )
     ) {
       return;
     }
@@ -50,7 +52,7 @@ export class BlacklistTableComponent implements OnInit {
       this.getAndRemoveBlacklistedByIndex(index);
     const params: RemoveFromBlacklistRequest = {
       email: toRemove.email,
-      phone: toRemove.phone,
+      phone: toRemove.phoneNumber,
     };
 
     this.dbService.removeFromBlacklist(params).subscribe(
@@ -62,7 +64,7 @@ export class BlacklistTableComponent implements OnInit {
           });
         } else {
           this.toastService.show({
-            body: `Successfully unbanned user ${toRemove.name}.`,
+            body: `Successfully unbanned user ${toRemove.firstName} ${toRemove.lastName}.`,
             preset: ToastPresets.SUCCESS,
           });
         }
@@ -77,7 +79,7 @@ export class BlacklistTableComponent implements OnInit {
   }
 
   public getFormattedDateForUser(index: number): string {
-    return formatDate(this.blacklist[index].banDate, 'dd/MM/yyyy', 'en-US');
+    return formatDate(this.blacklist[index].date, 'dd/MM/yyyy', 'en-US');
   }
 
   private getAndRemoveBlacklistedByIndex(index: number): BlacklistedUser {

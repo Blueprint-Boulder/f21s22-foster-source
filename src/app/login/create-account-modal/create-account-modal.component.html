@@ -281,9 +281,12 @@
             formControlName="primaryType"
             style="border-top: 0px; border-right: 0px; border-left: 0px"
           >
-            <option value="Home">Home</option>
-            <option value="Mobile">Mobile</option>
-            <option value="Work">Work</option>
+            <option
+              *ngFor="let phoneType of getPhoneTypes()"
+              [value]="phoneType"
+            >
+              {{ phoneType }}
+            </option>
           </select>
           <div
             *ngIf="
@@ -316,8 +319,7 @@
             *ngIf="
               createAccountForm.get('secondaryPhone')?.invalid &&
               (createAccountForm.get('secondaryPhone')?.dirty ||
-                createAccountForm.get('secondaryPhone')?.touched) &&
-              createAccountForm.get('secondaryPhone')?.value.length > 0
+                createAccountForm.get('secondaryPhone')?.touched)
             "
           >
             <small
@@ -348,8 +350,7 @@
             *ngIf="
               createAccountForm.get('secondaryType')?.invalid &&
               (createAccountForm.get('secondaryType')?.dirty ||
-                createAccountForm.get('secondaryType')?.touched) &&
-              createAccountForm.get('secondaryType')?.value != ''
+                createAccountForm.get('secondaryType')?.touched)
             "
           >
             <small
@@ -399,7 +400,6 @@
             id="address2"
             placeholder="Address Line 2"
             formControlName="address2"
-            required
           />
         </div>
       </div>
@@ -518,6 +518,45 @@
               *ngIf="createAccountForm.get('zip')?.errors?.pattern"
               class="input-error"
               >Please enter a valid zip code.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label class="mt-4" for="dob"
+            ><b>Date of Birth</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="dob"
+            placeholder="MM/DD/YYYY"
+            formControlName="dob"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('dob')?.invalid &&
+              (createAccountForm.get('dob')?.dirty ||
+                createAccountForm.get('dob')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.required"
+              class="input-error"
+              >Please enter date of birth.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.pattern"
+              class="input-error"
+              >Please enter date in format MM/DD/YYYY.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.invalidDate"
+              class="input-error"
+              >Please enter a valid date.<br
             /></small>
           </div>
         </div>
@@ -656,7 +695,12 @@
     </div>
     <div class="row">
       <div class="col-6 mx-auto">
-        <button type="submit" class="btn btn-primary w-100 p-2 mb-5 mt-2">
+        <button
+          type="submit"
+          id="createAccountButton"
+          class="btn btn-primary w-100 p-2 mb-5 mt-2"
+          [disabled]="disableSubmitButton"
+        >
           Create Account
         </button>
       </div>
@@ -664,7 +708,3 @@
   </form>
   <small><span class="required-star">*</span> indicates required field</small>
 </div>
-
-<!--  <div class="row">-->
-<!--    <div class="container col-5">-->
-<!--      <div class="jumbotron ml-5">-->

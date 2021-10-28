@@ -8,6 +8,11 @@ export const environment = {
   useRealAnnouncementService: false,
   useRealAccountService: false,
   useRealProfileService: false,
+  useRealAddressService: false,
+  useRealAvailabilityService: false,
+  useRealBlacklistService: false,
+  useRealPhoneNumberService: false,
+  useRealProfilePhotosService: false,
 };
 
 /*
