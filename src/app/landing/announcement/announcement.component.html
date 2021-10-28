@@ -1,6 +1,24 @@
-<div *ngIf="announcement" class="announcement-container">
-  <h3>{{ announcement.title }}</h3>
-  <i> {{ announcement.author }} </i>
-  <hr />
-  <div [innerHTML]="announcement.bodyHTML"></div>
+<div class="card m-3 announcement-card">
+  <div class="card-header announcement-card-header border-bottom-0 mb-3">
+    <b>{{ announcement.title }}</b>
+  </div>
+  <div class="card-body pt-1">
+    <div [innerHTML]="announcement.bodyHTML"></div>
+  </div>
+  <div
+    class="
+      card-footer
+      text-right
+      p-1
+      pr-3
+      pb-2
+      bg-white
+      border-0
+      announcement-card-footer
+    "
+  >
+    <small class="card-subtitle"
+      ><i>{{ announcement.author }} on {{ getFormattedDate() }}</i>
+    </small>
+  </div>
 </div>

@@ -10,6 +10,7 @@ import { BlacklistTableComponent } from './blacklist-table/blacklist-table.compo
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { EditorComponent } from '../common/editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { LandingModule } from '../landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgxEditorModule } from 'ngx-editor';
     ReactiveFormsModule,
     FormsModule,
     NgxEditorModule,
+    LandingModule,
   ],
 })
 export class AdminSectionModule {}

@@ -21,6 +21,24 @@ const announcements: Announcement[] = [
     <div>Also it has a div!</div>
     `,
   },
+  {
+    id: 2,
+    date: new Date(),
+    author: 'Jake Paul',
+    title: 'Christmas Party',
+    bodyHTML: `
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    `,
+  },
+  {
+    id: 3,
+    date: new Date(),
+    author: 'Penelope Smith',
+    title: 'This is really important!',
+    bodyHTML: `
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui </b> officia deserunt mollit anim id est laborum.</p> <img src="https://fostersource.org/wp-content/uploads/2020/07/team1.jpg" width="589px">
+    `,
+  },
 ];
 
 const getAnnouncementResponses: GetAnnouncementsRes[] = [
