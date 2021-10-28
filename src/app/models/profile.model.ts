@@ -19,7 +19,12 @@ export interface Profile {
   profileCompleted: boolean;
   address: Address;
   availability: Availability;
-  photoAWSKeys: string[];
+  photoAWSKeys: Photo[];
+}
+
+export interface Photo {
+  id: number;
+  photoAWSKey: string;
 }
 
 export interface GetProfilesRes {

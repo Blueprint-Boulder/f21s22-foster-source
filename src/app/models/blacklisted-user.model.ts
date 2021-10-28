@@ -1,10 +1,15 @@
 export interface BlacklistedUser {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
-  banDate: Date;
+  phoneNumber: string;
+  date: Date;
   bannedBy: string;
-  details: string;
+  reason: string;
+}
+
+export interface GetBlacklistedUsersReq {
+  blacklist: BlacklistedUser[];
 }
 
 export interface RemoveFromBlacklistRequest {
