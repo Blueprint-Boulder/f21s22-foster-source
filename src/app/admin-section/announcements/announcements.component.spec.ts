@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnnouncementsComponent } from './announcements.component';
 import {HttpClientModule} from "@angular/common/http";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AnnouncementsComponent', () => {
   let component: AnnouncementsComponent;
@@ -10,7 +11,7 @@ describe('AnnouncementsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AnnouncementsComponent ],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule, RouterTestingModule]
     })
     .compileComponents();
   });
