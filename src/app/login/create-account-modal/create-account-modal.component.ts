@@ -173,7 +173,7 @@ export class CreateAccountModalComponent implements OnInit {
       this.accountService.createAccount(createAccountReq).subscribe(
         (res: CreateAccountRequest) => {
           console.log(res);
-          this.router.navigate(['/login/create-account/verify']);
+          this.router.navigate([`/login/create-account/verify/${res.email}`]);
         },
         (err) => console.log(err)
       );
