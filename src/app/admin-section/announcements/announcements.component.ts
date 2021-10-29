@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatabaseService } from '../../services/database-service/database.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import {
   Announcement,
@@ -9,7 +8,6 @@ import {
 } from '../../models/announcement.model';
 import { ToastPresets } from '../../models/toast.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
 import { Router } from '@angular/router';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
 import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
@@ -17,7 +15,7 @@ import { announcementServiceProvider } from '../../services/announcement-service
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.scss'],
-  providers: [databaseServiceProvider, announcementServiceProvider],
+  providers: [announcementServiceProvider],
 })
 export class AnnouncementsComponent implements OnInit {
   public characterLimit = 2000;

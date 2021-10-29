@@ -7,7 +7,6 @@ import {
   GetApplicantsRes,
 } from '../../models/applicant.model';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
 import { formatDate } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import { ToastService } from '../../services/toast-service/toast.service';

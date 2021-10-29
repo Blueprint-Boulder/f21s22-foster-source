@@ -3,19 +3,19 @@ import { TestBed } from '@angular/core/testing';
 import { HttpDateService } from './http-date.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {databaseServiceProvider, databaseServiceTestProvider} from "../database-service/database.service.provider";
-import {DatabaseService} from "../database-service/database.service";
 import {environment} from "../../../environments/environment";
+import {accountServiceProvider} from "../account-service/account.service.provider";
+import {AccountService} from "../account-service/account.service";
 
 describe('HttpDateService', () => {
-  let service: DatabaseService;
+  let service: AccountService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        databaseServiceTestProvider,
+        accountServiceProvider,
         {
           provide: HTTP_INTERCEPTORS,
           useClass: HttpDateService,
@@ -23,7 +23,7 @@ describe('HttpDateService', () => {
         }
       ]
     });
-    service = TestBed.inject(DatabaseService);
+    service = TestBed.inject(AccountService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
