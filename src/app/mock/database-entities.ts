@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
-import { PhoneNumberType } from '../models/phonenumber.model';
+import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
 import { Profile } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
 import { Address, SimpleAddress } from '../models/adress.model';
@@ -237,6 +237,13 @@ export const primaryAvailabilities: Availability[] = [
   },
 ];
 
+export const mobilePhones: PhoneNumber[] = [
+  {
+    phoneNumber: '+17209938821',
+    type: PhoneNumberType.Mobile,
+  },
+];
+
 export const profiles: Profile[] = [
   {
     id: 1,
@@ -248,10 +255,7 @@ export const profiles: Profile[] = [
     firstName: 'Jack',
     lastName: 'Crowman',
     dob: new Date(),
-    primaryPhone: {
-      phoneNumber: '+17209938821',
-      type: PhoneNumberType.Mobile,
-    },
+    primaryPhone: mobilePhones[0],
     secondaryPhone: {
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,

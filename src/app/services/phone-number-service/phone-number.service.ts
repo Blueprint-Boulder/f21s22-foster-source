@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export abstract class PhoneNumberService {
   public abstract updatePhoneNumber(
-    phoneNumber: PhoneNumber
+    phoneNumber: PhoneNumber,
+    isPrimary: boolean
   ): Observable<PhoneNumber>;
 }
