@@ -4,6 +4,7 @@ import {
   Announcement,
   GetAnnouncementsRes,
   OptionalAnnouncement,
+  PostAnnouncementRequest,
 } from '../../models/announcement.model';
 
 @Injectable({
@@ -14,7 +15,7 @@ export abstract class AnnouncementService {
   public abstract getAnnouncementById(id: number): Observable<Announcement>;
   public abstract getLatestAnnouncement(): Observable<Announcement>;
   public abstract postAnnouncement(
-    announcement: Announcement
+    announcement: PostAnnouncementRequest
   ): Observable<Announcement>;
   public abstract updateAnnouncement(
     opAnnouncement: OptionalAnnouncement

@@ -4,6 +4,7 @@ import {
   Announcement,
   GetAnnouncementsRes,
   OptionalAnnouncement,
+  PostAnnouncementRequest,
 } from '../../models/announcement.model';
 import {
   announcements,
@@ -27,7 +28,9 @@ export class AnnouncementMockService implements AnnouncementService {
     return of(announcements[0]);
   }
 
-  postAnnouncement(announcement: Announcement): Observable<Announcement> {
+  postAnnouncement(
+    announcement: PostAnnouncementRequest
+  ): Observable<Announcement> {
     return of(announcements[0]);
   }
 

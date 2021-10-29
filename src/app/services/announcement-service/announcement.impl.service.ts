@@ -4,6 +4,7 @@ import {
   Announcement,
   GetAnnouncementsRes,
   OptionalAnnouncement,
+  PostAnnouncementRequest,
 } from '../../models/announcement.model';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
@@ -31,7 +32,9 @@ export class AnnouncementImplService implements AnnouncementService {
     );
   }
 
-  postAnnouncement(announcement: Announcement): Observable<Announcement> {
+  postAnnouncement(
+    announcement: PostAnnouncementRequest
+  ): Observable<Announcement> {
     return this.http.post<Announcement>(
       `${environment.backendHost}/api/db/announcements`,
       JSON.stringify(announcement)

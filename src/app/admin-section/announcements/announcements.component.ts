@@ -28,7 +28,6 @@ export class AnnouncementsComponent implements OnInit {
   public pastAnnouncements: Announcement[] = [];
 
   constructor(
-    private dbService: DatabaseService,
     private toastService: ToastService,
     private router: Router,
     private announcementService: AnnouncementService
@@ -57,25 +56,19 @@ export class AnnouncementsComponent implements OnInit {
       return;
     }
     this.attemptingToPost = true;
-    this.dbService
+
+    this.announcementService
       .postAnnouncement({
         title: this.title,
         bodyHtml: this.richText,
       } as PostAnnouncementRequest)
       .subscribe(
-        (res: PostAnnouncementResponse) => {
-          if (res.error) {
-            this.toastService.show({
-              body: 'Something went wrong trying to post the announcement.',
-              preset: ToastPresets.ERROR,
-            });
-          } else {
-            this.toastService.show({
-              body: `Successfully posted the announcement.`,
-              preset: ToastPresets.SUCCESS,
-            });
-            this.reloadPage();
-          }
+        (res: Announcement) => {
+          this.toastService.show({
+            body: `Successfully posted the announcement.`,
+            preset: ToastPresets.SUCCESS,
+          });
+          this.reloadPage();
         },
         (error: HttpErrorResponse) => {
           this.toastService.show({
