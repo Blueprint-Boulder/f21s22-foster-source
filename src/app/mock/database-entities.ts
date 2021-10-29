@@ -7,7 +7,7 @@ import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
-import { Profile } from '../models/profile.model';
+import { Photo, Profile } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
 import { Address, SimpleAddress } from '../models/adress.model';
 
@@ -190,6 +190,13 @@ const applicants: Applicant[] = [
     caseWorkerName: 'Gina White',
     caseWorkerEmail: 'gwhite@colorado.gov',
     dateApplied: new Date(),
+  },
+];
+
+export const photos: Photo[] = [
+  {
+    id: 1,
+    photoAWSKey: 'AWS_KEY',
   },
 ];
 

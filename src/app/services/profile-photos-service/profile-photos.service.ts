@@ -7,5 +7,5 @@ import { Photo } from '../../models/profile.model';
 })
 export abstract class ProfilePhotosService {
   public abstract postProfilePhoto(key: string): Observable<Photo>;
-  public abstract deletePhoto(id: number): Observable<void>;
+  public abstract deletePhoto(key: string): Observable<void>;
 }
