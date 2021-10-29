@@ -8,7 +8,7 @@ export interface BlacklistedUser {
   reason: string;
 }
 
-export interface GetBlacklistedUsersReq {
+export interface GetBlacklistedUsersRes {
   blacklist: BlacklistedUser[];
 }
 
