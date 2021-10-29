@@ -18,5 +18,5 @@ export abstract class BlacklistService {
   public abstract deleteFromBlacklist(
     phoneNumber: string,
     email: string
-  ): Observable<void>;
+  ): Observable<any>;
 }

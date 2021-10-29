@@ -20,5 +20,5 @@ export abstract class AnnouncementService {
   public abstract updateAnnouncement(
     opAnnouncement: OptionalAnnouncement
   ): Observable<Announcement>;
-  public abstract deleteAnnouncement(id: number): Observable<void>;
+  public abstract deleteAnnouncement(id: number): Observable<any>;
 }

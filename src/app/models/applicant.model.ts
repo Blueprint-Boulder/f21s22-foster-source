@@ -7,6 +7,10 @@ export interface Applicant {
   dateApplied: Date;
 }
 
+export interface GetApplicantsRes {
+  applicants: Applicant[];
+}
+
 export interface ApprovalTableUser extends Applicant {
   isCollapsed: boolean;
 }

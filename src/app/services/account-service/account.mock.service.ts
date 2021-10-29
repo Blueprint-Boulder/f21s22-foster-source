@@ -9,9 +9,15 @@ import {
 import { Observable, of } from 'rxjs';
 import {
   accounts,
+  applicants,
   cookies,
   createAccountRequests,
 } from '../../mock/database-entities';
+import {
+  ApproveApplicantRequest,
+  DenyApplicantRequest,
+  GetApplicantsRes,
+} from '../../models/applicant.model';
 
 export class AccountMockService implements AccountService {
   createAccount(
@@ -20,12 +26,12 @@ export class AccountMockService implements AccountService {
     return of(createAccountRequests[0]);
   }
 
-  deleteAccount(id: number): Observable<void> {
-    return of();
+  deleteAccount(id: number): Observable<any> {
+    return of({});
   }
 
-  deleteOwnAccount(): Observable<void> {
-    return of();
+  deleteOwnAccount(): Observable<any> {
+    return of({});
   }
 
   login(params: LoginRequest): Observable<Cookie> {
@@ -34,5 +40,19 @@ export class AccountMockService implements AccountService {
 
   updateAccount(params: UpdateAccountReq): Observable<Account> {
     return of(accounts[0]);
+  }
+
+  getApplicants(): Observable<GetApplicantsRes> {
+    return of({
+      applicants: applicants,
+    });
+  }
+
+  approveApplicant(params: ApproveApplicantRequest): Observable<any> {
+    return of({});
+  }
+
+  denyApplicant(params: DenyApplicantRequest): Observable<any> {
+    return of({});
   }
 }

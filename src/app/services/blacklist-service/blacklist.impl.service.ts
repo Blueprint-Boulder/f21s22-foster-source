@@ -17,7 +17,7 @@ export class BlacklistImplService implements BlacklistService {
     );
   }
 
-  deleteFromBlacklist(phoneNumber: string, email: string): Observable<void> {
+  deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return this.http.delete<void>(
       `${
         environment.backendHost

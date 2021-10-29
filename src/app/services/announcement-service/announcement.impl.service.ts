@@ -52,7 +52,7 @@ export class AnnouncementImplService implements AnnouncementService {
     );
   }
 
-  deleteAnnouncement(id: number): Observable<void> {
+  deleteAnnouncement(id: number): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/announcements/${encodeURIComponent(
         id

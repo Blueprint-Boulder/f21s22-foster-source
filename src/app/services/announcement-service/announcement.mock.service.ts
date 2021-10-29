@@ -12,8 +12,8 @@ import {
 } from '../../mock/database-entities';
 
 export class AnnouncementMockService implements AnnouncementService {
-  deleteAnnouncement(id: number): Observable<void> {
-    return of();
+  deleteAnnouncement(id: number): Observable<any> {
+    return of({});
   }
 
   getAnnouncementById(id: number): Observable<Announcement> {

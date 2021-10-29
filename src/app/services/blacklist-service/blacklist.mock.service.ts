@@ -11,8 +11,8 @@ export class BlacklistMockService implements BlacklistService {
     return of(blacklist[0]);
   }
 
-  deleteFromBlacklist(phoneNumber: string, email: string): Observable<void> {
-    return of();
+  deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
+    return of({});
   }
 
   getBlacklistedUsers(): Observable<GetBlacklistedUsersRes> {

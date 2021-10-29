@@ -9,6 +9,11 @@ import {
 } from '../../models/account.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import {
+  ApproveApplicantRequest,
+  DenyApplicantRequest,
+  GetApplicantsRes,
+} from '../../models/applicant.model';
 
 export class AccountImplService implements AccountService {
   constructor(private http: HttpClient) {}
@@ -22,13 +27,13 @@ export class AccountImplService implements AccountService {
     );
   }
 
-  deleteAccount(id: number): Observable<void> {
+  deleteAccount(id: number): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/accounts/${encodeURIComponent(id)}`
     );
   }
 
-  deleteOwnAccount(): Observable<void> {
+  deleteOwnAccount(): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/accounts/`
     );
@@ -44,6 +49,26 @@ export class AccountImplService implements AccountService {
   updateAccount(params: UpdateAccountReq): Observable<Account> {
     return this.http.put<Account>(
       `${environment.backendHost}/api/db/accounts`,
+      JSON.stringify(params)
+    );
+  }
+
+  getApplicants(): Observable<GetApplicantsRes> {
+    return this.http.get<GetApplicantsRes>(
+      `${environment.backendHost}/api/db/accounts/applicants`
+    );
+  }
+
+  approveApplicant(params: ApproveApplicantRequest): Observable<any> {
+    return this.http.put<any>(
+      `${environment.backendHost}/api/db/accounts/?approve=true`,
+      JSON.stringify(params)
+    );
+  }
+
+  denyApplicant(params: DenyApplicantRequest): Observable<any> {
+    return this.http.put<any>(
+      `${environment.backendHost}/api/db/accounts/?approve=false`,
       JSON.stringify(params)
     );
   }

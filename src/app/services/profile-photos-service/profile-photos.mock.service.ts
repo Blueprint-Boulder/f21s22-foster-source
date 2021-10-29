@@ -4,8 +4,8 @@ import { Photo } from '../../models/profile.model';
 import { photos } from '../../mock/database-entities';
 
 export class ProfilePhotosMockService implements ProfilePhotosService {
-  deletePhoto(key: string): Observable<void> {
-    return of();
+  deletePhoto(key: string): Observable<any> {
+    return of({});
   }
 
   postProfilePhoto(key: string): Observable<Photo> {

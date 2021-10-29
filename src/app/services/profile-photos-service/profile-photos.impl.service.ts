@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 export class ProfilePhotosImplService implements ProfilePhotosService {
   constructor(private http: HttpClient) {}
 
-  deletePhoto(key: string): Observable<void> {
+  deletePhoto(key: string): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/profile/photos/${encodeURIComponent(
         key
