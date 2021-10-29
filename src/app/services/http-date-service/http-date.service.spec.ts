@@ -2,10 +2,11 @@ import { TestBed } from '@angular/core/testing';
 
 import { HttpDateService } from './http-date.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {accountServiceProvider} from "../account-service/account.service.provider";
 import {AccountService} from "../account-service/account.service";
+import {AccountImplService} from "../account-service/account.impl.service";
 
 describe('HttpDateService', () => {
   let service: AccountService;
@@ -15,7 +16,7 @@ describe('HttpDateService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        accountServiceProvider,
+        {provide: AccountService, useClass: AccountImplService, deps: [HttpClient]},
         {
           provide: HTTP_INTERCEPTORS,
           useClass: HttpDateService,
@@ -50,7 +51,7 @@ describe('HttpDateService', () => {
         expect((dummy as any).nest.date instanceof Date).toBeTrue();
       })
 
-      const req = httpMock.expectOne(`${environment.backendHost}/api/db/applicants`);
+      const req = httpMock.expectOne(`${environment.backendHost}/api/db/accounts/applicants`);
       expect(req.request.method).toBe("GET");
       req.flush(dummy);
 
