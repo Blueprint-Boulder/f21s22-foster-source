@@ -9,6 +9,7 @@ import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumberType } from '../models/phonenumber.model';
 import { Profile } from '../models/profile.model';
 import { AvailabilityType } from '../models/availability.model';
+import { Address, SimpleAddress } from '../models/adress.model';
 
 const announcements: Announcement[] = [
   {
@@ -45,6 +46,28 @@ const getAnnouncementResponses: GetAnnouncementsRes[] = [
   { announcements: announcements },
 ];
 
+export const simpleAddresses: SimpleAddress[] = [
+  {
+    line1: '1002 fake st.',
+    city: 'Denver',
+    zip: '80210',
+    state: 'CO',
+    county: 'Arapahoe',
+  },
+];
+
+export const addresses: Address[] = [
+  {
+    line1: '1002 fake st.',
+    city: 'Denver',
+    zip: '80210',
+    state: 'CO',
+    county: 'Arapahoe',
+    lat: '1',
+    lon: '1',
+  },
+];
+
 export const createAccountRequests: CreateAccountRequest[] = [
   {
     email: 'jcrowson@aol.com',
@@ -64,13 +87,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },
-    address: {
-      line1: '1002 fake st.',
-      city: 'Denver',
-      zip: '80210',
-      state: 'CO',
-      county: 'Arapahoe',
-    },
+    address: simpleAddresses[0],
   },
 ];
 
