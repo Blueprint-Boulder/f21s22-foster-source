@@ -8,7 +8,7 @@ import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumberType } from '../models/phonenumber.model';
 import { Profile } from '../models/profile.model';
-import { AvailabilityType } from '../models/availability.model';
+import { Availability, AvailabilityType } from '../models/availability.model';
 import { Address, SimpleAddress } from '../models/adress.model';
 
 const announcements: Announcement[] = [
@@ -223,6 +223,19 @@ const blacklist: BlacklistedUser[] = [
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
   },
 ];
+export const primaryAvailabilities: Availability[] = [
+  {
+    id: 1,
+    type: AvailabilityType.PRIMARY,
+    monday: [true, true, true, false],
+    tuesday: [false, true, true, false],
+    wednesday: [true, true, true, false],
+    thursday: [true, true, false, false],
+    friday: [true, true, true, false],
+    saturday: [false, true, true, true],
+    sunday: [false, true, true, true],
+  },
+];
 
 export const profiles: Profile[] = [
   {
@@ -254,17 +267,7 @@ export const profiles: Profile[] = [
       lat: '1',
       lon: '1',
     },
-    availability: {
-      id: 1,
-      type: AvailabilityType.PRIMARY,
-      monday: [true, true, true, false],
-      tuesday: [false, true, true, false],
-      wednesday: [true, true, true, false],
-      thursday: [true, true, false, false],
-      friday: [true, true, true, false],
-      saturday: [false, true, true, true],
-      sunday: [false, true, true, true],
-    },
+    availability: primaryAvailabilities[0],
     photoAWSKeys: [{ id: 1, photoAWSKey: 'REAL_AWS_KEY' }],
   },
 ];
