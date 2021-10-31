@@ -4,11 +4,7 @@ import * as AWS from 'aws-sdk';
 
 export class ImageImplService implements ImageService {
   constructor(private http: HttpClient) {
-    const credentials = new AWS.Credentials(
-      'AKIAYFI6SJNZMNBZ2T53',
-      '5jlnOCBhIW9MaDSp8R5QMBfvl03E7Lkd8mWrcFAC'
-    );
-    AWS.config.credentials = credentials;
+    // AWS.config.credentials = credentials;
     AWS.config.getCredentials(function (err) {
       if (err) console.log(err.stack);
       // credentials not loaded
