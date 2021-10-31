@@ -17,12 +17,14 @@
     "target": "es2017",
     "module": "es2020",
     "lib": ["es2018", "dom"],
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "types": ["node"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "types": ["node", "jest"]
   }
 }

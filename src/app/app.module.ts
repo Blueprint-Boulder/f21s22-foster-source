@@ -11,9 +11,15 @@ import { ToastContainerComponent } from './common/toast-container/toast-containe
 import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageServiceTestComponent } from './image-service-test/image-service-test.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    ToastContainerComponent,
+    ImageServiceTestComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

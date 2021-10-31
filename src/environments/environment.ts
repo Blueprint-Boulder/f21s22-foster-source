@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   backendHost: 'localhost:3000',
+  useRealImageService: true,
 };
 
 /*
