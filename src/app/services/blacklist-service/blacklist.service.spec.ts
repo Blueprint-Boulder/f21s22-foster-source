@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DatabaseService } from './database.service';
+import { BlacklistService } from './blacklist.service';
 
-describe('AbstractDatabaseService', () => {
-  let service: DatabaseService;
+describe('BlacklistService', () => {
+  let service: BlacklistService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DatabaseService);
+    service = TestBed.inject(BlacklistService);
   });
 
   it('should be created', () => {

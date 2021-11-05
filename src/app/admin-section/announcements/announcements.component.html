@@ -1,13 +1,15 @@
 <div class="container">
   <div class="row post-announcement-container">
-    <h2>Post an announcement</h2>
+    <div class="col mb-2">
+      <h2>Post an announcement</h2>
+    </div>
   </div>
   <div class="row">
     <div class="col-12">
       <div class="form-group">
-        <!--        <label for="announcement-title-field">Announcement Title</label>-->
         <input
           [(ngModel)]="title"
+          (input)="updatePreview()"
           type="text"
           class="form-control"
           id="announcement-title-field"
@@ -27,16 +29,43 @@
     </div>
   </div>
   <div class="row">
-    <button
-      class="btn btn-primary"
-      [class]="{ disabled: richText.length > characterLimit }"
-      (click)="postAnnouncement()"
-      [disabled]="richText.length > characterLimit"
-    >
-      Post Announcement
-    </button>
+    <div class="col">
+      <button
+        class="btn btn-primary text-white float-right"
+        [class]="{
+          disabled: richText.length > characterLimit || attemptingToPost
+        }"
+        (click)="postAnnouncement()"
+        [disabled]="richText.length > characterLimit || attemptingToPost"
+      >
+        Post Announcement
+      </button>
+      <button
+        class="btn btn-secondary text-white float-right mr-3"
+        (click)="reloadPage()"
+        [class]="{ disabled: attemptingToPost }"
+        [disabled]="attemptingToPost"
+      >
+        Cancel
+      </button>
+    </div>
   </div>
-  <div class="row past-announcements">
-    <p>Here's where all the old announcements will go!</p>
+  <div *ngIf="announcement" class="row mt-1">
+    <div class="col">
+      <i>Preview of your announcement:</i>
+    </div>
+  </div>
+  <div *ngIf="announcement" class="row">
+    <div class="col">
+      <app-announcement [announcement]="announcement"></app-announcement>
+    </div>
+  </div>
+  <div class="row past-announcements mt-5 border-top pt-5 mb-2">
+    <i>Past Announcements</i>
+  </div>
+  <div *ngFor="let a of pastAnnouncements" class="row">
+    <div class="col">
+      <app-announcement [announcement]="a"></app-announcement>
+    </div>
   </div>
 </div>
