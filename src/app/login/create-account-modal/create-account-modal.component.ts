@@ -61,7 +61,7 @@ export class CreateAccountModalComponent implements OnInit {
         ]),
       ],
       state: ['', Validators.required],
-      county: ['', Validators.required],
+      certifiedBy: ['', Validators.required],
       caseworkerfname: ['', Validators.required],
       caseworkerlname: ['', Validators.required],
       caseworkeremail: [
@@ -91,16 +91,6 @@ export class CreateAccountModalComponent implements OnInit {
         Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
       confirmpassword: ['', Validators.compose([Validators.required])],
-      dob: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/
-          ),
-          CreateAccountModalComponent.validateDate,
-        ]),
-      ],
     });
     this.createAccountForm.setValidators([
       CreateAccountModalComponent.confirmEmailValidator,
@@ -143,16 +133,13 @@ export class CreateAccountModalComponent implements OnInit {
             ? this.createAccountForm!.get('address2')!.value
             : undefined,
           city: this.createAccountForm!.get('city')!.value,
-          county: this.createAccountForm!.get('county')!.value,
           zip: this.createAccountForm!.get('zip')!.value,
           state: this.createAccountForm!.get('state')!.value,
         },
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
         cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
-        dob: CreateAccountModalComponent.parseDateFromInput(
-          this.createAccountForm.get('dob')!.value
-        ),
+        certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
         email: this.createAccountForm.get('caseworkerlname')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
@@ -211,44 +198,6 @@ export class CreateAccountModalComponent implements OnInit {
     } catch (e) {
       return err;
     }
-  }
-
-  private static validateDate(
-    control: AbstractControl
-  ): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid phone date.' };
-
-    try {
-      const parsed = CreateAccountModalComponent.parseDateFromInput(
-        control.value as string
-      );
-      const validMonth =
-        parseInt(control.value.substring(0, 2)) > 0 &&
-        parseInt(control.value.substring(0, 2)) <= 12;
-      const validDay =
-        parseInt(control.value.substring(3, 5)) > 0 &&
-        parseInt(control.value.substring(3, 5)) <= 31;
-      const validYear =
-        parseInt(control.value.substring(6, 10)) >
-          new Date().getFullYear() - 100 &&
-        parseInt(control.value.substring(6, 10)) <=
-          new Date().getFullYear() - 13;
-      if (!validMonth || !validDay || !validYear) {
-        return err;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return err;
-    }
-  }
-
-  private static parseDateFromInput(dateStr: string): Date {
-    const year = parseInt(dateStr.substring(6, 10));
-    const day = parseInt(dateStr.substring(3, 5));
-    const month = parseInt(dateStr.substring(0, 2));
-    console.log(year, day, month);
-    return new Date(year, month - 1, day);
   }
 
   public getPhoneTypes(): string[] {
