@@ -11,6 +11,7 @@ import { Utils } from '../utils';
 export class FinishAccountModalComponent implements OnInit {
   public finishProfileForm: FormGroup;
   public hasSecondaryAccountHolder = false;
+  public canProvideRespiteCare = false;
   public phoneTypes: string[];
 
   private secondaryAccountHolderFields = [
@@ -23,6 +24,14 @@ export class FinishAccountModalComponent implements OnInit {
     'secPronouns',
     'secGender',
     'secMaritalStatus',
+  ];
+
+  private provideRespitefields = [
+    'respiteCity',
+    'respiteRange',
+    'minAge',
+    'maxAge',
+    'howManyCareFor',
   ];
 
   @Input() account: Account;
@@ -51,6 +60,11 @@ export class FinishAccountModalComponent implements OnInit {
       canProvideRespite: [false, Validators.required],
       lookingForRespite: [false, Validators.required],
       hasProvidedInPast: [false, Validators.required],
+      respiteCity: [''],
+      respiteRange: [null],
+      minAge: [null],
+      maxAge: [null],
+      howManyCareFor: [null],
     });
   }
 
@@ -60,6 +74,17 @@ export class FinishAccountModalComponent implements OnInit {
       this.makeSecFieldsRequired();
     } else {
       this.hasSecondaryAccountHolder = false;
+      this.makeSecFieldsNotRequired();
+    }
+  }
+
+  public respiteProvideChange(event: Event) {
+    if ((event.target as any).value === 'true') {
+      this.canProvideRespiteCare = true;
+      this.makeRespiteFieldsRequired();
+    } else {
+      this.canProvideRespiteCare = false;
+      this.makeRespiteFieldsNotRequired();
     }
   }
 
@@ -71,6 +96,20 @@ export class FinishAccountModalComponent implements OnInit {
 
   private makeSecFieldsNotRequired() {
     this.secondaryAccountHolderFields.forEach((fieldName: string) => {
+      this.finishProfileForm
+        .get(fieldName)
+        ?.removeValidators(Validators.required);
+    });
+  }
+
+  private makeRespiteFieldsRequired() {
+    this.provideRespitefields.forEach((fieldName: string) => {
+      this.finishProfileForm.get(fieldName)?.addValidators(Validators.required);
+    });
+  }
+
+  private makeRespiteFieldsNotRequired() {
+    this.provideRespitefields.forEach((fieldName: string) => {
       this.finishProfileForm
         .get(fieldName)
         ?.removeValidators(Validators.required);

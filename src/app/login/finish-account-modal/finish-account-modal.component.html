@@ -1,5 +1,8 @@
 <div class="container p-5 bg-white mt-5 mb-5">
   <form [formGroup]="finishProfileForm">
+    <div class="row mb-5">
+      <h1>Finish setting up your account</h1>
+    </div>
     <div class="row mb-2">
       <h3>Current Information on File</h3>
     </div>
@@ -473,10 +476,13 @@
         </div>
       </div>
     </div>
-    <div class="row respite-backround-checkboxes-row my-3">
+    <div class="row respite-backround-checkboxes-row my-3 px-3">
       <div class="col-sm-12 col-md-4">
         <div class="row">
-          <p><b>Can you provide respite care?</b></p>
+          <p>
+            <b>Can you provide respite care?</b
+            ><span class="required-star">*</span>
+          </p>
         </div>
         <div class="row">
           <div class="form-check m-2">
@@ -487,6 +493,7 @@
               name="canProvideRespite"
               value="true"
               id="canProvideRespiteYes"
+              (change)="respiteProvideChange($event)"
             />
             <label class="form-check-label" for="canProvideRespiteYes">
               Yes
@@ -500,6 +507,7 @@
               name="canProvideRespite"
               value="false"
               id="canProvideRespiteNo"
+              (change)="respiteProvideChange($event)"
             />
             <label class="form-check-label" for="canProvideRespiteNo">
               No
@@ -526,7 +534,10 @@
       </div>
       <div class="col-sm-12 col-md-4">
         <div class="row">
-          <p><b>Are you looking for respite care?</b></p>
+          <p>
+            <b>Are you looking for respite care?</b
+            ><span class="required-star">*</span>
+          </p>
         </div>
         <div class="row">
           <div class="form-check m-2">
@@ -576,7 +587,10 @@
       </div>
       <div class="col-sm-12 col-md-4">
         <div class="row">
-          <p><b>Have you provided respite care in the past?</b></p>
+          <p>
+            <b>Have you provided respite care in the past?</b
+            ><span class="required-star">*</span>
+          </p>
         </div>
         <div class="row">
           <div class="form-check m-2">
@@ -625,17 +639,183 @@
         </div>
       </div>
     </div>
-    <div class="row city-and-miles-row">
-      <div class="col-sm-6"></div>
-      <div class="col-sm-6"></div>
+
+    <div
+      *ngIf="canProvideRespiteCare"
+      class="row extra-provider-qs-row bg-light-grey p-3"
+    >
+      <div class="col-12">
+        <div class="row city-and-miles-row my-3">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="respiteCity"
+                ><b>City/town you can provide respite in</b
+                ><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="respiteCity"
+                placeholder="Enter city/town"
+                formControlName="respiteCity"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('respiteCity')?.invalid &&
+                  (finishProfileForm.get('respiteCity')?.dirty ||
+                    finishProfileForm.get('respiteCity')?.touched)
+                "
+              >
+                <small
+                  *ngIf="finishProfileForm.get('respiteCity')?.errors?.required"
+                  class="input-error"
+                  >Please enter which city/town you are able to provide respite
+                  in.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="respiteRange"
+                ><b
+                  >How far are you willing to travel to provide respite
+                  (miles)?<span class="required-star">*</span></b
+                ></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="respiteRange"
+                type="number"
+                placeholder="Enter distance (miles)"
+                formControlName="respiteRange"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('respiteRange')?.invalid &&
+                  (finishProfileForm.get('respiteRange')?.dirty ||
+                    finishProfileForm.get('respiteRange')?.touched)
+                "
+              >
+                <small
+                  *ngIf="
+                    finishProfileForm.get('respiteRange')?.errors?.required
+                  "
+                  class="input-error"
+                  >Please enter how far you are willing to travel.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row age-range-max-num-row">
+          <div class="col-sm-12 col-md-6">
+            <p>
+              <b
+                >If you are providing respite, what age range of children can
+                you care for?</b
+              ><span class="required-star">*</span>
+            </p>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="minAge" class="mr-2"><i>Min: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="minAge"
+                    type="number"
+                    placeholder="Enter minimum age"
+                    formControlName="minAge"
+                  />
+                  <div
+                    *ngIf="
+                      finishProfileForm.get('minAge')?.invalid &&
+                      (finishProfileForm.get('minAge')?.dirty ||
+                        finishProfileForm.get('minAge')?.touched)
+                    "
+                  >
+                    <small
+                      *ngIf="finishProfileForm.get('minAge')?.errors?.required"
+                      class="input-error"
+                      >Please the min age.<br
+                    /></small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="maxAge" class="mr-2"><i>Max: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="maxAge"
+                    type="number"
+                    placeholder="Enter maximum age"
+                    formControlName="maxAge"
+                  />
+                  <div
+                    *ngIf="
+                      finishProfileForm.get('maxAge')?.invalid &&
+                      (finishProfileForm.get('maxAge')?.dirty ||
+                        finishProfileForm.get('maxAge')?.touched)
+                    "
+                  >
+                    <small
+                      *ngIf="finishProfileForm.get('maxAge')?.errors?.required"
+                      class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="howManyCareFor"
+                ><b
+                  >What is the maximum number of children you are able to care
+                  for at one time?</b
+                ><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="howManyCareFor"
+                type="number"
+                placeholder="Enter number of children"
+                formControlName="howManyCareFor"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('howManyCareFor')?.invalid &&
+                  (finishProfileForm.get('howManyCareFor')?.dirty ||
+                    finishProfileForm.get('howManyCareFor')?.touched)
+                "
+              >
+                <small
+                  *ngIf="
+                    finishProfileForm.get('howManyCareFor')?.errors?.required
+                  "
+                  class="input-error"
+                  >Please enter how many children you can care for.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row availability-title mt-3">
+          <h5>
+            Please indicate your availability to provide respite:<span
+              class="required-star"
+              >*</span
+            >
+          </h5>
+        </div>
+        <div class="row availability-row">
+          <div class="col-sm-12"></div>
+        </div>
+      </div>
+      <small><i>These fields can always be edited and updated later.</i></small>
     </div>
-    <div class="row age-range-max-num-row">
-      <div class="col-sm-6"></div>
-      <div class="col-sm-6"></div>
-    </div>
-    <div class="row availability-row">
-      <div class="col-sm-12"></div>
-    </div>
+
     <div class="row how-many-row">
       <div class="col-sm-4"></div>
       <div class="col-sm-4"></div>
