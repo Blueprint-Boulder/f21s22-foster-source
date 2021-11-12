@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+$fs-tan: #fef4e8;
+
+.fs-tan-background {
+  background-color: #fef4e8;
+}
+
+.bottom-border-input {
+  background-color: transparent;
+  color: #1b1613;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid #1b1613 1px;
+}
+
+.bg-light-grey {
+  background-color: #f6f6f6;
+}
+
+body {
+  padding-top: 75px;
+}
+
+$theme-colors: (
+  "primary": #ea8a40,
+  "secondary": #49306b,
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,710 @@
+<div class="container p-5 bg-white mt-5 mb-5">
+  <h1 class="mt-5 text-center">Create An Account</h1>
+  <form [formGroup]="createAccountForm" (ngSubmit)="createAccountSubmit()">
+    <div class="row mt-5 mb-2">
+      <h3>Personal Information</h3>
+    </div>
+    <div class="row name-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="fname"
+            ><b>First Name</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="fname"
+            placeholder="Enter first name"
+            formControlName="fname"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('fname')?.invalid &&
+              (createAccountForm.get('fname')?.dirty ||
+                createAccountForm.get('fname')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('fname')?.errors?.required"
+              class="input-error"
+              >Please enter your first name.</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="lname"
+            ><b>Last Name</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="lname"
+            placeholder="Enter Last Name"
+            formControlName="lname"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('lname')?.invalid &&
+              (createAccountForm.get('lname')?.dirty ||
+                createAccountForm.get('lname')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('lname')?.errors?.required"
+              class="input-error"
+              >Please enter your first name.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row username-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="user"
+            ><b>Username</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="user"
+            placeholder="Enter username"
+            formControlName="user"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('user')?.invalid &&
+              (createAccountForm.get('user')?.dirty ||
+                createAccountForm.get('user')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('user')?.errors?.required"
+              class="input-error"
+              >Please enter a username.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('user')?.errors?.minlength"
+              class="input-error"
+              >Please enter a longer username.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('user')?.errors?.maxlength"
+              class="input-error"
+              >Please enter a shorter username.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('user')?.errors?.pattern"
+              class="input-error"
+              >Invalid characters in username.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row email-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email"
+            ><b>Email</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="email"
+            placeholder="Enter Email"
+            formControlName="email"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('email')?.invalid &&
+              (createAccountForm.get('email')?.dirty ||
+                createAccountForm.get('email')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('email')?.errors?.required"
+              class="input-error"
+              >Please enter your email.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('email')?.errors?.email"
+              class="input-error"
+              >Please enter a valid email.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="confirmEmail"
+            ><b>Confirm Email</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="confirmEmail"
+            placeholder="Confirm Email"
+            formControlName="confirmEmail"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('confirmEmail')?.invalid &&
+              (createAccountForm.get('confirmEmail')?.dirty ||
+                createAccountForm.get('confirmEmail')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('confirmEmail')?.errors?.required"
+              class="input-error"
+              >Please confirm your email.<br
+            /></small>
+          </div>
+          <small
+            *ngIf="createAccountForm.errors?.emailMatch"
+            class="input-error"
+            >Emails do not match</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row pass-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="password"
+            ><b>Password</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            formControlName="password"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('password')?.invalid &&
+              (createAccountForm.get('password')?.dirty ||
+                createAccountForm.get('password')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('password')?.errors?.required"
+              class="input-error"
+              >Please enter a password.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('password')?.errors?.minlength"
+              class="input-error"
+              >Please enter a password longer than 8 characters.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="confirmpassword"
+          ><b>Confirm Password</b><span class="required-star">*</span></label
+        >
+        <input
+          class="form-control p-1 m-0 bottom-border-input"
+          type="password"
+          id="confirmpassword"
+          placeholder="Enter Password"
+          formControlName="confirmpassword"
+          required
+        />
+        <div
+          *ngIf="
+            createAccountForm.get('confirmpassword')?.invalid &&
+            (createAccountForm.get('confirmpassword')?.dirty ||
+              createAccountForm.get('confirmpassword')?.touched)
+          "
+        >
+          <small
+            *ngIf="createAccountForm.get('confirmpassword')?.errors?.required"
+            class="input-error"
+            >Please confirm your password.<br
+          /></small>
+        </div>
+        <small
+          *ngIf="createAccountForm.errors?.passwordMatch"
+          class="input-error"
+          >Passwords do not match</small
+        >
+      </div>
+    </div>
+    <div class="row phones-row">
+      <div class="col-xs-8 col-md-4">
+        <label for="primaryPhone"
+          ><b>Enter Primary Phone Number</b
+          ><span class="required-star">*</span></label
+        >
+        <input
+          class="form-control p-1 ml-0 bottom-border-input"
+          type="tel"
+          id="primaryPhone"
+          placeholder="Enter Phone Number"
+          formControlName="primaryPhone"
+          required
+        />
+        <div
+          *ngIf="
+            createAccountForm.get('primaryPhone')?.invalid &&
+            (createAccountForm.get('primaryPhone')?.dirty ||
+              createAccountForm.get('primaryPhone')?.touched)
+          "
+        >
+          <small
+            *ngIf="createAccountForm.get('primaryPhone')?.errors?.required"
+            class="input-error"
+            >Please enter your primary phone number.<br
+          /></small>
+          <small
+            *ngIf="createAccountForm.get('primaryPhone')?.errors?.invalidPhone"
+            class="input-error"
+            >Please enter a valid phone number.<br
+          /></small>
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"
+            ><b>Type</b><span class="required-star">*</span></label
+          >
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="primaryType"
+            formControlName="primaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option
+              *ngFor="let phoneType of getPhoneTypes()"
+              [value]="phoneType"
+            >
+              {{ phoneType }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              createAccountForm.get('primaryType')?.invalid &&
+              (createAccountForm.get('primaryType')?.dirty ||
+                createAccountForm.get('primaryType')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('primaryType')?.errors?.required"
+              class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8 col-md-4">
+        <div class="form-group">
+          <label for="secondaryPhone"
+            ><b>Enter Secondary Phone Number</b></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="secondaryPhone"
+            placeholder="Enter Phone Number"
+            formControlName="secondaryPhone"
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('secondaryPhone')?.invalid &&
+              (createAccountForm.get('secondaryPhone')?.dirty ||
+                createAccountForm.get('secondaryPhone')?.touched)
+            "
+          >
+            <small
+              *ngIf="
+                createAccountForm.get('secondaryPhone')?.errors?.invalidPhone
+              "
+              class="input-error"
+              >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="secondaryType"
+            formControlName="secondaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Home">Home</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Work">Work</option>
+          </select>
+          <div
+            *ngIf="
+              createAccountForm.get('secondaryType')?.invalid &&
+              (createAccountForm.get('secondaryType')?.dirty ||
+                createAccountForm.get('secondaryType')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('secondaryType')?.errors?.required"
+              class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-1-row">
+      <div class="col-xs-12 col-sm-12 col-12">
+        <div class="form-group">
+          <label class="mt-4" for="address"
+            ><b>Address Line 1</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="address"
+            placeholder="Address Line 1"
+            formControlName="address"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('address')?.invalid &&
+              (createAccountForm.get('address')?.dirty ||
+                createAccountForm.get('address')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('address')?.errors?.required"
+              class="input-error"
+              >Please enter your address.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-2-row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label class="mt-4" for="address2"><b>Address Line 2</b></label>
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="address2"
+            placeholder="Address Line 2"
+            formControlName="address2"
+          />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="mt-4" for="address2"
+            ><b>County</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="county"
+            placeholder="Enter county"
+            formControlName="county"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('county')?.invalid &&
+              (createAccountForm.get('county')?.dirty ||
+                createAccountForm.get('county')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('county')?.errors?.required"
+              class="input-error"
+              >Please enter your county.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-info-row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="city"
+            ><b>City</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="city"
+            placeholder="Enter City"
+            formControlName="city"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('city')?.invalid &&
+              (createAccountForm.get('city')?.dirty ||
+                createAccountForm.get('city')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('city')?.errors?.required"
+              class="input-error"
+              >Please enter a city.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="state"
+            ><b>State</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="state"
+            placeholder="Enter State"
+            formControlName="state"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('state')?.invalid &&
+              (createAccountForm.get('state')?.dirty ||
+                createAccountForm.get('state')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('state')?.errors?.required"
+              class="input-error"
+              >Please enter a state.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="zipCode"
+            ><b>Zip Code</b><span class="required-star">*</span></label
+          >
+          <div class="container"></div>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="zipCode"
+            placeholder="Enter Zip"
+            formControlName="zip"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('zip')?.invalid &&
+              (createAccountForm.get('zip')?.dirty ||
+                createAccountForm.get('zip')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('zip')?.errors?.required"
+              class="input-error"
+              >Please enter a zip code.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('zip')?.errors?.pattern"
+              class="input-error"
+              >Please enter a valid zip code.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label class="mt-4" for="dob"
+            ><b>Date of Birth</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="dob"
+            placeholder="MM/DD/YYYY"
+            formControlName="dob"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('dob')?.invalid &&
+              (createAccountForm.get('dob')?.dirty ||
+                createAccountForm.get('dob')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.required"
+              class="input-error"
+              >Please enter date of birth.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.pattern"
+              class="input-error"
+              >Please enter date in format MM/DD/YYYY.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('dob')?.errors?.invalidDate"
+              class="input-error"
+              >Please enter a valid date.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <h3>Case Worker Information</h3>
+    </div>
+    <div class="row cw-name-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="caseworkerfname"
+            ><b>Case Worker First Name</b
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkerfname"
+            placeholder="Enter Case Worker's First Name"
+            formControlName="caseworkerfname"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('caseworkerfname')?.invalid &&
+              (createAccountForm.get('caseworkerfname')?.dirty ||
+                createAccountForm.get('caseworkerfname')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('caseworkerfname')?.errors?.required"
+              class="input-error"
+              >Please enter case worker's first name.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="caseworkerlname"
+            ><b>Case Worker Last Name</b
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkerlname"
+            placeholder="Enter Case Worker's First Name"
+            formControlName="caseworkerlname"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('caseworkerlname')?.invalid &&
+              (createAccountForm.get('caseworkerlname')?.dirty ||
+                createAccountForm.get('caseworkerlname')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('caseworkerlname')?.errors?.required"
+              class="input-error"
+              >Please enter case worker's last name.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row cw-contact-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="caseworkeremail"
+            ><b>Case Worker Email</b><span class="required-star">*</span></label
+          >
+          <input
+            type="email"
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkeremail"
+            placeholder="Enter Case Worker's Email"
+            formControlName="caseworkeremail"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('caseworkeremail')?.invalid &&
+              (createAccountForm.get('caseworkeremail')?.dirty ||
+                createAccountForm.get('caseworkeremail')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('caseworkeremail')?.errors?.required"
+              class="input-error"
+              >Please enter case worker's email.<br
+            /></small>
+            <small
+              *ngIf="createAccountForm.get('caseworkeremail')?.errors?.email"
+              class="input-error"
+              >Please enter a valid email.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="caseworkerphone"
+            ><b>Case Worker Phone Number</b
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="caseworkerphone"
+            placeholder="Enter Case Worker's Phone Number"
+            formControlName="caseworkerphone"
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('caseworkerphone')?.invalid &&
+              (createAccountForm.get('caseworkerphone')?.dirty ||
+                createAccountForm.get('caseworkerphone')?.touched)
+            "
+          >
+            <small
+              *ngIf="createAccountForm.get('caseworkerphone')?.errors?.required"
+              class="input-error"
+              >Please enter case worker's phone number.<br
+            /></small>
+            <small
+              *ngIf="
+                createAccountForm.get('caseworkerphone')?.errors?.invalidPhone
+              "
+              class="input-error"
+              >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <button
+          type="submit"
+          id="createAccountButton"
+          class="btn btn-primary w-100 p-2 mb-5 mt-2"
+          [disabled]="disableSubmitButton"
+        >
+          Create Account
+        </button>
+      </div>
+    </div>
+  </form>
+  <small><span class="required-star">*</span> indicates required field</small>
+</div>

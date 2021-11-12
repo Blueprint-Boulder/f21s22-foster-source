@@ -1,0 +1,8 @@
+.table-container {
+  width: 100%;
+  height: 100%;
+}
+
+.table-container::-webkit-scrollbar {
+  width: 0px; /* width of the entire scrollbar */
+}

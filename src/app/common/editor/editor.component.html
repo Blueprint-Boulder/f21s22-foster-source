@@ -1,0 +1,20 @@
+<div class="NgxEditor__Wrapper">
+  <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+  <ngx-editor
+    [editor]="editor"
+    [ngModel]="html"
+    [disabled]="false"
+    [placeholder]="'Type here...'"
+  ></ngx-editor>
+</div>
+<small
+  [class]="{
+    'text-danger': characterLimit > -1 && characterCount > characterLimit
+  }"
+  >{{ wordCount }} Words</small
+>
+<small *ngIf="characterLimit > -1 && characterCount > characterLimit">
+  Message too long ({{ characterCount }}/{{ characterLimit }} characters).
+  Messages are stored as HTML so character counts will be higher than they
+  appear.</small
+>
