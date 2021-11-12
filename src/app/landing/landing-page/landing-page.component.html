@@ -1,7 +1,53 @@
-<h2>This is the landing page!</h2>
-
-<div *ngIf="latestAnnouncement">
-  <p>There is an announcement!</p>
-  <app-announcement [announcement]="latestAnnouncement"></app-announcement>
+<div class="mt-5 col-sm-12">
+  <div *ngIf="latestAnnouncement">
+    <app-announcement [announcement]="latestAnnouncement"></app-announcement>
+  </div>
+  <div id="ej2Toast" #toast></div>
 </div>
-<div id="ej2Toast" #toast></div>
+<div class="ml-4 col-sm-9">
+  <h2>Foster parents are under prepared, unsupported, and overwhelmed.</h2>
+</div>
+<div class="row">
+  <div class="col-sm-3 ml-5">
+    <img
+      src="https://scontent-dfw5-2.xx.fbcdn.net/v/t1.6435-9/179675381_1364303307288554_8558358893900537259_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=YXCKylZcJVAAX8zvFrI&_nc_ht=scontent-dfw5-2.xx&oh=eca3c4c6ea25759ec0bb9302e5b1893b&oe=61B3FDDA"
+      width="300px"
+      height="300"
+    />
+  </div>
+  <div class="col-sm-7" style="text-align: left">
+    <small
+      >Welcome to the Respite Source, powered by Foster Source and you! Respite
+      Source is a database and community forum designed for you to find respite
+      solutions and connect with other foster parents. Foster Source is
+      committed to helping foster parents foster better and foster longer.
+    </small>
+    <br /><br />
+    <small
+      >Click the ‘Create Profile’ button below to get started. Once your
+      certification credentials are confirmed by a Foster Source team member,
+      your profile will be approved. From there you will be able to search for
+      foster parents offering respite, offer up respite services of your own to
+      parents in need, and post and respond to other foster parents on the
+      community message board.</small
+    >
+    <br /><br />
+    <small
+      >If you have any questions or issues creating your profile, please let us
+      know at info@fostersource.org. Thank you!
+    </small>
+    <br /><br />
+    <small
+      >A reminder that both parties in a respite agreement should have the
+      respite approved in advance by their certifying county or agency.
+      Certification workers will be notified of confirmed respite requests and
+      offers
+    </small>
+    <br /><br />
+    <div style="text-align: center">
+      <a [routerLink]="['/login/create-account']"
+        ><button class="btn btn-primary w-50">Create Profile</button></a
+      >
+    </div>
+  </div>
+</div>
