@@ -55,4 +55,8 @@ export class AccountMockService implements AccountService {
   denyApplicant(params: DenyApplicantRequest): Observable<any> {
     return of({});
   }
+
+  getCurrentAccount(): Observable<Account> {
+    return of(accounts[0]);
+  }
 }

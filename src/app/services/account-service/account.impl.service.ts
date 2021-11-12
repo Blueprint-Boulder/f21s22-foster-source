@@ -72,4 +72,10 @@ export class AccountImplService implements AccountService {
       JSON.stringify(params)
     );
   }
+
+  getCurrentAccount(): Observable<Account> {
+    return this.http.get<Account>(
+      `${environment.backendHost}/api/db/current-account`
+    );
+  }
 }

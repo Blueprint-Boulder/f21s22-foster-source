@@ -52,7 +52,7 @@ export const simpleAddresses: SimpleAddress[] = [
     city: 'Denver',
     zip: '80210',
     state: 'CO',
-    county: 'Arapahoe',
+    county: 'Arapahoe County',
   },
 ];
 
@@ -108,10 +108,11 @@ export const accounts: Account[] = [
     password: 'pass1234',
     firstName: 'Jet',
     lastName: 'Crowman',
-    dob: new Date(),
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
     cwEmail: 'noreply@google.com',
+    cwPhone: '+17208839921',
+    certifiedBy: 'Arapahoe County',
     primaryPhone: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,

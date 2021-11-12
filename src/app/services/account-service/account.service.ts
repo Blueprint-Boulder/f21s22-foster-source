@@ -31,4 +31,5 @@ export abstract class AccountService {
   public abstract approveApplicant(
     params: ApproveApplicantRequest
   ): Observable<any>;
+  public abstract getCurrentAccount(): Observable<Account>;
 }

@@ -1,0 +1,657 @@
+<div class="container p-5 bg-white mt-5 mb-5">
+  <form [formGroup]="finishProfileForm">
+    <div class="row mb-2">
+      <h3>Current Information on File</h3>
+    </div>
+    <div class="row info-on-file-row">
+      <div class="col-sm-12 col-md-6 mb-2">
+        <h5>Personal Information</h5>
+        <b>Name:</b> {{ account.firstName }} {{ account.lastName }} <br />
+        <b>Email:</b> {{ account.email }} <br />
+        <b>Phone:</b> {{ account.primaryPhone.phoneNumber }} ({{
+          account.primaryPhone.type
+        }}) <br />
+        <span *ngIf="account.secondaryPhone"
+          ><b>Secondary Phone:</b> {{ account.secondaryPhone.phoneNumber }} ({{
+            account.secondaryPhone.type
+          }})</span
+        >
+        <!--      TODO: WHY IS THIS NOT SHOWING UP WHEN IT SHOULD-->
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <h5>Child Care Information</h5>
+        <b>Case Worker Name:</b> {{ account.cwFirstName }}
+        {{ account.cwLastName }}<br />
+        <b>Case Worker Email:</b> {{ account.cwEmail }}<br />
+        <b>Case Worker Phone:</b> {{ account.cwPhone }}<br />
+        <b>Certified By:</b> {{ account.certifiedBy }}
+      </div>
+    </div>
+    <div class="row mt-2 mb-2">
+      <h3>Complete Your Profile</h3>
+    </div>
+    <div class="row preferred-name-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="preferredName"
+            ><b>Preferred Name</b><span class="required-star">*</span
+            ><br /><small
+              >This is the name that will appear publicly to others.</small
+            ></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="preferredName"
+            placeholder="Enter preferred name"
+            formControlName="preferredName"
+            required
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('preferredName')?.invalid &&
+              (finishProfileForm.get('preferredName')?.dirty ||
+                finishProfileForm.get('preferredName')?.touched)
+            "
+          >
+            <small
+              *ngIf="finishProfileForm.get('preferredName')?.errors?.required"
+              class="input-error"
+              >Please enter your preferred name.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row gender-pronouns-marital-row">
+      <div class="col-sm-6 col-md-4 my-auto">
+        <div class="form-group my-auto">
+          <label for="gender"
+            ><b>Gender</b><span class="required-star">*</span></label
+          >
+          <select
+            class="m-3 form-select"
+            name="gender"
+            id="gender"
+            formControlName="gender"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div
+            *ngIf="
+              finishProfileForm.get('gender')?.invalid &&
+              (finishProfileForm.get('gender')?.dirty ||
+                finishProfileForm.get('gender')?.touched)
+            "
+          >
+            <small
+              *ngIf="finishProfileForm.get('gender')?.errors?.required"
+              class="input-error"
+              >Please select a gender.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="form-group">
+          <label class="mt-4" for="pronouns"><b>Pronouns</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="pronouns"
+            placeholder="Enter your pronouns (e.g. he/him)"
+            formControlName="pronouns"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 my-auto">
+        <div class="form-group my-auto">
+          <label for="maritalStatus"><b>Marital Status</b></label>
+          <select
+            class="m-3 form-select"
+            name="maritalStatus"
+            id="maritalStatus"
+            formControlName="maritalStatus"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <h5>Would you like to add a secondary account holder?</h5>
+      <small
+        >For example if you have a 2 person parental unit, you may share an
+        account with your spouse, whose information you would add here.</small
+      >
+    </div>
+    <div class="row">
+      <div class="form-check m-2">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          value="true"
+          id="shouldAddSec"
+          (change)="secChange($event)"
+        />
+        <label class="form-check-label" for="shouldAddSec"> Yes </label>
+      </div>
+      <div class="form-check m-2">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          value="false"
+          id="shouldNotAddSec"
+          (change)="secChange($event)"
+          checked
+        />
+        <label class="form-check-label" for="shouldNotAddSec"> No </label>
+      </div>
+    </div>
+    <div
+      *ngIf="hasSecondaryAccountHolder"
+      class="row optional-secondary-account-holder-row bg-light-grey p-3"
+    >
+      <div class="col-sm-12">
+        <div class="row sec-title-row my-3">
+          <h4>Enter secondary account holder's information</h4>
+        </div>
+        <div class="row secNameRow">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="secfname"
+                ><b>First Name</b><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="secfname"
+                placeholder="Enter first name"
+                formControlName="secfname"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('secfname')?.invalid &&
+                  (finishProfileForm.get('secfname')?.dirty ||
+                    finishProfileForm.get('secfname')?.touched)
+                "
+              >
+                <small
+                  *ngIf="finishProfileForm.get('secfname')?.errors?.required"
+                  class="input-error"
+                  >Please enter the first name of the secondary account
+                  holder.</small
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="seclname"
+                ><b>Last Name</b><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="seclname"
+                placeholder="Enter Last Name"
+                formControlName="seclname"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('seclname')?.invalid &&
+                  (finishProfileForm.get('seclname')?.dirty ||
+                    finishProfileForm.get('seclname')?.touched)
+                "
+              >
+                <small
+                  *ngIf="finishProfileForm.get('seclname')?.errors?.required"
+                  class="input-error"
+                  >Please enter the last name of the secondary account
+                  holder.</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row sec-pref-name-row">
+          <div class="col-xs-12 col-sm-12, col-md-6">
+            <div class="form-group">
+              <label for="secPreferredName"
+                ><b>Preferred Name</b
+                ><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="secPreferredName"
+                placeholder="Enter preferred name"
+                formControlName="secPreferredName"
+                required
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('secPreferredName')?.invalid &&
+                  (finishProfileForm.get('secPreferredName')?.dirty ||
+                    finishProfileForm.get('secPreferredName')?.touched)
+                "
+              >
+                <small
+                  *ngIf="
+                    finishProfileForm.get('secPreferredName')?.errors?.required
+                  "
+                  class="input-error"
+                  >Please enter the secondary account holder's preferred
+                  name.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row sec-gender-pronouns-marital-row">
+          <div class="col-sm-6 col-md-4 my-auto">
+            <div class="form-group my-auto">
+              <label for="secGender"
+                ><b>Gender</b><span class="required-star">*</span></label
+              >
+              <select
+                class="m-3 form-select"
+                name="secGender"
+                id="secGender"
+                formControlName="secGender"
+                style="border-top: 0px; border-right: 0px; border-left: 0px"
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <div
+                *ngIf="
+                  finishProfileForm.get('secGender')?.invalid &&
+                  (finishProfileForm.get('secGender')?.dirty ||
+                    finishProfileForm.get('secGender')?.touched)
+                "
+              >
+                <small
+                  *ngIf="finishProfileForm.get('secGender')?.errors?.required"
+                  class="input-error"
+                  >Please select gender for secondary account holder.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+              <label class="mt-4" for="secPronouns"><b>Pronouns</b></label>
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="secPronouns"
+                placeholder="Enter their pronouns (e.g. she/her)"
+                formControlName="secPronouns"
+              />
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 my-auto">
+            <div class="form-group my-auto">
+              <label for="secMaritalStatus"><b>Marital Status</b></label>
+              <select
+                class="m-3 form-select"
+                name="secMaritalStatus"
+                id="secMaritalStatus"
+                formControlName="secMaritalStatus"
+                style="border-top: 0px; border-right: 0px; border-left: 0px"
+              >
+                <option value="Married">Married</option>
+                <option value="Single">Single</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row sec-contact-row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="secEmail"
+                ><b>Email</b><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="secEmail"
+                placeholder="Enter email"
+                formControlName="secEmail"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('secEmail')?.invalid &&
+                  (finishProfileForm.get('secEmail')?.dirty ||
+                    finishProfileForm.get('secEmail')?.touched)
+                "
+              >
+                <small
+                  *ngIf="finishProfileForm.get('secEmail')?.errors?.required"
+                  class="input-error"
+                  >Please enter the secondary account holder's email.<br
+                /></small>
+                <small
+                  *ngIf="finishProfileForm.get('secEmail')?.errors?.email"
+                  class="input-error"
+                  >Please enter a valid email.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-8 col-md-4">
+            <label for="secPhone"
+              ><b>Phone Number</b><span class="required-star">*</span></label
+            >
+            <input
+              class="form-control p-1 ml-0 bottom-border-input"
+              type="tel"
+              id="secPhone"
+              placeholder="Enter phone number"
+              formControlName="secPhone"
+            />
+            <div
+              *ngIf="
+                finishProfileForm.get('secPhone')?.invalid &&
+                (finishProfileForm.get('secPhone')?.dirty ||
+                  finishProfileForm.get('secPhone')?.touched)
+              "
+            >
+              <small
+                *ngIf="finishProfileForm.get('secPhone')?.errors?.required"
+                class="input-error"
+                >Please enter the secondary account holder's phone number.<br
+              /></small>
+              <small
+                *ngIf="finishProfileForm.get('secPhone')?.errors?.invalidPhone"
+                class="input-error"
+                >Please enter a valid phone number.<br
+              /></small>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-2">
+            <div class="form-group">
+              <label for="secPhoneType"
+                ><b>Type</b><span class="required-star">*</span></label
+              >
+              <select
+                class="m-3 form-select"
+                name="type"
+                id="secPhoneType"
+                formControlName="secPhoneType"
+                style="border-top: 0px; border-right: 0px; border-left: 0px"
+              >
+                <option
+                  *ngFor="let phoneType of phoneTypes"
+                  [value]="phoneType"
+                >
+                  {{ phoneType }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  finishProfileForm.get('secPhoneType')?.invalid &&
+                  (finishProfileForm.get('secPhoneType')?.dirty ||
+                    finishProfileForm.get('secPhoneType')?.touched)
+                "
+              >
+                <small
+                  *ngIf="
+                    finishProfileForm.get('secPhoneType')?.errors?.required
+                  "
+                  class="input-error"
+                  >Please select a phone number type.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row respite-and-household-background-title-row my-3">
+      <h5>Household and Respite Background</h5>
+    </div>
+    <div class="row how-many-years-how-many-children-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fosterYears"
+            ><b>How many years have you been a foster parent?</b
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="fosterYears"
+            type="number"
+            placeholder="Enter number of years"
+            formControlName="fosterYears"
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('fosterYears')?.invalid &&
+              (finishProfileForm.get('fosterYears')?.dirty ||
+                finishProfileForm.get('fosterYears')?.touched)
+            "
+          >
+            <small
+              *ngIf="finishProfileForm.get('fosterYears')?.errors?.required"
+              class="input-error"
+              >Please enter how long you have been a foster parent.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="totalChildren"
+            ><b>In total, how many children have you cared for?</b
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="totalChildren"
+            type="number"
+            placeholder="Enter number of children"
+            formControlName="totalChildren"
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('totalChildren')?.invalid &&
+              (finishProfileForm.get('totalChildren')?.dirty ||
+                finishProfileForm.get('totalChildren')?.touched)
+            "
+          >
+            <small
+              *ngIf="finishProfileForm.get('totalChildren')?.errors?.required"
+              class="input-error"
+              >Please enter how many children you have cared for in total.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row respite-backround-checkboxes-row my-3">
+      <div class="col-sm-12 col-md-4">
+        <div class="row">
+          <p><b>Can you provide respite care?</b></p>
+        </div>
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="canProvideRespite"
+              name="canProvideRespite"
+              value="true"
+              id="canProvideRespiteYes"
+            />
+            <label class="form-check-label" for="canProvideRespiteYes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="canProvideRespite"
+              name="canProvideRespite"
+              value="false"
+              id="canProvideRespiteNo"
+            />
+            <label class="form-check-label" for="canProvideRespiteNo">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            *ngIf="
+              finishProfileForm.get('canProvideRespite')?.invalid &&
+              (finishProfileForm.get('canProvideRespite')?.dirty ||
+                finishProfileForm.get('canProvideRespite')?.touched)
+            "
+          >
+            <small
+              *ngIf="
+                finishProfileForm.get('canProvideRespite')?.errors?.required
+              "
+              class="input-error"
+              >Please specify if you can provide respite.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="row">
+          <p><b>Are you looking for respite care?</b></p>
+        </div>
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="lookingForRespite"
+              name="lookingForRespite"
+              value="true"
+              id="lookingForRespiteYes"
+            />
+            <label class="form-check-label" for="lookingForRespiteYes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="lookingForRespite"
+              name="lookingForRespite"
+              value="false"
+              id="lookingForRespiteNo"
+            />
+            <label class="form-check-label" for="lookingForRespiteNo">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            *ngIf="
+              finishProfileForm.get('lookingForRespite')?.invalid &&
+              (finishProfileForm.get('lookingForRespite')?.dirty ||
+                finishProfileForm.get('lookingForRespite')?.touched)
+            "
+          >
+            <small
+              *ngIf="
+                finishProfileForm.get('lookingForRespite')?.errors?.required
+              "
+              class="input-error"
+              >Please indicate if you are looking for respite care.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <div class="row">
+          <p><b>Have you provided respite care in the past?</b></p>
+        </div>
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="hasProvidedInPast"
+              name="hasProvidedInPast"
+              value="true"
+              id="hasProvidedInPastYes"
+            />
+            <label class="form-check-label" for="hasProvidedInPastYes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="hasProvidedInPast"
+              name="hasProvidedInPast"
+              value="false"
+              id="hasProvidedInPastNo"
+            />
+            <label class="form-check-label" for="hasProvidedInPastNo">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            *ngIf="
+              finishProfileForm.get('hasProvidedInPast')?.invalid &&
+              (finishProfileForm.get('hasProvidedInPast')?.dirty ||
+                finishProfileForm.get('hasProvidedInPast')?.touched)
+            "
+          >
+            <small
+              *ngIf="
+                finishProfileForm.get('hasProvidedInPast')?.errors?.required
+              "
+              class="input-error"
+              >Please indicate if you have provided respite care in the past.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row city-and-miles-row">
+      <div class="col-sm-6"></div>
+      <div class="col-sm-6"></div>
+    </div>
+    <div class="row age-range-max-num-row">
+      <div class="col-sm-6"></div>
+      <div class="col-sm-6"></div>
+    </div>
+    <div class="row availability-row">
+      <div class="col-sm-12"></div>
+    </div>
+    <div class="row how-many-row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4"></div>
+    </div>
+    <div class="row children-info-row">
+      <div class="col-sm-12"></div>
+    </div>
+    <div class="row pets-row">
+      <div class="col-sm-12"></div>
+    </div>
+    <div class="row household-checkboxes-row">
+      <div class="col-sm-6"></div>
+    </div>
+    <div class="row additional-info-row">
+      <div class="col-sm-12"></div>
+    </div>
+  </form>
+</div>

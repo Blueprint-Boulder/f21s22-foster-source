@@ -8,10 +8,11 @@ export interface Account {
   password: string;
   firstName: string;
   lastName: string;
-  dob: Date;
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  cwPhone: string;
+  certifiedBy: string;
   primaryPhone: PhoneNumber;
   secondaryPhone?: PhoneNumber;
   lastLogin: Date;
