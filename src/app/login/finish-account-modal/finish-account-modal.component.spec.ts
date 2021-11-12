@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinishAccountModalComponent } from './finish-account-modal.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('FinishAccountModalComponent', () => {
   let component: FinishAccountModalComponent;
@@ -8,7 +10,8 @@ describe('FinishAccountModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FinishAccountModalComponent ]
+      declarations: [ FinishAccountModalComponent ],
+      imports: [ReactiveFormsModule]
     })
     .compileComponents();
   });
