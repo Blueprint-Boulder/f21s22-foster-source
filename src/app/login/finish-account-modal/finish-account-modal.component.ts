@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Utils } from '../utils';
+import { DayModel } from '../day-availability-input/day-availability-input.component';
 
 @Component({
   selector: 'app-finish-account-modal',
@@ -24,6 +25,58 @@ export class FinishAccountModalComponent implements OnInit {
     'secPronouns',
     'secGender',
     'secMaritalStatus',
+  ];
+
+  public dayModels: DayModel[] = [
+    {
+      name: 'Monday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Tuesday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Wednesday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Thursday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Friday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Saturday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
+    {
+      name: 'Sunday',
+      morning: false,
+      afternoon: false,
+      evening: false,
+      overnight: false,
+    },
   ];
 
   private provideRespitefields = ['respiteCity', 'respiteRange', 'minAge', 'maxAge', 'howManyCareFor'];
@@ -59,7 +112,21 @@ export class FinishAccountModalComponent implements OnInit {
       minAge: [null],
       maxAge: [null],
       howManyCareFor: [null],
+      parentalUnitSize: [null, Validators.required],
+      householdSize: [null, Validators.required],
+      numChildren: [null, Validators.required],
+      childrenInfo: [null, Validators.required],
+      vehicleAccess: [null],
+      isLGBT: [null],
+      caredForLGBT: [null],
+      caredForPhysicallyDisabled: [null],
+      caredForIntellectuallyDisabled: [null],
+      careForMedicallyFragile: [null],
+      ownsFirearm: [null],
+      additionalInfo: [null],
+      dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
     });
+    console.log(this.dayModels);
   }
 
   public secChange(event: Event) {
@@ -104,5 +171,33 @@ export class FinishAccountModalComponent implements OnInit {
     this.provideRespitefields.forEach((fieldName: string) => {
       this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
     });
+  }
+
+  private static validateDate(control: AbstractControl): ValidationErrors | null {
+    const err = { invalidDate: 'Please enter a valid phone date.' };
+
+    try {
+      const parsed = FinishAccountModalComponent.parseDateFromInput(control.value as string);
+      const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
+      const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
+      const validYear =
+        parseInt(control.value.substring(6, 10)) > new Date().getFullYear() - 100 &&
+        parseInt(control.value.substring(6, 10)) <= new Date().getFullYear() - 13;
+      if (!validMonth || !validDay || !validYear) {
+        return err;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return err;
+    }
+  }
+
+  private static parseDateFromInput(dateStr: string): Date {
+    const year = parseInt(dateStr.substring(6, 10));
+    const day = parseInt(dateStr.substring(3, 5));
+    const month = parseInt(dateStr.substring(0, 2));
+    console.log(year, day, month);
+    return new Date(year, month - 1, day);
   }
 }

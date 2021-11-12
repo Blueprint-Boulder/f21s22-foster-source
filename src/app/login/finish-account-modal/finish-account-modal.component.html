@@ -111,6 +111,36 @@
         </div>
       </div>
     </div>
+    <div class="row dob-row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label class="mt-4" for="dob"><b>Date of Birth</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="dob"
+            placeholder="MM/DD/YYYY"
+            formControlName="dob"
+            required
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('dob')?.invalid &&
+              (finishProfileForm.get('dob')?.dirty || finishProfileForm.get('dob')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('dob')?.errors?.required" class="input-error"
+              >Please enter date of birth.<br
+            /></small>
+            <small *ngIf="finishProfileForm.get('dob')?.errors?.pattern" class="input-error"
+              >Please enter date in format MM/DD/YYYY.<br
+            /></small>
+            <small *ngIf="finishProfileForm.get('dob')?.errors?.invalidDate" class="input-error"
+              >Please enter a valid date.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row mt-3">
       <h5>Would you like to add a secondary account holder?</h5>
       <small
@@ -349,8 +379,8 @@
         </div>
       </div>
     </div>
-    <div class="row respite-and-household-background-title-row my-3">
-      <h5>Household and Respite Background</h5>
+    <div class="row respite-background-title-row my-3">
+      <h5>Respite Background</h5>
     </div>
     <div class="row how-many-years-how-many-children-row">
       <div class="col-sm-6">
@@ -665,29 +695,283 @@
         <div class="row availability-title mt-3">
           <h5>Please indicate your availability to provide respite:<span class="required-star">*</span></h5>
         </div>
+        <div class="row mb-3">
+          <small
+            >This will be your primary, standard availability. In the future you can set temporary
+            availabilities.</small
+          >
+        </div>
         <div class="row availability-row">
-          <div class="col-sm-12"></div>
+          <div *ngFor="let dayModel of dayModels" class="col-sm-12 col-md-6 mb-2">
+            <app-day-availability-input [dayModel]="dayModel"></app-day-availability-input>
+          </div>
         </div>
       </div>
-      <small><i>These fields can always be edited and updated later.</i></small>
+      <small class="mt-5"><i>These fields can always be edited and updated later.</i></small>
     </div>
-
+    <div class="row household-background-title-row my-3">
+      <h5>Household Background</h5>
+    </div>
     <div class="row how-many-row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="parentalUnitSize"
+            ><b>How many individuals are in your parental unit?</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="parentalUnitSize"
+            type="number"
+            placeholder="Enter number individuals"
+            formControlName="parentalUnitSize"
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('parentalUnitSize')?.invalid &&
+              (finishProfileForm.get('parentalUnitSize')?.dirty || finishProfileForm.get('parentalUnitSize')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('parentalUnitSize')?.errors?.required" class="input-error"
+              >Please enter how many individuals.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="householdSize"
+            ><b>How many total individuals are in your household?</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="householdSize"
+            type="number"
+            placeholder="Enter number individuals"
+            formControlName="householdSize"
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('householdSize')?.invalid &&
+              (finishProfileForm.get('householdSize')?.dirty || finishProfileForm.get('householdSize')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('householdSize')?.errors?.required" class="input-error"
+              >Please enter how many individuals.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="numChildren"
+            ><b>How many children are in your household?</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="numChildren"
+            type="number"
+            placeholder="Enter number of children"
+            formControlName="numChildren"
+          />
+          <div
+            *ngIf="
+              finishProfileForm.get('numChildren')?.invalid &&
+              (finishProfileForm.get('numChildren')?.dirty || finishProfileForm.get('numChildren')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('numChildren')?.errors?.required" class="input-error"
+              >Please enter how many children.<br
+            /></small>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row children-info-row">
-      <div class="col-sm-12"></div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="childrenInfo"
+            ><b>Children Information</b><span class="required-star">*</span>
+            <br />
+            <small
+              >For each child in your household, please provide their age, gender, and if they are
+              biological/adopted/foster.</small
+            >
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="childrenInfo"
+            rows="4"
+            placeholder="Ex: 12, female, biological"
+            formControlName="childrenInfo"
+          ></textarea>
+          <div
+            *ngIf="
+              finishProfileForm.get('childrenInfo')?.invalid &&
+              (finishProfileForm.get('childrenInfo')?.dirty || finishProfileForm.get('childrenInfo')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('childrenInfo')?.errors?.required" class="input-error"
+              >Please information on the children in your household.<br
+            /></small>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row pets-row">
-      <div class="col-sm-12"></div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="petInfo"
+            ><b>Pet Information</b>
+            <br />
+            <small>Please list information on any pets you have in the household.</small>
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="petInfo"
+            rows="3"
+            placeholder="Ex. 2 dogs and a cat"
+            formControlName="petInfo"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row checkbox-title mt-4 mb-2">
+      <h5>Please indicate the following</h5>
     </div>
     <div class="row household-checkboxes-row">
-      <div class="col-sm-6"></div>
+      <div class="col-sm-12">
+        <h6>Do you have reliable access to a vehicle?</h6>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="vehicleAccess" value="true" id="vehicleAccessYes" />
+          <label class="form-check-label" for="vehicleAccessYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="vehicleAccess" value="false" id="vehicleAccessNo" />
+          <label class="form-check-label" for="vehicleAccessNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Are you a member of the LGBTQIA+ community?</h6>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="isLGBT" value="true" id="isLGBTYes" />
+          <label class="form-check-label" for="isLGBTYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="isLGBT" value="false" id="isLGBTNo" />
+          <label class="form-check-label" for="isLGBTNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for LGBTQIA+ youth?</h6>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="caredForLGBT" value="true" id="caredForLGBTYes" />
+          <label class="form-check-label" for="caredForLGBTYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="caredForLGBT" value="false" id="caredForLGBTNo" />
+          <label class="form-check-label" for="caredForLGBTNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for physically disabled youth?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysicallyDisabled"
+            value="true"
+            id="caredForPhysicallyDisabledYes"
+          />
+          <label class="form-check-label" for="caredForPhysicallyDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysicallyDisabled"
+            value="false"
+            id="caredForPhysicallyDisabledNo"
+          />
+          <label class="form-check-label" for="caredForPhysicallyDisabledNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for intellectually disabled youth?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntellectuallyDisabled"
+            value="true"
+            id="caredForIntellectuallyDisabledYes"
+          />
+          <label class="form-check-label" for="caredForIntellectuallyDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntellectuallyDisabled"
+            value="false"
+            id="caredForIntellectuallyDisabledNo"
+          />
+          <label class="form-check-label" for="caredForIntellectuallyDisabledNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Are you able to care for medically fragile children?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="careForMedicallyFragile"
+            value="true"
+            id="careForMedicallyFragileYes"
+          />
+          <label class="form-check-label" for="careForMedicallyFragileYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="careForMedicallyFragile"
+            value="false"
+            id="careForMedicallyFragileNo"
+          />
+          <label class="form-check-label" for="careForMedicallyFragileNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you (or does anyone in your household) own a firearm?</h6>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="ownsFirearm" value="true" id="ownsFirearmYes" />
+          <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input class="form-check-input" type="radio" name="ownsFirearm" value="false" id="ownsFirearmNo" />
+          <label class="form-check-label" for="ownsFirearmNo"> No </label>
+        </div>
+      </div>
     </div>
-    <div class="row additional-info-row">
-      <div class="col-sm-12"></div>
+    <div class="row additional-info-row my-4">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="childrenInfo"
+            ><b>Additional Information</b>
+            <br />
+            <small
+              >lease list any additional details you'd like to provide about your household or the respite care you are
+              able to provide (i.e. behaviors, allergies, etc.)</small
+            >
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="additionalInfo"
+            rows="4"
+            formControlName="additionalInfo"
+          ></textarea>
+        </div>
+      </div>
     </div>
   </form>
 </div>

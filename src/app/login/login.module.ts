@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FinishAccountPageComponent } from './finish-account-page/finish-account-page.component';
 import { FinishAccountModalComponent } from './finish-account-modal/finish-account-modal.component';
+import { DayAvailabilityInputComponent } from './day-availability-input/day-availability-input.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const loginRouting = RouterModule.forChild(routes);
     VerifyEmailComponent,
     FinishAccountPageComponent,
     FinishAccountModalComponent,
+    DayAvailabilityInputComponent,
   ],
   imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule],
   exports: [],
