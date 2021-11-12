@@ -6,14 +6,8 @@ import { Availability } from '../../models/availability.model';
   providedIn: 'root',
 })
 export abstract class AvailabilityService {
-  public abstract getAvailabilityByProfileId(
-    id: number
-  ): Observable<Availability>;
+  public abstract getAvailabilityByProfileId(id: number): Observable<Availability>;
   public abstract deleteAvailability(id: number): Observable<Availability>;
-  public abstract createAvailability(
-    availability: Availability
-  ): Observable<Availability>;
-  public abstract updateAvailability(
-    availability: Availability
-  ): Observable<Availability>;
+  public abstract createAvailability(availability: Availability): Observable<Availability>;
+  public abstract updateAvailability(availability: Availability): Observable<Availability>;
 }

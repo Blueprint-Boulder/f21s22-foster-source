@@ -15,12 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    ToastContainerComponent,
-    NavBarComponent,
-  ],
+  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

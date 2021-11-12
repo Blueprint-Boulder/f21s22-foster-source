@@ -42,13 +42,7 @@ export const loginRouting = RouterModule.forChild(routes);
     FinishAccountPageComponent,
     FinishAccountModalComponent,
   ],
-  imports: [
-    CommonModule,
-    loginRouting,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-  ],
+  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule],
   exports: [],
 })
 export class LoginModule {}

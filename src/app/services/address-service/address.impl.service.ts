@@ -8,9 +8,6 @@ export class AddressImplService implements AddressService {
   constructor(private http: HttpClient) {}
 
   updateAddress(address: SimpleAddress): Observable<Address> {
-    return this.http.put<Address>(
-      `${environment.backendHost}/api/db/account/address`,
-      JSON.stringify(address)
-    );
+    return this.http.put<Address>(`${environment.backendHost}/api/db/account/address`, JSON.stringify(address));
   }
 }

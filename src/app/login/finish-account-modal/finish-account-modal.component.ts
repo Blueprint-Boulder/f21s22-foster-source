@@ -26,13 +26,7 @@ export class FinishAccountModalComponent implements OnInit {
     'secMaritalStatus',
   ];
 
-  private provideRespitefields = [
-    'respiteCity',
-    'respiteRange',
-    'minAge',
-    'maxAge',
-    'howManyCareFor',
-  ];
+  private provideRespitefields = ['respiteCity', 'respiteRange', 'minAge', 'maxAge', 'howManyCareFor'];
 
   @Input() account: Account;
 
@@ -96,9 +90,7 @@ export class FinishAccountModalComponent implements OnInit {
 
   private makeSecFieldsNotRequired() {
     this.secondaryAccountHolderFields.forEach((fieldName: string) => {
-      this.finishProfileForm
-        .get(fieldName)
-        ?.removeValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
     });
   }
 
@@ -110,9 +102,7 @@ export class FinishAccountModalComponent implements OnInit {
 
   private makeRespiteFieldsNotRequired() {
     this.provideRespitefields.forEach((fieldName: string) => {
-      this.finishProfileForm
-        .get(fieldName)
-        ?.removeValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
     });
   }
 }
