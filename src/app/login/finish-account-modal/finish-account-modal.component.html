@@ -141,6 +141,14 @@
         </div>
       </div>
     </div>
+    <div class="row profile-image-title-row">
+      <h5>Add a profile picture</h5>
+    </div>
+    <div class="row profile-pic-row">
+      <div class="col">
+        <app-profile-image-upload></app-profile-image-upload>
+      </div>
+    </div>
     <div class="row mt-3">
       <h5>Would you like to add a secondary account holder?</h5>
       <small
@@ -559,7 +567,6 @@
         </div>
       </div>
     </div>
-
     <div *ngIf="canProvideRespiteCare" class="row extra-provider-qs-row bg-light-grey p-3">
       <div class="col-12">
         <div class="row city-and-miles-row my-3">
@@ -971,6 +978,11 @@
             formControlName="additionalInfo"
           ></textarea>
         </div>
+      </div>
+    </div>
+    <div class="row submit-row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary text-white mx-auto">Submit</button>
       </div>
     </div>
   </form>

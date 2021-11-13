@@ -1,0 +1,24 @@
+<div class="image-upload-container bg-light-grey">
+  <div class="row p-3">
+    <div class="col-sm-12 col-md-6">
+      <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <form (ngSubmit)="uploadImage()">
+        <!--  TODO: crop images      -->
+        <label for="pic-file" class="form-label">
+          <b>Please upload a profile picture.</b><br />
+          <small><i>Upload an image that is at least 250x250px, max size 5mb.</i></small>
+        </label>
+        <input
+          class="form-control form-control-lg"
+          id="pic-file"
+          #picFile
+          type="file"
+          (change)="imageChanged($event)"
+        />
+        <button type="submit" class="btn btn-primary text-white mt-4">Upload</button>
+      </form>
+    </div>
+  </div>
+</div>
