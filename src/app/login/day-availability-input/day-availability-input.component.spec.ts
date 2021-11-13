@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DayAvailabilityInputComponent } from './day-availability-input.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 describe('DayAvailabilityInputComponent', () => {
   let component: DayAvailabilityInputComponent;
@@ -8,7 +9,8 @@ describe('DayAvailabilityInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DayAvailabilityInputComponent ]
+      declarations: [ DayAvailabilityInputComponent ],
+      imports: [ReactiveFormsModule]
     })
     .compileComponents();
   });
