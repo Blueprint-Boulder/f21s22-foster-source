@@ -14,6 +14,9 @@ export class FinishAccountModalComponent implements OnInit {
   public hasSecondaryAccountHolder = false;
   public canProvideRespiteCare = false;
   public phoneTypes: string[];
+  public needToUploadImgError = false;
+
+  private profileImgKey = '';
 
   private secondaryAccountHolderFields = [
     'secfname',
@@ -96,7 +99,7 @@ export class FinishAccountModalComponent implements OnInit {
       secfname: [''],
       seclname: [''],
       secEmail: ['', Validators.email],
-      secPhone: ['', Utils.validatePhoneNumber],
+      secPhone: [''],
       secPhoneType: [''],
       secPreferredName: [''],
       secPronouns: [''],
@@ -104,9 +107,9 @@ export class FinishAccountModalComponent implements OnInit {
       secMaritalStatus: [''],
       fosterYears: [null, Validators.compose([Validators.required])],
       totalChildren: [null, Validators.compose([Validators.required])],
-      canProvideRespite: [false, Validators.required],
-      lookingForRespite: [false, Validators.required],
-      hasProvidedInPast: [false, Validators.required],
+      canProvideRespite: [null, Validators.required],
+      lookingForRespite: [null, Validators.required],
+      hasProvidedInPast: [null, Validators.required],
       respiteCity: [''],
       respiteRange: [null],
       minAge: [null],
@@ -127,16 +130,17 @@ export class FinishAccountModalComponent implements OnInit {
       additionalInfo: [null],
       dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
     });
-    console.log(this.dayModels);
   }
 
   public secChange(event: Event) {
     if ((event.target as any).value === 'true') {
       this.hasSecondaryAccountHolder = true;
       this.makeSecFieldsRequired();
+      this.finishProfileForm.get('secPhone')?.addValidators(Utils.validatePhoneNumber);
     } else {
       this.hasSecondaryAccountHolder = false;
       this.makeSecFieldsNotRequired();
+      this.finishProfileForm.get('secPhone')?.removeValidators(Utils.validatePhoneNumber);
     }
   }
 
@@ -198,7 +202,30 @@ export class FinishAccountModalComponent implements OnInit {
     const year = parseInt(dateStr.substring(6, 10));
     const day = parseInt(dateStr.substring(3, 5));
     const month = parseInt(dateStr.substring(0, 2));
-    console.log(year, day, month);
     return new Date(year, month - 1, day);
+  }
+
+  onSubmit() {
+    if (this.finishProfileForm.invalid) {
+      this.finishProfileForm.markAllAsTouched();
+      alert('Please complete all required fields (indicated with a red star).');
+      const invalid = [];
+      const controls = this.finishProfileForm.controls;
+      for (const name in controls) {
+        if (controls[name].invalid) {
+          invalid.push(name);
+        }
+      }
+      console.log(invalid);
+    } else if (this.profileImgKey.length < 1) {
+      this.needToUploadImgError = true;
+      alert('Please complete all required fields (indicated with a red star).');
+    } else {
+      console.log(this.finishProfileForm.value);
+    }
+  }
+
+  public imageUploaded(event: any) {
+    this.profileImgKey = event;
   }
 }

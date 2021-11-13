@@ -1,5 +1,5 @@
 <div *ngIf="account" class="container p-5 bg-white mt-5 mb-5">
-  <form [formGroup]="finishProfileForm">
+  <form [formGroup]="finishProfileForm" (ngSubmit)="onSubmit()">
     <div class="row mb-5">
       <h1>Finish setting up your account</h1>
     </div>
@@ -146,7 +146,10 @@
     </div>
     <div class="row profile-pic-row">
       <div class="col">
-        <app-profile-image-upload></app-profile-image-upload>
+        <app-profile-image-upload (imageUploaded)="imageUploaded($event)"></app-profile-image-upload>
+        <div *ngIf="needToUploadImgError">
+          <small class="input-error">Please upload a profile image.</small>
+        </div>
       </div>
     </div>
     <div class="row mt-3">
@@ -984,6 +987,9 @@
       <div class="col">
         <button type="submit" class="btn btn-primary text-white mx-auto">Submit</button>
       </div>
+    </div>
+    <div class="row mt-5">
+      <small><span class="required-star">*</span> indicates required field</small>
     </div>
   </form>
 </div>

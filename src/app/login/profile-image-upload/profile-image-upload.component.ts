@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-image-upload',
@@ -14,12 +15,27 @@ export class ProfileImageUploadComponent implements OnInit {
   @ViewChild('picFile')
   profilePhotoInput: ElementRef;
 
+  @Output() imageUploaded: EventEmitter<string> = new EventEmitter<string>();
+
+  public imageForm = this.formBuilder.group({
+    img: [''],
+  });
+
+  constructor(private formBuilder: FormBuilder) {}
+
   ngOnInit(): void {
     return;
   }
 
   uploadImage(): void {
-    return;
+    this.imageUploaded.emit('DUMMY_KEY');
+  }
+
+  private resetWithError(error: string): void {
+    alert(error);
+    this.imageUrl = this.BLANK_PROFILE_URL;
+    this.profilePhotoInput.nativeElement.value = '';
+    this.imageUploaded.emit('');
   }
 
   imageChanged(event: Event): void {
@@ -27,15 +43,11 @@ export class ProfileImageUploadComponent implements OnInit {
       const file = (event.target as any).files[0];
 
       if (!ProfileImageUploadComponent.validateType(file)) {
-        alert('Invalid image type. Please upload a png or jpeg.');
-        this.imageUrl = this.BLANK_PROFILE_URL;
-        this.profilePhotoInput.nativeElement.value = '';
+        this.resetWithError('Invalid image type. Please upload a png or jpeg.');
         return;
       }
       if (!ProfileImageUploadComponent.validateSize(file)) {
-        alert('Please upload an image that is less than 5mb.');
-        this.imageUrl = this.BLANK_PROFILE_URL;
-        this.profilePhotoInput.nativeElement.value = '';
+        this.resetWithError('Please upload an image that is less than 5mb.');
         return;
       }
 
@@ -48,16 +60,12 @@ export class ProfileImageUploadComponent implements OnInit {
             if (res.width > 250 && res.height > 250) {
               this.imageUrl = reader.result as string;
             } else {
-              alert('Please upload an image that is at least 250x250px.');
-              this.imageUrl = this.BLANK_PROFILE_URL;
-              this.profilePhotoInput.nativeElement.value = '';
+              this.resetWithError('Please upload an image that is at least 250x250px.');
               return;
             }
           })
           .catch((e) => {
-            alert('Please upload an image that is at least 250x250px.');
-            this.imageUrl = this.BLANK_PROFILE_URL;
-            this.profilePhotoInput.nativeElement.value = '';
+            this.resetWithError('Please upload an image that is at least 250x250px.');
             return;
           });
       };

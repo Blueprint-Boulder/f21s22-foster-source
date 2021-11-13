@@ -4,7 +4,7 @@
       <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
     </div>
     <div class="col-sm-12 col-md-6 mt-sm-3">
-      <form (ngSubmit)="uploadImage()">
+      <form [formGroup]="imageForm" (ngSubmit)="uploadImage()">
         <!--  TODO: crop images      -->
         <label for="pic-file" class="form-label">
           <b>Please upload a profile picture.</b><span class="required-star">*</span><br />
@@ -15,6 +15,7 @@
           id="pic-file"
           #picFile
           type="file"
+          formControlName="img"
           (change)="imageChanged($event)"
         />
         <button type="submit" class="btn btn-primary text-white mt-4">Upload</button>
