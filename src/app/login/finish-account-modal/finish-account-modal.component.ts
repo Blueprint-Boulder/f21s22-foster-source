@@ -116,6 +116,7 @@ export class FinishAccountModalComponent implements OnInit {
       householdSize: [null, Validators.required],
       numChildren: [null, Validators.required],
       childrenInfo: [null, Validators.required],
+      petInfo: [null],
       vehicleAccess: [null],
       isLGBT: [null],
       caredForLGBT: [null],
