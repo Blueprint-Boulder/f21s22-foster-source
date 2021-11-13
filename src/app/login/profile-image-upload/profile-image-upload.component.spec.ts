@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProfileImageUploadComponent } from './profile-image-upload.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 describe('ProfileImageUploadComponent', () => {
   let component: ProfileImageUploadComponent;
@@ -8,7 +9,11 @@ describe('ProfileImageUploadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProfileImageUploadComponent ]
+      declarations: [ ProfileImageUploadComponent ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   });
