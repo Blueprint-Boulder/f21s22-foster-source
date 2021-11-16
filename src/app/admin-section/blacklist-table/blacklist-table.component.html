@@ -6,17 +6,19 @@
     >
       <div class="col-sm-8 m-auto">
         <span
-          ><b>{{ blacklistedUser.name }}</b></span
+          ><b
+            >{{ blacklistedUser.firstName }} {{ blacklistedUser.lastName }}</b
+          ></span
         ><br />
         <span>{{ blacklistedUser.email }}</span
         ><br />
-        <span>{{ blacklistedUser.phone }}</span
+        <span>{{ blacklistedUser.phoneNumber }}</span
         ><br />
         <span><b>Reason:</b></span
         ><br />
         <div class="ml-1 ban-desc pl-2">
           <span
-            ><i>{{ blacklistedUser.details }}</i></span
+            ><i>{{ blacklistedUser.reason }}</i></span
           ><br />
         </div>
         <small

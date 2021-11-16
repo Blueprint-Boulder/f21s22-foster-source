@@ -6,6 +6,8 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAccountPageComponent } from './create-account-page/create-account-page.component';
 import { CreateAccountModalComponent } from './create-account-modal/create-account-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 const routes: Routes = [
   {
@@ -15,6 +17,10 @@ const routes: Routes = [
   {
     path: 'create-account',
     component: CreateAccountPageComponent,
+  },
+  {
+    path: 'create-account/verify/:email',
+    component: VerifyEmailComponent,
   },
 ];
 
@@ -26,8 +32,15 @@ export const loginRouting = RouterModule.forChild(routes);
     LoginModalComponent,
     CreateAccountPageComponent,
     CreateAccountModalComponent,
+    VerifyEmailComponent,
   ],
-  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    loginRouting,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+  ],
   exports: [],
 })
 export class LoginModule {}

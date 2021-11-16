@@ -1,25 +1,25 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Announcement } from '../../models/announcement.model';
-import { DatabaseService } from '../../services/database-service/database.service';
-import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
 import { ToastrService } from 'ngx-toastr';
+import { AnnouncementService } from '../../services/announcement-service/announcement.service';
+import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css'],
-  providers: [databaseServiceProvider],
+  providers: [announcementServiceProvider],
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;
   @ViewChild('toast') toast: ElementRef;
   constructor(
-    private dbService: DatabaseService,
+    private announcementService: AnnouncementService,
     private toastService: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.dbService.getLatestAnnouncement().subscribe(
+    this.announcementService.getLatestAnnouncement().subscribe(
       (a: Announcement) => {
         this.latestAnnouncement = a;
       },

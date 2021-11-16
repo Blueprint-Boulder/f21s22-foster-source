@@ -3,18 +3,17 @@ import {
   Applicant,
   ApprovalTableUser,
   ApproveApplicantRequest,
-  ApproveApplicantResponse,
   DenyApplicantRequest,
-  DenyApplicantResponse,
+  GetApplicantsRes,
 } from '../../models/applicant.model';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { DatabaseService } from '../../services/database-service/database.service';
-import { databaseServiceProvider } from '../../services/database-service/database.service.provider';
 import { formatDate } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastPresets } from '../../models/toast.model';
+import { AccountService } from '../../services/account-service/account.service';
+import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 
 @Component({
   selector: 'app-user-action-table',
@@ -28,7 +27,7 @@ import { ToastPresets } from '../../models/toast.model';
       ]),
     ]),
   ],
-  providers: [databaseServiceProvider],
+  providers: [accountServiceProvider],
 })
 export class UserActionTableComponent implements OnInit {
   public users: ApprovalTableUser[] = [];
@@ -39,14 +38,15 @@ export class UserActionTableComponent implements OnInit {
   });
 
   constructor(
-    private dbService: DatabaseService,
+    private accountService: AccountService,
     private formBuilder: FormBuilder,
     private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
-    this.dbService.getApplicants().subscribe(
-      (applicants: Applicant[]) => {
+    this.accountService.getApplicants().subscribe(
+      (res: GetApplicantsRes) => {
+        const applicants = res.applicants;
         this.users = [];
         for (let i = 0; i < applicants.length; i++) {
           this.users.push({ ...applicants[i], isCollapsed: true });
@@ -76,19 +76,12 @@ export class UserActionTableComponent implements OnInit {
       shouldBlacklist: params.shouldBan,
     };
 
-    this.dbService.denyApplicant(denyRequest).subscribe(
-      (res: DenyApplicantResponse) => {
-        if (res.error) {
-          this.toastService.show({
-            body: 'Something went wrong trying to deny the user.',
-            preset: ToastPresets.ERROR,
-          });
-        } else {
-          this.toastService.show({
-            body: `Successfully denied applicant ${denied.name}.`,
-            preset: ToastPresets.SUCCESS,
-          });
-        }
+    this.accountService.denyApplicant(denyRequest).subscribe(
+      (res: any) => {
+        this.toastService.show({
+          body: `Successfully denied applicant ${denied.name}.`,
+          preset: ToastPresets.SUCCESS,
+        });
       },
       (error: HttpErrorResponse) => {
         this.toastService.show({
@@ -105,19 +98,12 @@ export class UserActionTableComponent implements OnInit {
       id: approved.id,
     };
 
-    this.dbService.approveApplicant(approveParams).subscribe(
-      (res: ApproveApplicantResponse) => {
-        if (res.error) {
-          this.toastService.show({
-            body: 'Something went wrong trying to approve the user.',
-            preset: ToastPresets.ERROR,
-          });
-        } else {
-          this.toastService.show({
-            body: `Successfully approved applicant ${approved.name}.`,
-            preset: ToastPresets.SUCCESS,
-          });
-        }
+    this.accountService.approveApplicant(approveParams).subscribe(
+      (res: any) => {
+        this.toastService.show({
+          body: `Successfully approved applicant ${approved.name}.`,
+          preset: ToastPresets.SUCCESS,
+        });
       },
       (error: HttpErrorResponse) => {
         this.toastService.show({

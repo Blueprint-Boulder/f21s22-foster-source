@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+$fs-tan: #fef4e8;
+
 .fs-tan-background {
   background-color: #fef4e8;
 }
@@ -18,9 +20,8 @@
   background-color: #f6f6f6;
 }
 
-body,
-html {
-  background-color: #f6f6f6 !important;
+body {
+  padding-top: 75px;
 }
 
 $theme-colors: (

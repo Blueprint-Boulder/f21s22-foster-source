@@ -54,7 +54,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Code scaffolding
 
-Run `ng generate module [module name]` to generate a module.  
+Run `ng generate module [module name]` to generate a module.
 Run `ng generate component [module name]/component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 Run `ng generate service services/[service name]/[service name]` to generate a service. The two service names are intentional to place the service in a subdirectory with the same name.
 

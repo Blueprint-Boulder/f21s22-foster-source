@@ -6,6 +6,18 @@ export interface Announcement {
   bodyHTML: string;
 }
 
+export interface OptionalAnnouncement {
+  id: number;
+  date?: Date;
+  author?: string;
+  title?: string;
+  bodyHtml?: string;
+}
+
+export interface GetAnnouncementsRes {
+  announcements: Announcement[];
+}
+
 export interface PostAnnouncementRequest {
   title: string;
   bodyHtml: string;

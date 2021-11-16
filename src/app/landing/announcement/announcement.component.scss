@@ -1,0 +1,24 @@
+@import "src/styles";
+
+.announcement-container {
+  width: 100%;
+  background-color: map-get($theme-colors, "primary");
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  overflow: scroll;
+}
+
+.announcement-card {
+  border: 0px solid map-get($theme-colors, "primary");
+  background-color: $fs-tan;
+}
+
+.announcement-card-header {
+  background-color: map-get($theme-colors, "primary");
+  color: white;
+}
+
+.announcement-card-footer {
+  background-color: $fs-tan !important;
+}

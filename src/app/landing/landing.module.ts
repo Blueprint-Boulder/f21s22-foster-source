@@ -16,5 +16,6 @@ export const landingRouting = RouterModule.forChild(routes);
 @NgModule({
   declarations: [LandingPageComponent, AnnouncementComponent],
   imports: [CommonModule, landingRouting],
+  exports: [AnnouncementComponent],
 })
 export class LandingModule {}
