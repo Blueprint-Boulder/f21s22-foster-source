@@ -100,9 +100,7 @@ export const cookies: Cookie[] = [
   },
 ];
 
-export const tokenString: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYX' +
-'QiOjE1MTYyMzkwMjIsImlkIjo3LCJwcml2aWxlZ2VMZXZlbCI6MCwiZXhwIjo3MjAwfQ.Uh0Feuo5Z' +
-'AplMsD7KRvHm_Qbzgk-3-mEa-s4-UPXWMU';
+export const tokenString = `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NywicHJpdmlsZWdlTGV2ZWwiOiIzIiwiaWF0IjoxNjM2OTMyNDQzLCJleHAiOjE2Mzc5OTg4OTN9.Qgl84ZWtv9P6u14DTxoZ8lwspcyV3tR4RrMmqX63XTQ`;
 
 export const accounts: Account[] = [
   {

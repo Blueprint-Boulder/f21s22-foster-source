@@ -21,18 +21,23 @@ export class AuthService {
     //   'access-token',
     //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1MTYyMzkwMjIsImlkIjo3LCJwcml2aWxlZ2VMZXZlbCI6MCwiZXhwIjo3MjAwfQ.Uh0Feuo5ZAplMsD7KRvHm_Qbzgk-3-mEa-s4-UPXWMU'
     // );
+    console.log('init function');
     const token = this.getToken();
+    console.log(token);
     if (token) {
       this.expiresAt = moment().add(token.exp, 'second');
-      this.isUser = (token.privilegeLevel === 0);
-      this.isAdmin = (token.privilegeLevel === 1);
-      this.isMod = (token.privilegeLevel === 2);
+      this.isUser = token.privilegeLevel > 0;
+      this.isAdmin = token.privilegeLevel > 1;
+      this.isMod = token.privilegeLevel > 2;
     }
   }
 
   getToken(): Cookie {
+    console.log('getting token');
     const token = this.cookieService.get('access-token');
+    console.log(token);
     const tokenBody: Cookie = jwtDecode(token);
+    console.log(tokenBody);
     return tokenBody;
   }
 
@@ -41,18 +46,14 @@ export class AuthService {
   }
 
   validUser(): boolean {
-    //calling init so dummy token is set, will not be in final implementation
-    this.init();
     return this.isUser && this.validTime();
   }
 
   validAdmin(): boolean {
-    this.init();
     return this.isAdmin && this.validTime();
   }
 
   validMod(): boolean {
-    this.init();
     return this.isMod && this.validTime();
   }
 }

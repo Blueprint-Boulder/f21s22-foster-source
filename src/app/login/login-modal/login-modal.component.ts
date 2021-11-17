@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AccountMockService } from '../../services/account-service/account.mock.service';
+import { AccountService } from '../../services/account-service/account.service';
+import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 import { AuthService } from '../../services/auth-service/auth.service';
-import { LoginRequest, Cookie } from '../../models/account.model';
-import { cookies } from 'src/app/mock/database-entities';
+import { LoginRequest } from '../../models/account.model';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.scss'],
+  providers: [accountServiceProvider],
 })
 export class LoginModalComponent implements OnInit {
   public loginForm = this.formBuilder.group({
@@ -18,30 +19,40 @@ export class LoginModalComponent implements OnInit {
     remember: true,
   });
 
-  constructor(private formBuilder: FormBuilder, private accountMockService: AccountMockService,
-    private authService: AuthService, private cookieService: CookieService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private accountService: AccountService,
+    private authService: AuthService,
+    private cookieService: CookieService
+  ) {}
+
   ngOnInit(): void {
     return;
   }
+
   public loginSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      let data: LoginRequest;
-      data = {
+      const data: LoginRequest = {
         //Typescript was yelling at me about abstract control typing
         username: String(this.loginForm.controls.username),
-        password: String(this.loginForm.controls.password)
+        password: String(this.loginForm.controls.password),
       };
-      this.accountMockService.login(data)
-        .subscribe((res: string) => {
-          this.cookieService.set("auth-token", res);
-        }, (error: any) => {
+      this.accountService.login(data).subscribe(
+        (res: string) => {
+          console.log('next clause');
+          this.cookieService.set('access-token', res);
+        },
+        (error: Error) => {
+          console.log('error clause');
           console.log(error);
-        }, () => {
+        },
+        () => {
+          console.log('completed clause');
           this.authService.init();
-        });
-
+        }
+      );
     }
   }
 }
