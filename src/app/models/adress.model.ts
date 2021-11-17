@@ -2,7 +2,6 @@ export interface SimpleAddress {
   line1: string;
   line2?: string;
   city: string;
-  county: string;
   zip: string;
   state: string;
 }
