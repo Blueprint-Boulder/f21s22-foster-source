@@ -8,12 +8,6 @@ const routes: Routes = [
     path: '',
     component: PublicUserPageComponentComponent,
   },
-  /*
-  {
-    path: '/:user_id',
-    component: PublicUserPageComponentComponent
-  }
-  */
 ];
 
 export const userRouting = RouterModule.forChild(routes);
