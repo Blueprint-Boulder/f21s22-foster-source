@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidationErrors,
   Validators,
@@ -13,6 +12,8 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 import { CreateAccountRequest } from '../../models/account.model';
 import { PhoneNumberType } from '../../models/phonenumber.model';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-create-account-modal',
@@ -21,6 +22,68 @@ import { Router } from '@angular/router';
   providers: [accountServiceProvider],
 })
 export class CreateAccountModalComponent implements OnInit {
+  public readonly STATES = [
+    'Alabama',
+    'Alaska',
+    'American Samoa',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'District of Columbia',
+    'Federated States of Micronesia',
+    'Florida',
+    'Georgia',
+    'Guam',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Marshall Islands',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Northern Mariana Islands',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Palau',
+    'Pennsylvania',
+    'Puerto Rico',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virgin Island',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ];
+
   public createAccountForm: FormGroup;
   public disableSubmitButton = false;
 
@@ -31,7 +94,8 @@ export class CreateAccountModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +125,7 @@ export class CreateAccountModalComponent implements OnInit {
         ]),
       ],
       state: ['', Validators.required],
-      county: ['', Validators.required],
+      certifiedBy: ['', Validators.required],
       caseworkerfname: ['', Validators.required],
       caseworkerlname: ['', Validators.required],
       caseworkeremail: [
@@ -91,16 +155,6 @@ export class CreateAccountModalComponent implements OnInit {
         Validators.compose([Validators.required, Validators.minLength(8)]),
       ],
       confirmpassword: ['', Validators.compose([Validators.required])],
-      dob: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/
-          ),
-          CreateAccountModalComponent.validateDate,
-        ]),
-      ],
     });
     this.createAccountForm.setValidators([
       CreateAccountModalComponent.confirmEmailValidator,
@@ -139,31 +193,32 @@ export class CreateAccountModalComponent implements OnInit {
       const createAccountReq: CreateAccountRequest = {
         address: {
           line1: this.createAccountForm.get('address')!.value,
-          line2: this.createAccountForm!.get('address2')
+          line2: this.createAccountForm!.get('address2')?.value
             ? this.createAccountForm!.get('address2')!.value
             : undefined,
           city: this.createAccountForm!.get('city')!.value,
-          county: this.createAccountForm!.get('county')!.value,
           zip: this.createAccountForm!.get('zip')!.value,
           state: this.createAccountForm!.get('state')!.value,
         },
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
         cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
-        dob: CreateAccountModalComponent.parseDateFromInput(
-          this.createAccountForm.get('dob')!.value
-        ),
+        certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
         email: this.createAccountForm.get('caseworkerlname')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
         primaryPhone: {
-          phoneNumber: this.createAccountForm.get('primaryPhone')!.value,
+          phoneNumber: this.formatPhoneNumber(
+            this.createAccountForm.get('primaryPhone')!.value
+          ),
           type: this.createAccountForm.get('primaryType')!.value,
         },
-        secondaryPhone: this.createAccountForm.get('secondaryType')
+        secondaryPhone: this.createAccountForm.get('secondaryType')?.value
           ? {
-              phoneNumber: this.createAccountForm.get('secondaryPhone')!.value,
+              phoneNumber: this.formatPhoneNumber(
+                this.createAccountForm.get('secondaryPhone')!.value
+              ),
               type: this.createAccountForm.get('secondaryType')!.value,
             }
           : undefined,
@@ -172,10 +227,16 @@ export class CreateAccountModalComponent implements OnInit {
 
       this.accountService.createAccount(createAccountReq).subscribe(
         (res: CreateAccountRequest) => {
-          console.log(res);
+          //TODO: Check if username is available.
           this.router.navigate([`/login/create-account/verify/${res.email}`]);
         },
-        (err) => console.log(err)
+        (err) => {
+          this.toastService.show({
+            body: 'Something went wrong trying to create your account.',
+            preset: ToastPresets.ERROR,
+          });
+          console.log(err);
+        }
       );
     }
   }
@@ -213,49 +274,17 @@ export class CreateAccountModalComponent implements OnInit {
     }
   }
 
-  private static validateDate(
-    control: AbstractControl
-  ): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid phone date.' };
-
-    try {
-      const parsed = CreateAccountModalComponent.parseDateFromInput(
-        control.value as string
-      );
-      const validMonth =
-        parseInt(control.value.substring(0, 2)) > 0 &&
-        parseInt(control.value.substring(0, 2)) <= 12;
-      const validDay =
-        parseInt(control.value.substring(3, 5)) > 0 &&
-        parseInt(control.value.substring(3, 5)) <= 31;
-      const validYear =
-        parseInt(control.value.substring(6, 10)) >
-          new Date().getFullYear() - 100 &&
-        parseInt(control.value.substring(6, 10)) <=
-          new Date().getFullYear() - 13;
-      if (!validMonth || !validDay || !validYear) {
-        return err;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return err;
-    }
-  }
-
-  private static parseDateFromInput(dateStr: string): Date {
-    const year = parseInt(dateStr.substring(6, 10));
-    const day = parseInt(dateStr.substring(3, 5));
-    const month = parseInt(dateStr.substring(0, 2));
-    console.log(year, day, month);
-    return new Date(year, month - 1, day);
-  }
-
   public getPhoneTypes(): string[] {
     const types: string[] = [];
     Object.keys(PhoneNumberType).forEach((type) => {
       types.push(type);
     });
     return types;
+  }
+
+  private formatPhoneNumber(num: string): string {
+    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    const parsed = phoneUtil.parse(num, 'US');
+    return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
   }
 }
