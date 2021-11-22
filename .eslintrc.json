@@ -32,10 +32,15 @@
             "style": "kebab-case"
           }
         ],
-        "class-methods-use-this": "error",
         "eqeqeq": "error",
-        "@typescript-eslint/no-explicit-any": ["error"],
-        "prettier/prettier": ["error", {}]
+        "camelcase": "error",
+        "@typescript-eslint/no-explicit-any": ["warn"],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ]
       },
       "plugins": ["prettier", "@typescript-eslint"]
     },

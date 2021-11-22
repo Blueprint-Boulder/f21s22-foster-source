@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row post-announcement-container">
+    <div class="col mb-2">
+      <h2>Post an announcement</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <input
+          [(ngModel)]="title"
+          (input)="updatePreview()"
+          type="text"
+          class="form-control"
+          id="announcement-title-field"
+          aria-describedby="emailHelp"
+          placeholder="Enter an interesting title..."
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <app-editor
+        id="rich-editor"
+        (richTextChange)="textChange($event)"
+        [characterLimit]="characterLimit"
+      ></app-editor>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button
+        class="btn btn-primary text-white float-right"
+        [class]="{
+          disabled: richText.length > characterLimit || attemptingToPost
+        }"
+        (click)="postAnnouncement()"
+        [disabled]="richText.length > characterLimit || attemptingToPost"
+      >
+        Post Announcement
+      </button>
+      <button
+        class="btn btn-secondary text-white float-right mr-3"
+        (click)="reloadPage()"
+        [class]="{ disabled: attemptingToPost }"
+        [disabled]="attemptingToPost"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+  <div *ngIf="announcement" class="row mt-1">
+    <div class="col">
+      <i>Preview of your announcement:</i>
+    </div>
+  </div>
+  <div *ngIf="announcement" class="row">
+    <div class="col">
+      <app-announcement [announcement]="announcement"></app-announcement>
+    </div>
+  </div>
+  <div class="row past-announcements mt-5 border-top pt-5 mb-2">
+    <i>Past Announcements</i>
+  </div>
+  <div *ngFor="let a of pastAnnouncements" class="row">
+    <div class="col">
+      <app-announcement [announcement]="a"></app-announcement>
+    </div>
+  </div>
+</div>

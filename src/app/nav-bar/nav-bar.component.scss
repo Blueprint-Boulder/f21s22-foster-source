@@ -1,0 +1,9 @@
+@import "../../styles";
+
+.navbar {
+  border-bottom: 5px solid map-get($theme-colors, "primary");
+}
+
+.nav-respite-source {
+  height: 35px;
+}

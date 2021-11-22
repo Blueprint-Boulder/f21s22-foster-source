@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <img id="landing-main-image" src="assets/images/landing-photo.jpg" />
+    </div>
+    <div class="col-sm-6 my-auto">
+      <h2 class="mb-3">
+        <b
+          >Welcome to RespiteSource, your home for finding and providing
+          respite.</b
+        >
+      </h2>
+      <p class="body-text">
+        Welcome to the Respite Source, powered by Foster Source and you! Respite
+        Source is a database and community forum designed for you to find
+        respite solutions and connect with other foster parents. Foster Source
+        is committed to helping foster parents foster better and foster longer.
+      </p>
+      <p>
+        Click the ‘Create Profile’ button below to get started. Once your
+        certification credentials are confirmed by a Foster Source team member,
+        your profile will be approved. From there you will be able to search for
+        foster parents offering respite, offer up respite services of your own
+        to parents in need, and post and respond to other foster parents on the
+        community message board.
+      </p>
+      <small
+        ><i
+          >A reminder that both parties in a respite agreement should have the
+          respite approved in advance by their certifying county or agency.
+          Certification workers will be notified of confirmed respite requests
+          and offers.</i
+        >
+      </small>
+      <div class="text-center mt-5 mb-3">
+        <a [routerLink]="['/login/create-account']"
+          ><button class="btn btn-primary w-50 text-white text-center">
+            Create Profile
+          </button></a
+        >
+        <br />
+        <small
+          >Already have a profile?
+          <a [routerLink]="['/login']">Log in</a></small
+        >
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 row" *ngIf="latestAnnouncement">
+    <div class="col-12">
+      <small><i>Latest announcements from Foster Source</i></small>
+    </div>
+    <div class="col-sm-12">
+      <app-announcement [announcement]="latestAnnouncement"></app-announcement>
+      <div id="ej2Toast" #toast></div>
+    </div>
+  </div>
+</div>
