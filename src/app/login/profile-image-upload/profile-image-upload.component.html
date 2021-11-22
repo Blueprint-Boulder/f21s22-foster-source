@@ -2,12 +2,14 @@
   <div class="row p-3">
     <div class="col-sm-12 col-md-6">
       <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
-      <div *ngIf="imageChangedEvent != ''">
+      <div *ngIf="imageChangedEvent != ''" class="mt-5 mx-auto">
+        <small><i>Crop your image</i></small>
         <image-cropper
           [imageChangedEvent]="imageChangedEvent"
           [maintainAspectRatio]="true"
           [aspectRatio]="1 / 1"
           [format]="uploadedImageType"
+          [roundCropper]="true"
           (imageCropped)="imageCropped($event)"
           (imageLoaded)="imageLoaded()"
           (cropperReady)="cropperReady()"
@@ -24,13 +26,16 @@
         </label>
         <input
           class="form-control form-control-lg"
+          [disabled]="isUploading"
           id="pic-file"
           #picFile
           type="file"
           formControlName="img"
           (change)="imageChanged($event)"
         />
-        <button type="submit" class="btn btn-primary text-white mt-4" disabled>Upload</button>
+        <button type="submit" class="btn btn-primary text-white mt-4" [disabled]="imageUrl == BLANK_PROFILE_URL">
+          Upload
+        </button>
       </form>
     </div>
   </div>
