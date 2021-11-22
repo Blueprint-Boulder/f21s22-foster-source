@@ -2,6 +2,8 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ImageService } from '../../services/image-service/image.service';
 import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 import { FormBuilder } from '@angular/forms';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-profile-image-upload',
@@ -13,39 +15,43 @@ export class ProfileImageUploadComponent implements OnInit {
   public readonly BLANK_PROFILE_URL = 'assets/images/blank-profile-photo.jpg';
 
   public image: File;
+  public isUploading = false;
   public imageUrl = this.BLANK_PROFILE_URL;
+  public imageForm = this.formBuilder.group({
+    img: [''],
+  });
 
   @ViewChild('picFile')
   profilePhotoInput: ElementRef;
 
   @Output() imageUploaded: EventEmitter<string> = new EventEmitter<string>();
 
-  public imageForm = this.formBuilder.group({
-    img: [''],
-  });
-
-  constructor(private imageService: ImageService, private formBuilder: FormBuilder) {}
+  constructor(
+    private imageService: ImageService,
+    private formBuilder: FormBuilder,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     return;
   }
 
   uploadImage(): void {
+    this.isUploading = true;
     this.imageService.uploadImage(this.profilePhotoInput.nativeElement.file).subscribe(
       (res) => {
         this.imageUploaded.emit(res);
+        this.isUploading = false;
       },
       (err) => {
-        console.error(err);
+        this.toastService.show({
+          body: "Couldn't upload your image, please try again.",
+          preset: ToastPresets.ERROR,
+        });
+        this.reset();
+        this.isUploading = false;
       }
     );
-  }
-
-  private resetWithError(error: string): void {
-    alert(error);
-    this.imageUrl = this.BLANK_PROFILE_URL;
-    this.profilePhotoInput.nativeElement.value = '';
-    this.imageUploaded.emit('');
   }
 
   imageChanged(event: Event): void {
@@ -80,6 +86,17 @@ export class ProfileImageUploadComponent implements OnInit {
           });
       };
     }
+  }
+
+  private resetWithError(error: string): void {
+    alert(error);
+    this.reset();
+  }
+
+  private reset(): void {
+    this.imageUrl = this.BLANK_PROFILE_URL;
+    this.profilePhotoInput.nativeElement.value = '';
+    this.imageUploaded.emit('');
   }
 
   private static validateType(file: File): boolean {
