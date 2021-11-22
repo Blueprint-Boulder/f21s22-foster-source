@@ -242,7 +242,6 @@
                 id="secPreferredName"
                 placeholder="Enter preferred name"
                 formControlName="secPreferredName"
-                required
               />
               <div
                 *ngIf="
@@ -852,33 +851,75 @@
       <div class="col-sm-12">
         <h6>Do you have reliable access to a vehicle?</h6>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="vehicleAccess" value="true" id="vehicleAccessYes" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccess"
+            formControlName="vehicleAccess"
+            value="true"
+            id="vehicleAccessYes"
+          />
           <label class="form-check-label" for="vehicleAccessYes"> Yes </label>
         </div>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="vehicleAccess" value="false" id="vehicleAccessNo" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccess"
+            formControlName="vehicleAccess"
+            value="false"
+            id="vehicleAccessNo"
+          />
           <label class="form-check-label" for="vehicleAccessNo"> No </label>
         </div>
       </div>
       <div class="col-sm-12">
         <h6>Are you a member of the LGBTQIA+ community?</h6>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="isLGBT" value="true" id="isLGBTYes" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="isLGBT"
+            formControlName="isLGBT"
+            value="true"
+            id="isLGBTYes"
+          />
           <label class="form-check-label" for="isLGBTYes"> Yes </label>
         </div>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="isLGBT" value="false" id="isLGBTNo" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="isLGBT"
+            formControlName="isLGBT"
+            value="false"
+            id="isLGBTNo"
+          />
           <label class="form-check-label" for="isLGBTNo"> No </label>
         </div>
       </div>
       <div class="col-sm-12">
         <h6>Do you have have experience caring for LGBTQIA+ youth?</h6>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="caredForLGBT" value="true" id="caredForLGBTYes" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForLGBT"
+            formControlName="caredForLGBT"
+            value="true"
+            id="caredForLGBTYes"
+          />
           <label class="form-check-label" for="caredForLGBTYes"> Yes </label>
         </div>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="caredForLGBT" value="false" id="caredForLGBTNo" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForLGBT"
+            formControlName="caredForLGBT"
+            value="false"
+            id="caredForLGBTNo"
+          />
           <label class="form-check-label" for="caredForLGBTNo"> No </label>
         </div>
       </div>
@@ -891,6 +932,7 @@
             name="caredForPhysicallyDisabled"
             value="true"
             id="caredForPhysicallyDisabledYes"
+            formControlName="caredForPhysicallyDisabled"
           />
           <label class="form-check-label" for="caredForPhysicallyDisabledYes"> Yes </label>
         </div>
@@ -901,6 +943,7 @@
             name="caredForPhysicallyDisabled"
             value="false"
             id="caredForPhysicallyDisabledNo"
+            formControlName="caredForPhysicallyDisabled"
           />
           <label class="form-check-label" for="caredForPhysicallyDisabledNo"> No </label>
         </div>
@@ -914,6 +957,7 @@
             name="caredForIntellectuallyDisabled"
             value="true"
             id="caredForIntellectuallyDisabledYes"
+            formControlName="caredForIntellectuallyDisabled"
           />
           <label class="form-check-label" for="caredForIntellectuallyDisabledYes"> Yes </label>
         </div>
@@ -924,6 +968,7 @@
             name="caredForIntellectuallyDisabled"
             value="false"
             id="caredForIntellectuallyDisabledNo"
+            formControlName="caredForIntellectuallyDisabled"
           />
           <label class="form-check-label" for="caredForIntellectuallyDisabledNo"> No </label>
         </div>
@@ -937,6 +982,7 @@
             name="careForMedicallyFragile"
             value="true"
             id="careForMedicallyFragileYes"
+            formControlName="careForMedicallyFragile"
           />
           <label class="form-check-label" for="careForMedicallyFragileYes"> Yes </label>
         </div>
@@ -947,6 +993,7 @@
             name="careForMedicallyFragile"
             value="false"
             id="careForMedicallyFragileNo"
+            formControlName="careForMedicallyFragile"
           />
           <label class="form-check-label" for="careForMedicallyFragileNo"> No </label>
         </div>
@@ -954,11 +1001,25 @@
       <div class="col-sm-12">
         <h6>Do you (or does anyone in your household) own a firearm?</h6>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="ownsFirearm" value="true" id="ownsFirearmYes" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            formControlName="ownsFirearm"
+            value="true"
+            id="ownsFirearmYes"
+          />
           <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
         </div>
         <div class="form-check m-2">
-          <input class="form-check-input" type="radio" name="ownsFirearm" value="false" id="ownsFirearmNo" />
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            formControlName="ownsFirearm"
+            value="false"
+            id="ownsFirearmNo"
+          />
           <label class="form-check-label" for="ownsFirearmNo"> No </label>
         </div>
       </div>
@@ -985,7 +1046,7 @@
     </div>
     <div class="row submit-row">
       <div class="col">
-        <button type="submit" class="btn btn-primary text-white mx-auto">Submit</button>
+        <button type="submit" class="btn btn-primary text-white mx-auto" [disabled]="submitting">Submit</button>
       </div>
     </div>
     <div class="row mt-5">

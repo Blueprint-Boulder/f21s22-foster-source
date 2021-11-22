@@ -12,4 +12,8 @@ export class ImageImplService implements ImageService {
     formData.append('image', image);
     return this.http.post<string>(`${environment.backendHost}/api/image`, formData);
   }
+
+  public deleteImage(key: string): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/image/${encodeURIComponent(key)}`);
+  }
 }

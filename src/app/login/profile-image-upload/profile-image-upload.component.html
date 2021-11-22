@@ -1,25 +1,11 @@
 <div class="image-upload-container bg-light-grey">
   <div class="row p-3">
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-6 text-center">
       <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
-      <div *ngIf="imageChangedEvent != ''" class="mt-5 mx-auto">
-        <small><i>Crop your image</i></small>
-        <image-cropper
-          [imageChangedEvent]="imageChangedEvent"
-          [maintainAspectRatio]="true"
-          [aspectRatio]="1 / 1"
-          [format]="uploadedImageType"
-          [roundCropper]="true"
-          (imageCropped)="imageCropped($event)"
-          (imageLoaded)="imageLoaded()"
-          (cropperReady)="cropperReady()"
-          (loadImageFailed)="loadImageFailed()"
-        ></image-cropper>
-      </div>
+      <small>Profile Image Preview</small>
     </div>
     <div class="col-sm-12 col-md-6 mt-sm-3">
       <form [formGroup]="imageForm" (ngSubmit)="uploadImage()">
-        <!--  TODO: crop images      -->
         <label for="pic-file" class="form-label">
           <b>Please upload a profile picture.</b><span class="required-star">*</span><br />
           <small><i>Upload an image that is at least 250x250px, max size 5mb.</i></small>
@@ -33,10 +19,32 @@
           formControlName="img"
           (change)="imageChanged($event)"
         />
-        <button type="submit" class="btn btn-primary text-white mt-4" [disabled]="imageUrl == BLANK_PROFILE_URL">
+        <button
+          type="submit"
+          class="btn btn-primary text-white mt-4"
+          [disabled]="imageUrl == BLANK_PROFILE_URL || !fileChangedAfterUpload"
+        >
           Upload
         </button>
       </form>
     </div>
+  </div>
+  <div *ngIf="imageChangedEvent != ''" class="row">
+    <div class="col-sm-1 col-md-3"></div>
+    <div class="col-sm-10 col-md-6 mt-5 mb-5 mx-auto">
+      <div>
+        <small><i>Crop your image</i></small>
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          [format]="uploadedImageType"
+          [cropperMinHeight]="250"
+          [roundCropper]="true"
+          (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+      </div>
+    </div>
+    <div class="col-sm-1 col-md-3"></div>
   </div>
 </div>

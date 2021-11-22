@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ImageService } from '../../services/image-service/image.service';
 import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 import { FormBuilder } from '@angular/forms';
-import { ImageCroppedEvent, LoadedImage, OutputFormat } from 'ngx-image-cropper';
+import { ImageCroppedEvent, OutputFormat } from 'ngx-image-cropper';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ToastPresets } from '../../models/toast.model';
 
@@ -22,6 +22,8 @@ export class ProfileImageUploadComponent implements OnInit {
   public imageForm = this.formBuilder.group({
     img: [''],
   });
+  public imageUuid = '';
+  public fileChangedAfterUpload = false;
 
   @ViewChild('picFile')
   profilePhotoInput: ElementRef;
@@ -40,11 +42,23 @@ export class ProfileImageUploadComponent implements OnInit {
 
   uploadImage(): void {
     this.isUploading = true;
+    this.fileChangedAfterUpload = false;
+
+    // Delete the previously uploaded picture if there was one
+    if (this.imageUuid !== '') {
+      this.imageService.deleteImage(this.imageUuid);
+    }
+
     this.imageService.uploadImage(this.profilePhotoInput.nativeElement.file).subscribe(
       (res) => {
         this.imageUploaded.emit(res);
+        this.imageUuid = res;
         this.isUploading = false;
         this.imageChangedEvent = '';
+        this.toastService.show({
+          body: 'Image successfully uploaded',
+          preset: ToastPresets.SUCCESS,
+        });
       },
       (err) => {
         this.toastService.show({
@@ -70,6 +84,8 @@ export class ProfileImageUploadComponent implements OnInit {
         this.resetWithError('Please upload an image that is less than 5mb.');
         return;
       }
+
+      this.fileChangedAfterUpload = true;
 
       this.image = file;
       const reader = new FileReader();
@@ -138,19 +154,11 @@ export class ProfileImageUploadComponent implements OnInit {
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
   }
+
   imageCropped(event: ImageCroppedEvent) {
     if (event.base64) {
       this.imageUrl = event.base64;
     }
-  }
-  imageLoaded() {
-    // show cropper
-  }
-  cropperReady() {
-    // cropper ready
-  }
-  loadImageFailed() {
-    // show message
   }
 }
 

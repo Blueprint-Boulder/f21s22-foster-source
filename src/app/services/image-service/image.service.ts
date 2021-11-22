@@ -9,4 +9,5 @@ export type ImgKey = string;
 })
 export abstract class ImageService {
   public abstract uploadImage(image: File): Observable<string>;
+  public abstract deleteImage(key: string): Observable<any>;
 }

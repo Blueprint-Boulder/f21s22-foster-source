@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Utils } from '../utils';
 import { DayModel } from '../day-availability-input/day-availability-input.component';
+import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 
 @Component({
   selector: 'app-finish-account-modal',
@@ -15,6 +16,7 @@ export class FinishAccountModalComponent implements OnInit {
   public canProvideRespiteCare = false;
   public phoneTypes: string[];
   public needToUploadImgError = false;
+  public submitting = false;
 
   private profileImgKey = '';
 
@@ -24,10 +26,8 @@ export class FinishAccountModalComponent implements OnInit {
     'secEmail',
     'secPhone',
     'secPhoneType',
-    'secPreferredName',
-    'secPronouns',
     'secGender',
-    'secMaritalStatus',
+    'secPreferredName',
   ];
 
   public dayModels: DayModel[] = [
@@ -82,7 +82,7 @@ export class FinishAccountModalComponent implements OnInit {
     },
   ];
 
-  private provideRespitefields = ['respiteCity', 'respiteRange', 'minAge', 'maxAge', 'howManyCareFor'];
+  private provideRespiteFields = ['respiteCity', 'respiteRange', 'minAge', 'maxAge', 'howManyCareFor'];
 
   @Input() account: Account;
 
@@ -94,23 +94,23 @@ export class FinishAccountModalComponent implements OnInit {
     this.finishProfileForm = this.formBuilder.group({
       preferredName: ['', Validators.required],
       gender: ['', Validators.required],
-      pronouns: [''],
-      maritalStatus: [''],
-      secfname: [''],
-      seclname: [''],
-      secEmail: ['', Validators.email],
-      secPhone: [''],
-      secPhoneType: [''],
-      secPreferredName: [''],
-      secPronouns: [''],
-      secGender: [''],
-      secMaritalStatus: [''],
+      pronouns: [null],
+      maritalStatus: [null],
+      secfname: [null],
+      seclname: [null],
+      secEmail: [null],
+      secPhone: [null],
+      secPhoneType: [null],
+      secPreferredName: [null],
+      secPronouns: [null],
+      secGender: [null],
+      secMaritalStatus: [null],
       fosterYears: [null, Validators.compose([Validators.required])],
       totalChildren: [null, Validators.compose([Validators.required])],
       canProvideRespite: [null, Validators.required],
       lookingForRespite: [null, Validators.required],
       hasProvidedInPast: [null, Validators.required],
-      respiteCity: [''],
+      respiteCity: [null],
       respiteRange: [null],
       minAge: [null],
       maxAge: [null],
@@ -132,16 +132,67 @@ export class FinishAccountModalComponent implements OnInit {
     });
   }
 
+  public onSubmit() {
+    Object.keys(this.finishProfileForm.value).forEach((key) => {
+      if (this.finishProfileForm.get(key)?.errors) {
+        console.log('Key: ' + key);
+        console.log(this.finishProfileForm.get(key)?.errors);
+      }
+    });
+
+    this.finishProfileForm.updateValueAndValidity();
+    if (this.finishProfileForm.invalid) {
+      this.finishProfileForm.markAllAsTouched();
+      alert('Please complete all required fields (indicated with a red star).');
+    } else if (this.profileImgKey.length < 1) {
+      this.needToUploadImgError = true;
+      alert('Please complete all required fields (indicated with a red star).');
+    } else {
+      if (this.finishProfileForm.get('canProvideRespite')!.value === true) {
+        this.finishProfileForm.addControl('respiteAvailability', new FormControl(this.generateRespiteAvailability()));
+      }
+
+      this.finishProfileForm.addControl('photoAWSKey', new FormControl(this.profileImgKey));
+
+      console.log(JSON.stringify(this.finishProfileForm.value));
+    }
+  }
+
+  public imageUploaded(event: any): void {
+    this.profileImgKey = event;
+  }
+
   public secChange(event: Event): void {
     if ((event.target as any).value === 'true') {
       this.hasSecondaryAccountHolder = true;
       this.makeSecFieldsRequired();
-      this.finishProfileForm.get('secPhone')?.addValidators(Utils.validatePhoneNumber);
+
+      this.finishProfileForm.get('secPhone')!.addValidators(Utils.validatePhoneNumber);
+      this.finishProfileForm.get('secEmail')!.addValidators(Validators.email);
+      this.finishProfileForm.get('secPhone')!.updateValueAndValidity();
     } else {
-      this.hasSecondaryAccountHolder = false;
       this.makeSecFieldsNotRequired();
-      this.finishProfileForm.get('secPhone')?.removeValidators(Utils.validatePhoneNumber);
+      this.hasSecondaryAccountHolder = false;
+
+      this.finishProfileForm.get('secPhone')!.removeValidators(Utils.validatePhoneNumber);
+      this.finishProfileForm.get('secEmail')!.removeValidators(Validators.email);
+      this.finishProfileForm.get('secPhone')!.updateValueAndValidity();
     }
+    this.finishProfileForm.updateValueAndValidity();
+  }
+
+  private makeSecFieldsRequired() {
+    this.secondaryAccountHolderFields.forEach((fieldName: string) => {
+      this.finishProfileForm.get(fieldName)?.addValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
+    });
+  }
+
+  private makeSecFieldsNotRequired() {
+    this.secondaryAccountHolderFields.forEach((fieldName: string) => {
+      this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
+    });
   }
 
   public respiteProvideChange(event: Event): void {
@@ -149,37 +200,28 @@ export class FinishAccountModalComponent implements OnInit {
       this.canProvideRespiteCare = true;
       this.makeRespiteFieldsRequired();
     } else {
-      this.canProvideRespiteCare = false;
       this.makeRespiteFieldsNotRequired();
+      this.canProvideRespiteCare = false;
     }
   }
 
-  private makeSecFieldsRequired() {
-    this.secondaryAccountHolderFields.forEach((fieldName: string) => {
-      this.finishProfileForm.get(fieldName)?.addValidators(Validators.required);
-    });
-  }
-
-  private makeSecFieldsNotRequired() {
-    this.secondaryAccountHolderFields.forEach((fieldName: string) => {
-      this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
-    });
-  }
-
   private makeRespiteFieldsRequired() {
-    this.provideRespitefields.forEach((fieldName: string) => {
+    this.provideRespiteFields.forEach((fieldName: string) => {
       this.finishProfileForm.get(fieldName)?.addValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
     });
+    this.finishProfileForm.updateValueAndValidity();
   }
 
   private makeRespiteFieldsNotRequired() {
-    this.provideRespitefields.forEach((fieldName: string) => {
+    this.provideRespiteFields.forEach((fieldName: string) => {
       this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
+      this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
     });
   }
 
   private static validateDate(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid phone date.' };
+    const err = { invalidDate: 'Please enter a valid date.' };
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -206,19 +248,24 @@ export class FinishAccountModalComponent implements OnInit {
     return new Date(year, month - 1, day);
   }
 
-  onSubmit() {
-    if (this.finishProfileForm.invalid) {
-      this.finishProfileForm.markAllAsTouched();
-      alert('Please complete all required fields (indicated with a red star).');
-    } else if (this.profileImgKey.length < 1) {
-      this.needToUploadImgError = true;
-      alert('Please complete all required fields (indicated with a red star).');
-    } else {
-      console.log(this.finishProfileForm.value);
-    }
-  }
+  private generateRespiteAvailability(): SimpleAvailability {
+    const m: DayModel = this.dayModels.find((dm) => dm.name === 'Monday') as DayModel;
+    const t: DayModel = this.dayModels.find((dm) => dm.name === 'Tuesday') as DayModel;
+    const w: DayModel = this.dayModels.find((dm) => dm.name === 'Wednesday') as DayModel;
+    const th: DayModel = this.dayModels.find((dm) => dm.name === 'Thursday') as DayModel;
+    const f: DayModel = this.dayModels.find((dm) => dm.name === 'Friday') as DayModel;
+    const sa: DayModel = this.dayModels.find((dm) => dm.name === 'Saturday') as DayModel;
+    const su: DayModel = this.dayModels.find((dm) => dm.name === 'Sunday') as DayModel;
 
-  public imageUploaded(event: any): void {
-    this.profileImgKey = event;
+    return {
+      type: AvailabilityType.PRIMARY,
+      monday: [m.morning, m.afternoon, m.evening, m.overnight],
+      tuesday: [t.morning, t.afternoon, t.evening, t.overnight],
+      wednesday: [w.morning, w.afternoon, w.evening, w.overnight],
+      thursday: [th.morning, th.afternoon, th.evening, th.overnight],
+      friday: [f.morning, f.afternoon, f.evening, f.overnight],
+      saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
+      sunday: [su.morning, su.afternoon, su.evening, su.overnight],
+    };
   }
 }

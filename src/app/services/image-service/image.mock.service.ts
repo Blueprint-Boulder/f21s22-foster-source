@@ -5,4 +5,8 @@ export class ImageMockService implements ImageService {
   public uploadImage(image: File): Observable<ImgKey> {
     return of('FAKE_IMAGE_KEY');
   }
+
+  public deleteImage(key: string): Observable<any> {
+    return of({});
+  }
 }
