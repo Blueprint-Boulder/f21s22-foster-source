@@ -4,11 +4,17 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { Utils } from '../utils';
 import { DayModel } from '../day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
+import { AccountService } from '../../services/account-service/account.service';
+import { accountServiceProvider } from '../../services/account-service/account.service.provider';
+import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-finish-account-modal',
   templateUrl: './finish-account-modal.component.html',
   styleUrls: ['./finish-account-modal.component.scss'],
+  providers: [accountServiceProvider],
 })
 export class FinishAccountModalComponent implements OnInit {
   public finishProfileForm: FormGroup;
@@ -86,7 +92,12 @@ export class FinishAccountModalComponent implements OnInit {
 
   @Input() account: Account;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private accountService: AccountService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.phoneTypes = Utils.getPhoneTypes();
   }
 
@@ -133,13 +144,6 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   public onSubmit() {
-    Object.keys(this.finishProfileForm.value).forEach((key) => {
-      if (this.finishProfileForm.get(key)?.errors) {
-        console.log('Key: ' + key);
-        console.log(this.finishProfileForm.get(key)?.errors);
-      }
-    });
-
     this.finishProfileForm.updateValueAndValidity();
     if (this.finishProfileForm.invalid) {
       this.finishProfileForm.markAllAsTouched();
@@ -154,7 +158,17 @@ export class FinishAccountModalComponent implements OnInit {
 
       this.finishProfileForm.addControl('photoAWSKey', new FormControl(this.profileImgKey));
 
-      console.log(JSON.stringify(this.finishProfileForm.value));
+      this.accountService.completeProfile(this.finishProfileForm.value).subscribe(
+        (res) => {
+          this.router.navigate([`/respite`]);
+        },
+        (err) => {
+          this.toastService.show({
+            body: 'Error encountered while trying to complete your account.',
+            preset: ToastPresets.ERROR,
+          });
+        }
+      );
     }
   }
 

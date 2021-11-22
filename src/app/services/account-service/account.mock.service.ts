@@ -42,4 +42,8 @@ export class AccountMockService implements AccountService {
   getCurrentAccount(): Observable<Account> {
     return of(accounts[0]);
   }
+
+  completeProfile(params: any): Observable<any> {
+    return of({});
+  }
 }

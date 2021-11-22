@@ -46,4 +46,8 @@ export class AccountImplService implements AccountService {
   getCurrentAccount(): Observable<Account> {
     return this.http.get<Account>(`${environment.backendHost}/api/db/current-account`);
   }
+
+  completeProfile(params: any): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/complete`, JSON.stringify(params));
+  }
 }
