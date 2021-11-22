@@ -13,6 +13,7 @@ import { FinishAccountModalComponent } from './finish-account-modal/finish-accou
 import { DayAvailabilityInputComponent } from './day-availability-input/day-availability-input.component';
 import { AppModule } from '../app.module';
 import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const routes: Routes = [
   {
@@ -47,7 +48,7 @@ export const loginRouting = RouterModule.forChild(routes);
     DayAvailabilityInputComponent,
     ProfileImageUploadComponent,
   ],
-  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule],
+  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule, ImageCropperModule],
   exports: [],
 })
 export class LoginModule {}

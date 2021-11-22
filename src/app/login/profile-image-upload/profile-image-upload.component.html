@@ -2,6 +2,18 @@
   <div class="row p-3">
     <div class="col-sm-12 col-md-6">
       <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
+      <div *ngIf="imageChangedEvent != ''">
+        <image-cropper
+          [imageChangedEvent]="imageChangedEvent"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="1 / 1"
+          [format]="uploadedImageType"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
     </div>
     <div class="col-sm-12 col-md-6 mt-sm-3">
       <form [formGroup]="imageForm" (ngSubmit)="uploadImage()">
@@ -18,7 +30,7 @@
           formControlName="img"
           (change)="imageChanged($event)"
         />
-        <button type="submit" class="btn btn-primary text-white mt-4">Upload</button>
+        <button type="submit" class="btn btn-primary text-white mt-4" disabled>Upload</button>
       </form>
     </div>
   </div>

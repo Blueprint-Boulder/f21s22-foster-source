@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { ImageService } from '../../services/image-service/image.service';
 import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 import { FormBuilder } from '@angular/forms';
+import { ImageCroppedEvent, LoadedImage, OutputFormat } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-profile-image-upload',
@@ -14,6 +15,7 @@ export class ProfileImageUploadComponent implements OnInit {
 
   public image: File;
   public imageUrl = this.BLANK_PROFILE_URL;
+  public uploadedImageType: OutputFormat;
 
   @ViewChild('picFile')
   profilePhotoInput: ElementRef;
@@ -69,6 +71,7 @@ export class ProfileImageUploadComponent implements OnInit {
           .then((res: Dimensions) => {
             if (res.width > 250 && res.height > 250) {
               this.imageUrl = reader.result as string;
+              this.uploadedImageType = file['type'].split('/')[1];
             } else {
               this.resetWithError('Please upload an image that is at least 250x250px.');
               return;
@@ -80,6 +83,7 @@ export class ProfileImageUploadComponent implements OnInit {
           });
       };
     }
+    this.fileChangeEvent(event);
   }
 
   private static validateType(file: File): boolean {
@@ -107,6 +111,27 @@ export class ProfileImageUploadComponent implements OnInit {
       };
       img.src = dataURL;
     });
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    if (event.base64) {
+      this.imageUrl = event.base64;
+    }
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
 }
 
 export interface Dimensions {
