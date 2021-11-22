@@ -319,29 +319,6 @@
           />
         </div>
       </div>
-      <<<<<<< HEAD
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label class="mt-4" for="address2"><b>County</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 bottom-border-input"
-            id="county"
-            placeholder="Enter county"
-            formControlName="county"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('county')?.invalid &&
-              (createAccountForm.get('county')?.dirty || createAccountForm.get('county')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('county')?.errors?.required" class="input-error"
-              >Please enter your county.<br
-            /></small>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="row address-info-row">
       <div class="col-md-5">
