@@ -12,7 +12,7 @@ describe('FinishAccountModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FinishAccountModalComponent ],
-      imports: [ReactiveFormsModule, RouterTestingModule]
+      imports: [ReactiveFormsModule, RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   });
