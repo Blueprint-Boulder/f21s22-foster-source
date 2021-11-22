@@ -1,10 +1,13 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ImageService } from '../../services/image-service/image.service';
+import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-image-upload',
   templateUrl: './profile-image-upload.component.html',
   styleUrls: ['./profile-image-upload.component.scss'],
+  providers: [imageServiceProvider],
 })
 export class ProfileImageUploadComponent implements OnInit {
   public readonly BLANK_PROFILE_URL = 'assets/images/blank-profile-photo.jpg';
@@ -21,14 +24,21 @@ export class ProfileImageUploadComponent implements OnInit {
     img: [''],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private imageService: ImageService, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     return;
   }
 
   uploadImage(): void {
-    this.imageUploaded.emit('DUMMY_KEY');
+    this.imageService.uploadImage(this.profilePhotoInput.nativeElement.file).subscribe(
+      (res) => {
+        this.imageUploaded.emit(res);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   private resetWithError(error: string): void {

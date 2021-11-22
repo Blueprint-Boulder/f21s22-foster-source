@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account-service/account.service';
 import { Account } from '../../models/account.model';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-finish-account-page',
@@ -12,11 +14,19 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 export class FinishAccountPageComponent implements OnInit {
   public currentUser: Account;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.accountService.getCurrentAccount().subscribe((account: Account) => {
-      this.currentUser = account;
-    });
+    this.accountService.getCurrentAccount().subscribe(
+      (account: Account) => {
+        this.currentUser = account;
+      },
+      (err) => {
+        this.toastService.show({
+          body: 'Unable to fetch the current logged in user.',
+          preset: ToastPresets.ERROR,
+        });
+      }
+    );
   }
 }
