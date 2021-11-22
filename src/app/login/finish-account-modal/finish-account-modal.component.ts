@@ -132,7 +132,7 @@ export class FinishAccountModalComponent implements OnInit {
     });
   }
 
-  public secChange(event: Event) {
+  public secChange(event: Event): void {
     if ((event.target as any).value === 'true') {
       this.hasSecondaryAccountHolder = true;
       this.makeSecFieldsRequired();
@@ -144,7 +144,7 @@ export class FinishAccountModalComponent implements OnInit {
     }
   }
 
-  public respiteProvideChange(event: Event) {
+  public respiteProvideChange(event: Event): void {
     if ((event.target as any).value === 'true') {
       this.canProvideRespiteCare = true;
       this.makeRespiteFieldsRequired();
@@ -182,6 +182,7 @@ export class FinishAccountModalComponent implements OnInit {
     const err = { invalidDate: 'Please enter a valid phone date.' };
 
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const parsed = FinishAccountModalComponent.parseDateFromInput(control.value as string);
       const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
       const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
@@ -209,14 +210,6 @@ export class FinishAccountModalComponent implements OnInit {
     if (this.finishProfileForm.invalid) {
       this.finishProfileForm.markAllAsTouched();
       alert('Please complete all required fields (indicated with a red star).');
-      const invalid = [];
-      const controls = this.finishProfileForm.controls;
-      for (const name in controls) {
-        if (controls[name].invalid) {
-          invalid.push(name);
-        }
-      }
-      console.log(invalid);
     } else if (this.profileImgKey.length < 1) {
       this.needToUploadImgError = true;
       alert('Please complete all required fields (indicated with a red star).');
@@ -225,7 +218,7 @@ export class FinishAccountModalComponent implements OnInit {
     }
   }
 
-  public imageUploaded(event: any) {
+  public imageUploaded(event: any): void {
     this.profileImgKey = event;
   }
 }
