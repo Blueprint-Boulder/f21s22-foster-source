@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   backendHost: 'localhost:3000',
   useRealAnnouncementService: false,
-  useRealAccountService: true,
+  useRealAccountService: false,
   useRealProfileService: false,
   useRealAddressService: false,
   useRealAvailabilityService: false,

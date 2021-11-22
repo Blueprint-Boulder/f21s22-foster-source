@@ -168,12 +168,14 @@ export class CreateAccountModalComponent implements OnInit {
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
         primaryPhone: {
-          phoneNumber: this.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
+          phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
           type: this.createAccountForm.get('primaryType')!.value,
         },
         secondaryPhone: this.createAccountForm.get('secondaryType')?.value
           ? {
-              phoneNumber: this.formatPhoneNumber(this.createAccountForm.get('secondaryPhone')!.value),
+              phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
+                this.createAccountForm.get('secondaryPhone')!.value
+              ),
               type: this.createAccountForm.get('secondaryType')!.value,
             }
           : undefined,
@@ -227,7 +229,7 @@ export class CreateAccountModalComponent implements OnInit {
     return types;
   }
 
-  private formatPhoneNumber(num: string): string {
+  private static formatPhoneNumber(num: string): string {
     const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     const parsed = phoneUtil.parse(num, 'US');
     return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
