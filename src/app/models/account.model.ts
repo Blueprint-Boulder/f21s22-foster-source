@@ -26,10 +26,10 @@ export interface CreateAccountRequest {
   password: string;
   firstName: string;
   lastName: string;
-  dob: Date;
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  certifiedBy: string;
   primaryPhone: PhoneNumber;
   secondaryPhone?: PhoneNumber;
   address: SimpleAddress;

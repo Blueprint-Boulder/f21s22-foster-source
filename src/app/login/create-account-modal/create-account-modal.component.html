@@ -319,28 +319,6 @@
           />
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="form-group">
-          <label class="mt-4" for="address2"><b>County</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 bottom-border-input"
-            id="county"
-            placeholder="Enter county"
-            formControlName="county"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('county')?.invalid &&
-              (createAccountForm.get('county')?.dirty || createAccountForm.get('county')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('county')?.errors?.required" class="input-error"
-              >Please enter your county.<br
-            /></small>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="row address-info-row">
       <div class="col-md-5">
@@ -369,14 +347,17 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="state"><b>State</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="text"
+          <select
+            class="m-3 form-select"
+            name="state"
             id="state"
-            placeholder="Enter State"
             formControlName="state"
-            required
-          />
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option *ngFor="let s of STATES" [value]="s">
+              {{ s }}
+            </option>
+          </select>
           <div
             *ngIf="
               createAccountForm.get('state')?.invalid &&
@@ -384,7 +365,7 @@
             "
           >
             <small *ngIf="createAccountForm.get('state')?.errors?.required" class="input-error"
-              >Please enter a state.<br
+              >Please choose a state.<br
             /></small>
           </div>
         </div>
@@ -412,36 +393,6 @@
             /></small>
             <small *ngIf="createAccountForm.get('zip')?.errors?.pattern" class="input-error"
               >Please enter a valid zip code.<br
-            /></small>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <div class="form-group">
-          <label class="mt-4" for="dob"><b>Date of Birth</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="dob"
-            placeholder="MM/DD/YYYY"
-            formControlName="dob"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('dob')?.invalid &&
-              (createAccountForm.get('dob')?.dirty || createAccountForm.get('dob')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('dob')?.errors?.required" class="input-error"
-              >Please enter date of birth.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('dob')?.errors?.pattern" class="input-error"
-              >Please enter date in format MM/DD/YYYY.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('dob')?.errors?.invalidDate" class="input-error"
-              >Please enter a valid date.<br
             /></small>
           </div>
         </div>
@@ -548,6 +499,32 @@
             /></small>
             <small *ngIf="createAccountForm.get('caseworkerphone')?.errors?.invalidPhone" class="input-error"
               >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="address2"
+            ><b>County or Child Placement Agency Certified With</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="certifiedBy"
+            placeholder="Enter county or child placement agency"
+            formControlName="certifiedBy"
+            required
+          />
+          <div
+            *ngIf="
+              createAccountForm.get('certifiedBy')?.invalid &&
+              (createAccountForm.get('certifiedBy')?.dirty || createAccountForm.get('certifiedBy')?.touched)
+            "
+          >
+            <small *ngIf="createAccountForm.get('certifiedBy')?.errors?.required" class="input-error"
+              >Please enter the county or child placement agency you are certified by.<br
             /></small>
           </div>
         </div>

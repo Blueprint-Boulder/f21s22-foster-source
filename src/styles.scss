@@ -29,4 +29,13 @@ $theme-colors: (
   "secondary": #49306b,
 );
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", Helvetica, Arial, Lucida, sans-serif;
+}
+
 @import "node_modules/bootstrap/scss/bootstrap";

@@ -47,7 +47,6 @@ export const simpleAddresses: SimpleAddress[] = [
     city: 'Denver',
     zip: '80210',
     state: 'CO',
-    county: 'Arapahoe County',
   },
 ];
 
@@ -57,7 +56,6 @@ export const addresses: Address[] = [
     city: 'Denver',
     zip: '80210',
     state: 'CO',
-    county: 'Arapahoe',
     lat: '1',
     lon: '1',
   },
@@ -70,10 +68,10 @@ export const createAccountRequests: CreateAccountRequest[] = [
     password: 'hashedpassword',
     firstName: 'Jett',
     lastName: 'Crowman',
-    dob: new Date(),
     cwFirstName: 'George',
     cwLastName: 'Clooney',
     cwEmail: 'gCloon@aol.com',
+    certifiedBy: 'Araphaoe',
     primaryPhone: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
@@ -123,7 +121,6 @@ export const accounts: Account[] = [
       city: 'Denver',
       zip: '80210',
       state: 'CO',
-      county: 'Arapahoe',
       lat: '1',
       lon: '1',
     },
@@ -270,7 +267,6 @@ export const profiles: Profile[] = [
       city: 'Denver',
       zip: '80210',
       state: 'CO',
-      county: 'Arapahoe',
       lat: '1',
       lon: '1',
     },
