@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ImageService } from '../../services/image-service/image.service';
+import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 
 @Component({
   selector: 'app-profile-image-upload',
   templateUrl: './profile-image-upload.component.html',
   styleUrls: ['./profile-image-upload.component.scss'],
+  providers: [imageServiceProvider],
 })
 export class ProfileImageUploadComponent implements OnInit {
   public readonly BLANK_PROFILE_URL = 'assets/images/blank-profile-photo.jpg';
@@ -14,12 +17,21 @@ export class ProfileImageUploadComponent implements OnInit {
   @ViewChild('picFile')
   profilePhotoInput: ElementRef;
 
+  constructor(private imageService: ImageService) {}
+
   ngOnInit(): void {
     return;
   }
 
   uploadImage(): void {
-    return;
+    this.imageService.uploadImage(this.profilePhotoInput.nativeElement.file).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
   }
 
   imageChanged(event: Event): void {

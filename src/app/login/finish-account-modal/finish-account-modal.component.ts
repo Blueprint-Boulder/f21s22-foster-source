@@ -127,7 +127,6 @@ export class FinishAccountModalComponent implements OnInit {
       additionalInfo: [null],
       dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
     });
-    console.log(this.dayModels);
   }
 
   public secChange(event: Event) {
