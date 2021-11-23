@@ -1,26 +1,197 @@
 <p>Sample User Page</p>
 <!-- Page Data -->
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6 col-md-3">
-      <div class="card border-light" style="width: 18rem">
-        <img
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+<!-- ngIf="mock_account" -->
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="card border-0">
+          <img
+            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            class="rounded"
+            alt="profile picture"
+          />
+          <div class="card-body">
+            <h2 class="card-title text-center">
+              {{ Account[0].firstName }} {{ Account[0].lastName }}
+            </h2>
+            <p class="card-text">
+              <b>Distance:</b> {{ Account[0].distance }} miles
+            </p>
+            <h5 class="card-text">
+              <b><ins>Primary Contact</ins></b>
+            </h5>
+            <p class="card-text">
+              Name: {{ Account[0].firstName }} {{ Account[0].lastName }}
+            </p>
+            <p class="card-text">Pronouns: {{ Account[0].pronouns }}</p>
+            <h5 class="card-text">
+              <b><ins>Secondary Contact</ins></b>
+            </h5>
+            <p class="card-text">Name: Jet Crowman, the Legend</p>
+            <p class="card-text">Pronouns: {{ Account[0].pronouns }}</p>
+            <p class="card-text">
+              <b>State: {{ Account[0].address.state }}</b>
+            </p>
+            <p class="card-text">
+              <b>Zip: {{ Account[0].address.zip }}</b>
+            </p>
+          </div>
         </div>
       </div>
+
+      <!-- Bigraphy -->
+      <div class="col-sm-6"></div>
+
+      <!-- Availability Schedule -->
+      <div class="col-md-3 availability-table">
+        <div class="row px-3">
+          <div class="col-sm-12">
+            <h5 class="day">Monday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Tuesday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Wednesday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Thursday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Friday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Saturday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <h5 class="day">Sunday</h5>
+            <hr class="line" />
+            <div class="row Times">
+              <div class="col-md-6">
+                <p class="text">Morning</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Afternoon</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Evening</p>
+              </div>
+              <div class="col-md-6">
+                <p class="text">Overnight</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 px-3">
+            <button type="button" class="btn btn-primary btn-lg btn-block">
+              Contact
+            </button>
+          </div>
+
+          <!-- <div class="col-md-6">Two</div>
+          <div class="col-md-6">Three</div>
+          <div class="col-md-6">Four</div>
+          <div class="col-md-6">Five</div>
+          <div class="col-md-6">Six</div>
+          <div class="col-md-6">Seven</div>
+          <div class="col-md-6">Eight</div> -->
+        </div>
+      </div>
+      <!-- Availability Schedule -->
     </div>
-    <!-- Bigraphy -->
-    <div class="col-sm-6"></div>
-    <!-- Availability Schedule -->
-    <div class="col-md-3"></div>
   </div>
 </div>
-<!-- src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" -->
+
+<!-- Day -->
+<!-- Two Times -->
+<!-- End of Days -->

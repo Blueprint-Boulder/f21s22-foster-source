@@ -1,0 +1,12 @@
+.availability-table {
+  background-color: #fef4e8;
+}
+
+hr.line {
+  border: 1px solid black;
+  margin-top: 0px;
+}
+
+h5.day {
+  text-align: center;
+}

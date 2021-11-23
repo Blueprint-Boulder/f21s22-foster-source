@@ -12,6 +12,8 @@ export interface Account {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  distance: number;
+  pronouns: string;
   primaryPhone: PhoneNumber;
   secondaryPhone?: PhoneNumber;
   lastLogin: Date;
