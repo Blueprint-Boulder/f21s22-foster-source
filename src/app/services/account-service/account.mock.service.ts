@@ -10,8 +10,8 @@ import { Observable, of } from 'rxjs';
 import {
   accounts,
   applicants,
-  cookies,
   createAccountRequests,
+  tokenString,
 } from '../../mock/database-entities';
 import {
   ApproveApplicantRequest,
@@ -34,8 +34,8 @@ export class AccountMockService implements AccountService {
     return of({});
   }
 
-  login(params: LoginRequest): Observable<Cookie> {
-    return of(cookies[0]);
+  login(params: LoginRequest): Observable<string> {
+    return of(tokenString);
   }
 
   updateAccount(params: UpdateAccountReq): Observable<Account> {

@@ -22,7 +22,7 @@ export abstract class AccountService {
   public abstract createAccount(
     accountReq: CreateAccountRequest
   ): Observable<CreateAccountRequest>;
-  public abstract login(params: LoginRequest): Observable<Cookie>;
+  public abstract login(params: LoginRequest): Observable<string>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(): Observable<any>;
   public abstract deleteAccount(id: number): Observable<any>;

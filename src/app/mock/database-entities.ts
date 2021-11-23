@@ -98,6 +98,8 @@ export const cookies: Cookie[] = [
   },
 ];
 
+export const tokenString = `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NywicHJpdmlsZWdlTGV2ZWwiOiIzIiwiaWF0IjoxNjM2OTMyNDQzLCJleHAiOjE2Mzc5OTg4OTN9.Qgl84ZWtv9P6u14DTxoZ8lwspcyV3tR4RrMmqX63XTQ`;
+
 export const accounts: Account[] = [
   {
     id: 1,

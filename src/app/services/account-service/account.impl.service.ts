@@ -2,7 +2,6 @@ import { AccountService } from './account.service';
 import { HttpClient } from '@angular/common/http';
 import {
   Account,
-  Cookie,
   CreateAccountRequest,
   LoginRequest,
   UpdateAccountReq,
@@ -39,8 +38,8 @@ export class AccountImplService implements AccountService {
     );
   }
 
-  login(params: LoginRequest): Observable<Cookie> {
-    return this.http.post<Cookie>(
+  login(params: LoginRequest): Observable<string> {
+    return this.http.post<string>(
       `${environment.backendHost}/api/db/accounts/login`,
       JSON.stringify(params)
     );
