@@ -387,6 +387,32 @@
             </div>
           </div>
         </div>
+        <div class="row sec-relation-row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="relationshipToPrimary"
+                ><b>Relationship to Primary Account Holder</b><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="relationshipToPrimary"
+                placeholder="Enter relationship"
+                formControlName="relationshipToPrimary"
+              />
+              <div
+                *ngIf="
+                  finishProfileForm.get('relationshipToPrimary')?.invalid &&
+                  (finishProfileForm.get('relationshipToPrimary')?.dirty ||
+                    finishProfileForm.get('relationshipToPrimary')?.touched)
+                "
+              >
+                <small *ngIf="finishProfileForm.get('relationshipToPrimary')?.errors?.required" class="input-error"
+                  >Please enter your relation to the secondary account holder.</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row respite-background-title-row my-3">
@@ -871,31 +897,6 @@
             id="vehicleAccessNo"
           />
           <label class="form-check-label" for="vehicleAccessNo"> No </label>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <h6>Are you a member of the LGBTQIA+ community?</h6>
-        <div class="form-check m-2">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="isLGBT"
-            formControlName="isLGBT"
-            value="true"
-            id="isLGBTYes"
-          />
-          <label class="form-check-label" for="isLGBTYes"> Yes </label>
-        </div>
-        <div class="form-check m-2">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="isLGBT"
-            formControlName="isLGBT"
-            value="false"
-            id="isLGBTNo"
-          />
-          <label class="form-check-label" for="isLGBTNo"> No </label>
         </div>
       </div>
       <div class="col-sm-12">

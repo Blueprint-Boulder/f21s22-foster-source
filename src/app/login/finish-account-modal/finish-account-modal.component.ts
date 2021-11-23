@@ -34,6 +34,7 @@ export class FinishAccountModalComponent implements OnInit {
     'secPhoneType',
     'secGender',
     'secPreferredName',
+    'relationshipToPrimary',
   ];
 
   public dayModels: DayModel[] = [
@@ -116,6 +117,7 @@ export class FinishAccountModalComponent implements OnInit {
       secPronouns: [null],
       secGender: [null],
       secMaritalStatus: [null],
+      relationshipToPrimary: [null],
       fosterYears: [null, Validators.compose([Validators.required])],
       totalChildren: [null, Validators.compose([Validators.required])],
       canProvideRespite: [null, Validators.required],
@@ -132,7 +134,6 @@ export class FinishAccountModalComponent implements OnInit {
       childrenInfo: [null, Validators.required],
       petInfo: [null],
       vehicleAccess: [null],
-      isLGBT: [null],
       caredForLGBT: [null],
       caredForPhysicallyDisabled: [null],
       caredForIntellectuallyDisabled: [null],
@@ -157,6 +158,8 @@ export class FinishAccountModalComponent implements OnInit {
       }
 
       this.finishProfileForm.addControl('photoAWSKey', new FormControl(this.profileImgKey));
+
+      console.log(JSON.stringify(this.finishProfileForm.value));
 
       this.accountService.completeProfile(this.finishProfileForm.value).subscribe(
         (res) => {
