@@ -5,6 +5,9 @@ You must also input data in the phone_number table before you input data in the 
 When you delete an account, you must also delete the data in the phone number table associated with that account that got deleted.
 */
 
+
+
+
 -- phone_number
 INSERT INTO phone_number (phone_number, type) VALUES ('211','MOBILE');
 INSERT INTO phone_number (phone_number, type) VALUES ('206','MOBILE');
