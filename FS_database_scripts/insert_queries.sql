@@ -1,6 +1,8 @@
 /* IMPORTANT NOTES
 Must create phone_number prior to any other table.
 You must also input data in the phone_number table before you input data in the account table.
+
+When you delete an account, you must also delete the data in the phone number table associated with that account that got deleted.
 */
 
 -- phone_number
