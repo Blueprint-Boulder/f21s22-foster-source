@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RespiteSearchPageComponent } from './respite-search-page/respite-search-page.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SearchAndFilterComponent } from './search-and-filter/search-and-filter.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FilterPanelComponent } from './filter-panel/filter-panel.component';
@@ -25,7 +24,6 @@ export const respiteRouting = RouterModule.forChild(routes);
 @NgModule({
   declarations: [
     RespiteSearchPageComponent,
-    SearchAndFilterComponent,
     SearchResultsComponent,
     SearchBarComponent,
     FilterPanelComponent,

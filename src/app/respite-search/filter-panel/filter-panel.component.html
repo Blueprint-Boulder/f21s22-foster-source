@@ -1,4 +1,8 @@
-<div class="black-overlay" [ngClass]="{ hidden: hidden }"></div>
+<div
+  class="black-overlay"
+  [ngClass]="{ hidden: hidden }"
+  (click)="closePanel.emit()"
+></div>
 <div
   class="
     d-flex
