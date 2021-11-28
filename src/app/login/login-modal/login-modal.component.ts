@@ -5,6 +5,9 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 import { AuthService } from '../../services/auth-service/auth.service';
 import { LoginRequest } from 'src/app/models/account.model';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-modal',
@@ -23,7 +26,9 @@ export class LoginModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,14 +39,22 @@ export class LoginModalComponent implements OnInit {
       this.loginForm.markAllAsTouched();
     } else {
       const data: LoginRequest = {
-        //Typescript was complaining about abstract control typing
-        username: String(this.loginForm.controls.username),
-        password: String(this.loginForm.controls.password),
+        username: this.loginForm.get('username')!.value,
+        password: this.loginForm.get('password')!.value,
       };
-      this.accountService.login(data).subscribe((res: string) => {
-        this.cookieService.set('access-token', res);
-        this.authService.init();
-      });
+      this.accountService.login(data).subscribe(
+        (res: string) => {
+          this.cookieService.set('access-token', res);
+          this.authService.init();
+          this.router.navigate(['/respite']);
+        },
+        (err) => {
+          this.toastService.show({
+            body: 'Something went wrong when trying to login.',
+            preset: ToastPresets.ERROR,
+          });
+        }
+      );
     }
   }
 }
