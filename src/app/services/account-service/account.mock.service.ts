@@ -1,28 +1,11 @@
 import { AccountService } from './account.service';
-import {
-  Account,
-  Cookie,
-  CreateAccountRequest,
-  LoginRequest,
-  UpdateAccountReq,
-} from '../../models/account.model';
+import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
 import { Observable, of } from 'rxjs';
-import {
-  accounts,
-  applicants,
-  cookies,
-  createAccountRequests,
-} from '../../mock/database-entities';
-import {
-  ApproveApplicantRequest,
-  DenyApplicantRequest,
-  GetApplicantsRes,
-} from '../../models/applicant.model';
+import { accounts, applicants, cookies, createAccountRequests } from '../../mock/database-entities';
+import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 
 export class AccountMockService implements AccountService {
-  createAccount(
-    accountReq: CreateAccountRequest
-  ): Observable<CreateAccountRequest> {
+  createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
     return of(createAccountRequests[0]);
   }
 
@@ -53,6 +36,14 @@ export class AccountMockService implements AccountService {
   }
 
   denyApplicant(params: DenyApplicantRequest): Observable<any> {
+    return of({});
+  }
+
+  getCurrentAccount(): Observable<Account> {
+    return of(accounts[0]);
+  }
+
+  completeProfile(params: any): Observable<any> {
     return of({});
   }
 }

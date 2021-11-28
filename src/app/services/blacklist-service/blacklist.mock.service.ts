@@ -1,9 +1,6 @@
 import { BlacklistService } from './blacklist.service';
 import { Observable, of } from 'rxjs';
-import {
-  BlacklistedUser,
-  GetBlacklistedUsersRes,
-} from '../../models/blacklisted-user.model';
+import { BlacklistedUser, GetBlacklistedUsersRes } from '../../models/blacklisted-user.model';
 import { blacklist } from '../../mock/database-entities';
 
 export class BlacklistMockService implements BlacklistService {

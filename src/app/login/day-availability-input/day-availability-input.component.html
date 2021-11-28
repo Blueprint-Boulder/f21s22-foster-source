@@ -1,0 +1,51 @@
+<div *ngIf="dayModel">
+  <div class="row border-bottom mr-3 ml-1 my-2">
+    <h6>{{ dayModel.name }}</h6>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="morningCheck{{ dayModel.name }}"
+          [(ngModel)]="dayModel.morning"
+        />
+        <label class="form-check-label" for="morningCheck{{ dayModel.name }}"> Morning </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="afternoonCheck{{ dayModel.name }}"
+          [(ngModel)]="dayModel.afternoon"
+        />
+        <label class="form-check-label" for="afternoonCheck{{ dayModel.name }}"> Afternoon </label>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="eveningCheck{{ dayModel.name }}"
+          [(ngModel)]="dayModel.evening"
+        />
+        <label class="form-check-label" for="eveningCheck{{ dayModel.name }}"> Evening </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="overnightCheck{{ dayModel.name }}"
+          [(ngModel)]="dayModel.overnight"
+        />
+        <label class="form-check-label" for="overnightCheck{{ dayModel.name }}"> Overnight </label>
+      </div>
+    </div>
+  </div>
+</div>

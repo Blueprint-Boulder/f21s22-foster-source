@@ -1,11 +1,7 @@
 <div class="container comp bg-white">
   <ul class="nav nav-tabs mt-5 border-bottom-0 mb-3">
     <li class="nav-item">
-      <a
-        class="nav-link"
-        [ngClass]="{ active: router.url === '/admin' }"
-        aria-current="page"
-        [routerLink]="'/admin'"
+      <a class="nav-link" [ngClass]="{ active: router.url === '/admin' }" aria-current="page" [routerLink]="'/admin'"
         >Applications</a
       >
     </li>
@@ -18,18 +14,12 @@
       >
     </li>
     <li class="nav-item">
-      <a
-        class="nav-link"
-        [ngClass]="{ active: router.url === '/admin/blacklist' }"
-        [routerLink]="'/admin/blacklist'"
+      <a class="nav-link" [ngClass]="{ active: router.url === '/admin/blacklist' }" [routerLink]="'/admin/blacklist'"
         >Blacklist</a
       >
     </li>
     <li class="nav-item">
-      <a
-        class="nav-link disabled"
-        [ngClass]="{ active: router.url === '/admin/bugs' }"
-        [routerLink]="'/admin/bugs'"
+      <a class="nav-link disabled" [ngClass]="{ active: router.url === '/admin/bugs' }" [routerLink]="'/admin/bugs'"
         >Bug Reports</a
       >
     </li>
