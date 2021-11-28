@@ -13,8 +13,11 @@ export const environment = {
   useRealBlacklistService: false,
   useRealPhoneNumberService: false,
   useRealProfilePhotosService: false,
+<<<<<<< HEAD
   useRealAuthService: false,
+=======
   useRealImageService: false,
+>>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
 };
 
 /*
