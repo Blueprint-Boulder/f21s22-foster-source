@@ -1,0 +1,82 @@
+<div class="black-overlay" [ngClass]="{ hidden: hidden }"></div>
+<div
+  class="
+    d-flex
+    flex-column flex-shrink-0
+    p-3
+    bg-light
+    sidepanel
+    shadow-lg
+    min-w-50
+  "
+  [ngClass]="{ hidden: hidden }"
+>
+  <!--  <div class="closer bg-light-grey mr-4">-->
+  <!--    <a href="javascript:void(0);" (click)="closePanel.emit()"><b>X</b></a>-->
+  <!--  </div>-->
+  <div class="panel-container container-fluid">
+    <div class="filters">
+      <div class="row mt-3">
+        <div class="col">
+          <h5><b>Refine Your Search</b></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="distance-slider">
+            <p>Distance</p>
+            <ngx-slider
+              [(value)]="distanceValue"
+              [options]="distanceSliderOptions"
+            ></ngx-slider>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <div class="distance-slider mt-3">
+            <p>Can Care for Kids in Age Range</p>
+            <ngx-slider
+              [(value)]="minAgeValue"
+              [(highValue)]="maxAgeValue"
+              [options]="ageRangeSliderOptions"
+            ></ngx-slider>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <label for="maxKids" class="col-sm-12 col-md-7 col-form-label"
+          >Number of Kids Able To Care For</label
+        >
+        <div class="col-sm-12 col-md-5">
+          <input
+            type="number"
+            class="form-control"
+            id="maxKids"
+            placeholder="# kids"
+            [(ngModel)]="maxKids"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <app-availability-filters
+          [availabilityModel]="availabilityModel"
+        ></app-availability-filters>
+      </div>
+      <div class="row mt-5">
+        <app-household-background-filters
+          [radioModel]="householdRadios"
+        ></app-household-background-filters>
+      </div>
+    </div>
+
+    <div class="panel-footer pr-3">
+      <button class="btn btn-light mb-2 w-100" (click)="closePanel.emit()">
+        Cancel
+      </button>
+      <button class="btn btn-primary text-white w-100" (click)="filterSubmit()">
+        Filter
+      </button>
+    </div>
+  </div>
+</div>

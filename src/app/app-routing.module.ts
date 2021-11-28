@@ -21,6 +21,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'respite',
+    loadChildren: () =>
+      import('./respite-search/respite-search.module').then(
+        (m) => m.RespiteSearchModule
+      ),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },
