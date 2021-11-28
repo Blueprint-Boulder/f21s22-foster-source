@@ -16,13 +16,10 @@
             <div
               *ngIf="
                 loginForm.get('username')?.invalid &&
-                (loginForm.get('username')?.dirty ||
-                  loginForm.get('username')?.touched)
+                (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)
               "
             >
-              <small
-                *ngIf="loginForm.get('username')?.errors?.required"
-                class="input-error"
+              <small *ngIf="loginForm.get('username')?.errors?.required" class="input-error"
                 >Please enter username.<br
               /></small>
             </div>
@@ -41,36 +38,23 @@
             <div
               *ngIf="
                 loginForm.get('password')?.invalid &&
-                (loginForm.get('password')?.dirty ||
-                  loginForm.get('password')?.touched)
+                (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)
               "
             >
-              <small
-                *ngIf="loginForm.get('password')?.errors?.required"
-                class="input-error"
+              <small *ngIf="loginForm.get('password')?.errors?.required" class="input-error"
                 >Please enter password.<br
               /></small>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary w-100 p-2 mt-1 mb-2">
-            Login
-          </button>
+          <button type="submit" class="btn btn-primary w-100 p-2 mt-1 mb-2">Login</button>
           <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="remember"
-              formControlName="remember"
-              checked
-            />
+            <input class="form-check-input" type="checkbox" value="" id="remember" formControlName="remember" checked />
             <label class="form-check-label" for="remember"> Remember me </label>
           </div>
         </form>
         <div class="container">
           <span class="psw p-2 float-right"
-            >Don't have an account?
-            <a [routerLink]="['/login/create-account']">Sign up here</a></span
+            >Don't have an account? <a [routerLink]="['/login/create-account']">Sign up here</a></span
           >
         </div>
       </div>

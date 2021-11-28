@@ -1,11 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import * as libphonenumber from 'google-libphonenumber';
 import { AccountService } from '../../services/account-service/account.service';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
@@ -104,84 +98,49 @@ export class CreateAccountModalComponent implements OnInit {
       lname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       confirmEmail: ['', Validators.required],
-      primaryPhone: [
-        '',
-        Validators.compose([
-          Validators.required,
-          CreateAccountModalComponent.validatePhoneNumber,
-        ]),
-      ],
+      primaryPhone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
       primaryType: ['', Validators.required],
       secondaryPhone: '',
       secondaryType: '',
       address: ['', Validators.required],
       address2: '',
       city: ['', Validators.required],
-      zip: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/),
-        ]),
-      ],
+      zip: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/)])],
       state: ['', Validators.required],
       certifiedBy: ['', Validators.required],
       caseworkerfname: ['', Validators.required],
       caseworkerlname: ['', Validators.required],
-      caseworkeremail: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      caseworkerphone: [
-        '',
-        Validators.compose([
-          Validators.required,
-          CreateAccountModalComponent.validatePhoneNumber,
-        ]),
-      ],
+      caseworkeremail: ['', Validators.compose([Validators.required, Validators.email])],
+      caseworkerphone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
       user: [
         '',
         Validators.compose([
           Validators.required,
           Validators.maxLength(20),
           Validators.minLength(4),
-          Validators.pattern(
-            /^(?=[a-zA-Z0-9._]{0,100}$)(?!.*[_.]{2})[^_.].*[^_.]$/
-          ),
+          Validators.pattern(/^(?=[a-zA-Z0-9._]{0,100}$)(?!.*[_.]{2})[^_.].*[^_.]$/),
         ]),
       ],
-      password: [
-        '',
-        Validators.compose([Validators.required, Validators.minLength(8)]),
-      ],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmpassword: ['', Validators.compose([Validators.required])],
     });
     this.createAccountForm.setValidators([
       CreateAccountModalComponent.confirmEmailValidator,
       CreateAccountModalComponent.confirmPasswordValidator,
     ]);
-    this.createAccountForm
-      .get('secondaryPhone')
-      ?.valueChanges.subscribe((secondaryPhone: string) => {
-        if (secondaryPhone === '' || secondaryPhone === null) {
-          this.createAccountForm.get('secondaryPhone')?.setValidators([]);
-          this.createAccountForm.get('secondaryType')?.setValidators([]);
-        } else {
-          this.createAccountForm
-            .get('secondaryPhone')
-            ?.setValidators([CreateAccountModalComponent.validatePhoneNumber]);
-          this.createAccountForm
-            .get('secondaryType')
-            ?.setValidators([Validators.required]);
-        }
-        this.createAccountForm
-          .get('secondaryPhone')
-          ?.updateValueAndValidity({ emitEvent: false });
-        this.createAccountForm
-          .get('secondaryType')
-          ?.updateValueAndValidity({ emitEvent: false });
-      });
+    this.createAccountForm.get('secondaryPhone')?.valueChanges.subscribe((secondaryPhone: string) => {
+      if (secondaryPhone === '' || secondaryPhone === null) {
+        this.createAccountForm.get('secondaryPhone')?.setValidators([]);
+        this.createAccountForm.get('secondaryType')?.setValidators([]);
+      } else {
+        this.createAccountForm.get('secondaryPhone')?.setValidators([CreateAccountModalComponent.validatePhoneNumber]);
+        this.createAccountForm.get('secondaryType')?.setValidators([Validators.required]);
+      }
+      this.createAccountForm.get('secondaryPhone')?.updateValueAndValidity({ emitEvent: false });
+      this.createAccountForm.get('secondaryType')?.updateValueAndValidity({ emitEvent: false });
+    });
   }
+
   public createAccountSubmit(): void {
     if (this.createAccountForm.invalid) {
       console.log(this.createAccountForm.invalid);
@@ -209,14 +168,12 @@ export class CreateAccountModalComponent implements OnInit {
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
         primaryPhone: {
-          phoneNumber: this.formatPhoneNumber(
-            this.createAccountForm.get('primaryPhone')!.value
-          ),
+          phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
           type: this.createAccountForm.get('primaryType')!.value,
         },
         secondaryPhone: this.createAccountForm.get('secondaryType')?.value
           ? {
-              phoneNumber: this.formatPhoneNumber(
+              phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
                 this.createAccountForm.get('secondaryPhone')!.value
               ),
               type: this.createAccountForm.get('secondaryType')!.value,
@@ -241,32 +198,23 @@ export class CreateAccountModalComponent implements OnInit {
     }
   }
 
-  private static confirmEmailValidator(
-    control: AbstractControl
-  ): ValidationErrors | null {
+  private static confirmEmailValidator(control: AbstractControl): ValidationErrors | null {
     return control.get('confirmEmail')?.value === control.get('email')?.value
       ? null
       : { emailMatch: 'Emails do not match.' };
   }
-  private static confirmPasswordValidator(
-    control: AbstractControl
-  ): ValidationErrors | null {
-    return control.get('confirmpassword')?.value ===
-      control.get('password')?.value
+
+  private static confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
+    return control.get('confirmpassword')?.value === control.get('password')?.value
       ? null
       : { passwordMatch: 'Passwords do not match.' };
   }
 
-  private static validatePhoneNumber(
-    control: AbstractControl
-  ): ValidationErrors | null {
+  private static validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
     const err = { invalidPhone: 'Please enter a valid phone number.' };
     const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     try {
-      const number = phoneUtil.parseAndKeepRawInput(
-        control.value ? control.value : '',
-        'US'
-      );
+      const number = phoneUtil.parseAndKeepRawInput(control.value ? control.value : '', 'US');
       const valid = phoneUtil.isValidNumber(number);
       return valid ? null : err;
     } catch (e) {
@@ -282,7 +230,7 @@ export class CreateAccountModalComponent implements OnInit {
     return types;
   }
 
-  private formatPhoneNumber(num: string): string {
+  private static formatPhoneNumber(num: string): string {
     const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
     const parsed = phoneUtil.parse(num, 'US');
     return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);

@@ -1,14 +1,9 @@
 <div class="table-container">
   <div *ngFor="let blacklistedUser of blacklist; index as i">
-    <div
-      class="row fs-tan-background user-row p-4"
-      [ngClass]="{ 'mt-4': i != 0 }"
-    >
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
       <div class="col-sm-8 m-auto">
         <span
-          ><b
-            >{{ blacklistedUser.firstName }} {{ blacklistedUser.lastName }}</b
-          ></span
+          ><b>{{ blacklistedUser.firstName }} {{ blacklistedUser.lastName }}</b></span
         ><br />
         <span>{{ blacklistedUser.email }}</span
         ><br />
@@ -22,17 +17,11 @@
           ><br />
         </div>
         <small
-          ><i
-            >Banned on {{ getFormattedDateForUser(i) }} by
-            {{ blacklistedUser.bannedBy }}</i
-          ></small
+          ><i>Banned on {{ getFormattedDateForUser(i) }} by {{ blacklistedUser.bannedBy }}</i></small
         >
       </div>
       <div class="col-xs-12 col-sm-4 m-auto">
-        <button
-          (click)="removeFromBlacklist(i)"
-          class="btn btn-primary mr-5 text-white w-100 my-2"
-        >
+        <button (click)="removeFromBlacklist(i)" class="btn btn-primary mr-5 text-white w-100 my-2">
           Remove From Blacklist
         </button>
       </div>

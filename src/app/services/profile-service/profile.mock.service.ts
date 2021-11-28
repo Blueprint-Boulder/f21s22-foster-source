@@ -1,10 +1,5 @@
 import { ProfileService } from './profile.service';
-import {
-  CreateProfileReq,
-  GetProfilesRes,
-  Profile,
-  UpdateProfileReq,
-} from '../../models/profile.model';
+import { CreateProfileReq, GetProfilesRes, Profile, UpdateProfileReq } from '../../models/profile.model';
 import { Observable, of } from 'rxjs';
 import { profiles } from '../../mock/database-entities';
 

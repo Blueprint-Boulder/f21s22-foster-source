@@ -1,7 +1,4 @@
-import {
-  Announcement,
-  GetAnnouncementsRes,
-} from '../models/announcement.model';
+import { Announcement, GetAnnouncementsRes } from '../models/announcement.model';
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
@@ -42,9 +39,7 @@ const announcements: Announcement[] = [
   },
 ];
 
-const getAnnouncementResponses: GetAnnouncementsRes[] = [
-  { announcements: announcements },
-];
+const getAnnouncementResponses: GetAnnouncementsRes[] = [{ announcements: announcements }];
 
 export const simpleAddresses: SimpleAddress[] = [
   {
@@ -108,10 +103,11 @@ export const accounts: Account[] = [
     password: 'pass1234',
     firstName: 'Jet',
     lastName: 'Crowman',
-    dob: new Date(),
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
     cwEmail: 'noreply@google.com',
+    cwPhone: '+17208839921',
+    certifiedBy: 'Arapahoe County',
     primaryPhone: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
@@ -281,10 +277,4 @@ export const profiles: Profile[] = [
   },
 ];
 
-export {
-  announcements,
-  getAnnouncementResponses,
-  users,
-  applicants,
-  blacklist,
-};
+export { announcements, getAnnouncementResponses, users, applicants, blacklist };

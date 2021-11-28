@@ -8,29 +8,20 @@ export class AvailabilityImplService implements AvailabilityService {
   constructor(private http: HttpClient) {}
 
   createAvailability(availability: Availability): Observable<Availability> {
-    return this.http.post<Availability>(
-      `${environment.backendHost}/api/db/availability`,
-      JSON.stringify(availability)
-    );
+    return this.http.post<Availability>(`${environment.backendHost}/api/db/availability`, JSON.stringify(availability));
   }
 
   deleteAvailability(id: number): Observable<Availability> {
-    return this.http.delete<Availability>(
-      `${environment.backendHost}/api/db/availability/${encodeURIComponent(id)}`
-    );
+    return this.http.delete<Availability>(`${environment.backendHost}/api/db/availability/${encodeURIComponent(id)}`);
   }
 
   getAvailabilityByProfileId(id: number): Observable<Availability> {
-    return this.http.get<Availability>(
-      `${environment.backendHost}/api/db/availability/${encodeURIComponent(id)}`
-    );
+    return this.http.get<Availability>(`${environment.backendHost}/api/db/availability/${encodeURIComponent(id)}`);
   }
 
   updateAvailability(availability: Availability): Observable<Availability> {
     return this.http.put<Availability>(
-      `${environment.backendHost}/api/db/availability/${encodeURIComponent(
-        availability.id
-      )}`,
+      `${environment.backendHost}/api/db/availability/${encodeURIComponent(availability.id)}`,
       JSON.stringify(availability)
     );
   }

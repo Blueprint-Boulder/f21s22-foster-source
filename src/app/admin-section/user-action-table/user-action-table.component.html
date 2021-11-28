@@ -3,19 +3,14 @@
 </div>
 <div class="table-container">
   <div *ngFor="let user of users; index as i">
-    <div
-      class="row fs-tan-background user-row p-4"
-      [ngClass]="{ 'mt-4': i != 0 }"
-    >
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
       <div class="col-sm-8 m-auto">
         <span
           ><b>{{ users[i].name }}</b></span
         ><br />
         <span>{{ users[i].email }}</span
         ><br />
-        <span
-          >Case Worker: {{ users[i].caseWorkerName }},
-          {{ users[i].caseWorkerEmail }}</span
+        <span>Case Worker: {{ users[i].caseWorkerName }}, {{ users[i].caseWorkerEmail }}</span
         ><br />
         <small
           ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small
@@ -54,9 +49,7 @@
       <div class="col-12">
         <form [formGroup]="denyFormGroup" (ngSubmit)="denyApplicant(i)">
           <div class="form-group">
-            <label for="denialReasonTextArea"
-              >Reason for denial of application.</label
-            >
+            <label for="denialReasonTextArea">Reason for denial of application.</label>
             <textarea
               class="form-control"
               id="denialReasonTextArea"
@@ -66,39 +59,18 @@
             ></textarea>
           </div>
           <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="sendCopyCheck"
-              formControlName="sendCopy"
-            />
+            <input class="form-check-input" type="checkbox" value="" id="sendCopyCheck" formControlName="sendCopy" />
             <label class="form-check-label" for="sendCopyCheck">
               Send a copy of this response to the applicant's provided email
             </label>
           </div>
           <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="blacklistCheck"
-              formControlName="ban"
-            />
-            <label class="form-check-label" for="blacklistCheck">
-              Blacklist user to prevent future applications
-            </label>
+            <input class="form-check-input" type="checkbox" value="" id="blacklistCheck" formControlName="ban" />
+            <label class="form-check-label" for="blacklistCheck"> Blacklist user to prevent future applications </label>
           </div>
-          <button class="btn btn-secondary float-right ml-3">
-            Deny Applicant
-          </button>
+          <button class="btn btn-secondary float-right ml-3">Deny Applicant</button>
         </form>
-        <button
-          (click)="collapse.toggle()"
-          class="btn btn-light btn-outline-dark float-right"
-        >
-          Cancel
-        </button>
+        <button (click)="collapse.toggle()" class="btn btn-light btn-outline-dark float-right">Cancel</button>
       </div>
     </div>
   </div>

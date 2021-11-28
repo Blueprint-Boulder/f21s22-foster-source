@@ -21,11 +21,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <app-editor
-        id="rich-editor"
-        (richTextChange)="textChange($event)"
-        [characterLimit]="characterLimit"
-      ></app-editor>
+      <app-editor id="rich-editor" (richTextChange)="textChange($event)" [characterLimit]="characterLimit"></app-editor>
     </div>
   </div>
   <div class="row">

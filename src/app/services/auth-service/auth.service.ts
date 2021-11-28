@@ -23,8 +23,8 @@ export class AuthService {
       //used in the service.
       this.expiresAt = moment().add(token.exp, 'second');
       this.isUser = token.privilegeLevel > 0;
-      this.isAdmin = token.privilegeLevel > 1;
-      this.isMod = token.privilegeLevel > 2;
+      this.isMod = token.privilegeLevel > 1;
+      this.isAdmin = token.privilegeLevel > 2;
     }
   }
 
