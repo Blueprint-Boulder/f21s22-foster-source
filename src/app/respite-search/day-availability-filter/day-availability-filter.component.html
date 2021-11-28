@@ -11,7 +11,7 @@
           class="form-check-input"
           type="checkbox"
           value=""
-          id="morningCheck"
+          [id]="'morningCheck' + index"
           [(ngModel)]="dayModel[0]"
         />
         <label class="form-check-label" for="morningCheck"> Morning </label>
@@ -23,7 +23,7 @@
           class="form-check-input"
           type="checkbox"
           value=""
-          id="afternoonCheck"
+          [id]="'afternoonCheck' + index"
           [(ngModel)]="dayModel[1]"
         />
         <label class="form-check-label" for="afternoonCheck"> Afternoon </label>
@@ -35,7 +35,7 @@
           class="form-check-input"
           type="checkbox"
           value=""
-          id="eveningCheck"
+          [id]="'eveningCheck' + index"
           [(ngModel)]="dayModel[2]"
         />
         <label class="form-check-label" for="eveningCheck"> Evening </label>
@@ -47,7 +47,7 @@
           class="form-check-input"
           type="checkbox"
           value=""
-          id="overnight"
+          [id]="'overnight' + index"
           [(ngModel)]="dayModel[3]"
         />
         <label class="form-check-label" for="overnight"> Overnight </label>

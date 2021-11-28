@@ -9,6 +9,7 @@ import { DayAvailability } from '../../models/availability.model';
 export class DayAvailabilityFilterComponent implements OnInit {
   @Input() day: string;
   @Input() dayModel: DayAvailability;
+  @Input() index: number;
 
   ngOnInit(): void {
     return;

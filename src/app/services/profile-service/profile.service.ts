@@ -6,6 +6,7 @@ import {
   Profile,
   UpdateProfileReq,
 } from '../../models/profile.model';
+import { FiltersReq } from '../../models/filters.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ import {
 export abstract class ProfileService {
   public abstract getProfiles(
     limit: number,
-    offset: number
+    offset: number,
+    filters?: FiltersReq
   ): Observable<GetProfilesRes>;
   public abstract getProfileById(id: number): Observable<Profile>;
   public abstract createProfile(params: CreateProfileReq): Observable<Profile>;

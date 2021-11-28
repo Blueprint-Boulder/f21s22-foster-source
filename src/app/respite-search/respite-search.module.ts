@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AvailabilityFiltersComponent } from './availability-filters/availability-filters.component';
 import { DayAvailabilityFilterComponent } from './day-availability-filter/day-availability-filter.component';
 import { HouseholdBackgroundFiltersComponent } from './household-background-filters/household-background-filters.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const respiteRouting = RouterModule.forChild(routes);
     NgxBootstrapSliderModule,
     NgxSliderModule,
     FormsModule,
+    NgbPaginationModule,
   ],
 })
 export class RespiteSearchModule {}

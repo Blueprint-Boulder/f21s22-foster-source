@@ -8,6 +8,12 @@ import {
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { FiltersReq } from '../../models/filters.model';
+import { tap } from 'rxjs/operators';
+import {
+  AvailabilityFilters,
+  DayAvailability,
+} from '../../models/availability.model';
 
 export class ProfileImplService implements ProfileService {
   constructor(private http: HttpClient) {}
@@ -25,10 +31,19 @@ export class ProfileImplService implements ProfileService {
     );
   }
 
-  getProfiles(limit: number, offset: number): Observable<GetProfilesRes> {
-    const params = new HttpParams();
-    params.set('limit', limit);
-    params.set('offset', offset);
+  getProfiles(
+    limit: number,
+    offset: number,
+    filters?: FiltersReq
+  ): Observable<GetProfilesRes> {
+    let params = new HttpParams();
+    params = params.set('limit', limit);
+    params = params.set('offset', offset);
+
+    if (filters) {
+      params = this.setFilterParams(params, filters);
+    }
+
     return this.http.get<GetProfilesRes>(
       `${environment.backendHost}/api/db/profiles`,
       { params: params }
@@ -40,5 +55,57 @@ export class ProfileImplService implements ProfileService {
       `${environment.backendHost}/api/db/profiles`,
       JSON.stringify(params)
     );
+  }
+
+  private setFilterParams(params: HttpParams, filters: FiltersReq): HttpParams {
+    const filtersWNoUndefined = JSON.parse(JSON.stringify(filters));
+    let p: HttpParams = params;
+    const filterKeys: string[] = [];
+    const filterValues: (string | number | boolean)[] = [];
+    Object.keys(filtersWNoUndefined).forEach((key: string) => {
+      filterKeys.push(key);
+    });
+    Object.values(filtersWNoUndefined).forEach((val: any) => {
+      filterValues.push(
+        typeof val === 'boolean' || typeof val === 'number'
+          ? val
+          : val.toString
+          ? val.toString()
+          : val
+      );
+    });
+    for (let i = 0; i < filterKeys.length; i++) {
+      if (filterKeys[i] === 'availabilities') {
+        p = this.setAvailabilityParams(
+          p,
+          filters.availabilities as AvailabilityFilters
+        );
+      } else {
+        p = p.set(filterKeys[i], filterValues[i]);
+      }
+    }
+    return p;
+  }
+
+  private setAvailabilityParams(
+    params: HttpParams,
+    availabilities: AvailabilityFilters
+  ) {
+    let p = params;
+    const toFilter: string[] = [];
+    const vals: DayAvailability[] = [];
+    const days: string[] = [];
+    Object.values(availabilities).forEach((avail: DayAvailability) => {
+      vals.push(avail);
+    });
+    Object.keys(availabilities).forEach((key) => {
+      days.push(key);
+    });
+    days.forEach((day: string, index: number) => {
+      if (vals[index].some((x: boolean) => x)) {
+        p = p.set(day + 'Availability', vals[index].toString());
+      }
+    });
+    return p;
   }
 }

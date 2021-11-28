@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpDateService } from './services/http-date-service/http-date.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { LoggingInterceptor } from './services/logging.interceptor';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
       useClass: HttpDateService,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

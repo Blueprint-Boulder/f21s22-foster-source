@@ -64,6 +64,8 @@ export class FilterPanelComponent implements OnInit {
 
   @Input() hidden = true;
   @Output() closePanel: EventEmitter<void> = new EventEmitter<void>();
+  @Output() filterResults: EventEmitter<FiltersReq> =
+    new EventEmitter<FiltersReq>();
 
   ngOnInit(): void {
     return;
@@ -97,6 +99,8 @@ export class FilterPanelComponent implements OnInit {
           ? undefined
           : this.householdRadios.ownFirearm,
     };
+
+    this.filterResults.emit(filters);
 
     console.log(filters);
     console.log(JSON.stringify(filters));
