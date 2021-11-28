@@ -16,11 +16,13 @@ export class AvailabilityFiltersComponent implements OnInit {
   @Input() availabilityModel: AvailabilityFilters;
 
   ngOnInit(): void {
-    Object.keys(this.availabilityModel).forEach((key) => {
-      this.days.push(key);
-    });
-    Object.values(this.availabilityModel).forEach((availability) => {
-      this.availabilities.push(availability);
-    });
+    if (this.availabilityModel) {
+      Object.keys(this.availabilityModel).forEach((key) => {
+        this.days.push(key);
+      });
+      Object.values(this.availabilityModel).forEach((availability) => {
+        this.availabilities.push(availability);
+      });
+    }
   }
 }
