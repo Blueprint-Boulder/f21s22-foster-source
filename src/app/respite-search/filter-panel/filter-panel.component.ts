@@ -65,8 +65,6 @@ export class FilterPanelComponent implements OnInit {
   @Input() hidden = true;
   @Output() closePanel: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
-
   ngOnInit(): void {
     return;
   }
