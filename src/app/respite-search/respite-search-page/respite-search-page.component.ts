@@ -11,7 +11,7 @@ import { profileServiceProvider } from '../../services/profile-service/profile.s
 })
 export class RespiteSearchPageComponent implements OnInit {
   public results: Profile[];
-  public hidden = false;
+  public hidden = true;
 
   constructor(private profileService: ProfileService) {}
 
