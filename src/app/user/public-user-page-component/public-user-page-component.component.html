@@ -236,10 +236,10 @@
     <form>
       <div class="form-group">
         <div class="input-group">
-          <div class="input-group-append">
-            Email: {{ Account[0].email }} {{ Account[0].primaryPhone.type }}:
-            {{ Account[0].primaryPhone.phoneNumber }}
-            <br />
+          <div class="input-group-append contact">
+            Email: {{ Account[0].email }} <br />
+            {{ Account[0].primaryPhone.type }}:
+            {{ Account[0].primaryPhone.phoneNumber }} <br />
             <span *ngIf="Account[0].secondaryPhone"
               >{{ Account[0].secondaryPhone.type }}:
               {{ Account[0].secondaryPhone.phoneNumber }}</span

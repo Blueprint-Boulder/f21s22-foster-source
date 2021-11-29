@@ -19,3 +19,7 @@ h5.day {
 .profile-column {
   min-width: 223.5px;
 }
+
+.contact {
+  display: block;
+}
