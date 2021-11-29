@@ -1,5 +1,6 @@
 .availability-table {
   background-color: #fef4e8;
+  min-width: 220px;
 }
 
 hr.line {
@@ -9,4 +10,12 @@ hr.line {
 
 h5.day {
   text-align: center;
+}
+
+.word-wrap {
+  font-size: keep-all;
+}
+
+.profile-column {
+  min-width: 223.5px;
 }

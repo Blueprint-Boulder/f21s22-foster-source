@@ -2,7 +2,7 @@
 <div *ngIf="Account" class="m-5">
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-md-3">
+      <div class="col-sm-6 col-md-3 profile-column">
         <div class="card border-0">
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
@@ -10,7 +10,7 @@
             alt="profile picture"
           />
           <div class="card-body">
-            <h2 class="card-title text-center">
+            <h2 class="card-title text-center word-wrap">
               {{ Account[0].firstName }} {{ Account[0].lastName }}
             </h2>
             <p class="card-text">
