@@ -20,7 +20,10 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   open(content: any) {
     this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        backdropClass: 'modal-backgadawjlround',
+      })
       .result.then(
         (result) => {
           this.closeResult = `Closed with: ${result}`;

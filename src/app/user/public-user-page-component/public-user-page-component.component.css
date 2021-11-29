@@ -1,6 +1,7 @@
 .availability-table {
   background-color: #fef4e8;
   min-width: 220px;
+  border-radius: 10px;
 }
 
 hr.line {
@@ -28,6 +29,10 @@ h5.day {
   /* border: 2px solid #afb4b8; */
   background-color: #e4e6e8;
   border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
   display: inline-block;
+}
+
+.modal-background {
+  background-color: #fef4e8;
 }
