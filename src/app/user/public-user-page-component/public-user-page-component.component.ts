@@ -22,7 +22,7 @@ export class PublicUserPageComponentComponent implements OnInit {
     this.modalService
       .open(content, {
         ariaLabelledBy: 'modal-basic-title',
-        backdropClass: 'modal-backgadawjlround',
+        backdropClass: 'modal-background',
       })
       .result.then(
         (result) => {

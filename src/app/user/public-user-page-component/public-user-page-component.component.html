@@ -238,12 +238,19 @@
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-append contact-modal">
-            Email: {{ Account[0].email }} <br />
+            Email:
+            <a href="mailto:{{ Account[0].email }}">{{ Account[0].email }}</a>
+            <br />
             {{ Account[0].primaryPhone.type }}:
-            {{ Account[0].primaryPhone.phoneNumber }} <br />
+            <a href="tel:{{ Account[0].primaryPhone.phoneNumber }}">{{
+              Account[0].primaryPhone.phoneNumber
+            }}</a>
+            <br />
             <span *ngIf="Account[0].secondaryPhone"
               >{{ Account[0].secondaryPhone.type }}:
-              {{ Account[0].secondaryPhone.phoneNumber }}</span
+              <a href="tel:{{ Account[0].secondaryPhone.phoneNumber }}">{{
+                Account[0].secondaryPhone.phoneNumber
+              }}</a></span
             >
           </div>
         </div>
