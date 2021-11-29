@@ -20,6 +20,14 @@ h5.day {
   min-width: 223.5px;
 }
 
-.contact {
+.contact-modal {
   display: block;
+}
+
+.contact-items {
+  /* border: 2px solid #afb4b8; */
+  background-color: #e4e6e8;
+  border-radius: 10px;
+  padding: 5px;
+  display: inline-block;
 }
