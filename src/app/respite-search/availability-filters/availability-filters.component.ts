@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  AvailabilityFilters,
-  DayAvailability,
-} from '../../models/availability.model';
+import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
 
 @Component({
   selector: 'app-availability-filters',

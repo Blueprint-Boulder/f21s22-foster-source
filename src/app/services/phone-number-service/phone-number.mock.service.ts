@@ -4,10 +4,7 @@ import { Observable, of } from 'rxjs';
 import { mobilePhones } from '../../mock/database-entities';
 
 export class PhoneNumberMockService implements PhoneNumberService {
-  updatePhoneNumber(
-    phoneNumber: PhoneNumber,
-    isPrimary: boolean
-  ): Observable<PhoneNumber> {
+  updatePhoneNumber(phoneNumber: PhoneNumber, isPrimary: boolean): Observable<PhoneNumber> {
     return of(mobilePhones[0]);
   }
 }

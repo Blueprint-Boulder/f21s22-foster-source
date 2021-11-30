@@ -11,42 +11,29 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-left" href="#"
-    ><img
-      class="nav-respite-source m-2"
-      src="assets/images/respite-source-logo.png"
-      alt="Respite Source Logo"
+    ><img class="nav-respite-source m-2" src="assets/images/respite-source-logo.png" alt="Respite Source Logo"
   /></a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item" [ngClass]="{ active: router.url === '/' }">
         <a class="nav-link" href="#" [routerLink]="'/'"
-          >Home
-          <span *ngIf="router.url === '/'" class="sr-only">(current)</span></a
+          >Home <span *ngIf="router.url === '/'" class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" [ngClass]="{ active: router.url === '/respite' }">
         <a class="nav-link" href="#" [routerLink]="'/respite'"
-          >Find Respite
-          <span *ngIf="router.url === '/respite'" class="sr-only"
-            >(current)</span
-          ></a
+          >Find Respite <span *ngIf="router.url === '/respite'" class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" [ngClass]="{ active: router.url === '/admin' }">
         <a class="nav-link" href="#" [routerLink]="'/admin'"
-          >Administration
-          <span *ngIf="router.url === '/admin'" class="sr-only"
-            >(current)</span
-          ></a
+          >Administration <span *ngIf="router.url === '/admin'" class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item" [ngClass]="{ active: router.url === '/login' }">
         <a class="nav-link" href="#" [routerLink]="'/login'"
-          >Login
-          <span *ngIf="router.url === '/login'" class="sr-only"
-            >(current)</span
-          ></a
+          >Login <span *ngIf="router.url === '/login'" class="sr-only">(current)</span></a
         >
       </li>
     </ul>

@@ -1,10 +1,5 @@
 import { ProfileService } from './profile.service';
-import {
-  CreateProfileReq,
-  GetProfilesRes,
-  Profile,
-  UpdateProfileReq,
-} from '../../models/profile.model';
+import { CreateProfileReq, GetProfilesRes, Profile, UpdateProfileReq } from '../../models/profile.model';
 import { Observable, of } from 'rxjs';
 import { profiles } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
@@ -18,11 +13,7 @@ export class ProfileMockService implements ProfileService {
     return of(profiles[0]);
   }
 
-  getProfiles(
-    limit: number,
-    offset: number,
-    filters?: FiltersReq
-  ): Observable<GetProfilesRes> {
+  getProfiles(limit: number, offset: number, filters?: FiltersReq): Observable<GetProfilesRes> {
     return of({
       profiles: profiles,
       numResults: 200,

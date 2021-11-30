@@ -16,12 +16,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoggingInterceptor } from './services/logging.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    ToastContainerComponent,
-    NavBarComponent,
-  ],
+  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

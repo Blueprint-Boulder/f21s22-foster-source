@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpResponse } from '@angular/common/http';
 import { finalize, tap } from 'rxjs/operators';
 
 @Injectable()
@@ -25,15 +20,7 @@ export class LoggingInterceptor implements HttpInterceptor {
       ),
       finalize(() => {
         const elapsedTime = Date.now() - startTime;
-        const message =
-          req.method +
-          ' ' +
-          req.urlWithParams +
-          ' ' +
-          status +
-          ' in ' +
-          elapsedTime +
-          'ms';
+        const message = req.method + ' ' + req.urlWithParams + ' ' + status + ' in ' + elapsedTime + 'ms';
 
         this.logDetails(message);
       })

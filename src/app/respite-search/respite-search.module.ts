@@ -32,13 +32,6 @@ export const respiteRouting = RouterModule.forChild(routes);
     DayAvailabilityFilterComponent,
     HouseholdBackgroundFiltersComponent,
   ],
-  imports: [
-    CommonModule,
-    respiteRouting,
-    NgxBootstrapSliderModule,
-    NgxSliderModule,
-    FormsModule,
-    NgbPaginationModule,
-  ],
+  imports: [CommonModule, respiteRouting, NgxBootstrapSliderModule, NgxSliderModule, FormsModule, NgbPaginationModule],
 })
 export class RespiteSearchModule {}

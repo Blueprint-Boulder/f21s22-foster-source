@@ -26,11 +26,7 @@ export class RespiteSearchPageComponent implements OnInit {
 
   getSearchResults() {
     this.profileService
-      .getProfiles(
-        this.resultsPerPage,
-        (this.resultPage - 1) * this.resultsPerPage,
-        this.filtersReq
-      )
+      .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq)
       .subscribe((res: GetProfilesRes) => {
         this.results = res.profiles;
         this.totalResults = res.numResults;

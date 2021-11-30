@@ -3,18 +3,12 @@
     <div class="card-body">
       <h5 class="card-title">Verification Email Sent</h5>
       <p class="card-text">
-        A verification link has been sent to {{ email }}. Please click the link
-        to verify your account. Upon account verification, you will still need
-        to be approved by Foster Source to begin using this service.
+        A verification link has been sent to {{ email }}. Please click the link to verify your account. Upon account
+        verification, you will still need to be approved by Foster Source to begin using this service.
       </p>
       <small
         >Didn't get an email?
-        <a
-          href="javascript:void(0)"
-          [ngClass]="{ disabled: countdown !== 0 }"
-          (click)="resendEmail()"
-          >Retry</a
-        >
+        <a href="javascript:void(0)" [ngClass]="{ disabled: countdown !== 0 }" (click)="resendEmail()">Retry</a>
         <span *ngIf="countdown !== 0"> in {{ countdown }} seconds</span></small
       >
     </div>
