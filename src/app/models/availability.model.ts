@@ -19,6 +19,16 @@ export interface Availability {
   end?: Date;
 }
 
+export interface AvailabilityFilters {
+  monday?: DayAvailability;
+  tuesday?: DayAvailability;
+  wednesday?: DayAvailability;
+  thursday?: DayAvailability;
+  friday?: DayAvailability;
+  saturday?: DayAvailability;
+  sunday?: DayAvailability;
+}
+
 export interface SimpleAvailability {
   type: AvailabilityType;
   monday: DayAvailability;

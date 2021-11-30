@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./admin-section/admin-section.module').then((m) => m.AdminSectionModule),
   },
   {
+    path: 'respite',
+    loadChildren: () => import('./respite-search/respite-search.module').then((m) => m.RespiteSearchModule),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },

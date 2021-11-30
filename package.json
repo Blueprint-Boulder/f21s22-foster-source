@@ -16,6 +16,7 @@
     "trailingComma": "es5"
   },
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "~12.2.0",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
@@ -30,6 +31,7 @@
     "bootstrap": "^4.5.0",
     "google-libphonenumber": "^3.2.25",
     "jquery": "^3.6.0",
+    "ngx-bootstrap-slider": "^1.9.0",
     "ngx-editor": "^11.1.1",
     "ngx-image-cropper": "^5.0.1",
     "ngx-toastr": "^14.1.3",
