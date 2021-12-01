@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  getClassListFromPreset,
-  Toast,
-  ToastPresets,
-} from '../../models/toast.model';
+import { getClassListFromPreset, Toast, ToastPresets } from '../../models/toast.model';
 
 @Injectable({
   providedIn: 'root',

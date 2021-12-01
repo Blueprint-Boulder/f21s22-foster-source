@@ -22,10 +22,7 @@ import { blacklistServiceProvider } from '../../services/blacklist-service/black
 export class BlacklistTableComponent implements OnInit {
   public blacklist: BlacklistedUser[] = [];
 
-  constructor(
-    private blacklistService: BlacklistService,
-    private toastService: ToastService
-  ) {}
+  constructor(private blacklistService: BlacklistService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.blacklistService.getBlacklistedUsers().subscribe(
@@ -42,36 +39,31 @@ export class BlacklistTableComponent implements OnInit {
 
   public removeFromBlacklist(index: number): void {
     if (
-      !confirm(
-        `Are you sure you want to unban ${this.blacklist[index].firstName} ${this.blacklist[index].lastName}?`
-      )
+      !confirm(`Are you sure you want to unban ${this.blacklist[index].firstName} ${this.blacklist[index].lastName}?`)
     ) {
       return;
     }
 
-    const toRemove: BlacklistedUser =
-      this.getAndRemoveBlacklistedByIndex(index);
+    const toRemove: BlacklistedUser = this.getAndRemoveBlacklistedByIndex(index);
     const params: RemoveFromBlacklistRequest = {
       email: toRemove.email,
       phone: toRemove.phoneNumber,
     };
 
-    this.blacklistService
-      .deleteFromBlacklist(params.phone, params.email)
-      .subscribe(
-        (res: any) => {
-          this.toastService.show({
-            body: `Successfully unbanned user ${toRemove.firstName} ${toRemove.lastName}.`,
-            preset: ToastPresets.SUCCESS,
-          });
-        },
-        (error: HttpErrorResponse) => {
-          this.toastService.show({
-            body: 'Something went wrong trying to unban the user.',
-            preset: ToastPresets.ERROR,
-          });
-        }
-      );
+    this.blacklistService.deleteFromBlacklist(params.phone, params.email).subscribe(
+      (res: any) => {
+        this.toastService.show({
+          body: `Successfully unbanned user ${toRemove.firstName} ${toRemove.lastName}.`,
+          preset: ToastPresets.SUCCESS,
+        });
+      },
+      (error: HttpErrorResponse) => {
+        this.toastService.show({
+          body: 'Something went wrong trying to unban the user.',
+          preset: ToastPresets.ERROR,
+        });
+      }
+    );
   }
 
   public getFormattedDateForUser(index: number): string {

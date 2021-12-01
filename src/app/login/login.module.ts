@@ -8,6 +8,12 @@ import { CreateAccountPageComponent } from './create-account-page/create-account
 import { CreateAccountModalComponent } from './create-account-modal/create-account-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { FinishAccountPageComponent } from './finish-account-page/finish-account-page.component';
+import { FinishAccountModalComponent } from './finish-account-modal/finish-account-modal.component';
+import { DayAvailabilityInputComponent } from './day-availability-input/day-availability-input.component';
+import { AppModule } from '../app.module';
+import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const routes: Routes = [
   {
@@ -22,6 +28,10 @@ const routes: Routes = [
     path: 'create-account/verify/:email',
     component: VerifyEmailComponent,
   },
+  {
+    path: 'complete-profile',
+    component: FinishAccountPageComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -33,14 +43,12 @@ export const loginRouting = RouterModule.forChild(routes);
     CreateAccountPageComponent,
     CreateAccountModalComponent,
     VerifyEmailComponent,
+    FinishAccountPageComponent,
+    FinishAccountModalComponent,
+    DayAvailabilityInputComponent,
+    ProfileImageUploadComponent,
   ],
-  imports: [
-    CommonModule,
-    loginRouting,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-  ],
+  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule, ImageCropperModule],
   exports: [],
 })
 export class LoginModule {}

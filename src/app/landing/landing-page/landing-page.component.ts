@@ -7,16 +7,13 @@ import { announcementServiceProvider } from '../../services/announcement-service
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css'],
+  styleUrls: ['./landing-page.component.scss'],
   providers: [announcementServiceProvider],
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;
   @ViewChild('toast') toast: ElementRef;
-  constructor(
-    private announcementService: AnnouncementService,
-    private toastService: ToastrService
-  ) {}
+  constructor(private announcementService: AnnouncementService, private toastService: ToastrService) {}
 
   ngOnInit(): void {
     this.announcementService.getLatestAnnouncement().subscribe(
@@ -24,10 +21,7 @@ export class LandingPageComponent implements OnInit {
         this.latestAnnouncement = a;
       },
       (error) => {
-        this.toastService.error(
-          'Failed to fetch latest announcement. Try reloading the page.',
-          'Error'
-        );
+        this.toastService.error('Failed to fetch latest announcement. Try reloading the page.', 'Error');
       }
     );
   }
