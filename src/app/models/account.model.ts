@@ -11,8 +11,8 @@ export interface Account {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
-  distance: number;
-  pronouns: string;
+  distance: number; // delete
+  pronouns: string; // delete
   cwPhone: string;
   certifiedBy: string;
   primaryPhone: PhoneNumber;
