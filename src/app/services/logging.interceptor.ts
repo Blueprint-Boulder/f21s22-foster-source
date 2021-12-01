@@ -21,7 +21,7 @@ export class LoggingInterceptor implements HttpInterceptor {
       finalize(() => {
         const elapsedTime = Date.now() - startTime;
         const message = req.method + ' ' + req.urlWithParams + ' ' + status + ' in ' + elapsedTime + 'ms';
-
+        console.log(req);
         this.logDetails(message);
       })
     );
