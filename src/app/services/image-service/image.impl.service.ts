@@ -16,6 +16,6 @@ export class ImageImplService implements ImageService {
   }
 
   public deleteImage(key: string): Observable<any> {
-    return this.http.delete<any>(`${environment.backendHost}/api/image/${encodeURIComponent(key)}`);
+    return this.http.delete<any>(`${environment.backendHost}/api/utils/images/${encodeURIComponent(key)}`);
   }
 }

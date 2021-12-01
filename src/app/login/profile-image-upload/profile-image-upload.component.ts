@@ -76,6 +76,12 @@ export class ProfileImageUploadComponent implements OnInit {
   }
 
   imageChanged(event: Event): void {
+    // Delete the previously uploaded image, if there is one
+    if (this.imageUuid !== '') {
+      this.imageService.deleteImage(`${this.imageUuid}_small`).subscribe();
+      this.imageService.deleteImage(`${this.imageUuid}_large`).subscribe();
+    }
+
     if (event.target && (event.target as any).files) {
       const file = (event.target as any).files[0];
 
