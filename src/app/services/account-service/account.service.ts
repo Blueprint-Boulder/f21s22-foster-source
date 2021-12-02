@@ -8,6 +8,7 @@ import {
   DenyApplicantResponse,
   GetApplicantsRes,
 } from '../../models/applicant.model';
+import { FinishProfileReq } from '../../models/profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ import {
 export abstract class AccountService {
   public abstract createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest>;
   public abstract login(params: LoginRequest): Observable<Cookie>;
-  public abstract completeProfile(params: any): Observable<any>;
+  public abstract completeProfile(params: FinishProfileReq): Observable<any>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(): Observable<any>;
   public abstract deleteAccount(id: number): Observable<any>;
