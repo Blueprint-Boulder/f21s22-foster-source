@@ -5,7 +5,7 @@ import { PublicUserPageComponentComponent } from './public-user-page-component/p
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: PublicUserPageComponentComponent,
   },
 ];

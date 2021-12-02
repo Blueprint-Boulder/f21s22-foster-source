@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { accounts } from '../../mock/database-entities';
-// import { Account } from 'src/app/models/account.model'; not implemented yet
+import { Profile } from 'src/app/models/profile.model';
+import { ProfileService } from 'src/app/services/profile-service/profile.service';
+import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
 
 @Component({
   selector: 'app-public-user-page-component',
   templateUrl: './public-user-page-component.component.html',
   styleUrls: ['./public-user-page-component.component.css'],
+  providers: [profileServiceProvider],
 })
 export class PublicUserPageComponentComponent implements OnInit {
-  Account = accounts; // list of mock accounts
-  closeResult = ''; // how modal was
-  constructor(private route: ActivatedRoute, private modalService: NgbModal) {}
+  public selectedProfile: Profile;
+  closeResult = ''; // how modal was closed
+  toastService: any;
+  constructor(private route: ActivatedRoute, private modalService: NgbModal, private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    return;
+    this.profileService.getProfileById(1).subscribe(
+      (p: Profile) => {
+        this.selectedProfile = p;
+      },
+      (error) => {
+        this.toastService.error('Failed to fetch latest announcement. Try reloading the page.', 'Error');
+      }
+    );
   }
 
   open(content: any) {
