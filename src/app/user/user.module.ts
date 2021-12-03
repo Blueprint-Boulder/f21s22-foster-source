@@ -8,6 +8,10 @@ const routes: Routes = [
     path: ':id',
     component: PublicUserPageComponentComponent,
   },
+  {
+    path: '',
+    component: PublicUserPageComponentComponent,
+  },
 ];
 
 export const userRouting = RouterModule.forChild(routes);

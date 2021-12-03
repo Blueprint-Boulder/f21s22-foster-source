@@ -23,6 +23,7 @@ export class PublicUserPageComponentComponent implements OnInit {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params['id'];
     });
+    console.log('User ID: ' + String(this.id));
     this.profileService.getProfileById(this.id).subscribe((p: Profile) => {
       this.selectedProfile = p;
     });

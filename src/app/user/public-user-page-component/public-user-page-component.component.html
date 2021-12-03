@@ -35,8 +35,8 @@
       </div>
 
       <!-- Bigraphy -->
-      <div class="col-sm-6 p-3">
-        <div class="">
+      <div class="col-sm-6 pl-4">
+        <div *ngIf="selectedProfile.biography">
           <h4 class="day bio text-center">About</h4>
           <div>
             {{ selectedProfile.biography }}
@@ -51,134 +51,134 @@
           <h4 class="text-center mt-4">Availability Schedule</h4>
         </div>
         <div class="row p-3">
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.monday">
             <h5 class="day">Monday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.tuesday">
             <h5 class="day">Tuesday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.wednesday">
             <h5 class="day">Wednesday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.thursday">
             <h5 class="day">Thursday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.friday">
             <h5 class="day">Friday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.saturday">
             <h5 class="day">Saturday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.sunday">
             <h5 class="day">Sunday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
