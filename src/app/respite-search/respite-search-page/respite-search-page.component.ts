@@ -3,6 +3,7 @@ import { GetProfilesRes, Profile } from '../../models/profile.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { profileServiceProvider } from '../../services/profile-service/profile.service.provider';
 import { FiltersReq } from '../../models/filters.model';
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
 
 @Component({
   selector: 'app-respite-search-page',
@@ -11,7 +12,7 @@ import { FiltersReq } from '../../models/filters.model';
   providers: [profileServiceProvider],
 })
 export class RespiteSearchPageComponent implements OnInit {
-  public results: Profile[];
+  public results: FullProfileRes[];
   public totalResults: number;
   public resultPage = 1;
   public resultsPerPage = 25;

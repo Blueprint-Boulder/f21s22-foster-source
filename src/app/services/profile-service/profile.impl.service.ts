@@ -6,16 +6,17 @@ import { environment } from '../../../environments/environment';
 import { FiltersReq } from '../../models/filters.model';
 import { tap } from 'rxjs/operators';
 import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
 
 export class ProfileImplService implements ProfileService {
   constructor(private http: HttpClient) {}
 
-  createProfile(params: CreateProfileReq): Observable<Profile> {
-    return this.http.post<Profile>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params));
+  createProfile(params: CreateProfileReq): Observable<FullProfileRes> {
+    return this.http.post<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params));
   }
 
-  getProfileById(id: number): Observable<Profile> {
-    return this.http.get<Profile>(`${environment.backendHost}/api/db/profiles/${encodeURIComponent(id)}`);
+  getProfileById(id: number): Observable<FullProfileRes> {
+    return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/${encodeURIComponent(id)}`);
   }
 
   getProfiles(limit: number, offset: number, filters?: FiltersReq): Observable<GetProfilesRes> {
@@ -30,8 +31,8 @@ export class ProfileImplService implements ProfileService {
     return this.http.get<GetProfilesRes>(`${environment.backendHost}/api/db/profiles`, { params: params });
   }
 
-  updateProfile(params: UpdateProfileReq): Observable<Profile> {
-    return this.http.put<Profile>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params));
+  updateProfile(params: UpdateProfileReq): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params));
   }
 
   private setFilterParams(params: HttpParams, filters: FiltersReq): HttpParams {

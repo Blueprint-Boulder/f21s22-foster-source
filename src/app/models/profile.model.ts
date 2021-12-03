@@ -1,7 +1,8 @@
 import { Account } from './account.model';
 import { PhoneNumber } from './phonenumber.model';
-import { Address } from './adress.model';
+import { AddressReq, AddressRes } from './adress.model';
 import { Availability, SimpleAvailability } from './availability.model';
+import { FullProfileRes } from './get-profile-by-id.models';
 
 export interface Profile {
   id: number;
@@ -17,7 +18,7 @@ export interface Profile {
   secondaryPhone?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
-  address: Address;
+  address: AddressReq;
   availability: Availability;
   photoAWSKeys: Photo[];
 }
@@ -28,7 +29,7 @@ export interface Photo {
 }
 
 export interface GetProfilesRes {
-  profiles: Profile[];
+  profiles: FullProfileRes[];
   numResults: number;
 }
 
@@ -48,7 +49,7 @@ export interface UpdateProfileReq {
   photos?: string[];
 }
 
-export interface SecondaryAccountHolder {
+export interface SecondaryAccountHolderReq {
   firstName: string;
   lastName: string;
   preferredName: string;
@@ -61,7 +62,8 @@ export interface SecondaryAccountHolder {
   maritalStatus?: string;
 }
 
-export interface RespiteProviderInfo {
+export interface RespiteProviderInfoReq {
+  id?: number;
   cityCanProvideRespiteIn: string;
   respiteTravelDistance: number;
   careForMinAge: number;
@@ -70,15 +72,16 @@ export interface RespiteProviderInfo {
   availability: SimpleAvailability;
 }
 
-export interface RespiteBackground {
+export interface RespiteBackgroundReq {
   fosterYearsExperience: number;
   totalChildrenCaredFor: number;
   canProvideRespite: boolean;
   lookingForRespite: boolean;
-  respiteProviderInfo?: RespiteProviderInfo;
+  respiteProviderInfo?: RespiteProviderInfoReq;
 }
 
 export interface HouseholdBackground {
+  id?: number;
   parentalUnitSize: number;
   householdSize: number;
   childrenInHousehold: number;
@@ -101,7 +104,7 @@ export interface FinishProfileReq {
   profileLargeAwsKey: string;
   pronouns?: string;
   maritalStatus?: string;
-  secondaryAccountHolder?: SecondaryAccountHolder;
-  respiteBackground: RespiteBackground;
+  secondaryAccountHolder?: SecondaryAccountHolderReq;
+  respiteBackground: RespiteBackgroundReq;
   householdBackground: HouseholdBackground;
 }
