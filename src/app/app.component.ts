@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ProfileService } from './services/profile-service/profile.service';
+import { profileServiceProvider } from './services/profile-service/profile.service.provider';
+import { FullProfileRes } from './models/get-profile-by-id.models';
 
 @Component({
   selector: 'app-root',

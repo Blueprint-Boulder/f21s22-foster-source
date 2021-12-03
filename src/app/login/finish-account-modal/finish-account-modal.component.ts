@@ -12,9 +12,9 @@ import { ToastPresets } from '../../models/toast.model';
 import {
   FinishProfileReq,
   HouseholdBackground,
-  RespiteBackground,
-  RespiteProviderInfo,
-  SecondaryAccountHolder,
+  RespiteBackgroundReq,
+  RespiteProviderInfoReq,
+  SecondaryAccountHolderReq,
 } from '../../models/profile.model';
 
 @Component({
@@ -199,7 +199,7 @@ export class FinishAccountModalComponent implements OnInit {
     return val === undefined || val === null ? undefined : val;
   }
 
-  private getSecondaryAccountHolderInfo(): SecondaryAccountHolder | undefined {
+  private getSecondaryAccountHolderInfo(): SecondaryAccountHolderReq | undefined {
     if (!this.hasSecondaryAccountHolder) {
       return undefined;
     }
@@ -218,7 +218,7 @@ export class FinishAccountModalComponent implements OnInit {
     };
   }
 
-  private getRespiteBackground(): RespiteBackground {
+  private getRespiteBackground(): RespiteBackgroundReq {
     return {
       fosterYearsExperience: this.finishProfileForm.get('fosterYears')!.value,
       totalChildrenCaredFor: this.finishProfileForm.get('totalChildren')!.value,
@@ -228,7 +228,7 @@ export class FinishAccountModalComponent implements OnInit {
     };
   }
 
-  private getRespiteProviderInfo(): RespiteProviderInfo | undefined {
+  private getRespiteProviderInfo(): RespiteProviderInfoReq | undefined {
     if (!this.finishProfileForm.get('canProvideRespite')!.value) {
       return undefined;
     }

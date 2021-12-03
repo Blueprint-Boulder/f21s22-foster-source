@@ -4,9 +4,10 @@ import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
-import { Photo, Profile } from '../models/profile.model';
+import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { Address, SimpleAddress } from '../models/adress.model';
+import { AddressReq, SimpleAddressReq } from '../models/adress.model';
+import { FullProfileRes } from '../models/get-profile-by-id.models';
 
 const announcements: Announcement[] = [
   {
@@ -41,7 +42,7 @@ const announcements: Announcement[] = [
 
 const getAnnouncementResponses: GetAnnouncementsRes[] = [{ announcements: announcements }];
 
-export const simpleAddresses: SimpleAddress[] = [
+export const simpleAddresses: SimpleAddressReq[] = [
   {
     line1: '1002 fake st.',
     city: 'Denver',
@@ -50,7 +51,7 @@ export const simpleAddresses: SimpleAddress[] = [
   },
 ];
 
-export const addresses: Address[] = [
+export const addresses: AddressReq[] = [
   {
     line1: '1002 fake st.',
     city: 'Denver',
@@ -244,34 +245,103 @@ export const mobilePhones: PhoneNumber[] = [
   },
 ];
 
-export const profiles: Profile[] = [
+export const profiles: FullProfileRes[] = [
   {
     id: 1,
-    biography: 'This is the biography of the profile',
-    profileLargeAWSKey: '121234123234',
-    profileSmallAWSKey: 'asdfasdfasdfas',
-    email: 'test@email.com',
-    username: 'This is the username',
-    firstName: 'Jack',
-    lastName: 'Crowman',
+    preferredName: 'Jace',
     dob: new Date(),
-    primaryPhone: mobilePhones[0],
-    secondaryPhone: {
-      phoneNumber: '+13321123345',
-      type: PhoneNumberType.Home,
+    biography: 'Just an easy going guy',
+    profileLargeAwsKey: 'awskey_large',
+    profileSmallAwsKey: 'awskey_small',
+    gender: 'male',
+    pronouns: 'he/his',
+    maritalStatus: 'single',
+    accountId: 1,
+    householdBackground: {
+      id: 1,
+      parentalUnitSize: 2,
+      householdSize: 4,
+      childrenInHousehold: 2,
+      childrenInfo: '12, female, biological\n 14 male, adopted',
+      vehicleAccess: true,
+      lgbtCareExperience: true,
+      caredForPhysDisabled: true,
+      caredForIntelDisabled: true,
+      caredForMedicallyFragile: true,
+      ownsFirearm: true,
+      petInfo: 'Two dogs and a cat',
+      additionalDetails: 'I am so allergic to peanuts',
     },
-    lastLogin: new Date(),
-    profileCompleted: true,
-    address: {
-      line1: '1002 fake st.',
-      city: 'Denver',
-      zip: '80210',
-      state: 'CO',
-      lat: '1',
-      lon: '1',
+    respiteBackground: {
+      id: 1,
+      fosterYearsExperience: 1,
+      totalChildrenCaredFor: 10,
+      canProvideRespite: true,
+      lookingForRespite: true,
+      respiteProviderInfo: {
+        id: 1,
+        cityCanProvideRespiteIn: 'boulder',
+        respiteTravelDistance: 100,
+        careForMinAge: 0,
+        careForMaxAge: 10,
+        maxNumCareFor: 3,
+        availabilities: [
+          {
+            id: 1,
+            type: AvailabilityType.PRIMARY,
+            monday: [true, false, false, false],
+            tuesday: [false, true, true, true],
+            wednesday: [true, false, false, false],
+            thursday: [false, true, true, true],
+            friday: [true, false, false, false],
+            saturday: [false, true, true, true],
+            sunday: [true, false, false, false],
+          },
+        ],
+      },
     },
-    availability: primaryAvailabilities[0],
-    photoAWSKeys: [{ id: 1, photoAWSKey: 'REAL_AWS_KEY' }],
+    photos: [],
+    secAccountHolder: {
+      id: 1,
+      relationshipToPrimary: 'met once in an airport',
+      firstName: 'Tommy',
+      lastName: 'Bahama',
+      gender: 'male',
+      email: 'tbahama@tommyb.com',
+      preferredName: 'Tom',
+      secAccountHolderPhone: {
+        id: 1,
+        phoneNumber: '+17207738882',
+        type: PhoneNumberType.Home,
+      },
+    },
+    account: {
+      firstName: 'Jett',
+      lastName: 'Crowson',
+      email: 'jettcrowson@colorado.gov',
+      username: 'jcrowson',
+      address: {
+        id: 1,
+        addressLine1: '741 Danbury St',
+        addressLine2: 'APT 101',
+        city: 'Boulder',
+        zipcode: '903213',
+        state: 'CO',
+        country: 'USA',
+        longitude: 12030210,
+        latitude: 23412,
+      },
+      primaryPhoneNumber: {
+        id: 1,
+        phoneNumber: '+193993921',
+        type: PhoneNumberType.Mobile,
+      },
+      secondaryPhoneNumber: {
+        id: 1,
+        phoneNumber: '+8889999999',
+        type: PhoneNumberType.Mobile,
+      },
+    },
   },
 ];
 
