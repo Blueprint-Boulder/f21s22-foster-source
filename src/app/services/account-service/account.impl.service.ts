@@ -4,6 +4,7 @@ import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq }
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
+import { FinishProfileReq } from '../../models/profile.model';
 
 export class AccountImplService implements AccountService {
   constructor(private http: HttpClient) {}
@@ -47,7 +48,7 @@ export class AccountImplService implements AccountService {
     return this.http.get<Account>(`${environment.backendHost}/api/db/current-account`);
   }
 
-  completeProfile(params: any): Observable<any> {
+  completeProfile(params: FinishProfileReq): Observable<any> {
     return this.http.post<any>(`${environment.backendHost}/api/db/accounts/complete`, JSON.stringify(params));
   }
 }

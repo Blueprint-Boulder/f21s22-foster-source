@@ -48,11 +48,13 @@ export class ProfileImageUploadComponent implements OnInit {
     if (this.imageUuid !== '') {
       this.imageService.deleteImage(this.imageUuid);
     }
-
-    this.imageService.uploadImage(this.profilePhotoInput.nativeElement.file).subscribe(
+    const file = this.dataURLtoFile(this.imageUrl, 'profile_image');
+    console.log(file);
+    this.imageService.uploadImage(file).subscribe(
       (res) => {
-        this.imageUploaded.emit(res);
-        this.imageUuid = res;
+        console.log(res);
+        this.imageUploaded.emit(res.key);
+        this.imageUuid = res.key;
         this.isUploading = false;
         this.imageChangedEvent = '';
         this.toastService.show({
@@ -61,6 +63,7 @@ export class ProfileImageUploadComponent implements OnInit {
         });
       },
       (err) => {
+        console.log(err);
         this.toastService.show({
           body: "Couldn't upload your image, please try again.",
           preset: ToastPresets.ERROR,
@@ -73,6 +76,12 @@ export class ProfileImageUploadComponent implements OnInit {
   }
 
   imageChanged(event: Event): void {
+    // Delete the previously uploaded image, if there is one
+    if (this.imageUuid !== '') {
+      this.imageService.deleteImage(`${this.imageUuid}_small`).subscribe();
+      this.imageService.deleteImage(`${this.imageUuid}_large`).subscribe();
+    }
+
     if (event.target && (event.target as any).files) {
       const file = (event.target as any).files[0];
 
@@ -159,6 +168,22 @@ export class ProfileImageUploadComponent implements OnInit {
     if (event.base64) {
       this.imageUrl = event.base64;
     }
+  }
+
+  dataURLtoFile(dataurl: string, filename: string) {
+    const arr = dataurl.split(',');
+
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+
+    const mime = arr[0].match(/:(.*?);/)![1],
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
   }
 }
 
