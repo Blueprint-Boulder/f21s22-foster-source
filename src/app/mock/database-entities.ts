@@ -249,7 +249,7 @@ export const mobilePhones: PhoneNumber[] = [
 export const profiles: Profile[] = [
   {
     id: 1,
-    biography: 'This is the biography of the profile',
+    biography: 'This is the biography of the profile.',
     profileLargeAWSKey: '121234123234',
     profileSmallAWSKey: 'asdfasdfasdfas',
     email: 'test@email.com',

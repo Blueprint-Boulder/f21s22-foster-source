@@ -1,5 +1,5 @@
 <!-- Page Data -->
-<div *ngIf="Account" class="m-5">
+<div *ngIf="selectedProfile" class="m-5">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-md-3 profile-column">
@@ -11,28 +11,24 @@
           />
           <div class="card-body">
             <h2 class="card-title text-center word-wrap">
-              {{ Account[0].firstName }} {{ Account[0].lastName }}
+              {{ selectedProfile.firstName }} {{ selectedProfile.lastName }}
             </h2>
-            <p class="card-text">
-              <b>Distance:</b> {{ Account[0].distance }} miles
-            </p>
+            <p class="card-text"><b>Distance:</b> Placeholder miles</p>
             <h5 class="card-text contact-items">
               <b>Primary Contact</b>
             </h5>
-            <p class="card-text">
-              Name: {{ Account[0].firstName }} {{ Account[0].lastName }}
-            </p>
-            <p class="card-text">Pronouns: {{ Account[0].pronouns }}</p>
+            <p class="card-text">Name: {{ selectedProfile.firstName }} {{ selectedProfile.lastName }}</p>
+            <p class="card-text">Pronouns: Placeholder</p>
             <h5 class="card-text contact-items">
               <b>Secondary Contact</b>
             </h5>
             <p class="card-text">Name: Jet Crowman, the Legend</p>
-            <p class="card-text">Pronouns: {{ Account[0].pronouns }}</p>
+            <p class="card-text">Pronouns: Placeholder</p>
             <p class="card-text">
-              <b>State: {{ Account[0].address.state }}</b>
+              <b>State: {{ selectedProfile.address.state }}</b>
             </p>
             <p class="card-text">
-              <b>Zip: {{ Account[0].address.zip }}</b>
+              <b>Zip: {{ selectedProfile.address.zip }}</b>
             </p>
           </div>
         </div>
@@ -41,28 +37,15 @@
       <!-- Bigraphy -->
       <div class="col-sm-6 p-3">
         <div class="">
-          <h3 class="day bio text-center">Biography</h3>
+          <h4 class="day bio text-center">About</h4>
           <div>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-            sed quia non numquam eius modi tempora incidunt ut labore et dolore
-            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-            aliquid ex ea commodi consequatur? Quis autem vel eum iure
-            reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
-            pariatur?
+            {{ selectedProfile.biography }}
           </div>
         </div>
       </div>
 
       <!-- Availability Schedule -->
-      <div class="col-md-3 availability-table">
+      <div class="col-md-3 availability-table" *ngIf="selectedProfile.availability">
         <!-- Need to figure out how to do the margins without moving the entire schedule-->
         <div class="day m-2">
           <h4 class="text-center mt-4">Availability Schedule</h4>
@@ -201,13 +184,7 @@
             </div>
           </div>
 
-          <button
-            type="button"
-            class="btn btn-primary btn-lg btn-block"
-            (click)="open(content)"
-          >
-            Contact
-          </button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="open(content)">Contact</button>
         </div>
       </div>
       <!-- Availability Schedule -->
@@ -218,18 +195,12 @@
 <!-- Day -->
 <!-- Two Times -->
 <!-- End of Days -->
-<!-- (click)="open(content)" -->
 
 <!-- Modal Template -->
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Contact Information</h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -239,17 +210,17 @@
         <div class="input-group">
           <div class="input-group-append contact-modal">
             Email:
-            <a href="mailto:{{ Account[0].email }}">{{ Account[0].email }}</a>
+            <a href="mailto:{{ selectedProfile.email }}">{{ selectedProfile.email }}</a>
             <br />
-            {{ Account[0].primaryPhone.type }}:
-            <a href="tel:{{ Account[0].primaryPhone.phoneNumber }}">{{
-              Account[0].primaryPhone.phoneNumber
+            {{ selectedProfile.primaryPhone.type }}:
+            <a href="tel:{{ selectedProfile.primaryPhone.phoneNumber }}">{{
+              selectedProfile.primaryPhone.phoneNumber
             }}</a>
             <br />
-            <span *ngIf="Account[0].secondaryPhone"
-              >{{ Account[0].secondaryPhone.type }}:
-              <a href="tel:{{ Account[0].secondaryPhone.phoneNumber }}">{{
-                Account[0].secondaryPhone.phoneNumber
+            <span *ngIf="selectedProfile.secondaryPhone"
+              >{{ selectedProfile.secondaryPhone.type }}:
+              <a href="tel:{{ selectedProfile.secondaryPhone.phoneNumber }}">{{
+                selectedProfile.secondaryPhone.phoneNumber
               }}</a></span
             >
           </div>
@@ -258,12 +229,6 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline-dark"
-      (click)="modal.close('Save click')"
-    >
-      Close
-    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>

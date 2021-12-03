@@ -1,4 +1,3 @@
-import { Account } from './account.model';
 import { PhoneNumber } from './phonenumber.model';
 import { Address } from './adress.model';
 import { Availability } from './availability.model';

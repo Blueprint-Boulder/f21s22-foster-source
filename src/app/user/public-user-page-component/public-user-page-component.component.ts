@@ -12,20 +12,20 @@ import { profileServiceProvider } from 'src/app/services/profile-service/profile
   providers: [profileServiceProvider],
 })
 export class PublicUserPageComponentComponent implements OnInit {
+  id: number;
+  private sub: any;
   public selectedProfile: Profile;
   closeResult = ''; // how modal was closed
   toastService: any;
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    this.profileService.getProfileById(1).subscribe(
-      (p: Profile) => {
-        this.selectedProfile = p;
-      },
-      (error) => {
-        this.toastService.error('Failed to fetch latest announcement. Try reloading the page.', 'Error');
-      }
-    );
+    this.sub = this.route.params.subscribe((params) => {
+      this.id = +params['id'];
+    });
+    this.profileService.getProfileById(this.id).subscribe((p: Profile) => {
+      this.selectedProfile = p;
+    });
   }
 
   open(content: any) {
