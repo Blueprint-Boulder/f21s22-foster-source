@@ -10,10 +10,7 @@ export class AccountImplService implements AccountService {
   constructor(private http: HttpClient) {}
 
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
-    return this.http.post<CreateAccountRequest>(
-      `${environment.backendHost}/api/db/accounts`,
-      JSON.stringify(accountReq)
-    );
+    return this.http.post<CreateAccountRequest>(`${environment.backendHost}/api/db/accounts`, accountReq);
   }
 
   deleteAccount(id: number): Observable<any> {
