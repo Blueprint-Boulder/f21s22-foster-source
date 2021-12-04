@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
 import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
@@ -14,7 +15,7 @@ import { profileServiceProvider } from 'src/app/services/profile-service/profile
 export class PublicUserPageComponentComponent implements OnInit {
   id: number;
   private sub: any;
-  public selectedProfile: Profile;
+  public selectedProfile: FullProfileRes;
   closeResult = ''; // how modal was closed
   toastService: any;
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private profileService: ProfileService) {}
@@ -24,7 +25,7 @@ export class PublicUserPageComponentComponent implements OnInit {
       this.id = +params['id'];
     });
     console.log('User ID: ' + String(this.id));
-    this.profileService.getProfileById(this.id).subscribe((p: Profile) => {
+    this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
       this.selectedProfile = p;
     });
   }
