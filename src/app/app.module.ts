@@ -20,13 +20,13 @@ import { LoggingInterceptor } from './services/logging.interceptor';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule,
     NgxEditorModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     {
