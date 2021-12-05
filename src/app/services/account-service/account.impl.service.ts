@@ -1,6 +1,13 @@
 import { AccountService } from './account.service';
 import { HttpClient } from '@angular/common/http';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  LoginRequest,
+  UpdateAccountReq,
+  VerifyReq,
+} from '../../models/account.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
@@ -11,6 +18,14 @@ export class AccountImplService implements AccountService {
 
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
     return this.http.post<CreateAccountRequest>(`${environment.backendHost}/api/db/accounts`, accountReq);
+  }
+
+  verifyAccount(params: VerifyReq): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/verification`, params);
+  }
+
+  resendVerificationEmail(email: string): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/verification/resend`, { email: email });
   }
 
   deleteAccount(id: number): Observable<any> {

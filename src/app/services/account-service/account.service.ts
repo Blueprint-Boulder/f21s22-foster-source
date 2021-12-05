@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  LoginRequest,
+  UpdateAccountReq,
+  VerifyReq,
+} from '../../models/account.model';
 import { Observable } from 'rxjs';
 import {
   ApproveApplicantRequest,
@@ -15,6 +22,8 @@ import { FinishProfileReq } from '../../models/profile.model';
 })
 export abstract class AccountService {
   public abstract createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest>;
+  public abstract verifyAccount(params: VerifyReq): Observable<any>;
+  public abstract resendVerificationEmail(email: string): Observable<any>;
   public abstract login(params: LoginRequest): Observable<Cookie>;
   public abstract completeProfile(params: FinishProfileReq): Observable<any>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;

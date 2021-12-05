@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="card mx-auto mt-5 p-3">
+    <div class="card-body" *ngIf="!isError">
+      <h5 class="card-title">Thanks for verifying your email!</h5>
+      <p class="card-text">You may now log in and finish your account.</p>
+      <button class="btn btn-primary text-white float-right" [routerLink]="'/login'">Log In</button>
+    </div>
+    <div class="card-body" *ngIf="isError">
+      <p class="card-text">
+        {{ errorMessage }}
+      </p>
+    </div>
+  </div>
+</div>
