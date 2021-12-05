@@ -72,12 +72,13 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwFirstName: 'George',
     cwLastName: 'Clooney',
     cwEmail: 'gCloon@aol.com',
+    cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
-    primaryPhone: {
+    primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
     },
-    secondaryPhone: {
+    secondaryPhoneNumber: {
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },

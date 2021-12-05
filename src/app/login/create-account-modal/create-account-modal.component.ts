@@ -162,16 +162,19 @@ export class CreateAccountModalComponent implements OnInit {
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
         cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
+        cwPhoneNumber: CreateAccountModalComponent.formatPhoneNumber(
+          this.createAccountForm.get('caseworkerphone')!.value
+        ),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
         email: this.createAccountForm.get('caseworkerlname')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
-        primaryPhone: {
+        primaryPhoneNumber: {
           phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
           type: this.createAccountForm.get('primaryType')!.value,
         },
-        secondaryPhone: this.createAccountForm.get('secondaryType')?.value
+        secondaryPhoneNumber: this.createAccountForm.get('secondaryType')?.value
           ? {
               phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
                 this.createAccountForm.get('secondaryPhone')!.value

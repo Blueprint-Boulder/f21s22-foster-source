@@ -29,9 +29,10 @@ export interface CreateAccountRequest {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   address: SimpleAddressReq;
 }
 
