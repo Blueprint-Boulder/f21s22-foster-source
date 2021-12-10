@@ -1,0 +1,21 @@
+version: 0.2
+env:
+  variables:
+    APP_NAME: "respite-source"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14.15
+    commands:
+      - echo Installing dependencies
+      - npm install && npm install -g @angular/cli
+  build:
+    commands:
+      - echo Building production distribution...
+      - ng build --configuration=production
+  post_build:
+    commands:
+      - echo Build finished. Deploying to S3.
+      - cd dist/$APP_NAME
+      - ls -la
+      - aws s3 sync . s3://respite-source-prod --delete
