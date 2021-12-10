@@ -1,0 +1,12 @@
+<div class="container-fluid" *ngIf="days">
+  <div class="row mt-5">
+    <div class="col">
+      <h5><span>Filter Availability By Day</span></h5>
+    </div>
+  </div>
+  <div class="row mt-3" *ngFor="let day of days; let i = index">
+    <div class="col">
+      <app-day-availability-filter [day]="day" [dayModel]="availabilities[i]" [index]="i"></app-day-availability-filter>
+    </div>
+  </div>
+</div>

@@ -21,10 +21,7 @@ import { accountServiceProvider } from '../../services/account-service/account.s
   styleUrls: ['./user-action-table.component.css'],
   animations: [
     trigger('inOutAnimation', [
-      transition(':leave', [
-        style({ opacity: 1 }),
-        animate('0.1s ease-in', style({ opacity: 0 })),
-      ]),
+      transition(':leave', [style({ opacity: 1 }), animate('0.1s ease-in', style({ opacity: 0 }))]),
     ]),
   ],
   providers: [accountServiceProvider],

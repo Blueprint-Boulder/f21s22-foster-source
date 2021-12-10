@@ -6,10 +6,7 @@ import {
   OptionalAnnouncement,
   PostAnnouncementRequest,
 } from '../../models/announcement.model';
-import {
-  announcements,
-  getAnnouncementResponses,
-} from '../../mock/database-entities';
+import { announcements, getAnnouncementResponses } from '../../mock/database-entities';
 
 export class AnnouncementMockService implements AnnouncementService {
   deleteAnnouncement(id: number): Observable<any> {
@@ -28,15 +25,11 @@ export class AnnouncementMockService implements AnnouncementService {
     return of(announcements[0]);
   }
 
-  postAnnouncement(
-    announcement: PostAnnouncementRequest
-  ): Observable<Announcement> {
+  postAnnouncement(announcement: PostAnnouncementRequest): Observable<Announcement> {
     return of(announcements[0]);
   }
 
-  updateAnnouncement(
-    opAnnouncement: OptionalAnnouncement
-  ): Observable<Announcement> {
+  updateAnnouncement(opAnnouncement: OptionalAnnouncement): Observable<Announcement> {
     return of(announcements[0]);
   }
 }

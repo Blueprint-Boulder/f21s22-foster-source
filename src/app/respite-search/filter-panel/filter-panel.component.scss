@@ -1,0 +1,104 @@
+@import "../../../styles";
+
+.sidepanel {
+  z-index: 9999;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.panel-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.filters {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 80%;
+  overflow-y: scroll;
+  padding-right: 10px;
+  overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.panel-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.closer {
+  float: right;
+  right: 0;
+  position: absolute;
+  z-index: 999999;
+}
+
+#distance-slider {
+  width: 250px;
+}
+::ng-deep {
+  ngx-slider .ngx-slider-pointer {
+    background-color: map-get($theme-colors, "primary") !important;
+    height: 16px !important;
+    width: 16px !important;
+    top: -7px !important;
+    border-radius: 8px;
+  }
+
+  ngx-slider .ngx-slider-pointer:after {
+    top: 4px !important;
+    left: 4px !important;
+  }
+
+  ngx-slider .ngx-slider-model-value {
+    color: map-get($theme-colors, "primary") !important;
+  }
+
+  ngx-slider .ngx-slider-selection {
+    background-color: map-get($theme-colors, "primary") !important;
+  }
+}
+
+.min-w-50 {
+  min-width: 400px;
+}
+
+.black-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 5555;
+}

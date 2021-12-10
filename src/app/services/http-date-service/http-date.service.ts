@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { isObject } from 'rxjs/internal-compatibility';
@@ -14,12 +8,7 @@ import { isObject } from 'rxjs/internal-compatibility';
   providedIn: 'root',
 })
 export class HttpDateService implements HttpInterceptor {
-  constructor() {}
-
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       // @ts-ignore
       // proceed when there is a response; ignore other events

@@ -5,6 +5,7 @@ export enum PhoneNumberType {
 }
 
 export interface PhoneNumber {
+  id?: number;
   phoneNumber: string;
   type: PhoneNumberType;
 }
