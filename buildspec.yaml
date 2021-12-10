@@ -1,7 +1,7 @@
 version: 0.2
 env:
   variables:
-    APP_NAME: "respite-source"
+    APP_NAME: "f21s22-foster-source"
 phases:
   install:
     runtime-versions:
