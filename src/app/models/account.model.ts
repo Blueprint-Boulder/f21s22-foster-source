@@ -59,3 +59,7 @@ export interface Cookie {
   exp: number;
   iat: number;
 }
+
+export interface VerifyReq {
+  key: string;
+}

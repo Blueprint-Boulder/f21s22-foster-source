@@ -166,7 +166,7 @@ export class CreateAccountModalComponent implements OnInit {
           this.createAccountForm.get('caseworkerphone')!.value
         ),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
-        email: this.createAccountForm.get('caseworkerlname')!.value,
+        email: this.createAccountForm.get('email')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
