@@ -44,18 +44,18 @@ const getAnnouncementResponses: GetAnnouncementsRes[] = [{ announcements: announ
 
 export const simpleAddresses: SimpleAddressReq[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
   },
 ];
 
 export const addresses: AddressReq[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
     lat: '1',
     lon: '1',
@@ -119,9 +119,9 @@ export const accounts: Account[] = [
     lastLogin: new Date(),
     profileCompleted: true,
     address: {
-      line1: '1002 fake st.',
+      addressLine1: '1002 fake st.',
       city: 'Denver',
-      zip: '80210',
+      zipcode: '80210',
       state: 'CO',
       lat: '1',
       lon: '1',
