@@ -37,10 +37,7 @@ export class AnnouncementsComponent implements OnInit {
         this.pastAnnouncements = res.announcements;
       },
       (err) => {
-        this.toastService.show({
-          body: 'Something went wrong trying to fetch past announcements.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(err);
       }
     );
   }
@@ -68,11 +65,8 @@ export class AnnouncementsComponent implements OnInit {
           });
           this.reloadPage();
         },
-        (error: HttpErrorResponse) => {
-          this.toastService.show({
-            body: 'Something went wrong trying to post the announcement.',
-            preset: ToastPresets.ERROR,
-          });
+        (error) => {
+          this.toastService.httpError(error);
         }
       );
   }
@@ -82,9 +76,12 @@ export class AnnouncementsComponent implements OnInit {
     this.announcement = {
       id: -1,
       title: this.title,
-      author: 'Your Name Here',
-      bodyHTML: changes,
-      date: new Date(),
+      account: {
+        firstName: 'Your name',
+        lastName: '',
+      },
+      bodyHtml: changes,
+      datePosted: new Date(),
     };
   }
 
@@ -92,9 +89,12 @@ export class AnnouncementsComponent implements OnInit {
     this.announcement = {
       id: -1,
       title: this.title,
-      author: 'Your Name Here',
-      bodyHTML: this.richText,
-      date: new Date(),
+      account: {
+        firstName: '[Your name]',
+        lastName: '',
+      },
+      bodyHtml: this.richText,
+      datePosted: new Date(),
     };
   }
 
