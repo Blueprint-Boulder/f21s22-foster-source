@@ -151,12 +151,12 @@ export class CreateAccountModalComponent implements OnInit {
 
       const createAccountReq: CreateAccountRequest = {
         address: {
-          line1: this.createAccountForm.get('address')!.value,
-          line2: this.createAccountForm!.get('address2')?.value
+          addressLine1: this.createAccountForm.get('address')!.value,
+          addressLine2: this.createAccountForm!.get('address2')?.value
             ? this.createAccountForm!.get('address2')!.value
             : undefined,
           city: this.createAccountForm!.get('city')!.value,
-          zip: this.createAccountForm!.get('zip')!.value,
+          zipcode: this.createAccountForm!.get('zip')!.value,
           state: this.createAccountForm!.get('state')!.value,
         },
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
