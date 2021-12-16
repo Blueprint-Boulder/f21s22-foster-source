@@ -17,7 +17,10 @@
           ><br />
         </div>
         <small
-          ><i>Banned on {{ getFormattedDateForUser(i) }} by {{ blacklistedUser.bannedBy }}</i></small
+          ><i
+            >Banned on {{ getFormattedDateForUser(i) }} by {{ blacklistedUser.bannedByAccount.firstName }}
+            {{ blacklistedUser.bannedByAccount.lastName }}</i
+          ></small
         >
       </div>
       <div class="col-xs-12 col-sm-4 m-auto">

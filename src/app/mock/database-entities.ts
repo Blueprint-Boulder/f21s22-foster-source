@@ -210,7 +210,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Smith',
     email: 'josh.smith@aol.com',
     phoneNumber: '(720) 822-9918',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason: 'Josh is not even from Colorado, but will not stop applying.',
   },
@@ -219,7 +223,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'green',
     email: 'amygirl1111@aol.com',
     phoneNumber: '(720) 221-9887',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 2,
+      firstName: 'Joe',
+      lastName: 'Biden',
+    },
     date: new Date(),
     reason: 'Amy is honestly just not a vibe.',
   },
@@ -228,7 +236,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Gates',
     email: 'bill@microsoft.com',
     phoneNumber: '(315) 883-1182',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
