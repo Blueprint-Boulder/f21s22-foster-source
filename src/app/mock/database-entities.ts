@@ -12,29 +12,38 @@ import { FullProfileRes } from '../models/get-profile-by-id.models';
 const announcements: Announcement[] = [
   {
     id: 1,
-    date: new Date(),
-    author: 'Tim Cook',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Tim',
+      lastName: 'Cook',
+    },
     title: 'This is the first announcement!',
-    bodyHTML: `
+    bodyHtml: `
     <b>this should be some bold text...</b>
     <div>Also it has a div!</div>
     `,
   },
   {
     id: 2,
-    date: new Date(),
-    author: 'Jake Paul',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Jake',
+      lastName: 'Paul',
+    },
     title: 'Christmas Party',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     `,
   },
   {
     id: 3,
-    date: new Date(),
-    author: 'Penelope Smith',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Penelope',
+      lastName: 'Smith',
+    },
     title: 'This is really important!',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui </b> officia deserunt mollit anim id est laborum.</p> <img src="https://fostersource.org/wp-content/uploads/2020/07/team1.jpg" width="589px">
     `,
   },
@@ -201,7 +210,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Smith',
     email: 'josh.smith@aol.com',
     phoneNumber: '(720) 822-9918',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason: 'Josh is not even from Colorado, but will not stop applying.',
   },
@@ -210,7 +223,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'green',
     email: 'amygirl1111@aol.com',
     phoneNumber: '(720) 221-9887',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 2,
+      firstName: 'Joe',
+      lastName: 'Biden',
+    },
     date: new Date(),
     reason: 'Amy is honestly just not a vibe.',
   },
@@ -219,7 +236,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Gates',
     email: 'bill@microsoft.com',
     phoneNumber: '(315) 883-1182',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',

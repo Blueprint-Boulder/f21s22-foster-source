@@ -58,10 +58,7 @@ export class BlacklistTableComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        this.toastService.show({
-          body: 'Something went wrong trying to unban the user.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(error);
       }
     );
   }

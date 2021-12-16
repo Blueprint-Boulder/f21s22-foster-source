@@ -13,7 +13,7 @@ export class BlacklistImplService implements BlacklistService {
 
   deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return this.http.delete<void>(
-      `${environment.backendHost}/api/db/blacklist/?phonenumber=${encodeURIComponent(
+      `${environment.backendHost}/api/db/blacklist/?phoneNumber=${encodeURIComponent(
         phoneNumber
       )}&email=${encodeURIComponent(email)}`
     );

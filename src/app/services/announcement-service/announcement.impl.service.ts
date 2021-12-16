@@ -25,16 +25,13 @@ export class AnnouncementImplService implements AnnouncementService {
   }
 
   postAnnouncement(announcement: PostAnnouncementRequest): Observable<Announcement> {
-    return this.http.post<Announcement>(
-      `${environment.backendHost}/api/db/announcements`,
-      JSON.stringify(announcement)
-    );
+    return this.http.post<Announcement>(`${environment.backendHost}/api/db/announcements`, announcement);
   }
 
   updateAnnouncement(opAnnouncement: OptionalAnnouncement): Observable<Announcement> {
     return this.http.put<Announcement>(
       `${environment.backendHost}/api/db/announcements/${encodeURIComponent(opAnnouncement.id)}`,
-      JSON.stringify(opAnnouncement)
+      opAnnouncement
     );
   }
 
