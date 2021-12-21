@@ -25,6 +25,10 @@ const routes: Routes = [
 >>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
   },
   {
+    path: 'respite',
+    loadChildren: () => import('./respite-search/respite-search.module').then((m) => m.RespiteSearchModule),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },

@@ -1,8 +1,16 @@
 import { AccountService } from './account.service';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  LoginRequest,
+  UpdateAccountReq,
+  VerifyReq,
+} from '../../models/account.model';
 import { Observable, of } from 'rxjs';
 import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
+import { FinishProfileReq } from '../../models/profile.model';
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
@@ -43,7 +51,15 @@ export class AccountMockService implements AccountService {
     return of(accounts[0]);
   }
 
-  completeProfile(params: any): Observable<any> {
+  completeProfile(params: FinishProfileReq): Observable<any> {
+    return of({});
+  }
+
+  verifyAccount(params: VerifyReq): Observable<any> {
+    return of({});
+  }
+
+  resendVerificationEmail(email: string): Observable<any> {
     return of({});
   }
 }

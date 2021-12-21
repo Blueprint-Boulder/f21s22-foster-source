@@ -9,6 +9,13 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ToastPresets } from '../../models/toast.model';
+import {
+  FinishProfileReq,
+  HouseholdBackground,
+  RespiteBackgroundReq,
+  RespiteProviderInfoReq,
+  SecondaryAccountHolderReq,
+} from '../../models/profile.model';
 
 @Component({
   selector: 'app-finish-account-modal',
@@ -153,15 +160,22 @@ export class FinishAccountModalComponent implements OnInit {
       this.needToUploadImgError = true;
       alert('Please complete all required fields (indicated with a red star).');
     } else {
-      if (this.finishProfileForm.get('canProvideRespite')!.value === true) {
-        this.finishProfileForm.addControl('respiteAvailability', new FormControl(this.generateRespiteAvailability()));
-      }
+      const req: FinishProfileReq = {
+        preferredName: this.finishProfileForm.get('preferredName')!.value,
+        gender: this.finishProfileForm.get('gender')!.value,
+        dob: this.finishProfileForm.get('dob')!.value,
+        profileSmallAwsKey: `${this.profileImgKey}_small`,
+        profileLargeAwsKey: `${this.profileImgKey}_large`,
+        pronouns: this.getOptionalStringFromForm('pronouns'),
+        maritalStatus: this.getOptionalStringFromForm('maritalStatus'),
+        secondaryAccountHolder: this.getSecondaryAccountHolderInfo(),
+        respiteBackground: this.getRespiteBackground(),
+        householdBackground: this.getHouseholdBackground(),
+      };
 
-      this.finishProfileForm.addControl('photoAWSKey', new FormControl(this.profileImgKey));
+      console.log(JSON.stringify(req));
 
-      console.log(JSON.stringify(this.finishProfileForm.value));
-
-      this.accountService.completeProfile(this.finishProfileForm.value).subscribe(
+      this.accountService.completeProfile(req).subscribe(
         (res) => {
           this.router.navigate([`/respite`]);
         },
@@ -173,6 +187,77 @@ export class FinishAccountModalComponent implements OnInit {
         }
       );
     }
+  }
+
+  private getOptionalStringFromForm(name: string): string | undefined {
+    const val = this.finishProfileForm.get(name)?.value;
+    return val === undefined || val === null || val === '' ? undefined : val;
+  }
+
+  private getOptionalBooleanFromForm(name: string): boolean | undefined {
+    const val = this.finishProfileForm.get(name)?.value;
+    return val === undefined || val === null ? undefined : val;
+  }
+
+  private getSecondaryAccountHolderInfo(): SecondaryAccountHolderReq | undefined {
+    if (!this.hasSecondaryAccountHolder) {
+      return undefined;
+    }
+
+    return {
+      firstName: this.finishProfileForm.get('secfname')!.value,
+      lastName: this.finishProfileForm.get('seclname')!.value,
+      preferredName: this.finishProfileForm.get('secPreferredName')!.value,
+      relationshipToPrimary: this.finishProfileForm.get('relationshipToPrimary')!.value,
+      gender: this.finishProfileForm.get('secGender')!.value,
+      email: this.finishProfileForm.get('secEmail')!.value,
+      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
+      phoneNumberType: this.finishProfileForm.get('secPhoneType')!.value,
+      pronouns: this.getOptionalStringFromForm('secPronouns'),
+      maritalStatus: this.getOptionalStringFromForm('secMaritalStatus'),
+    };
+  }
+
+  private getRespiteBackground(): RespiteBackgroundReq {
+    return {
+      fosterYearsExperience: this.finishProfileForm.get('fosterYears')!.value,
+      totalChildrenCaredFor: this.finishProfileForm.get('totalChildren')!.value,
+      canProvideRespite: this.finishProfileForm.get('canProvideRespite')!.value,
+      lookingForRespite: this.finishProfileForm.get('lookingForRespite')!.value,
+      respiteProviderInfo: this.getRespiteProviderInfo(),
+    };
+  }
+
+  private getRespiteProviderInfo(): RespiteProviderInfoReq | undefined {
+    if (!this.finishProfileForm.get('canProvideRespite')!.value) {
+      return undefined;
+    }
+    console.log('SHOULD NEVER GET HERRE');
+    return {
+      cityCanProvideRespiteIn: this.finishProfileForm.get('respiteCity')!.value,
+      respiteTravelDistance: this.finishProfileForm.get('respiteRange')!.value,
+      careForMinAge: this.finishProfileForm.get('minAge')!.value,
+      careForMaxAge: this.finishProfileForm.get('maxAge')!.value,
+      maxNumCareFor: this.finishProfileForm.get('howManyCareFor')!.value,
+      availability: this.generateRespiteAvailability(),
+    };
+  }
+
+  private getHouseholdBackground(): HouseholdBackground {
+    return {
+      parentalUnitSize: this.finishProfileForm.get('parentalUnitSize')!.value,
+      householdSize: this.finishProfileForm.get('householdSize')!.value,
+      childrenInHousehold: this.finishProfileForm.get('numChildren')!.value,
+      childrenInfo: this.finishProfileForm.get('childrenInfo')!.value,
+      vehicleAccess: this.getOptionalBooleanFromForm('vehicleAccess'),
+      lgbtCareExperience: this.getOptionalBooleanFromForm('caredForLGBT'),
+      caredForPhysDisabled: this.getOptionalBooleanFromForm('caredForPhysicallyDisabled'),
+      caredForIntelDisabled: this.getOptionalBooleanFromForm('caredForIntellectuallyDisabled'),
+      caredForMedicallyFragile: this.getOptionalBooleanFromForm('careForMedicallyFragile'),
+      ownsFirearm: this.getOptionalBooleanFromForm('ownsFirearm'),
+      petInfo: this.getOptionalStringFromForm('petInfo'),
+      additionalDetails: this.getOptionalStringFromForm('additionalInfo'),
+    };
   }
 
   public imageUploaded(event: any): void {

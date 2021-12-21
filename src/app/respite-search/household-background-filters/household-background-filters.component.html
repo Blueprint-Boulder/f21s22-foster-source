@@ -1,0 +1,162 @@
+<div class="container-fluid" *ngIf="radioModel">
+  <div class="row mt-5">
+    <div class="col">
+      <h5><span>Household Background</span></h5>
+    </div>
+  </div>
+  <div class="vehicle-access-container">
+    <div class="row">
+      <div class="col">Access to a Vehicle</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccessRadio"
+            id="vehicleAccessRadioYes"
+            value="yes"
+            [(ngModel)]="radioModel.vehicleAccess"
+          />
+          <label class="form-check-label" for="vehicleAccessRadioYes"> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccessRadio"
+            id="vehicleAccessRadioNo"
+            value="no"
+            [(ngModel)]="radioModel.vehicleAccess"
+          />
+          <label class="form-check-label" for="vehicleAccessRadioNo"> No </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cared-for-lgbt-container mt-3">
+    <div class="row">
+      <div class="col">Has cared for LGBTQIA+ Chilren in the past</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="lgbtCared"
+            id="lgbtCaredYes"
+            value="yes"
+            [(ngModel)]="radioModel.lgbtExperience"
+          />
+          <label class="form-check-label" for="lgbtCaredYes"> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="lgbtCared"
+            id="lgbtCaredNo"
+            value="no"
+            [(ngModel)]="radioModel.lgbtExperience"
+          />
+          <label class="form-check-label" for="lgbtCaredNo"> No </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cared-for-physical-dis-container mt-3">
+    <div class="row">
+      <div class="col">Has cared for children with physical disabilities</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysDisabled"
+            id="caredForPhysDisabledYes"
+            value="yes"
+            [(ngModel)]="radioModel.physicalDisabilityExperience"
+          />
+          <label class="form-check-label" for="caredForPhysDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysDisabled"
+            id="caredForPhysDisabledNo"
+            value="no"
+            [(ngModel)]="radioModel.physicalDisabilityExperience"
+          />
+          <label class="form-check-label" for="caredForPhysDisabledNo"> No </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cared-for-int-dis-container mt-3">
+    <div class="row">
+      <div class="col">Has cared for children with intellectual disabilities</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntDisabled"
+            id="caredForIntDisabledYes"
+            value="yes"
+            [(ngModel)]="radioModel.intellectualDisabilityExperience"
+          />
+          <label class="form-check-label" for="caredForIntDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntDisabled"
+            id="caredForIntDisabledNo"
+            value="no"
+            [(ngModel)]="radioModel.intellectualDisabilityExperience"
+          />
+          <label class="form-check-label" for="caredForIntDisabledNo"> No </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="firearm-container mt-3">
+    <div class="row">
+      <div class="col">Owns a firearm</div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            id="ownsFirearmYes"
+            value="yes"
+            [(ngModel)]="radioModel.ownFirearm"
+          />
+          <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            id="ownsFirearmNo"
+            value="no"
+            [(ngModel)]="radioModel.ownFirearm"
+          />
+          <label class="form-check-label" for="ownsFirearmNo"> No </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

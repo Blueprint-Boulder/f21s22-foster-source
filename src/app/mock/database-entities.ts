@@ -4,36 +4,46 @@ import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
-import { Photo, Profile } from '../models/profile.model';
+import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { Address, SimpleAddress } from '../models/adress.model';
+import { AddressReq, SimpleAddressReq } from '../models/adress.model';
+import { FullProfileRes } from '../models/get-profile-by-id.models';
 
 const announcements: Announcement[] = [
   {
     id: 1,
-    date: new Date(),
-    author: 'Tim Cook',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Tim',
+      lastName: 'Cook',
+    },
     title: 'This is the first announcement!',
-    bodyHTML: `
+    bodyHtml: `
     <b>this should be some bold text...</b>
     <div>Also it has a div!</div>
     `,
   },
   {
     id: 2,
-    date: new Date(),
-    author: 'Jake Paul',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Jake',
+      lastName: 'Paul',
+    },
     title: 'Christmas Party',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     `,
   },
   {
     id: 3,
-    date: new Date(),
-    author: 'Penelope Smith',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Penelope',
+      lastName: 'Smith',
+    },
     title: 'This is really important!',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui </b> officia deserunt mollit anim id est laborum.</p> <img src="https://fostersource.org/wp-content/uploads/2020/07/team1.jpg" width="589px">
     `,
   },
@@ -41,20 +51,20 @@ const announcements: Announcement[] = [
 
 const getAnnouncementResponses: GetAnnouncementsRes[] = [{ announcements: announcements }];
 
-export const simpleAddresses: SimpleAddress[] = [
+export const simpleAddresses: SimpleAddressReq[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
   },
 ];
 
-export const addresses: Address[] = [
+export const addresses: AddressReq[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
     lat: '1',
     lon: '1',
@@ -71,12 +81,13 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwFirstName: 'George',
     cwLastName: 'Clooney',
     cwEmail: 'gCloon@aol.com',
+    cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
-    primaryPhone: {
+    primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
     },
-    secondaryPhone: {
+    secondaryPhoneNumber: {
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },
@@ -119,9 +130,9 @@ export const accounts: Account[] = [
     lastLogin: new Date(),
     profileCompleted: true,
     address: {
-      line1: '1002 fake st.',
+      addressLine1: '1002 fake st.',
       city: 'Denver',
-      zip: '80210',
+      zipcode: '80210',
       state: 'CO',
       lat: '1',
       lon: '1',
@@ -201,7 +212,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Smith',
     email: 'josh.smith@aol.com',
     phoneNumber: '(720) 822-9918',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason: 'Josh is not even from Colorado, but will not stop applying.',
   },
@@ -210,7 +225,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'green',
     email: 'amygirl1111@aol.com',
     phoneNumber: '(720) 221-9887',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 2,
+      firstName: 'Joe',
+      lastName: 'Biden',
+    },
     date: new Date(),
     reason: 'Amy is honestly just not a vibe.',
   },
@@ -219,7 +238,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Gates',
     email: 'bill@microsoft.com',
     phoneNumber: '(315) 883-1182',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
@@ -246,34 +269,103 @@ export const mobilePhones: PhoneNumber[] = [
   },
 ];
 
-export const profiles: Profile[] = [
+export const profiles: FullProfileRes[] = [
   {
     id: 1,
-    biography: 'This is the biography of the profile',
-    profileLargeAWSKey: '121234123234',
-    profileSmallAWSKey: 'asdfasdfasdfas',
-    email: 'test@email.com',
-    username: 'This is the username',
-    firstName: 'Jack',
-    lastName: 'Crowman',
+    preferredName: 'Jace',
     dob: new Date(),
-    primaryPhone: mobilePhones[0],
-    secondaryPhone: {
-      phoneNumber: '+13321123345',
-      type: PhoneNumberType.Home,
+    biography: 'Just an easy going guy',
+    profileLargeAwsKey: 'awskey_large',
+    profileSmallAwsKey: 'awskey_small',
+    gender: 'male',
+    pronouns: 'he/his',
+    maritalStatus: 'single',
+    accountId: 1,
+    householdBackground: {
+      id: 1,
+      parentalUnitSize: 2,
+      householdSize: 4,
+      childrenInHousehold: 2,
+      childrenInfo: '12, female, biological\n 14 male, adopted',
+      vehicleAccess: true,
+      lgbtCareExperience: true,
+      caredForPhysDisabled: true,
+      caredForIntelDisabled: true,
+      caredForMedicallyFragile: true,
+      ownsFirearm: true,
+      petInfo: 'Two dogs and a cat',
+      additionalDetails: 'I am so allergic to peanuts',
     },
-    lastLogin: new Date(),
-    profileCompleted: true,
-    address: {
-      line1: '1002 fake st.',
-      city: 'Denver',
-      zip: '80210',
-      state: 'CO',
-      lat: '1',
-      lon: '1',
+    respiteBackground: {
+      id: 1,
+      fosterYearsExperience: 1,
+      totalChildrenCaredFor: 10,
+      canProvideRespite: true,
+      lookingForRespite: true,
+      respiteProviderInfo: {
+        id: 1,
+        cityCanProvideRespiteIn: 'boulder',
+        respiteTravelDistance: 100,
+        careForMinAge: 0,
+        careForMaxAge: 10,
+        maxNumCareFor: 3,
+        availabilities: [
+          {
+            id: 1,
+            type: AvailabilityType.PRIMARY,
+            monday: [true, false, false, false],
+            tuesday: [false, true, true, true],
+            wednesday: [true, false, false, false],
+            thursday: [false, true, true, true],
+            friday: [true, false, false, false],
+            saturday: [false, true, true, true],
+            sunday: [true, false, false, false],
+          },
+        ],
+      },
     },
-    availability: primaryAvailabilities[0],
-    photoAWSKeys: [{ id: 1, photoAWSKey: 'REAL_AWS_KEY' }],
+    photos: [],
+    secAccountHolder: {
+      id: 1,
+      relationshipToPrimary: 'met once in an airport',
+      firstName: 'Tommy',
+      lastName: 'Bahama',
+      gender: 'male',
+      email: 'tbahama@tommyb.com',
+      preferredName: 'Tom',
+      secAccountHolderPhone: {
+        id: 1,
+        phoneNumber: '+17207738882',
+        type: PhoneNumberType.Home,
+      },
+    },
+    account: {
+      firstName: 'Jett',
+      lastName: 'Crowson',
+      email: 'jettcrowson@colorado.gov',
+      username: 'jcrowson',
+      address: {
+        id: 1,
+        addressLine1: '741 Danbury St',
+        addressLine2: 'APT 101',
+        city: 'Boulder',
+        zipcode: '903213',
+        state: 'CO',
+        country: 'USA',
+        longitude: 12030210,
+        latitude: 23412,
+      },
+      primaryPhoneNumber: {
+        id: 1,
+        phoneNumber: '+193993921',
+        type: PhoneNumberType.Mobile,
+      },
+      secondaryPhoneNumber: {
+        id: 1,
+        phoneNumber: '+8889999999',
+        type: PhoneNumberType.Mobile,
+      },
+    },
   },
 ];
 

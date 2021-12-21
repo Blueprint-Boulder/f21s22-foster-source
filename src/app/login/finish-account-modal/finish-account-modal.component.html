@@ -165,7 +165,7 @@
           class="form-check-input"
           type="radio"
           name="flexRadioDefault"
-          value="true"
+          [value]="true"
           id="shouldAddSec"
           (change)="secChange($event)"
         />
@@ -176,7 +176,7 @@
           class="form-check-input"
           type="radio"
           name="flexRadioDefault"
-          value="false"
+          [value]="false"
           id="shouldNotAddSec"
           (change)="secChange($event)"
           checked
@@ -480,7 +480,7 @@
               type="radio"
               formControlName="canProvideRespite"
               name="canProvideRespite"
-              value="true"
+              [value]="true"
               id="canProvideRespiteYes"
               (change)="respiteProvideChange($event)"
             />
@@ -492,7 +492,7 @@
               type="radio"
               formControlName="canProvideRespite"
               name="canProvideRespite"
-              value="false"
+              [value]="false"
               id="canProvideRespiteNo"
               (change)="respiteProvideChange($event)"
             />
@@ -523,7 +523,7 @@
               type="radio"
               formControlName="lookingForRespite"
               name="lookingForRespite"
-              value="true"
+              [value]="true"
               id="lookingForRespiteYes"
             />
             <label class="form-check-label" for="lookingForRespiteYes"> Yes </label>
@@ -534,7 +534,7 @@
               type="radio"
               formControlName="lookingForRespite"
               name="lookingForRespite"
-              value="false"
+              [value]="false"
               id="lookingForRespiteNo"
             />
             <label class="form-check-label" for="lookingForRespiteNo"> No </label>
@@ -564,7 +564,7 @@
               type="radio"
               formControlName="hasProvidedInPast"
               name="hasProvidedInPast"
-              value="true"
+              [value]="true"
               id="hasProvidedInPastYes"
             />
             <label class="form-check-label" for="hasProvidedInPastYes"> Yes </label>
@@ -575,7 +575,7 @@
               type="radio"
               formControlName="hasProvidedInPast"
               name="hasProvidedInPast"
-              value="false"
+              [value]="false"
               id="hasProvidedInPastNo"
             />
             <label class="form-check-label" for="hasProvidedInPastNo"> No </label>
@@ -882,7 +882,7 @@
             type="radio"
             name="vehicleAccess"
             formControlName="vehicleAccess"
-            value="true"
+            [value]="true"
             id="vehicleAccessYes"
           />
           <label class="form-check-label" for="vehicleAccessYes"> Yes </label>
@@ -893,7 +893,7 @@
             type="radio"
             name="vehicleAccess"
             formControlName="vehicleAccess"
-            value="false"
+            [value]="false"
             id="vehicleAccessNo"
           />
           <label class="form-check-label" for="vehicleAccessNo"> No </label>
@@ -907,7 +907,7 @@
             type="radio"
             name="caredForLGBT"
             formControlName="caredForLGBT"
-            value="true"
+            [value]="true"
             id="caredForLGBTYes"
           />
           <label class="form-check-label" for="caredForLGBTYes"> Yes </label>
@@ -918,7 +918,7 @@
             type="radio"
             name="caredForLGBT"
             formControlName="caredForLGBT"
-            value="false"
+            [value]="false"
             id="caredForLGBTNo"
           />
           <label class="form-check-label" for="caredForLGBTNo"> No </label>
@@ -931,7 +931,7 @@
             class="form-check-input"
             type="radio"
             name="caredForPhysicallyDisabled"
-            value="true"
+            [value]="true"
             id="caredForPhysicallyDisabledYes"
             formControlName="caredForPhysicallyDisabled"
           />
@@ -942,7 +942,7 @@
             class="form-check-input"
             type="radio"
             name="caredForPhysicallyDisabled"
-            value="false"
+            [value]="false"
             id="caredForPhysicallyDisabledNo"
             formControlName="caredForPhysicallyDisabled"
           />
@@ -956,7 +956,7 @@
             class="form-check-input"
             type="radio"
             name="caredForIntellectuallyDisabled"
-            value="true"
+            [value]="true"
             id="caredForIntellectuallyDisabledYes"
             formControlName="caredForIntellectuallyDisabled"
           />
@@ -967,7 +967,7 @@
             class="form-check-input"
             type="radio"
             name="caredForIntellectuallyDisabled"
-            value="false"
+            [value]="false"
             id="caredForIntellectuallyDisabledNo"
             formControlName="caredForIntellectuallyDisabled"
           />
@@ -981,7 +981,7 @@
             class="form-check-input"
             type="radio"
             name="careForMedicallyFragile"
-            value="true"
+            [value]="true"
             id="careForMedicallyFragileYes"
             formControlName="careForMedicallyFragile"
           />
@@ -992,7 +992,7 @@
             class="form-check-input"
             type="radio"
             name="careForMedicallyFragile"
-            value="false"
+            [value]="false"
             id="careForMedicallyFragileNo"
             formControlName="careForMedicallyFragile"
           />
@@ -1007,7 +1007,7 @@
             type="radio"
             name="ownsFirearm"
             formControlName="ownsFirearm"
-            value="true"
+            [value]="true"
             id="ownsFirearmYes"
           />
           <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
@@ -1018,7 +1018,7 @@
             type="radio"
             name="ownsFirearm"
             formControlName="ownsFirearm"
-            value="false"
+            [value]="false"
             id="ownsFirearmNo"
           />
           <label class="form-check-label" for="ownsFirearmNo"> No </label>

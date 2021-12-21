@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  backendHost: 'localhost:3000',
-  useRealAnnouncementService: false,
-  useRealAccountService: false,
-  useRealProfileService: false,
+  backendHost: 'http://localhost:3000',
+  useRealAnnouncementService: true,
+  useRealAccountService: true,
+  useRealProfileService: true,
   useRealAddressService: false,
   useRealAvailabilityService: false,
-  useRealBlacklistService: false,
+  useRealBlacklistService: true,
   useRealPhoneNumberService: false,
   useRealProfilePhotosService: false,
 <<<<<<< HEAD

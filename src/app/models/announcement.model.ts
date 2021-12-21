@@ -1,9 +1,12 @@
 export interface Announcement {
   id: number;
-  date: Date;
-  author: string;
+  datePosted: Date;
   title: string;
-  bodyHTML: string;
+  bodyHtml: string;
+  account: {
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export interface OptionalAnnouncement {

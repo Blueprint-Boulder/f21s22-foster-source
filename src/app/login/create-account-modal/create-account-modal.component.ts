@@ -151,27 +151,30 @@ export class CreateAccountModalComponent implements OnInit {
 
       const createAccountReq: CreateAccountRequest = {
         address: {
-          line1: this.createAccountForm.get('address')!.value,
-          line2: this.createAccountForm!.get('address2')?.value
+          addressLine1: this.createAccountForm.get('address')!.value,
+          addressLine2: this.createAccountForm!.get('address2')?.value
             ? this.createAccountForm!.get('address2')!.value
             : undefined,
           city: this.createAccountForm!.get('city')!.value,
-          zip: this.createAccountForm!.get('zip')!.value,
+          zipcode: this.createAccountForm!.get('zip')!.value,
           state: this.createAccountForm!.get('state')!.value,
         },
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
         cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
+        cwPhoneNumber: CreateAccountModalComponent.formatPhoneNumber(
+          this.createAccountForm.get('caseworkerphone')!.value
+        ),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
-        email: this.createAccountForm.get('caseworkerlname')!.value,
+        email: this.createAccountForm.get('email')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
-        primaryPhone: {
+        primaryPhoneNumber: {
           phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
           type: this.createAccountForm.get('primaryType')!.value,
         },
-        secondaryPhone: this.createAccountForm.get('secondaryType')?.value
+        secondaryPhoneNumber: this.createAccountForm.get('secondaryType')?.value
           ? {
               phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
                 this.createAccountForm.get('secondaryPhone')!.value

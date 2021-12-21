@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VerifyEmailComponent } from './verify-email.component';
 import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('VerifyEmailComponent', () => {
   let component: VerifyEmailComponent;
@@ -10,7 +11,7 @@ describe('VerifyEmailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ VerifyEmailComponent ],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   });

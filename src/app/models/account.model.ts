@@ -1,5 +1,5 @@
 import { PhoneNumber } from './phonenumber.model';
-import { Address, SimpleAddress } from './adress.model';
+import { AddressReq, SimpleAddressReq } from './adress.model';
 
 export interface Account {
   id: number;
@@ -17,7 +17,7 @@ export interface Account {
   secondaryPhone?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
-  address: Address;
+  address: AddressReq;
 }
 
 export interface CreateAccountRequest {
@@ -29,10 +29,11 @@ export interface CreateAccountRequest {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
-  address: SimpleAddress;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+  address: SimpleAddressReq;
 }
 
 export interface UpdateAccountReq {
@@ -44,7 +45,7 @@ export interface UpdateAccountReq {
   cwEmail?: string;
   primaryPhone?: PhoneNumber;
   secondaryPhone?: PhoneNumber;
-  address?: SimpleAddress;
+  address?: SimpleAddressReq;
 }
 
 export interface LoginRequest {
@@ -57,4 +58,8 @@ export interface Cookie {
   privilegeLevel: number;
   exp: number;
   iat: number;
+}
+
+export interface VerifyReq {
+  key: string;
 }
