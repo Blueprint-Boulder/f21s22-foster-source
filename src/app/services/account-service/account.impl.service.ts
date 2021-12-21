@@ -1,15 +1,6 @@
 import { AccountService } from './account.service';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
-import {
-  Account,
-  CreateAccountRequest,
-  LoginRequest,
-  UpdateAccountReq,
-} from '../../models/account.model';
-=======
 import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
->>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
@@ -32,16 +23,8 @@ export class AccountImplService implements AccountService {
     return this.http.delete<void>(`${environment.backendHost}/api/db/accounts/`);
   }
 
-<<<<<<< HEAD
   login(params: LoginRequest): Observable<string> {
-    return this.http.post<string>(
-      `${environment.backendHost}/api/db/accounts/login`,
-      JSON.stringify(params)
-    );
-=======
-  login(params: LoginRequest): Observable<Cookie> {
-    return this.http.post<Cookie>(`${environment.backendHost}/api/db/accounts/login`, JSON.stringify(params));
->>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
+    return this.http.post<string>(`${environment.backendHost}/api/db/accounts/login`, JSON.stringify(params));
   }
 
   updateAccount(params: UpdateAccountReq): Observable<Account> {

@@ -1,22 +1,8 @@
 import { AccountService } from './account.service';
 import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
 import { Observable, of } from 'rxjs';
-<<<<<<< HEAD
-import {
-  accounts,
-  applicants,
-  createAccountRequests,
-  tokenString,
-} from '../../mock/database-entities';
-import {
-  ApproveApplicantRequest,
-  DenyApplicantRequest,
-  GetApplicantsRes,
-} from '../../models/applicant.model';
-=======
-import { accounts, applicants, cookies, createAccountRequests } from '../../mock/database-entities';
+import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
->>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {

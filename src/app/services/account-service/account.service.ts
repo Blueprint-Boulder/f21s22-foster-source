@@ -13,16 +13,9 @@ import {
   providedIn: 'root',
 })
 export abstract class AccountService {
-<<<<<<< HEAD
-  public abstract createAccount(
-    accountReq: CreateAccountRequest
-  ): Observable<CreateAccountRequest>;
-  public abstract login(params: LoginRequest): Observable<string>;
-=======
   public abstract createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest>;
-  public abstract login(params: LoginRequest): Observable<Cookie>;
+  public abstract login(params: LoginRequest): Observable<string>;
   public abstract completeProfile(params: any): Observable<any>;
->>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(): Observable<any>;
   public abstract deleteAccount(id: number): Observable<any>;
