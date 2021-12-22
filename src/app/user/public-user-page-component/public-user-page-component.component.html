@@ -1,4 +1,4 @@
-<!-- Page Data -->
+Page Data
 <div *ngIf="selectedProfile" class="m-5">
   <div class="container">
     <div class="row">
@@ -11,13 +11,17 @@
           />
           <div class="card-body">
             <h2 class="card-title text-center word-wrap">
-              {{ selectedProfile.firstName }} {{ selectedProfile.lastName }}
+              {{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}
             </h2>
-            <p class="card-text"><b>Distance:</b> Placeholder miles</p>
+            <p class="card-text">
+              <b>Distance:</b> {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
+            </p>
             <h5 class="card-text contact-items">
               <b>Primary Contact</b>
             </h5>
-            <p class="card-text">Name: {{ selectedProfile.firstName }} {{ selectedProfile.lastName }}</p>
+            <p class="card-text">
+              Name: {{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}
+            </p>
             <p class="card-text">Pronouns: Placeholder</p>
             <h5 class="card-text contact-items">
               <b>Secondary Contact</b>
@@ -25,10 +29,10 @@
             <p class="card-text">Name: Jet Crowman, the Legend</p>
             <p class="card-text">Pronouns: Placeholder</p>
             <p class="card-text">
-              <b>State: {{ selectedProfile.address.state }}</b>
+              <b>State: {{ selectedProfile.account.address.state }}</b>
             </p>
             <p class="card-text">
-              <b>Zip: {{ selectedProfile.address.zip }}</b>
+              <b>Zip: {{ selectedProfile.account.address.zipcode }}</b>
             </p>
           </div>
         </div>
@@ -44,18 +48,18 @@
         </div>
       </div>
 
-      <!-- Availability Schedule -->
-      <div class="col-md-3 availability-table" *ngIf="selectedProfile.availability">
+      Availability Schedule
+      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground.canProvideRespite">
         <!-- Need to figure out how to do the margins without moving the entire schedule-->
         <div class="day m-2">
           <h4 class="text-center mt-4">Availability Schedule</h4>
         </div>
         <div class="row p-3">
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.monday">
+          <div class="col-sm-12 px-3" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0]">
             <h5 class="day">Monday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[0]">
+              <div class="col-md-6" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities">
                 <p class="text text-center">Morning</p>
               </div>
               <div class="col-md-6" *ngIf="selectedProfile.availability.monday[1]">
@@ -210,17 +214,17 @@
         <div class="input-group">
           <div class="input-group-append contact-modal">
             Email:
-            <a href="mailto:{{ selectedProfile.email }}">{{ selectedProfile.email }}</a>
+            <a href="mailto:{{ selectedProfile.account.email }}">{{ selectedProfile.account.email }}</a>
             <br />
-            {{ selectedProfile.primaryPhone.type }}:
-            <a href="tel:{{ selectedProfile.primaryPhone.phoneNumber }}">{{
-              selectedProfile.primaryPhone.phoneNumber
+            {{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}:
+            <a href="tel:{{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}">{{
+              selectedProfile.account.primaryPhoneNumber.phoneNumber
             }}</a>
             <br />
-            <span *ngIf="selectedProfile.secondaryPhone"
-              >{{ selectedProfile.secondaryPhone.type }}:
-              <a href="tel:{{ selectedProfile.secondaryPhone.phoneNumber }}">{{
-                selectedProfile.secondaryPhone.phoneNumber
+            <span *ngIf="selectedProfile.account.secondaryPhoneNumber.phoneNumber"
+              >{{ selectedProfile.account.secondaryPhoneNumber.type }}:
+              <a href="tel:{{ selectedProfile.account.secondaryPhoneNumber.phoneNumber }}">{{
+                selectedProfile.account.secondaryPhoneNumber.phoneNumber
               }}</a></span
             >
           </div>

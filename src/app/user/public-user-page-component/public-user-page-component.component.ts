@@ -26,6 +26,8 @@ export class PublicUserPageComponentComponent implements OnInit {
     });
     console.log('User ID: ' + String(this.id));
     this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
+      console.log(p);
+      console.log(p.respiteBackground.respiteProviderInfo?.respiteTravelDistance);
       this.selectedProfile = p;
     });
   }
