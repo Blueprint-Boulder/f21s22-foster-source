@@ -1,1 +1,5 @@
-<p>search-results works!</p>
+<div class="container-fluid" *ngIf="profiles">
+  <div class="row">
+    <app-result-card *ngFor="let profile of profiles" [profile]="profile"></app-result-card>
+  </div>
+</div>

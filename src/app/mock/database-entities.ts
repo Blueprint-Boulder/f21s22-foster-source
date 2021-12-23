@@ -8,6 +8,7 @@ import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
 import { AddressReq, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
+import { SmallProfile } from '../models/small-profile.model';
 
 const announcements: Announcement[] = [
   {
@@ -346,3 +347,70 @@ export const profiles: FullProfileRes[] = [
 ];
 
 export { announcements, getAnnouncementResponses, users, applicants, blacklist };
+
+export const searchResults: SmallProfile[] = [
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+  {
+    firstName: 'Jett',
+    lastName: 'Crowson',
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    latitude: 12345,
+    longitude: 54321,
+  },
+];

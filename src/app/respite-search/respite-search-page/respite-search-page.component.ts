@@ -4,6 +4,7 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { profileServiceProvider } from '../../services/profile-service/profile.service.provider';
 import { FiltersReq } from '../../models/filters.model';
 import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { SmallProfile } from '../../models/small-profile.model';
 
 @Component({
   selector: 'app-respite-search-page',
@@ -12,7 +13,7 @@ import { FullProfileRes } from '../../models/get-profile-by-id.models';
   providers: [profileServiceProvider],
 })
 export class RespiteSearchPageComponent implements OnInit {
-  public results: FullProfileRes[];
+  public results: SmallProfile[];
   public totalResults: number;
   public resultPage = 1;
   public resultsPerPage = 25;
