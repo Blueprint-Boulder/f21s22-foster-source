@@ -1,8 +1,9 @@
 export interface SmallProfile {
-  firstName: string;
-  lastName: string;
   id: number;
+  preferredName: string;
   profileLargeAWSKey: string;
-  latitude: number;
-  longitude: number;
+  account: {
+    username: string;
+  };
+  distance: number;
 }

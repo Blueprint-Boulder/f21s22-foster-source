@@ -1,8 +1,9 @@
 <div class="card pt-3 col text-center" *ngIf="profile" >
   <img class="card-img-top" [src]="getPhoto()" alt="Profile image" />
   <div class="card-body">
-    <h5 class="card-text"><small><i>{{ getDistance() }} miles away</i></small></h5>
-    <h5 class="card-title">{{ profile.firstName }} {{ profile.lastName }}</h5>
-    <a href="#" class="btn btn-primary text-white">Visit Profile</a>
+    <p class="card-text"><i>{{ profile.distance.toFixed(1) }} miles away</i></p>
+    <h5 class="card-title">{{ profile.preferredName }}</h5>
+    <p class="card-subtitle mb-3"><small>{{profile.account.username}}</small></p>
+    <a href="#" [routerLink]="'/users/' + profile.id" class="btn btn-primary text-white">Visit Profile</a>
   </div>
 </div>
