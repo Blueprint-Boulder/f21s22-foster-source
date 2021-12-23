@@ -1,8 +1,8 @@
-<div class="card ml-5 mt-4 col-md-11" *ngIf="profile" style="width: 18rem; text-align: center">
-  <img class="card-img-top" [src]="getPhoto()" alt="" />
+<div class="card pt-3 col text-center" *ngIf="profile" >
+  <img class="card-img-top" [src]="getPhoto()" alt="Profile image" />
   <div class="card-body">
-    <h5 class="card-text">{{ getDistance() }} miles away</h5>
+    <h5 class="card-text"><small><i>{{ getDistance() }} miles away</i></small></h5>
     <h5 class="card-title">{{ profile.firstName }} {{ profile.lastName }}</h5>
-    <a href="#" class="btn btn-primary">Profile Page</a>
+    <a href="#" class="btn btn-primary text-white">Visit Profile</a>
   </div>
 </div>
