@@ -19,6 +19,7 @@ export class RespiteSearchPageComponent implements OnInit {
   public resultsPerPage = 25;
   public hidden = true;
   public filtersReq: FiltersReq;
+  public searchTerm = '';
 
   constructor(private profileService: ProfileService) {}
 
@@ -28,15 +29,11 @@ export class RespiteSearchPageComponent implements OnInit {
 
   getSearchResults() {
     this.profileService
-      .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq)
+      .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq, this.searchTerm)
       .subscribe((res: GetProfilesRes) => {
         this.results = res.profiles;
         this.totalResults = res.numResults;
       });
-  }
-
-  searchForTerm(term: string): void {
-    return;
   }
 
   closeNav() {
@@ -54,6 +51,11 @@ export class RespiteSearchPageComponent implements OnInit {
 
   setFilters(filters: FiltersReq): void {
     this.filtersReq = filters;
+    this.getSearchResults();
+  }
+
+  searchEvent(term: any) {
+    this.searchTerm = term;
     this.getSearchResults();
   }
 }

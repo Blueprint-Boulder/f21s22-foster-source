@@ -6,9 +6,11 @@
       placeholder="Who are you looking for?"
       aria-label="Search bar"
       aria-describedby="basic-addon2"
+      [(ngModel)]="searchTerm"
+      (keyup)="searchBarKeyEvent($event)"
     />
     <div class="input-group-append">
-      <button class="btn btn-primary text-white" type="button">Search</button>
+      <button class="btn btn-primary text-white" type="button" (click)="search()">Search</button>
     </div>
   </div>
 </div>

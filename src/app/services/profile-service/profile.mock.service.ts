@@ -14,7 +14,7 @@ export class ProfileMockService implements ProfileService {
     return of(profiles[0]);
   }
 
-  getProfiles(limit: number, offset: number, filters?: FiltersReq): Observable<GetProfilesRes> {
+  getProfiles(limit: number, offset: number, filters?: FiltersReq, searchTerm?: string): Observable<GetProfilesRes> {
     return of({
       profiles: searchResults,
       numResults: 200,
