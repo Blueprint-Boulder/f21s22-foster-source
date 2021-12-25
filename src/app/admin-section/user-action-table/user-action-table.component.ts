@@ -51,10 +51,7 @@ export class UserActionTableComponent implements OnInit {
         }
       },
       (error: HttpErrorResponse) => {
-        this.toastService.show({
-          body: `Something went wrong trying to fetch the list of applicants.`,
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(error);
       }
     );
   }
@@ -82,10 +79,7 @@ export class UserActionTableComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        this.toastService.show({
-          body: 'Something went wrong trying to deny the user.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(error);
       }
     );
   }
@@ -104,10 +98,7 @@ export class UserActionTableComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        this.toastService.show({
-          body: 'Something went wrong trying to approve the user.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(error);
       }
     );
   }
