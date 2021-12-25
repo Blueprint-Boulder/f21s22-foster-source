@@ -1,6 +1,13 @@
 import { AccountService } from './account.service';
 import { HttpClient } from '@angular/common/http';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  GetAccountsReq,
+  LoginRequest,
+  UpdateAccountReq,
+} from '../../models/account.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
@@ -32,16 +39,16 @@ export class AccountImplService implements AccountService {
     return this.http.put<Account>(`${environment.backendHost}/api/db/accounts`, JSON.stringify(params));
   }
 
-  getApplicants(): Observable<GetApplicantsRes> {
-    return this.http.get<GetApplicantsRes>(`${environment.backendHost}/api/db/accounts/applicants`);
+  getApplicants(): Observable<GetAccountsReq> {
+    return this.http.get<GetAccountsReq>(`${environment.backendHost}/api/db/accounts?approved=false`);
   }
 
   approveApplicant(params: ApproveApplicantRequest): Observable<any> {
-    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/?approve=true`, JSON.stringify(params));
+    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/approval?approve=true`, params);
   }
 
   denyApplicant(params: DenyApplicantRequest): Observable<any> {
-    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/?approve=false`, JSON.stringify(params));
+    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/approval?approve=false`, params);
   }
 
   getCurrentAccount(): Observable<Account> {

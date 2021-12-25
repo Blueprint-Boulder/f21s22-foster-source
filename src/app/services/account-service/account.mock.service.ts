@@ -1,5 +1,12 @@
 import { AccountService } from './account.service';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  GetAccountsReq,
+  LoginRequest,
+  UpdateAccountReq,
+} from '../../models/account.model';
 import { Observable, of } from 'rxjs';
 import { accounts, applicants, cookies, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
@@ -26,9 +33,9 @@ export class AccountMockService implements AccountService {
     return of(accounts[0]);
   }
 
-  getApplicants(): Observable<GetApplicantsRes> {
+  getApplicants(): Observable<GetAccountsReq> {
     return of({
-      applicants: applicants,
+      accounts: accounts,
     });
   }
 

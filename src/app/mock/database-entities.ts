@@ -106,7 +106,7 @@ export const accounts: Account[] = [
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
     cwEmail: 'noreply@google.com',
-    cwPhone: '+17208839921',
+    cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
     primaryPhone: {
       phoneNumber: '+17209938821',

@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  Cookie,
+  CreateAccountRequest,
+  GetAccountsReq,
+  LoginRequest,
+  UpdateAccountReq,
+} from '../../models/account.model';
 import { Observable } from 'rxjs';
 import {
   ApproveApplicantRequest,
@@ -20,7 +27,7 @@ export abstract class AccountService {
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(): Observable<any>;
   public abstract deleteAccount(id: number): Observable<any>;
-  public abstract getApplicants(): Observable<GetApplicantsRes>;
+  public abstract getApplicants(): Observable<GetAccountsReq>;
   public abstract denyApplicant(params: DenyApplicantRequest): Observable<any>;
   public abstract approveApplicant(params: ApproveApplicantRequest): Observable<any>;
   public abstract getCurrentAccount(): Observable<Account>;
