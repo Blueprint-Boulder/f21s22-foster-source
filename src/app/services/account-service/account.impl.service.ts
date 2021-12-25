@@ -7,6 +7,7 @@ import {
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
+  VerifyReq,
 } from '../../models/account.model';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -17,10 +18,15 @@ export class AccountImplService implements AccountService {
   constructor(private http: HttpClient) {}
 
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
-    return this.http.post<CreateAccountRequest>(
-      `${environment.backendHost}/api/db/accounts`,
-      JSON.stringify(accountReq)
-    );
+    return this.http.post<CreateAccountRequest>(`${environment.backendHost}/api/db/accounts`, accountReq);
+  }
+
+  verifyAccount(params: VerifyReq): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/verification`, params);
+  }
+
+  resendVerificationEmail(email: string): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/verification/resend`, { email: email });
   }
 
   deleteAccount(id: number): Observable<any> {

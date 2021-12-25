@@ -29,9 +29,10 @@ export interface CreateAccountRequest {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   address: SimpleAddressReq;
 }
 
@@ -61,4 +62,8 @@ export interface Cookie {
 
 export interface GetAccountsReq {
   accounts: Account[];
+}
+
+export interface VerifyReq {
+  key: string;
 }

@@ -6,11 +6,7 @@
   </div>
   <div class="row mt-3" *ngFor="let day of days; let i = index">
     <div class="col">
-      <app-day-availability-filter
-        [day]="day"
-        [dayModel]="availabilities[i]"
-        [index]="i"
-      ></app-day-availability-filter>
+      <app-day-availability-filter [day]="day" [dayModel]="availabilities[i]" [index]="i"></app-day-availability-filter>
     </div>
   </div>
 </div>

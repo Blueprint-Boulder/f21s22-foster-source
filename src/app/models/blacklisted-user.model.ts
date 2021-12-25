@@ -4,8 +4,12 @@ export interface BlacklistedUser {
   email: string;
   phoneNumber: string;
   date: Date;
-  bannedBy: string;
   reason: string;
+  bannedByAccount: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
 }
 
 export interface GetBlacklistedUsersRes {

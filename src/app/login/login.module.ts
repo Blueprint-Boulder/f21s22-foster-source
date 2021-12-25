@@ -11,9 +11,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FinishAccountPageComponent } from './finish-account-page/finish-account-page.component';
 import { FinishAccountModalComponent } from './finish-account-modal/finish-account-modal.component';
 import { DayAvailabilityInputComponent } from './day-availability-input/day-availability-input.component';
-import { AppModule } from '../app.module';
 import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { VerifyEmailActionComponent } from './verify-email-action/verify-email-action.component';
 
 const routes: Routes = [
   {
@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'complete-profile',
     component: FinishAccountPageComponent,
   },
+  {
+    path: 'verify',
+    component: VerifyEmailActionComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -47,6 +51,7 @@ export const loginRouting = RouterModule.forChild(routes);
     FinishAccountModalComponent,
     DayAvailabilityInputComponent,
     ProfileImageUploadComponent,
+    VerifyEmailActionComponent,
   ],
   imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule, ImageCropperModule],
   exports: [],
