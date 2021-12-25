@@ -2,12 +2,15 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col-sm-8 col-md-10">
-      <app-search-bar></app-search-bar>
+      <app-search-bar (searchEvent)="searchEvent($event)"></app-search-bar>
     </div>
     <div class="col-sm-4 col-md-2">
       <button class="btn btn-secondary w-100" (click)="hidden ? openNav() : closeNav()">☰ Filters</button>
     </div>
   </div>
+</div>
+<div class="row mb-5">
+  <app-search-results class="w-100" [profiles]="results"></app-search-results>
 </div>
 <div class="page-footer">
   <ngb-pagination

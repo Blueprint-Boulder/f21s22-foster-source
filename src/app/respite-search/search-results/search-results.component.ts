@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Profile } from '../../models/profile.model';
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { SmallProfile } from '../../models/small-profile.model';
 
 @Component({
   selector: 'app-search-results',
@@ -6,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-results.component.scss'],
 })
 export class SearchResultsComponent implements OnInit {
+  @Input() profiles: SmallProfile[];
   ngOnInit(): void {
     return;
   }
