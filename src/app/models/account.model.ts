@@ -11,7 +11,7 @@ export interface Account {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
-  cwPhone: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
   primaryPhone: PhoneNumber;
   secondaryPhone?: PhoneNumber;
@@ -58,6 +58,10 @@ export interface Cookie {
   privilegeLevel: number;
   exp: number;
   iat: number;
+}
+
+export interface GetAccountsReq {
+  accounts: Account[];
 }
 
 export interface VerifyReq {
