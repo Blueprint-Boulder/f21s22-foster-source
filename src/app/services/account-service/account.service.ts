@@ -25,7 +25,7 @@ export abstract class AccountService {
   public abstract createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest>;
   public abstract verifyAccount(params: VerifyReq): Observable<any>;
   public abstract resendVerificationEmail(email: string): Observable<any>;
-  public abstract login(params: LoginRequest): Observable<Cookie>;
+  public abstract login(params: LoginRequest): Observable<string>;
   public abstract completeProfile(params: FinishProfileReq): Observable<any>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(): Observable<any>;

@@ -9,7 +9,7 @@ import {
   VerifyReq,
 } from '../../models/account.model';
 import { Observable, of } from 'rxjs';
-import { accounts, applicants, cookies, createAccountRequests } from '../../mock/database-entities';
+import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
 
@@ -26,8 +26,8 @@ export class AccountMockService implements AccountService {
     return of({});
   }
 
-  login(params: LoginRequest): Observable<Cookie> {
-    return of(cookies[0]);
+  login(params: LoginRequest): Observable<string> {
+    return of(tokenString);
   }
 
   updateAccount(params: UpdateAccountReq): Observable<Account> {

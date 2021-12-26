@@ -8,18 +8,23 @@ export class BlacklistImplService implements BlacklistService {
   constructor(private http: HttpClient) {}
 
   blacklistUser(user: BlacklistedUser): Observable<BlacklistedUser> {
-    return this.http.post<BlacklistedUser>(`${environment.backendHost}/api/db/blacklist`, JSON.stringify(user));
+    return this.http.post<BlacklistedUser>(`${environment.backendHost}/api/db/blacklist`, JSON.stringify(user), {
+      withCredentials: true,
+    });
   }
 
   deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/blacklist/?phoneNumber=${encodeURIComponent(
         phoneNumber
-      )}&email=${encodeURIComponent(email)}`
+      )}&email=${encodeURIComponent(email)}`,
+      { withCredentials: true }
     );
   }
 
   getBlacklistedUsers(): Observable<GetBlacklistedUsersRes> {
-    return this.http.get<GetBlacklistedUsersRes>(`${environment.backendHost}/api/db/blacklist`);
+    return this.http.get<GetBlacklistedUsersRes>(`${environment.backendHost}/api/db/blacklist`, {
+      withCredentials: true,
+    });
   }
 }
