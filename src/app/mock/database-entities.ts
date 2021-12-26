@@ -377,27 +377,33 @@ export const searchResults: SmallProfile[] = [
     preferredName: 'Paul',
     account: {
       username: 'Paulyboy123',
+      address: {
+        distance: 10.55,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 10.5,
   },
   {
     preferredName: 'Jett',
     account: {
       username: 'jcrowson',
+      address: {
+        distance: 14.15,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 1.2,
   },
   {
     preferredName: 'Gina Smith',
     account: {
       username: 'ginasmithmane',
+      address: {
+        distance: 21.09,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 2.2,
   },
 ];
