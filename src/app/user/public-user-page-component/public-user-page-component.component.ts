@@ -15,6 +15,13 @@ import { profileServiceProvider } from 'src/app/services/profile-service/profile
 export class PublicUserPageComponentComponent implements OnInit {
   id: number;
   private sub: any;
+  public monday: any;
+  public tuesday: any;
+  public wednesday: any;
+  public thursday: any;
+  public friday: any;
+  public saturday: any;
+  public sunday: any;
   public selectedProfile: FullProfileRes;
   closeResult = ''; // how modal was closed
   toastService: any;
@@ -26,9 +33,18 @@ export class PublicUserPageComponentComponent implements OnInit {
     });
     console.log('User ID: ' + String(this.id));
     this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
-      console.log(p);
-      console.log(p.respiteBackground.respiteProviderInfo?.respiteTravelDistance);
+      // console.log(p);
+      // console.log('Object Type: ');
+      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].monday[0]);
+      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].friday);
       this.selectedProfile = p;
+      this.monday = p.respiteBackground.respiteProviderInfo?.availabilities[0].monday;
+      this.tuesday = p.respiteBackground.respiteProviderInfo?.availabilities[0].tuesday;
+      this.wednesday = p.respiteBackground.respiteProviderInfo?.availabilities[0].wednesday;
+      this.thursday = p.respiteBackground.respiteProviderInfo?.availabilities[0].thursday;
+      this.friday = p.respiteBackground.respiteProviderInfo?.availabilities[0].friday;
+      this.saturday = p.respiteBackground.respiteProviderInfo?.availabilities[0].saturday;
+      this.sunday = p.respiteBackground.respiteProviderInfo?.availabilities[0].sunday;
     });
   }
 

@@ -13,7 +13,7 @@ Page Data
             <h2 class="card-title text-center word-wrap">
               {{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}
             </h2>
-            <p class="card-text">
+            <p class="card-text" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
               <b>Distance:</b> {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
             </p>
             <h5 class="card-text contact-items">
@@ -48,141 +48,139 @@ Page Data
         </div>
       </div>
 
-      Availability Schedule
-      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground.canProvideRespite">
+      <!--      Availability Schedule-->
+      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
         <!-- Need to figure out how to do the margins without moving the entire schedule-->
-        <div class="day m-2">
-          <h4 class="text-center mt-4">Availability Schedule</h4>
-        </div>
+
         <div class="row p-3">
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0]">
+          <div class="col-sm-12 px-3">
             <h5 class="day">Monday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities">
+              <div class="col-md-6" *ngIf="monday">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[1]">
+              <div class="col-md-6" *ngIf="monday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[2]">
+              <div class="col-md-6" *ngIf="monday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.monday[3]">
+              <div class="col-md-6" *ngIf="monday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.tuesday">
+          <div class="col-sm-12 px-3" *ngIf="tuesday">
             <h5 class="day">Tuesday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
+              <div class="col-md-6" *ngIf="tuesday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[1]">
+              <div class="col-md-6" *ngIf="tuesday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[2]">
+              <div class="col-md-6" *ngIf="tuesday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[3]">
+              <div class="col-md-6" *ngIf="tuesday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.wednesday">
+          <div class="col-sm-12 px-3" *ngIf="wednesday">
             <h5 class="day">Wednesday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
+              <div class="col-md-6" *ngIf="tuesday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[1]">
+              <div class="col-md-6" *ngIf="tuesday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[2]">
+              <div class="col-md-6" *ngIf="tuesday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.tuesday[0]">
+              <div class="col-md-6" *ngIf="tuesday[0]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.thursday">
+          <div class="col-sm-12 px-3" *ngIf="thursday">
             <h5 class="day">Thursday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[0]">
+              <div class="col-md-6" *ngIf="thursday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[1]">
+              <div class="col-md-6" *ngIf="thursday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[2]">
+              <div class="col-md-6" *ngIf="thursday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.thursday[3]">
+              <div class="col-md-6" *ngIf="thursday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.friday">
+          <div class="col-sm-12 px-3" *ngIf="friday">
             <h5 class="day">Friday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[0]">
+              <div class="col-md-6" *ngIf="friday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[1]">
+              <div class="col-md-6" *ngIf="friday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[2]">
+              <div class="col-md-6" *ngIf="friday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.friday[3]">
+              <div class="col-md-6" *ngIf="friday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.saturday">
+          <div class="col-sm-12 px-3" *ngIf="saturday">
             <h5 class="day">Saturday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[0]">
+              <div class="col-md-6" *ngIf="saturday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[1]">
+              <div class="col-md-6" *ngIf="saturday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[2]">
+              <div class="col-md-6" *ngIf="saturday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.saturday[3]">
+              <div class="col-md-6" *ngIf="saturday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-12 px-3" *ngIf="selectedProfile.availability.sunday">
+          <div class="col-sm-12 px-3" *ngIf="sunday">
             <h5 class="day">Sunday</h5>
             <hr class="line" />
             <div class="row Times">
-              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[0]">
+              <div class="col-md-6" *ngIf="sunday[0]">
                 <p class="text text-center">Morning</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[1]">
+              <div class="col-md-6" *ngIf="sunday[1]">
                 <p class="text text-center">Afternoon</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[2]">
+              <div class="col-md-6" *ngIf="sunday[2]">
                 <p class="text text-center">Evening</p>
               </div>
-              <div class="col-md-6" *ngIf="selectedProfile.availability.sunday[3]">
+              <div class="col-md-6" *ngIf="sunday[3]">
                 <p class="text text-center">Overnight</p>
               </div>
             </div>
@@ -191,7 +189,6 @@ Page Data
           <button type="button" class="btn btn-primary btn-lg btn-block" (click)="open(content)">Contact</button>
         </div>
       </div>
-      <!-- Availability Schedule -->
     </div>
   </div>
 </div>
@@ -221,10 +218,10 @@ Page Data
               selectedProfile.account.primaryPhoneNumber.phoneNumber
             }}</a>
             <br />
-            <span *ngIf="selectedProfile.account.secondaryPhoneNumber.phoneNumber"
-              >{{ selectedProfile.account.secondaryPhoneNumber.type }}:
-              <a href="tel:{{ selectedProfile.account.secondaryPhoneNumber.phoneNumber }}">{{
-                selectedProfile.account.secondaryPhoneNumber.phoneNumber
+            <span *ngIf="selectedProfile.account.secondaryPhoneNumber?.phoneNumber"
+              >{{ selectedProfile.account.secondaryPhoneNumber?.type }}:
+              <a href="tel:{{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}">{{
+                selectedProfile.account.secondaryPhoneNumber?.phoneNumber
               }}</a></span
             >
           </div>
