@@ -8,6 +8,7 @@ import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
 import { AddressReq, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
+import { SmallProfile } from '../models/small-profile.model';
 
 const announcements: Announcement[] = [
   {
@@ -117,7 +118,7 @@ export const accounts: Account[] = [
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
     cwEmail: 'noreply@google.com',
-    cwPhone: '+17208839921',
+    cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
     primaryPhone: {
       phoneNumber: '+17209938821',
@@ -370,3 +371,33 @@ export const profiles: FullProfileRes[] = [
 ];
 
 export { announcements, getAnnouncementResponses, users, applicants, blacklist };
+
+export const searchResults: SmallProfile[] = [
+  {
+    preferredName: 'Paul',
+    account: {
+      username: 'Paulyboy123',
+    },
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    distance: 10.5,
+  },
+  {
+    preferredName: 'Jett',
+    account: {
+      username: 'jcrowson',
+    },
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    distance: 1.2,
+  },
+  {
+    preferredName: 'Gina Smith',
+    account: {
+      username: 'ginasmithmane',
+    },
+    id: 1,
+    profileLargeAWSKey: 'largeKey',
+    distance: 2.2,
+  },
+];

@@ -4,6 +4,7 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { profileServiceProvider } from '../../services/profile-service/profile.service.provider';
 import { FiltersReq } from '../../models/filters.model';
 import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { SmallProfile } from '../../models/small-profile.model';
 
 @Component({
   selector: 'app-respite-search-page',
@@ -12,12 +13,13 @@ import { FullProfileRes } from '../../models/get-profile-by-id.models';
   providers: [profileServiceProvider],
 })
 export class RespiteSearchPageComponent implements OnInit {
-  public results: FullProfileRes[];
+  public results: SmallProfile[];
   public totalResults: number;
   public resultPage = 1;
   public resultsPerPage = 25;
   public hidden = true;
   public filtersReq: FiltersReq;
+  public searchTerm = '';
 
   constructor(private profileService: ProfileService) {}
 
@@ -27,15 +29,11 @@ export class RespiteSearchPageComponent implements OnInit {
 
   getSearchResults() {
     this.profileService
-      .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq)
+      .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq, this.searchTerm)
       .subscribe((res: GetProfilesRes) => {
         this.results = res.profiles;
         this.totalResults = res.numResults;
       });
-  }
-
-  searchForTerm(term: string): void {
-    return;
   }
 
   closeNav() {
@@ -53,6 +51,11 @@ export class RespiteSearchPageComponent implements OnInit {
 
   setFilters(filters: FiltersReq): void {
     this.filtersReq = filters;
+    this.getSearchResults();
+  }
+
+  searchEvent(term: any) {
+    this.searchTerm = term;
     this.getSearchResults();
   }
 }

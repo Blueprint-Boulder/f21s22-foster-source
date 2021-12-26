@@ -4,6 +4,7 @@ import {
   Account,
   Cookie,
   CreateAccountRequest,
+  GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
   VerifyReq,
@@ -60,20 +61,20 @@ export class AccountImplService implements AccountService {
     });
   }
 
-  getApplicants(): Observable<GetApplicantsRes> {
-    return this.http.get<GetApplicantsRes>(`${environment.backendHost}/api/db/accounts/applicants`, {
+  getApplicants(): Observable<GetAccountsReq> {
+    return this.http.get<GetAccountsReq>(`${environment.backendHost}/api/db/accounts?approved=false&level=USER`, {
       withCredentials: true,
     });
   }
 
   approveApplicant(params: ApproveApplicantRequest): Observable<any> {
-    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/?approve=true`, JSON.stringify(params), {
+    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/approval?approve=true`, params, {
       withCredentials: true,
     });
   }
 
   denyApplicant(params: DenyApplicantRequest): Observable<any> {
-    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/?approve=false`, JSON.stringify(params), {
+    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/approval?approve=false`, params, {
       withCredentials: true,
     });
   }

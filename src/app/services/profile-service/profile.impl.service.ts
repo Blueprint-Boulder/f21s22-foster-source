@@ -23,10 +23,14 @@ export class ProfileImplService implements ProfileService {
     });
   }
 
-  getProfiles(limit: number, offset: number, filters?: FiltersReq): Observable<GetProfilesRes> {
+  getProfiles(limit: number, offset: number, filters?: FiltersReq, searchTerm?: string): Observable<GetProfilesRes> {
     let params = new HttpParams();
     params = params.set('limit', limit);
     params = params.set('offset', offset);
+
+    if (searchTerm && searchTerm !== '') {
+      params = params.set('search', searchTerm);
+    }
 
     if (filters) {
       params = this.setFilterParams(params, filters);

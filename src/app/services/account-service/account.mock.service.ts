@@ -3,6 +3,7 @@ import {
   Account,
   Cookie,
   CreateAccountRequest,
+  GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
   VerifyReq,
@@ -33,9 +34,9 @@ export class AccountMockService implements AccountService {
     return of(accounts[0]);
   }
 
-  getApplicants(): Observable<GetApplicantsRes> {
+  getApplicants(): Observable<GetAccountsReq> {
     return of({
-      applicants: applicants,
+      accounts: accounts,
     });
   }
 
