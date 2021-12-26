@@ -4,6 +4,8 @@ export interface SmallProfile {
   profileLargeAWSKey: string;
   account: {
     username: string;
+    address: {
+      distance: number;
+    };
   };
-  distance: number;
 }
