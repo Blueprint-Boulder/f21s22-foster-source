@@ -14,15 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-<<<<<<< HEAD
-    loadChildren: () =>
-      import('./admin-section/admin-section.module').then(
-        (m) => m.AdminSectionModule
-      ),
-    canActivate: [AdminGuard],
-=======
     loadChildren: () => import('./admin-section/admin-section.module').then((m) => m.AdminSectionModule),
->>>>>>> 3f16f5c15f14f6df99484c145a2c4ad991933174
+    canActivate: [AdminGuard],
   },
   {
     path: 'respite',

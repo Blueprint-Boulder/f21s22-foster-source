@@ -42,9 +42,10 @@ export class LoginModalComponent implements OnInit {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
       };
+      console.log(JSON.stringify(data));
       this.accountService.login(data).subscribe(
         (res: string) => {
-          this.cookieService.set('access-token', res);
+          // this.cookieService.set('access-token', res);
           this.authService.init();
           this.router.navigate(['/respite']);
         },

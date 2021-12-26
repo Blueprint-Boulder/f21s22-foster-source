@@ -35,18 +35,22 @@ export class AuthService {
   }
 
   validTime(): boolean {
+    this.init();
     return moment().isBefore(this.expiresAt);
   }
 
   validUser(): boolean {
+    this.init();
     return this.isUser && this.validTime();
   }
 
   validAdmin(): boolean {
+    this.init();
     return this.isAdmin && this.validTime();
   }
 
   validMod(): boolean {
+    this.init();
     return this.isMod && this.validTime();
   }
 }

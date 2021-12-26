@@ -10,7 +10,8 @@ export class PhoneNumberImplService implements PhoneNumberService {
     const isPrimaryString = isPrimary ? 'true' : 'false';
     return this.http.put<PhoneNumber>(
       `${environment.backendHost}/api/db/?primary=${isPrimaryString}`,
-      JSON.stringify(phoneNumber)
+      JSON.stringify(phoneNumber),
+      { withCredentials: true }
     );
   }
 }
