@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookie } from '../../models/account.model';
 import jwtDecode from 'jwt-decode';
@@ -16,6 +16,8 @@ export enum Privilege {
 })
 export class AuthService {
   constructor(private cookieService: CookieService) {}
+
+  public loggedInEvent: EventEmitter<void> = new EventEmitter<void>();
 
   //Storing priveleges of the user.
   private isUser = false;
@@ -64,22 +66,7 @@ export class AuthService {
     return this.isMod && this.validTime();
   }
 
-  hasPrivilege(given: string, required: Privilege | number): boolean {
-    let privilege: number;
-    switch (given) {
-      case 'USER':
-        privilege = 1;
-        break;
-      case 'MOD':
-        privilege = 2;
-        break;
-      case 'ADMIN':
-        privilege = 3;
-        break;
-      default:
-        privilege = 0;
-        break;
-    }
-    return privilege >= required;
+  emitLoggedIn(): void {
+    this.loggedInEvent.emit();
   }
 }

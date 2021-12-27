@@ -36,7 +36,7 @@
   - [ ] Mod / Admin signup page
   - [ ] Mod / Admin approvals frontend
   - [ ] Mod / Admin approvals backend
-  - [ ] Remove "Profile" tab on nav bar for mods and admins
+  - [x] Remove "Profile" tab on nav bar for mods and admins
 
 ### Stretch Goals
 

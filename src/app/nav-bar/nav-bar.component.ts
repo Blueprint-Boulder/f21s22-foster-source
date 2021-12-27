@@ -15,9 +15,15 @@ export class NavBarComponent implements OnInit {
   public currentAccount: Account;
   public isAdmin = false;
 
-  constructor(public router: Router, private accountService: AccountService, private authService: AuthService) {}
+  constructor(public router: Router, private accountService: AccountService, private authService: AuthService) {
+    this.authService.loggedInEvent.subscribe((_) => this.loggedIn());
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.loggedIn();
+  }
+
+  loggedIn(): void {
     this.accountService.getCurrentAccount().subscribe(
       (account: Account) => {
         this.currentAccount = account;

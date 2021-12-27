@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account-service/account.service';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ToastPresets } from '../../models/toast.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-modal',
@@ -42,18 +43,14 @@ export class LoginModalComponent implements OnInit {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
       };
-      console.log(JSON.stringify(data));
       this.accountService.login(data).subscribe(
         (res: string) => {
-          // this.cookieService.set('access-token', res);
           this.authService.init();
           this.router.navigate(['/respite']);
+          this.authService.emitLoggedIn();
         },
         (err) => {
-          this.toastService.show({
-            body: 'Something went wrong when trying to login.',
-            preset: ToastPresets.ERROR,
-          });
+          this.toastService.httpError(err);
         }
       );
     }
