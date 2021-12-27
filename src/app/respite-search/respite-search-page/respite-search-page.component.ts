@@ -5,6 +5,7 @@ import { profileServiceProvider } from '../../services/profile-service/profile.s
 import { FiltersReq } from '../../models/filters.model';
 import { FullProfileRes } from '../../models/get-profile-by-id.models';
 import { SmallProfile } from '../../models/small-profile.model';
+import { ToastService } from '../../services/toast-service/toast.service';
 
 @Component({
   selector: 'app-respite-search-page',
@@ -20,20 +21,29 @@ export class RespiteSearchPageComponent implements OnInit {
   public hidden = true;
   public filtersReq: FiltersReq;
   public searchTerm = '';
+  public searching = true;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.getSearchResults();
   }
 
   getSearchResults() {
+    this.searching = true;
     this.profileService
       .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq, this.searchTerm)
-      .subscribe((res: GetProfilesRes) => {
-        this.results = res.profiles;
-        this.totalResults = res.numResults;
-      });
+      .subscribe(
+        (res: GetProfilesRes) => {
+          this.results = res.profiles;
+          this.totalResults = res.numResults;
+          this.searching = false;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          this.searching = false;
+        }
+      );
   }
 
   closeNav() {
