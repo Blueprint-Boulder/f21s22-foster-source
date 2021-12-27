@@ -21,7 +21,7 @@
           >Home <span *ngIf="router.url === '/'" class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item" [ngClass]="{ active: router.url === '/respite' }">
+      <li *ngIf="currentAccount" class="nav-item" [ngClass]="{ active: router.url === '/respite' }">
         <a class="nav-link" href="#" [routerLink]="'/respite'"
           >Find Respite <span *ngIf="router.url === '/respite'" class="sr-only">(current)</span></a
         >
