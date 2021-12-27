@@ -1,5 +1,49 @@
 # Foster Source Respite App
 
+## TODO
+
+- [ ] Updating account
+  - [ ] Backend endpoints
+  - [ ] Frontend forms
+- [ ] Complete Profile
+  - [ ] Backend Routes
+  - [ ] Capture frontend user when they have not yet completed their account
+    - user should not be able to visit any other page until they complete their account
+- [ ] Deployment
+  - [ ] Make sure all configurations work in the cloud
+  - [ ] Dockerize the backend?
+  - [ ] Set up CI/CD
+  - [ ] Set up AWS database
+- [ ] AWS
+  - [ ] Re-add everyone to AWS
+  - [ ] Get out of sandbox mode on emails
+- [ ] Images
+  - [ ] Implement actual S3 image fetching on front end instead of placeholder images
+- [ ] Account Page
+  - Different from profile page
+  - [ ] Update account specific details
+  - [ ] Delete account
+- [ ] Profile Page
+  - [ ] Finish profile page
+  - [ ] Allow updating of attributes for profile
+- [ ] Login
+  - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
+  - [ ] Logout
+  - [ ] Forgot your password?
+- [ ] Announcements
+  - [ ] Make recent announcements not return anything after maybe a week?
+- [ ] Mod/Admin
+  - [ ] Mod / Admin signup page
+  - [ ] Mod / Admin approvals frontend
+  - [ ] Mod / Admin approvals backend
+  - [ ] Remove "Profile" tab on nav bar for mods and admins
+
+### Stretch Goals
+
+- [ ] Reporting functionality
+- [ ] User Forum
+- [ ] Feature requests + bug reporting
+
 ## System Set-Up
 
 This project is going to be built in angular, so to develop you will need to properly set up your environment.
