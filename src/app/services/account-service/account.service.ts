@@ -34,4 +34,5 @@ export abstract class AccountService {
   public abstract denyApplicant(params: DenyApplicantRequest): Observable<any>;
   public abstract approveApplicant(params: ApproveApplicantRequest): Observable<any>;
   public abstract getCurrentAccount(): Observable<Account>;
+  public abstract getAccountById(id: number): Observable<Account>;
 }

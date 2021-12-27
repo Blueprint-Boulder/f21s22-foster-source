@@ -11,7 +11,7 @@
         ><i>{{ announcement.account.firstName }} {{ announcement.account.lastName }} on {{ getFormattedDate() }}</i>
       </small>
     </div>
-    <div class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
+    <div *ngIf="canEdit" class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
       <small class="card-subtitle"
         ><i
           ><a href="javascript:void(0)" (click)="deleteAnnouncement()" class="mr-3">Delete</a>

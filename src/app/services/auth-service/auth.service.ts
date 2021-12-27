@@ -4,6 +4,13 @@ import { Cookie } from '../../models/account.model';
 import jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 
+export enum Privilege {
+  NONE,
+  USER,
+  MOD,
+  ADMIN,
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,10 +35,13 @@ export class AuthService {
     }
   }
 
-  getToken(): Cookie {
-    const token = this.cookieService.get('access-token');
-    const tokenBody: Cookie = jwtDecode(token);
-    return tokenBody;
+  getToken(): Cookie | undefined {
+    try {
+      const token = this.cookieService.get('access-token');
+      return jwtDecode(token);
+    } catch (e) {
+      return undefined;
+    }
   }
 
   validTime(): boolean {
@@ -52,5 +62,24 @@ export class AuthService {
   validMod(): boolean {
     this.init();
     return this.isMod && this.validTime();
+  }
+
+  hasPrivilege(given: string, required: Privilege | number): boolean {
+    let privilege: number;
+    switch (given) {
+      case 'USER':
+        privilege = 1;
+        break;
+      case 'MOD':
+        privilege = 2;
+        break;
+      case 'ADMIN':
+        privilege = 3;
+        break;
+      default:
+        privilege = 0;
+        break;
+    }
+    return privilege >= required;
   }
 }
