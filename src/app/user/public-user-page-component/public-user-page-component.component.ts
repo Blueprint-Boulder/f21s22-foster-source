@@ -5,6 +5,7 @@ import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
 import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
+import { ToastService } from '../../services/toast-service/toast.service';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -24,7 +25,6 @@ export class PublicUserPageComponentComponent implements OnInit {
   public sunday: any;
   public selectedProfile: FullProfileRes;
   closeResult = ''; // how modal was closed
-  toastService: any;
   constructor(private route: ActivatedRoute, private modalService: NgbModal, private profileService: ProfileService) {}
 
   ngOnInit(): void {

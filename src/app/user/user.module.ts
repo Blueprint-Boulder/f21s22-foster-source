@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicUserPageComponentComponent } from './public-user-page-component/public-user-page-component.component';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -18,6 +19,6 @@ export const userRouting = RouterModule.forChild(routes);
 
 @NgModule({
   declarations: [PublicUserPageComponentComponent],
-  imports: [CommonModule, userRouting],
+  imports: [CommonModule, userRouting, NgbAccordionModule],
 })
 export class UserModule {}
