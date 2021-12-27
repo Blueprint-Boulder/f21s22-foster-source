@@ -63,4 +63,8 @@ export class AccountMockService implements AccountService {
   resendVerificationEmail(email: string): Observable<any> {
     return of({});
   }
+
+  getAccountById(id: number): Observable<Account> {
+    return of(accounts[0]);
+  }
 }
