@@ -14,6 +14,7 @@ import { DayAvailabilityInputComponent } from './day-availability-input/day-avai
 import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { VerifyEmailActionComponent } from './verify-email-action/verify-email-action.component';
+import { ModRegisterComponent } from './mod-register/mod-register.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'verify',
     component: VerifyEmailActionComponent,
   },
+  {
+    path: 'create-account/staff',
+    component: ModRegisterComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -52,6 +57,7 @@ export const loginRouting = RouterModule.forChild(routes);
     DayAvailabilityInputComponent,
     ProfileImageUploadComponent,
     VerifyEmailActionComponent,
+    ModRegisterComponent,
   ],
   imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule, ImageCropperModule],
   exports: [],

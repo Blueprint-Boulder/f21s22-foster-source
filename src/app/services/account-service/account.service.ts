@@ -3,6 +3,7 @@ import {
   Account,
   Cookie,
   CreateAccountRequest,
+  CreateStaffAccountRequest,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -23,6 +24,7 @@ import { FinishProfileReq } from '../../models/profile.model';
 })
 export abstract class AccountService {
   public abstract createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest>;
+  public abstract createStaffAccount(accountReq: CreateStaffAccountRequest): Observable<any>;
   public abstract verifyAccount(params: VerifyReq): Observable<any>;
   public abstract resendVerificationEmail(email: string): Observable<any>;
   public abstract login(params: LoginRequest): Observable<string>;

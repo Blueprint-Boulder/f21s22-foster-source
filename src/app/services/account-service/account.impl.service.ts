@@ -4,6 +4,7 @@ import {
   Account,
   Cookie,
   CreateAccountRequest,
+  CreateStaffAccountRequest,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -20,6 +21,12 @@ export class AccountImplService implements AccountService {
 
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
     return this.http.post<CreateAccountRequest>(`${environment.backendHost}/api/db/accounts`, accountReq, {
+      withCredentials: true,
+    });
+  }
+
+  createStaffAccount(accountReq: CreateStaffAccountRequest): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/staff`, accountReq, {
       withCredentials: true,
     });
   }

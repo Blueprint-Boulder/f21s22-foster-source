@@ -36,6 +36,19 @@ export interface CreateAccountRequest {
   address: SimpleAddressReq;
 }
 
+export interface CreateStaffAccountRequest {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+  address: SimpleAddressReq;
+  staffAccessKey: string;
+  privilege: string;
+}
+
 export interface UpdateAccountReq {
   email?: string;
   username?: string;

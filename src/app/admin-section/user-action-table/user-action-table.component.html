@@ -14,6 +14,8 @@
           >Case Worker: {{ users[i].cwFirstName }} {{ users[i].cwLastName }}, {{ users[i].cwEmail }}
           {{ users[i].cwPhoneNumber }}</span
         ><br />
+        <span>Certifying Agency: {{ users[i].certifiedBy }}</span
+        ><br />
         <small
           ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small
         >
