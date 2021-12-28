@@ -3,7 +3,7 @@ import { CreateProfileReq, GetProfilesRes, Profile, UpdateProfileReq } from '../
 import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
 
 export class ProfileMockService implements ProfileService {
   createProfile(params: CreateProfileReq): Observable<FullProfileRes> {
@@ -23,5 +23,9 @@ export class ProfileMockService implements ProfileService {
 
   updateProfile(params: UpdateProfileReq): Observable<FullProfileRes> {
     return of(profiles[0]);
+  }
+
+  currentProfileCompleted(): Observable<ProfileCompletionRes> {
+    return of({ completed: true });
   }
 }

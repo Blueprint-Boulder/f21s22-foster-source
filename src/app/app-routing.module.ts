@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
 import { AdminGuard } from './guards/admin/admin.guard';
 import { ModGuard } from './guards/mod/mod.guard';
+import { UserGuard } from './guards/user/user.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
   {
     path: 'respite',
     loadChildren: () => import('./respite-search/respite-search.module').then((m) => m.RespiteSearchModule),
+    canActivate: [UserGuard],
   },
   {
     path: '**',

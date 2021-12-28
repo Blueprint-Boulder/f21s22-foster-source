@@ -7,7 +7,7 @@
   - [ ] Frontend forms
 - [ ] Complete Profile
   - [ ] Backend Routes
-  - [ ] Capture frontend user when they have not yet completed their account
+  - [x] Capture frontend user when they have not yet completed their account
     - user should not be able to visit any other page until they complete their account
 - [ ] Deployment
   - [ ] Make sure all configurations work in the cloud
