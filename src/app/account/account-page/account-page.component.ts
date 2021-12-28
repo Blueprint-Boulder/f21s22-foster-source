@@ -4,6 +4,7 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 import { Account } from '../../models/account.model';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-page',
@@ -18,7 +19,8 @@ export class AccountPageComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private toastService: ToastService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,5 +33,15 @@ export class AccountPageComponent implements OnInit {
         this.toastService.httpError(err);
       }
     );
+  }
+
+  deleteAccount(): void {
+    const verify: boolean =
+      prompt(
+        'Are you sure you would like to delete your account? Type "confirm" to confirm deletion.'
+      )?.toLowerCase() === 'confirm';
+    if (verify) {
+      this.router.navigate(['/account/delete-account']);
+    }
   }
 }

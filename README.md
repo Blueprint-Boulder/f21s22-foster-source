@@ -21,8 +21,14 @@
   - [ ] Implement actual S3 image fetching on front end instead of placeholder images
 - [ ] Account Page
   - Different from profile page
-  - [ ] Update account specific details
-  - [ ] Delete account
+  - [x] View account page
+  - [ ] Change case worker details front end
+  - [ ] Change case worker details back end
+    - These two are on hold until we find out if users should be able to change this information.
+  - [x] Delete account front end
+  - [ ] Delete account back end
+  - [x] Change password front end
+  - [ ] Change password back end
 - [ ] Profile Page
   - [ ] Finish profile page
   - [ ] Allow updating of attributes for profile
@@ -43,6 +49,13 @@
 - [ ] Reporting functionality
 - [ ] User Forum
 - [ ] Feature requests + bug reporting
+
+### Feature Backlog
+
+- [ ] Hide profile temporarily
+- [ ] Get list of all accounts for admins
+- [ ] Get list of all staff accounts for admins
+- [ ] Periodically go through and get rid of unverified accounts
 
 ## System Set-Up
 

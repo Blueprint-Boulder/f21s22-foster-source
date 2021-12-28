@@ -25,12 +25,13 @@
       </p>
       <p *ngIf="!isUser"><b>Account Level:</b> {{ currentAccount.privilege }}</p>
     </div>
-    <div *ngIf="isUser" class="col-sm-12 col-md-6 mt-sm-5">
+    <div *ngIf="isUser" class="col-sm-12 col-md-6 mt-sm-5 mt-md-0">
       <h3>Case Worker Information</h3>
       <p><b>Case Worker Name:</b> {{ currentAccount.cwFirstName }} {{ currentAccount.cwLastName }}</p>
       <p><b>Case Worker Email:</b> {{ currentAccount.cwEmail }}</p>
       <p><b>Case Worker Phone Number:</b> {{ currentAccount.cwPhoneNumber }}</p>
       <p><b>County or Agency Certified By:</b> {{ currentAccount.certifiedBy }}</p>
+      <!-- TODO: Make sure that users should be able to update their case worker information -->
       <p><a href="javascript:void(0)">Click here to update your case worker information.</a></p>
     </div>
   </div>
@@ -38,6 +39,12 @@
     <div class="col-sm-12 col-md-6">
       <h3>Password</h3>
       <p><a href="javascript:void(0)" [routerLink]="'/account/update-password'">Update your password</a></p>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-6">
+      <h3>Delete Your Account</h3>
+      <p><button class="btn btn-danger mt-2" (click)="deleteAccount()">Delete Account</button></p>
     </div>
   </div>
 </div>

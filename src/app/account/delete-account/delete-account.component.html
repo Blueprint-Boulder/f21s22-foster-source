@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <h2 class="text-center">Delete Your Account</h2>
+      <i>
+        This action is irreversible and if you'd like to use the site again you will need to go through the account
+        approval process again, including signing up, verifying your email, getting approved by administrators, and
+        completing your profile.
+      </i>
+    </div>
+  </div>
+  <form [formGroup]="deleteAccountForm">
+    <div class="row mt-5">
+      <div class="col-md-3 col-lg-4"></div>
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="form-group">
+          <label for="password"><b>Password</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            formControlName="password"
+            required
+          />
+          <div
+            *ngIf="
+              deleteAccountForm.get('password')?.invalid &&
+              (deleteAccountForm.get('password')?.dirty || deleteAccountForm.get('password')?.touched)
+            "
+          >
+            <small *ngIf="deleteAccountForm.get('password')?.errors?.required" class="input-error"
+              >Please enter your current password.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-1">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-danger text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Delete Account
+      </button>
+    </div>
+  </div>
+</div>

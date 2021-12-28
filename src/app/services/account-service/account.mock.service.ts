@@ -4,6 +4,7 @@ import {
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
+  DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -28,7 +29,7 @@ export class AccountMockService implements AccountService {
     return of({});
   }
 
-  deleteOwnAccount(): Observable<any> {
+  deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return of({});
   }
 

@@ -5,6 +5,7 @@ import {
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
+  DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -52,8 +53,9 @@ export class AccountImplService implements AccountService {
     });
   }
 
-  deleteOwnAccount(): Observable<any> {
+  deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return this.http.delete<void>(`${environment.backendHost}/api/db/accounts/`, {
+      body: req,
       withCredentials: true,
     });
   }

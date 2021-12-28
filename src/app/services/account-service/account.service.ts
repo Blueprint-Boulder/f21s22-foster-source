@@ -4,6 +4,7 @@ import {
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
+  DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -31,7 +32,7 @@ export abstract class AccountService {
   public abstract login(params: LoginRequest): Observable<string>;
   public abstract completeProfile(params: FinishProfileReq): Observable<any>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
-  public abstract deleteOwnAccount(): Observable<any>;
+  public abstract deleteOwnAccount(req: DeleteAccountReq): Observable<any>;
   public abstract deleteAccount(id: number): Observable<any>;
   public abstract getApplicants(): Observable<GetAccountsReq>;
   public abstract getStaffApplicants(): Observable<GetAccountsReq>;
