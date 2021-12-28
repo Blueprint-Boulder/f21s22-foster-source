@@ -15,6 +15,7 @@ import { ProfileImageUploadComponent } from './profile-image-upload/profile-imag
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { VerifyEmailActionComponent } from './verify-email-action/verify-email-action.component';
 import { ModRegisterComponent } from './mod-register/mod-register.component';
+import { ProfileNotCompletedGuard } from '../guards/profile-not-completed/profile-not-completed.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
   {
     path: 'complete-profile',
     component: FinishAccountPageComponent,
+    canActivate: [ProfileNotCompletedGuard],
   },
   {
     path: 'verify',
