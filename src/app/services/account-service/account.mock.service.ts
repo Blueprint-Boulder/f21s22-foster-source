@@ -45,6 +45,12 @@ export class AccountMockService implements AccountService {
     });
   }
 
+  getStaffApplicants(): Observable<GetAccountsReq> {
+    return of({
+      accounts: accounts,
+    });
+  }
+
   approveApplicant(params: ApproveApplicantRequest): Observable<any> {
     return of({});
   }

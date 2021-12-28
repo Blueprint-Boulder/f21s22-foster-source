@@ -75,6 +75,12 @@ export class AccountImplService implements AccountService {
     });
   }
 
+  getStaffApplicants(): Observable<GetAccountsReq> {
+    return this.http.get<GetAccountsReq>(`${environment.backendHost}/api/db/accounts?approved=false&level=STAFF`, {
+      withCredentials: true,
+    });
+  }
+
   approveApplicant(params: ApproveApplicantRequest): Observable<any> {
     return this.http.put<any>(`${environment.backendHost}/api/db/accounts/approval?approve=true`, params, {
       withCredentials: true,

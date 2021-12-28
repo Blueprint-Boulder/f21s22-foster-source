@@ -11,9 +11,11 @@
         <h5>Personal Information</h5>
         <b>Name:</b> {{ account.firstName }} {{ account.lastName }} <br />
         <b>Email:</b> {{ account.email }} <br />
-        <b>Phone:</b> {{ account.primaryPhone.phoneNumber }} ({{ account.primaryPhone.type }}) <br />
-        <span *ngIf="account.secondaryPhone"
-          ><b>Secondary Phone:</b> {{ account.secondaryPhone.phoneNumber }} ({{ account.secondaryPhone.type }})</span
+        <b>Phone:</b> {{ account.primaryPhoneNumber.phoneNumber }} ({{ account.primaryPhoneNumber.type }}) <br />
+        <span *ngIf="account.secondaryPhoneNumber"
+          ><b>Secondary Phone:</b> {{ account.secondaryPhoneNumber.phoneNumber }} ({{
+            account.secondaryPhoneNumber.type
+          }})</span
         >
         <!--      TODO: WHY IS THIS NOT SHOWING UP WHEN IT SHOULD-->
       </div>

@@ -13,8 +13,9 @@ export interface Account {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  privilege: string;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
   address: AddressReq;

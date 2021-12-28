@@ -1,5 +1,5 @@
 <div class="application-table-desc">
-  <p>Here is everyone wanting to apply for the app!</p>
+  <p>Applications for Staff Accounts</p>
 </div>
 <div class="table-container">
   <div *ngFor="let user of users; index as i">
@@ -13,11 +13,7 @@
             users[i].primaryPhoneNumber.type
           }})</span
         ><br />
-        <span
-          >Case Worker: {{ users[i].cwFirstName }} {{ users[i].cwLastName }}, {{ users[i].cwEmail }}
-          {{ users[i].cwPhoneNumber }}</span
-        ><br />
-        <span>Certifying Agency: {{ users[i].certifiedBy }}</span
+        <span>Requested Level: {{ users[i].privilege }}</span
         ><br />
         <small
           ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small
