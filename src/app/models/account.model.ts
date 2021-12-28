@@ -13,8 +13,8 @@ export interface Account {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
   address: AddressReq;
