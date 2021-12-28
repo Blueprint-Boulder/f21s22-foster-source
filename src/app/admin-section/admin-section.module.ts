@@ -11,6 +11,7 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { EditorComponent } from '../common/editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { LandingModule } from '../landing/landing.module';
+import { StaffAccountRequestsComponent } from './staff-account-requests/staff-account-requests.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LandingModule } from '../landing/landing.module';
     BlacklistTableComponent,
     AnnouncementsComponent,
     EditorComponent,
+    StaffAccountRequestsComponent,
   ],
   imports: [
     CommonModule,

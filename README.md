@@ -32,10 +32,10 @@
   - [ ] Forgot your password?
 - [ ] Announcements
   - [ ] Make recent announcements not return anything after maybe a week?
-- [ ] Mod/Admin
-  - [ ] Mod / Admin signup page
-  - [ ] Mod / Admin approvals frontend
-  - [ ] Mod / Admin approvals backend
+- [x] Mod/Admin
+  - [x] Mod / Admin signup page
+  - [x] Mod / Admin approvals frontend
+  - [x] Mod / Admin approvals backend
   - [x] Remove "Profile" tab on nav bar for mods and admins
 
 ### Stretch Goals

@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import * as libphonenumber from 'google-libphonenumber';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
-import { CreateAccountRequest } from '../../models/account.model';
-import { PhoneNumberType } from '../../models/phonenumber.model';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { CreateAccountRequest, CreateStaffAccountRequest } from '../../models/account.model';
 import { ToastPresets } from '../../models/toast.model';
+import * as libphonenumber from 'google-libphonenumber';
+import { PhoneNumberType } from '../../models/phonenumber.model';
+import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 
 @Component({
-  selector: 'app-create-account-modal',
-  templateUrl: './create-account-modal.component.html',
-  styleUrls: ['./create-account-modal.component.scss'],
+  selector: 'app-mod-register',
+  templateUrl: './mod-register.component.html',
+  styleUrls: ['./mod-register.component.scss'],
   providers: [accountServiceProvider],
 })
-export class CreateAccountModalComponent implements OnInit {
+export class ModRegisterComponent implements OnInit {
   public readonly STATES = [
     'Alabama',
     'Alaska',
@@ -78,12 +78,8 @@ export class CreateAccountModalComponent implements OnInit {
     'Wyoming',
   ];
 
-  public createAccountForm: FormGroup;
+  public createStaffAccountForm: FormGroup;
   public disableSubmitButton = false;
-
-  get confirmEmail() {
-    return this.createAccountForm.get('confirmEmail');
-  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,12 +89,12 @@ export class CreateAccountModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.createAccountForm = this.formBuilder.group({
+    this.createStaffAccountForm = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       confirmEmail: ['', Validators.required],
-      primaryPhone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
+      primaryPhone: ['', Validators.compose([Validators.required, ModRegisterComponent.validatePhoneNumber])],
       primaryType: ['', Validators.required],
       secondaryPhone: '',
       secondaryType: '',
@@ -107,11 +103,6 @@ export class CreateAccountModalComponent implements OnInit {
       city: ['', Validators.required],
       zip: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/)])],
       state: ['', Validators.required],
-      certifiedBy: ['', Validators.required],
-      caseworkerfname: ['', Validators.required],
-      caseworkerlname: ['', Validators.required],
-      caseworkeremail: ['', Validators.compose([Validators.required, Validators.email])],
-      caseworkerphone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
       user: [
         '',
         Validators.compose([
@@ -123,77 +114,70 @@ export class CreateAccountModalComponent implements OnInit {
       ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmpassword: ['', Validators.compose([Validators.required])],
+      staffAccessKey: ['', Validators.required],
+      privilegeLevel: ['', Validators.required],
     });
-    this.createAccountForm.setValidators([
-      CreateAccountModalComponent.confirmEmailValidator,
-      CreateAccountModalComponent.confirmPasswordValidator,
+    this.createStaffAccountForm.setValidators([
+      ModRegisterComponent.confirmEmailValidator,
+      ModRegisterComponent.confirmPasswordValidator,
     ]);
-    this.createAccountForm.get('secondaryPhone')?.valueChanges.subscribe((secondaryPhone: string) => {
+    this.createStaffAccountForm.get('secondaryPhone')?.valueChanges.subscribe((secondaryPhone: string) => {
       if (secondaryPhone === '' || secondaryPhone === null) {
-        this.createAccountForm.get('secondaryPhone')?.setValidators([]);
-        this.createAccountForm.get('secondaryType')?.setValidators([]);
+        this.createStaffAccountForm.get('secondaryPhone')?.setValidators([]);
+        this.createStaffAccountForm.get('secondaryType')?.setValidators([]);
       } else {
-        this.createAccountForm.get('secondaryPhone')?.setValidators([CreateAccountModalComponent.validatePhoneNumber]);
-        this.createAccountForm.get('secondaryType')?.setValidators([Validators.required]);
+        this.createStaffAccountForm.get('secondaryPhone')?.setValidators([ModRegisterComponent.validatePhoneNumber]);
+        this.createStaffAccountForm.get('secondaryType')?.setValidators([Validators.required]);
       }
-      this.createAccountForm.get('secondaryPhone')?.updateValueAndValidity({ emitEvent: false });
-      this.createAccountForm.get('secondaryType')?.updateValueAndValidity({ emitEvent: false });
+      this.createStaffAccountForm.get('secondaryPhone')?.updateValueAndValidity({ emitEvent: false });
+      this.createStaffAccountForm.get('secondaryType')?.updateValueAndValidity({ emitEvent: false });
     });
   }
 
   public createAccountSubmit(): void {
-    if (this.createAccountForm.invalid) {
-      this.createAccountForm.markAllAsTouched();
+    if (this.createStaffAccountForm.invalid) {
+      this.createStaffAccountForm.markAllAsTouched();
     } else {
       this.disableSubmitButton = true;
 
-      const createAccountReq: CreateAccountRequest = {
+      const createAccountReq: CreateStaffAccountRequest = {
         address: {
-          addressLine1: this.createAccountForm.get('address')!.value,
-          addressLine2: this.createAccountForm!.get('address2')?.value
-            ? this.createAccountForm!.get('address2')!.value
+          addressLine1: this.createStaffAccountForm.get('address')!.value,
+          addressLine2: this.createStaffAccountForm!.get('address2')?.value
+            ? this.createStaffAccountForm!.get('address2')!.value
             : undefined,
-          city: this.createAccountForm!.get('city')!.value,
-          zipcode: this.createAccountForm!.get('zip')!.value,
-          state: this.createAccountForm!.get('state')!.value,
+          city: this.createStaffAccountForm!.get('city')!.value,
+          zipcode: this.createStaffAccountForm!.get('zip')!.value,
+          state: this.createStaffAccountForm!.get('state')!.value,
         },
-        cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
-        cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
-        cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
-        cwPhoneNumber: CreateAccountModalComponent.formatPhoneNumber(
-          this.createAccountForm.get('caseworkerphone')!.value
-        ),
-        certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
-        email: this.createAccountForm.get('email')!.value,
-        firstName: this.createAccountForm.get('fname')!.value,
-        lastName: this.createAccountForm.get('lname')!.value,
-        password: this.createAccountForm.get('password')!.value,
+        email: this.createStaffAccountForm.get('email')!.value,
+        firstName: this.createStaffAccountForm.get('fname')!.value,
+        lastName: this.createStaffAccountForm.get('lname')!.value,
+        password: this.createStaffAccountForm.get('password')!.value,
         primaryPhoneNumber: {
-          phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
-          type: this.createAccountForm.get('primaryType')!.value,
+          phoneNumber: ModRegisterComponent.formatPhoneNumber(this.createStaffAccountForm.get('primaryPhone')!.value),
+          type: this.createStaffAccountForm.get('primaryType')!.value,
         },
-        secondaryPhoneNumber: this.createAccountForm.get('secondaryType')?.value
+        secondaryPhoneNumber: this.createStaffAccountForm.get('secondaryType')?.value
           ? {
-              phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
-                this.createAccountForm.get('secondaryPhone')!.value
+              phoneNumber: ModRegisterComponent.formatPhoneNumber(
+                this.createStaffAccountForm.get('secondaryPhone')!.value
               ),
-              type: this.createAccountForm.get('secondaryType')!.value,
+              type: this.createStaffAccountForm.get('secondaryType')!.value,
             }
           : undefined,
-        username: this.createAccountForm.get('user')!.value,
+        username: this.createStaffAccountForm.get('user')!.value,
+        staffAccessKey: this.createStaffAccountForm.get('staffAccessKey')!.value,
+        privilege: this.createStaffAccountForm.get('privilegeLevel')!.value,
       };
 
-      this.accountService.createAccount(createAccountReq).subscribe(
+      this.accountService.createStaffAccount(createAccountReq).subscribe(
         (res: CreateAccountRequest) => {
           //TODO: Check if username is available.
           this.router.navigate([`/login/create-account/verify/${res.email}`]);
         },
         (err) => {
-          this.toastService.show({
-            body: 'Something went wrong trying to create your account.',
-            preset: ToastPresets.ERROR,
-          });
-          console.log(err);
+          this.toastService.httpError(err);
         }
       );
     }

@@ -1,25 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Applicant,
-  ApprovalTableUser,
-  ApproveApplicantRequest,
-  DenyApplicantRequest,
-  GetApplicantsRes,
-} from '../../models/applicant.model';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { formatDate } from '@angular/common';
+import { accountServiceProvider } from '../../services/account-service/account.service.provider';
+import { ApprovalTableUser, ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
+import { AccountService } from '../../services/account-service/account.service';
 import { FormBuilder } from '@angular/forms';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ToastPresets } from '../../models/toast.model';
-import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 import { Account, GetAccountsReq } from '../../models/account.model';
+import { HttpErrorResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
-  selector: 'app-user-action-table',
-  templateUrl: './user-action-table.component.html',
-  styleUrls: ['./user-action-table.component.css'],
+  selector: 'app-staff-account-requests',
+  templateUrl: './staff-account-requests.component.html',
+  styleUrls: ['./staff-account-requests.component.scss'],
   animations: [
     trigger('inOutAnimation', [
       transition(':leave', [style({ opacity: 1 }), animate('0.1s ease-in', style({ opacity: 0 }))]),
@@ -27,7 +21,7 @@ import { Account, GetAccountsReq } from '../../models/account.model';
   ],
   providers: [accountServiceProvider],
 })
-export class UserActionTableComponent implements OnInit {
+export class StaffAccountRequestsComponent implements OnInit {
   public users: ApprovalTableUser[] = [];
   public denyFormGroup = this.formBuilder.group({
     reason: '',
@@ -42,8 +36,9 @@ export class UserActionTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.accountService.getApplicants().subscribe(
+    this.accountService.getStaffApplicants().subscribe(
       (res: GetAccountsReq) => {
+        console.log(res);
         const applicants = res.accounts;
         this.users = [];
         for (let i = 0; i < applicants.length; i++) {
