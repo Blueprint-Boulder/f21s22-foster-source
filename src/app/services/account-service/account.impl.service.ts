@@ -97,7 +97,7 @@ export class AccountImplService implements AccountService {
   }
 
   completeProfile(params: FinishProfileReq): Observable<any> {
-    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/complete`, JSON.stringify(params), {
+    return this.http.post<any>(`${environment.backendHost}/api/db/profiles/`, params, {
       withCredentials: true,
     });
   }
