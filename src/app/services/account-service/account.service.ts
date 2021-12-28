@@ -18,6 +18,7 @@ import {
   GetApplicantsRes,
 } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
+import { ChangePasswordReq } from '../../models/change-password';
 
 @Injectable({
   providedIn: 'root',
@@ -38,4 +39,5 @@ export abstract class AccountService {
   public abstract approveApplicant(params: ApproveApplicantRequest): Observable<any>;
   public abstract getCurrentAccount(): Observable<Account>;
   public abstract getAccountById(id: number): Observable<Account>;
+  public abstract updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any>;
 }
