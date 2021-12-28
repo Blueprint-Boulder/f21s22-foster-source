@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { FiltersReq } from '../../models/filters.model';
 import { tap } from 'rxjs/operators';
 import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
 
 export class ProfileImplService implements ProfileService {
   constructor(private http: HttpClient) {}
@@ -19,6 +19,12 @@ export class ProfileImplService implements ProfileService {
 
   getProfileById(id: number): Observable<FullProfileRes> {
     return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/${encodeURIComponent(id)}`, {
+      withCredentials: true,
+    });
+  }
+
+  currentProfileCompleted(): Observable<ProfileCompletionRes> {
+    return this.http.get<ProfileCompletionRes>(`${environment.backendHost}/api/db/profiles/completion`, {
       withCredentials: true,
     });
   }

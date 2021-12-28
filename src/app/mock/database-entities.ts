@@ -120,6 +120,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,

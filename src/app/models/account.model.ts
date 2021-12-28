@@ -13,6 +13,7 @@ export interface Account {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
+  privilege: string;
   primaryPhoneNumber: PhoneNumber;
   secondaryPhoneNumber?: PhoneNumber;
   lastLogin: Date;
@@ -34,6 +35,19 @@ export interface CreateAccountRequest {
   primaryPhoneNumber: PhoneNumber;
   secondaryPhoneNumber?: PhoneNumber;
   address: SimpleAddressReq;
+}
+
+export interface CreateStaffAccountRequest {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+  address: SimpleAddressReq;
+  staffAccessKey: string;
+  privilege: string;
 }
 
 export interface UpdateAccountReq {

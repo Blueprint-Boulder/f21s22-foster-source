@@ -7,7 +7,7 @@
   - [ ] Frontend forms
 - [ ] Complete Profile
   - [ ] Backend Routes
-  - [ ] Capture frontend user when they have not yet completed their account
+  - [x] Capture frontend user when they have not yet completed their account
     - user should not be able to visit any other page until they complete their account
 - [ ] Deployment
   - [ ] Make sure all configurations work in the cloud
@@ -32,10 +32,10 @@
   - [ ] Forgot your password?
 - [ ] Announcements
   - [ ] Make recent announcements not return anything after maybe a week?
-- [ ] Mod/Admin
-  - [ ] Mod / Admin signup page
-  - [ ] Mod / Admin approvals frontend
-  - [ ] Mod / Admin approvals backend
+- [x] Mod/Admin
+  - [x] Mod / Admin signup page
+  - [x] Mod / Admin approvals frontend
+  - [x] Mod / Admin approvals backend
   - [x] Remove "Profile" tab on nav bar for mods and admins
 
 ### Stretch Goals

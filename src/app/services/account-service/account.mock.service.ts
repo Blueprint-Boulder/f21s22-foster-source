@@ -3,6 +3,7 @@ import {
   Account,
   Cookie,
   CreateAccountRequest,
+  CreateStaffAccountRequest,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -16,6 +17,10 @@ import { FinishProfileReq } from '../../models/profile.model';
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
     return of(createAccountRequests[0]);
+  }
+
+  createStaffAccount(accountReq: CreateStaffAccountRequest): Observable<any> {
+    return of({});
   }
 
   deleteAccount(id: number): Observable<any> {
@@ -35,6 +40,12 @@ export class AccountMockService implements AccountService {
   }
 
   getApplicants(): Observable<GetAccountsReq> {
+    return of({
+      accounts: accounts,
+    });
+  }
+
+  getStaffApplicants(): Observable<GetAccountsReq> {
     return of({
       accounts: accounts,
     });

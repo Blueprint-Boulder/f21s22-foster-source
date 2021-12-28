@@ -42,11 +42,8 @@ export class VerifyEmailComponent implements OnInit {
             preset: ToastPresets.SUCCESS,
           });
         },
-        () => {
-          this.toastService.show({
-            body: 'Unable to resend verification email.',
-            preset: ToastPresets.ERROR,
-          });
+        (err) => {
+          this.toastService.httpError(err);
         }
       );
     }
