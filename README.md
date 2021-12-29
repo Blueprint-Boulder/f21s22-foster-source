@@ -5,8 +5,8 @@
 - [ ] Updating account
   - [ ] Backend endpoints
   - [ ] Frontend forms
-- [ ] Complete Profile
-  - [ ] Backend Routes
+- [x] Complete Profile
+  - [x] Backend Routes
   - [x] Capture frontend user when they have not yet completed their account
     - user should not be able to visit any other page until they complete their account
 - [ ] Deployment
@@ -30,8 +30,8 @@
   - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [ ] Logout
   - [ ] Forgot your password?
-- [ ] Announcements
-  - [ ] Make recent announcements not return anything after maybe a week?
+- [x] Announcements
+  - [x] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
   - [x] Mod / Admin signup page
   - [x] Mod / Admin approvals frontend
