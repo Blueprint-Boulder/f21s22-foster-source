@@ -29,6 +29,10 @@
   - [ ] Delete account back end
   - [x] Change password front end
   - [ ] Change password back end
+  - [x] Change address front end
+  - [ ] Change address back end
+  - [x] Change phone number front end
+  - [ ] Change phone number back end
 - [ ] Profile Page
   - [ ] Finish profile page
   - [ ] Allow updating of attributes for profile
