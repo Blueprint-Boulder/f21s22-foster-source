@@ -40,7 +40,6 @@ export class NavBarComponent implements OnInit {
   }
 
   logout(): void {
-    console.log("init govna");
     this.accountService.logout().subscribe(
       () => {
         this.authService.init();
