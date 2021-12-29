@@ -5,6 +5,7 @@
 <div *ngIf="selectedProfile" class="m-5">
   <div class="container">
     <div class="row">
+      <!-- Profile Image -->
       <div class="col-sm-6 col-md-3 profile-column">
         <div class="card border-0">
           <img
@@ -51,15 +52,7 @@
         </div>
       </div>
 
-      <!--      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo?.availabilities">-->
-      <!--        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">-->
-      <!--          <div>-->
-      <!--            {{selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]}}-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <!--      Availability Schedule-->
+      <!-- Availability Schedule-->
       <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
         <!-- Need to figure out how to do the margins without moving the entire schedule-->
         <h4 class="text-center mt-4">Availability Schedule</h4>
@@ -245,38 +238,50 @@
   </div>
 </ng-template>
 
+<!-- Accordian Template -->
 <ngb-accordion [closeOthers]="true" activeIds="static-1">
-  <ngb-panel id="static-1" title="Simple">
+  <ngb-panel id="static-1" title="Certification Background">
     <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-      officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-      moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-      keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-      vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-      heard of them accusamus labore sustainable VHS.
+      <div>County or child placement agency certified with</div>
+      <div>Years as a foster parent</div>
+      <div>Total foster children cared for</div>
     </ng-template>
   </ngb-panel>
-  <ngb-panel id="static-2">
-    <ng-template ngbPanelTitle>
-      <span>&#9733; <b>Fancy</b> title &#9733;</span>
-    </ng-template>
+  <ngb-panel id="static-2" title="Respite Background">
     <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-      officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-      moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-      keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-      vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-      heard of them accusamus labore sustainable VHS.
+      <div>City/town you can provide respite in</div>
+      <div>Miles willing to travel to provide respite</div>
+      <div>Provided respite in the past</div>
+      <div>Age range of children to care for</div>
+      <div>Mann number children to care for at a time</div>
     </ng-template>
   </ngb-panel>
-  <ngb-panel id="static-3" title="Disabled" [disabled]="true">
+  <ngb-panel id="static-3" title="Household Background">
+    <!--[disabled]="true"-->
     <ng-template ngbPanelContent>
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-      officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-      moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-      keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
-      vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
-      heard of them accusamus labore sustainable VHS.
+      <div>Access to reliable vehicle</div>
+      <div>Individuals in parental unit</div>
+      <div>total individuals in household</div>
+      <div>Biological children in household</div>
+      <div>Adopted children in household</div>
+      <div>Foster children in household</div>
+      <div>Ages of children in household</div>
+      <div>Genders of all children in household</div>
+      <div>Pets in household</div>
+      <div>Other details abut household or respite care</div>
+      <div>Member of LGBTQIA+ community</div>
+      <div>Experience with LGBTQIA+ youth</div>
+      <div>Experience for children with physical disability</div>
+      <div>Experience for children with intellectual disability</div>
+      <div>Own a firearm</div>
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
+
+<!--      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo?.availabilities">-->
+<!--        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">-->
+<!--          <div>-->
+<!--            {{selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]}}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
