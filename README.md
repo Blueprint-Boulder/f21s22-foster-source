@@ -1,5 +1,67 @@
 # Foster Source Respite App
 
+## TODO
+
+- [ ] Updating account
+  - [ ] Backend endpoints
+  - [ ] Frontend forms
+- [ ] Complete Profile
+  - [ ] Backend Routes
+  - [x] Capture frontend user when they have not yet completed their account
+    - user should not be able to visit any other page until they complete their account
+- [ ] Deployment
+  - [ ] Make sure all configurations work in the cloud
+  - [ ] Dockerize the backend?
+  - [ ] Set up CI/CD
+  - [ ] Set up AWS database
+- [ ] AWS
+  - [ ] Re-add everyone to AWS
+  - [ ] Get out of sandbox mode on emails
+- [ ] Images
+  - [ ] Implement actual S3 image fetching on front end instead of placeholder images
+- [ ] Account Page
+  - Different from profile page
+  - [x] View account page
+  - [ ] Change case worker details front end
+  - [ ] Change case worker details back end
+    - These two are on hold until we find out if users should be able to change this information.
+  - [x] Delete account front end
+  - [ ] Delete account back end
+  - [x] Change password front end
+  - [ ] Change password back end
+  - [x] Change address front end
+  - [x] Change address back end
+  - [x] Change phone number front end
+  - [ ] Change phone number back end
+- [ ] Profile Page
+  - [ ] Finish profile page
+  - [ ] Allow updating of attributes for profile
+- [ ] Login
+  - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
+  - [ ] Logout
+  - [ ] Forgot your password?
+  - [ ] Update login to be username or email, instead of just username
+- [ ] Announcements
+  - [ ] Make recent announcements not return anything after maybe a week?
+- [x] Mod/Admin
+  - [x] Mod / Admin signup page
+  - [x] Mod / Admin approvals frontend
+  - [x] Mod / Admin approvals backend
+  - [x] Remove "Profile" tab on nav bar for mods and admins
+
+### Stretch Goals
+
+- [ ] Reporting functionality
+- [ ] User Forum
+- [ ] Feature requests + bug reporting
+
+### Feature Backlog
+
+- [ ] Hide profile temporarily
+- [ ] Get list of all accounts for admins
+- [ ] Get list of all staff accounts for admins
+- [ ] Periodically go through and get rid of unverified accounts
+
 ## System Set-Up
 
 This project is going to be built in angular, so to develop you will need to properly set up your environment.

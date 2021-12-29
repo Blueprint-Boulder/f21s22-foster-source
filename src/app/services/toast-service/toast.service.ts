@@ -25,6 +25,11 @@ export class ToastService {
         body: `[${err.error.code}] ${err.error.message}`,
         preset: ToastPresets.ERROR,
       });
+    } else {
+      this.show({
+        body: `${err.message}`,
+        preset: ToastPresets.ERROR,
+      });
     }
   }
 

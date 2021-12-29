@@ -143,8 +143,6 @@ export class CreateAccountModalComponent implements OnInit {
 
   public createAccountSubmit(): void {
     if (this.createAccountForm.invalid) {
-      console.log(this.createAccountForm.invalid);
-      console.log(this.createAccountForm);
       this.createAccountForm.markAllAsTouched();
     } else {
       this.disableSubmitButton = true;
@@ -191,11 +189,8 @@ export class CreateAccountModalComponent implements OnInit {
           this.router.navigate([`/login/create-account/verify/${res.email}`]);
         },
         (err) => {
-          this.toastService.show({
-            body: 'Something went wrong trying to create your account.',
-            preset: ToastPresets.ERROR,
-          });
-          console.log(err);
+          this.toastService.httpError(err);
+          this.disableSubmitButton = false;
         }
       );
     }

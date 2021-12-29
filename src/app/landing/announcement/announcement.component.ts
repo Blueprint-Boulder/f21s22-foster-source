@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement.model';
 import { formatDate } from '@angular/common';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 import { ToastPresets } from '../../models/toast.model';
+import { AuthService, Privilege } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-announcement',
@@ -12,13 +13,26 @@ import { ToastPresets } from '../../models/toast.model';
   styleUrls: ['./announcement.component.scss'],
   providers: [announcementServiceProvider],
 })
-export class AnnouncementComponent {
+export class AnnouncementComponent implements OnInit {
   public editMode = false;
+  public canEdit = false;
   private preEditAnnouncement: Announcement;
 
   @Input() announcement: Announcement | undefined;
 
-  constructor(private announcementService: AnnouncementService, private toastService: ToastService) {}
+  constructor(
+    private announcementService: AnnouncementService,
+    private toastService: ToastService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    const cookie = this.authService.getToken();
+
+    if (cookie) {
+      this.canEdit = cookie.privilegeLevel >= Privilege.MOD;
+    }
+  }
 
   public getFormattedDate(): string {
     if (this.announcement) {

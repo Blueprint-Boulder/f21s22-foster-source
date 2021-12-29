@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement.model';
-import { ToastrService } from 'ngx-toastr';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
 import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,8 +13,7 @@ import { announcementServiceProvider } from '../../services/announcement-service
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;
-  @ViewChild('toast') toast: ElementRef;
-  constructor(private announcementService: AnnouncementService, private toastService: ToastrService) {}
+  constructor(private announcementService: AnnouncementService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.announcementService.getLatestAnnouncement().subscribe(
@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
         this.latestAnnouncement = a;
       },
       (error) => {
-        this.toastService.error('Failed to fetch latest announcement. Try reloading the page.', 'Error');
+        this.toastService.httpError(error);
       }
     );
   }

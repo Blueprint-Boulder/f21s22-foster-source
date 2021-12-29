@@ -3,10 +3,10 @@ import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
-import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
+import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
 import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { AddressReq, SimpleAddressReq } from '../models/adress.model';
+import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
 import { SmallProfile } from '../models/small-profile.model';
 
@@ -61,14 +61,15 @@ export const simpleAddresses: SimpleAddressReq[] = [
   },
 ];
 
-export const addresses: AddressReq[] = [
+export const addresses: AddressRes[] = [
   {
     addressLine1: '1002 fake st.',
     city: 'Denver',
     zipcode: '80210',
     state: 'CO',
-    lat: '1',
-    lon: '1',
+    country: 'USA',
+    latitude: 42,
+    longitude: 44,
   },
 ];
 
@@ -120,11 +121,12 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
-    primaryPhone: {
+    privilege: 'USER',
+    primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
     },
-    secondaryPhone: {
+    secondaryPhoneNumber: {
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },
@@ -270,6 +272,19 @@ export const mobilePhones: PhoneNumber[] = [
   },
 ];
 
+export const phoneNumbersRes: PhoneNumbersRes[] = [
+  {
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+3033467754',
+      type: PhoneNumberType.Home,
+    },
+  },
+];
+
 export const profiles: FullProfileRes[] = [
   {
     id: 1,
@@ -377,27 +392,33 @@ export const searchResults: SmallProfile[] = [
     preferredName: 'Paul',
     account: {
       username: 'Paulyboy123',
+      address: {
+        distance: 10.55,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 10.5,
   },
   {
     preferredName: 'Jett',
     account: {
       username: 'jcrowson',
+      address: {
+        distance: 14.15,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 1.2,
   },
   {
     preferredName: 'Gina Smith',
     account: {
       username: 'ginasmithmane',
+      address: {
+        distance: 21.09,
+      },
     },
     id: 1,
     profileLargeAWSKey: 'largeKey',
-    distance: 2.2,
   },
 ];
