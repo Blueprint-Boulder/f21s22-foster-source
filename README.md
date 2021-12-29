@@ -40,6 +40,7 @@
   - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [ ] Logout
   - [ ] Forgot your password?
+  - [ ] Update login to be username or email, instead of just username
 - [ ] Announcements
   - [ ] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
