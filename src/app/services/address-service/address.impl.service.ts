@@ -14,8 +14,7 @@ export class AddressImplService implements AddressService {
   }
 
   updateAddress(address: SimpleAddressReq): Observable<AddressRes> {
-    return this.http.put<AddressRes>(`${environment.backendHost}/api/db/account/address`, {
-      body: address,
+    return this.http.put<AddressRes>(`${environment.backendHost}/api/db/accounts/address`, address, {
       withCredentials: true,
     });
   }
