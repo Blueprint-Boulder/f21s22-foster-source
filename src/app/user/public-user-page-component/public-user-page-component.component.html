@@ -194,6 +194,123 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">
+      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">
+        <div>
+          {{ selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0] }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Accordian Template -->
+    <ngb-accordion [closeOthers]="true" activeIds="static-1">
+      <ngb-panel id="static-1" title="Certification Background">
+        <ng-template ngbPanelContent>
+          <div class="row">
+            <div class="col-sm-6">County or child placement agency certified with</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Years as a foster parent</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Total foster children cared for</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-2" title="Respite Background">
+        <ng-template ngbPanelContent>
+          <div class="row">
+            <div class="col-sm-6">City/town you can provide respite in</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Miles willing to travel to provide respite</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Provided respite in the past</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Age range of children to care for</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Mann number children to care for at a time</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+      <ngb-panel id="static-3" title="Household Background">
+        <!--[disabled]="true"-->
+        <ng-template ngbPanelContent>
+          <div class="row">
+            <div class="col-sm-6">Access to reliable vehicle</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Individuals in parental unit</div>
+            <div class="col-sm-6">#</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">total individuals in household</div>
+            <div class="col-sm-6">#</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Biological children in household</div>
+            <div class="col-sm-6">#</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Adopted children in household</div>
+            <div class="col-sm-6">#</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Foster children in household</div>
+            <div class="col-sm-6">#</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Ages of children in household</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Genders of all children in household</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Pets in household</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Other details abut household or respite care</div>
+            <div class="col-sm-6">Test test</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Member of LGBTQIA+ community</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Experience with LGBTQIA+ youth</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Experience for children with physical disability</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Experience for children with intellectual disability</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">Own a firearm</div>
+            <div class="col-sm-6">Y/N</div>
+          </div>
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
   </div>
 </div>
 
@@ -237,51 +354,3 @@
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>
-
-<!-- Accordian Template -->
-<ngb-accordion [closeOthers]="true" activeIds="static-1">
-  <ngb-panel id="static-1" title="Certification Background">
-    <ng-template ngbPanelContent>
-      <div>County or child placement agency certified with</div>
-      <div>Years as a foster parent</div>
-      <div>Total foster children cared for</div>
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-2" title="Respite Background">
-    <ng-template ngbPanelContent>
-      <div>City/town you can provide respite in</div>
-      <div>Miles willing to travel to provide respite</div>
-      <div>Provided respite in the past</div>
-      <div>Age range of children to care for</div>
-      <div>Mann number children to care for at a time</div>
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-3" title="Household Background">
-    <!--[disabled]="true"-->
-    <ng-template ngbPanelContent>
-      <div>Access to reliable vehicle</div>
-      <div>Individuals in parental unit</div>
-      <div>total individuals in household</div>
-      <div>Biological children in household</div>
-      <div>Adopted children in household</div>
-      <div>Foster children in household</div>
-      <div>Ages of children in household</div>
-      <div>Genders of all children in household</div>
-      <div>Pets in household</div>
-      <div>Other details abut household or respite care</div>
-      <div>Member of LGBTQIA+ community</div>
-      <div>Experience with LGBTQIA+ youth</div>
-      <div>Experience for children with physical disability</div>
-      <div>Experience for children with intellectual disability</div>
-      <div>Own a firearm</div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-
-<!--      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo?.availabilities">-->
-<!--        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">-->
-<!--          <div>-->
-<!--            {{selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]}}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
