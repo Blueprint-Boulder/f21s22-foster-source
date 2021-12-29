@@ -81,3 +81,7 @@ export interface GetAccountsReq {
 export interface VerifyReq {
   key: string;
 }
+
+export interface DeleteAccountReq {
+  password: string;
+}

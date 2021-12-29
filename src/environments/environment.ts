@@ -8,7 +8,7 @@ export const environment = {
   useRealAnnouncementService: true,
   useRealAccountService: true,
   useRealProfileService: true,
-  useRealAddressService: false,
+  useRealAddressService: true,
   useRealAvailabilityService: false,
   useRealBlacklistService: true,
   useRealPhoneNumberService: false,

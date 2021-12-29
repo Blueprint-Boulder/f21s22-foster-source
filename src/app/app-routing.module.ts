@@ -4,6 +4,7 @@ import { PageNotFoundComponent } from './common/page-not-found/page-not-found.co
 import { AdminGuard } from './guards/admin/admin.guard';
 import { ModGuard } from './guards/mod/mod.guard';
 import { UserGuard } from './guards/user/user.guard';
+import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: 'respite',
     loadChildren: () => import('./respite-search/respite-search.module').then((m) => m.RespiteSearchModule),
     canActivate: [UserGuard],
+  },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
+    canActivate: [LoggedInGuard],
   },
   {
     path: '**',
