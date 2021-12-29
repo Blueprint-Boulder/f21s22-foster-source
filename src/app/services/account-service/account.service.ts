@@ -30,6 +30,7 @@ export abstract class AccountService {
   public abstract verifyAccount(params: VerifyReq): Observable<any>;
   public abstract resendVerificationEmail(email: string): Observable<any>;
   public abstract login(params: LoginRequest): Observable<string>;
+  public abstract logout(): Observable<any>;
   public abstract completeProfile(params: FinishProfileReq): Observable<any>;
   public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(req: DeleteAccountReq): Observable<any>;

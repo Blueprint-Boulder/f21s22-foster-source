@@ -66,6 +66,12 @@ export class AccountImplService implements AccountService {
     });
   }
 
+  logout(): Observable<any> {
+    return this.http.get<any>(`${environment.backendHost}/api/db/accounts/session/logout`, {
+      withCredentials: true,
+    });
+  }
+
   updateAccount(params: UpdateAccountReq): Observable<Account> {
     return this.http.put<Account>(`${environment.backendHost}/api/db/accounts`, JSON.stringify(params), {
       withCredentials: true,

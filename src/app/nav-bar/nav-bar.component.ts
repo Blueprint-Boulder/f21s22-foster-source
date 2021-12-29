@@ -39,6 +39,20 @@ export class NavBarComponent implements OnInit {
     );
   }
 
+  logout(): void {
+    console.log("init govna");
+    this.accountService.logout().subscribe(
+      () => {
+        this.authService.init();
+        this.router.navigate(['/']);
+      },
+      (err) => {
+        console.log(err);
+        console.log('Failed to log out');
+      }
+    );
+  }
+
   getProfilePicture(): string {
     return 'assets/images/blank-profile-photo.jpg';
   }

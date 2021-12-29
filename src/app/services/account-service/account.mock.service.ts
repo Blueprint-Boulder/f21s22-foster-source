@@ -37,6 +37,10 @@ export class AccountMockService implements AccountService {
     return of(tokenString);
   }
 
+  logout(): Observable<any> {
+    return of({});
+  }
+
   updateAccount(params: UpdateAccountReq): Observable<Account> {
     return of(accounts[0]);
   }
