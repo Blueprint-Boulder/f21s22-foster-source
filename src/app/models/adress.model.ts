@@ -12,7 +12,7 @@ export interface AddressReq extends SimpleAddressReq {
 }
 
 export interface AddressRes {
-  id: number;
+  id?: number;
   addressLine1: string;
   addressLine2?: string;
   city: string;

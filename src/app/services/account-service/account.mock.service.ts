@@ -4,6 +4,7 @@ import {
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
+  DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -13,6 +14,7 @@ import { Observable, of } from 'rxjs';
 import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
+import { ChangePasswordReq } from '../../models/change-password';
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
@@ -27,7 +29,7 @@ export class AccountMockService implements AccountService {
     return of({});
   }
 
-  deleteOwnAccount(): Observable<any> {
+  deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return of({});
   }
 
@@ -77,5 +79,9 @@ export class AccountMockService implements AccountService {
 
   getAccountById(id: number): Observable<Account> {
     return of(accounts[0]);
+  }
+
+  updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any> {
+    return of({});
   }
 }

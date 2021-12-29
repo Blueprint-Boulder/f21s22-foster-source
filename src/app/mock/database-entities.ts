@@ -3,10 +3,10 @@ import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
-import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
+import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
 import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { AddressReq, SimpleAddressReq } from '../models/adress.model';
+import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
 import { SmallProfile } from '../models/small-profile.model';
 
@@ -61,14 +61,15 @@ export const simpleAddresses: SimpleAddressReq[] = [
   },
 ];
 
-export const addresses: AddressReq[] = [
+export const addresses: AddressRes[] = [
   {
     addressLine1: '1002 fake st.',
     city: 'Denver',
     zipcode: '80210',
     state: 'CO',
-    lat: '1',
-    lon: '1',
+    country: 'USA',
+    latitude: 42,
+    longitude: 44,
   },
 ];
 
@@ -268,6 +269,19 @@ export const mobilePhones: PhoneNumber[] = [
   {
     phoneNumber: '+17209938821',
     type: PhoneNumberType.Mobile,
+  },
+];
+
+export const phoneNumbersRes: PhoneNumbersRes[] = [
+  {
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+3033467754',
+      type: PhoneNumberType.Home,
+    },
   },
 ];
 

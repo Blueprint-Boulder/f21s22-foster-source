@@ -5,6 +5,7 @@ import {
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
+  DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
   UpdateAccountReq,
@@ -15,6 +16,7 @@ import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
 import { AuthService } from '../auth-service/auth.service';
+import { ChangePasswordReq } from '../../models/change-password';
 
 export class AccountImplService implements AccountService {
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -51,8 +53,9 @@ export class AccountImplService implements AccountService {
     });
   }
 
-  deleteOwnAccount(): Observable<any> {
+  deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return this.http.delete<void>(`${environment.backendHost}/api/db/accounts/`, {
+      body: req,
       withCredentials: true,
     });
   }
@@ -110,7 +113,13 @@ export class AccountImplService implements AccountService {
   }
 
   completeProfile(params: FinishProfileReq): Observable<any> {
-    return this.http.post<any>(`${environment.backendHost}/api/db/accounts/complete`, JSON.stringify(params), {
+    return this.http.post<any>(`${environment.backendHost}/api/db/profiles/`, params, {
+      withCredentials: true,
+    });
+  }
+
+  updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any> {
+    return this.http.put<any>(`${environment.backendHost}/api/db/accounts/password`, req, {
       withCredentials: true,
     });
   }
