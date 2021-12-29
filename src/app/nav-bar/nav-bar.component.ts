@@ -12,7 +12,7 @@ import { accountServiceProvider } from '../services/account-service/account.serv
   providers: [accountServiceProvider],
 })
 export class NavBarComponent implements OnInit {
-  public currentAccount: Account;
+  public currentAccount: Account | undefined;
   public isAdmin = false;
 
   constructor(public router: Router, private accountService: AccountService, private authService: AuthService) {
@@ -44,6 +44,8 @@ export class NavBarComponent implements OnInit {
       () => {
         this.authService.init();
         this.router.navigate(['/']);
+        this.currentAccount = undefined;
+        this.isAdmin = false;
       },
       (err) => {
         console.log(err);
