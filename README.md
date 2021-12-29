@@ -26,7 +26,7 @@
   - [ ] Change case worker details back end
     - These two are on hold until we find out if users should be able to change this information.
   - [x] Delete account front end
-  - [ ] Delete account back end
+  - [x] Delete account back end
   - [x] Change password front end
   - [ ] Change password back end
   - [x] Change address front end
