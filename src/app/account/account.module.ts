@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { UpdateAddressComponent } from './update-address/update-address.component';
 import { UpdatePhoneComponent } from './update-phone/update-phone.component';
+import { UpdateCaseWorkerComponent } from './update-case-worker/update-case-worker.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { UpdatePhoneComponent } from './update-phone/update-phone.component';
     DeleteAccountComponent,
     UpdateAddressComponent,
     UpdatePhoneComponent,
+    UpdateCaseWorkerComponent,
   ],
   imports: [CommonModule, AccountRoutingModule, ReactiveFormsModule],
 })

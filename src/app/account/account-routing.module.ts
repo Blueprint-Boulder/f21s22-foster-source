@@ -5,6 +5,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { DeleteAccountComponent } from './delete-account/delete-account.component';
 import { UpdateAddressComponent } from './update-address/update-address.component';
 import { UpdatePhoneComponent } from './update-phone/update-phone.component';
+import { UpdateCaseWorkerComponent } from './update-case-worker/update-case-worker.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'update-phone-number',
     component: UpdatePhoneComponent,
+  },
+  {
+    path: 'update-case-worker-info',
+    component: UpdateCaseWorkerComponent,
   },
 ];
 

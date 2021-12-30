@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Account,
+  CaseWorkerInfo,
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
@@ -41,4 +42,6 @@ export abstract class AccountService {
   public abstract getCurrentAccount(): Observable<Account>;
   public abstract getAccountById(id: number): Observable<Account>;
   public abstract updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any>;
+  public abstract getCwInfo(): Observable<CaseWorkerInfo>;
+  public abstract updateCwInfo(req: CaseWorkerInfo): Observable<any>;
 }
