@@ -48,6 +48,7 @@ export class LoginModalComponent implements OnInit {
           this.authService.init();
           this.router.navigate(['/respite']);
           this.authService.emitLoggedIn();
+          sessionStorage.setItem('active', 'true');
         },
         (err) => {
           this.toastService.httpError(err);

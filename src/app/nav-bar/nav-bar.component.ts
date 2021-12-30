@@ -20,7 +20,11 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loggedIn();
+    if (sessionStorage.getItem('active')) {
+      this.loggedIn();
+    } else {
+      this.logout();
+    }
   }
 
   loggedIn(): void {
