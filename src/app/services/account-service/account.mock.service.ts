@@ -1,6 +1,7 @@
 import { AccountService } from './account.service';
 import {
   Account,
+  CaseWorkerInfo,
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
@@ -82,6 +83,14 @@ export class AccountMockService implements AccountService {
   }
 
   updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any> {
+    return of({});
+  }
+
+  getCwInfo(): Observable<CaseWorkerInfo> {
+    return of(accounts[0]);
+  }
+
+  updateCwInfo(req: CaseWorkerInfo): Observable<any> {
     return of({});
   }
 }

@@ -1,0 +1,157 @@
+<div *ngIf="cwInfo" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Case Worker/Certification Information</h2>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <p><b>Current Case Worker Info On File</b></p>
+      <p><b>Case Worker Name:</b> {{ cwInfo.cwFirstName }} {{ cwInfo.cwLastName }}</p>
+      <p><b>Case Worker Email:</b> {{ cwInfo.cwEmail }}</p>
+      <p><b>Case Worker Phone Number:</b> {{ cwInfo.cwPhoneNumber }}</p>
+      <p><b>County or Agency Certified By:</b> {{ cwInfo.certifiedBy }}</p>
+      <hr />
+    </div>
+  </div>
+  <form [formGroup]="updateCwInfoForm">
+    <div class="row cw-name-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="caseworkerfname"
+            ><b>Case Worker First Name</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkerfname"
+            placeholder="Enter Case Worker's First Name"
+            formControlName="caseworkerfname"
+            required
+          />
+          <div
+            *ngIf="
+              updateCwInfoForm.get('caseworkerfname')?.invalid &&
+              (updateCwInfoForm.get('caseworkerfname')?.dirty || updateCwInfoForm.get('caseworkerfname')?.touched)
+            "
+          >
+            <small *ngIf="updateCwInfoForm.get('caseworkerfname')?.errors?.required" class="input-error"
+              >Please enter case worker's first name.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="caseworkerlname"
+            ><b>Case Worker Last Name</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkerlname"
+            placeholder="Enter Case Worker's First Name"
+            formControlName="caseworkerlname"
+            required
+          />
+          <div
+            *ngIf="
+              updateCwInfoForm.get('caseworkerlname')?.invalid &&
+              (updateCwInfoForm.get('caseworkerlname')?.dirty || updateCwInfoForm.get('caseworkerlname')?.touched)
+            "
+          >
+            <small *ngIf="updateCwInfoForm.get('caseworkerlname')?.errors?.required" class="input-error"
+              >Please enter case worker's last name.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row cw-contact-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="caseworkeremail"><b>Case Worker Email</b><span class="required-star">*</span></label>
+          <input
+            type="email"
+            class="form-control p-1 m-0 bottom-border-input"
+            id="caseworkeremail"
+            placeholder="Enter Case Worker's Email"
+            formControlName="caseworkeremail"
+            required
+          />
+          <div
+            *ngIf="
+              updateCwInfoForm.get('caseworkeremail')?.invalid &&
+              (updateCwInfoForm.get('caseworkeremail')?.dirty || updateCwInfoForm.get('caseworkeremail')?.touched)
+            "
+          >
+            <small *ngIf="updateCwInfoForm.get('caseworkeremail')?.errors?.required" class="input-error"
+              >Please enter case worker's email.<br
+            /></small>
+            <small *ngIf="updateCwInfoForm.get('caseworkeremail')?.errors?.email" class="input-error"
+              >Please enter a valid email.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="caseworkerphone"><b>Case Worker Phone Number</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="caseworkerphone"
+            placeholder="Enter Case Worker's Phone Number"
+            formControlName="caseworkerphone"
+          />
+          <div
+            *ngIf="
+              updateCwInfoForm.get('caseworkerphone')?.invalid &&
+              (updateCwInfoForm.get('caseworkerphone')?.dirty || updateCwInfoForm.get('caseworkerphone')?.touched)
+            "
+          >
+            <small *ngIf="updateCwInfoForm.get('caseworkerphone')?.errors?.required" class="input-error"
+              >Please enter case worker's phone number.<br
+            /></small>
+            <small *ngIf="updateCwInfoForm.get('caseworkerphone')?.errors?.invalidPhone" class="input-error"
+              >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="certifiedBy"
+            ><b>County or Child Placement Agency Certified With</b><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="certifiedBy"
+            placeholder="Enter county or child placement agency"
+            formControlName="certifiedBy"
+            required
+          />
+          <div
+            *ngIf="
+              updateCwInfoForm.get('certifiedBy')?.invalid &&
+              (updateCwInfoForm.get('certifiedBy')?.dirty || updateCwInfoForm.get('certifiedBy')?.touched)
+            "
+          >
+            <small *ngIf="updateCwInfoForm.get('certifiedBy')?.errors?.required" class="input-error"
+              >Please enter the county or child placement agency you are certified by.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Case Worker Information
+      </button>
+    </div>
+  </div>
+</div>

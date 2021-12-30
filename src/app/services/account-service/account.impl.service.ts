@@ -2,6 +2,7 @@ import { AccountService } from './account.service';
 import { HttpClient } from '@angular/common/http';
 import {
   Account,
+  CaseWorkerInfo,
   Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
@@ -120,6 +121,18 @@ export class AccountImplService implements AccountService {
 
   updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any> {
     return this.http.put<any>(`${environment.backendHost}/api/db/accounts/password`, req, {
+      withCredentials: true,
+    });
+  }
+
+  getCwInfo(): Observable<CaseWorkerInfo> {
+    return this.http.get<CaseWorkerInfo>(`${environment.backendHost}/api/db/accounts/case-worker-info`, {
+      withCredentials: true,
+    });
+  }
+
+  updateCwInfo(req: CaseWorkerInfo): Observable<any> {
+    return this.http.put(`${environment.backendHost}/api/db/accounts/case-worker-info`, req, {
       withCredentials: true,
     });
   }
