@@ -85,3 +85,11 @@ export interface VerifyReq {
 export interface DeleteAccountReq {
   password: string;
 }
+
+export interface CaseWorkerInfo {
+  cwFirstName: string;
+  cwLastName: string;
+  cwEmail: string;
+  cwPhoneNumber: string;
+  certifiedBy: string;
+}

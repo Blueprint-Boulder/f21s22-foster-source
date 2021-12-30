@@ -32,7 +32,11 @@
       <p><b>Case Worker Phone Number:</b> {{ currentAccount.cwPhoneNumber }}</p>
       <p><b>County or Agency Certified By:</b> {{ currentAccount.certifiedBy }}</p>
       <!-- TODO: Make sure that users should be able to update their case worker information -->
-      <p><a href="javascript:void(0)">Click here to update your case worker information.</a></p>
+      <p>
+        <a href="javascript:void(0)" [routerLink]="'/account/update-case-worker-info'"
+          >Click here to update your case worker information.</a
+        >
+      </p>
     </div>
   </div>
   <div class="row mt-5">

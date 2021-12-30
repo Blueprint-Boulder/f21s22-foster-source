@@ -5,8 +5,8 @@
 - [ ] Updating account
   - [ ] Backend endpoints
   - [ ] Frontend forms
-- [ ] Complete Profile
-  - [ ] Backend Routes
+- [x] Complete Profile
+  - [x] Backend Routes
   - [x] Capture frontend user when they have not yet completed their account
     - user should not be able to visit any other page until they complete their account
 - [ ] Deployment
@@ -26,7 +26,7 @@
   - [ ] Change case worker details back end
     - These two are on hold until we find out if users should be able to change this information.
   - [x] Delete account front end
-  - [ ] Delete account back end
+  - [x] Delete account back end
   - [x] Change password front end
   - [ ] Change password back end
   - [x] Change address front end
@@ -40,9 +40,8 @@
   - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [ ] Logout
   - [ ] Forgot your password?
-  - [ ] Update login to be username or email, instead of just username
-- [ ] Announcements
-  - [ ] Make recent announcements not return anything after maybe a week?
+- [x] Announcements
+  - [x] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
   - [x] Mod / Admin signup page
   - [x] Mod / Admin approvals frontend
@@ -135,5 +134,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-> > > > > > > master
