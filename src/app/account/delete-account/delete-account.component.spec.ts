@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeleteAccountComponent } from './delete-account.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ReactiveFormsModule } from "@angular/forms";
 
 describe('DeleteAccountComponent', () => {
   let component: DeleteAccountComponent;
@@ -8,9 +11,9 @@ describe('DeleteAccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteAccountComponent ]
-    })
-    .compileComponents();
+      declarations: [DeleteAccountComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

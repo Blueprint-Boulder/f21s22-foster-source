@@ -40,6 +40,7 @@
   - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [x] Logout
   - [ ] Forgot your password?
+  - [ ] Does unchecking the remember me tab do anything?
 - [x] Announcements
   - [x] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
@@ -60,6 +61,15 @@
 - [ ] Get list of all accounts for admins
 - [ ] Get list of all staff accounts for admins
 - [ ] Periodically go through and get rid of unverified accounts
+
+## Testing
+
+Run the command `npm run test`.
+
+If you are using Windows + WSL (Windows Subsystem for Linux):
+
+- The angular testing system uses Google Chrome to run the tests. If you are on a virtual subsystem like WSL, it is likely that there is no chrome installed and so you will not be able to run tests.
+- Use [this link](https://www.gregbrisebois.com/posts/chromedriver-in-wsl2/) to setup to run tests. You may skip "The X Server" step
 
 ## System Set-Up
 

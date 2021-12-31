@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateCaseWorkerComponent } from './update-case-worker.component';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { ReactiveFormsModule } from "@angular/forms";
 
 describe('UpdateCaseWorkerComponent', () => {
   let component: UpdateCaseWorkerComponent;
@@ -8,7 +11,8 @@ describe('UpdateCaseWorkerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateCaseWorkerComponent ]
+      declarations: [ UpdateCaseWorkerComponent],
+      imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
     })
     .compileComponents();
   });
