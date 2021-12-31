@@ -1,10 +1,9 @@
 import { ProfileService } from './profile.service';
-import { CreateProfileReq, GetProfilesRes, Profile, UpdateProfileReq } from '../../models/profile.model';
+import { CreateProfileReq, GetProfilesRes, UpdateProfileReq } from '../../models/profile.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FiltersReq } from '../../models/filters.model';
-import { tap } from 'rxjs/operators';
 import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
 import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
 

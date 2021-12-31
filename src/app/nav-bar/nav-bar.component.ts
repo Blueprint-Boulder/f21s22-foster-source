@@ -12,7 +12,7 @@ import { accountServiceProvider } from '../services/account-service/account.serv
   providers: [accountServiceProvider],
 })
 export class NavBarComponent implements OnInit {
-  public currentAccount: Account;
+  public currentAccount: Account | undefined;
   public isAdmin = false;
 
   constructor(public router: Router, private accountService: AccountService, private authService: AuthService) {
@@ -20,7 +20,11 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loggedIn();
+    if (sessionStorage.getItem('active')) {
+      this.loggedIn();
+    } else {
+      this.logout();
+    }
   }
 
   loggedIn(): void {
@@ -35,6 +39,21 @@ export class NavBarComponent implements OnInit {
       (err) => {
         console.log(err);
         console.log('No account found.');
+      }
+    );
+  }
+
+  logout(): void {
+    this.accountService.logout().subscribe(
+      () => {
+        this.authService.init();
+        this.router.navigate(['/']);
+        this.currentAccount = undefined;
+        this.isAdmin = false;
+      },
+      (err) => {
+        console.log(err);
+        console.log('Failed to log out');
       }
     );
   }

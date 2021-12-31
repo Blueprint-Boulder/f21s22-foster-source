@@ -11,4 +11,8 @@ export class AddressMockService implements AddressService {
   updateAddress(address: SimpleAddressReq): Observable<AddressRes> {
     return of(addresses[0]);
   }
+
+  logout(): Observable<any> {
+    return of({});
+  }
 }

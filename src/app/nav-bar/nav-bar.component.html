@@ -40,7 +40,7 @@
         <a class="nav-link" href="javascript:void(0)" [routerLink]="'/account'">Account</a>
       </li>
       <li *ngIf="currentAccount" class="nav-item">
-        <a class="nav-link" href="javascript:void(0)">Logout</a>
+        <a class="nav-link" href="javascript:void(0)" (click)="logout()">Logout</a>
       </li>
       <li *ngIf="currentAccount && !isAdmin" class="nav-item">
         <a class="nav-link" href="javascript:void(0)">

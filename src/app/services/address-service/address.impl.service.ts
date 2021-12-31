@@ -1,7 +1,7 @@
 import { AddressService } from './address.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AddressReq, AddressRes, SimpleAddressReq } from '../../models/adress.model';
+import { AddressRes, SimpleAddressReq } from '../../models/adress.model';
 import { environment } from '../../../environments/environment';
 
 export class AddressImplService implements AddressService {

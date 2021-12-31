@@ -15,15 +15,14 @@ export enum Privilege {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private cookieService: CookieService) {}
-
   public loggedInEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  //Storing priveleges of the user.
   private isUser = false;
   private isAdmin = false;
   private isMod = false;
   private expiresAt = moment();
+
+  constructor(private cookieService: CookieService) {}
 
   init(): void {
     const token = this.getToken();

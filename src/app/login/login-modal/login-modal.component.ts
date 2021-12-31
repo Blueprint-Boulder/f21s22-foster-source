@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account-service/account.service';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
@@ -6,9 +6,7 @@ import { AuthService } from '../../services/auth-service/auth.service';
 import { LoginRequest } from 'src/app/models/account.model';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ToastPresets } from '../../models/toast.model';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login-modal',
@@ -48,6 +46,7 @@ export class LoginModalComponent implements OnInit {
           this.authService.init();
           this.router.navigate(['/respite']);
           this.authService.emitLoggedIn();
+          sessionStorage.setItem('active', 'true');
         },
         (err) => {
           this.toastService.httpError(err);
