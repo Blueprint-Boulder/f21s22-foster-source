@@ -38,13 +38,6 @@ export class PublicUserPageComponentComponent implements OnInit {
       console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].monday[0]);
       console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].friday);
       this.selectedProfile = p;
-      this.monday = p.respiteBackground.respiteProviderInfo?.availabilities[0].monday;
-      this.tuesday = p.respiteBackground.respiteProviderInfo?.availabilities[0].tuesday;
-      this.wednesday = p.respiteBackground.respiteProviderInfo?.availabilities[0].wednesday;
-      this.thursday = p.respiteBackground.respiteProviderInfo?.availabilities[0].thursday;
-      this.friday = p.respiteBackground.respiteProviderInfo?.availabilities[0].friday;
-      this.saturday = p.respiteBackground.respiteProviderInfo?.availabilities[0].saturday;
-      this.sunday = p.respiteBackground.respiteProviderInfo?.availabilities[0].sunday;
     });
   }
 

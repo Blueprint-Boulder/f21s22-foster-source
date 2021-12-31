@@ -52,153 +52,259 @@
         </div>
       </div>
 
+      <!--    <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">-->
+      <!--      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">-->
+      <!--        <div>-->
+      <!--          {{selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]}}-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--    </div>-->
+
       <!-- Availability Schedule-->
-      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
-        <!-- Need to figure out how to do the margins without moving the entire schedule-->
-        <h4 class="text-center mt-4">Availability Schedule</h4>
-        <div class="row p-3">
-          <div class="col-sm-12 px-3">
-            <h5 class="day">Monday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="monday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="monday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="monday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="monday[3]">
-                <p class="text text-center">Overnight</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-12 px-3" *ngIf="tuesday">
-            <h5 class="day">Tuesday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="tuesday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[3]">
-                <p class="text text-center">Overnight</p>
+      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">
+        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">
+          <h4 class="text-center mt-4">Availability Schedule</h4>
+          <div class="row p-3">
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday"
+            >
+              <h5 class="day">Monday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-12 px-3" *ngIf="wednesday">
-            <h5 class="day">Wednesday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="tuesday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="tuesday[0]">
-                <p class="text text-center">Overnight</p>
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday"
+            >
+              <h5 class="day">Tuesday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-12 px-3" *ngIf="thursday">
-            <h5 class="day">Thursday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="thursday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="thursday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="thursday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="thursday[3]">
-                <p class="text text-center">Overnight</p>
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday"
+            >
+              <h5 class="day">Wednesday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-12 px-3" *ngIf="friday">
-            <h5 class="day">Friday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="friday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="friday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="friday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="friday[3]">
-                <p class="text text-center">Overnight</p>
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday"
+            >
+              <h5 class="day">Thursday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-12 px-3" *ngIf="saturday">
-            <h5 class="day">Saturday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="saturday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="saturday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="saturday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="saturday[3]">
-                <p class="text text-center">Overnight</p>
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday"
+            >
+              <h5 class="day">Friday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-sm-12 px-3" *ngIf="sunday">
-            <h5 class="day">Sunday</h5>
-            <hr class="line" />
-            <div class="row Times">
-              <div class="col-md-6" *ngIf="sunday[0]">
-                <p class="text text-center">Morning</p>
-              </div>
-              <div class="col-md-6" *ngIf="sunday[1]">
-                <p class="text text-center">Afternoon</p>
-              </div>
-              <div class="col-md-6" *ngIf="sunday[2]">
-                <p class="text text-center">Evening</p>
-              </div>
-              <div class="col-md-6" *ngIf="sunday[3]">
-                <p class="text text-center">Overnight</p>
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday"
+            >
+              <h5 class="day">Saturday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
               </div>
             </div>
+
+            <div
+              class="col-sm-12 px-3"
+              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday"
+            >
+              <h5 class="day">Sunday</h5>
+              <hr class="line" />
+              <div class="row Times">
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[0]"
+                >
+                  <p class="text text-center">Morning</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[1]"
+                >
+                  <p class="text text-center">Afternoon</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[2]"
+                >
+                  <p class="text text-center">Evening</p>
+                </div>
+                <div
+                  class="col-md-6"
+                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[3]"
+                >
+                  <p class="text text-center">Overnight</p>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="open(content)">Contact</button>
           </div>
-
-          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="open(content)">Contact</button>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">
-      <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">
-        <div>
-          {{ selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0] }}
         </div>
       </div>
     </div>
@@ -207,17 +313,17 @@
     <ngb-accordion [closeOthers]="true" activeIds="static-1">
       <ngb-panel id="static-1" title="Certification Background">
         <ng-template ngbPanelContent>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-6">County or child placement agency certified with</div>
-            <div class="col-sm-6">Test test</div>
-          </div>
+            <div class="col-sm-6">Test Test</div>
+          </div> -->
           <div class="row">
             <div class="col-sm-6">Years as a foster parent</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">{{ selectedProfile.respiteBackground.fosterYearsExperience }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Total foster children cared for</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">{{ selectedProfile.respiteBackground.totalChildrenCaredFor }}</div>
           </div>
         </ng-template>
       </ngb-panel>
@@ -225,23 +331,30 @@
         <ng-template ngbPanelContent>
           <div class="row">
             <div class="col-sm-6">City/town you can provide respite in</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">
+              {{ selectedProfile.respiteBackground.respiteProviderInfo?.cityCanProvideRespiteIn }}
+            </div>
           </div>
           <div class="row">
             <div class="col-sm-6">Miles willing to travel to provide respite</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">
+              {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
+            </div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-6">Provided respite in the past</div>
-            <div class="col-sm-6">Test test</div>
-          </div>
+            <div class="col-sm-6">Test Test</div>
+          </div> -->
           <div class="row">
             <div class="col-sm-6">Age range of children to care for</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">
+              {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMinAge }} to
+              {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMaxAge }}
+            </div>
           </div>
           <div class="row">
-            <div class="col-sm-6">Mann number children to care for at a time</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">Max number children to care for at a time</div>
+            <div class="col-sm-6">{{ selectedProfile.respiteBackground.respiteProviderInfo?.maxNumCareFor }}</div>
           </div>
         </ng-template>
       </ngb-panel>
@@ -250,63 +363,63 @@
         <ng-template ngbPanelContent>
           <div class="row">
             <div class="col-sm-6">Access to reliable vehicle</div>
-            <div class="col-sm-6">Y/N</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.vehicleAccess?.valueOf() }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Individuals in parental unit</div>
-            <div class="col-sm-6">#</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.parentalUnitSize }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">total individuals in household</div>
-            <div class="col-sm-6">#</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.householdSize }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Biological children in household</div>
-            <div class="col-sm-6">#</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInHousehold }}</div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-6">Adopted children in household</div>
             <div class="col-sm-6">#</div>
-          </div>
-          <div class="row">
+          </div> -->
+          <!-- <div class="row">
             <div class="col-sm-6">Foster children in household</div>
             <div class="col-sm-6">#</div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-sm-6">Ages of children in household</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInfo }}</div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-6">Genders of all children in household</div>
             <div class="col-sm-6">Test test</div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-sm-6">Pets in household</div>
-            <div class="col-sm-6">Test test</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.petInfo }}</div>
           </div>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-sm-6">Other details abut household or respite care</div>
-            <div class="col-sm-6">Test test</div>
-          </div>
-          <div class="row">
+            <div class="col-sm-6">Test Test</div>
+          </div> -->
+          <!-- <div class="row">
             <div class="col-sm-6">Member of LGBTQIA+ community</div>
             <div class="col-sm-6">Y/N</div>
-          </div>
+          </div> -->
           <div class="row">
             <div class="col-sm-6">Experience with LGBTQIA+ youth</div>
-            <div class="col-sm-6">Y/N</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.lgbtCareExperience?.valueOf() }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Experience for children with physical disability</div>
-            <div class="col-sm-6">Y/N</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForPhysDisabled }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Experience for children with intellectual disability</div>
-            <div class="col-sm-6">Y/N</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForIntelDisabled }}</div>
           </div>
           <div class="row">
             <div class="col-sm-6">Own a firearm</div>
-            <div class="col-sm-6">Y/N</div>
+            <div class="col-sm-6">{{ selectedProfile.householdBackground.ownsFirearm }}</div>
           </div>
         </ng-template>
       </ngb-panel>
