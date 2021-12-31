@@ -6,6 +6,7 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 import { ToastService } from '../../services/toast-service/toast.service';
 import { Router } from '@angular/router';
 import { ToastPresets } from '../../models/toast.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-change-password',
@@ -30,7 +31,7 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmNewPassword: ['', Validators.required],
     });
-    this.changePasswordForm.setValidators([ChangePasswordComponent.confirmPasswordValidator]);
+    this.changePasswordForm.setValidators([FormUtils.confirmPasswordValidator('confirmNewPassword', 'newPassword')]);
   }
 
   onSubmit() {
@@ -56,11 +57,5 @@ export class ChangePasswordComponent implements OnInit {
         }
       );
     }
-  }
-
-  private static confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
-    return control.get('confirmNewPassword')?.value === control.get('newPassword')?.value
-      ? null
-      : { passwordMatch: 'Passwords do not match.' };
   }
 }

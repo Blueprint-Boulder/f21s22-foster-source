@@ -97,9 +97,14 @@ export class FormUtils {
       : { emailMatch: 'Emails do not match.' };
   }
 
-  public static confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
-    return control.get('confirmpassword')?.value === control.get('password')?.value
-      ? null
-      : { passwordMatch: 'Passwords do not match.' };
+  public static confirmPasswordValidator(
+    field1: string,
+    field2: string
+  ): (control: AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.get(field1)?.value === control.get(field2)?.value
+        ? null
+        : { passwordMatch: 'Passwords do not match.' };
+    };
   }
 }

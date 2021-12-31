@@ -69,7 +69,10 @@ export class CreateAccountModalComponent implements OnInit {
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmpassword: ['', Validators.compose([Validators.required])],
     });
-    this.createAccountForm.setValidators([FormUtils.confirmEmailValidator, FormUtils.confirmPasswordValidator]);
+    this.createAccountForm.setValidators([
+      FormUtils.confirmEmailValidator,
+      FormUtils.confirmPasswordValidator('confirmpassword', 'password'),
+    ]);
     this.createAccountForm.get('secondaryPhone')?.valueChanges.subscribe((secondaryPhone: string) => {
       if (secondaryPhone === '' || secondaryPhone === null) {
         this.createAccountForm.get('secondaryPhone')?.setValidators([]);
