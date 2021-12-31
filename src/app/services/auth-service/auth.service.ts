@@ -1,20 +1,28 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Cookie } from '../../models/account.model';
 import jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 
+export enum Privilege {
+  NONE,
+  USER,
+  MOD,
+  ADMIN,
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private cookieService: CookieService) {}
+  public loggedInEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  //Storing priveleges of the user.
   private isUser = false;
   private isAdmin = false;
   private isMod = false;
   private expiresAt = moment();
+
+  constructor(private cookieService: CookieService) {}
 
   init(): void {
     const token = this.getToken();
@@ -28,10 +36,13 @@ export class AuthService {
     }
   }
 
-  getToken(): Cookie {
-    const token = this.cookieService.get('access-token');
-    const tokenBody: Cookie = jwtDecode(token);
-    return tokenBody;
+  getToken(): Cookie | undefined {
+    try {
+      const token = this.cookieService.get('access-token');
+      return jwtDecode(token);
+    } catch (e) {
+      return undefined;
+    }
   }
 
   validTime(): boolean {
@@ -52,5 +63,9 @@ export class AuthService {
   validMod(): boolean {
     this.init();
     return this.isMod && this.validTime();
+  }
+
+  emitLoggedIn(): void {
+    this.loggedInEvent.emit();
   }
 }

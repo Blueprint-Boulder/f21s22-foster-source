@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { PhoneNumber } from '../../models/phonenumber.model';
+import { PhoneNumber, PhoneNumbersRes, PhoneNumbersUpdateReq } from '../../models/phonenumber.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export abstract class PhoneNumberService {
-  public abstract updatePhoneNumber(phoneNumber: PhoneNumber, isPrimary: boolean): Observable<PhoneNumber>;
+  public abstract updatePhoneNumber(req: PhoneNumbersUpdateReq): Observable<PhoneNumbersRes>;
+  public abstract getPhoneNumbers(): Observable<PhoneNumbersRes>;
 }

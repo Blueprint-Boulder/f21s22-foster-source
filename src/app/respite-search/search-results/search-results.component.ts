@@ -10,6 +10,7 @@ import { SmallProfile } from '../../models/small-profile.model';
 })
 export class SearchResultsComponent implements OnInit {
   @Input() profiles: SmallProfile[];
+  @Input() searching: boolean;
   ngOnInit(): void {
     return;
   }

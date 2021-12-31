@@ -57,7 +57,7 @@ export class UserActionTableComponent implements OnInit {
   }
 
   public getFormattedDateForUser(index: number): string {
-    return formatDate(this.users[index].lastLogin, 'dd/MM/yyyy', 'en-US');
+    return formatDate(this.users[index].lastLogin, 'MM/dd/yyyy', 'en-US');
   }
 
   public denyApplicant(index: number): void {

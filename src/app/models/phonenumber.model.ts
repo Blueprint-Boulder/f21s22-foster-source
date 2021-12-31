@@ -9,3 +9,13 @@ export interface PhoneNumber {
   phoneNumber: string;
   type: PhoneNumberType;
 }
+
+export interface PhoneNumbersRes {
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+}
+
+export interface PhoneNumbersUpdateReq {
+  primaryPhoneNumber?: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+}
