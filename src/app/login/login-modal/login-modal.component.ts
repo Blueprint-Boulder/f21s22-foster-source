@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
   styleUrls: ['./login-modal.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class LoginModalComponent implements OnInit {
   public loginForm = this.formBuilder.group({
