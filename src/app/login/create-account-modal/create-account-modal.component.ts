@@ -8,6 +8,7 @@ import { PhoneNumberType } from '../../models/phonenumber.model';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ToastPresets } from '../../models/toast.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-create-account-modal',
@@ -16,67 +17,8 @@ import { ToastPresets } from '../../models/toast.model';
   providers: [accountServiceProvider],
 })
 export class CreateAccountModalComponent implements OnInit {
-  public readonly STATES = [
-    'Alabama',
-    'Alaska',
-    'American Samoa',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'District of Columbia',
-    'Federated States of Micronesia',
-    'Florida',
-    'Georgia',
-    'Guam',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Marshall Islands',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Northern Mariana Islands',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Palau',
-    'Pennsylvania',
-    'Puerto Rico',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virgin Island',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
+  public readonly STATES;
+  public readonly PHONE_TYPES;
 
   public createAccountForm: FormGroup;
   public disableSubmitButton = false;
@@ -90,7 +32,10 @@ export class CreateAccountModalComponent implements OnInit {
     private accountService: AccountService,
     private router: Router,
     private toastService: ToastService
-  ) {}
+  ) {
+    this.STATES = FormUtils.STATES;
+    this.PHONE_TYPES = FormUtils.getPhoneTypes();
+  }
 
   ngOnInit(): void {
     this.createAccountForm = this.formBuilder.group({
@@ -98,7 +43,7 @@ export class CreateAccountModalComponent implements OnInit {
       lname: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       confirmEmail: ['', Validators.required],
-      primaryPhone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
+      primaryPhone: ['', Validators.compose([Validators.required, FormUtils.validatePhoneNumber])],
       primaryType: ['', Validators.required],
       secondaryPhone: '',
       secondaryType: '',
@@ -111,7 +56,7 @@ export class CreateAccountModalComponent implements OnInit {
       caseworkerfname: ['', Validators.required],
       caseworkerlname: ['', Validators.required],
       caseworkeremail: ['', Validators.compose([Validators.required, Validators.email])],
-      caseworkerphone: ['', Validators.compose([Validators.required, CreateAccountModalComponent.validatePhoneNumber])],
+      caseworkerphone: ['', Validators.compose([Validators.required, FormUtils.validatePhoneNumber])],
       user: [
         '',
         Validators.compose([
@@ -125,15 +70,15 @@ export class CreateAccountModalComponent implements OnInit {
       confirmpassword: ['', Validators.compose([Validators.required])],
     });
     this.createAccountForm.setValidators([
-      CreateAccountModalComponent.confirmEmailValidator,
-      CreateAccountModalComponent.confirmPasswordValidator,
+      FormUtils.confirmEmailValidator,
+      FormUtils.confirmPasswordValidator('confirmpassword', 'password'),
     ]);
     this.createAccountForm.get('secondaryPhone')?.valueChanges.subscribe((secondaryPhone: string) => {
       if (secondaryPhone === '' || secondaryPhone === null) {
         this.createAccountForm.get('secondaryPhone')?.setValidators([]);
         this.createAccountForm.get('secondaryType')?.setValidators([]);
       } else {
-        this.createAccountForm.get('secondaryPhone')?.setValidators([CreateAccountModalComponent.validatePhoneNumber]);
+        this.createAccountForm.get('secondaryPhone')?.setValidators([FormUtils.validatePhoneNumber]);
         this.createAccountForm.get('secondaryType')?.setValidators([Validators.required]);
       }
       this.createAccountForm.get('secondaryPhone')?.updateValueAndValidity({ emitEvent: false });
@@ -160,23 +105,19 @@ export class CreateAccountModalComponent implements OnInit {
         cwEmail: this.createAccountForm.get('caseworkeremail')!.value,
         cwFirstName: this.createAccountForm.get('caseworkerfname')!.value,
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
-        cwPhoneNumber: CreateAccountModalComponent.formatPhoneNumber(
-          this.createAccountForm.get('caseworkerphone')!.value
-        ),
+        cwPhoneNumber: FormUtils.formatPhoneNumber(this.createAccountForm.get('caseworkerphone')!.value),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
         email: this.createAccountForm.get('email')!.value,
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
         primaryPhoneNumber: {
-          phoneNumber: CreateAccountModalComponent.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
+          phoneNumber: FormUtils.formatPhoneNumber(this.createAccountForm.get('primaryPhone')!.value),
           type: this.createAccountForm.get('primaryType')!.value,
         },
         secondaryPhoneNumber: this.createAccountForm.get('secondaryType')?.value
           ? {
-              phoneNumber: CreateAccountModalComponent.formatPhoneNumber(
-                this.createAccountForm.get('secondaryPhone')!.value
-              ),
+              phoneNumber: FormUtils.formatPhoneNumber(this.createAccountForm.get('secondaryPhone')!.value),
               type: this.createAccountForm.get('secondaryType')!.value,
             }
           : undefined,
@@ -185,7 +126,6 @@ export class CreateAccountModalComponent implements OnInit {
 
       this.accountService.createAccount(createAccountReq).subscribe(
         (res: CreateAccountRequest) => {
-          //TODO: Check if username is available.
           this.router.navigate([`/login/create-account/verify/${res.email}`]);
         },
         (err) => {
@@ -194,43 +134,5 @@ export class CreateAccountModalComponent implements OnInit {
         }
       );
     }
-  }
-
-  private static confirmEmailValidator(control: AbstractControl): ValidationErrors | null {
-    return control.get('confirmEmail')?.value === control.get('email')?.value
-      ? null
-      : { emailMatch: 'Emails do not match.' };
-  }
-
-  private static confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
-    return control.get('confirmpassword')?.value === control.get('password')?.value
-      ? null
-      : { passwordMatch: 'Passwords do not match.' };
-  }
-
-  private static validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidPhone: 'Please enter a valid phone number.' };
-    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    try {
-      const number = phoneUtil.parseAndKeepRawInput(control.value ? control.value : '', 'US');
-      const valid = phoneUtil.isValidNumber(number);
-      return valid ? null : err;
-    } catch (e) {
-      return err;
-    }
-  }
-
-  public getPhoneTypes(): string[] {
-    const types: string[] = [];
-    Object.keys(PhoneNumberType).forEach((type) => {
-      types.push(type);
-    });
-    return types;
-  }
-
-  private static formatPhoneNumber(num: string): string {
-    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    const parsed = phoneUtil.parse(num, 'US');
-    return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
   }
 }

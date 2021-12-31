@@ -6,6 +6,7 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { addressServiceProvider } from '../../services/address-service/address.service.provider';
 import { AddressRes, SimpleAddressReq } from '../../models/adress.model';
 import { ToastPresets } from '../../models/toast.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-update-address',
@@ -14,67 +15,7 @@ import { ToastPresets } from '../../models/toast.model';
   providers: [addressServiceProvider],
 })
 export class UpdateAddressComponent implements OnInit {
-  public readonly STATES = [
-    'Alabama',
-    'Alaska',
-    'American Samoa',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'District of Columbia',
-    'Federated States of Micronesia',
-    'Florida',
-    'Georgia',
-    'Guam',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Marshall Islands',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Northern Mariana Islands',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Palau',
-    'Pennsylvania',
-    'Puerto Rico',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virgin Island',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
+  public readonly STATES;
 
   public updateAddressForm: FormGroup;
   public submittingForm = false;
@@ -85,7 +26,9 @@ export class UpdateAddressComponent implements OnInit {
     private addressService: AddressService,
     private router: Router,
     private toastService: ToastService
-  ) {}
+  ) {
+    this.STATES = FormUtils.STATES;
+  }
 
   ngOnInit(): void {
     this.updateAddressForm = this.formBuilder.group({

@@ -7,6 +7,7 @@ import { PhoneNumber, PhoneNumbersUpdateReq, PhoneNumberType } from '../../model
 import * as libphonenumber from 'google-libphonenumber';
 import { ToastPresets } from '../../models/toast.model';
 import { Router } from '@angular/router';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-update-phone',
@@ -15,6 +16,8 @@ import { Router } from '@angular/router';
   providers: [phoneNumberServiceProvider],
 })
 export class UpdatePhoneComponent implements OnInit {
+  public readonly PHONE_TYPES;
+
   public updatePhoneForm: FormGroup;
   public currentPrimaryPhoneNumber: PhoneNumber;
   public currentSecondaryPhoneNumber: PhoneNumber;
@@ -25,7 +28,9 @@ export class UpdatePhoneComponent implements OnInit {
     private toastService: ToastService,
     private phoneService: PhoneNumberService,
     private router: Router
-  ) {}
+  ) {
+    this.PHONE_TYPES = FormUtils.getPhoneTypes();
+  }
 
   ngOnInit(): void {
     this.updatePhoneForm = this.formBuilder.group({
@@ -45,7 +50,7 @@ export class UpdatePhoneComponent implements OnInit {
         this.updatePhoneForm.get('primaryPhone')?.setValidators([]);
         this.updatePhoneForm.get('primaryType')?.setValidators([]);
       } else {
-        this.updatePhoneForm.get('primaryPhone')?.setValidators([UpdatePhoneComponent.validatePhoneNumber]);
+        this.updatePhoneForm.get('primaryPhone')?.setValidators([FormUtils.validatePhoneNumber]);
         this.updatePhoneForm.get('primaryType')?.setValidators([Validators.required]);
       }
       this.updatePhoneForm.get('primaryPhone')?.updateValueAndValidity({ emitEvent: false });
@@ -56,32 +61,12 @@ export class UpdatePhoneComponent implements OnInit {
         this.updatePhoneForm.get('secondaryPhone')?.setValidators([]);
         this.updatePhoneForm.get('secondaryType')?.setValidators([]);
       } else {
-        this.updatePhoneForm.get('secondaryPhone')?.setValidators([UpdatePhoneComponent.validatePhoneNumber]);
+        this.updatePhoneForm.get('secondaryPhone')?.setValidators([FormUtils.validatePhoneNumber]);
         this.updatePhoneForm.get('secondaryType')?.setValidators([Validators.required]);
       }
       this.updatePhoneForm.get('secondaryPhone')?.updateValueAndValidity({ emitEvent: false });
       this.updatePhoneForm.get('secondaryType')?.updateValueAndValidity({ emitEvent: false });
     });
-  }
-
-  private static validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidPhone: 'Please enter a valid phone number.' };
-    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    try {
-      const number = phoneUtil.parseAndKeepRawInput(control.value ? control.value : '', 'US');
-      const valid = phoneUtil.isValidNumber(number);
-      return valid ? null : err;
-    } catch (e) {
-      return err;
-    }
-  }
-
-  public getPhoneTypes(): string[] {
-    const types: string[] = [];
-    Object.keys(PhoneNumberType).forEach((type) => {
-      types.push(type);
-    });
-    return types;
   }
 
   onSubmit(): void {
@@ -92,13 +77,13 @@ export class UpdatePhoneComponent implements OnInit {
       const req: PhoneNumbersUpdateReq = {
         primaryPhoneNumber: this.updatePhoneForm.get('primaryType')?.value
           ? {
-              phoneNumber: UpdatePhoneComponent.formatPhoneNumber(this.updatePhoneForm.get('primaryPhone')!.value),
+              phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('primaryPhone')!.value),
               type: this.updatePhoneForm.get('primaryType')!.value,
             }
           : undefined,
         secondaryPhoneNumber: this.updatePhoneForm.get('secondaryType')?.value
           ? {
-              phoneNumber: UpdatePhoneComponent.formatPhoneNumber(this.updatePhoneForm.get('secondaryPhone')!.value),
+              phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('secondaryPhone')!.value),
               type: this.updatePhoneForm.get('secondaryType')!.value,
             }
           : undefined,
@@ -117,10 +102,5 @@ export class UpdatePhoneComponent implements OnInit {
         }
       );
     }
-  }
-  private static formatPhoneNumber(num: string): string {
-    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
-    const parsed = phoneUtil.parse(num, 'US');
-    return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
   }
 }

@@ -22,8 +22,8 @@
 - [ ] Account Page
   - Different from profile page
   - [x] View account page
-  - [ ] Change case worker details front end
-  - [ ] Change case worker details back end
+  - [x] Change case worker details front end
+  - [x] Change case worker details back end
     - These two are on hold until we find out if users should be able to change this information.
   - [x] Delete account front end
   - [x] Delete account back end
@@ -37,8 +37,8 @@
   - [ ] Finish profile page
   - [ ] Allow updating of attributes for profile
 - [ ] Login
-  - [ ] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
-  - [ ] Logout
+  - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
+  - [x] Logout
   - [ ] Forgot your password?
 - [x] Announcements
   - [x] Make recent announcements not return anything after maybe a week?

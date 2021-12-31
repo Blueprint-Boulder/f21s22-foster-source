@@ -59,7 +59,7 @@
             formControlName="primaryType"
             style="border-top: 0px; border-right: 0px; border-left: 0px"
           >
-            <option *ngFor="let phoneType of getPhoneTypes()" [value]="phoneType">
+            <option *ngFor="let phoneType of PHONE_TYPES" [value]="phoneType">
               {{ phoneType }}
             </option>
           </select>
