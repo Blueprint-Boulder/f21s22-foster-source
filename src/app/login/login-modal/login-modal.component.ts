@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../../services/account-service/account.service';
 import { accountServiceProvider } from '../../services/account-service/account.service.provider';
@@ -46,6 +46,7 @@ export class LoginModalComponent implements OnInit {
           this.authService.init();
           this.router.navigate(['/respite']);
           this.authService.emitLoggedIn();
+          sessionStorage.setItem('active', 'true');
         },
         (err) => {
           this.toastService.httpError(err);

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {
   Account,
   CaseWorkerInfo,
-  Cookie,
   CreateAccountRequest,
   CreateStaffAccountRequest,
   DeleteAccountReq,
@@ -14,7 +13,7 @@ import {
 } from '../../models/account.model';
 import { Observable, of, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
+import { ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
 import { AuthService } from '../auth-service/auth.service';
 import { ChangePasswordReq } from '../../models/change-password';
@@ -62,7 +61,13 @@ export class AccountImplService implements AccountService {
   }
 
   login(params: LoginRequest): Observable<string> {
-    return this.http.post<string>(`${environment.backendHost}/api/db/accounts/login`, params, {
+    return this.http.post<string>(`${environment.backendHost}/api/session/login`, params, {
+      withCredentials: true,
+    });
+  }
+
+  logout(): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/session/logout`, {
       withCredentials: true,
     });
   }
@@ -133,12 +138,6 @@ export class AccountImplService implements AccountService {
 
   updateCwInfo(req: CaseWorkerInfo): Observable<any> {
     return this.http.put(`${environment.backendHost}/api/db/accounts/case-worker-info`, req, {
-      withCredentials: true,
-    });
-  }
-
-  logout(): Observable<any> {
-    return this.http.get<any>(`${environment.backendHost}/api/db/accounts/session/logout`, {
       withCredentials: true,
     });
   }

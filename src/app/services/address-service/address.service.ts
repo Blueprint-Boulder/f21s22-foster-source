@@ -8,5 +8,4 @@ import { Observable } from 'rxjs';
 export abstract class AddressService {
   public abstract getCurrentAddress(): Observable<AddressRes>;
   public abstract updateAddress(address: SimpleAddressReq): Observable<AddressRes>;
-  public abstract logout(): Observable<any>;
 }
