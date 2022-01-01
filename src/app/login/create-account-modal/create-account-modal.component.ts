@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import * as libphonenumber from 'google-libphonenumber';
 import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
-import { CreateAccountRequest } from '../../models/account.model';
-import { PhoneNumberType } from '../../models/phonenumber.model';
-import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ToastPresets } from '../../models/toast.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateAccountRequest } from '../../models/account.model';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account-modal',
   templateUrl: './create-account-modal.component.html',
   styleUrls: ['./create-account-modal.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class CreateAccountModalComponent implements OnInit {
   public readonly STATES;
