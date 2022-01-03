@@ -25,4 +25,10 @@ describe('DeleteAccountComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not let you submit if you do not enter password');
+  it('if you submit without password, mark all fields as touched');
+  it('when form valid, submit, make call to backend, navigate away');
+  it('button should be enabled again after failure');
+
 });

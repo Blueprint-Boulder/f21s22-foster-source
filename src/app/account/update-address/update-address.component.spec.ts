@@ -25,4 +25,13 @@ describe('UpdateAddressComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should fetch the users address on page load');
+  it('should be invalid if missing any required fields');
+  it('should be valid if required fields filled out');
+  it('should be valid if optional fields are also filled out');
+  it('should mark fields as invalid if submit invalid');
+  it('should update address and navigate to account page if valid');
+  it('should enable button if backend call fails, dont navigate');
+
 });

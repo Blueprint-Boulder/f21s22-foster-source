@@ -26,4 +26,11 @@ describe('UpdateCaseWorkerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should fetch case worker information on load');
+  it('should be invalid if any field is not filled out');
+  it('should mark all as touched if try to submit invalid');
+  it('should make call to backend if valid, and navigate to account page');
+  it('should enable button again if call fails, dont navigate');
+
 });

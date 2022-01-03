@@ -26,4 +26,14 @@ describe('UpdatePhoneComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should get get phone numbers on page load');
+  it('should only get secondary phone number if the user has it');
+  it('should have both fields be optional');
+  it('primary: if number is filled out, type must be filled out');
+  it('secondary: if number is filled out, type must be filled out');
+  it('should mark fields as touched if submit invalid');
+  it('should make backend call and navigate to account page if valid');
+  it('should enable button and not navigate on backend fail');
+
 });
