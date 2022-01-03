@@ -1,13 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AccountPageComponent } from './account-page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AccountMockService } from '../../services/account-service/account.mock.service';
 import { AccountService } from '../../services/account-service/account.service';
-import { accounts } from '../../mock/database-entities';
-import { of } from 'rxjs';
-import { postprocessComponentFile } from '@angular-eslint/eslint-plugin-template/dist/processors';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
 import { By } from "@angular/platform-browser";
