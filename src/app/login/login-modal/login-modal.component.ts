@@ -36,6 +36,8 @@ export class LoginModalComponent implements OnInit {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
+      const remember = this.loginForm.get('remember')!.value;
+      localStorage.setItem('rememberUser', remember);
       const data: LoginRequest = {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
