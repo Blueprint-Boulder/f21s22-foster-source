@@ -1,24 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../services/toast-service/toast.service';
-import {
-  Announcement,
-  GetAnnouncementsRes,
-  PostAnnouncementRequest,
-  PostAnnouncementResponse,
-} from '../../models/announcement.model';
+import { Announcement, GetAnnouncementsRes, PostAnnouncementRequest } from '../../models/announcement.model';
 import { ToastPresets } from '../../models/toast.model';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
-import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.scss'],
-  providers: [announcementServiceProvider],
 })
 export class AnnouncementsComponent implements OnInit {
-  public characterLimit = 2000;
+  public characterLimit = 6000;
   public richText = '';
   public title = '';
   public announcement: Announcement;
@@ -50,6 +42,9 @@ export class AnnouncementsComponent implements OnInit {
       });
       return;
     }
+    if (this.richText.length > this.characterLimit) {
+      return;
+    }
     this.attemptingToPost = true;
 
     this.announcementService
@@ -67,6 +62,7 @@ export class AnnouncementsComponent implements OnInit {
         },
         (error) => {
           this.toastService.httpError(error);
+          this.attemptingToPost = false;
         }
       );
   }

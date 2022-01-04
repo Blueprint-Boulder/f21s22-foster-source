@@ -12,7 +12,6 @@ import { ToastPresets } from '../../models/toast.model';
   selector: 'app-update-case-worker',
   templateUrl: './update-case-worker.component.html',
   styleUrls: ['./update-case-worker.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class UpdateCaseWorkerComponent implements OnInit {
   public cwInfo: CaseWorkerInfo;
