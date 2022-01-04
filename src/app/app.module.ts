@@ -16,6 +16,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoggingInterceptor } from './services/logging.interceptor';
 import { profileServiceProvider } from './services/profile-service/profile.service.provider';
 import { accountServiceProvider } from './services/account-service/account.service.provider';
+import { addressServiceProvider } from './services/address-service/address.service.provider';
+import { phoneNumberServiceProvider } from './services/phone-number-service/phone-number.service.provider';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
@@ -39,6 +41,8 @@ import { accountServiceProvider } from './services/account-service/account.servi
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     profileServiceProvider,
     accountServiceProvider,
+    addressServiceProvider,
+    phoneNumberServiceProvider,
   ],
   bootstrap: [AppComponent],
 })
