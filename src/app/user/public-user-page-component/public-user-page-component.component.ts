@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
@@ -16,16 +16,17 @@ import { ToastService } from '../../services/toast-service/toast.service';
 export class PublicUserPageComponentComponent implements OnInit {
   id: number;
   private sub: any;
-  public monday: any;
-  public tuesday: any;
-  public wednesday: any;
-  public thursday: any;
-  public friday: any;
-  public saturday: any;
-  public sunday: any;
   public selectedProfile: FullProfileRes;
   closeResult = ''; // how modal was closed
-  constructor(private route: ActivatedRoute, private modalService: NgbModal, private profileService: ProfileService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private profileService: ProfileService,
+    config: NgbAccordionConfig
+  ) {
+    config.closeOthers = true;
+    config.type = 'light';
+  }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
