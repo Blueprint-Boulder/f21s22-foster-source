@@ -19,6 +19,7 @@ import { accountServiceProvider } from './services/account-service/account.servi
 import { addressServiceProvider } from './services/address-service/address.service.provider';
 import { phoneNumberServiceProvider } from './services/phone-number-service/phone-number.service.provider';
 import { blacklistServiceProvider } from './services/blacklist-service/blacklist.service.provider';
+import { announcementServiceProvider } from './services/announcement-service/announcement.service.provider';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
@@ -45,6 +46,7 @@ import { blacklistServiceProvider } from './services/blacklist-service/blacklist
     addressServiceProvider,
     phoneNumberServiceProvider,
     blacklistServiceProvider,
+    announcementServiceProvider,
   ],
   bootstrap: [AppComponent],
 })

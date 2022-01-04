@@ -6,7 +6,9 @@ import { AccountMockService } from '../../services/account-service/account.mock.
 import { AccountService } from '../../services/account-service/account.service';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
-import { By } from "@angular/platform-browser";
+import { By } from '@angular/platform-browser';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { throwError } from 'rxjs';
 
 describe('AccountPageComponent', () => {
   let component: AccountPageComponent;
@@ -20,6 +22,7 @@ describe('AccountPageComponent', () => {
     },
   };
   let router: Router;
+  let toastService: ToastService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -38,6 +41,9 @@ describe('AccountPageComponent', () => {
 
     router = TestBed.inject(Router);
     spyOn(router, 'navigate');
+
+    toastService = TestBed.inject(ToastService);
+    spyOn(toastService, 'httpError');
   });
   beforeEach(() => {
     fixture = TestBed.createComponent(AccountPageComponent);
@@ -93,5 +99,18 @@ describe('AccountPageComponent', () => {
     fixture.detectChanges();
     editLink = fixture.debugElement.query(By.css('#update-address-link'));
     expect(editLink).toBeTruthy();
+  });
+
+  it('should navigate to delete account page when button is clicked and confirmed', () => {
+    const deleteButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector('.delete-button');
+    spyOn(window, 'prompt').and.returnValue('confirm');
+    deleteButton.click();
+    expect(router.navigate).toHaveBeenCalled();
+  });
+  it('should not navigate when button is clicked and prompt cancelled', () => {
+    const deleteButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector('.delete-button');
+    spyOn(window, 'prompt').and.returnValue('not');
+    deleteButton.click();
+    expect(router.navigate).toHaveBeenCalledTimes(0);
   });
 });
