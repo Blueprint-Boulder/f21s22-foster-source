@@ -89,3 +89,7 @@ export interface AddressRes {
   longitude: number;
   latitude: number;
 }
+
+export interface ProfileCompletionRes {
+  completed: boolean;
+}

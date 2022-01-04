@@ -14,6 +14,8 @@ import { HttpDateService } from './services/http-date-service/http-date.service'
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoggingInterceptor } from './services/logging.interceptor';
+import { profileServiceProvider } from './services/profile-service/profile.service.provider';
+import { accountServiceProvider } from './services/account-service/account.service.provider';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
@@ -35,6 +37,8 @@ import { LoggingInterceptor } from './services/logging.interceptor';
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+    profileServiceProvider,
+    accountServiceProvider,
   ],
   bootstrap: [AppComponent],
 })

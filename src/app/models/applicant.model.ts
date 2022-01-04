@@ -1,3 +1,5 @@
+import { Account } from './account.model';
+
 export interface Applicant {
   id: number;
   name: string;
@@ -11,7 +13,7 @@ export interface GetApplicantsRes {
   applicants: Applicant[];
 }
 
-export interface ApprovalTableUser extends Applicant {
+export interface ApprovalTableUser extends Account {
   isCollapsed: boolean;
 }
 

@@ -1,0 +1,143 @@
+<div *ngIf="currentAddress" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Address</h2>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <p><b>Current Address On File</b></p>
+      <p>
+        {{ currentAddress.addressLine1
+        }}<span *ngIf="currentAddress.addressLine2">, {{ currentAddress.addressLine2 }}</span
+        ><br />{{ currentAddress.city }} {{ currentAddress.state }}, {{ currentAddress.zipcode }}
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="updateAddressForm">
+    <div class="row address-1-row">
+      <div class="col-xs-12 col-sm-12 col-12">
+        <div class="form-group">
+          <label class="mt-4" for="address"><b>Address Line 1</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="address"
+            placeholder="Address Line 1"
+            formControlName="address"
+            required
+          />
+          <div
+            *ngIf="
+              updateAddressForm.get('address')?.invalid &&
+              (updateAddressForm.get('address')?.dirty || updateAddressForm.get('address')?.touched)
+            "
+          >
+            <small *ngIf="updateAddressForm.get('address')?.errors?.required" class="input-error"
+              >Please enter your address.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-2-row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label class="mt-4" for="address2"><b>Address Line 2</b></label>
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="address2"
+            placeholder="Address Line 2"
+            formControlName="address2"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row address-info-row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="city"><b>City</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="city"
+            placeholder="Enter City"
+            formControlName="city"
+            required
+          />
+          <div
+            *ngIf="
+              updateAddressForm.get('city')?.invalid &&
+              (updateAddressForm.get('city')?.dirty || updateAddressForm.get('city')?.touched)
+            "
+          >
+            <small *ngIf="updateAddressForm.get('city')?.errors?.required" class="input-error"
+              >Please enter a city.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="state"><b>State</b><span class="required-star">*</span></label>
+          <select
+            class="m-3 form-select"
+            name="state"
+            id="state"
+            formControlName="state"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option *ngFor="let s of STATES" [value]="s">
+              {{ s }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              updateAddressForm.get('state')?.invalid &&
+              (updateAddressForm.get('state')?.dirty || updateAddressForm.get('state')?.touched)
+            "
+          >
+            <small *ngIf="updateAddressForm.get('state')?.errors?.required" class="input-error"
+              >Please choose a state.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="zipCode"><b>Zip Code</b><span class="required-star">*</span></label>
+          <div class="container"></div>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="zipCode"
+            placeholder="Enter Zip"
+            formControlName="zip"
+            required
+          />
+          <div
+            *ngIf="
+              updateAddressForm.get('zip')?.invalid &&
+              (updateAddressForm.get('zip')?.dirty || updateAddressForm.get('zip')?.touched)
+            "
+          >
+            <small *ngIf="updateAddressForm.get('zip')?.errors?.required" class="input-error"
+              >Please enter a zip code.<br
+            /></small>
+            <small *ngIf="updateAddressForm.get('zip')?.errors?.pattern" class="input-error"
+              >Please enter a valid zip code.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Address
+      </button>
+    </div>
+  </div>
+</div>

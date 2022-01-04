@@ -4,6 +4,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserActionTableComponent } from './user-action-table/user-action-table.component';
 import { BlacklistTableComponent } from './blacklist-table/blacklist-table.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { StaffAccountRequestsComponent } from './staff-account-requests/staff-account-requests.component';
+import { AdminGuard } from '../guards/admin/admin.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +23,11 @@ const routes: Routes = [
       {
         path: 'announcements',
         component: AnnouncementsComponent,
+      },
+      {
+        path: 'staff-requests',
+        component: StaffAccountRequestsComponent,
+        canActivate: [AdminGuard],
       },
     ],
   },

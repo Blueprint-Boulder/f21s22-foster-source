@@ -58,7 +58,7 @@ export class FilterPanelComponent implements OnInit {
 
   filterSubmit() {
     const filters: FiltersReq = {
-      distance: this.distanceValue === 0 ? undefined : this.distanceValue,
+      distance: this.distanceValue === 0 || this.distanceValue === 100 ? undefined : this.distanceValue,
       ageRange: this.buildAgeRange(),
       maxKids: this.maxKids === null || this.maxKids < 1 ? undefined : this.maxKids,
       availabilities: this.buildAvailabilitiesReq(),

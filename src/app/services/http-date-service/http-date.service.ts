@@ -8,8 +8,6 @@ import { isObject } from 'rxjs/internal-compatibility';
   providedIn: 'root',
 })
 export class HttpDateService implements HttpInterceptor {
-  constructor() {}
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       // @ts-ignore

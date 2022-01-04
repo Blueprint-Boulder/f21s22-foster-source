@@ -8,10 +8,14 @@ export class ProfilePhotosImplService implements ProfilePhotosService {
   constructor(private http: HttpClient) {}
 
   deletePhoto(key: string): Observable<any> {
-    return this.http.delete<void>(`${environment.backendHost}/api/db/profile/photos/${encodeURIComponent(key)}`);
+    return this.http.delete<void>(`${environment.backendHost}/api/db/profile/photos/${encodeURIComponent(key)}`, {
+      withCredentials: true,
+    });
   }
 
   postProfilePhoto(key: string): Observable<Photo> {
-    return this.http.post<Photo>(`${environment.backendHost}/api/db/profile.photos`, JSON.stringify(key));
+    return this.http.post<Photo>(`${environment.backendHost}/api/db/profile.photos`, JSON.stringify(key), {
+      withCredentials: true,
+    });
   }
 }

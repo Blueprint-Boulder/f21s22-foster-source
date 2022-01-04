@@ -11,12 +11,11 @@ export interface Account {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
-  distance: number; // delete
-  pronouns: string; // delete
-  cwPhone: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  privilege: string;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   lastLogin: Date;
   profileCompleted: boolean;
   address: AddressReq;
@@ -31,10 +30,24 @@ export interface CreateAccountRequest {
   cwFirstName: string;
   cwLastName: string;
   cwEmail: string;
+  cwPhoneNumber: string;
   certifiedBy: string;
-  primaryPhone: PhoneNumber;
-  secondaryPhone?: PhoneNumber;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
   address: SimpleAddressReq;
+}
+
+export interface CreateStaffAccountRequest {
+  email: string;
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  primaryPhoneNumber: PhoneNumber;
+  secondaryPhoneNumber?: PhoneNumber;
+  address: SimpleAddressReq;
+  staffAccessKey: string;
+  privilege: string;
 }
 
 export interface UpdateAccountReq {
@@ -59,4 +72,24 @@ export interface Cookie {
   privilegeLevel: number;
   exp: number;
   iat: number;
+}
+
+export interface GetAccountsReq {
+  accounts: Account[];
+}
+
+export interface VerifyReq {
+  key: string;
+}
+
+export interface DeleteAccountReq {
+  password: string;
+}
+
+export interface CaseWorkerInfo {
+  cwFirstName: string;
+  cwLastName: string;
+  cwEmail: string;
+  cwPhoneNumber: string;
+  certifiedBy: string;
 }

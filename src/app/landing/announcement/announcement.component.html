@@ -1,14 +1,55 @@
-<div *ngIf="announcement">
+<div *ngIf="announcement && !editMode">
   <div class="card m-3 announcement-card">
     <div class="card-header announcement-card-header border-bottom-0 mb-3">
       <b>{{ announcement.title }}</b>
     </div>
     <div class="card-body pt-1">
-      <div [innerHTML]="announcement.bodyHTML"></div>
+      <div [innerHTML]="announcement.bodyHtml"></div>
     </div>
     <div class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
       <small class="card-subtitle"
-        ><i>{{ announcement.author }} on {{ getFormattedDate() }}</i>
+        ><i>{{ announcement.account.firstName }} {{ announcement.account.lastName }} on {{ getFormattedDate() }}</i>
+      </small>
+    </div>
+    <div *ngIf="canEdit" class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
+      <small class="card-subtitle"
+        ><i
+          ><a href="javascript:void(0)" (click)="deleteAnnouncement()" class="mr-3">Delete</a>
+          <a class="mr-3" href="javascript:void(0)" (click)="enableEditMode()">Edit</a></i
+        >
+      </small>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="announcement && editMode">
+  <div class="card m-3 announcement-card">
+    <div class="card-header announcement-card-header border-bottom-0 mb-3">
+      <input class="form-control p-1 bottom-border-input" id="edit-title" [(ngModel)]="announcement.title" />
+    </div>
+    <div class="card-body pt-1">
+      <textarea
+        class="form-control bottom-border-input"
+        id="edit-body"
+        rows="4"
+        [(ngModel)]="announcement.bodyHtml"
+      ></textarea>
+      <small
+        >Here you will have to edit the html for your component. For help, visit
+        <a href="https://www.w3schools.com/html/html_formatting.asp">this site.</a></small
+      >
+    </div>
+    <div class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
+      <small class="card-subtitle"
+        ><i>{{ announcement.account.firstName }} {{ announcement.account.lastName }} on {{ getFormattedDate() }}</i>
+      </small>
+    </div>
+    <div class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
+      <small class="card-subtitle"
+        ><i
+          ><a class="mr-3" href="javascript:void(0)" (click)="cancelEditMode()">Cancel</a
+          ><a class="mr-3" href="javascript:void(0)" (click)="updateAnnouncement()">Save</a></i
+        >
       </small>
     </div>
   </div>

@@ -6,11 +6,18 @@
     <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
       <div class="col-sm-8 m-auto">
         <span
-          ><b>{{ users[i].name }}</b></span
+          ><b>{{ users[i].firstName }} {{ users[i].lastName }}</b></span
         ><br />
-        <span>{{ users[i].email }}</span
+        <span
+          >{{ users[i].email }}, {{ users[i].primaryPhoneNumber.phoneNumber }} ({{
+            users[i].primaryPhoneNumber.type
+          }})</span
         ><br />
-        <span>Case Worker: {{ users[i].caseWorkerName }}, {{ users[i].caseWorkerEmail }}</span
+        <span
+          >Case Worker: {{ users[i].cwFirstName }} {{ users[i].cwLastName }}, {{ users[i].cwEmail }}
+          {{ users[i].cwPhoneNumber }}</span
+        ><br />
+        <span>Certifying Agency: {{ users[i].certifiedBy }}</span
         ><br />
         <small
           ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small

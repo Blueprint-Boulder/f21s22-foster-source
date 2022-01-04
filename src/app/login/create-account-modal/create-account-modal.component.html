@@ -155,7 +155,7 @@
               >Please enter a password.<br
             /></small>
             <small *ngIf="createAccountForm.get('password')?.errors?.minlength" class="input-error"
-              >Please enter a password longer than 8 characters.<br
+              >Please enter a password that is at least 8 characters.<br
             /></small>
           </div>
         </div>
@@ -218,7 +218,7 @@
             formControlName="primaryType"
             style="border-top: 0px; border-right: 0px; border-left: 0px"
           >
-            <option *ngFor="let phoneType of getPhoneTypes()" [value]="phoneType">
+            <option *ngFor="let phoneType of PHONE_TYPES" [value]="phoneType">
               {{ phoneType }}
             </option>
           </select>
@@ -535,7 +535,7 @@
         <button
           type="submit"
           id="createAccountButton"
-          class="btn btn-primary w-100 p-2 mb-5 mt-2"
+          class="btn btn-primary w-100 p-2 mb-5 mt-2 text-white"
           [disabled]="disableSubmitButton"
         >
           Create Account
