@@ -1,4 +1,5 @@
 import { Account } from './account.model';
+import { FormGroup } from '@angular/forms';
 
 export interface Applicant {
   id: number;
@@ -15,6 +16,8 @@ export interface GetApplicantsRes {
 
 export interface ApprovalTableUser extends Account {
   isCollapsed: boolean;
+  index: number;
+  denyForm: FormGroup;
 }
 
 export interface DenyApplicantRequest {

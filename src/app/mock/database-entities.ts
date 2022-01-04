@@ -141,6 +141,38 @@ export const accounts: Account[] = [
       lon: '1',
     },
   },
+  {
+    id: 2,
+    email: 'jcrowson@colorado.edu',
+    username: 'jword',
+    password: 'pass1234',
+    firstName: 'Jet',
+    lastName: 'Crowman',
+    cwFirstName: 'Gina',
+    cwLastName: 'Smith',
+    cwEmail: 'noreply@google.com',
+    cwPhoneNumber: '+17208839921',
+    certifiedBy: 'Arapahoe County',
+    privilege: 'USER',
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+    lastLogin: new Date(),
+    profileCompleted: true,
+    address: {
+      addressLine1: '1002 fake st.',
+      city: 'Denver',
+      zipcode: '80210',
+      state: 'CO',
+      lat: '1',
+      lon: '1',
+    },
+  },
 ];
 
 const users: User[] = [
