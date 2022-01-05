@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ImageService } from '../../services/image-service/image.service';
-import { imageServiceProvider } from '../../services/image-service/image.service.provider';
 import { FormBuilder } from '@angular/forms';
 import { ImageCroppedEvent, OutputFormat } from 'ngx-image-cropper';
 import { ToastService } from '../../services/toast-service/toast.service';
@@ -10,7 +9,6 @@ import { ToastPresets } from '../../models/toast.model';
   selector: 'app-profile-image-upload',
   templateUrl: './profile-image-upload.component.html',
   styleUrls: ['./profile-image-upload.component.scss'],
-  providers: [imageServiceProvider],
 })
 export class ProfileImageUploadComponent implements OnInit {
   public readonly BLANK_PROFILE_URL = 'assets/images/blank-profile-photo.jpg';
@@ -44,15 +42,9 @@ export class ProfileImageUploadComponent implements OnInit {
     this.isUploading = true;
     this.fileChangedAfterUpload = false;
 
-    // Delete the previously uploaded picture if there was one
-    if (this.imageUuid !== '') {
-      this.imageService.deleteImage(this.imageUuid);
-    }
     const file = this.dataURLtoFile(this.imageUrl, 'profile_image');
-    console.log(file);
     this.imageService.uploadImage(file).subscribe(
       (res) => {
-        console.log(res);
         this.imageUploaded.emit(res.key);
         this.imageUuid = res.key;
         this.isUploading = false;
@@ -63,11 +55,7 @@ export class ProfileImageUploadComponent implements OnInit {
         });
       },
       (err) => {
-        console.log(err);
-        this.toastService.show({
-          body: "Couldn't upload your image, please try again.",
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(err);
         this.reset();
         this.isUploading = false;
         this.imageChangedEvent = '';
@@ -98,25 +86,35 @@ export class ProfileImageUploadComponent implements OnInit {
 
       this.image = file;
       const reader = new FileReader();
+      reader.addEventListener('load', this.readerOnLoad(reader, file));
       reader.readAsDataURL(file);
-      reader.onload = (_event) => {
-        ProfileImageUploadComponent.getHeightAndWidthFromDataUrl(reader.result as string)
-          .then((res: Dimensions) => {
-            if (res.width > 250 && res.height > 250) {
-              this.imageUrl = reader.result as string;
-              this.uploadedImageType = file['type'].split('/')[1];
-            } else {
-              this.resetWithError('Please upload an image that is at least 250x250px.');
-              return;
-            }
-          })
-          .catch((e) => {
-            this.resetWithError('Please upload an image that is at least 250x250px.');
-            return;
-          });
-      };
     }
-    this.fileChangeEvent(event);
+  }
+
+  private readerOnLoad(reader: FileReader, file: File): (event: ProgressEvent<FileReader>) => void {
+    return (event: ProgressEvent<FileReader>) => {
+      ProfileImageUploadComponent.getHeightAndWidthFromDataUrl(reader.result as string)
+        .then(this.validateAndChangeFile(reader, file, event))
+        .catch((e) => {
+          this.resetWithError('Please upload an image that is at least 250x250px.');
+        });
+    };
+  }
+
+  public validateAndChangeFile(
+    reader: FileReader,
+    file: File,
+    event: ProgressEvent<FileReader>
+  ): (res: Dimensions) => void {
+    return (res: Dimensions) => {
+      if (res.width >= 250 && res.height >= 250) {
+        this.imageUrl = reader.result as string;
+        this.uploadedImageType = file['type'].split('/')[1] as OutputFormat;
+        this.fileChangeEvent(event);
+      } else {
+        this.resetWithError('Please upload an image that is at least 250x250px.');
+      }
+    };
   }
 
   private resetWithError(error: string): void {
@@ -133,7 +131,6 @@ export class ProfileImageUploadComponent implements OnInit {
 
   private static validateType(file: File): boolean {
     const acceptedImageTypes = ['image/jpeg', 'image/png'];
-
     return file && acceptedImageTypes.includes(file['type']);
   }
 
