@@ -1,4 +1,4 @@
-<div *ngIf="announcement && !editMode">
+<div *ngIf="announcement && !editMode" class="display-announcement">
   <div class="card m-3 announcement-card">
     <div class="card-header announcement-card-header border-bottom-0 mb-3">
       <b>{{ announcement.title }}</b>
@@ -12,7 +12,7 @@
       </small>
     </div>
     <div *ngIf="canEdit" class="card-footer text-right p-1 pr-3 pb-2 bg-white border-0 announcement-card-footer">
-      <small class="card-subtitle"
+      <small class="card-subtitle edit-footer"
         ><i
           ><a href="javascript:void(0)" (click)="deleteAnnouncement()" class="mr-3">Delete</a>
           <a class="mr-3" href="javascript:void(0)" (click)="enableEditMode()">Edit</a></i
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div *ngIf="announcement && editMode">
+<div *ngIf="announcement && editMode" class="edit-announcement">
   <div class="card m-3 announcement-card">
     <div class="card-header announcement-card-header border-bottom-0 mb-3">
       <input class="form-control p-1 bottom-border-input" id="edit-title" [(ngModel)]="announcement.title" />

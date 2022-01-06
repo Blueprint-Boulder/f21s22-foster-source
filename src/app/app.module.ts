@@ -49,6 +49,7 @@ import { imageServiceProvider } from './services/image-service/image.service.pro
     blacklistServiceProvider,
     announcementServiceProvider,
     imageServiceProvider,
+    announcementServiceProvider,
   ],
   bootstrap: [AppComponent],
 })
