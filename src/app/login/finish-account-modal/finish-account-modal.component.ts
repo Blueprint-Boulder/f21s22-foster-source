@@ -21,7 +21,6 @@ import {
   selector: 'app-finish-account-modal',
   templateUrl: './finish-account-modal.component.html',
   styleUrls: ['./finish-account-modal.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class FinishAccountModalComponent implements OnInit {
   public finishProfileForm: FormGroup;
@@ -31,7 +30,7 @@ export class FinishAccountModalComponent implements OnInit {
   public needToUploadImgError = false;
   public submitting = false;
 
-  private profileImgKey = '';
+  public profileImgKey = '';
 
   private secondaryAccountHolderFields = [
     'secfname',
