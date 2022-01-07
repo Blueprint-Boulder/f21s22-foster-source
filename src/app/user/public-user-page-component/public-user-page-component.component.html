@@ -9,40 +9,53 @@
             class="rounded"
             alt="profile picture"
           />
-          <div class="card-body">
-            <h2 class="card-title text-center word-wrap">
-              {{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}
-            </h2>
-            <p class="card-text" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
-              <b>Distance:</b> {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
-            </p>
-            <h5 class="card-text contact-items">
-              <b>Primary Contact</b>
-            </h5>
-            <p class="card-text">
-              Name: {{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}
-            </p>
-            <p class="card-text">Pronouns: Placeholder</p>
-            <h5 class="card-text contact-items">
-              <b>Secondary Contact</b>
-            </h5>
-            <p class="card-text">Name: Jet Crowman, the Legend</p>
-            <p class="card-text">Pronouns: Placeholder</p>
-            <p class="card-text">
-              <b>State: {{ selectedProfile.account.address.state }}</b>
-            </p>
-            <p class="card-text">
-              <b>Zip: {{ selectedProfile.account.address.zipcode }}</b>
-            </p>
+          <div>
+            <div class="">
+              <h1 class="card-title text-center text-wrap pt-3">{{ selectedProfile.account.username }}</h1>
+              <p class="text-muted text-center" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
+                <em
+                  >{{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }} miles from you</em
+                >
+              </p>
+              <div class="first-contact-background">
+                <p class="first-contact">
+                  <b>{{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}</b>
+                </p>
+                <p class="contact-items-test"><b>Preferred Name: </b>{{ selectedProfile.preferredName }}</p>
+                <p class="contact-items-test"><b>Pronouns:</b> {{ selectedProfile.pronouns }}</p>
+                <p class="contact-items-test">
+                  <b>State and Zip: </b>{{ selectedProfile.account.address.state }},
+                  {{ selectedProfile.account.address.zipcode }}
+                </p>
+              </div>
+              <div class="spacer"></div>
+              <div *ngIf="selectedProfile.secAccountHolder" class="second-contact-background">
+                <!--                <h5 class="card-text contact-items"><b>Secondary Contact</b></h5>-->
+                <p class="second-contact">
+                  <b
+                    >{{ selectedProfile.secAccountHolder.firstName }} {{ selectedProfile.secAccountHolder.lastName }}</b
+                  >
+                </p>
+                <p class="text-wrap contact-items-test">
+                  <b>Relationship: </b>{{ selectedProfile.secAccountHolder.relationshipToPrimary }}
+                </p>
+                <p class="text-wrap contact-items-test" *ngIf="selectedProfile.secAccountHolder.maritalStatus">
+                  <b>Marital Status: </b>{{ selectedProfile.secAccountHolder.maritalStatus }}
+                </p>
+                <p class="contact-items-test" *ngIf="selectedProfile.secAccountHolder.pronouns">
+                  {{ selectedProfile.secAccountHolder.pronouns }}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Bigraphy -->
+      <!-- Biography -->
       <div class="col-sm-6 pl-4">
         <div *ngIf="selectedProfile.biography">
           <h4 class="day bio text-center">About</h4>
-          <div>
+          <div class="text-wrap">
             {{ selectedProfile.biography }}
           </div>
         </div>
@@ -291,98 +304,102 @@
               </div>
             </div>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block" (click)="open(content)">Contact</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block text-white" (click)="open(content)">
+              Contact
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Accordian Template -->
-    <ngb-accordion [closeOthers]="true" activeIds="static-1">
-      <ngb-panel id="static-1" title="Certification Background">
-        <ng-template ngbPanelContent>
-          <div class="row">
-            <div class="col-sm-6">Years as a foster parent</div>
-            <div class="col-sm-6">{{ selectedProfile.respiteBackground.fosterYearsExperience }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Total foster children cared for</div>
-            <div class="col-sm-6">{{ selectedProfile.respiteBackground.totalChildrenCaredFor }}</div>
-          </div>
-        </ng-template>
-      </ngb-panel>
-      <ngb-panel id="static-2" title="Respite Background">
-        <ng-template ngbPanelContent>
-          <div class="row">
-            <div class="col-sm-6">City/town you can provide respite in</div>
-            <div class="col-sm-6">
-              {{ selectedProfile.respiteBackground.respiteProviderInfo?.cityCanProvideRespiteIn }}
+    <div class="py-5">
+      <ngb-accordion [closeOthers]="true">
+        <ngb-panel id="static-1" title="Certification Background">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-sm-6">Years as a foster parent</div>
+              <div class="col-sm-6">{{ selectedProfile.respiteBackground.fosterYearsExperience }}</div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Miles willing to travel to provide respite</div>
-            <div class="col-sm-6">
-              {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
+            <div class="row">
+              <div class="col-sm-6">Total foster children cared for</div>
+              <div class="col-sm-6">{{ selectedProfile.respiteBackground.totalChildrenCaredFor }}</div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Age range of children to care for</div>
-            <div class="col-sm-6">
-              {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMinAge }} to
-              {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMaxAge }}
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-2" title="Respite Background">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-sm-6">City/town you can provide respite in</div>
+              <div class="col-sm-6">
+                {{ selectedProfile.respiteBackground.respiteProviderInfo?.cityCanProvideRespiteIn }}
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Max number children to care for at a time</div>
-            <div class="col-sm-6">{{ selectedProfile.respiteBackground.respiteProviderInfo?.maxNumCareFor }}</div>
-          </div>
-        </ng-template>
-      </ngb-panel>
-      <ngb-panel id="static-3" title="Household Background">
-        <ng-template ngbPanelContent>
-          <div class="row">
-            <div class="col-sm-6">Access to reliable vehicle</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.vehicleAccess?.valueOf() }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Individuals in parental unit</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.parentalUnitSize }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">total individuals in household</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.householdSize }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Biological children in household</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInHousehold }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Ages of children in household</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInfo }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Pets in household</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.petInfo }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Experience with LGBTQIA+ youth</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.lgbtCareExperience?.valueOf() }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Experience for children with physical disability</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForPhysDisabled }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Experience for children with intellectual disability</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForIntelDisabled }}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">Own a firearm</div>
-            <div class="col-sm-6">{{ selectedProfile.householdBackground.ownsFirearm }}</div>
-          </div>
-        </ng-template>
-      </ngb-panel>
-    </ngb-accordion>
+            <div class="row">
+              <div class="col-sm-6">Miles willing to travel to provide respite</div>
+              <div class="col-sm-6">
+                {{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Age range of children to care for</div>
+              <div class="col-sm-6">
+                {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMinAge }} to
+                {{ selectedProfile.respiteBackground.respiteProviderInfo?.careForMaxAge }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Max number children to care for at a time</div>
+              <div class="col-sm-6">{{ selectedProfile.respiteBackground.respiteProviderInfo?.maxNumCareFor }}</div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-3" title="Household Background">
+          <ng-template ngbPanelContent>
+            <div class="row">
+              <div class="col-sm-6">Access to reliable vehicle</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.vehicleAccess?.valueOf() }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Individuals in parental unit</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.parentalUnitSize }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">total individuals in household</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.householdSize }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Biological children in household</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInHousehold }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Ages of children in household</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInfo }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Pets in household</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.petInfo }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Experience with LGBTQIA+ youth</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.lgbtCareExperience?.valueOf() }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Experience for children with physical disability</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForPhysDisabled }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Experience for children with intellectual disability</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForIntelDisabled }}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">Own a firearm</div>
+              <div class="col-sm-6">{{ selectedProfile.householdBackground.ownsFirearm }}</div>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
   </div>
 </div>
 

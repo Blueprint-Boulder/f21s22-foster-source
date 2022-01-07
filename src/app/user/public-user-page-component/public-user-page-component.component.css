@@ -32,6 +32,45 @@ h5.day {
   padding: 10px;
   display: inline-block;
 }
+.first-contact {
+  background-color: #ffe2bf;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-block;
+}
+
+.first-contact-background {
+  background-color: #fff2e3;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+.spacer {
+  padding: 10px;
+}
+
+.second-contact {
+  /* border: 2px solid #afb4b8; */
+  background-color: #dabfff;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-block;
+}
+
+.second-contact-background {
+  /* border: 2px solid #afb4b8; */
+  background-color: #e9d9ff;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+.contact-items-test {
+  padding-left: 10px;
+  padding-right: 15px;
+  /*padding-bottom: 10px;*/
+}
 
 .modal-background {
   background-color: #fef4e8;

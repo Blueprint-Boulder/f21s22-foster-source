@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   backendHost: 'http://localhost:3000',
-  useRealAnnouncementService: true,
-  useRealAccountService: true,
-  useRealProfileService: true,
-  useRealAddressService: true,
+  useRealAnnouncementService: false,
+  useRealAccountService: false,
+  useRealProfileService: false,
+  useRealAddressService: false,
   useRealAvailabilityService: false,
-  useRealBlacklistService: true,
+  useRealBlacklistService: false,
   useRealPhoneNumberService: false,
   useRealProfilePhotosService: false,
-  useRealAuthService: true,
+  useRealAuthService: false,
   useRealImageService: false,
 };
 
