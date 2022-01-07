@@ -8,7 +8,7 @@ export interface FiltersReq {
   vehicleAccess?: boolean;
   lgbtExperience?: boolean;
   physicalDisabilityExperience?: boolean;
-  intellectualDisabilityExperience?: boolean;
+  intellectualDisabilityExperience?: boolean; // TODO: Add medically fragile
   ownFirearm?: boolean;
 }
 

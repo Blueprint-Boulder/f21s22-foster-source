@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { GetProfilesRes, Profile } from '../../models/profile.model';
+import { Component, OnInit } from '@angular/core';
+import { GetProfilesRes } from '../../models/profile.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
-import { profileServiceProvider } from '../../services/profile-service/profile.service.provider';
 import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
 import { SmallProfile } from '../../models/small-profile.model';
 import { ToastService } from '../../services/toast-service/toast.service';
 
@@ -11,14 +9,13 @@ import { ToastService } from '../../services/toast-service/toast.service';
   selector: 'app-respite-search-page',
   templateUrl: './respite-search-page.component.html',
   styleUrls: ['./respite-search-page.component.scss'],
-  providers: [profileServiceProvider],
 })
 export class RespiteSearchPageComponent implements OnInit {
   public results: SmallProfile[];
   public totalResults: number;
   public resultPage = 1;
   public resultsPerPage = 25;
-  public hidden = true;
+  public filtersHidden = true;
   public filtersReq: FiltersReq;
   public searchTerm = '';
   public searching = true;
@@ -47,14 +44,15 @@ export class RespiteSearchPageComponent implements OnInit {
   }
 
   closeNav() {
-    this.hidden = true;
+    this.filtersHidden = true;
   }
 
   openNav() {
-    this.hidden = false;
+    this.filtersHidden = false;
   }
 
   changePage(newPage: number): void {
+    this.scrollToTop();
     this.resultPage = newPage;
     this.getSearchResults();
   }
@@ -67,5 +65,15 @@ export class RespiteSearchPageComponent implements OnInit {
   searchEvent(term: any) {
     this.searchTerm = term;
     this.getSearchResults();
+  }
+
+  private scrollToTop(): void {
+    (function smoothScroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothScroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
   }
 }

@@ -7,7 +7,7 @@ import { AnnouncementService } from '../../services/announcement-service/announc
 import { AnnouncementMockService } from '../../services/announcement-service/announcement.mock.service';
 import { announcements } from '../../mock/database-entities';
 import { AuthService } from '../../services/auth-service/auth.service';
-import { Cookie } from '../../models/account.model';
+import { Token } from '../../models/account.model';
 
 describe('AnnouncementComponent', () => {
   let component: AnnouncementComponent;
@@ -24,7 +24,7 @@ describe('AnnouncementComponent', () => {
     }).compileComponents();
     announcementService = TestBed.inject(AnnouncementService);
     authService = TestBed.inject(AuthService);
-    const mockCookie: Cookie = {
+    const mockCookie: Token = {
       exp: 99999999,
       iat: 0,
       id: 0,

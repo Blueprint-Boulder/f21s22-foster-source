@@ -11,7 +11,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(): boolean {
     if (environment.useRealAuthService) {
-      if (!this.authService.validAdmin()) {
+      if (!this.authService.isAtLeastAdmin()) {
         this.router.navigate(['login']);
         return false;
       }

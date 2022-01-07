@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   Account,
   CaseWorkerInfo,
-  Cookie,
+  Token,
   CreateAccountRequest,
   CreateStaffAccountRequest,
   DeleteAccountReq,
