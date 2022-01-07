@@ -20,6 +20,7 @@ import { addressServiceProvider } from './services/address-service/address.servi
 import { phoneNumberServiceProvider } from './services/phone-number-service/phone-number.service.provider';
 import { blacklistServiceProvider } from './services/blacklist-service/blacklist.service.provider';
 import { announcementServiceProvider } from './services/announcement-service/announcement.service.provider';
+import { imageServiceProvider } from './services/image-service/image.service.provider';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
@@ -46,6 +47,8 @@ import { announcementServiceProvider } from './services/announcement-service/ann
     addressServiceProvider,
     phoneNumberServiceProvider,
     blacklistServiceProvider,
+    announcementServiceProvider,
+    imageServiceProvider,
     announcementServiceProvider,
   ],
   bootstrap: [AppComponent],

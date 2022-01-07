@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 export interface DayModel {
   name: string;
@@ -13,10 +13,6 @@ export interface DayModel {
   templateUrl: './day-availability-input.component.html',
   styleUrls: ['./day-availability-input.component.scss'],
 })
-export class DayAvailabilityInputComponent implements OnInit {
+export class DayAvailabilityInputComponent {
   @Input() dayModel: DayModel;
-
-  ngOnInit(): void {
-    return;
-  }
 }
