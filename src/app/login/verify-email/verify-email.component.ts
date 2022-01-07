@@ -30,6 +30,7 @@ export class VerifyEmailComponent implements OnInit {
     this.email = this.route.snapshot.paramMap.get('email');
     if (!this.email?.match(this.EMAIL_REGEX)) {
       this.router.navigate(['/not-found']);
+      return;
     }
 
     timer(0, 1000).subscribe((_) => {
