@@ -12,6 +12,9 @@ import { ToastPresets } from '../../models/toast.model';
   styleUrls: ['./verify-email.component.scss'],
 })
 export class VerifyEmailComponent implements OnInit {
+  public readonly EMAIL_REGEX: RegExp =
+    /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i;
+
   public email: string | null;
   public countdown = 121;
   public verificationEmailReSent = false;
@@ -25,11 +28,7 @@ export class VerifyEmailComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.route.snapshot.paramMap.get('email');
-    if (
-      !this.email?.match(
-        /^[a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-zA-Z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
-      )
-    ) {
+    if (!this.email?.match(this.EMAIL_REGEX)) {
       this.router.navigate(['/not-found']);
     }
 
