@@ -4,7 +4,7 @@
 
 - [ ] Updating account
   - [ ] Backend endpoints
-  - [ ] Frontend forms
+  - [x] Frontend forms
 - [x] Complete Profile
   - [x] Backend Routes
   - [x] Capture frontend user when they have not yet completed their account
@@ -34,13 +34,13 @@
   - [x] Change phone number front end
   - [ ] Change phone number back end
 - [ ] Profile Page
-  - [ ] Finish profile page
+  - [x] Finish profile page
   - [ ] Allow updating of attributes for profile
 - [ ] Login
   - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [x] Logout
   - [ ] Forgot your password?
-  - [ ] Does unchecking the remember me tab do anything?
+  - [x] Does unchecking the remember me tab do anything?
 - [x] Announcements
   - [x] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
