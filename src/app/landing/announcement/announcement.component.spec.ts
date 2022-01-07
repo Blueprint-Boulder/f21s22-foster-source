@@ -44,7 +44,7 @@ describe('AnnouncementComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the announcement if available', () => {
+  it('should display the announcement if available', async() => {
     expect(fixture.debugElement.nativeElement.querySelector('.display-announcement')).toBeTruthy();
   });
   it('if >= mod, display edit and delete buttons', () => {
@@ -59,14 +59,14 @@ describe('AnnouncementComponent', () => {
     expect(announcementService.deleteAnnouncement).toHaveBeenCalled();
     expect(component.announcement).toBeUndefined();
   });
-  it('clicking edit should display edit forms', () => {
+  it('clicking edit should display edit forms', async() => {
     component.editMode = true;
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(fixture.debugElement.nativeElement.querySelector('.edit-announcement')).toBeTruthy();
     });
   });
-  it('clicking save should call update announcement', () => {
+  it('clicking save should call update announcement', async() => {
     spyOn(announcementService, 'updateAnnouncement').and.callThrough();
     component.editMode = true;
     fixture.detectChanges();
@@ -76,7 +76,7 @@ describe('AnnouncementComponent', () => {
       expect(announcementService.updateAnnouncement).toHaveBeenCalled();
     });
   });
-  it('clicking cancel should restore the previous values', () => {
+  it('clicking cancel should restore the previous values', async() => {
     spyOn(announcementService, 'updateAnnouncement').and.callThrough();
     component.editMode = true;
     fixture.detectChanges();
