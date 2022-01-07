@@ -13,6 +13,6 @@ export class AdminPageComponent implements OnInit {
   constructor(public router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.validAdmin();
+    this.isAdmin = this.authService.isAtLeastAdmin();
   }
 }

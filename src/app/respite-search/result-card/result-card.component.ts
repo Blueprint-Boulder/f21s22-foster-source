@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Profile } from '../../models/profile.model';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
 import { SmallProfile } from '../../models/small-profile.model';
 
 @Component({
@@ -14,11 +12,7 @@ export class ResultCardComponent implements OnInit {
     return;
   }
 
-  getPhoto() {
+  getPhoto(): string {
     return '/assets/images/blank-profile-photo.jpg';
-  }
-
-  getDistance() {
-    return 20;
   }
 }

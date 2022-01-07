@@ -76,9 +76,6 @@ export class FilterPanelComponent implements OnInit {
     };
 
     this.filterResults.emit(filters);
-
-    console.log(filters);
-    console.log(JSON.stringify(filters));
   }
 
   private buildAgeRange(): [number, number] | undefined {

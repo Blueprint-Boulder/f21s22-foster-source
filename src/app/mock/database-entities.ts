@@ -2,7 +2,7 @@ import { Announcement, GetAnnouncementsRes } from '../models/announcement.model'
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
-import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
+import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
 import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
@@ -97,7 +97,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
   },
 ];
 
-export const cookies: Cookie[] = [
+export const cookies: Token[] = [
   {
     id: 1,
     privilegeLevel: 3,

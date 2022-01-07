@@ -36,18 +36,17 @@ export class LoginModalComponent implements OnInit {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      const remember = this.loginForm.get('remember')!.value;
-      localStorage.setItem('rememberUser', remember);
+      localStorage.setItem('rememberUser', this.loginForm.get('remember')!.value);
+
       const data: LoginRequest = {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
       };
+
       this.accountService.login(data).subscribe(
         (res: string) => {
           this.authService.init();
           this.router.navigate(['/respite']);
-          this.authService.emitLoggedIn();
-          sessionStorage.setItem('active', 'true');
         },
         (err) => {
           this.toastService.httpError(err);

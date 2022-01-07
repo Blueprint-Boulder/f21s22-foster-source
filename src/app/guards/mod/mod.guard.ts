@@ -11,7 +11,7 @@ export class ModGuard implements CanActivate {
 
   canActivate(): boolean {
     if (environment.useRealAuthService) {
-      if (!this.authService.validMod()) {
+      if (!this.authService.isAtLeastMod()) {
         this.router.navigate(['login']);
         return false;
       }
