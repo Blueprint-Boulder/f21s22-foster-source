@@ -10,25 +10,39 @@
             alt="profile picture"
           />
           <div>
-            <div class="">
+            <div>
               <h1 class="card-title text-center text-wrap pt-3">{{ selectedProfile.account.username }}</h1>
               <p class="text-muted text-center" *ngIf="selectedProfile.respiteBackground?.canProvideRespite">
                 <em
                   >{{ selectedProfile.respiteBackground.respiteProviderInfo?.respiteTravelDistance }} miles from you</em
                 >
               </p>
+
+              <div class="contact-quick-facts-background">
+                <p class="contact-quick-facts"><b>Quick Facts</b></p>
+                <p class="contact-items-test">
+                  <b>Date of Birth: </b>{{ selectedProfile.dob.getMonth() }} {{ selectedProfile.dob.getDate() }},
+                  {{ selectedProfile.dob.getFullYear() }}
+                </p>
+                <p class="contact-items-test">
+                  <b>State and Zip: </b>{{ selectedProfile.account.address.state }},
+                  {{ selectedProfile.account.address.zipcode }}
+                </p>
+                <p class="contact-items-test"><b>Marital Status: </b>{{ selectedProfile.maritalStatus }}</p>
+              </div>
+
+              <div class="spacer"></div>
+
               <div class="first-contact-background">
                 <p class="first-contact">
                   <b>{{ selectedProfile.account.firstName }} {{ selectedProfile.account.lastName }}</b>
                 </p>
                 <p class="contact-items-test"><b>Preferred Name: </b>{{ selectedProfile.preferredName }}</p>
                 <p class="contact-items-test"><b>Pronouns:</b> {{ selectedProfile.pronouns }}</p>
-                <p class="contact-items-test">
-                  <b>State and Zip: </b>{{ selectedProfile.account.address.state }},
-                  {{ selectedProfile.account.address.zipcode }}
-                </p>
               </div>
+
               <div class="spacer"></div>
+
               <div *ngIf="selectedProfile.secAccountHolder" class="second-contact-background">
                 <!--                <h5 class="card-text contact-items"><b>Secondary Contact</b></h5>-->
                 <p class="second-contact">

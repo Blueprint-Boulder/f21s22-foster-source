@@ -25,13 +25,21 @@ h5.day {
   display: block;
 }
 
-.contact-items {
+.contact-quick-facts {
   /* border: 2px solid #afb4b8; */
-  background-color: #e4e6e8;
+  background-color: #c4c9cc;
   border-radius: 10px;
   padding: 10px;
   display: inline-block;
 }
+
+.contact-quick-facts-background {
+  background-color: #e4e6e8;
+  border-radius: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
 .first-contact {
   background-color: #ffe2bf;
   border-radius: 10px;
