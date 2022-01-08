@@ -47,6 +47,13 @@ h5.day {
   display: inline-block;
 }
 
+.first-contact {
+  background-color: #ffe2bf;
+  border-radius: 10px;
+  padding: 8px;
+  display: inline-block;
+}
+
 .first-contact-background {
   background-color: #fff2e3;
   border-radius: 10px;

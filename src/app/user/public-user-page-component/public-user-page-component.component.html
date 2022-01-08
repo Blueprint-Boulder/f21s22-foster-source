@@ -430,19 +430,25 @@
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-append contact-modal">
-            Email:
-            <a href="mailto:{{ selectedProfile.account.email }}">{{ selectedProfile.account.email }}</a>
+            <span
+              ><b class="first-contact">Email </b
+              ><a href="mailto:{{ selectedProfile.account.email }}"> {{ selectedProfile.account.email }}</a></span
+            >
             <br />
-            {{ selectedProfile.account.primaryPhoneNumber.type }}:
-            <a href="tel:{{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}">{{
-              selectedProfile.account.primaryPhoneNumber.phoneNumber
-            }}</a>
+            <div class="spacer"></div>
+            <span
+              ><b class="first-contact">{{ selectedProfile.account.primaryPhoneNumber.type }}</b>
+              <a href="tel:{{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}">
+                {{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}</a
+              ></span
+            >
             <br />
-            <span *ngIf="selectedProfile.account.secondaryPhoneNumber?.phoneNumber"
-              >{{ selectedProfile.account.secondaryPhoneNumber?.type }}:
-              <a href="tel:{{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}">{{
-                selectedProfile.account.secondaryPhoneNumber?.phoneNumber
-              }}</a></span
+            <div class="spacer"></div>
+            <span *ngIf="selectedProfile.account.secondaryPhoneNumber?.phoneNumber" class="second-contact-background"
+              ><b class="second-contact">{{ selectedProfile.account.secondaryPhoneNumber?.type }}</b
+              ><a href="tel:{{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}">
+                {{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}</a
+              ></span
             >
           </div>
         </div>
