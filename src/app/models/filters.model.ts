@@ -8,7 +8,8 @@ export interface FiltersReq {
   vehicleAccess?: boolean;
   lgbtExperience?: boolean;
   physicalDisabilityExperience?: boolean;
-  intellectualDisabilityExperience?: boolean; // TODO: Add medically fragile
+  intellectualDisabilityExperience?: boolean;
+  medicallyFragileExperience?: boolean;
   ownFirearm?: boolean;
 }
 
@@ -17,5 +18,6 @@ export interface HouseholdBackgroundRadioFilters {
   lgbtExperience: boolean | null;
   physicalDisabilityExperience: boolean | null;
   intellectualDisabilityExperience: boolean | null;
+  medicallyFragileExperience: boolean | null;
   ownFirearm: boolean | null;
 }

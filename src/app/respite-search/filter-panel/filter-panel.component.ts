@@ -45,6 +45,7 @@ export class FilterPanelComponent implements OnInit {
     lgbtExperience: null,
     ownFirearm: null,
     physicalDisabilityExperience: null,
+    medicallyFragileExperience: null,
     vehicleAccess: null,
   };
 
@@ -72,6 +73,10 @@ export class FilterPanelComponent implements OnInit {
         this.householdRadios.intellectualDisabilityExperience === null
           ? undefined
           : this.householdRadios.intellectualDisabilityExperience,
+      medicallyFragileExperience:
+        this.householdRadios.medicallyFragileExperience === null
+          ? undefined
+          : this.householdRadios.medicallyFragileExperience,
       ownFirearm: this.householdRadios.ownFirearm === null ? undefined : this.householdRadios.ownFirearm,
     };
 
