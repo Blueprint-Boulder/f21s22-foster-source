@@ -70,7 +70,7 @@ export interface RespiteProviderInfoReq {
   careForMinAge: number;
   careForMaxAge: number;
   maxNumCareFor: number;
-  availability: SimpleAvailability;
+  availabilities: [SimpleAvailability];
 }
 
 export interface RespiteBackgroundReq {
@@ -105,7 +105,13 @@ export interface FinishProfileReq {
   profileLargeAwsKey: string;
   pronouns?: string;
   maritalStatus?: string;
+  biography: string;
   secondaryAccountHolder?: SecondaryAccountHolderReq;
   respiteBackground: RespiteBackgroundReq;
   householdBackground: HouseholdBackground;
+}
+
+export interface ProfileImages {
+  profileLargeAwsKey: string;
+  profileSmallAwsKey: string;
 }

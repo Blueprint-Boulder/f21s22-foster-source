@@ -19,7 +19,6 @@ export class ProfileImageUploadComponent implements OnInit {
   public croppedImageDataUrl = this.BLANK_PROFILE_URL;
   public uploadedImageType: OutputFormat;
   public imageUuid = '';
-  public fileChangedAfterUpload = false;
   public imageChangedEvent: any = '';
   public croppedImage: any = '';
   public imageHasBeenUploaded = false;

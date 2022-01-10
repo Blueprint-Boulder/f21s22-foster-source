@@ -1,5 +1,5 @@
 import { ProfileService } from './profile.service';
-import { CreateProfileReq, GetProfilesRes, Profile, UpdateProfileReq } from '../../models/profile.model';
+import { CreateProfileReq, GetProfilesRes, Profile, ProfileImages, UpdateProfileReq } from '../../models/profile.model';
 import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
@@ -27,5 +27,9 @@ export class ProfileMockService implements ProfileService {
 
   currentProfileCompleted(): Observable<ProfileCompletionRes> {
     return of({ completed: true });
+  }
+
+  getProfileImages(): Observable<ProfileImages> {
+    return of({ profileLargeAwsKey: 'blank-profile-image', profileSmallAwsKey: 'blank-profile-image' });
   }
 }

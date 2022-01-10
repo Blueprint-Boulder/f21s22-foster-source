@@ -1,3 +1,5 @@
+import { environment } from '../../../environments/environment';
+
 export interface Dimensions {
   height: number;
   width: number;
@@ -44,6 +46,10 @@ export class ImageUtils {
     }
 
     return new File([u8arr], filename, { type: mime });
+  }
+
+  public static buildS3Url(key: string): string {
+    return `https://${environment.imageBucket}.s3.${environment.bucketRegion}.amazonaws.com/${key}`;
   }
 
   private static validateType(file: File): boolean {
