@@ -49,6 +49,10 @@
   - [x] Mod / Admin approvals backend
   - [x] Remove "Profile" tab on nav bar for mods and admins
 
+### Known Bugs
+
+- [ ] When user creates account, says they are logged in
+
 ### Stretch Goals
 
 - [ ] Reporting functionality
@@ -57,10 +61,12 @@
 
 ### Feature Backlog
 
+- [ ] Allow user after account creation to choose to provide respite, rescind their current offering
 - [ ] Hide profile temporarily
 - [ ] Get list of all accounts for admins
 - [ ] Get list of all staff accounts for admins
 - [ ] Periodically go through and get rid of unverified accounts
+- [ ] Reject address if not coords
 
 ## Testing
 

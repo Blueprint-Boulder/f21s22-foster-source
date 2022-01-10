@@ -429,7 +429,7 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
   },
   {
     preferredName: 'Jett',
@@ -440,7 +440,7 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
   },
   {
     preferredName: 'Gina Smith',
@@ -451,6 +451,6 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
   },
 ];

@@ -113,6 +113,34 @@
         </div>
       </div>
     </div>
+    <div class="row biography-row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="biography"
+            ><b>Biography</b><span class="required-star">*</span>
+            <br />
+            <small>Tell the world about yourself!</small>
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="biography"
+            rows="4"
+            formControlName="biography"
+          ></textarea>
+          <div
+            *ngIf="
+              finishProfileForm.get('biography')?.invalid &&
+              (finishProfileForm.get('biography')?.dirty || finishProfileForm.get('biography')?.touched)
+            "
+          >
+            <small *ngIf="finishProfileForm.get('biography')?.errors?.required" class="input-error"
+              >Please enter a biography.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row dob-row">
       <div class="col-sm-6 col-md-3">
         <div class="form-group">
@@ -166,8 +194,8 @@
         <input
           class="form-check-input add-sec-yes"
           type="radio"
-          name="flexRadioDefaultYes"
-          [value]="true"
+          name="addSec"
+          value="true"
           id="shouldAddSec"
           (change)="secChange($event)"
         />
@@ -177,8 +205,8 @@
         <input
           class="form-check-input add-sec-no"
           type="radio"
-          name="flexRadioDefaultNo"
-          [value]="false"
+          name="addSec"
+          value="false"
           id="shouldNotAddSec"
           (change)="secChange($event)"
           checked
@@ -525,7 +553,7 @@
               type="radio"
               formControlName="lookingForRespite"
               name="lookingForRespite"
-              [value]="true"
+              value="true"
               id="lookingForRespiteYes"
             />
             <label class="form-check-label" for="lookingForRespiteYes"> Yes </label>
@@ -536,7 +564,7 @@
               type="radio"
               formControlName="lookingForRespite"
               name="lookingForRespite"
-              [value]="false"
+              value="false"
               id="lookingForRespiteNo"
             />
             <label class="form-check-label" for="lookingForRespiteNo"> No </label>
@@ -566,7 +594,7 @@
               type="radio"
               formControlName="hasProvidedInPast"
               name="hasProvidedInPast"
-              [value]="true"
+              value="true"
               id="hasProvidedInPastYes"
             />
             <label class="form-check-label" for="hasProvidedInPastYes"> Yes </label>
@@ -577,7 +605,7 @@
               type="radio"
               formControlName="hasProvidedInPast"
               name="hasProvidedInPast"
-              [value]="false"
+              value="false"
               id="hasProvidedInPastNo"
             />
             <label class="form-check-label" for="hasProvidedInPastNo"> No </label>
@@ -848,7 +876,7 @@
             "
           >
             <small *ngIf="finishProfileForm.get('childrenInfo')?.errors?.required" class="input-error"
-              >Please information on the children in your household.<br
+              >Please enter information on the children in your household.<br
             /></small>
           </div>
         </div>
@@ -884,7 +912,7 @@
             type="radio"
             name="vehicleAccess"
             formControlName="vehicleAccess"
-            [value]="true"
+            value="true"
             id="vehicleAccessYes"
           />
           <label class="form-check-label" for="vehicleAccessYes"> Yes </label>
@@ -895,7 +923,7 @@
             type="radio"
             name="vehicleAccess"
             formControlName="vehicleAccess"
-            [value]="false"
+            value="false"
             id="vehicleAccessNo"
           />
           <label class="form-check-label" for="vehicleAccessNo"> No </label>
@@ -909,7 +937,7 @@
             type="radio"
             name="caredForLGBT"
             formControlName="caredForLGBT"
-            [value]="true"
+            value="true"
             id="caredForLGBTYes"
           />
           <label class="form-check-label" for="caredForLGBTYes"> Yes </label>
@@ -920,7 +948,7 @@
             type="radio"
             name="caredForLGBT"
             formControlName="caredForLGBT"
-            [value]="false"
+            value="false"
             id="caredForLGBTNo"
           />
           <label class="form-check-label" for="caredForLGBTNo"> No </label>
@@ -933,7 +961,7 @@
             class="form-check-input"
             type="radio"
             name="caredForPhysicallyDisabled"
-            [value]="true"
+            value="true"
             id="caredForPhysicallyDisabledYes"
             formControlName="caredForPhysicallyDisabled"
           />
@@ -944,7 +972,7 @@
             class="form-check-input"
             type="radio"
             name="caredForPhysicallyDisabled"
-            [value]="false"
+            value="false"
             id="caredForPhysicallyDisabledNo"
             formControlName="caredForPhysicallyDisabled"
           />
@@ -958,7 +986,7 @@
             class="form-check-input"
             type="radio"
             name="caredForIntellectuallyDisabled"
-            [value]="true"
+            value="true"
             id="caredForIntellectuallyDisabledYes"
             formControlName="caredForIntellectuallyDisabled"
           />
@@ -969,7 +997,7 @@
             class="form-check-input"
             type="radio"
             name="caredForIntellectuallyDisabled"
-            [value]="false"
+            value="false"
             id="caredForIntellectuallyDisabledNo"
             formControlName="caredForIntellectuallyDisabled"
           />
@@ -983,7 +1011,7 @@
             class="form-check-input"
             type="radio"
             name="careForMedicallyFragile"
-            [value]="true"
+            value="true"
             id="careForMedicallyFragileYes"
             formControlName="careForMedicallyFragile"
           />
@@ -994,7 +1022,7 @@
             class="form-check-input"
             type="radio"
             name="careForMedicallyFragile"
-            [value]="false"
+            value="false"
             id="careForMedicallyFragileNo"
             formControlName="careForMedicallyFragile"
           />
@@ -1009,7 +1037,7 @@
             type="radio"
             name="ownsFirearm"
             formControlName="ownsFirearm"
-            [value]="true"
+            value="true"
             id="ownsFirearmYes"
           />
           <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
@@ -1020,7 +1048,7 @@
             type="radio"
             name="ownsFirearm"
             formControlName="ownsFirearm"
-            [value]="false"
+            value="false"
             id="ownsFirearmNo"
           />
           <label class="form-check-label" for="ownsFirearmNo"> No </label>
