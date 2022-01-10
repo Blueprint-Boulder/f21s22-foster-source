@@ -8,12 +8,15 @@ export const environment = {
   useRealAnnouncementService: true,
   useRealAccountService: true,
   useRealProfileService: true,
-  useRealAddressService: false,
+  useRealAddressService: true,
   useRealAvailabilityService: false,
-  useRealBlacklistService: false,
+  useRealBlacklistService: true,
   useRealPhoneNumberService: false,
   useRealProfilePhotosService: false,
-  useRealImageService: false,
+  useRealAuthService: true,
+  useRealImageService: true,
+  imageBucket: 'respite-source-images-dev',
+  bucketRegion: 'us-west-1',
 };
 
 /*

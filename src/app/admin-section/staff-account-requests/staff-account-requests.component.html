@@ -1,0 +1,111 @@
+<div class="application-table-desc">
+  <p>Applications for Staff Accounts</p>
+</div>
+<div class="table-container">
+  <div class="user-result-row" *ngFor="let user of users; index as i">
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
+      <div class="col-sm-8 m-auto">
+        <span
+          ><b>{{ users[i].firstName }} {{ users[i].lastName }}</b></span
+        ><br />
+        <span
+          >{{ users[i].email }}, {{ users[i].primaryPhoneNumber.phoneNumber }} ({{
+            users[i].primaryPhoneNumber.type
+          }})</span
+        ><br />
+        <span>Requested Level: {{ users[i].privilege }}</span
+        ><br />
+        <small
+          ><i>Applied on {{ getFormattedDateForUser(i) }}</i></small
+        >
+      </div>
+      <div class="col-xs-6 col-sm-2 m-auto">
+        <button
+          *ngIf="users[i].isCollapsed"
+          [@inOutAnimation]
+          class="btn btn-primary mr-5 text-white w-100 my-2 approve-button"
+          (click)="approveApplicant(i)"
+        >
+          Approve
+        </button>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-auto">
+        <button
+          *ngIf="users[i].isCollapsed"
+          [@inOutAnimation]
+          class="btn btn-secondary w-100 my-2 deny-button"
+          (click)="collapse.toggle()"
+          [attr.aria-expanded]="!users[i].isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Deny
+        </button>
+      </div>
+    </div>
+    <div
+      class="row fs-tan-background user-row p-4"
+      #collapse="ngbCollapse"
+      [(ngbCollapse)]="users[i].isCollapsed"
+      [attr.aria-expanded]="!users[i].isCollapsed"
+      aria-controls="collapseExample"
+    >
+      <div class="col-12">
+        <form [formGroup]="users[i].denyForm" (ngSubmit)="denyApplicant(i)">
+          <div class="form-group">
+            <label [for]="'denialReasonTextArea' + users[i].index">Reason for denial of application.</label>
+            <textarea
+              class="form-control"
+              [id]="'denialReasonTextArea' + users[i].index"
+              rows="2"
+              [formControlName]="'reason' + users[i].index"
+            ></textarea>
+            <div
+              *ngIf="
+                users[i].denyForm.get('reason' + users[i].index)?.invalid &&
+                (users[i].denyForm.get('reason' + users[i].index)?.dirty ||
+                  users[i].denyForm.get('reason' + users[i].index)?.touched)
+              "
+            >
+              <small *ngIf="users[i].denyForm.get('reason' + users[i].index)?.errors?.required" class="input-error"
+                >Please enter a reason for denial.<br
+              /></small>
+            </div>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              [id]="'sendCopyCheck' + users[i].index"
+              [formControlName]="'sendCopy' + users[i].index"
+            />
+            <label class="form-check-label" [for]="'sendCopyCheck' + users[i].index">
+              Send a copy of this response to the applicant's provided email
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              [id]="'blacklistCheck' + users[i].index"
+              [formControlName]="'ban' + users[i].index"
+            />
+            <label class="form-check-label" [for]="'blacklistCheck' + users[i].index">
+              Blacklist user to prevent future applications
+            </label>
+          </div>
+          <button class="btn btn-secondary float-right ml-3 submit-deny">Deny Applicant</button>
+        </form>
+        <button (click)="collapse.toggle()" class="btn btn-light btn-outline-dark float-right cancel-button">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="users.length == 0" class="row">
+    <div class="col-xs-12 mx-auto bg-light rounded mt-5">
+      <div class="p-5">No Applicants Found</div>
+    </div>
+  </div>
+</div>

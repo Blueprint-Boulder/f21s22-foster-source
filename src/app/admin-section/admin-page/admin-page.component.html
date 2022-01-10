@@ -5,6 +5,15 @@
         >Applications</a
       >
     </li>
+    <li class="nav-item" *ngIf="isAdmin">
+      <a
+        class="nav-link"
+        [ngClass]="{ active: router.url === '/admin/staff-requests' }"
+        aria-current="page"
+        [routerLink]="'/admin/staff-requests'"
+        >Staff Account Requests</a
+      >
+    </li>
     <li class="nav-item">
       <a
         class="nav-link"

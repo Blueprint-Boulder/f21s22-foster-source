@@ -1,24 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../services/toast-service/toast.service';
-import {
-  Announcement,
-  GetAnnouncementsRes,
-  PostAnnouncementRequest,
-  PostAnnouncementResponse,
-} from '../../models/announcement.model';
+import { Announcement, GetAnnouncementsRes, PostAnnouncementRequest } from '../../models/announcement.model';
 import { ToastPresets } from '../../models/toast.model';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
-import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 @Component({
   selector: 'app-announcements',
   templateUrl: './announcements.component.html',
   styleUrls: ['./announcements.component.scss'],
-  providers: [announcementServiceProvider],
 })
 export class AnnouncementsComponent implements OnInit {
-  public characterLimit = 2000;
+  public characterLimit = 6000;
   public richText = '';
   public title = '';
   public announcement: Announcement;
@@ -37,10 +29,7 @@ export class AnnouncementsComponent implements OnInit {
         this.pastAnnouncements = res.announcements;
       },
       (err) => {
-        this.toastService.show({
-          body: 'Something went wrong trying to fetch past announcements.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.httpError(err);
       }
     );
   }
@@ -51,6 +40,9 @@ export class AnnouncementsComponent implements OnInit {
         body: 'Please enter a title and some body text.',
         preset: ToastPresets.ERROR,
       });
+      return;
+    }
+    if (this.richText.length > this.characterLimit) {
       return;
     }
     this.attemptingToPost = true;
@@ -68,11 +60,9 @@ export class AnnouncementsComponent implements OnInit {
           });
           this.reloadPage();
         },
-        (error: HttpErrorResponse) => {
-          this.toastService.show({
-            body: 'Something went wrong trying to post the announcement.',
-            preset: ToastPresets.ERROR,
-          });
+        (error) => {
+          this.toastService.httpError(error);
+          this.attemptingToPost = false;
         }
       );
   }
@@ -82,9 +72,12 @@ export class AnnouncementsComponent implements OnInit {
     this.announcement = {
       id: -1,
       title: this.title,
-      author: 'Your Name Here',
-      bodyHTML: changes,
-      date: new Date(),
+      account: {
+        firstName: 'Your name',
+        lastName: '',
+      },
+      bodyHtml: changes,
+      datePosted: new Date(),
     };
   }
 
@@ -92,9 +85,12 @@ export class AnnouncementsComponent implements OnInit {
     this.announcement = {
       id: -1,
       title: this.title,
-      author: 'Your Name Here',
-      bodyHTML: this.richText,
-      date: new Date(),
+      account: {
+        firstName: '[Your name]',
+        lastName: '',
+      },
+      bodyHtml: this.richText,
+      datePosted: new Date(),
     };
   }
 

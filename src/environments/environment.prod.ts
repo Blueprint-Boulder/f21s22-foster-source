@@ -10,4 +10,5 @@ export const environment = {
   useRealPhoneNumberService: true,
   useRealProfilePhotosService: true,
   useRealImageService: true,
+  useRealAuthService: true,
 };

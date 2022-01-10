@@ -16,24 +16,40 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item" [ngClass]="{ active: router.url === '/' }">
+      <li class="nav-item home-link" [ngClass]="{ active: router.url === '/' }">
         <a class="nav-link" href="#" [routerLink]="'/'"
           >Home <span *ngIf="router.url === '/'" class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item" [ngClass]="{ active: router.url === '/respite' }">
+      <li *ngIf="currentAccount" class="nav-item respite-link" [ngClass]="{ active: router.url === '/respite' }">
         <a class="nav-link" href="#" [routerLink]="'/respite'"
           >Find Respite <span *ngIf="router.url === '/respite'" class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item" [ngClass]="{ active: router.url === '/admin' }">
+      <li *ngIf="isMod" class="nav-item admin-link" [ngClass]="{ active: router.url === '/admin' }">
         <a class="nav-link" href="#" [routerLink]="'/admin'"
           >Administration <span *ngIf="router.url === '/admin'" class="sr-only">(current)</span></a
         >
       </li>
-      <li class="nav-item" [ngClass]="{ active: router.url === '/login' }">
+      <li *ngIf="!currentAccount" class="nav-item login-link" [ngClass]="{ active: router.url === '/login' }">
         <a class="nav-link" href="#" [routerLink]="'/login'"
           >Login <span *ngIf="router.url === '/login'" class="sr-only">(current)</span></a
+        >
+      </li>
+      <li *ngIf="currentAccount" class="nav-item">
+        <a class="nav-link" href="javascript:void(0)" [routerLink]="'/account'">Account</a>
+      </li>
+      <li *ngIf="currentAccount" class="nav-item">
+        <a class="nav-link" href="javascript:void(0)" (click)="logout()">Logout</a>
+      </li>
+      <li *ngIf="currentAccount && !isMod" class="nav-item profile-link">
+        <a class="nav-link" href="javascript:void(0)">
+          <img
+            [src]="profileImageSrc"
+            width="32px"
+            height="32px"
+            class="hidden-xs rounded-circle d-inline-block mr-2"
+          />Profile</a
         >
       </li>
     </ul>

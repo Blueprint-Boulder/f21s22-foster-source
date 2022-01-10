@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth-service/auth.service';
+import { Account } from '../models/account.model';
+import { AccountService } from '../services/account-service/account.service';
+import { ImageUtils } from '../common/utils/ImageUtils';
+import { ProfileService } from '../services/profile-service/profile.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +12,68 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  constructor(public router: Router) {}
+  public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
+
+  public currentAccount: Account | undefined;
+  public isMod = false;
+  private isLoggedIn = false;
+
+  constructor(
+    public router: Router,
+    private accountService: AccountService,
+    private authService: AuthService,
+    private profileService: ProfileService
+  ) {
+    this.authService.loggedInEvent.subscribe((_) => this.loggedIn());
+  }
 
   ngOnInit(): void {
-    return;
+    // Account for possible race condition where auth service emits logged in before nav bar loads
+    if (!this.isLoggedIn) {
+      if (this.authService.isAtLeastUser()) {
+        this.loggedIn();
+      }
+    }
+  }
+
+  loggedIn(): void {
+    this.isLoggedIn = true;
+    this.accountService.getCurrentAccount().subscribe(
+      (account: Account) => {
+        this.currentAccount = account;
+        this.isMod = this.authService.isAtLeastMod();
+
+        if (account.profileCompleted) {
+          this.profileService.getProfileImages().subscribe(
+            (imageKeys) => {
+              this.profileImageSrc = ImageUtils.buildS3Url(imageKeys.profileSmallAwsKey);
+            },
+            (err) => {
+              console.log('Error fetching profile images.', err);
+            }
+          );
+        }
+      },
+      (err) => {
+        console.log(err);
+        console.log('No account found.');
+      }
+    );
+  }
+
+  logout(): void {
+    this.isLoggedIn = false;
+    this.authService.logout();
+    this.accountService.logout().subscribe(
+      () => {
+        this.router.navigate(['/']);
+        this.currentAccount = undefined;
+        this.isMod = false;
+      },
+      (err) => {
+        console.log(err);
+        console.log('Failed to log out');
+      }
+    );
   }
 }

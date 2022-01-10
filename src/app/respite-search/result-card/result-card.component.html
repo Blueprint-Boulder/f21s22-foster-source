@@ -1,0 +1,13 @@
+<div class="card pt-3 col text-center" *ngIf="profile">
+  <img class="card-img-top" [id]="id" [src]="imageUrl" alt="Profile image" height="300" width="300" />
+  <div class="card-body">
+    <p class="card-text">
+      <i>{{ profile.account.address.distance.toFixed(1) }} miles away</i>
+    </p>
+    <h5 class="card-title">{{ profile.preferredName }}</h5>
+    <p class="card-subtitle mb-3">
+      <small>{{ profile.account.username }}</small>
+    </p>
+    <a href="#" [routerLink]="'/users/' + profile.id" class="btn btn-primary text-white">Visit Profile</a>
+  </div>
+</div>

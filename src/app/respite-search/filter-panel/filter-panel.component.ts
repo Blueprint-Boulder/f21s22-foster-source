@@ -45,6 +45,7 @@ export class FilterPanelComponent implements OnInit {
     lgbtExperience: null,
     ownFirearm: null,
     physicalDisabilityExperience: null,
+    medicallyFragileExperience: null,
     vehicleAccess: null,
   };
 
@@ -58,7 +59,7 @@ export class FilterPanelComponent implements OnInit {
 
   filterSubmit() {
     const filters: FiltersReq = {
-      distance: this.distanceValue === 0 ? undefined : this.distanceValue,
+      distance: this.distanceValue === 0 || this.distanceValue === 100 ? undefined : this.distanceValue,
       ageRange: this.buildAgeRange(),
       maxKids: this.maxKids === null || this.maxKids < 1 ? undefined : this.maxKids,
       availabilities: this.buildAvailabilitiesReq(),
@@ -72,13 +73,14 @@ export class FilterPanelComponent implements OnInit {
         this.householdRadios.intellectualDisabilityExperience === null
           ? undefined
           : this.householdRadios.intellectualDisabilityExperience,
+      medicallyFragileExperience:
+        this.householdRadios.medicallyFragileExperience === null
+          ? undefined
+          : this.householdRadios.medicallyFragileExperience,
       ownFirearm: this.householdRadios.ownFirearm === null ? undefined : this.householdRadios.ownFirearm,
     };
 
     this.filterResults.emit(filters);
-
-    console.log(filters);
-    console.log(JSON.stringify(filters));
   }
 
   private buildAgeRange(): [number, number] | undefined {

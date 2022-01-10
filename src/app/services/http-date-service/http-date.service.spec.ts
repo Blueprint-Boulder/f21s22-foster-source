@@ -51,7 +51,7 @@ describe('HttpDateService', () => {
         expect((dummy as any).nest.date instanceof Date).toBeTrue();
       })
 
-      const req = httpMock.expectOne(`${environment.backendHost}/api/db/accounts/applicants`);
+      const req = httpMock.expectOne(`${environment.backendHost}/api/db/accounts?approved=false&level=USER`);
       expect(req.request.method).toBe("GET");
       req.flush(dummy);
 

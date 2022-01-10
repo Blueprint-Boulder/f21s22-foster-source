@@ -5,7 +5,7 @@ import { PhoneNumberImplService } from './phone-number.impl.service';
 import { PhoneNumberMockService } from './phone-number.mock.service';
 
 const phoneNumberServiceFactory = (http: HttpClient) => {
-  if (environment.useRealBlacklistService) {
+  if (environment.useRealPhoneNumberService) {
     return new PhoneNumberImplService(http);
   } else {
     return new PhoneNumberMockService();

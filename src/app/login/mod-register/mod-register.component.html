@@ -1,0 +1,482 @@
+<div class="container p-5 bg-white mt-5 mb-5">
+  <h1 class="mt-5 text-center">Request a Staff Account</h1>
+  <form [formGroup]="createStaffAccountForm" (ngSubmit)="createAccountSubmit()">
+    <div class="row mt-5 mb-2">
+      <h3>Personal Information</h3>
+    </div>
+    <div class="row name-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="fname"><b>First Name</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="fname"
+            placeholder="Enter first name"
+            formControlName="fname"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('fname')?.invalid &&
+              (createStaffAccountForm.get('fname')?.dirty || createStaffAccountForm.get('fname')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('fname')?.errors?.required" class="input-error"
+              >Please enter your first name.</small
+            >
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="lname"><b>Last Name</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="lname"
+            placeholder="Enter Last Name"
+            formControlName="lname"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('lname')?.invalid &&
+              (createStaffAccountForm.get('lname')?.dirty || createStaffAccountForm.get('lname')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('lname')?.errors?.required" class="input-error"
+              >Please enter your first name.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row username-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="user"><b>Username</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="user"
+            placeholder="Enter username"
+            formControlName="user"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('user')?.invalid &&
+              (createStaffAccountForm.get('user')?.dirty || createStaffAccountForm.get('user')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('user')?.errors?.required" class="input-error"
+              >Please enter a username.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('user')?.errors?.minlength" class="input-error"
+              >Please enter a longer username.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('user')?.errors?.maxlength" class="input-error"
+              >Please enter a shorter username.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('user')?.errors?.pattern" class="input-error"
+              >Invalid characters in username.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row email-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email"><b>Email</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="email"
+            placeholder="Enter Email"
+            formControlName="email"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('email')?.invalid &&
+              (createStaffAccountForm.get('email')?.dirty || createStaffAccountForm.get('email')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('email')?.errors?.required" class="input-error"
+              >Please enter your email.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('email')?.errors?.email" class="input-error"
+              >Please enter a valid email.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="confirmEmail"><b>Confirm Email</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="confirmEmail"
+            placeholder="Confirm Email"
+            formControlName="confirmEmail"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('confirmEmail')?.invalid &&
+              (createStaffAccountForm.get('confirmEmail')?.dirty || createStaffAccountForm.get('confirmEmail')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('confirmEmail')?.errors?.required" class="input-error"
+              >Please confirm your email.<br
+            /></small>
+          </div>
+          <small *ngIf="createStaffAccountForm.errors?.emailMatch" class="input-error">Emails do not match</small>
+        </div>
+      </div>
+    </div>
+    <div class="row pass-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="password"><b>Password</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            formControlName="password"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('password')?.invalid &&
+              (createStaffAccountForm.get('password')?.dirty || createStaffAccountForm.get('password')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('password')?.errors?.required" class="input-error"
+              >Please enter a password.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('password')?.errors?.minlength" class="input-error"
+              >Please enter a password longer than 8 characters.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="confirmpassword"><b>Confirm Password</b><span class="required-star">*</span></label>
+        <input
+          class="form-control p-1 m-0 bottom-border-input"
+          type="password"
+          id="confirmpassword"
+          placeholder="Enter Password"
+          formControlName="confirmpassword"
+          required
+        />
+        <div
+          *ngIf="
+            createStaffAccountForm.get('confirmpassword')?.invalid &&
+            (createStaffAccountForm.get('confirmpassword')?.dirty ||
+              createStaffAccountForm.get('confirmpassword')?.touched)
+          "
+        >
+          <small *ngIf="createStaffAccountForm.get('confirmpassword')?.errors?.required" class="input-error"
+            >Please confirm your password.<br
+          /></small>
+        </div>
+        <small *ngIf="createStaffAccountForm.errors?.passwordMatch" class="input-error">Passwords do not match</small>
+      </div>
+    </div>
+    <div class="row phones-row">
+      <div class="col-xs-8 col-md-4">
+        <label for="primaryPhone"><b>Enter Primary Phone Number</b><span class="required-star">*</span></label>
+        <input
+          class="form-control p-1 ml-0 bottom-border-input"
+          type="tel"
+          id="primaryPhone"
+          placeholder="Enter Phone Number"
+          formControlName="primaryPhone"
+          required
+        />
+        <div
+          *ngIf="
+            createStaffAccountForm.get('primaryPhone')?.invalid &&
+            (createStaffAccountForm.get('primaryPhone')?.dirty || createStaffAccountForm.get('primaryPhone')?.touched)
+          "
+        >
+          <small *ngIf="createStaffAccountForm.get('primaryPhone')?.errors?.required" class="input-error"
+            >Please enter your primary phone number.<br
+          /></small>
+          <small *ngIf="createStaffAccountForm.get('primaryPhone')?.errors?.invalidPhone" class="input-error"
+            >Please enter a valid phone number.<br
+          /></small>
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b><span class="required-star">*</span></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="primaryType"
+            formControlName="primaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option *ngFor="let phoneType of PHONE_TYPES" [value]="phoneType">
+              {{ phoneType }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              createStaffAccountForm.get('primaryType')?.invalid &&
+              (createStaffAccountForm.get('primaryType')?.dirty || createStaffAccountForm.get('primaryType')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('primaryType')?.errors?.required" class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8 col-md-4">
+        <div class="form-group">
+          <label for="secondaryPhone"><b>Enter Secondary Phone Number</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="secondaryPhone"
+            placeholder="Enter Phone Number"
+            formControlName="secondaryPhone"
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('secondaryPhone')?.invalid &&
+              (createStaffAccountForm.get('secondaryPhone')?.dirty ||
+                createStaffAccountForm.get('secondaryPhone')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('secondaryPhone')?.errors?.invalidPhone" class="input-error"
+              >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="secondaryType"
+            formControlName="secondaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Home">Home</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Work">Work</option>
+          </select>
+          <div
+            *ngIf="
+              createStaffAccountForm.get('secondaryType')?.invalid &&
+              (createStaffAccountForm.get('secondaryType')?.dirty ||
+                createStaffAccountForm.get('secondaryType')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('secondaryType')?.errors?.required" class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-1-row">
+      <div class="col-xs-12 col-sm-12 col-12">
+        <div class="form-group">
+          <label class="mt-4" for="address"><b>Address Line 1</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="address"
+            placeholder="Address Line 1"
+            formControlName="address"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('address')?.invalid &&
+              (createStaffAccountForm.get('address')?.dirty || createStaffAccountForm.get('address')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('address')?.errors?.required" class="input-error"
+              >Please enter your address.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row address-2-row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label class="mt-4" for="address2"><b>Address Line 2</b></label>
+          <input
+            class="form-control p-1 bottom-border-input"
+            id="address2"
+            placeholder="Address Line 2"
+            formControlName="address2"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row address-info-row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <label for="city"><b>City</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="city"
+            placeholder="Enter City"
+            formControlName="city"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('city')?.invalid &&
+              (createStaffAccountForm.get('city')?.dirty || createStaffAccountForm.get('city')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('city')?.errors?.required" class="input-error"
+              >Please enter a city.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="state"><b>State</b><span class="required-star">*</span></label>
+          <select
+            class="m-3 form-select"
+            name="state"
+            id="state"
+            formControlName="state"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option *ngFor="let s of STATES" [value]="s">
+              {{ s }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              createStaffAccountForm.get('state')?.invalid &&
+              (createStaffAccountForm.get('state')?.dirty || createStaffAccountForm.get('state')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('state')?.errors?.required" class="input-error"
+              >Please choose a state.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="zipCode"><b>Zip Code</b><span class="required-star">*</span></label>
+          <div class="container"></div>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="text"
+            id="zipCode"
+            placeholder="Enter Zip"
+            formControlName="zip"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('zip')?.invalid &&
+              (createStaffAccountForm.get('zip')?.dirty || createStaffAccountForm.get('zip')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('zip')?.errors?.required" class="input-error"
+              >Please enter a zip code.<br
+            /></small>
+            <small *ngIf="createStaffAccountForm.get('zip')?.errors?.pattern" class="input-error"
+              >Please enter a valid zip code.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row staff-access-key-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="staffAccessKey"
+            ><b>Staff Access Key </b><small>(Contact a staff member for the access key)</small
+            ><span class="required-star">*</span></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="password"
+            id="staffAccessKey"
+            placeholder="Enter Access Key"
+            formControlName="staffAccessKey"
+            required
+          />
+          <div
+            *ngIf="
+              createStaffAccountForm.get('staffAccessKey')?.invalid &&
+              (createStaffAccountForm.get('staffAccessKey')?.dirty ||
+                createStaffAccountForm.get('staffAccessKey')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('staffAccessKey')?.errors?.required" class="input-error"
+              >Please enter the staff access key.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="privilegeLevel"
+            ><b
+              >Requested Privilege Level
+              <small
+                >(Moderator: Basic staff account, can approve/remove users, post announcements | Administrator:
+                Moderator privileges + approve new staff accounts, view bug reports + analytics)</small
+              ></b
+            ><span class="required-star">*</span></label
+          >
+          <select
+            class="m-3 form-select"
+            name="privilegeLevel"
+            id="privilegeLevel"
+            formControlName="privilegeLevel"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="MOD">Moderator</option>
+            <option value="ADMIN">Administrator</option>
+          </select>
+          <div
+            *ngIf="
+              createStaffAccountForm.get('privilegeLevel')?.invalid &&
+              (createStaffAccountForm.get('privilegeLevel')?.dirty ||
+                createStaffAccountForm.get('privilegeLevel')?.touched)
+            "
+          >
+            <small *ngIf="createStaffAccountForm.get('privilegeLevel')?.errors?.required" class="input-error"
+              >Please choose a privilege level.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <button
+          type="submit"
+          id="createAccountButton"
+          class="btn btn-primary w-100 p-2 mb-5 mt-2 text-white"
+          [disabled]="disableSubmitButton"
+        >
+          Create Account
+        </button>
+      </div>
+    </div>
+  </form>
+  <small><span class="required-star">*</span> indicates required field</small>
+</div>

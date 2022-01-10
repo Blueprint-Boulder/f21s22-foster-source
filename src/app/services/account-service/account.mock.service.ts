@@ -1,34 +1,60 @@
 import { AccountService } from './account.service';
-import { Account, Cookie, CreateAccountRequest, LoginRequest, UpdateAccountReq } from '../../models/account.model';
+import {
+  Account,
+  CaseWorkerInfo,
+  Token,
+  CreateAccountRequest,
+  CreateStaffAccountRequest,
+  DeleteAccountReq,
+  GetAccountsReq,
+  LoginRequest,
+  UpdateAccountReq,
+  VerifyReq,
+} from '../../models/account.model';
 import { Observable, of } from 'rxjs';
-import { accounts, applicants, cookies, createAccountRequests } from '../../mock/database-entities';
+import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
+import { ChangePasswordReq } from '../../models/change-password';
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
     return of(createAccountRequests[0]);
   }
 
+  createStaffAccount(accountReq: CreateStaffAccountRequest): Observable<any> {
+    return of({});
+  }
+
   deleteAccount(id: number): Observable<any> {
     return of({});
   }
 
-  deleteOwnAccount(): Observable<any> {
+  deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return of({});
   }
 
-  login(params: LoginRequest): Observable<Cookie> {
-    return of(cookies[0]);
+  login(params: LoginRequest): Observable<string> {
+    return of(tokenString);
+  }
+
+  logout(): Observable<any> {
+    return of({});
   }
 
   updateAccount(params: UpdateAccountReq): Observable<Account> {
     return of(accounts[0]);
   }
 
-  getApplicants(): Observable<GetApplicantsRes> {
+  getApplicants(): Observable<GetAccountsReq> {
     return of({
-      applicants: applicants,
+      accounts: accounts,
+    });
+  }
+
+  getStaffApplicants(): Observable<GetAccountsReq> {
+    return of({
+      accounts: accounts,
     });
   }
 
@@ -45,6 +71,30 @@ export class AccountMockService implements AccountService {
   }
 
   completeProfile(params: FinishProfileReq): Observable<any> {
+    return of({});
+  }
+
+  verifyAccount(params: VerifyReq): Observable<any> {
+    return of({});
+  }
+
+  resendVerificationEmail(email: string): Observable<any> {
+    return of({});
+  }
+
+  getAccountById(id: number): Observable<Account> {
+    return of(accounts[0]);
+  }
+
+  updatePasswordForCurrentAccount(req: ChangePasswordReq): Observable<any> {
+    return of({});
+  }
+
+  getCwInfo(): Observable<CaseWorkerInfo> {
+    return of(accounts[0]);
+  }
+
+  updateCwInfo(req: CaseWorkerInfo): Observable<any> {
     return of({});
   }
 }

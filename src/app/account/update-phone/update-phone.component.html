@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Phone Numbers</h2>
+    </div>
+  </div>
+  <div *ngIf="currentPrimaryPhoneNumber" class="row mt-5 text-center">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <p>
+        <b>Current Phone Number<span *ngIf="currentSecondaryPhoneNumber">s</span> On File</b>
+      </p>
+      <p><b>Primary: </b>{{ currentPrimaryPhoneNumber.phoneNumber }} ({{ currentPrimaryPhoneNumber.type }})</p>
+      <p *ngIf="currentSecondaryPhoneNumber">
+        <b>Secondary: </b>{{ currentSecondaryPhoneNumber.phoneNumber }} ({{ currentSecondaryPhoneNumber.type }})
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-md-6 col-lg-4">
+      <small>Leaving a field blank will keep your current stored phone number.</small>
+    </div>
+  </div>
+  <form [formGroup]="updatePhoneForm">
+    <div class="row phones-row mt-5">
+      <div class="col-md-3"></div>
+      <div class="col-sm-8 col-md-4">
+        <label for="primaryPhone"><b>Enter Primary Phone Number</b></label>
+        <input
+          class="form-control p-1 ml-0 bottom-border-input"
+          type="tel"
+          id="primaryPhone"
+          placeholder="Enter Phone Number"
+          formControlName="primaryPhone"
+        />
+        <div
+          *ngIf="
+            updatePhoneForm.get('primaryPhone')?.invalid &&
+            (updatePhoneForm.get('primaryPhone')?.dirty || updatePhoneForm.get('primaryPhone')?.touched)
+          "
+        >
+          <small *ngIf="updatePhoneForm.get('primaryPhone')?.errors?.required" class="input-error"
+            >Please enter your primary phone number.<br
+          /></small>
+          <small *ngIf="updatePhoneForm.get('primaryPhone')?.errors?.invalidPhone" class="input-error"
+            >Please enter a valid phone number.<br
+          /></small>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="primaryType"
+            formControlName="primaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option *ngFor="let phoneType of PHONE_TYPES" [value]="phoneType">
+              {{ phoneType }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              updatePhoneForm.get('primaryType')?.invalid &&
+              (updatePhoneForm.get('primaryType')?.dirty || updatePhoneForm.get('primaryType')?.touched)
+            "
+          >
+            <small *ngIf="updatePhoneForm.get('primaryType')?.errors?.required" class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-md-3"></div>
+      <div class="col-sm-8 col-md-4">
+        <div class="form-group">
+          <label for="secondaryPhone"><b>Enter Secondary Phone Number</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            type="tel"
+            id="secondaryPhone"
+            placeholder="Enter Phone Number"
+            formControlName="secondaryPhone"
+          />
+          <div
+            *ngIf="
+              updatePhoneForm.get('secondaryPhone')?.invalid &&
+              (updatePhoneForm.get('secondaryPhone')?.dirty || updatePhoneForm.get('secondaryPhone')?.touched)
+            "
+          >
+            <small *ngIf="updatePhoneForm.get('secondaryPhone')?.errors?.invalidPhone" class="input-error"
+              >Please enter a valid phone number.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 col-md-2">
+        <div class="form-group">
+          <label for="primaryType"><b>Type</b></label>
+          <select
+            class="m-3 form-select"
+            name="type"
+            id="secondaryType"
+            formControlName="secondaryType"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Home">Home</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Work">Work</option>
+          </select>
+          <div
+            *ngIf="
+              updatePhoneForm.get('secondaryType')?.invalid &&
+              (updatePhoneForm.get('secondaryType')?.dirty || updatePhoneForm.get('secondaryType')?.touched)
+            "
+          >
+            <small *ngIf="updatePhoneForm.get('secondaryType')?.errors?.required" class="input-error"
+              >Please select a phone number type.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5 mb-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Phone Numbers
+      </button>
+    </div>
+  </div>
+</div>

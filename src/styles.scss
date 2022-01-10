@@ -22,6 +22,8 @@ $fs-tan: #fef4e8;
 
 body {
   padding-top: 75px;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 $theme-colors: (

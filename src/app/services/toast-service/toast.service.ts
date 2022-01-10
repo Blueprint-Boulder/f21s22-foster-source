@@ -18,6 +18,21 @@ export class ToastService {
     }
   }
 
+  httpError(err: any) {
+    // Standard error response from fs-service
+    if (err.error && err.error.code && err.error.message) {
+      this.show({
+        body: `[${err.error.code}] ${err.error.message}`,
+        preset: ToastPresets.ERROR,
+      });
+    } else {
+      this.show({
+        body: `${err.message}`,
+        preset: ToastPresets.ERROR,
+      });
+    }
+  }
+
   remove(toast: Toast) {
     this.toasts = this.toasts.filter((t) => t !== toast);
   }

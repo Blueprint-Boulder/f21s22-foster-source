@@ -1,27 +1,29 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../../models/announcement.model';
-import { ToastrService } from 'ngx-toastr';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
 import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ToastPresets } from '../../models/toast.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
-  providers: [announcementServiceProvider],
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;
-  @ViewChild('toast') toast: ElementRef;
-  constructor(private announcementService: AnnouncementService, private toastService: ToastrService) {}
+  constructor(private announcementService: AnnouncementService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.announcementService.getLatestAnnouncement().subscribe(
       (a: Announcement) => {
         this.latestAnnouncement = a;
       },
-      (error) => {
-        this.toastService.error('Failed to fetch latest announcement. Try reloading the page.', 'Error');
+      (error: HttpErrorResponse) => {
+        if (error.status !== 404) {
+          this.toastService.httpError(error);
+        }
       }
     );
   }

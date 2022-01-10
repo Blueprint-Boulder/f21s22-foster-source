@@ -6,11 +6,12 @@
         A verification link has been sent to {{ email }}. Please click the link to verify your account. Upon account
         verification, you will still need to be approved by Foster Source to begin using this service.
       </p>
-      <small
+      <small *ngIf="!verificationEmailReSent"
         >Didn't get an email?
         <a href="javascript:void(0)" [ngClass]="{ disabled: countdown !== 0 }" (click)="resendEmail()">Retry</a>
         <span *ngIf="countdown !== 0"> in {{ countdown }} seconds</span></small
       >
+      <small *ngIf="verificationEmailReSent">Resending verification email...</small>
     </div>
   </div>
 </div>

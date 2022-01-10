@@ -12,10 +12,14 @@ export class ImageImplService implements ImageService {
     const formData = new FormData();
     formData.append('image', image, image.name);
     console.log(image);
-    return this.http.post<ImagePostRes>(`${environment.backendHost}/api/utils/images`, formData);
+    return this.http.post<ImagePostRes>(`${environment.backendHost}/api/utils/images`, formData, {
+      withCredentials: true,
+    });
   }
 
   public deleteImage(key: string): Observable<any> {
-    return this.http.delete<any>(`${environment.backendHost}/api/utils/images/${encodeURIComponent(key)}`);
+    return this.http.delete<any>(`${environment.backendHost}/api/utils/images/${encodeURIComponent(key)}`, {
+      withCredentials: true,
+    });
   }
 }

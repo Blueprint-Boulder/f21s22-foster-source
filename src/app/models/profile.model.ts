@@ -3,6 +3,7 @@ import { PhoneNumber } from './phonenumber.model';
 import { AddressReq, AddressRes } from './adress.model';
 import { Availability, SimpleAvailability } from './availability.model';
 import { FullProfileRes } from './get-profile-by-id.models';
+import { SmallProfile } from './small-profile.model';
 
 export interface Profile {
   id: number;
@@ -29,7 +30,7 @@ export interface Photo {
 }
 
 export interface GetProfilesRes {
-  profiles: FullProfileRes[];
+  profiles: SmallProfile[];
   numResults: number;
 }
 
@@ -69,7 +70,7 @@ export interface RespiteProviderInfoReq {
   careForMinAge: number;
   careForMaxAge: number;
   maxNumCareFor: number;
-  availability: SimpleAvailability;
+  availabilities: [SimpleAvailability];
 }
 
 export interface RespiteBackgroundReq {
@@ -104,7 +105,13 @@ export interface FinishProfileReq {
   profileLargeAwsKey: string;
   pronouns?: string;
   maritalStatus?: string;
+  biography: string;
   secondaryAccountHolder?: SecondaryAccountHolderReq;
   respiteBackground: RespiteBackgroundReq;
   householdBackground: HouseholdBackground;
+}
+
+export interface ProfileImages {
+  profileLargeAwsKey: string;
+  profileSmallAwsKey: string;
 }

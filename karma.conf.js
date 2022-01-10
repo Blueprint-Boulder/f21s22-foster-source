@@ -20,6 +20,7 @@ module.exports = function (config) {
         // or set a specific seed with `seed: 4321`
       },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      captureConsole: true,
     },
     jasmineHtmlReporter: {
       suppressAll: true, // removes the duplicated traces
@@ -42,7 +43,13 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ["Chrome"],
+    browsers: ["ChromeHeadlessNoSandbox"],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox"],
+      },
+    },
     singleRun: false,
     restartOnFileChange: true,
   });

@@ -1,1 +1,12 @@
-<p>search-results works!</p>
+<div class="container w-100 mb-5" *ngIf="profiles">
+  <div class="row mx-auto">
+    <app-result-card class="m-2 mx-auto" *ngFor="let profile of profiles" [profile]="profile"></app-result-card>
+  </div>
+</div>
+<div class="container w-100 mb-5 h-100" *ngIf="searching">
+  <div class="d-flex justify-content-center mt-5 h-100">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>

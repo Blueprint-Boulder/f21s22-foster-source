@@ -2,39 +2,49 @@ import { Announcement, GetAnnouncementsRes } from '../models/announcement.model'
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
-import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
-import { PhoneNumber, PhoneNumberType } from '../models/phonenumber.model';
+import { Account, Token, CreateAccountRequest } from '../models/account.model';
+import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
 import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { AddressReq, SimpleAddressReq } from '../models/adress.model';
+import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
+import { SmallProfile } from '../models/small-profile.model';
 
 const announcements: Announcement[] = [
   {
     id: 1,
-    date: new Date(),
-    author: 'Tim Cook',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Tim',
+      lastName: 'Cook',
+    },
     title: 'This is the first announcement!',
-    bodyHTML: `
+    bodyHtml: `
     <b>this should be some bold text...</b>
     <div>Also it has a div!</div>
     `,
   },
   {
     id: 2,
-    date: new Date(),
-    author: 'Jake Paul',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Jake',
+      lastName: 'Paul',
+    },
     title: 'Christmas Party',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     `,
   },
   {
     id: 3,
-    date: new Date(),
-    author: 'Penelope Smith',
+    datePosted: new Date(),
+    account: {
+      firstName: 'Penelope',
+      lastName: 'Smith',
+    },
     title: 'This is really important!',
-    bodyHTML: `
+    bodyHtml: `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <b>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui </b> officia deserunt mollit anim id est laborum.</p> <img src="https://fostersource.org/wp-content/uploads/2020/07/team1.jpg" width="589px">
     `,
   },
@@ -44,21 +54,22 @@ const getAnnouncementResponses: GetAnnouncementsRes[] = [{ announcements: announ
 
 export const simpleAddresses: SimpleAddressReq[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
   },
 ];
 
-export const addresses: AddressReq[] = [
+export const addresses: AddressRes[] = [
   {
-    line1: '1002 fake st.',
+    addressLine1: '1002 fake st.',
     city: 'Denver',
-    zip: '80210',
+    zipcode: '80210',
     state: 'CO',
-    lat: '1',
-    lon: '1',
+    country: 'USA',
+    latitude: 42,
+    longitude: 44,
   },
 ];
 
@@ -86,7 +97,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
   },
 ];
 
-export const cookies: Cookie[] = [
+export const cookies: Token[] = [
   {
     id: 1,
     privilegeLevel: 3,
@@ -94,6 +105,8 @@ export const cookies: Cookie[] = [
     iat: 123412341,
   },
 ];
+
+export const tokenString = `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NywicHJpdmlsZWdlTGV2ZWwiOiIzIiwiaWF0IjoxNjM2OTMyNDQzLCJleHAiOjE2Mzc5OTg4OTN9.Qgl84ZWtv9P6u14DTxoZ8lwspcyV3tR4RrMmqX63XTQ`;
 
 export const accounts: Account[] = [
   {
@@ -106,22 +119,55 @@ export const accounts: Account[] = [
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
     cwEmail: 'noreply@google.com',
-    cwPhone: '+17208839921',
+    cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
-    primaryPhone: {
+    privilege: 'USER',
+    primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
     },
-    secondaryPhone: {
+    secondaryPhoneNumber: {
       phoneNumber: '+13321123345',
       type: PhoneNumberType.Home,
     },
     lastLogin: new Date(),
     profileCompleted: true,
     address: {
-      line1: '1002 fake st.',
+      addressLine1: '1002 fake st.',
       city: 'Denver',
-      zip: '80210',
+      zipcode: '80210',
+      state: 'CO',
+      lat: '1',
+      lon: '1',
+    },
+  },
+  {
+    id: 2,
+    email: 'jcrowson@colorado.edu',
+    username: 'jword',
+    password: 'pass1234',
+    firstName: 'Jet',
+    lastName: 'Crowman',
+    cwFirstName: 'Gina',
+    cwLastName: 'Smith',
+    cwEmail: 'noreply@google.com',
+    cwPhoneNumber: '+17208839921',
+    certifiedBy: 'Arapahoe County',
+    privilege: 'USER',
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+    lastLogin: new Date(),
+    profileCompleted: true,
+    address: {
+      addressLine1: '1002 fake st.',
+      city: 'Denver',
+      zipcode: '80210',
       state: 'CO',
       lat: '1',
       lon: '1',
@@ -201,7 +247,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Smith',
     email: 'josh.smith@aol.com',
     phoneNumber: '(720) 822-9918',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason: 'Josh is not even from Colorado, but will not stop applying.',
   },
@@ -210,7 +260,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'green',
     email: 'amygirl1111@aol.com',
     phoneNumber: '(720) 221-9887',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 2,
+      firstName: 'Joe',
+      lastName: 'Biden',
+    },
     date: new Date(),
     reason: 'Amy is honestly just not a vibe.',
   },
@@ -219,7 +273,11 @@ const blacklist: BlacklistedUser[] = [
     lastName: 'Gates',
     email: 'bill@microsoft.com',
     phoneNumber: '(315) 883-1182',
-    bannedBy: 'Jett Crowson',
+    bannedByAccount: {
+      id: 1,
+      firstName: 'Jett',
+      lastName: 'Crowson',
+    },
     date: new Date(),
     reason:
       'I have no idea why Bill Gates would be banned from this site, but here we are... Here is some more information about the ban just to check out if the text wraps in an aesthetically pleasing way.',
@@ -243,6 +301,19 @@ export const mobilePhones: PhoneNumber[] = [
   {
     phoneNumber: '+17209938821',
     type: PhoneNumberType.Mobile,
+  },
+];
+
+export const phoneNumbersRes: PhoneNumbersRes[] = [
+  {
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+3033467754',
+      type: PhoneNumberType.Home,
+    },
   },
 ];
 
@@ -347,3 +418,39 @@ export const profiles: FullProfileRes[] = [
 ];
 
 export { announcements, getAnnouncementResponses, users, applicants, blacklist };
+
+export const searchResults: SmallProfile[] = [
+  {
+    preferredName: 'Paul',
+    account: {
+      username: 'Paulyboy123',
+      address: {
+        distance: 10.55,
+      },
+    },
+    id: 1,
+    profileLargeAwsKey: 'largeKey',
+  },
+  {
+    preferredName: 'Jett',
+    account: {
+      username: 'jcrowson',
+      address: {
+        distance: 14.15,
+      },
+    },
+    id: 1,
+    profileLargeAwsKey: 'largeKey',
+  },
+  {
+    preferredName: 'Gina Smith',
+    account: {
+      username: 'ginasmithmane',
+      address: {
+        distance: 21.09,
+      },
+    },
+    id: 1,
+    profileLargeAwsKey: 'largeKey',
+  },
+];
