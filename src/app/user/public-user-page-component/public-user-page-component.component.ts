@@ -42,6 +42,11 @@ export class PublicUserPageComponentComponent implements OnInit {
     });
   }
 
+  returnAge(birthday: Date) {
+    const now = new Date().getFullYear();
+    return now - birthday.getFullYear();
+  }
+
   open(content: any) {
     this.modalService
       .open(content, {
