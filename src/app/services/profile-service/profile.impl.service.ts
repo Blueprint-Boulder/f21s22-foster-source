@@ -4,6 +4,7 @@ import {
   GetProfilesRes,
   HouseholdBackground,
   ProfileImages,
+  SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
 } from '../../models/profile.model';
@@ -68,6 +69,12 @@ export class ProfileImplService implements ProfileService {
 
   updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes> {
     return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/secondary-account-holder`, req, {
+      withCredentials: true,
+    });
+  }
+
+  addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes> {
+    return this.http.post<FullProfileRes>(`${environment.backendHost}/api/db/profiles/secondary-account-holder`, req, {
       withCredentials: true,
     });
   }

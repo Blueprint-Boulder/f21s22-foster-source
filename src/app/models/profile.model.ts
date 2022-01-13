@@ -57,8 +57,7 @@ export interface SecondaryAccountHolderReq {
   relationshipToPrimary: string;
   gender: string;
   email: string;
-  phoneNumber: string;
-  phoneNumberType: string;
+  secAccountHolderPhone: PhoneNumber;
   pronouns?: string;
   maritalStatus?: string;
 }

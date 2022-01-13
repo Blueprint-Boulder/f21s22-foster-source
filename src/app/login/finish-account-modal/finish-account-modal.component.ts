@@ -15,6 +15,7 @@ import {
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
 } from '../../models/profile.model';
+import { PhoneNumber } from '../../models/phonenumber.model';
 
 @Component({
   selector: 'app-finish-account-modal',
@@ -215,10 +216,16 @@ export class FinishAccountModalComponent implements OnInit {
       relationshipToPrimary: this.finishProfileForm.get('relationshipToPrimary')!.value,
       gender: this.finishProfileForm.get('secGender')!.value,
       email: this.finishProfileForm.get('secEmail')!.value,
-      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
-      phoneNumberType: this.finishProfileForm.get('secPhoneType')!.value,
+      secAccountHolderPhone: this.getSecPhone(),
       pronouns: this.getOptionalStringFromForm('secPronouns'),
       maritalStatus: this.getOptionalStringFromForm('secMaritalStatus'),
+    };
+  }
+
+  private getSecPhone(): PhoneNumber {
+    return {
+      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
+      type: this.finishProfileForm.get('secPhoneType')!.value,
     };
   }
 

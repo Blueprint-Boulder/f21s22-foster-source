@@ -5,6 +5,7 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
 } from '../../models/profile.model';
@@ -38,6 +39,10 @@ export class ProfileMockService implements ProfileService {
   }
 
   updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
 

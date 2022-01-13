@@ -7,6 +7,7 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
 } from '../../models/profile.model';
@@ -30,4 +31,5 @@ export abstract class ProfileService {
   public abstract getCurrentProfile(): Observable<FullProfileRes>;
   public abstract updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes>;
   public abstract updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes>;
+  public abstract addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes>;
 }

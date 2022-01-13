@@ -1,4 +1,5 @@
 import { UpdateSecondaryAccountHolderComponent } from './update-secondary-account-holder/update-secondary-account-holder.component';
+import { CreateSecondaryAccountHolderComponent } from './create-secondary-account-holder/create-secondary-account-holder.component';
 import { UpdateHouseholdBackgroundComponent } from './update-household-background/update-household-background.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'update/secondary-account-holder',
     component: UpdateSecondaryAccountHolderComponent,
+  },
+  {
+    path: 'create/secondary-account-holder',
+    component: CreateSecondaryAccountHolderComponent,
   },
 ];
 
