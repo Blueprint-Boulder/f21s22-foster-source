@@ -1,0 +1,129 @@
+<div class="shadow-sm">
+  <table *ngIf="availability && dayModels" class="table table-responsive-md text-center">
+    <caption *ngIf="availability.type === 'PRIMARY'" class="pl-3 py-2">
+      {{
+        availability.type | titlecase
+      }}
+      Availability
+    </caption>
+    <caption *ngIf="availability.type === 'TEMPORARY' && availability.end" class="pl-3 py-2">
+      {{
+        availability.type | titlecase
+      }}
+      Availability - Active until
+      {{
+        getFormattedDate(availability.end)
+      }}
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+        <th scope="col">Thursday</th>
+        <th scope="col">Friday</th>
+        <th scope="col">Saturday</th>
+        <th scope="col">Sunday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Morning</th>
+        <td [class]="{ 'available-cell': availability.monday[0] }">
+          <span *ngIf="availability.monday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.tuesday[0] }">
+          <span *ngIf="availability.tuesday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.wednesday[0] }">
+          <span *ngIf="availability.wednesday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.thursday[0] }">
+          <span *ngIf="availability.thursday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.friday[0] }">
+          <span *ngIf="availability.friday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.saturday[0] }">
+          <span *ngIf="availability.saturday[0]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.sunday[0] }">
+          <span *ngIf="availability.sunday[0]">Available</span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Afternoon</th>
+        <td [class]="{ 'available-cell': availability.monday[1] }">
+          <span *ngIf="availability.monday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.tuesday[1] }">
+          <span *ngIf="availability.tuesday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.wednesday[1] }">
+          <span *ngIf="availability.wednesday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.thursday[1] }">
+          <span *ngIf="availability.thursday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.friday[1] }">
+          <span *ngIf="availability.friday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.saturday[1] }">
+          <span *ngIf="availability.saturday[1]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.sunday[1] }">
+          <span *ngIf="availability.sunday[1]">Available</span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Evening</th>
+        <td [class]="{ 'available-cell': availability.monday[2] }">
+          <span *ngIf="availability.monday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.tuesday[2] }">
+          <span *ngIf="availability.tuesday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.wednesday[2] }">
+          <span *ngIf="availability.wednesday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.thursday[2] }">
+          <span *ngIf="availability.thursday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.friday[2] }">
+          <span *ngIf="availability.friday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.saturday[2] }">
+          <span *ngIf="availability.saturday[2]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.sunday[2] }">
+          <span *ngIf="availability.sunday[2]">Available</span>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <th scope="row">Overnight</th>
+        <td [class]="{ 'available-cell': availability.monday[3] }">
+          <span *ngIf="availability.monday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.tuesday[3] }">
+          <span *ngIf="availability.tuesday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.wednesday[3] }">
+          <span *ngIf="availability.wednesday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.thursday[3] }">
+          <span *ngIf="availability.thursday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.friday[3] }">
+          <span *ngIf="availability.friday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.saturday[3] }">
+          <span *ngIf="availability.saturday[3]">Available</span>
+        </td>
+        <td [class]="{ 'available-cell': availability.sunday[3] }">
+          <span *ngIf="availability.sunday[3]">Available</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

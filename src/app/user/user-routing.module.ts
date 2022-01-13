@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { UpdateRespiteProviderInfoComponent } from './update-respite-provider-info/update-respite-provider-info.component';
 import { UpdatePrimaryAvailabilityComponent } from './update-primary-availability/update-primary-availability.component';
 import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
+import { AvailabilityGridComponent } from '../common-components/availability-grid/availability-grid.component';
 
 const routes: Routes = [
   {

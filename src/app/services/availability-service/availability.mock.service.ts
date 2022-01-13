@@ -1,7 +1,7 @@
 import { AvailabilityService } from './availability.service';
-import { Availability } from '../../models/availability.model';
+import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { Observable, of } from 'rxjs';
-import { primaryAvailabilities } from '../../mock/database-entities';
+import { primaryAvailabilities, temporaryAvailabilities } from '../../mock/database-entities';
 
 export class AvailabilityMockService implements AvailabilityService {
   createAvailability(availability: Availability): Observable<Availability> {
@@ -18,5 +18,13 @@ export class AvailabilityMockService implements AvailabilityService {
 
   updateAvailability(availability: Availability): Observable<Availability> {
     return of(primaryAvailabilities[0]);
+  }
+
+  addTemporaryAvailability(req: SimpleAvailability): Observable<SimpleAvailability> {
+    return of(temporaryAvailabilities[0]);
+  }
+
+  removeTemporaryAvailability(): Observable<any> {
+    return of({});
   }
 }

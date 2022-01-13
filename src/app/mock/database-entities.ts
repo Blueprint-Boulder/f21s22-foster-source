@@ -297,6 +297,22 @@ export const primaryAvailabilities: Availability[] = [
   },
 ];
 
+export const temporaryAvailabilities: Availability[] = [
+  {
+    id: 2,
+    type: AvailabilityType.TEMPORARY,
+    monday: [true, true, true, false],
+    tuesday: [false, true, true, false],
+    wednesday: [true, true, true, false],
+    thursday: [true, true, false, false],
+    friday: [true, true, true, false],
+    saturday: [false, true, true, true],
+    sunday: [false, true, true, true],
+    start: new Date(),
+    end: new Date(),
+  },
+];
+
 export const mobilePhones: PhoneNumber[] = [
   {
     phoneNumber: '+17209938821',
@@ -368,6 +384,19 @@ export const profiles: FullProfileRes[] = [
             friday: [true, false, false, false],
             saturday: [false, true, true, true],
             sunday: [true, false, false, false],
+          },
+          {
+            id: 2,
+            type: AvailabilityType.TEMPORARY,
+            monday: [true, false, false, false],
+            tuesday: [false, true, true, true],
+            wednesday: [true, false, false, false],
+            thursday: [false, true, true, true],
+            friday: [true, false, true, true],
+            saturday: [false, true, true, true],
+            sunday: [false, false, false, false],
+            start: new Date(),
+            end: new Date(),
           },
         ],
       },

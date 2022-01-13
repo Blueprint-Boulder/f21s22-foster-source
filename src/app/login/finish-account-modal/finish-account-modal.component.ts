@@ -16,6 +16,7 @@ import {
   SecondaryAccountHolderReq,
 } from '../../models/profile.model';
 import { PhoneNumber } from '../../models/phonenumber.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-finish-account-modal',
@@ -146,7 +147,7 @@ export class FinishAccountModalComponent implements OnInit {
       careForMedicallyFragile: [null],
       ownsFirearm: [null],
       additionalInfo: [null],
-      dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
+      dob: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
       biography: ['', Validators.required],
     });
   }
@@ -329,34 +330,6 @@ export class FinishAccountModalComponent implements OnInit {
       this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
       this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
     });
-  }
-
-  private static validateDate(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid date.' };
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const parsed = FinishAccountModalComponent.parseDateFromInput(control.value as string);
-      const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
-      const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
-      const validYear =
-        parseInt(control.value.substring(6, 10)) > new Date().getFullYear() - 100 &&
-        parseInt(control.value.substring(6, 10)) <= new Date().getFullYear() - 13;
-      if (!validMonth || !validDay || !validYear) {
-        return err;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return err;
-    }
-  }
-
-  private static parseDateFromInput(dateStr: string): Date {
-    const year = parseInt(dateStr.substring(6, 10));
-    const day = parseInt(dateStr.substring(3, 5));
-    const month = parseInt(dateStr.substring(0, 2));
-    return new Date(year, month - 1, day);
   }
 
   private generateRespiteAvailability(): [SimpleAvailability] {

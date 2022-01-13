@@ -16,7 +16,7 @@ import {
   UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
 import { FiltersReq } from '../../models/filters.model';
-import { SimpleAvailability } from '../../models/availability.model';
+import { Availability, SimpleAvailability } from '../../models/availability.model';
 
 @Injectable({
   providedIn: 'root',

@@ -4,6 +4,7 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { Router } from '@angular/router';
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-update-primary-availability',
@@ -135,7 +136,7 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.hasAvailability()) {
+    if (!FormUtils.hasAvailability(this.dayModels)) {
       const shouldProceed = confirm(
         'You have indicated that you have no availability to provide respite. Is this correct?'
       );
@@ -157,17 +158,6 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
         this.submittingForm = false;
       }
     );
-  }
-
-  private hasAvailability(): boolean {
-    let hasAvailability = false;
-    this.dayModels.forEach((dm) => {
-      const dayHasAvailability = dm.morning || dm.afternoon || dm.evening || dm.overnight;
-      if (dayHasAvailability) {
-        hasAvailability = true;
-      }
-    });
-    return hasAvailability;
   }
 
   private generateAvailability(): SimpleAvailability {

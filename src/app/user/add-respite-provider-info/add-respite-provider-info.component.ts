@@ -1,5 +1,5 @@
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
-import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
+import { AvailabilityType } from '../../models/availability.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,6 +7,7 @@ import { RespiteProviderInfoReq } from '../../models/profile.model';
 import { ToastPresets } from '../../models/toast.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-add-respite-provider-info',
@@ -96,7 +97,7 @@ export class AddRespiteProviderInfoComponent {
         careForMinAge: this.addRespiteProviderInfoForm.get('careForMinAge')!.value,
         careForMaxAge: this.addRespiteProviderInfoForm.get('careForMaxAge')!.value,
         maxNumCareFor: this.addRespiteProviderInfoForm.get('maxNumCareFor')!.value,
-        availabilities: this.generateRespiteAvailability(),
+        availabilities: [FormUtils.generateRespiteAvailability(this.dayModels, AvailabilityType.PRIMARY)],
       };
 
       this.profileService.addRespiteProviderInfo(req).subscribe(
@@ -113,28 +114,5 @@ export class AddRespiteProviderInfoComponent {
         }
       );
     }
-  }
-
-  private generateRespiteAvailability(): [SimpleAvailability] {
-    const m: DayModel = this.dayModels.find((dm) => dm.name === 'Monday') as DayModel;
-    const t: DayModel = this.dayModels.find((dm) => dm.name === 'Tuesday') as DayModel;
-    const w: DayModel = this.dayModels.find((dm) => dm.name === 'Wednesday') as DayModel;
-    const th: DayModel = this.dayModels.find((dm) => dm.name === 'Thursday') as DayModel;
-    const f: DayModel = this.dayModels.find((dm) => dm.name === 'Friday') as DayModel;
-    const sa: DayModel = this.dayModels.find((dm) => dm.name === 'Saturday') as DayModel;
-    const su: DayModel = this.dayModels.find((dm) => dm.name === 'Sunday') as DayModel;
-
-    return [
-      {
-        type: AvailabilityType.PRIMARY,
-        monday: [m.morning, m.afternoon, m.evening, m.overnight],
-        tuesday: [t.morning, t.afternoon, t.evening, t.overnight],
-        wednesday: [w.morning, w.afternoon, w.evening, w.overnight],
-        thursday: [th.morning, th.afternoon, th.evening, th.overnight],
-        friday: [f.morning, f.afternoon, f.evening, f.overnight],
-        saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
-        sunday: [su.morning, su.afternoon, su.evening, su.overnight],
-      },
-    ];
   }
 }

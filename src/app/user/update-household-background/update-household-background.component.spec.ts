@@ -137,21 +137,19 @@ describe('UpdateHouseholdBackgroundComponent', () => {
     vehicleAccessControl.setValue(true);
     submitButton.click();
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(profileService.updateHouseholdBackground).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalled();
-      expect(submitButton.getAttribute('disabled')).toEqual('');
-    });
+    await fixture.whenStable();
+    expect(profileService.updateHouseholdBackground).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalled();
+    expect(submitButton.getAttribute('disabled')).toEqual('');
   });
-  it('should not navigate, enable submit button on backend error', () => {
+  it('should not navigate, enable submit button on backend error', async () => {
     spyOn(profileService, 'updateHouseholdBackground').and.returnValue(throwError(''));
     childrenInfoControl.setValue('test val');
     vehicleAccessControl.setValue(true);
     submitButton.click();
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(profileService.updateHouseholdBackground).toHaveBeenCalled();
-      expect(submitButton.getAttribute('disabled')).toEqual(null);
-    });
+    await fixture.whenStable();
+    expect(profileService.updateHouseholdBackground).toHaveBeenCalled();
+    expect(submitButton.getAttribute('disabled')).toEqual(null);
   });
 });
