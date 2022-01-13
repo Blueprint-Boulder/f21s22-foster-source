@@ -9,34 +9,54 @@
     <div class="col-sm-12 col-md-10 col-lg-8">
       <p><b>Current Information On File</b></p>
       <p>
-        <b *ngIf="currentHouseholdBackground.parentalUnitSize">Parental Unit Size: </b>
-        {{ currentHouseholdBackground.parentalUnitSize }} <br *ngIf="currentHouseholdBackground.parentalUnitSize" />
-        <b *ngIf="currentHouseholdBackground.householdSize">Household Size: </b>
-        {{ currentHouseholdBackground.householdSize }} <br *ngIf="currentHouseholdBackground.householdSize" />
-        <b *ngIf="currentHouseholdBackground.childrenInHousehold">Children In Household: </b>
-        {{ currentHouseholdBackground.childrenInHousehold }}
+        <span *ngIf="currentHouseholdBackground.parentalUnitSize"
+          ><b>Parental Unit Size: </b> {{ currentHouseholdBackground.parentalUnitSize }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.parentalUnitSize" />
+        <span *ngIf="currentHouseholdBackground.householdSize"
+          ><b>Household Size: </b> {{ currentHouseholdBackground.householdSize }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.householdSize" />
+        <span *ngIf="currentHouseholdBackground.childrenInHousehold"
+          ><b>Children In Household: </b> {{ currentHouseholdBackground.childrenInHousehold }}</span
+        >
         <br *ngIf="currentHouseholdBackground.childrenInHousehold" />
-        <b *ngIf="currentHouseholdBackground.childrenInfo">Children Info: </b>
-        {{ currentHouseholdBackground.childrenInfo }} <br *ngIf="currentHouseholdBackground.childrenInfo" />
-        <b *ngIf="currentHouseholdBackground.vehicleAccess">Vehicle Access: </b>
-        {{ currentHouseholdBackground.vehicleAccess }} <br *ngIf="currentHouseholdBackground.vehicleAccess" />
-        <b *ngIf="currentHouseholdBackground.lgbtCareExperience">LGBT Care Experience: </b>
-        {{ currentHouseholdBackground.lgbtCareExperience }} <br *ngIf="currentHouseholdBackground.lgbtCareExperience" />
-        <b *ngIf="currentHouseholdBackground.caredForPhysDisabled">Cared For Physically Disabled: </b>
-        {{ currentHouseholdBackground.caredForPhysDisabled }}
+        <span *ngIf="currentHouseholdBackground.childrenInfo"
+          ><b>Children Info: </b> {{ currentHouseholdBackground.childrenInfo }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.childrenInfo" />
+        <span *ngIf="currentHouseholdBackground.vehicleAccess"
+          ><b>Vehicle Access: </b> {{ currentHouseholdBackground.vehicleAccess }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.vehicleAccess" />
+        <span *ngIf="currentHouseholdBackground.lgbtCareExperience"
+          ><b>LGBT Care Experience: </b> {{ currentHouseholdBackground.lgbtCareExperience }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.lgbtCareExperience" />
+        <span *ngIf="currentHouseholdBackground.caredForPhysDisabled"
+          ><b>Cared For Physically Disabled: </b> {{ currentHouseholdBackground.caredForPhysDisabled }}</span
+        >
         <br *ngIf="currentHouseholdBackground.caredForPhysDisabled" />
-        <b *ngIf="currentHouseholdBackground.caredForIntelDisabled">Cared For Intellectually Disabled: </b>
-        {{ currentHouseholdBackground.caredForIntelDisabled }}
+        <span *ngIf="currentHouseholdBackground.caredForIntelDisabled"
+          ><b>Cared For Intellectually Disabled: </b> {{ currentHouseholdBackground.caredForIntelDisabled }}</span
+        >
         <br *ngIf="currentHouseholdBackground.caredForIntelDisabled" />
-        <b *ngIf="currentHouseholdBackground.caredForMedicallyFragile">Cared For Medically Fragile: </b>
-        {{ currentHouseholdBackground.caredForMedicallyFragile }}
+        <span *ngIf="currentHouseholdBackground.caredForMedicallyFragile"
+          ><b>Cared For Medically Fragile: </b> {{ currentHouseholdBackground.caredForMedicallyFragile }}</span
+        >
         <br *ngIf="currentHouseholdBackground.caredForMedicallyFragile" />
-        <b *ngIf="currentHouseholdBackground.ownsFirearm">Owns Firearm: </b>
-        {{ currentHouseholdBackground.ownsFirearm }} <br *ngIf="currentHouseholdBackground.ownsFirearm" />
-        <b *ngIf="currentHouseholdBackground.petInfo">Pet Info: </b> {{ currentHouseholdBackground.petInfo }}
+        <span *ngIf="currentHouseholdBackground.ownsFirearm"
+          ><b>Owns Firearm: </b> {{ currentHouseholdBackground.ownsFirearm }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.ownsFirearm" />
+        <span *ngIf="currentHouseholdBackground.petInfo"
+          ><b>Pet Info: </b> {{ currentHouseholdBackground.petInfo }}
+        </span>
         <br *ngIf="currentHouseholdBackground.petInfo" />
-        <b *ngIf="currentHouseholdBackground.additionalDetails">Additional Details: </b>
-        {{ currentHouseholdBackground.additionalDetails }} <br *ngIf="currentHouseholdBackground.additionalDetails" />
+        <span *ngIf="currentHouseholdBackground.additionalDetails"
+          ><b>Additional Details: </b> {{ currentHouseholdBackground.additionalDetails }}</span
+        >
+        <br *ngIf="currentHouseholdBackground.additionalDetails" />
       </p>
       <small>Any fields that are not filled out will not be updated.</small>
     </div>

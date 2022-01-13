@@ -1,3 +1,4 @@
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -10,7 +11,6 @@ import {
   UpdateProfileReq,
 } from '../../models/profile.model';
 import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
 
 @Injectable({
   providedIn: 'root',
@@ -29,4 +29,5 @@ export abstract class ProfileService {
   public abstract getProfileImages(): Observable<ProfileImages>;
   public abstract getCurrentProfile(): Observable<FullProfileRes>;
   public abstract updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes>;
+  public abstract updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes>;
 }

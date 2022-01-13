@@ -9,11 +9,16 @@
     <div class="col-sm-12 col-md-6 col-lg-4">
       <p><b>Current Information On File</b></p>
       <p>
-        <b>Preferred Name:</b> {{ currentProfile.preferredName }} <br />
-        <b>Biography:</b> {{ currentProfile.biography }} <br />
-        <b>Gender:</b> {{ currentProfile.gender }}<br />
-        <b>Pronouns:</b> {{ currentProfile.pronouns }} <br />
-        <b>Marital Status:</b> {{ currentProfile.maritalStatus }}
+        <span *ngIf="currentProfile.preferredName"><b>Preferred Name:</b> {{ currentProfile.preferredName }}</span>
+        <br *ngIf="currentProfile.preferredName" />
+        <span *ngIf="currentProfile.biography"><b>Biography:</b> {{ currentProfile.biography }}</span>
+        <br *ngIf="currentProfile.biography" />
+        <span *ngIf="currentProfile.gender"><b>Gender:</b> {{ currentProfile.gender }}</span
+        ><br *ngIf="currentProfile.gender" />
+        <span *ngIf="currentProfile.pronouns"><b>Pronouns:</b> {{ currentProfile.pronouns }}</span>
+        <br *ngIf="currentProfile.pronouns" />
+        <span *ngIf="currentProfile.maritalStatus"><b>Marital Status:</b> {{ currentProfile.maritalStatus }}</span>
+        <br *ngIf="currentProfile.maritalStatus" />
       </p>
       <small>Any fields that are not filled out will not be updated.</small>
     </div>

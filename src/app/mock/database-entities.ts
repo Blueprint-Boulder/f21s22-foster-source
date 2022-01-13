@@ -381,6 +381,7 @@ export const profiles: FullProfileRes[] = [
       gender: 'male',
       email: 'tbahama@tommyb.com',
       preferredName: 'Tom',
+      maritalStatus: 'Married',
       secAccountHolderPhone: {
         id: 1,
         phoneNumber: '+17207738882',

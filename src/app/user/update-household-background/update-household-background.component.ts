@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { HouseholdBackground, UpdateHouseholdBackground } from '../../models/profile.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastPresets } from '../../models/toast.model';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-household-background',

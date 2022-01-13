@@ -4,9 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { UpdateHouseholdBackgroundComponent } from './update-household-background/update-household-background.component';
+import { UpdateSecondaryAccountHolderComponent } from './update-secondary-account-holder/update-secondary-account-holder.component';
 
 @NgModule({
-  declarations: [UpdateProfileComponent, UpdateHouseholdBackgroundComponent],
+  declarations: [UpdateProfileComponent, UpdateHouseholdBackgroundComponent, UpdateSecondaryAccountHolderComponent],
   imports: [CommonModule, UserRoutingModule, ReactiveFormsModule],
 })
 export class UserModule {}

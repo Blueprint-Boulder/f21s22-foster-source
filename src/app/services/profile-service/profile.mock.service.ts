@@ -11,7 +11,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
 
 export class ProfileMockService implements ProfileService {
   createProfile(params: CreateProfileReq): Observable<FullProfileRes> {
@@ -34,6 +34,10 @@ export class ProfileMockService implements ProfileService {
   }
 
   updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
 
