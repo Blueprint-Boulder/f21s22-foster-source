@@ -7,10 +7,13 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
+  UpdateRespiteBackgroundReq,
+  UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
 import { FiltersReq } from '../../models/filters.model';
 
@@ -34,4 +37,6 @@ export abstract class ProfileService {
   public abstract updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes>;
   public abstract addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes>;
   public abstract addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes>;
+  public abstract updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes>;
+  public abstract updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes>;
 }

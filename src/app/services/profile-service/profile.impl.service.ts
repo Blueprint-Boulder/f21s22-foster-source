@@ -4,10 +4,13 @@ import {
   GetProfilesRes,
   HouseholdBackground,
   ProfileImages,
+  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
+  UpdateRespiteBackgroundReq,
+  UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -82,6 +85,18 @@ export class ProfileImplService implements ProfileService {
 
   addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes> {
     return this.http.post<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-provider-info`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-background`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-provider-info`, req, {
       withCredentials: true,
     });
   }

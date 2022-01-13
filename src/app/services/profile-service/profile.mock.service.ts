@@ -5,10 +5,13 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
+  UpdateRespiteBackgroundReq,
+  UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
 import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
@@ -48,6 +51,14 @@ export class ProfileMockService implements ProfileService {
   }
 
   addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
 

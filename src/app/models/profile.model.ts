@@ -72,12 +72,26 @@ export interface RespiteProviderInfoReq {
   availabilities: [SimpleAvailability];
 }
 
+export interface UpdateRespiteProviderInfo {
+  cityCanProvideRespiteIn?: string;
+  respiteTravelDistance?: number;
+  careForMinAge?: number;
+  careForMaxAge?: number;
+  maxNumCareFor?: number;
+}
+
 export interface RespiteBackgroundReq {
   fosterYearsExperience: number;
   totalChildrenCaredFor: number;
   canProvideRespite: boolean;
   lookingForRespite: boolean;
   respiteProviderInfo?: RespiteProviderInfoReq;
+}
+
+export interface UpdateRespiteBackgroundReq {
+  fosterYearsExperience: number;
+  totalChildrenCaredFor: number;
+  lookingForRespite: boolean;
 }
 
 export interface HouseholdBackground {
