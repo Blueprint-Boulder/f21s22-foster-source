@@ -1,13 +1,13 @@
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
-import { AvailabilityType } from '../../models/availability.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RespiteProviderInfoReq } from '../../models/profile.model';
+import { AvailabilityType } from '../../models/availability.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 import { ToastPresets } from '../../models/toast.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-add-respite-provider-info',

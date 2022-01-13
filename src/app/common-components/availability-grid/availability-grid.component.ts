@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { DayModel } from '../day-availability-input/day-availability-input.component';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { SimpleAvailability } from '../../models/availability.model';
 import { formatDate } from '@angular/common';
 
 @Component({

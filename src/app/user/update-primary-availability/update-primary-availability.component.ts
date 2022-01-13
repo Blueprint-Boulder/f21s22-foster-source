@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { Router } from '@angular/router';
-import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-primary-availability',

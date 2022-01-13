@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProfileService } from '../../services/profile-service/profile.service';
-import { ToastService } from '../../services/toast-service/toast.service';
-import { Router } from '@angular/router';
-import { ToastPresets } from '../../models/toast.model';
 import { SecAccountHolderRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { ProfileService } from '../../services/profile-service/profile.service';
 import { PhoneNumber, PhoneNumberType } from '../../models/phonenumber.model';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { ToastPresets } from '../../models/toast.model';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-secondary-account-holder',
