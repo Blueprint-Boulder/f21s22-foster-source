@@ -1,32 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavBarComponent } from './nav-bar.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { AccountService } from "../services/account-service/account.service";
-import { AccountMockService } from "../services/account-service/account.mock.service";
-import { AuthService } from "../services/auth-service/auth.service";
-import { Router } from "@angular/router";
-import { accounts } from "../mock/database-entities";
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AccountService } from '../services/account-service/account.service';
+import { AccountMockService } from '../services/account-service/account.mock.service';
+import { AuthService } from '../services/auth-service/auth.service';
+import { Router } from '@angular/router';
+import { accounts } from '../mock/database-entities';
+import { ProfileService } from '../services/profile-service/profile.service';
+import { ProfileMockService } from '../services/profile-service/profile.mock.service';
 
 describe('NavBarComponent', async () => {
   let component: NavBarComponent;
   let fixture: ComponentFixture<NavBarComponent>;
 
   let accountService: AccountService = new AccountMockService();
+  let profileService: ProfileService = new ProfileMockService();
   let authService: AuthService;
   let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavBarComponent ],
+      declarations: [NavBarComponent],
       imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [{provide: AccountService, useValue: accountService}]
-    })
-    .compileComponents();
+      providers: [
+        { provide: AccountService, useValue: accountService },
+        { provide: ProfileService, useValue: profileService },
+      ],
+    }).compileComponents();
     accountService = TestBed.inject(AccountService);
     authService = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
+    profileService = TestBed.inject(ProfileService);
   });
 
   beforeEach(() => {
@@ -45,7 +51,7 @@ describe('NavBarComponent', async () => {
       const login = fixture.debugElement.nativeElement.querySelector('.login-link');
       expect(home).toBeTruthy();
       expect(login).toBeTruthy();
-    })
+    });
   });
 
   describe('user is logged in', async () => {
@@ -62,7 +68,7 @@ describe('NavBarComponent', async () => {
         const respite = fixture.debugElement.nativeElement.querySelector('.respite-link');
         expect(respite).toBeFalsy();
       });
-    })
+    });
     describe('as user', async () => {
       it('should not be able to see administration page', async () => {
         component.isMod = false;
@@ -74,7 +80,7 @@ describe('NavBarComponent', async () => {
           const profile = fixture.debugElement.nativeElement.querySelector('.profile-link');
           expect(profile).toBeTruthy();
         });
-      })
+      });
     });
     describe('as at least mod', async () => {
       it('should be able to see administration page and not profile page', async () => {
@@ -86,12 +92,12 @@ describe('NavBarComponent', async () => {
           const profile = fixture.debugElement.nativeElement.querySelector('.profile-link');
           expect(profile).toBeFalsy();
         });
-      })
-    })
+      });
+    });
     it('should get current account on login event', async () => {
       spyOn(accountService, 'getCurrentAccount').and.callThrough();
       component.loggedIn();
       expect(accountService.getCurrentAccount).toHaveBeenCalled();
-    })
-  })
+    });
+  });
 });

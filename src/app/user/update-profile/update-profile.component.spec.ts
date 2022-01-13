@@ -119,7 +119,6 @@ describe('UpdateProfileComponent', () => {
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       expect(submitButton.getAttribute('disabled')).toEqual(null);
-    })
+    });
   });
-
 });

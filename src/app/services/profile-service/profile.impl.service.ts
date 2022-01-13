@@ -1,5 +1,12 @@
 import { ProfileService } from './profile.service';
-import { CreateProfileReq, GetProfilesRes, ProfileImages, UpdateProfileReq } from '../../models/profile.model';
+import {
+  CreateProfileReq,
+  GetProfilesRes,
+  HouseholdBackground,
+  ProfileImages,
+  UpdateHouseholdBackground,
+  UpdateProfileReq,
+} from '../../models/profile.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -49,6 +56,12 @@ export class ProfileImplService implements ProfileService {
 
   updateProfile(params: UpdateProfileReq): Observable<FullProfileRes> {
     return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, params, {
+      withCredentials: true,
+    });
+  }
+
+  updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/household-background`, req, {
       withCredentials: true,
     });
   }

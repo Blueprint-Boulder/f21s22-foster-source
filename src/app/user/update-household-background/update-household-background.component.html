@@ -1,0 +1,303 @@
+<div *ngIf="currentHouseholdBackground" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Household Background</h2>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-1 col-lg-2"></div>
+    <div class="col-sm-12 col-md-10 col-lg-8">
+      <p><b>Current Information On File</b></p>
+      <p>
+        <b *ngIf="currentHouseholdBackground.parentalUnitSize">Parental Unit Size: </b>
+        {{ currentHouseholdBackground.parentalUnitSize }} <br *ngIf="currentHouseholdBackground.parentalUnitSize" />
+        <b *ngIf="currentHouseholdBackground.householdSize">Household Size: </b>
+        {{ currentHouseholdBackground.householdSize }} <br *ngIf="currentHouseholdBackground.householdSize" />
+        <b *ngIf="currentHouseholdBackground.childrenInHousehold">Children In Household: </b>
+        {{ currentHouseholdBackground.childrenInHousehold }}
+        <br *ngIf="currentHouseholdBackground.childrenInHousehold" />
+        <b *ngIf="currentHouseholdBackground.childrenInfo">Children Info: </b>
+        {{ currentHouseholdBackground.childrenInfo }} <br *ngIf="currentHouseholdBackground.childrenInfo" />
+        <b *ngIf="currentHouseholdBackground.vehicleAccess">Vehicle Access: </b>
+        {{ currentHouseholdBackground.vehicleAccess }} <br *ngIf="currentHouseholdBackground.vehicleAccess" />
+        <b *ngIf="currentHouseholdBackground.lgbtCareExperience">LGBT Care Experience: </b>
+        {{ currentHouseholdBackground.lgbtCareExperience }} <br *ngIf="currentHouseholdBackground.lgbtCareExperience" />
+        <b *ngIf="currentHouseholdBackground.caredForPhysDisabled">Cared For Physically Disabled: </b>
+        {{ currentHouseholdBackground.caredForPhysDisabled }}
+        <br *ngIf="currentHouseholdBackground.caredForPhysDisabled" />
+        <b *ngIf="currentHouseholdBackground.caredForIntelDisabled">Cared For Intellectually Disabled: </b>
+        {{ currentHouseholdBackground.caredForIntelDisabled }}
+        <br *ngIf="currentHouseholdBackground.caredForIntelDisabled" />
+        <b *ngIf="currentHouseholdBackground.caredForMedicallyFragile">Cared For Medically Fragile: </b>
+        {{ currentHouseholdBackground.caredForMedicallyFragile }}
+        <br *ngIf="currentHouseholdBackground.caredForMedicallyFragile" />
+        <b *ngIf="currentHouseholdBackground.ownsFirearm">Owns Firearm: </b>
+        {{ currentHouseholdBackground.ownsFirearm }} <br *ngIf="currentHouseholdBackground.ownsFirearm" />
+        <b *ngIf="currentHouseholdBackground.petInfo">Pet Info: </b> {{ currentHouseholdBackground.petInfo }}
+        <br *ngIf="currentHouseholdBackground.petInfo" />
+        <b *ngIf="currentHouseholdBackground.additionalDetails">Additional Details: </b>
+        {{ currentHouseholdBackground.additionalDetails }} <br *ngIf="currentHouseholdBackground.additionalDetails" />
+      </p>
+      <small>Any fields that are not filled out will not be updated.</small>
+    </div>
+  </div>
+  <form [formGroup]="updateHouseholdBackgroundForm">
+    <div class="row how-many-row mt-5">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="parentalUnitSize"><b>How many individuals are in your parental unit?</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="parentalUnitSize"
+            type="number"
+            placeholder="Enter number individuals"
+            formControlName="parentalUnitSize"
+          />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="householdSize"><b>How many total individuals are in your household?</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="householdSize"
+            type="number"
+            placeholder="Enter number individuals"
+            formControlName="householdSize"
+          />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="childrenInHousehold"><b>How many children are in your household?</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="childrenInHousehold"
+            type="number"
+            placeholder="Enter number of children"
+            formControlName="childrenInHousehold"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row children-info-row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="childrenInfo"
+            ><b>Children Information</b>
+            <br />
+            <small
+              >For each child in your household, please provide their age, gender, and if they are
+              biological/adopted/foster.</small
+            >
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="childrenInfo"
+            rows="4"
+            placeholder="Ex: 12, female, biological"
+            formControlName="childrenInfo"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row pets-row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="petInfo"
+            ><b>Pet Information</b>
+            <br />
+            <small>Please list information on any pets you have in the household.</small>
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="petInfo"
+            rows="3"
+            placeholder="Ex. 2 dogs and a cat"
+            formControlName="petInfo"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row household-checkboxes-row">
+      <div class="col-sm-12">
+        <h6>Do you have reliable access to a vehicle?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccess"
+            formControlName="vehicleAccess"
+            value="true"
+            id="vehicleAccessYes"
+          />
+          <label class="form-check-label" for="vehicleAccessYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="vehicleAccess"
+            formControlName="vehicleAccess"
+            value="false"
+            id="vehicleAccessNo"
+          />
+          <label class="form-check-label" for="vehicleAccessNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for LGBTQIA+ youth?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="lgbtCareExperience"
+            formControlName="lgbtCareExperience"
+            value="true"
+            id="lgbtCareExperienceYes"
+          />
+          <label class="form-check-label" for="lgbtCareExperienceYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="lgbtCareExperience"
+            formControlName="lgbtCareExperience"
+            value="false"
+            id="lgbtCareExperienceNo"
+          />
+          <label class="form-check-label" for="lgbtCareExperienceNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for physically disabled youth?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysDisabled"
+            value="true"
+            id="caredForPhysDisabledYes"
+            formControlName="caredForPhysDisabled"
+          />
+          <label class="form-check-label" for="caredForPhysDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForPhysDisabled"
+            value="false"
+            id="caredForPhysDisabledNo"
+            formControlName="caredForPhysDisabled"
+          />
+          <label class="form-check-label" for="caredForPhysDisabledNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you have have experience caring for intellectually disabled youth?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntelDisabled"
+            value="true"
+            id="caredForIntelDisabledYes"
+            formControlName="caredForIntelDisabled"
+          />
+          <label class="form-check-label" for="caredForIntelDisabledYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForIntelDisabled"
+            value="false"
+            id="caredForIntelDisabledNo"
+            formControlName="caredForIntelDisabled"
+          />
+          <label class="form-check-label" for="caredForIntelDisabledNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Are you able to care for medically fragile children?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForMedicallyFragile"
+            value="true"
+            id="caredForMedicallyFragileYes"
+            formControlName="caredForMedicallyFragile"
+          />
+          <label class="form-check-label" for="caredForMedicallyFragileYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="caredForMedicallyFragile"
+            value="false"
+            id="caredForMedicallyFragileNo"
+            formControlName="caredForMedicallyFragile"
+          />
+          <label class="form-check-label" for="caredForMedicallyFragileNo"> No </label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <h6>Do you (or does anyone in your household) own a firearm?</h6>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            formControlName="ownsFirearm"
+            value="true"
+            id="ownsFirearmYes"
+          />
+          <label class="form-check-label" for="ownsFirearmYes"> Yes </label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="ownsFirearm"
+            formControlName="ownsFirearm"
+            value="false"
+            id="ownsFirearmNo"
+          />
+          <label class="form-check-label" for="ownsFirearmNo"> No </label>
+        </div>
+      </div>
+    </div>
+    <div class="row additional-info-row my-4">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="childrenInfo"
+            ><b>Additional Information</b>
+            <br />
+            <small
+              >Please list any additional details you'd like to provide about your household or the respite care you are
+              able to provide (i.e. behaviors, allergies, etc.)</small
+            >
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="additionalDetails"
+            rows="4"
+            formControlName="additionalDetails"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-5">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Household Background
+      </button>
+    </div>
+  </div>
+</div>

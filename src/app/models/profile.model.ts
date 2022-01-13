@@ -97,6 +97,21 @@ export interface HouseholdBackground {
   additionalDetails?: string;
 }
 
+export interface UpdateHouseholdBackground {
+  parentalUnitSize?: number;
+  householdSize?: number;
+  childrenInHousehold?: number;
+  childrenInfo?: string;
+  vehicleAccess?: boolean;
+  lgbtCareExperience?: boolean;
+  caredForPhysDisabled?: boolean;
+  caredForIntelDisabled?: boolean;
+  caredForMedicallyFragile?: boolean;
+  ownsFirearm?: boolean;
+  petInfo?: string;
+  additionalDetails?: string;
+}
+
 export interface FinishProfileReq {
   preferredName: string;
   gender: string;
