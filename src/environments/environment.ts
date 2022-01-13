@@ -7,7 +7,7 @@ export const environment = {
   backendHost: 'http://localhost:3000',
   useRealAnnouncementService: true,
   useRealAccountService: true,
-  useRealProfileService: true,
+  useRealProfileService: false,
   useRealAddressService: true,
   useRealAvailabilityService: false,
   useRealBlacklistService: true,

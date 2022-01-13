@@ -48,13 +48,19 @@ export class ProfileImplService implements ProfileService {
   }
 
   updateProfile(params: UpdateProfileReq): Observable<FullProfileRes> {
-    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params), {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, params, {
       withCredentials: true,
     });
   }
 
   getProfileImages(): Observable<ProfileImages> {
     return this.http.get<ProfileImages>(`${environment.backendHost}/api/db/profiles/profile-images`, {
+      withCredentials: true,
+    });
+  }
+
+  getCurrentProfile(): Observable<FullProfileRes> {
+    return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/current`, {
       withCredentials: true,
     });
   }

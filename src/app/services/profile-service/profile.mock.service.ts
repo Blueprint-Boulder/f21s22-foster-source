@@ -32,4 +32,8 @@ export class ProfileMockService implements ProfileService {
   getProfileImages(): Observable<ProfileImages> {
     return of({ profileLargeAwsKey: 'blank-profile-image', profileSmallAwsKey: 'blank-profile-image' });
   }
+
+  getCurrentProfile(): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
 }

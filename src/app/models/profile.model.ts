@@ -43,11 +43,11 @@ export interface CreateProfileReq {
 }
 
 export interface UpdateProfileReq {
+  preferredName?: string;
   biography?: string;
-  profileLargeAWSKey?: string;
-  profileSmallAWSKey?: string;
-  availability?: Availability;
-  photos?: string[];
+  gender?: string;
+  pronouns?: string;
+  maritalStatus?: string;
 }
 
 export interface SecondaryAccountHolderReq {

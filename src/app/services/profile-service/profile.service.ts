@@ -19,4 +19,5 @@ export abstract class ProfileService {
   public abstract updateProfile(params: UpdateProfileReq): Observable<FullProfileRes>;
   public abstract currentProfileCompleted(): Observable<ProfileCompletionRes>;
   public abstract getProfileImages(): Observable<ProfileImages>;
+  public abstract getCurrentProfile(): Observable<FullProfileRes>;
 }

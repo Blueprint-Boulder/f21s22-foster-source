@@ -67,6 +67,7 @@
 - [ ] Get list of all staff accounts for admins
 - [ ] Periodically go through and get rid of unverified accounts
 - [ ] Reject address if not coords
+- [ ] Add temporary availabilities
 
 ## Testing
 
