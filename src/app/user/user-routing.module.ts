@@ -1,6 +1,7 @@
 import { UpdateSecondaryAccountHolderComponent } from './update-secondary-account-holder/update-secondary-account-holder.component';
 import { CreateSecondaryAccountHolderComponent } from './create-secondary-account-holder/create-secondary-account-holder.component';
 import { UpdateHouseholdBackgroundComponent } from './update-household-background/update-household-background.component';
+import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add-respite-provider-info.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'create/secondary-account-holder',
     component: CreateSecondaryAccountHolderComponent,
+  },
+  {
+    path: 'create/respite-provider-info',
+    component: AddRespiteProviderInfoComponent,
   },
 ];
 

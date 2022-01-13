@@ -7,6 +7,7 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
@@ -32,4 +33,5 @@ export abstract class ProfileService {
   public abstract updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes>;
   public abstract updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes>;
   public abstract addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes>;
+  public abstract addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes>;
 }

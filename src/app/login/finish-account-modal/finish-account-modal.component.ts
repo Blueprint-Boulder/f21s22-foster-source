@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Utils } from '../utils';
-import { DayModel } from '../day-availability-input/day-availability-input.component';
+import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { AccountService } from '../../services/account-service/account.service';
 import { Router } from '@angular/router';
@@ -174,8 +174,6 @@ export class FinishAccountModalComponent implements OnInit {
         householdBackground: this.getHouseholdBackground(),
       };
 
-      console.log(JSON.stringify(req));
-
       this.accountService.completeProfile(req).subscribe(
         (res) => {
           this.toastService.show({
@@ -271,6 +269,7 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   public imageUploaded(event: any): void {
+    this.needToUploadImgError = false;
     this.profileImgKey = event;
   }
 

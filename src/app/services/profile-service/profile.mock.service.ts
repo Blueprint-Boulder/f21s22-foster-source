@@ -5,6 +5,7 @@ import {
   HouseholdBackground,
   Profile,
   ProfileImages,
+  RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
   UpdateProfileReq,
@@ -43,6 +44,10 @@ export class ProfileMockService implements ProfileService {
   }
 
   addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
 
