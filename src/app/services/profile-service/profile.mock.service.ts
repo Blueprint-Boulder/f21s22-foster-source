@@ -17,6 +17,7 @@ import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
 import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { SimpleAvailability } from '../../models/availability.model';
 
 export class ProfileMockService implements ProfileService {
   createProfile(params: CreateProfileReq): Observable<FullProfileRes> {
@@ -59,6 +60,10 @@ export class ProfileMockService implements ProfileService {
   }
 
   updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
 

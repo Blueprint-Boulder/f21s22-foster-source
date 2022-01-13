@@ -7,7 +7,7 @@ import { getClassListFromPreset, Toast, ToastPresets } from '../../models/toast.
 export class ToastService {
   public toasts: Toast[] = [];
 
-  show(toast: Toast) {
+  show(toast: Toast): void {
     if (toast.preset) {
       this.toasts.push({
         ...toast,
@@ -18,7 +18,7 @@ export class ToastService {
     }
   }
 
-  httpError(err: any) {
+  httpError(err: any): void {
     // Standard error response from fs-service
     if (err.error && err.error.code && err.error.message) {
       this.show({
@@ -33,7 +33,21 @@ export class ToastService {
     }
   }
 
-  remove(toast: Toast) {
+  remove(toast: Toast): void {
     this.toasts = this.toasts.filter((t) => t !== toast);
+  }
+
+  success(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.SUCCESS,
+    });
+  }
+
+  error(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.ERROR,
+    });
   }
 }

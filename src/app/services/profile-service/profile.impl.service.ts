@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { FiltersReq } from '../../models/filters.model';
-import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
+import { AvailabilityFilters, DayAvailability, SimpleAvailability } from '../../models/availability.model';
 import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
 
 export class ProfileImplService implements ProfileService {
@@ -97,6 +97,12 @@ export class ProfileImplService implements ProfileService {
 
   updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
     return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-provider-info`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/availability?type=primary`, req, {
       withCredentials: true,
     });
   }

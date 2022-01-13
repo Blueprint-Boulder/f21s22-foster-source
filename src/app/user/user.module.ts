@@ -10,6 +10,8 @@ import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { UpdateRespiteBackgroundComponent } from './update-respite-background/update-respite-background.component';
 import { UpdateRespiteProviderInfoComponent } from './update-respite-provider-info/update-respite-provider-info.component';
+import { UpdatePrimaryAvailabilityComponent } from './update-primary-availability/update-primary-availability.component';
+import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { UpdateRespiteProviderInfoComponent } from './update-respite-provider-in
     AddRespiteProviderInfoComponent,
     UpdateRespiteBackgroundComponent,
     UpdateRespiteProviderInfoComponent,
+    UpdatePrimaryAvailabilityComponent,
+    ModifyTempAvailabilityComponent,
   ],
   imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule],
 })

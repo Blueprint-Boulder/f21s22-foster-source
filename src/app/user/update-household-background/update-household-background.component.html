@@ -25,31 +25,31 @@
           ><b>Children Info: </b> {{ currentHouseholdBackground.childrenInfo }}</span
         >
         <br *ngIf="currentHouseholdBackground.childrenInfo" />
-        <span *ngIf="currentHouseholdBackground.vehicleAccess"
+        <span *ngIf="currentHouseholdBackground.vehicleAccess !== undefined"
           ><b>Vehicle Access: </b> {{ currentHouseholdBackground.vehicleAccess }}</span
         >
-        <br *ngIf="currentHouseholdBackground.vehicleAccess" />
-        <span *ngIf="currentHouseholdBackground.lgbtCareExperience"
+        <br *ngIf="currentHouseholdBackground.vehicleAccess !== undefined" />
+        <span *ngIf="currentHouseholdBackground.lgbtCareExperience !== undefined"
           ><b>LGBT Care Experience: </b> {{ currentHouseholdBackground.lgbtCareExperience }}</span
         >
-        <br *ngIf="currentHouseholdBackground.lgbtCareExperience" />
-        <span *ngIf="currentHouseholdBackground.caredForPhysDisabled"
+        <br *ngIf="currentHouseholdBackground.lgbtCareExperience !== undefined" />
+        <span *ngIf="currentHouseholdBackground.caredForPhysDisabled !== undefined"
           ><b>Cared For Physically Disabled: </b> {{ currentHouseholdBackground.caredForPhysDisabled }}</span
         >
-        <br *ngIf="currentHouseholdBackground.caredForPhysDisabled" />
-        <span *ngIf="currentHouseholdBackground.caredForIntelDisabled"
+        <br *ngIf="currentHouseholdBackground.caredForPhysDisabled !== undefined" />
+        <span *ngIf="currentHouseholdBackground.caredForIntelDisabled !== undefined"
           ><b>Cared For Intellectually Disabled: </b> {{ currentHouseholdBackground.caredForIntelDisabled }}</span
         >
-        <br *ngIf="currentHouseholdBackground.caredForIntelDisabled" />
-        <span *ngIf="currentHouseholdBackground.caredForMedicallyFragile"
+        <br *ngIf="currentHouseholdBackground.caredForIntelDisabled !== undefined" />
+        <span *ngIf="currentHouseholdBackground.caredForMedicallyFragile !== undefined"
           ><b>Cared For Medically Fragile: </b> {{ currentHouseholdBackground.caredForMedicallyFragile }}</span
         >
-        <br *ngIf="currentHouseholdBackground.caredForMedicallyFragile" />
-        <span *ngIf="currentHouseholdBackground.ownsFirearm"
+        <br *ngIf="currentHouseholdBackground.caredForMedicallyFragile !== undefined" />
+        <span *ngIf="currentHouseholdBackground.ownsFirearm !== undefined"
           ><b>Owns Firearm: </b> {{ currentHouseholdBackground.ownsFirearm }}</span
         >
-        <br *ngIf="currentHouseholdBackground.ownsFirearm" />
-        <span *ngIf="currentHouseholdBackground.petInfo"
+        <br *ngIf="currentHouseholdBackground.ownsFirearm !== undefined" />
+        <span *ngIf="currentHouseholdBackground.petInfo !== undefined"
           ><b>Pet Info: </b> {{ currentHouseholdBackground.petInfo }}
         </span>
         <br *ngIf="currentHouseholdBackground.petInfo" />

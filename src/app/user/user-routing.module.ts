@@ -7,6 +7,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { UpdateRespiteProviderInfoComponent } from './update-respite-provider-info/update-respite-provider-info.component';
+import { UpdatePrimaryAvailabilityComponent } from './update-primary-availability/update-primary-availability.component';
+import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,14 @@ const routes: Routes = [
   {
     path: 'update/respite-provider-info',
     component: UpdateRespiteProviderInfoComponent,
+  },
+  {
+    path: 'update/primary-availability',
+    component: UpdatePrimaryAvailabilityComponent,
+  },
+  {
+    path: 'update/temporary-availability',
+    component: ModifyTempAvailabilityComponent,
   },
   {
     path: 'create/secondary-account-holder',

@@ -16,6 +16,7 @@ import {
   UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
 import { FiltersReq } from '../../models/filters.model';
+import { SimpleAvailability } from '../../models/availability.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,4 +40,5 @@ export abstract class ProfileService {
   public abstract addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes>;
   public abstract updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes>;
   public abstract updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes>;
+  public abstract updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes>;
 }
