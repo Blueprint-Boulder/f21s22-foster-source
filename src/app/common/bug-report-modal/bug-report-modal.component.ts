@@ -37,6 +37,7 @@ export class BugReportModalComponent implements OnInit {
     if (this.bugForm.invalid) {
       this.bugForm.markAllAsTouched();
     } else {
+      this.submittingForm = true;
       const report: BugReportReq = {
         description: this.bugForm.get('description')!.value,
         stepsToReproduce:
@@ -53,6 +54,7 @@ export class BugReportModalComponent implements OnInit {
         (_) => {
           this.toastService.success('Successfully submitted bug report. We will look into it shortly');
           this.closeModal();
+          this.submittingForm = false;
         },
         (err) => {
           this.toastService.httpError(err);

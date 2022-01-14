@@ -5,6 +5,7 @@
   left: -220px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  z-index: 998;
 }
 
 .bug-tab:hover {

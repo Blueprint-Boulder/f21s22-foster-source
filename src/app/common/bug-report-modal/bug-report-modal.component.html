@@ -1,5 +1,5 @@
-<div class="bug-modal-background" (click)="closeModal()"></div>
-<div class="card bug-modal center-screen">
+<div [hidden]="!open" class="bug-modal-background" (click)="closeModal()"></div>
+<div [hidden]="!open" class="card bug-modal center-screen">
   <div class="card-header">
     <i class="bi-bug-fill"></i>
   </div>
@@ -69,15 +69,10 @@
         </div>
       </form>
     </div>
-    <a
-      href="#"
-      class="btn btn-primary text-white float-right my-3"
-      (click)="onSubmit()"
-      [class]="{ disabled: submittingForm }"
+    <a class="btn btn-primary text-white float-right my-3" (click)="onSubmit()" [class]="{ disabled: submittingForm }"
       >Submit Report</a
     >
     <a
-      href="#"
       class="btn btn-secondary text-white float-right m-3"
       (click)="closeModal()"
       [class]="{ disabled: submittingForm }"

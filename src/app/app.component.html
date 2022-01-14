@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
-<app-toasts></app-toasts>
-<router-outlet></router-outlet>
 <div class="bug-tab pl-3 pb-2 pt-1 bg-secondary text-white text-center mb-2 shadow-lg" (click)="launchBugModal()">
   <span class="text-light"><small>Something wrong? Tell us!</small> <i class="bi-bug-fill float-right mr-2"></i></span>
 </div>
-<app-bug-report-modal [hidden]="!bugModalOpen" (closeModalEvent)="closeBugModal()"></app-bug-report-modal>
+<app-bug-report-modal [open]="bugModalOpen" (closeModalEvent)="closeBugModal()"></app-bug-report-modal>
+<app-toasts></app-toasts>
+<router-outlet></router-outlet>

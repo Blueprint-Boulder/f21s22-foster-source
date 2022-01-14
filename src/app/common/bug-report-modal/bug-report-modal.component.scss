@@ -6,6 +6,7 @@
   height: 100%;
   background-color: black;
   opacity: 0.75;
+  z-index: 999;
 }
 
 .bug-modal {
@@ -14,6 +15,7 @@
   transform: translate(-50%, -50%);
   position: absolute;
   width: 100%;
+  z-index: 1000;
 }
 
 @media (min-width: 760px) {
