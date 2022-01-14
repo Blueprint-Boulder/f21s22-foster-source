@@ -60,7 +60,7 @@ export class BlacklistTableComponent implements OnInit {
   }
 
   public getFormattedDateForUser(index: number): string {
-    return formatDate(this.blacklist[index].date, 'dd/MM/yyyy', 'en-US');
+    return formatDate(this.blacklist[index].date, 'MM/dd/yyyy', 'en-US');
   }
 
   private getAndRemoveBlacklistedByIndex(index: number): BlacklistedUser {

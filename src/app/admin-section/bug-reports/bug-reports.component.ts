@@ -40,7 +40,7 @@ export class BugReportsComponent implements OnInit {
   }
 
   public getFormattedDateForBug(index: number): string {
-    return formatDate(this.bugs[index].createdAt, 'dd/MM/yyyy', 'en-US');
+    return formatDate(this.bugs[index].createdAt, 'MM/dd/yyyy', 'en-US');
   }
 
   private getAndRemoveBugByIndex(index: number): BugReport {
