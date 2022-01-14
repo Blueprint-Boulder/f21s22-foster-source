@@ -14,8 +14,7 @@ export class PhoneNumberImplService implements PhoneNumberService {
   }
 
   updatePhoneNumber(req: PhoneNumbersUpdateReq): Observable<PhoneNumbersRes> {
-    return this.http.put<PhoneNumbersRes>(`${environment.backendHost}/api/db/accounts/phone-numbers`, {
-      body: req,
+    return this.http.put<PhoneNumbersRes>(`${environment.backendHost}/api/db/accounts/phone-numbers`, req, {
       withCredentials: true,
     });
   }
