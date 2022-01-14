@@ -18,19 +18,6 @@
                 >
               </p>
 
-              <div class="contact-quick-facts-background">
-                <p class="contact-quick-facts"><b>Quick Facts</b></p>
-                <p class="contact-items-test">
-                  <b>Date of Birth: </b>{{ selectedProfile.dob.getMonth() }} {{ selectedProfile.dob.getDate() }},
-                  {{ selectedProfile.dob.getFullYear() }}
-                </p>
-                <p class="contact-items-test">
-                  <b>State and Zip: </b>{{ selectedProfile.account.address.state }},
-                  {{ selectedProfile.account.address.zipcode }}
-                </p>
-                <p class="contact-items-test"><b>Marital Status: </b>{{ selectedProfile.maritalStatus }}</p>
-              </div>
-
               <div class="spacer"></div>
 
               <div class="first-contact-background">
@@ -39,6 +26,16 @@
                 </p>
                 <p class="contact-items-test"><b>Preferred Name: </b>{{ selectedProfile.preferredName }}</p>
                 <p class="contact-items-test"><b>Pronouns:</b> {{ selectedProfile.pronouns }}</p>
+                <p class="contact-items-test"><b>Age: </b> {{ returnAge(selectedProfile.dob) }}</p>
+                <p class="contact-items-test">
+                  <b>State and Zip: </b>{{ selectedProfile.account.address.state }},
+                  {{ selectedProfile.account.address.zipcode }}
+                </p>
+                <p class="contact-items-test">
+                  <b>Second Account Holder:</b>
+                  <span *ngIf="selectedProfile.secAccountHolder"> Yes</span>
+                  <span *ngIf="!selectedProfile.secAccountHolder"> No</span>
+                </p>
               </div>
 
               <div class="spacer"></div>
@@ -417,7 +414,7 @@
   </div>
 </div>
 
-<!-- Modal Template -->
+<!-- Modal -->
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Contact Information</h4>
@@ -431,21 +428,21 @@
         <div class="input-group">
           <div class="input-group-append contact-modal">
             <span
-              ><b class="first-contact">Email </b
+              ><b>Email </b
               ><a href="mailto:{{ selectedProfile.account.email }}"> {{ selectedProfile.account.email }}</a></span
             >
             <br />
             <div class="spacer"></div>
             <span
-              ><b class="first-contact">{{ selectedProfile.account.primaryPhoneNumber.type }}</b>
+              ><b>{{ selectedProfile.account.primaryPhoneNumber.type }}</b>
               <a href="tel:{{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}">
                 {{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}</a
               ></span
             >
             <br />
             <div class="spacer"></div>
-            <span *ngIf="selectedProfile.account.secondaryPhoneNumber?.phoneNumber" class="second-contact-background"
-              ><b class="second-contact">{{ selectedProfile.account.secondaryPhoneNumber?.type }}</b
+            <span *ngIf="selectedProfile.account.secondaryPhoneNumber?.phoneNumber"
+              ><b>{{ selectedProfile.account.secondaryPhoneNumber?.type }}</b
               ><a href="tel:{{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}">
                 {{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}</a
               ></span
@@ -459,3 +456,18 @@
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>
+
+<!-- Setup for Availability Schedule in Block format-->
+
+<!--<div class="row">-->
+<!--  <div class="col-sm-6"></div>-->
+<!--  <div class="col-sm-6"></div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--  <div class="col-sm-6"></div>-->
+<!--  <div class="col-sm-6"></div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--  <div class="col-sm-6"></div>-->
+<!--  <div class="col-sm-6"></div>-->
+<!--</div>-->
