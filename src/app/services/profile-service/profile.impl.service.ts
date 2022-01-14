@@ -101,13 +101,6 @@ export class ProfileImplService implements ProfileService {
     });
   }
 
-  //TODO: Move this to availability service
-  updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
-    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/availability?type=PRIMARY`, req, {
-      withCredentials: true,
-    });
-  }
-
   getProfileImages(): Observable<ProfileImages> {
     return this.http.get<ProfileImages>(`${environment.backendHost}/api/db/profiles/profile-images`, {
       withCredentials: true,

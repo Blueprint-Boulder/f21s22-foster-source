@@ -63,10 +63,6 @@ export class ProfileMockService implements ProfileService {
     return of(profiles[0]);
   }
 
-  updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
-    return of(profiles[0]);
-  }
-
   currentProfileCompleted(): Observable<ProfileCompletionRes> {
     return of({ completed: true });
   }

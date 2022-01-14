@@ -5,6 +5,7 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AvailabilityService } from '../../services/availability-service/availability.service';
 
 @Component({
   selector: 'app-update-primary-availability',
@@ -15,7 +16,12 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
   public dayModels: DayModel[];
   public submittingForm = false;
 
-  constructor(private profileService: ProfileService, private toastService: ToastService, private router: Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private availService: AvailabilityService,
+    private toastService: ToastService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.profileService.getCurrentProfile().subscribe((profile) => {
@@ -148,7 +154,7 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
 
     const req: SimpleAvailability = this.generateAvailability();
 
-    this.profileService.updatePrimaryAvailability(req).subscribe(
+    this.availService.updatePrimaryAvailability(req).subscribe(
       (profile) => {
         this.toastService.success('Successfully updated primary availability');
         this.router.navigate([`/user/${profile.id}`]);

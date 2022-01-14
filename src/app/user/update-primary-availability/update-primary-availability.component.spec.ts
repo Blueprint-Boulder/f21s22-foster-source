@@ -10,12 +10,15 @@ import { profiles } from '../../mock/database-entities';
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { of, throwError } from 'rxjs';
 import { AvailabilityType } from '../../models/availability.model';
+import { AvailabilityService } from '../../services/availability-service/availability.service';
+import { AvailabilityMockService } from '../../services/availability-service/availability.mock.service';
 
 describe('UpdatePrimaryAvailabilityComponent', () => {
   let component: UpdatePrimaryAvailabilityComponent;
   let fixture: ComponentFixture<UpdatePrimaryAvailabilityComponent>;
 
   let profileService: ProfileService = new ProfileMockService();
+  let availService: AvailabilityService = new AvailabilityMockService();
   let router: Router;
 
   let dayModels: DayModel[];
@@ -25,9 +28,13 @@ describe('UpdatePrimaryAvailabilityComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [UpdatePrimaryAvailabilityComponent],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [{ provide: ProfileService, useValue: profileService }],
+      providers: [
+        { provide: ProfileService, useValue: profileService },
+        { provide: AvailabilityService, useValue: availService },
+      ],
     }).compileComponents();
     profileService = TestBed.inject(ProfileService);
+    availService = TestBed.inject(AvailabilityService);
     router = TestBed.inject(Router);
   });
 
@@ -201,7 +208,7 @@ describe('UpdatePrimaryAvailabilityComponent', () => {
         },
       })
     );
-    spyOn(profileService, 'updatePrimaryAvailability').and.callThrough();
+    spyOn(availService, 'updatePrimaryAvailability').and.callThrough();
     spyOn(window, 'confirm').and.returnValue(true);
     spyOn(router, 'navigate');
     component.ngOnInit();
@@ -211,7 +218,7 @@ describe('UpdatePrimaryAvailabilityComponent', () => {
     expect(window.confirm).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalled();
     expect(submitButton.getAttribute('disabled')).toEqual('');
-    expect(profileService.updatePrimaryAvailability).toHaveBeenCalled();
+    expect(availService.updatePrimaryAvailability).toHaveBeenCalled();
   });
   it('should enable submit button and not navigate on error', async () => {
     spyOn(profileService, 'getCurrentProfile').and.returnValue(
@@ -235,7 +242,7 @@ describe('UpdatePrimaryAvailabilityComponent', () => {
         },
       })
     );
-    spyOn(profileService, 'updatePrimaryAvailability').and.returnValue(throwError(''));
+    spyOn(availService, 'updatePrimaryAvailability').and.returnValue(throwError(''));
     spyOn(window, 'confirm').and.returnValue(true);
     spyOn(router, 'navigate');
     component.ngOnInit();
