@@ -10,12 +10,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FinishAccountPageComponent } from './finish-account-page/finish-account-page.component';
 import { FinishAccountModalComponent } from './finish-account-modal/finish-account-modal.component';
-import { DayAvailabilityInputComponent } from './day-availability-input/day-availability-input.component';
 import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { VerifyEmailActionComponent } from './verify-email-action/verify-email-action.component';
 import { ModRegisterComponent } from './mod-register/mod-register.component';
 import { ProfileNotCompletedGuard } from '../guards/profile-not-completed/profile-not-completed.guard';
+import { CommonComponentsModule } from '../common-components/common-components.module';
 
 const routes: Routes = [
   {
@@ -56,12 +56,19 @@ export const loginRouting = RouterModule.forChild(routes);
     VerifyEmailComponent,
     FinishAccountPageComponent,
     FinishAccountModalComponent,
-    DayAvailabilityInputComponent,
     ProfileImageUploadComponent,
     VerifyEmailActionComponent,
     ModRegisterComponent,
   ],
-  imports: [CommonModule, loginRouting, FormsModule, ReactiveFormsModule, NgbModule, ImageCropperModule],
+  imports: [
+    CommonModule,
+    loginRouting,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    ImageCropperModule,
+    CommonComponentsModule,
+  ],
   exports: [],
 })
 export class LoginModule {}

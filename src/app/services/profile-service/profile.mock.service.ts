@@ -1,9 +1,23 @@
 import { ProfileService } from './profile.service';
-import { CreateProfileReq, GetProfilesRes, Profile, ProfileImages, UpdateProfileReq } from '../../models/profile.model';
+import {
+  CreateProfileReq,
+  GetProfilesRes,
+  HouseholdBackground,
+  Profile,
+  ProfileImages,
+  RespiteBackgroundReq,
+  RespiteProviderInfoReq,
+  SecondaryAccountHolderReq,
+  UpdateHouseholdBackground,
+  UpdateProfileReq,
+  UpdateRespiteBackgroundReq,
+  UpdateRespiteProviderInfo,
+} from '../../models/profile.model';
 import { Observable, of } from 'rxjs';
 import { profiles, searchResults } from '../../mock/database-entities';
 import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { Availability, SimpleAvailability } from '../../models/availability.model';
 
 export class ProfileMockService implements ProfileService {
   createProfile(params: CreateProfileReq): Observable<FullProfileRes> {
@@ -25,11 +39,39 @@ export class ProfileMockService implements ProfileService {
     return of(profiles[0]);
   }
 
+  updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
+  updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
+    return of(profiles[0]);
+  }
+
   currentProfileCompleted(): Observable<ProfileCompletionRes> {
     return of({ completed: true });
   }
 
   getProfileImages(): Observable<ProfileImages> {
     return of({ profileLargeAwsKey: 'blank-profile-image', profileSmallAwsKey: 'blank-profile-image' });
+  }
+
+  getCurrentProfile(): Observable<FullProfileRes> {
+    return of(profiles[0]);
   }
 }

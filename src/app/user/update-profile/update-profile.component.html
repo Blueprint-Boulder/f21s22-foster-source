@@ -1,0 +1,112 @@
+<div *ngIf="currentProfile" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Profile</h2>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col">
+      <p><b>Current Information On File</b></p>
+      <p>
+        <span *ngIf="currentProfile.preferredName"><b>Preferred Name:</b> {{ currentProfile.preferredName }}</span>
+        <br *ngIf="currentProfile.preferredName" />
+        <span *ngIf="currentProfile.biography"><b>Biography:</b> {{ currentProfile.biography }}</span>
+        <br *ngIf="currentProfile.biography" />
+        <span *ngIf="currentProfile.gender"><b>Gender:</b> {{ currentProfile.gender }}</span
+        ><br *ngIf="currentProfile.gender" />
+        <span *ngIf="currentProfile.pronouns"><b>Pronouns:</b> {{ currentProfile.pronouns }}</span>
+        <br *ngIf="currentProfile.pronouns" />
+        <span *ngIf="currentProfile.maritalStatus"><b>Marital Status:</b> {{ currentProfile.maritalStatus }}</span>
+        <br *ngIf="currentProfile.maritalStatus" />
+      </p>
+      <small>Any fields that are not filled out will not be updated.</small>
+    </div>
+  </div>
+  <form [formGroup]="updateProfileForm">
+    <div class="row preferred-name-row">
+      <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+          <label for="preferredName"
+            ><b>Preferred Name</b><br /><small>This is the name that will appear publicly to others.</small></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="preferredName"
+            placeholder="Enter preferred name"
+            formControlName="preferredName"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row gender-pronouns-marital-row">
+      <div class="col-sm-6 col-md-4 my-auto">
+        <div class="form-group my-auto">
+          <label for="gender"><b>Gender</b></label>
+          <select
+            class="m-3 form-select"
+            name="gender"
+            id="gender"
+            formControlName="gender"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="form-group">
+          <label class="mt-4" for="pronouns"><b>Pronouns</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="pronouns"
+            placeholder="Enter your pronouns (e.g. he/him)"
+            formControlName="pronouns"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4 my-auto">
+        <div class="form-group my-auto">
+          <label for="maritalStatus"><b>Marital Status</b></label>
+          <select
+            class="m-3 form-select"
+            name="maritalStatus"
+            id="maritalStatus"
+            formControlName="maritalStatus"
+            style="border-top: 0px; border-right: 0px; border-left: 0px"
+          >
+            <option value="Married">Married</option>
+            <option value="Single">Single</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row biography-row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="biography"
+            ><b>Biography</b>
+            <br />
+            <small>Tell the world about yourself!</small>
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="biography"
+            rows="4"
+            formControlName="biography"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row my-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Profile
+      </button>
+    </div>
+  </div>
+</div>
