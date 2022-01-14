@@ -1,0 +1,32 @@
+<div class="table-container">
+  <div *ngFor="let bug of bugs; index as i">
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
+      <div class="col-sm-8 m-auto">
+        <span><b>Description</b><br /></span>
+        <div class="ml-1 bug-desc pl-2 mb-1">
+          <span
+            ><i>{{ bug.description }}</i></span
+          ><br />
+        </div>
+        <span *ngIf="bug.url"><b>URL: </b>{{ bug.url }}<br /></span>
+        <span *ngIf="bug.stepsToReproduce"><b>Steps To Reproduce</b><br /></span>
+        <div *ngIf="bug.stepsToReproduce" class="ml-1 bug-desc pl-2 mb-1">
+          <span
+            ><i>{{ bug.stepsToReproduce }}</i></span
+          ><br />
+        </div>
+        <small>Submitted on {{ getFormattedDateForBug(i) }}</small>
+      </div>
+      <div class="col-xs-12 col-sm-4 m-auto">
+        <button (click)="removeBug(i)" class="btn btn-primary mr-5 text-white w-100 my-2 remove-button">
+          Remove Bug Report
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="bugs.length == 0" class="row">
+    <div class="col-xs-12 mx-auto bg-light rounded mt-5">
+      <div class="p-5">No Bugs Found</div>
+    </div>
+  </div>
+</div>

@@ -22,9 +22,17 @@ import { blacklistServiceProvider } from './services/blacklist-service/blacklist
 import { announcementServiceProvider } from './services/announcement-service/announcement.service.provider';
 import { imageServiceProvider } from './services/image-service/image.service.provider';
 import { availabilityServiceProvider } from './services/availability-service/availability.service.provider';
+import { BugReportModalComponent } from './common/bug-report-modal/bug-report-modal.component';
+import { bugServiceProvider } from './services/bug-service/bug.service.provider';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    ToastContainerComponent,
+    NavBarComponent,
+    BugReportModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,6 +60,7 @@ import { availabilityServiceProvider } from './services/availability-service/ava
     imageServiceProvider,
     announcementServiceProvider,
     availabilityServiceProvider,
+    bugServiceProvider,
   ],
   bootstrap: [AppComponent],
 })

@@ -9,6 +9,7 @@ import { Availability, AvailabilityType } from '../models/availability.model';
 import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
 import { SmallProfile } from '../models/small-profile.model';
+import { BugReport } from '../models/bug.model';
 
 const announcements: Announcement[] = [
   {
@@ -482,5 +483,31 @@ export const searchResults: SmallProfile[] = [
     },
     id: 1,
     profileLargeAwsKey: 'largeKey',
+  },
+];
+
+export const bugs: BugReport[] = [
+  {
+    id: 1,
+    description: 'This is the description of the bug',
+    environment: 'Mozilla Firefox VERSION etc.',
+    url: 'https://respite.fostersource.org/user/10',
+    stepsToReproduce: 'Navigate to the profile page',
+    createdAt: new Date(),
+  },
+  {
+    id: 2,
+    description: 'Another nasty bug',
+    environment: 'Mobile device iOS10.32.1',
+    url: 'https://respite.fostersource.org/respite-search',
+    createdAt: new Date(),
+  },
+  {
+    id: 3,
+    description:
+      'This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps. This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps.',
+    environment: 'Chrome OS 10.3.2.112.3',
+    stepsToReproduce: 'Try to use medically fragile filter on respite search',
+    createdAt: new Date(),
   },
 ];

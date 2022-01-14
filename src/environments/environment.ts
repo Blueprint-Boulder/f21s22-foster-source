@@ -15,6 +15,7 @@ export const environment = {
   useRealProfilePhotosService: false,
   useRealAuthService: true,
   useRealImageService: true,
+  useRealBugService: false,
   imageBucket: 'respite-source-images-dev',
   bucketRegion: 'us-west-1',
 };

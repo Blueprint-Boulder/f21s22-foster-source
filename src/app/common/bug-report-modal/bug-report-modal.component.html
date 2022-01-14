@@ -1,0 +1,87 @@
+<div class="bug-modal-background" (click)="closeModal()"></div>
+<div class="card bug-modal center-screen">
+  <div class="card-header">
+    <i class="bi-bug-fill"></i>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Report a Bug</h5>
+    <p class="card-subtitle mb-3">
+      RespiteSource is still in it's beta version, so we appreciate you helping us make it better.
+    </p>
+    <div class="container-fluid w-100">
+      <form [formGroup]="bugForm">
+        <div class="row desc-row my-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="description"
+                ><b>Description of Bug Encountered</b><span class="required-star">*</span>
+                <br />
+                <small>Please list details of the bug.</small>
+              </label>
+              <textarea
+                class="form-control bottom-border-input"
+                id="description"
+                rows="4"
+                formControlName="description"
+              ></textarea>
+              <div
+                *ngIf="
+                  bugForm.get('description')?.invalid &&
+                  (bugForm.get('description')?.dirty || bugForm.get('description')?.touched)
+                "
+              >
+                <small *ngIf="bugForm.get('description')?.errors?.required" class="input-error"
+                  >Please enter information about the bug.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="url"><b>What is the URL that you experienced the bug at?</b></label>
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="url"
+                placeholder="Enter the url"
+                formControlName="url"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row desc-row my-4">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="stepsToReproduce"
+                ><b>Steps to Reproduce</b>
+                <br />
+                <small>Please list the steps to take to reproduce the bug.</small>
+              </label>
+              <textarea
+                class="form-control bottom-border-input"
+                id="stepsToReproduce"
+                rows="2"
+                formControlName="description"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <a
+      href="#"
+      class="btn btn-primary text-white float-right my-3"
+      (click)="onSubmit()"
+      [class]="{ disabled: submittingForm }"
+      >Submit Report</a
+    >
+    <a
+      href="#"
+      class="btn btn-secondary text-white float-right m-3"
+      (click)="closeModal()"
+      [class]="{ disabled: submittingForm }"
+      >Cancel</a
+    >
+  </div>
+</div>
