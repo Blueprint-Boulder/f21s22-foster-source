@@ -6,13 +6,13 @@
       }}
       Availability
     </caption>
-    <caption *ngIf="availability.type === 'TEMPORARY' && availability.end" class="pl-3 py-2">
+    <caption *ngIf="availability.type === 'TEMPORARY' && availability.endDate" class="pl-3 py-2">
       {{
         availability.type | titlecase
       }}
       Availability - Active until
       {{
-        getFormattedDate(availability.end)
+        getFormattedDate(availability.endDate)
       }}
     </caption>
     <thead>

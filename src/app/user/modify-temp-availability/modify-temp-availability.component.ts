@@ -83,6 +83,7 @@ export class ModifyTempAvailabilityComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getCurrentProfile().subscribe((profile) => {
+      console.log(profile);
       if (profile.respiteBackground.respiteProviderInfo) {
         const avail = profile.respiteBackground.respiteProviderInfo.availabilities.find(
           (avail) => avail.type === 'TEMPORARY'
@@ -136,8 +137,15 @@ export class ModifyTempAvailabilityComponent implements OnInit {
       FormUtils.parseDateFromInput(this.addTempAvailForm.get('end')!.value)
     );
     this.availService.addTemporaryAvailability(req).subscribe(
-      (avail) => {
-        this.temporaryAvail = avail;
+      (profile) => {
+        const avail = profile.respiteBackground.respiteProviderInfo?.availabilities.find(
+          (avail) => avail.type === 'TEMPORARY'
+        );
+        console.log(profile);
+        console.log(avail);
+        if (avail) {
+          this.temporaryAvail = avail;
+        }
         this.toastService.success('Successfully added a temporary availability.');
         this.submittingAvail = false;
         this.resetForm();

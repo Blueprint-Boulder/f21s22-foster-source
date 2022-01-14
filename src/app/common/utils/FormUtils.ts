@@ -159,8 +159,8 @@ export class FormUtils {
       friday: [f.morning, f.afternoon, f.evening, f.overnight],
       saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
       sunday: [su.morning, su.afternoon, su.evening, su.overnight],
-      start: start,
-      end: end,
+      startDate: start,
+      endDate: end,
     };
   }
 

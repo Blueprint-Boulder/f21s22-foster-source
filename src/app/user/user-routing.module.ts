@@ -9,43 +9,53 @@ import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modi
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
 
 const routes: Routes = [
   {
     path: 'update/profile',
     component: UpdateProfileComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/household-background',
     component: UpdateHouseholdBackgroundComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/secondary-account-holder',
     component: UpdateSecondaryAccountHolderComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/respite-background',
     component: UpdateRespiteBackgroundComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/respite-provider-info',
     component: UpdateRespiteProviderInfoComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/primary-availability',
     component: UpdatePrimaryAvailabilityComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'update/temporary-availability',
     component: ModifyTempAvailabilityComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'create/secondary-account-holder',
     component: CreateSecondaryAccountHolderComponent,
+    canActivate: [PureUserGuard],
   },
   {
     path: 'create/respite-provider-info',
     component: AddRespiteProviderInfoComponent,
+    canActivate: [PureUserGuard],
   },
 ];
 

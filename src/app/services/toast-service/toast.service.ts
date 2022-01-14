@@ -20,6 +20,7 @@ export class ToastService {
 
   httpError(err: any): void {
     // Standard error response from fs-service
+    console.log(err);
     if (err.error && err.error.code && err.error.message) {
       this.show({
         body: `[${err.error.code}] ${err.error.message}`,
@@ -48,6 +49,13 @@ export class ToastService {
     this.show({
       body: body,
       preset: ToastPresets.ERROR,
+    });
+  }
+
+  info(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.REGULAR,
     });
   }
 }

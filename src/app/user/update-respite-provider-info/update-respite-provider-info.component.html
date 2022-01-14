@@ -1,13 +1,28 @@
 <div *ngIf="currentProviderInfo" class="container">
   <div class="row mt-5">
     <div class="col text-center">
-      <h2>Update Your Respite Background</h2>
+      <h2>Update Your Respite Provider Info</h2>
     </div>
   </div>
   <div class="row my-5">
     <div class="col-md-3 col-lg-4"></div>
     <div class="col-sm-12 col-md-6 col-lg-4">
       <p><b>Current Information On File</b></p>
+      <span *ngIf="currentProviderInfo.cityCanProvideRespiteIn"
+        ><b>City Can Provide Respite In: </b> {{ currentProviderInfo.cityCanProvideRespiteIn }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.respiteTravelDistance"
+        ><b>Travel Distance: </b> {{ currentProviderInfo.respiteTravelDistance }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.careForMinAge"
+        ><b>Min Age Able to Care For: </b> {{ currentProviderInfo.careForMinAge }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.careForMaxAge"
+        ><b>Max Age Able to Care For: </b> {{ currentProviderInfo.careForMaxAge }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.maxNumCareFor"
+        ><b>Max # of Children Able to Care For: </b> {{ currentProviderInfo.maxNumCareFor }} <br
+      /></span>
       <p>
         <small
           ><i

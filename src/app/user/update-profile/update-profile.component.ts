@@ -33,9 +33,14 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe((profile) => {
-      this.currentProfile = profile;
-    });
+    this.profileService.getCurrentProfile().subscribe(
+      (profile) => {
+        this.currentProfile = profile;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   onSubmit(): void {
@@ -62,7 +67,7 @@ export class UpdateProfileComponent implements OnInit {
         pronouns:
           this.updateProfileForm.get('pronouns')?.value === '' || this.updateProfileForm.get('gender')?.value === null
             ? undefined
-            : this.updateProfileForm.get('gender')?.value,
+            : this.updateProfileForm.get('pronouns')?.value,
         maritalStatus:
           this.updateProfileForm.get('maritalStatus')?.value === '' ||
           this.updateProfileForm.get('maritalStatus')?.value === null

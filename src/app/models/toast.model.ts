@@ -23,10 +23,11 @@ export function getClassListFromPreset(preset: ToastPresets) {
       classlist = 'bg-danger text-light rounded mt-2';
       break;
     case ToastPresets.REGULAR:
-      classlist = 'bg-info rounded mt-2';
+      classlist = 'bg-primary rounded mt-2';
       break;
     default:
-      classlist = 'bg-info rounded mt-2';
+      classlist = 'bg-light rounded mt-2';
+      break;
   }
   return classlist;
 }

@@ -111,8 +111,8 @@ describe('ModifyTempAvailabilityComponent', () => {
         friday: [true, false, true, true],
         saturday: [false, true, true, true],
         sunday: [false, false, false, false],
-        start: new Date(),
-        end: new Date(),
+        startDate: new Date(),
+        endDate: new Date(),
       };
       fixture.detectChanges();
       await fixture.whenStable();
