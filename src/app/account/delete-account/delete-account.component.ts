@@ -10,7 +10,6 @@ import { ToastPresets } from '../../models/toast.model';
   selector: 'app-delete-account',
   templateUrl: './delete-account.component.html',
   styleUrls: ['./delete-account.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class DeleteAccountComponent implements OnInit {
   public deleteAccountForm: FormGroup;

@@ -1,0 +1,182 @@
+<div class="container">
+  <div class="row my-5">
+    <div class="col text-center">
+      <h2>Add Respite Provider Information</h2>
+      <small
+        >Submitting this form will mark your account as able to provide respite, meaning that you will appear in respite
+        searches.</small
+      >
+    </div>
+  </div>
+  <form [formGroup]="addRespiteProviderInfoForm">
+    <div class="row extra-provider-qs-row can-provide-row">
+      <div class="col-12">
+        <div class="row city-and-miles-row my-3">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="cityCanProvideRespiteIn"
+                ><b>City/town you can provide respite in</b><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="cityCanProvideRespiteIn"
+                placeholder="Enter city/town"
+                formControlName="cityCanProvideRespiteIn"
+              />
+              <div
+                *ngIf="
+                  addRespiteProviderInfoForm.get('cityCanProvideRespiteIn')?.invalid &&
+                  (addRespiteProviderInfoForm.get('cityCanProvideRespiteIn')?.dirty ||
+                    addRespiteProviderInfoForm.get('cityCanProvideRespiteIn')?.touched)
+                "
+              >
+                <small
+                  *ngIf="addRespiteProviderInfoForm.get('cityCanProvideRespiteIn')?.errors?.required"
+                  class="input-error"
+                  >Please enter which city/town you are able to provide respite in.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="respiteTravelDistance"
+                ><b
+                  >How far are you willing to travel to provide respite (miles)?<span class="required-star">*</span></b
+                ></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="respiteTravelDistance"
+                type="number"
+                placeholder="Enter distance (miles)"
+                formControlName="respiteTravelDistance"
+              />
+              <div
+                *ngIf="
+                  addRespiteProviderInfoForm.get('respiteTravelDistance')?.invalid &&
+                  (addRespiteProviderInfoForm.get('respiteTravelDistance')?.dirty ||
+                    addRespiteProviderInfoForm.get('respiteTravelDistance')?.touched)
+                "
+              >
+                <small
+                  *ngIf="addRespiteProviderInfoForm.get('respiteTravelDistance')?.errors?.required"
+                  class="input-error"
+                  >Please enter how far you are willing to travel.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row age-range-max-num-row">
+          <div class="col-sm-12 col-md-6">
+            <p>
+              <b>If you are providing respite, what age range of children can you care for?</b
+              ><span class="required-star">*</span>
+            </p>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="careForMinAge" class="mr-2"><i>Min: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="careForMinAge"
+                    type="number"
+                    placeholder="Enter minimum age"
+                    formControlName="careForMinAge"
+                  />
+                  <div
+                    *ngIf="
+                      addRespiteProviderInfoForm.get('careForMinAge')?.invalid &&
+                      (addRespiteProviderInfoForm.get('careForMinAge')?.dirty ||
+                        addRespiteProviderInfoForm.get('careForMinAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="addRespiteProviderInfoForm.get('careForMinAge')?.errors?.required" class="input-error"
+                      >Please the min age.<br
+                    /></small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="careForMaxAge" class="mr-2"><i>Max: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="careForMaxAge"
+                    type="number"
+                    placeholder="Enter maximum age"
+                    formControlName="careForMaxAge"
+                  />
+                  <div
+                    *ngIf="
+                      addRespiteProviderInfoForm.get('careForMaxAge')?.invalid &&
+                      (addRespiteProviderInfoForm.get('careForMaxAge')?.dirty ||
+                        addRespiteProviderInfoForm.get('careForMaxAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="addRespiteProviderInfoForm.get('careForMaxAge')?.errors?.required" class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="maxNumCareFor"
+                ><b>What is the maximum number of children you are able to care for at one time?</b
+                ><span class="required-star">*</span></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="maxNumCareFor"
+                type="number"
+                placeholder="Enter number of children"
+                formControlName="maxNumCareFor"
+              />
+              <div
+                *ngIf="
+                  addRespiteProviderInfoForm.get('maxNumCareFor')?.invalid &&
+                  (addRespiteProviderInfoForm.get('maxNumCareFor')?.dirty ||
+                    addRespiteProviderInfoForm.get('maxNumCareFor')?.touched)
+                "
+              >
+                <small *ngIf="addRespiteProviderInfoForm.get('maxNumCareFor')?.errors?.required" class="input-error"
+                  >Please enter how many children you can care for.<br
+                /></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row availability-title mt-3">
+          <h5>Please indicate your availability to provide respite:<span class="required-star">*</span></h5>
+        </div>
+        <div class="row mb-3">
+          <small
+            >This will be your primary, standard availability. In the future you can set temporary
+            availabilities.</small
+          >
+        </div>
+        <div class="row availability-row">
+          <div *ngFor="let dayModel of dayModels" class="col-sm-12 col-md-6 mb-2">
+            <app-day-availability-input [dayModel]="dayModel"></app-day-availability-input>
+          </div>
+        </div>
+      </div>
+      <small class="mt-5"><i>These fields can always be edited and updated later.</i></small>
+    </div>
+  </form>
+  <div class="row my-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Add Respite Provider Information
+      </button>
+    </div>
+  </div>
+  <div class="row my-5">
+    <small><span class="required-star">*</span> indicates required field</small>
+  </div>
+</div>

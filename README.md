@@ -4,7 +4,7 @@
 
 - [ ] Updating account
   - [ ] Backend endpoints
-  - [ ] Frontend forms
+  - [x] Frontend forms
 - [x] Complete Profile
   - [x] Backend Routes
   - [x] Capture frontend user when they have not yet completed their account
@@ -34,13 +34,13 @@
   - [x] Change phone number front end
   - [ ] Change phone number back end
 - [ ] Profile Page
-  - [ ] Finish profile page
+  - [x] Finish profile page
   - [ ] Allow updating of attributes for profile
 - [ ] Login
   - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [x] Logout
   - [ ] Forgot your password?
-  - [ ] Does unchecking the remember me tab do anything?
+  - [x] Does unchecking the remember me tab do anything?
 - [x] Announcements
   - [x] Make recent announcements not return anything after maybe a week?
 - [x] Mod/Admin
@@ -48,6 +48,10 @@
   - [x] Mod / Admin approvals frontend
   - [x] Mod / Admin approvals backend
   - [x] Remove "Profile" tab on nav bar for mods and admins
+
+### Known Bugs
+
+- [ ] When user creates account, says they are logged in
 
 ### Stretch Goals
 
@@ -57,10 +61,13 @@
 
 ### Feature Backlog
 
+- [ ] Allow user after account creation to choose to provide respite, rescind their current offering
 - [ ] Hide profile temporarily
 - [ ] Get list of all accounts for admins
 - [ ] Get list of all staff accounts for admins
 - [ ] Periodically go through and get rid of unverified accounts
+- [ ] Reject address if not coords
+- [ ] Add temporary availabilities
 
 ## Testing
 

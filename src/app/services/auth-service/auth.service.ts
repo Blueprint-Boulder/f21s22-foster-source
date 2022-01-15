@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Cookie } from '../../models/account.model';
+import { Token } from '../../models/account.model';
 import jwtDecode from 'jwt-decode';
 import * as moment from 'moment';
 
@@ -16,27 +16,27 @@ export enum Privilege {
 })
 export class AuthService {
   public loggedInEvent: EventEmitter<void> = new EventEmitter<void>();
+  public loggedOutEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  private isUser = false;
-  private isAdmin = false;
-  private isMod = false;
+  private privilegeLevel = Privilege.NONE;
   private expiresAt = moment();
 
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService) {
+    this.init();
+  }
 
   init(): void {
     const token = this.getToken();
     if (token) {
-      //reads off the properties of the new token to initialize the properties
-      //used in the service.
       this.expiresAt = moment().add(token.exp, 'second');
-      this.isUser = token.privilegeLevel > 0;
-      this.isMod = token.privilegeLevel > 1;
-      this.isAdmin = token.privilegeLevel > 2;
+      this.privilegeLevel = token.privilegeLevel;
+      this.emitLoggedIn();
+    } else {
+      this.privilegeLevel = Privilege.NONE;
     }
   }
 
-  getToken(): Cookie | undefined {
+  getToken(): Token | undefined {
     try {
       const token = this.cookieService.get('access-token');
       return jwtDecode(token);
@@ -46,26 +46,48 @@ export class AuthService {
   }
 
   validTime(): boolean {
-    this.init();
-    return moment().isBefore(this.expiresAt);
+    const valid = moment().isBefore(this.expiresAt);
+    if (!valid) {
+      this.emitLoggedOut();
+      return false;
+    }
+    return true;
   }
 
-  validUser(): boolean {
-    this.init();
-    return this.isUser && this.validTime();
+  isUser(): boolean {
+    return this.privilegeLevel === Privilege.USER && this.validTime();
   }
 
-  validAdmin(): boolean {
-    this.init();
-    return this.isAdmin && this.validTime();
+  isAtLeastUser(): boolean {
+    return this.privilegeLevel >= Privilege.USER && this.validTime();
   }
 
-  validMod(): boolean {
-    this.init();
-    return this.isMod && this.validTime();
+  isMod(): boolean {
+    return this.privilegeLevel === Privilege.MOD && this.validTime();
+  }
+
+  isAtLeastMod(): boolean {
+    return this.privilegeLevel >= Privilege.MOD && this.validTime();
+  }
+
+  isAdmin(): boolean {
+    return this.privilegeLevel === Privilege.USER && this.validTime();
+  }
+
+  isAtLeastAdmin(): boolean {
+    return this.privilegeLevel >= Privilege.ADMIN && this.validTime();
+  }
+
+  logout(): void {
+    this.cookieService.delete('access-token');
+    this.emitLoggedOut();
   }
 
   emitLoggedIn(): void {
     this.loggedInEvent.emit();
+  }
+
+  emitLoggedOut(): void {
+    this.loggedOutEvent.emit();
   }
 }

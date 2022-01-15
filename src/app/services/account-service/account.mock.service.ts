@@ -2,7 +2,7 @@ import { AccountService } from './account.service';
 import {
   Account,
   CaseWorkerInfo,
-  Cookie,
+  Token,
   CreateAccountRequest,
   CreateStaffAccountRequest,
   DeleteAccountReq,

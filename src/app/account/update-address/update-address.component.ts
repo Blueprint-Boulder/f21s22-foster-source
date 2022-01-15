@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddressService } from '../../services/address-service/address.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { addressServiceProvider } from '../../services/address-service/address.service.provider';
 import { AddressRes, SimpleAddressReq } from '../../models/adress.model';
 import { ToastPresets } from '../../models/toast.model';
 import { FormUtils } from '../../common/utils/FormUtils';
@@ -12,7 +11,6 @@ import { FormUtils } from '../../common/utils/FormUtils';
   selector: 'app-update-address',
   templateUrl: './update-address.component.html',
   styleUrls: ['./update-address.component.scss'],
-  providers: [addressServiceProvider],
 })
 export class UpdateAddressComponent implements OnInit {
   public readonly STATES;

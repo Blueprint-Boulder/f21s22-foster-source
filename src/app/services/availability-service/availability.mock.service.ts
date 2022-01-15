@@ -1,22 +1,19 @@
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { SimpleAvailability } from '../../models/availability.model';
 import { AvailabilityService } from './availability.service';
-import { Availability } from '../../models/availability.model';
+import { profiles } from '../../mock/database-entities';
 import { Observable, of } from 'rxjs';
-import { primaryAvailabilities } from '../../mock/database-entities';
 
 export class AvailabilityMockService implements AvailabilityService {
-  createAvailability(availability: Availability): Observable<Availability> {
-    return of(primaryAvailabilities[0]);
+  addTemporaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
+    return of(profiles[0]);
   }
 
-  deleteAvailability(id: number): Observable<Availability> {
-    return of(primaryAvailabilities[0]);
+  removeTemporaryAvailability(): Observable<any> {
+    return of({});
   }
 
-  getAvailabilityByProfileId(id: number): Observable<Availability> {
-    return of(primaryAvailabilities[0]);
-  }
-
-  updateAvailability(availability: Availability): Observable<Availability> {
-    return of(primaryAvailabilities[0]);
+  updatePrimaryAvailability(req: SimpleAvailability): Observable<FullProfileRes> {
+    return of(profiles[0]);
   }
 }

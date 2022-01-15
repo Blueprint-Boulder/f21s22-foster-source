@@ -68,6 +68,18 @@ export interface SecAccountHolderRes {
   secAccountHolderPhone: PhoneNumber;
 }
 
+export interface UpdateSecAccountHolderReq {
+  relationshipToPrimary?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  preferredName?: string;
+  pronouns?: string;
+  gender?: string;
+  maritalStatus?: string;
+  secAccountHolderPhone?: PhoneNumber;
+}
+
 export interface PublicAccountFields {
   firstName: string;
   lastName: string;

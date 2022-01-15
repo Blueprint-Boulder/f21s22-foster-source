@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhoneNumberService } from '../../services/phone-number-service/phone-number.service';
-import { phoneNumberServiceProvider } from '../../services/phone-number-service/phone-number.service.provider';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { PhoneNumber, PhoneNumbersUpdateReq, PhoneNumberType } from '../../models/phonenumber.model';
-import * as libphonenumber from 'google-libphonenumber';
 import { ToastPresets } from '../../models/toast.model';
 import { Router } from '@angular/router';
 import { FormUtils } from '../../common/utils/FormUtils';
@@ -13,7 +11,6 @@ import { FormUtils } from '../../common/utils/FormUtils';
   selector: 'app-update-phone',
   templateUrl: './update-phone.component.html',
   styleUrls: ['./update-phone.component.scss'],
-  providers: [phoneNumberServiceProvider],
 })
 export class UpdatePhoneComponent implements OnInit {
   public readonly PHONE_TYPES;

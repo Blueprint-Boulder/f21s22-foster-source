@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Account } from '../../models/account.model';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Utils } from '../utils';
-import { DayModel } from '../day-availability-input/day-availability-input.component';
+import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ToastPresets } from '../../models/toast.model';
@@ -16,12 +15,13 @@ import {
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
 } from '../../models/profile.model';
+import { PhoneNumber } from '../../models/phonenumber.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-finish-account-modal',
   templateUrl: './finish-account-modal.component.html',
   styleUrls: ['./finish-account-modal.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class FinishAccountModalComponent implements OnInit {
   public finishProfileForm: FormGroup;
@@ -31,7 +31,7 @@ export class FinishAccountModalComponent implements OnInit {
   public needToUploadImgError = false;
   public submitting = false;
 
-  private profileImgKey = '';
+  public profileImgKey = '';
 
   private secondaryAccountHolderFields = [
     'secfname',
@@ -147,7 +147,8 @@ export class FinishAccountModalComponent implements OnInit {
       careForMedicallyFragile: [null],
       ownsFirearm: [null],
       additionalInfo: [null],
-      dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
+      dob: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
+      biography: ['', Validators.required],
     });
   }
 
@@ -166,6 +167,7 @@ export class FinishAccountModalComponent implements OnInit {
         dob: this.finishProfileForm.get('dob')!.value,
         profileSmallAwsKey: `${this.profileImgKey}_small`,
         profileLargeAwsKey: `${this.profileImgKey}_large`,
+        biography: this.finishProfileForm.get('biography')!.value,
         pronouns: this.getOptionalStringFromForm('pronouns'),
         maritalStatus: this.getOptionalStringFromForm('maritalStatus'),
         secondaryAccountHolder: this.getSecondaryAccountHolderInfo(),
@@ -173,10 +175,12 @@ export class FinishAccountModalComponent implements OnInit {
         householdBackground: this.getHouseholdBackground(),
       };
 
-      console.log(JSON.stringify(req));
-
       this.accountService.completeProfile(req).subscribe(
         (res) => {
+          this.toastService.show({
+            body: 'Successfully completed profile!',
+            preset: ToastPresets.SUCCESS,
+          });
           this.router.navigate([`/respite`]);
         },
         (err) => {
@@ -195,7 +199,7 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   private getOptionalBooleanFromForm(name: string): boolean | undefined {
-    const val = this.finishProfileForm.get(name)?.value;
+    const val = this.finishProfileForm.get(name)?.value === 'true';
     return val === undefined || val === null ? undefined : val;
   }
 
@@ -211,10 +215,16 @@ export class FinishAccountModalComponent implements OnInit {
       relationshipToPrimary: this.finishProfileForm.get('relationshipToPrimary')!.value,
       gender: this.finishProfileForm.get('secGender')!.value,
       email: this.finishProfileForm.get('secEmail')!.value,
-      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
-      phoneNumberType: this.finishProfileForm.get('secPhoneType')!.value,
+      secAccountHolderPhone: this.getSecPhone(),
       pronouns: this.getOptionalStringFromForm('secPronouns'),
       maritalStatus: this.getOptionalStringFromForm('secMaritalStatus'),
+    };
+  }
+
+  private getSecPhone(): PhoneNumber {
+    return {
+      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
+      type: this.finishProfileForm.get('secPhoneType')!.value,
     };
   }
 
@@ -222,24 +232,23 @@ export class FinishAccountModalComponent implements OnInit {
     return {
       fosterYearsExperience: this.finishProfileForm.get('fosterYears')!.value,
       totalChildrenCaredFor: this.finishProfileForm.get('totalChildren')!.value,
-      canProvideRespite: this.finishProfileForm.get('canProvideRespite')!.value,
-      lookingForRespite: this.finishProfileForm.get('lookingForRespite')!.value,
+      canProvideRespite: this.finishProfileForm.get('canProvideRespite')!.value === 'true',
+      lookingForRespite: this.finishProfileForm.get('lookingForRespite')!.value === 'true',
       respiteProviderInfo: this.getRespiteProviderInfo(),
     };
   }
 
   private getRespiteProviderInfo(): RespiteProviderInfoReq | undefined {
-    if (!this.finishProfileForm.get('canProvideRespite')!.value) {
+    if (this.finishProfileForm.get('canProvideRespite')!.value === 'false') {
       return undefined;
     }
-    console.log('SHOULD NEVER GET HERRE');
     return {
       cityCanProvideRespiteIn: this.finishProfileForm.get('respiteCity')!.value,
       respiteTravelDistance: this.finishProfileForm.get('respiteRange')!.value,
       careForMinAge: this.finishProfileForm.get('minAge')!.value,
       careForMaxAge: this.finishProfileForm.get('maxAge')!.value,
       maxNumCareFor: this.finishProfileForm.get('howManyCareFor')!.value,
-      availability: this.generateRespiteAvailability(),
+      availabilities: this.generateRespiteAvailability(),
     };
   }
 
@@ -261,6 +270,7 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   public imageUploaded(event: any): void {
+    this.needToUploadImgError = false;
     this.profileImgKey = event;
   }
 
@@ -322,35 +332,7 @@ export class FinishAccountModalComponent implements OnInit {
     });
   }
 
-  private static validateDate(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid date.' };
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const parsed = FinishAccountModalComponent.parseDateFromInput(control.value as string);
-      const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
-      const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
-      const validYear =
-        parseInt(control.value.substring(6, 10)) > new Date().getFullYear() - 100 &&
-        parseInt(control.value.substring(6, 10)) <= new Date().getFullYear() - 13;
-      if (!validMonth || !validDay || !validYear) {
-        return err;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return err;
-    }
-  }
-
-  private static parseDateFromInput(dateStr: string): Date {
-    const year = parseInt(dateStr.substring(6, 10));
-    const day = parseInt(dateStr.substring(3, 5));
-    const month = parseInt(dateStr.substring(0, 2));
-    return new Date(year, month - 1, day);
-  }
-
-  private generateRespiteAvailability(): SimpleAvailability {
+  private generateRespiteAvailability(): [SimpleAvailability] {
     const m: DayModel = this.dayModels.find((dm) => dm.name === 'Monday') as DayModel;
     const t: DayModel = this.dayModels.find((dm) => dm.name === 'Tuesday') as DayModel;
     const w: DayModel = this.dayModels.find((dm) => dm.name === 'Wednesday') as DayModel;
@@ -359,15 +341,17 @@ export class FinishAccountModalComponent implements OnInit {
     const sa: DayModel = this.dayModels.find((dm) => dm.name === 'Saturday') as DayModel;
     const su: DayModel = this.dayModels.find((dm) => dm.name === 'Sunday') as DayModel;
 
-    return {
-      type: AvailabilityType.PRIMARY,
-      monday: [m.morning, m.afternoon, m.evening, m.overnight],
-      tuesday: [t.morning, t.afternoon, t.evening, t.overnight],
-      wednesday: [w.morning, w.afternoon, w.evening, w.overnight],
-      thursday: [th.morning, th.afternoon, th.evening, th.overnight],
-      friday: [f.morning, f.afternoon, f.evening, f.overnight],
-      saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
-      sunday: [su.morning, su.afternoon, su.evening, su.overnight],
-    };
+    return [
+      {
+        type: AvailabilityType.PRIMARY,
+        monday: [m.morning, m.afternoon, m.evening, m.overnight],
+        tuesday: [t.morning, t.afternoon, t.evening, t.overnight],
+        wednesday: [w.morning, w.afternoon, w.evening, w.overnight],
+        thursday: [th.morning, th.afternoon, th.evening, th.overnight],
+        friday: [f.morning, f.afternoon, f.evening, f.overnight],
+        saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
+        sunday: [su.morning, su.afternoon, su.evening, su.overnight],
+      },
+    ];
   }
 }

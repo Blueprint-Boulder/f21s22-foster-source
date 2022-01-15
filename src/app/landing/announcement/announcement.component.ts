@@ -3,7 +3,6 @@ import { Announcement } from '../../models/announcement.model';
 import { formatDate } from '@angular/common';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 import { ToastPresets } from '../../models/toast.model';
 import { AuthService, Privilege } from '../../services/auth-service/auth.service';
 
@@ -11,7 +10,6 @@ import { AuthService, Privilege } from '../../services/auth-service/auth.service
   selector: 'app-announcement',
   templateUrl: './announcement.component.html',
   styleUrls: ['./announcement.component.scss'],
-  providers: [announcementServiceProvider],
 })
 export class AnnouncementComponent implements OnInit {
   public editMode = false;

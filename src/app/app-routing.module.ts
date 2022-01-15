@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './common/page-not-found/page-not-found.component';
-import { AdminGuard } from './guards/admin/admin.guard';
-import { ModGuard } from './guards/mod/mod.guard';
-import { UserGuard } from './guards/user/user.guard';
 import { LoggedInGuard } from './guards/logged-in/logged-in.guard';
+import { RouterModule, Routes } from '@angular/router';
+import { UserGuard } from './guards/user/user.guard';
+import { ModGuard } from './guards/mod/mod.guard';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {
@@ -33,6 +32,16 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
     canActivate: [LoggedInGuard],
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: 'forum',
+    loadChildren: () => import('./forum/forum.module').then((m) => m.ForumModule),
+    canActivate: [],
   },
   {
     path: '**',

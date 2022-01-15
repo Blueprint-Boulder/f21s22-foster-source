@@ -1,11 +1,15 @@
-<app-filter-panel [hidden]="hidden" (closePanel)="closeNav()" (filterResults)="setFilters($event)"></app-filter-panel>
+<app-filter-panel
+  [hidden]="filtersHidden"
+  (closePanel)="closeNav()"
+  (filterResults)="setFilters($event)"
+></app-filter-panel>
 <div class="container">
   <div class="row mt-4">
     <div class="col-sm-8 col-md-10">
       <app-search-bar (searchEvent)="searchEvent($event)"></app-search-bar>
     </div>
     <div class="col-sm-4 col-md-2">
-      <button class="btn btn-secondary w-100" (click)="hidden ? openNav() : closeNav()">☰ Filters</button>
+      <button class="btn btn-secondary w-100" (click)="filtersHidden ? openNav() : closeNav()">☰ Filters</button>
     </div>
   </div>
 </div>

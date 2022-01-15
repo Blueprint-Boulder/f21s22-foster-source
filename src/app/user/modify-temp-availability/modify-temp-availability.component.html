@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row pb-3 border-bottom">
+    <span *ngIf="!temporaryAvail" class="mt-5 mb-3"
+      ><i>You do not currently have any active temporary availabilities.</i></span
+    >
+    <div *ngIf="temporaryAvail" class="w-100 avail-grid-row">
+      <h5 class="mt-5 mb-3">Your Current Temporary Availability</h5>
+      <app-availability-grid [availability]="temporaryAvail"></app-availability-grid>
+      <button
+        class="btn btn-secondary float-right remove-button"
+        (click)="deleteTempAvailability()"
+        [disabled]="deletingAvail"
+      >
+        Remove Temporary Availability
+      </button>
+    </div>
+  </div>
+  <div *ngIf="temporaryAvail" class="row mt-3">
+    <span><i>You must remove your current temporary availability to add a new one.</i></span>
+  </div>
+  <div *ngIf="!temporaryAvail" class="row">
+    <h5 class="mt-5 mb-3">Add a Temporary Availability</h5>
+  </div>
+  <div *ngIf="!temporaryAvail" class="row mt-3 avail-input-row">
+    <div *ngFor="let dayModel of dayModels" class="col-sm-12 col-md-6 mb-2">
+      <app-day-availability-input [dayModel]="dayModel"></app-day-availability-input>
+    </div>
+  </div>
+  <form [formGroup]="addTempAvailForm">
+    <div *ngIf="!temporaryAvail" class="row end-row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label class="mt-4" for="end"><b>Use Availability Until</b><span class="required-star">*</span></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="end"
+            placeholder="MM/DD/YYYY"
+            formControlName="end"
+            required
+          />
+          <div
+            *ngIf="
+              addTempAvailForm.get('end')?.invalid &&
+              (addTempAvailForm.get('end')?.dirty || addTempAvailForm.get('end')?.touched)
+            "
+          >
+            <small *ngIf="addTempAvailForm.get('end')?.errors?.required" class="input-error"
+              >Please enter the end date of this availability.<br
+            /></small>
+            <small *ngIf="addTempAvailForm.get('end')?.errors?.pattern" class="input-error"
+              >Please enter date in format MM/DD/YYYY.<br
+            /></small>
+            <small *ngIf="addTempAvailForm.get('end')?.errors?.invalidDate" class="input-error"
+              >Please enter a valid date.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="!temporaryAvail" class="row my-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <button class="btn btn-primary text-white w-100 add-button" [disabled]="submittingAvail" (click)="onSubmit()">
+        Add Temporary Availability
+      </button>
+    </div>
+  </div>
+</div>

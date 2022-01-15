@@ -10,7 +10,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
-  providers: [announcementServiceProvider],
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;

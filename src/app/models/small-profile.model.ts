@@ -1,7 +1,7 @@
 export interface SmallProfile {
   id: number;
   preferredName: string;
-  profileLargeAWSKey: string;
+  profileLargeAwsKey: string;
   account: {
     username: string;
     address: {

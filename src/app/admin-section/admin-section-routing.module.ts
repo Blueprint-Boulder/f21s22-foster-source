@@ -6,6 +6,7 @@ import { BlacklistTableComponent } from './blacklist-table/blacklist-table.compo
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { StaffAccountRequestsComponent } from './staff-account-requests/staff-account-requests.component';
 import { AdminGuard } from '../guards/admin/admin.guard';
+import { BugReportsComponent } from './bug-reports/bug-reports.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
       {
         path: 'staff-requests',
         component: StaffAccountRequestsComponent,
+        canActivate: [AdminGuard],
+      },
+      {
+        path: 'bug-reports',
+        component: BugReportsComponent,
         canActivate: [AdminGuard],
       },
     ],
