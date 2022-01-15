@@ -83,7 +83,6 @@ export class ModifyTempAvailabilityComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getCurrentProfile().subscribe((profile) => {
-      console.log(profile);
       if (profile.respiteBackground.respiteProviderInfo) {
         const avail = profile.respiteBackground.respiteProviderInfo.availabilities.find(
           (avail) => avail.type === 'TEMPORARY'
