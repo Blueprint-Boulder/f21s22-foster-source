@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- Profile Image -->
-      <div class="col-sm-6 col-md-3 profile-column">
+      <div class="col-sm-6 col-md-4 profile-column">
         <div class="card border-0">
           <img
             src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
@@ -63,261 +63,267 @@
       </div>
 
       <!-- Biography -->
-      <div class="col-sm-6 pl-4">
-        <div *ngIf="selectedProfile.biography">
-          <h4 class="day bio text-center">About</h4>
-          <div class="text-wrap">
-            {{ selectedProfile.biography }}
+      <div class="col-sm-6 col-md-8 about-height">
+        <div class="pl-4">
+          <div *ngIf="selectedProfile.biography">
+            <h4 class="day bio text-center">About</h4>
+            <div class="text-wrap">
+              {{ selectedProfile.biography }}
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Availability Schedule-->
-      <div class="col-md-3 availability-table" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">
-        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">
-          <h4 class="text-center mt-4">Availability Schedule</h4>
-          <div class="row p-3">
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday"
-            >
-              <h5 class="day">Monday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+        <!-- Availability Schedule-->
+        <div class="availability-table" *ngIf="selectedProfile.respiteBackground.respiteProviderInfo">
+          <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities.length > 0">
+            <h4 class="text-center mt-5 pt-4">Availability Schedule</h4>
+            <div class="grid-custom">
+              <div
+                class="monday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday"
+              >
+                <h5 class="day">Monday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].monday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday"
-            >
-              <h5 class="day">Tuesday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="tuesday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday"
+              >
+                <h5 class="day">Tuesday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].tuesday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday"
-            >
-              <h5 class="day">Wednesday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="wednesday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday"
+              >
+                <h5 class="day">Wednesday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].wednesday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday"
-            >
-              <h5 class="day">Thursday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="thursday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday"
+              >
+                <h5 class="day">Thursday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].thursday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday"
-            >
-              <h5 class="day">Friday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="friday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday"
+              >
+                <h5 class="day">Friday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].friday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday"
-            >
-              <h5 class="day">Saturday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="saturday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday"
+              >
+                <h5 class="day">Saturday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].saturday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="col-sm-12 px-3"
-              *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday"
-            >
-              <h5 class="day">Sunday</h5>
-              <hr class="line" />
-              <div class="row Times">
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[0]"
-                >
-                  <p class="text text-center">Morning</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[1]"
-                >
-                  <p class="text text-center">Afternoon</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[2]"
-                >
-                  <p class="text text-center">Evening</p>
-                </div>
-                <div
-                  class="col-md-6"
-                  *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[3]"
-                >
-                  <p class="text text-center">Overnight</p>
+              <div
+                class="sunday"
+                *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday"
+              >
+                <h5 class="day">Sunday</h5>
+                <hr class="line" />
+                <div class="row Times">
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[0]"
+                  >
+                    <p class="text text-center">Morning</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[1]"
+                  >
+                    <p class="text text-center">Afternoon</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[2]"
+                  >
+                    <p class="text text-center">Evening</p>
+                  </div>
+                  <div
+                    class="col-md-6"
+                    *ngIf="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0].sunday[3]"
+                  >
+                    <p class="text text-center">Overnight</p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block text-white" (click)="open(content)">
-              Contact
-            </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-lg btn-block text-white contact-grid"
+                (click)="open(content)"
+              >
+                Contact
+              </button>
+            </div>
           </div>
         </div>
       </div>

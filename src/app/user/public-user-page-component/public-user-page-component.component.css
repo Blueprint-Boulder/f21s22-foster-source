@@ -21,6 +21,10 @@ h5.day {
   min-width: 223.5px;
 }
 
+.about-height {
+  height: 500px;
+}
+
 .contact-modal {
   display: block;
 }
@@ -30,6 +34,53 @@ h5.day {
   border-radius: 10px;
   padding: 10px;
   display: inline-block;
+}
+
+.grid-custom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.monday {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tuesday {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.wednesday {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.thursday {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.friday {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.saturday {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.sunday {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.contact-grid {
+  grid-column: 2;
+  grid-row: 4;
 }
 
 .contact-quick-facts-background {
