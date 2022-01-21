@@ -19,7 +19,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchBarKeyEvent(event: KeyboardEvent): void {
-    if (event.code === 'Enter') {
+    if (event.code === 'Enter' || event.key === 'Enter') {
       this.search();
     }
   }

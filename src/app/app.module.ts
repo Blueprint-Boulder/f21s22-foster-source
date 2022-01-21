@@ -16,9 +16,23 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoggingInterceptor } from './services/logging.interceptor';
 import { profileServiceProvider } from './services/profile-service/profile.service.provider';
 import { accountServiceProvider } from './services/account-service/account.service.provider';
+import { addressServiceProvider } from './services/address-service/address.service.provider';
+import { phoneNumberServiceProvider } from './services/phone-number-service/phone-number.service.provider';
+import { blacklistServiceProvider } from './services/blacklist-service/blacklist.service.provider';
+import { announcementServiceProvider } from './services/announcement-service/announcement.service.provider';
+import { imageServiceProvider } from './services/image-service/image.service.provider';
+import { availabilityServiceProvider } from './services/availability-service/availability.service.provider';
+import { BugReportModalComponent } from './common/bug-report-modal/bug-report-modal.component';
+import { bugServiceProvider } from './services/bug-service/bug.service.provider';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, ToastContainerComponent, NavBarComponent],
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    ToastContainerComponent,
+    NavBarComponent,
+    BugReportModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,6 +53,14 @@ import { accountServiceProvider } from './services/account-service/account.servi
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     profileServiceProvider,
     accountServiceProvider,
+    addressServiceProvider,
+    phoneNumberServiceProvider,
+    blacklistServiceProvider,
+    announcementServiceProvider,
+    imageServiceProvider,
+    announcementServiceProvider,
+    availabilityServiceProvider,
+    bugServiceProvider,
   ],
   bootstrap: [AppComponent],
 })

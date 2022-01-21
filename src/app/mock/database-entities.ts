@@ -2,13 +2,14 @@ import { Announcement, GetAnnouncementsRes } from '../models/announcement.model'
 import { User } from '../models/user.model';
 import { Applicant } from '../models/applicant.model';
 import { BlacklistedUser } from '../models/blacklisted-user.model';
-import { Account, Cookie, CreateAccountRequest } from '../models/account.model';
+import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
 import { Photo } from '../models/profile.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
 import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
 import { SmallProfile } from '../models/small-profile.model';
+import { BugReport } from '../models/bug.model';
 
 const announcements: Announcement[] = [
   {
@@ -97,7 +98,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
   },
 ];
 
-export const cookies: Cookie[] = [
+export const cookies: Token[] = [
   {
     id: 1,
     privilegeLevel: 3,
@@ -115,6 +116,38 @@ export const accounts: Account[] = [
     username: 'jword',
     password: 'pass1234',
     firstName: 'Jett',
+    lastName: 'Crowman',
+    cwFirstName: 'Gina',
+    cwLastName: 'Smith',
+    cwEmail: 'noreply@google.com',
+    cwPhoneNumber: '+17208839921',
+    certifiedBy: 'Arapahoe County',
+    privilege: 'USER',
+    primaryPhoneNumber: {
+      phoneNumber: '+17209938821',
+      type: PhoneNumberType.Mobile,
+    },
+    secondaryPhoneNumber: {
+      phoneNumber: '+13321123345',
+      type: PhoneNumberType.Home,
+    },
+    lastLogin: new Date(),
+    profileCompleted: true,
+    address: {
+      addressLine1: '1002 fake st.',
+      city: 'Denver',
+      zipcode: '80210',
+      state: 'CO',
+      lat: '1',
+      lon: '1',
+    },
+  },
+  {
+    id: 2,
+    email: 'jcrowson@colorado.edu',
+    username: 'jword',
+    password: 'pass1234',
+    firstName: 'Jet',
     lastName: 'Crowman',
     cwFirstName: 'Gina',
     cwLastName: 'Smith',
@@ -265,6 +298,22 @@ export const primaryAvailabilities: Availability[] = [
   },
 ];
 
+export const temporaryAvailabilities: Availability[] = [
+  {
+    id: 2,
+    type: AvailabilityType.TEMPORARY,
+    monday: [true, true, true, false],
+    tuesday: [false, true, true, false],
+    wednesday: [true, true, true, false],
+    thursday: [true, true, false, false],
+    friday: [true, true, true, false],
+    saturday: [false, true, true, true],
+    sunday: [false, true, true, true],
+    start: new Date(),
+    end: new Date(),
+  },
+];
+
 export const mobilePhones: PhoneNumber[] = [
   {
     phoneNumber: '+17209938821',
@@ -337,6 +386,19 @@ export const profiles: FullProfileRes[] = [
             saturday: [false, true, true, true],
             sunday: [true, false, false, false],
           },
+          {
+            id: 2,
+            type: AvailabilityType.TEMPORARY,
+            monday: [true, false, false, false],
+            tuesday: [false, true, true, true],
+            wednesday: [true, false, false, false],
+            thursday: [false, true, true, true],
+            friday: [true, false, true, true],
+            saturday: [false, true, true, true],
+            sunday: [false, false, false, false],
+            start: new Date(),
+            end: new Date(),
+          },
         ],
       },
     },
@@ -349,6 +411,7 @@ export const profiles: FullProfileRes[] = [
       gender: 'male',
       email: 'tbahama@tommyb.com',
       preferredName: 'Tom',
+      maritalStatus: 'Married',
       secAccountHolderPhone: {
         id: 1,
         phoneNumber: '+17207738882',
@@ -397,7 +460,7 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
   },
   {
     preferredName: 'Jett',
@@ -408,7 +471,7 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
   },
   {
     preferredName: 'Gina Smith',
@@ -419,6 +482,32 @@ export const searchResults: SmallProfile[] = [
       },
     },
     id: 1,
-    profileLargeAWSKey: 'largeKey',
+    profileLargeAwsKey: 'largeKey',
+  },
+];
+
+export const bugs: BugReport[] = [
+  {
+    id: 1,
+    description: 'This is the description of the bug',
+    environment: 'Mozilla Firefox VERSION etc.',
+    url: 'https://respite.fostersource.org/user/10',
+    stepsToReproduce: 'Navigate to the profile page',
+    createdAt: new Date(),
+  },
+  {
+    id: 2,
+    description: 'Another nasty bug',
+    environment: 'Mobile device iOS10.32.1',
+    url: 'https://respite.fostersource.org/respite-search',
+    createdAt: new Date(),
+  },
+  {
+    id: 3,
+    description:
+      'This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps. This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps.',
+    environment: 'Chrome OS 10.3.2.112.3',
+    stepsToReproduce: 'Try to use medically fragile filter on respite search',
+    createdAt: new Date(),
   },
 ];

@@ -28,7 +28,10 @@
       >
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" [ngClass]="{ active: router.url === '/admin/bugs' }" [routerLink]="'/admin/bugs'"
+      <a
+        class="nav-link"
+        [ngClass]="{ active: router.url === '/admin/bug-reports' }"
+        [routerLink]="'/admin/bug-reports'"
         >Bug Reports</a
       >
     </li>

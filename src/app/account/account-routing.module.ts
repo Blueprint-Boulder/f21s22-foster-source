@@ -13,23 +13,23 @@ const routes: Routes = [
     component: AccountPageComponent,
   },
   {
-    path: 'update-password',
-    component: ChangePasswordComponent,
-  },
-  {
     path: 'delete-account',
     component: DeleteAccountComponent,
   },
   {
-    path: 'update-address',
+    path: 'update/password',
+    component: ChangePasswordComponent,
+  },
+  {
+    path: 'update/address',
     component: UpdateAddressComponent,
   },
   {
-    path: 'update-phone-number',
+    path: 'update/phone-number',
     component: UpdatePhoneComponent,
   },
   {
-    path: 'update-case-worker-info',
+    path: 'update/case-worker-info',
     component: UpdateCaseWorkerComponent,
   },
 ];

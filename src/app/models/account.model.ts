@@ -67,7 +67,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface Cookie {
+export interface Token {
   id: number;
   privilegeLevel: number;
   exp: number;

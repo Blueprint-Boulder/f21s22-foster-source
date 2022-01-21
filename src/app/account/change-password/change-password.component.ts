@@ -12,7 +12,6 @@ import { FormUtils } from '../../common/utils/FormUtils';
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class ChangePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;

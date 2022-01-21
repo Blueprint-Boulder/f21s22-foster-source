@@ -1,0 +1,102 @@
+<div *ngIf="currentRespiteBackground" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Respite Background</h2>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <p><b>Current Information On File</b></p>
+      <p>
+        <span *ngIf="currentRespiteBackground.fosterYearsExperience"
+          ><b>Years of Foster Care Experience: </b> {{ currentRespiteBackground.fosterYearsExperience }}<br
+        /></span>
+        <span *ngIf="currentRespiteBackground.totalChildrenCaredFor"
+          ><b>Total Children Cared For: </b> {{ currentRespiteBackground.totalChildrenCaredFor }}<br
+        /></span>
+        <span *ngIf="currentRespiteBackground.lookingForRespite !== undefined"
+          ><b>Looking for Respite: </b> {{ currentRespiteBackground.lookingForRespite }}<br
+        /></span>
+        <span *ngIf="currentRespiteBackground.canProvideRespite !== undefined"
+          ><b>Can Provide Respite: </b> {{ currentRespiteBackground.canProvideRespite }}<br
+        /></span>
+        <small *ngIf="!currentRespiteBackground.canProvideRespite"
+          ><i
+            >(You have indicated that you are unable to provide respite. If you'd like to begin providing respite,
+            <a [routerLink]="'/user/create/respite-provider-info'">click here</a>.</i
+          ></small
+        >
+      </p>
+      <small>Any fields that are not filled out will not be updated.</small>
+    </div>
+  </div>
+  <form [formGroup]="updateRespiteBackgroundForm">
+    <div class="row how-many-years-how-many-children-row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fosterYearsExperience"><b>How many years have you been a foster parent?</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="fosterYearsExperience"
+            type="number"
+            placeholder="Enter number of years"
+            formControlName="fosterYearsExperience"
+          />
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="totalChildrenCaredFor"><b>In total, how many children have you cared for?</b></label>
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="totalChildrenCaredFor"
+            type="number"
+            placeholder="Enter number of children"
+            formControlName="totalChildrenCaredFor"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row respite-backround-checkboxes-row my-3 px-3">
+      <div class="col-sm-12 col-md-4">
+        <div class="row">
+          <p><b>Are you looking for respite care?</b></p>
+        </div>
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="lookingForRespite"
+              name="lookingForRespite"
+              [value]="true"
+              id="lookingForRespiteYes"
+            />
+            <label class="form-check-label" for="lookingForRespiteYes"> Yes </label>
+          </div>
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="lookingForRespite"
+              name="lookingForRespite"
+              [value]="false"
+              id="lookingForRespiteNo"
+            />
+            <label class="form-check-label" for="lookingForRespiteNo"> No </label>
+          </div>
+        </div>
+        <div class="row"></div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-5">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Respite Background
+      </button>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@
   <div class="card mx-auto mt-5 p-3">
     <div class="card-body" *ngIf="!isError">
       <h5 class="card-title">Thanks for verifying your email!</h5>
-      <p class="card-text">You may now log in and finish your account.</p>
+      <p class="card-text">You will receive an email when your account has been approved.</p>
       <button class="btn btn-primary text-white float-right" [routerLink]="'/login'">Log In</button>
     </div>
     <div class="card-body" *ngIf="isError">

@@ -1,0 +1,46 @@
+.bug-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.75;
+  z-index: 999;
+}
+
+.bug-modal {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+@media (min-width: 760px) {
+  .bug-modal {
+    width: 90%;
+  }
+}
+
+///* Medium devices (desktops, 992px and up) */
+//@media (min-width: @screen-md-min) { ... }
+
+.bottom-border-input {
+  background-color: transparent;
+  color: #1b1613;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: solid #1b1613 1px;
+}
+
+.input-error {
+  color: red;
+}
+
+.required-star {
+  color: red;
+}

@@ -12,6 +12,7 @@ import { EditorComponent } from '../common/editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { LandingModule } from '../landing/landing.module';
 import { StaffAccountRequestsComponent } from './staff-account-requests/staff-account-requests.component';
+import { BugReportsComponent } from './bug-reports/bug-reports.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StaffAccountRequestsComponent } from './staff-account-requests/staff-ac
     AnnouncementsComponent,
     EditorComponent,
     StaffAccountRequestsComponent,
+    BugReportsComponent,
   ],
   imports: [
     CommonModule,

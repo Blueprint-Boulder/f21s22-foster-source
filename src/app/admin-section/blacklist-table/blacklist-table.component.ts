@@ -4,20 +4,16 @@ import {
   BlacklistedUser,
   GetBlacklistedUsersRes,
   RemoveFromBlacklistRequest,
-  RemoveFromBlacklistResponse,
 } from '../../models/blacklisted-user.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import { Applicant } from '../../models/applicant.model';
 import { ToastPresets } from '../../models/toast.model';
 import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
-import { blacklistServiceProvider } from '../../services/blacklist-service/blacklist.service.provider';
 
 @Component({
   selector: 'app-blacklist-table',
   templateUrl: './blacklist-table.component.html',
   styleUrls: ['./blacklist-table.component.scss'],
-  providers: [blacklistServiceProvider],
 })
 export class BlacklistTableComponent implements OnInit {
   public blacklist: BlacklistedUser[] = [];
@@ -64,7 +60,7 @@ export class BlacklistTableComponent implements OnInit {
   }
 
   public getFormattedDateForUser(index: number): string {
-    return formatDate(this.blacklist[index].date, 'dd/MM/yyyy', 'en-US');
+    return formatDate(this.blacklist[index].date, 'MM/dd/yyyy', 'en-US');
   }
 
   private getAndRemoveBlacklistedByIndex(index: number): BlacklistedUser {

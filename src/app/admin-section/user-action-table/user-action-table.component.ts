@@ -1,19 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Applicant,
-  ApprovalTableUser,
-  ApproveApplicantRequest,
-  DenyApplicantRequest,
-  GetApplicantsRes,
-} from '../../models/applicant.model';
+import { ApprovalTableUser, ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { formatDate } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastPresets } from '../../models/toast.model';
 import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 import { Account, GetAccountsReq } from '../../models/account.model';
 
 @Component({
@@ -25,15 +18,9 @@ import { Account, GetAccountsReq } from '../../models/account.model';
       transition(':leave', [style({ opacity: 1 }), animate('0.1s ease-in', style({ opacity: 0 }))]),
     ]),
   ],
-  providers: [accountServiceProvider],
 })
 export class UserActionTableComponent implements OnInit {
   public users: ApprovalTableUser[] = [];
-  public denyFormGroup = this.formBuilder.group({
-    reason: '',
-    ban: false,
-    sendCopy: false,
-  });
 
   constructor(
     private accountService: AccountService,
@@ -47,7 +34,17 @@ export class UserActionTableComponent implements OnInit {
         const applicants = res.accounts;
         this.users = [];
         for (let i = 0; i < applicants.length; i++) {
-          this.users.push({ ...applicants[i], isCollapsed: true });
+          const controlsConfig: { [p: string]: any } = {};
+          controlsConfig['reason' + i.toString()] = ['', Validators.required];
+          controlsConfig['ban' + i.toString()] = false;
+          controlsConfig['sendCopy' + i.toString()] = false;
+
+          this.users.push({
+            ...applicants[i],
+            isCollapsed: true,
+            index: i,
+            denyForm: this.formBuilder.group(controlsConfig),
+          });
         }
       },
       (error: HttpErrorResponse) => {
@@ -61,27 +58,31 @@ export class UserActionTableComponent implements OnInit {
   }
 
   public denyApplicant(index: number): void {
-    const denied: Account = this.users[index];
-    const params = this.denyFormGroup.value;
-    const denyRequest: DenyApplicantRequest = {
-      id: denied.id,
-      reason: params.reason,
-      shouldNotifyApplicant: params.sendCopy,
-      shouldBlacklist: params.ban,
-    };
+    const denied: ApprovalTableUser = this.users[index];
+    if (denied.denyForm.invalid) {
+      denied.denyForm.markAllAsTouched();
+    } else {
+      const params = denied.denyForm.value;
+      const denyRequest: DenyApplicantRequest = {
+        id: denied.id,
+        reason: params['reason' + denied.index],
+        shouldNotifyApplicant: params['sendCopy' + denied.index],
+        shouldBlacklist: params['ban' + denied.index],
+      };
 
-    this.accountService.denyApplicant(denyRequest).subscribe(
-      (res: any) => {
-        this.getAndRemoveApplicantByIndex(index);
-        this.toastService.show({
-          body: `Successfully denied applicant ${denied.firstName} ${denied.lastName}.`,
-          preset: ToastPresets.SUCCESS,
-        });
-      },
-      (error: HttpErrorResponse) => {
-        this.toastService.httpError(error);
-      }
-    );
+      this.accountService.denyApplicant(denyRequest).subscribe(
+        (res: any) => {
+          this.getAndRemoveApplicantByIndex(index);
+          this.toastService.show({
+            body: `Successfully denied applicant ${denied.firstName} ${denied.lastName}.`,
+            preset: ToastPresets.SUCCESS,
+          });
+        },
+        (error: HttpErrorResponse) => {
+          this.toastService.httpError(error);
+        }
+      );
+    }
   }
 
   public approveApplicant(index: number): void {

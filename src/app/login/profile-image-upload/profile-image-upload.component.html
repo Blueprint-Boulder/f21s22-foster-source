@@ -1,7 +1,7 @@
 <div class="image-upload-container bg-light-grey">
   <div class="row p-3">
     <div class="col-sm-12 col-md-6 text-center">
-      <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="imageUrl" />
+      <img class="img-fluid mx-auto d-block" id="profile-image-preview" [src]="croppedImageDataUrl" />
       <small>Profile Image Preview</small>
     </div>
     <div class="col-sm-12 col-md-6 mt-sm-3">
@@ -21,15 +21,15 @@
         />
         <button
           type="submit"
-          class="btn btn-primary text-white mt-4"
-          [disabled]="imageUrl == BLANK_PROFILE_URL || !fileChangedAfterUpload"
+          class="btn btn-primary text-white mt-4 upload-button"
+          [disabled]="croppedImageDataUrl == BLANK_PROFILE_URL || imageHasBeenUploaded"
         >
           Upload
         </button>
       </form>
     </div>
   </div>
-  <div *ngIf="imageChangedEvent != ''" class="row">
+  <div *ngIf="imageChangedEvent != ''" class="row image-crop-row">
     <div class="col-sm-1 col-md-3"></div>
     <div class="col-sm-10 col-md-6 mt-5 mb-5 mx-auto">
       <div>

@@ -24,7 +24,7 @@ export class ProfileNotCompletedGuard implements CanActivate {
     if (!environment.useRealAuthService) {
       return of(true);
     }
-    if (!this.authService.validUser()) {
+    if (!this.authService.isAtLeastUser()) {
       this.router.navigate(['login']);
       return of(false);
     }

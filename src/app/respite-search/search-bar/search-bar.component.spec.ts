@@ -8,9 +8,8 @@ describe('SearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchBarComponent ]
-    })
-    .compileComponents();
+      declarations: [SearchBarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +20,25 @@ describe('SearchBarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit the searched string on submit', () => {
+    spyOn(component.searchEvent, 'emit').and.callThrough();
+    component.searchTerm = 'test';
+    component.search();
+    expect(component.searchEvent.emit).toHaveBeenCalledWith('test');
+  });
+  it('should call search on enter', async () => {
+    spyOn(component, 'search');
+    const input: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('input');
+    input.dispatchEvent(
+      new KeyboardEvent('keyup', {
+        key: 'Enter',
+      })
+    );
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(component.search).toHaveBeenCalled();
+    })
   });
 });

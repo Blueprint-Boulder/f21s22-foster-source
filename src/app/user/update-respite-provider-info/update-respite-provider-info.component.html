@@ -1,0 +1,126 @@
+<div *ngIf="currentProviderInfo" class="container">
+  <div class="row mt-5">
+    <div class="col text-center">
+      <h2>Update Your Respite Provider Info</h2>
+    </div>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <p><b>Current Information On File</b></p>
+      <span *ngIf="currentProviderInfo.cityCanProvideRespiteIn"
+        ><b>City Can Provide Respite In: </b> {{ currentProviderInfo.cityCanProvideRespiteIn }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.respiteTravelDistance"
+        ><b>Travel Distance: </b> {{ currentProviderInfo.respiteTravelDistance }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.careForMinAge"
+        ><b>Min Age Able to Care For: </b> {{ currentProviderInfo.careForMinAge }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.careForMaxAge"
+        ><b>Max Age Able to Care For: </b> {{ currentProviderInfo.careForMaxAge }} <br
+      /></span>
+      <span *ngIf="currentProviderInfo.maxNumCareFor"
+        ><b>Max # of Children Able to Care For: </b> {{ currentProviderInfo.maxNumCareFor }} <br
+      /></span>
+      <p>
+        <small
+          ><i
+            >To update your primary weekly availability,
+            <a [routerLink]="'/user/update/primary-availability'">click here</a>.<br />To add or remove a temporary
+            availability, <a [routerLink]="'/user/update/temporary-availability'">click here</a>.</i
+          ></small
+        >
+      </p>
+      <small>Any fields that are not filled out will not be updated.</small>
+    </div>
+  </div>
+  <form [formGroup]="updateProviderInfoForm">
+    <div class="row extra-provider-qs-row can-provide-row">
+      <div class="col-12">
+        <div class="row city-and-miles-row my-3">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="cityCanProvideRespiteIn"><b>City/town you can provide respite in</b></label>
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="cityCanProvideRespiteIn"
+                placeholder="Enter city/town"
+                formControlName="cityCanProvideRespiteIn"
+              />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="respiteTravelDistance"
+                ><b>How far are you willing to travel to provide respite (miles)?</b></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="respiteTravelDistance"
+                type="number"
+                placeholder="Enter distance (miles)"
+                formControlName="respiteTravelDistance"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row age-range-max-num-row">
+          <div class="col-sm-12 col-md-6">
+            <p>
+              <b>If you are providing respite, what age range of children can you care for?</b>
+            </p>
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="careForMinAge" class="mr-2"><i>Min: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="careForMinAge"
+                    type="number"
+                    placeholder="Enter minimum age"
+                    formControlName="careForMinAge"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group form-inline">
+                  <label for="careForMaxAge" class="mr-2"><i>Max: </i></label>
+                  <input
+                    class="form-control p-1 m-0 bottom-border-input"
+                    id="careForMaxAge"
+                    type="number"
+                    placeholder="Enter maximum age"
+                    formControlName="careForMaxAge"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+              <label for="maxNumCareFor"
+                ><b>What is the maximum number of children you are able to care for at one time?</b></label
+              >
+              <input
+                class="form-control p-1 m-0 bottom-border-input"
+                id="maxNumCareFor"
+                type="number"
+                placeholder="Enter number of children"
+                formControlName="maxNumCareFor"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <div class="col-md-3 col-lg-4"></div>
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-5">
+      <button class="btn btn-primary text-white w-100" [disabled]="submittingForm" (click)="onSubmit()">
+        Update Respite Provider Info
+      </button>
+    </div>
+  </div>
+</div>

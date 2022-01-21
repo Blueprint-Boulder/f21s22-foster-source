@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
   styleUrls: ['./account-page.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class AccountPageComponent implements OnInit {
   public currentAccount: Account;

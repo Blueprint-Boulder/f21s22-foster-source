@@ -9,6 +9,7 @@ export interface FiltersReq {
   lgbtExperience?: boolean;
   physicalDisabilityExperience?: boolean;
   intellectualDisabilityExperience?: boolean;
+  medicallyFragileExperience?: boolean;
   ownFirearm?: boolean;
 }
 
@@ -17,5 +18,6 @@ export interface HouseholdBackgroundRadioFilters {
   lgbtExperience: boolean | null;
   physicalDisabilityExperience: boolean | null;
   intellectualDisabilityExperience: boolean | null;
+  medicallyFragileExperience: boolean | null;
   ownFirearm: boolean | null;
 }

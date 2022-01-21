@@ -5,16 +5,19 @@
 export const environment = {
   production: false,
   backendHost: 'http://localhost:3000',
-  useRealAnnouncementService: false,
-  useRealAccountService: false,
-  useRealProfileService: false,
-  useRealAddressService: false,
-  useRealAvailabilityService: false,
-  useRealBlacklistService: false,
-  useRealPhoneNumberService: false,
+  useRealAnnouncementService: true,
+  useRealAccountService: true,
+  useRealProfileService: true,
+  useRealAddressService: true,
+  useRealAvailabilityService: true,
+  useRealBlacklistService: true,
+  useRealPhoneNumberService: true,
   useRealProfilePhotosService: false,
-  useRealAuthService: false,
-  useRealImageService: false,
+  useRealAuthService: true,
+  useRealImageService: true,
+  useRealBugService: true,
+  imageBucket: 'respite-source-images-dev',
+  bucketRegion: 'us-west-1',
 };
 
 /*
