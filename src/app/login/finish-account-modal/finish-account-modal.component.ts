@@ -1,13 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Account } from '../../models/account.model';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Utils } from '../utils';
-import { DayModel } from '../day-availability-input/day-availability-input.component';
+import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { AccountService } from '../../services/account-service/account.service';
-import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PhoneNumber } from '../../models/phonenumber.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormUtils } from '../../common/utils/FormUtils';
 import { ToastPresets } from '../../models/toast.model';
+import { Account } from '../../models/account.model';
+import { Router } from '@angular/router';
+import { Utils } from '../utils';
 import {
   FinishProfileReq,
   HouseholdBackground,
@@ -145,7 +147,7 @@ export class FinishAccountModalComponent implements OnInit {
       careForMedicallyFragile: [null],
       ownsFirearm: [null],
       additionalInfo: [null],
-      dob: [null, Validators.compose([Validators.required, FinishAccountModalComponent.validateDate])],
+      dob: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
       biography: ['', Validators.required],
     });
   }
@@ -172,8 +174,6 @@ export class FinishAccountModalComponent implements OnInit {
         respiteBackground: this.getRespiteBackground(),
         householdBackground: this.getHouseholdBackground(),
       };
-
-      console.log(JSON.stringify(req));
 
       this.accountService.completeProfile(req).subscribe(
         (res) => {
@@ -215,10 +215,16 @@ export class FinishAccountModalComponent implements OnInit {
       relationshipToPrimary: this.finishProfileForm.get('relationshipToPrimary')!.value,
       gender: this.finishProfileForm.get('secGender')!.value,
       email: this.finishProfileForm.get('secEmail')!.value,
-      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
-      phoneNumberType: this.finishProfileForm.get('secPhoneType')!.value,
+      secAccountHolderPhone: this.getSecPhone(),
       pronouns: this.getOptionalStringFromForm('secPronouns'),
       maritalStatus: this.getOptionalStringFromForm('secMaritalStatus'),
+    };
+  }
+
+  private getSecPhone(): PhoneNumber {
+    return {
+      phoneNumber: this.finishProfileForm.get('secPhone')!.value,
+      type: this.finishProfileForm.get('secPhoneType')!.value,
     };
   }
 
@@ -264,6 +270,7 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   public imageUploaded(event: any): void {
+    this.needToUploadImgError = false;
     this.profileImgKey = event;
   }
 
@@ -323,34 +330,6 @@ export class FinishAccountModalComponent implements OnInit {
       this.finishProfileForm.get(fieldName)?.removeValidators(Validators.required);
       this.finishProfileForm.get(fieldName)?.updateValueAndValidity();
     });
-  }
-
-  private static validateDate(control: AbstractControl): ValidationErrors | null {
-    const err = { invalidDate: 'Please enter a valid date.' };
-
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const parsed = FinishAccountModalComponent.parseDateFromInput(control.value as string);
-      const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
-      const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
-      const validYear =
-        parseInt(control.value.substring(6, 10)) > new Date().getFullYear() - 100 &&
-        parseInt(control.value.substring(6, 10)) <= new Date().getFullYear() - 13;
-      if (!validMonth || !validDay || !validYear) {
-        return err;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return err;
-    }
-  }
-
-  private static parseDateFromInput(dateStr: string): Date {
-    const year = parseInt(dateStr.substring(6, 10));
-    const day = parseInt(dateStr.substring(3, 5));
-    const month = parseInt(dateStr.substring(0, 2));
-    return new Date(year, month - 1, day);
   }
 
   private generateRespiteAvailability(): [SimpleAvailability] {

@@ -28,6 +28,7 @@
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "bootstrap": "^4.5.0",
+    "bootstrap-icons": "^1.7.2",
     "google-libphonenumber": "^3.2.25",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",

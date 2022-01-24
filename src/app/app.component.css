@@ -1,0 +1,30 @@
+.bug-tab {
+  position: fixed;
+  width: 250px;
+  bottom: 0%;
+  left: -220px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 998;
+}
+
+.bug-tab:hover {
+  -moz-transform: translatex(220px);
+  -ms-transform: translatex(220px);
+  -o-transform: translatex(220px);
+  -webkit-transform: translatex(220px);
+  transform: translatex(220px);
+  -webkit-transition: 0.15s ease-in-out;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.bug-icon {
+  position: fixed;
+  right: 10px;
+}
+
+.light-grey-text {
+  color: #7f7f7f;
+}

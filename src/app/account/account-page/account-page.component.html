@@ -33,7 +33,7 @@
       <p><b>County or Agency Certified By:</b> {{ currentAccount.certifiedBy }}</p>
       <!-- TODO: Make sure that users should be able to update their case worker information -->
       <p>
-        <a id="edit-cw-link" [routerLink]="'/account/update-case-worker-info'"
+        <a id="edit-cw-link" [routerLink]="'/account/update/case-worker-info'"
           >Click here to update your case worker information.</a
         >
       </p>
@@ -48,7 +48,7 @@
         ><br />{{ currentAccount.address.city }} {{ currentAccount.address.state }},
         {{ currentAccount.address.zipcode }}
       </p>
-      <p><a id="update-address-link" [routerLink]="'/account/update-address'">Update your address</a></p>
+      <p><a id="update-address-link" [routerLink]="'/account/update/address'">Update your address</a></p>
     </div>
     <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0">
       <h3>Phone Number<span *ngIf="currentAccount.secondaryPhoneNumber">s</span></h3>
@@ -63,7 +63,7 @@
         }})
       </p>
       <p>
-        <a id="update-phone-link" [routerLink]="'/account/update-phone-number'"
+        <a id="update-phone-link" [routerLink]="'/account/update/phone-number'"
           >Update your phone number<span *ngIf="currentAccount.secondaryPhoneNumber">s</span
           ><span *ngIf="!currentAccount.secondaryPhoneNumber"> or add a secondary phone number.</span></a
         >
@@ -73,13 +73,18 @@
   <div class="row mt-5">
     <div class="col-sm-12 col-md-6">
       <h3>Password</h3>
-      <p><a href="javascript:void(0)" [routerLink]="'/account/update-password'">Update your password</a></p>
+      <p><a href="javascript:void(0)" [routerLink]="'/account/update/password'">Update your password</a></p>
     </div>
   </div>
   <div class="row mt-5">
     <div class="col-sm-12 col-md-6">
       <h3>Delete Your Account</h3>
       <p><button class="btn btn-danger mt-2 delete-button" (click)="deleteAccount()">Delete Account</button></p>
+    </div>
+    <div class="col-sm-12 col-md-6" *ngIf="isUser && currentAccount.profileCompleted">
+      <h3>Profile</h3>
+      <p><i>To view and edit your profile details, navigate to the profile update page.</i></p>
+      <button class="btn btn-primary text-white" [routerLink]="'/user/update'">Visit Update Profile Page</button>
     </div>
   </div>
 </div>

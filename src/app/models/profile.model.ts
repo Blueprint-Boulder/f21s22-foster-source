@@ -1,9 +1,7 @@
-import { Account } from './account.model';
-import { PhoneNumber } from './phonenumber.model';
-import { AddressReq, AddressRes } from './adress.model';
 import { Availability, SimpleAvailability } from './availability.model';
-import { FullProfileRes } from './get-profile-by-id.models';
+import { AddressReq, AddressRes } from './adress.model';
 import { SmallProfile } from './small-profile.model';
+import { PhoneNumber } from './phonenumber.model';
 
 export interface Profile {
   id: number;
@@ -43,11 +41,11 @@ export interface CreateProfileReq {
 }
 
 export interface UpdateProfileReq {
+  preferredName?: string;
   biography?: string;
-  profileLargeAWSKey?: string;
-  profileSmallAWSKey?: string;
-  availability?: Availability;
-  photos?: string[];
+  gender?: string;
+  pronouns?: string;
+  maritalStatus?: string;
 }
 
 export interface SecondaryAccountHolderReq {
@@ -57,8 +55,7 @@ export interface SecondaryAccountHolderReq {
   relationshipToPrimary: string;
   gender: string;
   email: string;
-  phoneNumber: string;
-  phoneNumberType: string;
+  secAccountHolderPhone: PhoneNumber;
   pronouns?: string;
   maritalStatus?: string;
 }
@@ -73,6 +70,14 @@ export interface RespiteProviderInfoReq {
   availabilities: [SimpleAvailability];
 }
 
+export interface UpdateRespiteProviderInfo {
+  cityCanProvideRespiteIn?: string;
+  respiteTravelDistance?: number;
+  careForMinAge?: number;
+  careForMaxAge?: number;
+  maxNumCareFor?: number;
+}
+
 export interface RespiteBackgroundReq {
   fosterYearsExperience: number;
   totalChildrenCaredFor: number;
@@ -81,12 +86,33 @@ export interface RespiteBackgroundReq {
   respiteProviderInfo?: RespiteProviderInfoReq;
 }
 
+export interface UpdateRespiteBackgroundReq {
+  fosterYearsExperience: number;
+  totalChildrenCaredFor: number;
+  lookingForRespite: boolean;
+}
+
 export interface HouseholdBackground {
   id?: number;
   parentalUnitSize: number;
   householdSize: number;
   childrenInHousehold: number;
   childrenInfo: string;
+  vehicleAccess?: boolean;
+  lgbtCareExperience?: boolean;
+  caredForPhysDisabled?: boolean;
+  caredForIntelDisabled?: boolean;
+  caredForMedicallyFragile?: boolean;
+  ownsFirearm?: boolean;
+  petInfo?: string;
+  additionalDetails?: string;
+}
+
+export interface UpdateHouseholdBackground {
+  parentalUnitSize?: number;
+  householdSize?: number;
+  childrenInHousehold?: number;
+  childrenInfo?: string;
   vehicleAccess?: boolean;
   lgbtCareExperience?: boolean;
   caredForPhysDisabled?: boolean;

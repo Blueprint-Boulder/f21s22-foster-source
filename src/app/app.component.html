@@ -1,3 +1,13 @@
 <app-nav-bar></app-nav-bar>
+<div class="bug-tab pl-3 pb-2 pt-1 bg-secondary text-white text-center mb-2 shadow-lg" (click)="launchBugModal()">
+  <span class="text-light"><small>Something wrong? Tell us!</small> <i class="bi-bug-fill float-right mr-2"></i></span>
+</div>
+<app-bug-report-modal [open]="bugModalOpen" (closeModalEvent)="closeBugModal()"></app-bug-report-modal>
 <app-toasts></app-toasts>
 <router-outlet></router-outlet>
+<footer class="text-center pt-4 pb-2 bg-light-grey fixed-bottom">
+  <p class="light-grey-text">
+    Copyright FosterSource 2022 | Made with <i class="bi bi-heart-fill"></i> by
+    <a href="https://blueprintboulder.org/">Blueprint Boulder</a>
+  </p>
+</footer>

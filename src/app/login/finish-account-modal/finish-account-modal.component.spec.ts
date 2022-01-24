@@ -51,6 +51,7 @@ describe('FinishAccountModalComponent', () => {
   let ownsFirearmControl: AbstractControl;
   let additionalInfoControl: AbstractControl;
   let dobControl: AbstractControl;
+  let biographyControl: AbstractControl;
 
   let submitButton: HTMLButtonElement;
 
@@ -106,6 +107,7 @@ describe('FinishAccountModalComponent', () => {
     ownsFirearmControl = component.finishProfileForm.get('ownsFirearm') as AbstractControl;
     additionalInfoControl = component.finishProfileForm.get('additionalInfo') as AbstractControl;
     dobControl = component.finishProfileForm.get('dob') as AbstractControl;
+    biographyControl = component.finishProfileForm.get('biography') as AbstractControl;
 
     submitButton = fixture.debugElement.nativeElement.querySelector('.submit-button');
   });
@@ -127,6 +129,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
     expect(component.finishProfileForm.invalid).toBeFalse();
   });
   it('should require image uuid for successful submit', () => {
@@ -144,6 +147,8 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
+
     expect(accountService.completeProfile).toHaveBeenCalledTimes(0);
   });
   it('clicking yes add secondary should show secondary form, should require info', async () => {
@@ -160,6 +165,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.secChange({ target: { value: 'true' } });
     fixture.detectChanges();
@@ -182,6 +188,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.secChange({ target: { value: 'false' } });
     fixture.detectChanges();
@@ -204,6 +211,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.respiteProvideChange({ target: { value: 'true' } });
     fixture.detectChanges();
@@ -226,6 +234,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.respiteProvideChange({ target: { value: 'false' } });
     fixture.detectChanges();

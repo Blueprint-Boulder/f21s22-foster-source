@@ -1,6 +1,8 @@
+import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
+import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import * as libphonenumber from 'google-libphonenumber';
 import { PhoneNumberType } from '../../models/phonenumber.model';
+import * as libphonenumber from 'google-libphonenumber';
 
 export class FormUtils {
   public static readonly STATES = [
@@ -106,5 +108,70 @@ export class FormUtils {
         ? null
         : { passwordMatch: 'Passwords do not match.' };
     };
+  }
+
+  public static validateDate(control: AbstractControl): ValidationErrors | null {
+    const err = { invalidDate: 'Please enter a valid date.' };
+
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const parsed = FormUtils.parseDateFromInput(control.value as string);
+      const validMonth = parseInt(control.value.substring(0, 2)) > 0 && parseInt(control.value.substring(0, 2)) <= 12;
+      const validDay = parseInt(control.value.substring(3, 5)) > 0 && parseInt(control.value.substring(3, 5)) <= 31;
+      const validYear = parseInt(control.value.substring(6, 10)) > new Date().getFullYear() - 100;
+      if (!validMonth || !validDay || !validYear) {
+        return err;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      return err;
+    }
+  }
+
+  public static parseDateFromInput(dateStr: string): Date {
+    const year = parseInt(dateStr.substring(6, 10));
+    const day = parseInt(dateStr.substring(3, 5));
+    const month = parseInt(dateStr.substring(0, 2));
+    return new Date(year, month - 1, day);
+  }
+
+  public static generateRespiteAvailability(
+    dayModels: DayModel[],
+    type: AvailabilityType,
+    start?: Date,
+    end?: Date
+  ): SimpleAvailability {
+    const m: DayModel = dayModels.find((dm) => dm.name === 'Monday') as DayModel;
+    const t: DayModel = dayModels.find((dm) => dm.name === 'Tuesday') as DayModel;
+    const w: DayModel = dayModels.find((dm) => dm.name === 'Wednesday') as DayModel;
+    const th: DayModel = dayModels.find((dm) => dm.name === 'Thursday') as DayModel;
+    const f: DayModel = dayModels.find((dm) => dm.name === 'Friday') as DayModel;
+    const sa: DayModel = dayModels.find((dm) => dm.name === 'Saturday') as DayModel;
+    const su: DayModel = dayModels.find((dm) => dm.name === 'Sunday') as DayModel;
+
+    return {
+      type: type,
+      monday: [m.morning, m.afternoon, m.evening, m.overnight],
+      tuesday: [t.morning, t.afternoon, t.evening, t.overnight],
+      wednesday: [w.morning, w.afternoon, w.evening, w.overnight],
+      thursday: [th.morning, th.afternoon, th.evening, th.overnight],
+      friday: [f.morning, f.afternoon, f.evening, f.overnight],
+      saturday: [sa.morning, sa.afternoon, sa.evening, sa.overnight],
+      sunday: [su.morning, su.afternoon, su.evening, su.overnight],
+      startDate: start,
+      endDate: end,
+    };
+  }
+
+  public static hasAvailability(dayModels: DayModel[]): boolean {
+    let hasAvailability = false;
+    dayModels.forEach((dm) => {
+      const dayHasAvailability = dm.morning || dm.afternoon || dm.evening || dm.overnight;
+      if (dayHasAvailability) {
+        hasAvailability = true;
+      }
+    });
+    return hasAvailability;
   }
 }

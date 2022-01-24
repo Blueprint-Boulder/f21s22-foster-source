@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { getClassListFromPreset, Toast, ToastPresets } from '../../models/toast.model';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,7 @@ import { getClassListFromPreset, Toast, ToastPresets } from '../../models/toast.
 export class ToastService {
   public toasts: Toast[] = [];
 
-  show(toast: Toast) {
+  show(toast: Toast): void {
     if (toast.preset) {
       this.toasts.push({
         ...toast,
@@ -35,5 +35,26 @@ export class ToastService {
 
   remove(toast: Toast) {
     this.toasts = this.toasts.filter((t) => t !== toast);
+  }
+
+  success(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.SUCCESS,
+    });
+  }
+
+  error(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.ERROR,
+    });
+  }
+
+  info(body: string): void {
+    this.show({
+      body: body,
+      preset: ToastPresets.REGULAR,
+    });
   }
 }

@@ -8,6 +8,7 @@ import { AuthService } from './services/auth-service/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'f21s22-foster-source';
+  bugModalOpen = false;
 
   constructor(private authService: AuthService) {}
 
@@ -17,5 +18,13 @@ export class AppComponent implements OnInit {
     } else {
       this.authService.logout();
     }
+  }
+
+  launchBugModal(): void {
+    this.bugModalOpen = true;
+  }
+
+  closeBugModal(): void {
+    this.bugModalOpen = false;
   }
 }

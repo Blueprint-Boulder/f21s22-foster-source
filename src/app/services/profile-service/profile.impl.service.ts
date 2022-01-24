@@ -1,11 +1,21 @@
-import { ProfileService } from './profile.service';
-import { CreateProfileReq, GetProfilesRes, ProfileImages, UpdateProfileReq } from '../../models/profile.model';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { FiltersReq } from '../../models/filters.model';
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
 import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
-import { FullProfileRes, ProfileCompletionRes } from '../../models/get-profile-by-id.models';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { FiltersReq } from '../../models/filters.model';
+import { ProfileService } from './profile.service';
+import { Observable } from 'rxjs';
+import {
+  CreateProfileReq,
+  GetProfilesRes,
+  ProfileImages,
+  RespiteProviderInfoReq,
+  SecondaryAccountHolderReq,
+  UpdateHouseholdBackground,
+  UpdateProfileReq,
+  UpdateRespiteBackgroundReq,
+  UpdateRespiteProviderInfo,
+} from '../../models/profile.model';
 
 export class ProfileImplService implements ProfileService {
   constructor(private http: HttpClient) {}
@@ -48,13 +58,55 @@ export class ProfileImplService implements ProfileService {
   }
 
   updateProfile(params: UpdateProfileReq): Observable<FullProfileRes> {
-    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, JSON.stringify(params), {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles`, params, {
+      withCredentials: true,
+    });
+  }
+
+  updateHouseholdBackground(req: UpdateHouseholdBackground): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/household-background`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateSecondaryAccountHolder(req: UpdateSecAccountHolderReq): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/secondary-account-holder`, req, {
+      withCredentials: true,
+    });
+  }
+
+  addSecondaryAccountHolder(req: SecondaryAccountHolderReq): Observable<FullProfileRes> {
+    return this.http.post<FullProfileRes>(`${environment.backendHost}/api/db/profiles/secondary-account-holder`, req, {
+      withCredentials: true,
+    });
+  }
+
+  addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes> {
+    return this.http.post<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-provider-info`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-background`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes> {
+    return this.http.put<FullProfileRes>(`${environment.backendHost}/api/db/profiles/respite-provider-info`, req, {
       withCredentials: true,
     });
   }
 
   getProfileImages(): Observable<ProfileImages> {
     return this.http.get<ProfileImages>(`${environment.backendHost}/api/db/profiles/profile-images`, {
+      withCredentials: true,
+    });
+  }
+
+  getCurrentProfile(): Observable<FullProfileRes> {
+    return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/current`, {
       withCredentials: true,
     });
   }

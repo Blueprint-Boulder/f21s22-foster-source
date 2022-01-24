@@ -1,14 +1,15 @@
-import { Announcement, GetAnnouncementsRes } from '../models/announcement.model';
-import { User } from '../models/user.model';
-import { Applicant } from '../models/applicant.model';
-import { BlacklistedUser } from '../models/blacklisted-user.model';
-import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
-import { Photo } from '../models/profile.model';
+import { Announcement, GetAnnouncementsRes } from '../models/announcement.model';
+import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
+import { AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
+import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { SmallProfile } from '../models/small-profile.model';
+import { Applicant } from '../models/applicant.model';
+import { BugReport } from '../models/bug.model';
+import { Photo } from '../models/profile.model';
+import { User } from '../models/user.model';
 
 const announcements: Announcement[] = [
   {
@@ -297,6 +298,22 @@ export const primaryAvailabilities: Availability[] = [
   },
 ];
 
+export const temporaryAvailabilities: Availability[] = [
+  {
+    id: 2,
+    type: AvailabilityType.TEMPORARY,
+    monday: [true, true, true, false],
+    tuesday: [false, true, true, false],
+    wednesday: [true, true, true, false],
+    thursday: [true, true, false, false],
+    friday: [true, true, true, false],
+    saturday: [false, true, true, true],
+    sunday: [false, true, true, true],
+    start: new Date(),
+    end: new Date(),
+  },
+];
+
 export const mobilePhones: PhoneNumber[] = [
   {
     phoneNumber: '+17209938821',
@@ -369,6 +386,19 @@ export const profiles: FullProfileRes[] = [
             saturday: [false, true, true, true],
             sunday: [true, false, false, false],
           },
+          {
+            id: 2,
+            type: AvailabilityType.TEMPORARY,
+            monday: [true, false, false, false],
+            tuesday: [false, true, true, true],
+            wednesday: [true, false, false, false],
+            thursday: [false, true, true, true],
+            friday: [true, false, true, true],
+            saturday: [false, true, true, true],
+            sunday: [false, false, false, false],
+            start: new Date(),
+            end: new Date(),
+          },
         ],
       },
     },
@@ -381,6 +411,7 @@ export const profiles: FullProfileRes[] = [
       gender: 'male',
       email: 'tbahama@tommyb.com',
       preferredName: 'Tom',
+      maritalStatus: 'Married',
       secAccountHolderPhone: {
         id: 1,
         phoneNumber: '+17207738882',
@@ -452,5 +483,31 @@ export const searchResults: SmallProfile[] = [
     },
     id: 1,
     profileLargeAwsKey: 'largeKey',
+  },
+];
+
+export const bugs: BugReport[] = [
+  {
+    id: 1,
+    description: 'This is the description of the bug',
+    environment: 'Mozilla Firefox VERSION etc.',
+    url: 'https://respite.fostersource.org/user/10',
+    stepsToReproduce: 'Navigate to the profile page',
+    createdAt: new Date(),
+  },
+  {
+    id: 2,
+    description: 'Another nasty bug',
+    environment: 'Mobile device iOS10.32.1',
+    url: 'https://respite.fostersource.org/respite-search',
+    createdAt: new Date(),
+  },
+  {
+    id: 3,
+    description:
+      'This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps. This ones not that bad, but the user is picky. This is a long bug report just to see how the text wraps.',
+    environment: 'Chrome OS 10.3.2.112.3',
+    stepsToReproduce: 'Try to use medically fragile filter on respite search',
+    createdAt: new Date(),
   },
 ];
