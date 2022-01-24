@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { AnnouncementComponent } from './announcement/announcement.component';
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AllAnnouncementsComponent } from './all-announcements/all-announcements.component';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {

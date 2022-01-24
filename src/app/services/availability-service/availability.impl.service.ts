@@ -1,9 +1,9 @@
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { SimpleAvailability } from '../../models/availability.model';
+import { environment } from '../../../environments/environment';
 import { AvailabilityService } from './availability.service';
 import { HttpClient } from '@angular/common/http';
-import { SimpleAvailability } from '../../models/availability.model';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
 
 export class AvailabilityImplService implements AvailabilityService {
   constructor(private http: HttpClient) {}

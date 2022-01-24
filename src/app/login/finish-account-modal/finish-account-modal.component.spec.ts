@@ -129,8 +129,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
-
+    biographyControl.setValue('Test biog');
     expect(component.finishProfileForm.invalid).toBeFalse();
   });
   it('should require image uuid for successful submit', () => {
@@ -148,7 +147,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
+    biographyControl.setValue('Test biog');
 
     expect(accountService.completeProfile).toHaveBeenCalledTimes(0);
   });
@@ -166,7 +165,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.secChange({ target: { value: 'true' } });
     fixture.detectChanges();
@@ -189,7 +188,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.secChange({ target: { value: 'false' } });
     fixture.detectChanges();
@@ -212,7 +211,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.respiteProvideChange({ target: { value: 'true' } });
     fixture.detectChanges();
@@ -235,7 +234,7 @@ describe('FinishAccountModalComponent', () => {
     householdSizeControl.setValue(3);
     numChildrenControl.setValue(3);
     childrenInfoControl.setValue('male 12 bio');
-    biographyControl.setValue('Test biog')
+    biographyControl.setValue('Test biog');
     // @ts-ignore
     component.respiteProvideChange({ target: { value: 'false' } });
     fixture.detectChanges();

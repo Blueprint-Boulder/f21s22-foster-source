@@ -1,8 +1,8 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
-import * as libphonenumber from 'google-libphonenumber';
-import { PhoneNumberType } from '../../models/phonenumber.model';
-import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
+import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { PhoneNumberType } from '../../models/phonenumber.model';
+import * as libphonenumber from 'google-libphonenumber';
 
 export class FormUtils {
   public static readonly STATES = [

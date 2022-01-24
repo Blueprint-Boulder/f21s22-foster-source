@@ -1,15 +1,15 @@
-import { Announcement, GetAnnouncementsRes } from '../models/announcement.model';
-import { User } from '../models/user.model';
-import { Applicant } from '../models/applicant.model';
-import { BlacklistedUser } from '../models/blacklisted-user.model';
-import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { PhoneNumber, PhoneNumbersRes, PhoneNumberType } from '../models/phonenumber.model';
-import { Photo } from '../models/profile.model';
+import { Announcement, GetAnnouncementsRes } from '../models/announcement.model';
+import { Account, Token, CreateAccountRequest } from '../models/account.model';
 import { Availability, AvailabilityType } from '../models/availability.model';
-import { AddressReq, AddressRes, SimpleAddressReq } from '../models/adress.model';
+import { AddressRes, SimpleAddressReq } from '../models/adress.model';
 import { FullProfileRes } from '../models/get-profile-by-id.models';
+import { BlacklistedUser } from '../models/blacklisted-user.model';
 import { SmallProfile } from '../models/small-profile.model';
+import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
+import { Photo } from '../models/profile.model';
+import { User } from '../models/user.model';
 
 const announcements: Announcement[] = [
   {

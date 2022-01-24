@@ -1,7 +1,6 @@
+import { ImagePostRes } from '../../models/image.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpEvent } from '@angular/common/http';
-import { ImagePostRes } from '../../models/image.model';
 
 export type ImgKey = string;
 

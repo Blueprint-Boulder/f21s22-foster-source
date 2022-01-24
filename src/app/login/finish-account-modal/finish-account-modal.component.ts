@@ -1,13 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Account } from '../../models/account.model';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { Utils } from '../utils';
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { AccountService } from '../../services/account-service/account.service';
-import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PhoneNumber } from '../../models/phonenumber.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormUtils } from '../../common/utils/FormUtils';
 import { ToastPresets } from '../../models/toast.model';
+import { Account } from '../../models/account.model';
+import { Router } from '@angular/router';
+import { Utils } from '../utils';
 import {
   FinishProfileReq,
   HouseholdBackground,
@@ -15,8 +17,6 @@ import {
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
 } from '../../models/profile.model';
-import { PhoneNumber } from '../../models/phonenumber.model';
-import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-finish-account-modal',

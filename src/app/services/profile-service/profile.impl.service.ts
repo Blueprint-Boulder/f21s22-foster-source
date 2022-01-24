@@ -1,10 +1,14 @@
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { FiltersReq } from '../../models/filters.model';
 import { ProfileService } from './profile.service';
+import { Observable } from 'rxjs';
 import {
   CreateProfileReq,
   GetProfilesRes,
-  HouseholdBackground,
   ProfileImages,
-  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -12,12 +16,6 @@ import {
   UpdateRespiteBackgroundReq,
   UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { FiltersReq } from '../../models/filters.model';
-import { AvailabilityFilters, DayAvailability, SimpleAvailability } from '../../models/availability.model';
-import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
 
 export class ProfileImplService implements ProfileService {
   constructor(private http: HttpClient) {}

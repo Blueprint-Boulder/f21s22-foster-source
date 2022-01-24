@@ -1,9 +1,7 @@
-import { Account } from './account.model';
-import { PhoneNumber } from './phonenumber.model';
-import { AddressReq, AddressRes } from './adress.model';
 import { Availability, SimpleAvailability } from './availability.model';
-import { FullProfileRes } from './get-profile-by-id.models';
+import { AddressReq, AddressRes } from './adress.model';
 import { SmallProfile } from './small-profile.model';
+import { PhoneNumber } from './phonenumber.model';
 
 export interface Profile {
   id: number;

@@ -1,8 +1,8 @@
+import { PhoneNumbersRes, PhoneNumbersUpdateReq } from '../../models/phonenumber.model';
+import { environment } from '../../../environments/environment';
 import { PhoneNumberService } from './phone-number.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PhoneNumbersRes, PhoneNumbersUpdateReq } from '../../models/phonenumber.model';
-import { environment } from '../../../environments/environment';
 
 export class PhoneNumberImplService implements PhoneNumberService {
   constructor(private http: HttpClient) {}
