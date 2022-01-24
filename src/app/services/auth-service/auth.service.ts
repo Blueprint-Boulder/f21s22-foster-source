@@ -41,6 +41,8 @@ export class AuthService {
       const token = this.cookieService.get('access-token');
       return jwtDecode(token);
     } catch (e) {
+      console.log('Invalid token.');
+      console.log(e);
       return undefined;
     }
   }
