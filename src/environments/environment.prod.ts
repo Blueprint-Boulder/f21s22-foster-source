@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  backendHost: 'http://localhost:3000',
+  backendHost: 'https://respitesource.herokuapp.com',
   useRealAnnouncementService: true,
   useRealAccountService: true,
   useRealProfileService: true,
@@ -9,6 +9,9 @@ export const environment = {
   useRealBlacklistService: true,
   useRealPhoneNumberService: true,
   useRealProfilePhotosService: true,
-  useRealImageService: true,
   useRealAuthService: true,
+  useRealImageService: true,
+  useRealBugService: true,
+  imageBucket: 'respite-source-images-dev',
+  bucketRegion: 'us-west-1',
 };
