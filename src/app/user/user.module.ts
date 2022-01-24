@@ -12,6 +12,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { UpdateProfileCollectionComponent } from './update-profile-collection/update-profile-collection.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgModule } from '@angular/core';
     UpdateRespiteProviderInfoComponent,
     UpdatePrimaryAvailabilityComponent,
     ModifyTempAvailabilityComponent,
+    UpdateProfileCollectionComponent,
   ],
   imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule],
 })
