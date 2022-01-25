@@ -10,6 +10,8 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
+import { PublicUserPageComponentComponent } from './public-user-page-component/public-user-page-component.component';
+import { LoggedInGuard } from '../guards/logged-in/logged-in.guard';
 
 const routes: Routes = [
   {
@@ -55,6 +57,16 @@ const routes: Routes = [
   {
     path: 'create/respite-provider-info',
     component: AddRespiteProviderInfoComponent,
+    canActivate: [PureUserGuard],
+  },
+  {
+    path: ':id',
+    component: PublicUserPageComponentComponent,
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: '',
+    component: PublicUserPageComponentComponent,
     canActivate: [PureUserGuard],
   },
 ];

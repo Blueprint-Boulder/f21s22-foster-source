@@ -12,6 +12,8 @@ import { UserRoutingModule } from './user-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { PublicUserPageComponentComponent } from './public-user-page-component/public-user-page-component.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { NgModule } from '@angular/core';
     UpdateRespiteProviderInfoComponent,
     UpdatePrimaryAvailabilityComponent,
     ModifyTempAvailabilityComponent,
+    PublicUserPageComponentComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule],
+  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule, NgbAccordionModule],
 })
 export class UserModule {}

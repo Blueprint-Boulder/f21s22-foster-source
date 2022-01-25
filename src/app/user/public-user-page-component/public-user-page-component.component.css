@@ -13,9 +13,9 @@ h5.day {
   text-align: center;
 }
 
-.word-wrap {
-  font-size: keep-all;
-}
+/*.word-wrap {*/
+/*  font-size: keep-all;*/
+/*}*/
 
 .profile-column {
   min-width: 223.5px;

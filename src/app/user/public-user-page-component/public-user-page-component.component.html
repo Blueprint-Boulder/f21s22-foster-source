@@ -67,11 +67,16 @@
         <div class="pl-4">
           <div *ngIf="selectedProfile.biography">
             <h4 class="day bio text-left mt-3">About</h4>
-            <div class="text-wrap about-height">
+            <div class="text-wrap about-height text-break">
               <!--              about-height-->
               {{ selectedProfile.biography }}
             </div>
           </div>
+        </div>
+        <div *ngIf="selectedProfile.respiteBackground.respiteProviderInfo" class="w-100">
+          <app-availability-grid
+            [availability]="selectedProfile.respiteBackground.respiteProviderInfo.availabilities[0]"
+          ></app-availability-grid>
         </div>
       </div>
     </div>
