@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   backendHost: 'http://localhost:3000',
   useRealAnnouncementService: true,
   useRealAccountService: true,
@@ -12,7 +12,7 @@ export const environment = {
   useRealAvailabilityService: true,
   useRealBlacklistService: true,
   useRealPhoneNumberService: true,
-  useRealProfilePhotosService: false,
+  useRealProfilePhotosService: true,
   useRealAuthService: true,
   useRealImageService: true,
   useRealBugService: true,

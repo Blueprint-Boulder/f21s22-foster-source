@@ -6,6 +6,7 @@ import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
 import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { SimpleAvailability } from '../../models/availability.model';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -14,7 +15,8 @@ import { ToastService } from '../../services/toast-service/toast.service';
   providers: [profileServiceProvider],
 })
 export class PublicUserPageComponentComponent implements OnInit {
-  id: number;
+  public priAvail: SimpleAvailability | undefined;
+  private id: number;
   private sub: any;
   public selectedProfile: FullProfileRes;
   closeResult = ''; // how modal was closed
@@ -32,12 +34,9 @@ export class PublicUserPageComponentComponent implements OnInit {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params['id'];
     });
-    console.log('User ID: ' + String(this.id));
     this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
-      // console.log(p);
-      // console.log('Object Type: ');
-      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].monday[0]);
-      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0].friday);
+      console.log('User ID: ' + String(this.id));
+      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0]);
       this.selectedProfile = p;
     });
   }
