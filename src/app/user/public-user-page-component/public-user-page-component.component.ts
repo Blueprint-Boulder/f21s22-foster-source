@@ -15,7 +15,7 @@ import { SimpleAvailability } from '../../models/availability.model';
   providers: [profileServiceProvider],
 })
 export class PublicUserPageComponentComponent implements OnInit {
-  public priAvail: SimpleAvailability | undefined;
+  public priAvail: SimpleAvailability;
   private id: number;
   private sub: any;
   public selectedProfile: FullProfileRes;
@@ -35,9 +35,13 @@ export class PublicUserPageComponentComponent implements OnInit {
       this.id = +params['id'];
     });
     this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
-      console.log('User ID: ' + String(this.id));
-      console.log(p.respiteBackground.respiteProviderInfo?.availabilities[0]);
       this.selectedProfile = p;
+      if (p.respiteBackground.respiteProviderInfo) {
+        const avail = p.respiteBackground.respiteProviderInfo.availabilities.find((avail) => avail.type === 'PRIMARY');
+        if (avail) {
+          this.priAvail = avail;
+        }
+      }
     });
   }
 
