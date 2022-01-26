@@ -67,7 +67,7 @@
         <div class="pl-4">
           <div *ngIf="selectedProfile.biography">
             <h4 class="day bio text-left mt-3">About</h4>
-            <div class="text-wrap about-height">
+            <div class="word-wrap about-height">
               <!--              about-height-->
               {{ selectedProfile.biography }}
             </div>
@@ -76,6 +76,7 @@
       </div>
     </div>
 
+    <!--    <button type="button" class="btn btn-primary btn-lg btn-block text-white contact-grid"(click)="open(content)">Contact</button>-->
     <!-- Acc Template -->
     <div class="py-5">
       <ngb-accordion [closeOthers]="true">
