@@ -26,19 +26,27 @@ export class AuthService {
   }
 
   init(): void {
+    console.log('Initting');
     const token = this.getToken();
     if (token) {
+      console.log('token got');
       this.expiresAt = moment().add(token.exp, 'second');
+      console.log(`Expires at ${this.expiresAt}`);
       this.privilegeLevel = token.privilegeLevel;
+      console.log(`PRivilege ${this.privilegeLevel}`);
       this.emitLoggedIn();
     } else {
+      console.log('no token');
       this.privilegeLevel = Privilege.NONE;
     }
   }
 
   getToken(): Token | undefined {
+    console.log('Getting Token');
     try {
       const token = this.cookieService.get('access-token');
+      console.log('cookie exists', token);
+      console.log('jwt:', jwtDecode(token));
       return jwtDecode(token);
     } catch (e) {
       console.log('Invalid token.');
@@ -86,6 +94,7 @@ export class AuthService {
   }
 
   emitLoggedIn(): void {
+    console.log('emitting logged in');
     this.loggedInEvent.emit();
   }
 
