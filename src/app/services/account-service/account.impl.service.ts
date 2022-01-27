@@ -1,5 +1,5 @@
 import { AccountService } from './account.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import {
   Account,
   CaseWorkerInfo,
@@ -17,6 +17,7 @@ import { ApproveApplicantRequest, DenyApplicantRequest } from '../../models/appl
 import { FinishProfileReq } from '../../models/profile.model';
 import { AuthService } from '../auth-service/auth.service';
 import { ChangePasswordReq } from '../../models/change-password';
+import { switchMap } from 'rxjs/operators';
 
 export class AccountImplService implements AccountService {
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -61,9 +62,17 @@ export class AccountImplService implements AccountService {
   }
 
   login(params: LoginRequest): Observable<string> {
-    return this.http.post<string>(`${environment.backendHost}/api/session/login`, params, {
-      withCredentials: true,
-    });
+    return this.http
+      .post<HttpResponse<any>>(`${environment.backendHost}/api/session/login`, params, {
+        withCredentials: true,
+        observe: 'response',
+      })
+      .pipe(
+        switchMap((res) => {
+          console.log(res);
+          return of(res.body as unknown as string);
+        })
+      );
   }
 
   logout(): Observable<any> {
