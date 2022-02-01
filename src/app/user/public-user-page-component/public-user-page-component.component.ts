@@ -38,6 +38,7 @@ export class PublicUserPageComponentComponent implements OnInit {
       this.selectedProfile = p;
       if (p.respiteBackground.respiteProviderInfo) {
         const avail = p.respiteBackground.respiteProviderInfo.availabilities.find((avail) => avail.type === 'PRIMARY');
+        console.log(p);
         if (avail) {
           this.priAvail = avail;
         }

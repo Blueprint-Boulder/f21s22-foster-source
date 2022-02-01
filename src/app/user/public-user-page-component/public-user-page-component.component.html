@@ -142,23 +142,23 @@
               <div class="col-sm-6">Ages of children in household</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.childrenInfo }}</div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="selectedProfile.householdBackground.petInfo">
               <div class="col-sm-6">Pets in household</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.petInfo }}</div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="selectedProfile.householdBackground.lgbtCareExperience">
               <div class="col-sm-6">Experience with LGBTQIA+ youth</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.lgbtCareExperience?.valueOf() }}</div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="selectedProfile.householdBackground.caredForPhysDisabled">
               <div class="col-sm-6">Experience for children with physical disability</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForPhysDisabled }}</div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="selectedProfile.householdBackground.caredForIntelDisabled">
               <div class="col-sm-6">Experience for children with intellectual disability</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.caredForIntelDisabled }}</div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="selectedProfile.householdBackground.ownsFirearm">
               <div class="col-sm-6">Own a firearm</div>
               <div class="col-sm-6">{{ selectedProfile.householdBackground.ownsFirearm }}</div>
             </div>
