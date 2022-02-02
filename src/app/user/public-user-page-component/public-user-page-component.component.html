@@ -68,7 +68,7 @@
           <div *ngIf="selectedProfile.biography">
             <h4 class="day bio text-left mt-3">About</h4>
             <div class="word-wrap about-height">
-              <!--              about-height-->
+              <!-- bout-height-->
               {{ selectedProfile.biography }}
             </div>
             <app-availability-grid [availability]="priAvail"></app-availability-grid>
@@ -77,9 +77,23 @@
       </div>
     </div>
 
+    <!--    <ngb-carousel  *ngIf="selectedProfile.photos"> &lt;!&ndash;    *ngIf="images"&ndash;&gt;-->
+    <!--      <ng-template ngbSlide *ngFor="let img of selectedProfile.photos; index as i">-->
+    <!--        <div class="carousel-caption">-->
+    <!--          <h3>My slide {{i + 1}} title</h3>-->
+    <!--        </div>-->
+    <!--        <a href="https://www.google.fr/?q=Number+{{i+1}}" target="_blank" rel="nofollow noopener noreferrer">-->
+    <!--          <div>-->
+    <!--            <img [src]="img" alt="Image {{i + 1}}">-->
+    <!--          </div>-->
+    <!--        </a>-->
+    <!--      </ng-template>-->
+    <!--    </ngb-carousel>-->
+
     <!--    <button type="button" class="btn btn-primary btn-lg btn-block text-white contact-grid"(click)="open(content)">Contact</button>-->
     <!-- Acc Template -->
-    <div class="py-5">
+
+    <div class="py-5 collapsible">
       <ngb-accordion [closeOthers]="true">
         <ngb-panel id="static-1" title="Certification Background">
           <ng-template ngbPanelContent>

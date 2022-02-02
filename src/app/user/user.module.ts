@@ -12,7 +12,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { PublicUserPageComponentComponent } from './public-user-page-component/public-user-page-component.component';
 
 @NgModule({
@@ -28,6 +28,13 @@ import { PublicUserPageComponentComponent } from './public-user-page-component/p
     ModifyTempAvailabilityComponent,
     PublicUserPageComponentComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule, NgbAccordionModule],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    ReactiveFormsModule,
+    CommonComponentsModule,
+    NgbAccordionModule,
+    NgbCarouselModule,
+  ],
 })
 export class UserModule {}

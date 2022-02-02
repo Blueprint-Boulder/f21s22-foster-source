@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDismissReasons, NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
-import { Profile } from 'src/app/models/profile.model';
+// import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
 import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
-import { ToastService } from '../../services/toast-service/toast.service';
+// import { ToastService } from '../../services/toast-service/toast.service';
 import { SimpleAvailability } from '../../models/availability.model';
 
 @Component({
@@ -34,11 +34,12 @@ export class PublicUserPageComponentComponent implements OnInit {
     this.sub = this.route.params.subscribe((params) => {
       this.id = +params['id'];
     });
+
     this.profileService.getProfileById(this.id).subscribe((p: FullProfileRes) => {
       this.selectedProfile = p;
       if (p.respiteBackground.respiteProviderInfo) {
-        const avail = p.respiteBackground.respiteProviderInfo.availabilities.find((avail) => avail.type === 'PRIMARY');
         console.log(p);
+        const avail = p.respiteBackground.respiteProviderInfo?.availabilities.find((avail) => avail.type === 'PRIMARY');
         if (avail) {
           this.priAvail = avail;
         }

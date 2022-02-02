@@ -1,9 +1,3 @@
-.availability-table {
-  background-color: #fef4e8;
-  min-width: 220px;
-  border-radius: 10px;
-}
-
 hr.line {
   border: 1px solid #000000;
   margin-top: 0px;
@@ -34,53 +28,6 @@ h5.day {
   border-radius: 10px;
   padding: 10px;
   display: inline-block;
-}
-
-.grid-custom {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  grid-auto-rows: minmax(100px, auto);
-}
-
-.monday {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.tuesday {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.wednesday {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.thursday {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.friday {
-  grid-column: 1;
-  grid-row: 3;
-}
-
-.saturday {
-  grid-column: 2;
-  grid-row: 3;
-}
-
-.sunday {
-  grid-column: 1;
-  grid-row: 4;
-}
-
-.contact-grid {
-  grid-column: 2;
-  grid-row: 4;
 }
 
 .contact-quick-facts-background {
@@ -135,16 +82,4 @@ span.second-contact-background {
 
 .modal-background {
   background-color: #fef4e8;
-}
-
-/* .bio {
-  color: white;
-  background-color: #7e69a0;
-  border-radius: 15px;
-  padding: 10px;
-  display: inline-block;
-  text-align: center;
-} */
-.e-accordian {
-  background-color: #ea8a40;
 }
