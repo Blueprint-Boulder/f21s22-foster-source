@@ -42,10 +42,15 @@ export class AuthService {
   }
 
   getToken(): Token | undefined {
+    console.log('Getting Token');
     try {
       const token = this.cookieService.get('access-token');
+      console.log('cookie exists', token);
+      console.log('jwt:', jwtDecode(token));
       return jwtDecode(token);
     } catch (e) {
+      console.log('Invalid token.');
+      console.log(e);
       return undefined;
     }
   }
