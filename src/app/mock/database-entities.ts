@@ -10,6 +10,7 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
+import { FullTopicRes } from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -509,5 +510,23 @@ export const bugs: BugReport[] = [
     environment: 'Chrome OS 10.3.2.112.3',
     stepsToReproduce: 'Try to use medically fragile filter on respite search',
     createdAt: new Date(),
+  },
+];
+
+export const topics: FullTopicRes[] = [
+  {
+    id: 1,
+    title: 'Parenting 101',
+    description:
+      'Come here to discuss all the ins and outs, ups and downs, yada yada about parenting. Then there will be bit more description most likely but I cant imagine that there will be a lot more than this.',
+    replies: 20032,
+    lastReply: new Date(),
+  },
+  {
+    id: 1,
+    title: 'Burger Chat',
+    description: 'Come here to chat about burgers!',
+    replies: 9,
+    lastReply: new Date(),
   },
 ];
