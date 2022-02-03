@@ -48,7 +48,14 @@ export class AuthService {
     try {
       const token = this.cookieService.get('access-token');
       console.log('before jwt decode');
-      console.log(token);
+      console.log(
+        token,
+        typeof token,
+        token === undefined,
+        token === null,
+        token === '',
+        this.cookieService.check('access-token')
+      );
       return jwtDecode(token);
     } catch (e) {
       console.log('something went wrong decoding...');
