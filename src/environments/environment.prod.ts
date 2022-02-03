@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  backendHost: 'https://respitesource.herokuapp.com',
+  backendHost: 'https://api.respitesource.org',
   useRealAnnouncementService: true,
   useRealAccountService: true,
   useRealProfileService: true,

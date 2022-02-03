@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Announcement } from '../../models/announcement.model';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
-import { announcementServiceProvider } from '../../services/announcement-service/announcement.service.provider';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ToastPresets } from '../../models/toast.model';
+import { Announcement } from '../../models/announcement.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-landing-page',
@@ -21,6 +19,7 @@ export class LandingPageComponent implements OnInit {
         this.latestAnnouncement = a;
       },
       (error: HttpErrorResponse) => {
+        console.log(error);
         if (error.status !== 404) {
           this.toastService.httpError(error);
         }
