@@ -33,30 +33,19 @@ export class LoginModalComponent implements OnInit {
     return;
   }
   public loginSubmit(): void {
-    console.log('request to submit');
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      console.log('form is valid... setting localstorage...');
       localStorage.setItem('rememberUser', this.loginForm.get('remember')!.value);
 
       const data: LoginRequest = {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
       };
-      console.log('making call');
       this.accountService.login(data).subscribe(
         (res: string) => {
-          console.log('Call to login service succeeded.');
           this.authService.init();
-          this.router
-            .navigate(['/respite'])
-            .then(() => {
-              console.log('Navigated');
-            })
-            .catch((e) => {
-              console.log(e);
-            });
+          this.router.navigate(['/respite']);
         },
         (err) => {
           this.toastService.httpError(err);
