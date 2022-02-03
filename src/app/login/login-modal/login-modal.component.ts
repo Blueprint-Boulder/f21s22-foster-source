@@ -45,8 +45,16 @@ export class LoginModalComponent implements OnInit {
 
       this.accountService.login(data).subscribe(
         (res: string) => {
+          console.log('Call to login service succeeded.');
           this.authService.init();
-          this.router.navigate(['/respite']);
+          this.router
+            .navigate(['/respite'])
+            .then(() => {
+              console.log('Navigated');
+            })
+            .catch((e) => {
+              console.log(e);
+            });
         },
         (err) => {
           this.toastService.httpError(err);
