@@ -54,7 +54,8 @@ export class AuthService {
         token === undefined,
         token === null,
         token === '',
-        this.cookieService.check('access-token')
+        this.cookieService.check('access-token'),
+        this.cookieService.getAll()
       );
       return jwtDecode(token);
     } catch (e) {
