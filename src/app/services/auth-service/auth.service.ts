@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../../models/account.model';
-import jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtDecodeOptions } from 'jwt-decode';
 import * as moment from 'moment';
 
 export enum Privilege {
@@ -48,9 +48,11 @@ export class AuthService {
     try {
       const token = this.cookieService.get('access-token');
       console.log('before jwt decode');
+      console.log(token);
       return jwtDecode(token);
     } catch (e) {
       console.log('something went wrong decoding...');
+      console.log(e);
       return undefined;
     }
   }
