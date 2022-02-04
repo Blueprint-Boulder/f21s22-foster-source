@@ -34,7 +34,7 @@ export class AnnouncementComponent implements OnInit {
 
   public getFormattedDate(): string {
     if (this.announcement) {
-      return formatDate(this.announcement.datePosted, 'dd/MM/yyyy', 'en-US');
+      return formatDate(this.announcement.datePosted, 'mm/dd/yyyy', 'en-US');
     } else {
       return '';
     }

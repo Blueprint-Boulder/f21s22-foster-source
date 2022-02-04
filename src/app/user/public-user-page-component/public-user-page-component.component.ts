@@ -86,7 +86,7 @@ export class PublicUserPageComponentComponent implements OnInit {
     this.availability = avail ? avail : providerInfo.availabilities[0];
   }
 
-  open(content: any) {
+  openPrimaryContactModal(content: any) {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       backdropClass: 'modal-background',

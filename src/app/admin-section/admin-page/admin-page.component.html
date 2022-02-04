@@ -1,4 +1,4 @@
-<div class="container comp bg-white">
+<div class="container comp bg-white pb-5">
   <ul class="nav nav-tabs mt-5 border-bottom-0 mb-3">
     <li class="nav-item">
       <a class="nav-link" [ngClass]="{ active: router.url === '/admin' }" aria-current="page" [routerLink]="'/admin'"
@@ -44,7 +44,7 @@
       >
     </li>
   </ul>
-  <div class="router-container">
+  <div class="router-container mb-5">
     <router-outlet></router-outlet>
   </div>
 </div>
