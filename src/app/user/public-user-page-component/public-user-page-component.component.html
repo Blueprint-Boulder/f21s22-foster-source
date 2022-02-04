@@ -11,6 +11,11 @@
               <p>
                 <b>{{ selectedProfile.preferredName }}</b
                 ><br />
+                <i
+                  >{{ selectedProfile.gender
+                  }}<span *ngIf="selectedProfile.pronouns"> | {{ selectedProfile.pronouns }}</span></i
+                >
+                <br />
                 <i *ngIf="selectedProfile.secAccountHolder" class="text-muted"><small>Primary Account Holder</small></i>
                 <br *ngIf="selectedProfile.secAccountHolder" />
                 <i class="text-muted">{{ getDistance() }} miles away</i>
@@ -48,6 +53,12 @@
               <a href="#" class="card-link">Contact Secondary Account Holder</a>
             </div>
           </div>
+        </div>
+      </div>
+      <div *ngIf="isOwnProfile" class="row edit-row">
+        <div class="col-md-2 col-lg-3"></div>
+        <div class="col-sm-12 col-md-8 col-lg-6">
+          <a class="btn btn-secondary w-100" [routerLink]="'/user/update'">Edit Profile</a>
         </div>
       </div>
     </div>

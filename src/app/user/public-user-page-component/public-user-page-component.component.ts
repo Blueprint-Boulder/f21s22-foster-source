@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalDismissReasons, NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FullProfileRes, RespiteProviderInfoRes } from 'src/app/models/get-profile-by-id.models';
-import { Profile } from 'src/app/models/profile.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
-import { profileServiceProvider } from 'src/app/services/profile-service/profile.service.provider';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { Availability, SimpleAvailability } from '../../models/availability.model';
+import { SimpleAvailability } from '../../models/availability.model';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
 
@@ -14,11 +12,11 @@ import { FormUtils } from '../../common/utils/FormUtils';
   selector: 'app-public-user-page-component',
   templateUrl: './public-user-page-component.component.html',
   styleUrls: ['./public-user-page-component.component.scss'],
-  providers: [profileServiceProvider],
 })
 export class PublicUserPageComponentComponent implements OnInit {
   public selectedProfile: FullProfileRes;
   public availability: SimpleAvailability;
+  public isOwnProfile = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,16 +27,22 @@ export class PublicUserPageComponentComponent implements OnInit {
   ) {
     config.closeOthers = true;
     config.type = 'light';
-    // TODO: If you are looking at your own profile then add the edit profile button
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
       if (id === undefined || id === null) {
-        // get current profile.
-        this.toastService.info('Getting current profile but its not implemented yet.');
-        // TODO: Implement getting the current account!
+        this.profileService.getCurrentProfile().subscribe(
+          (p) => {
+            this.selectedProfile = p;
+            this.isOwnProfile = true;
+            this.getAvailability();
+          },
+          (err) => {
+            this.toastService.httpError(err);
+          }
+        );
       } else {
         this.profileService.getProfileById(id).subscribe(
           (p: FullProfileRes) => {
@@ -80,11 +84,6 @@ export class PublicUserPageComponentComponent implements OnInit {
     const avail = providerInfo.availabilities.find((avail) => avail.type === 'TEMPORARY');
 
     this.availability = avail ? avail : providerInfo.availabilities[0];
-  }
-
-  returnAge(birthday: Date) {
-    const now = new Date().getFullYear();
-    return now - birthday.getFullYear();
   }
 
   open(content: any) {
