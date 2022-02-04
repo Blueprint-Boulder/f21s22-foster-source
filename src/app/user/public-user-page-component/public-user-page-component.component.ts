@@ -29,6 +29,7 @@ export class PublicUserPageComponentComponent implements OnInit {
   ) {
     config.closeOthers = true;
     config.type = 'light';
+    // TODO: If you are looking at your own profile then add the edit profile button
   }
 
   ngOnInit(): void {
