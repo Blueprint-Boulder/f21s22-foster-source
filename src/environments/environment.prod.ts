@@ -3,7 +3,7 @@ export const environment = {
   backendHost: 'https://api.fostersource.org',
   useRealAnnouncementService: true,
   useRealAccountService: true,
-  useRealProfileService: true,
+  useRealProfileService: false,
   useRealAddressService: true,
   useRealAvailabilityService: true,
   useRealBlacklistService: true,

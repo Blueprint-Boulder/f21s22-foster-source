@@ -1,0 +1,249 @@
+<div class="container my-5" *ngIf="selectedProfile">
+  <div class="row main-row">
+    <div class="col-md-4 profile-info-col">
+      <div class="row profile-image row">
+        <div class="container-fluid">
+          <div class="row profile-image text-center">
+            <img [src]="getProfileSrc()" class="rounded w-75 m-auto" alt="profile picture" />
+          </div>
+          <div class="row profile-image-info">
+            <div class="col text-center mt-3">
+              <p>
+                <b>{{ selectedProfile.preferredName }}</b
+                ><br />
+                <i
+                  >{{ selectedProfile.gender
+                  }}<span *ngIf="selectedProfile.pronouns"> | {{ selectedProfile.pronouns }}</span></i
+                >
+                <br />
+                <i *ngIf="selectedProfile.secAccountHolder" class="text-muted"><small>Primary Account Holder</small></i>
+                <br *ngIf="selectedProfile.secAccountHolder" />
+                <i class="text-muted">{{ getDistance() }} miles away</i>
+                <br />
+                <i class="text-muted">{{ getAge() }} years old</i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row secondary-acc-holder-row" *ngIf="selectedProfile.secAccountHolder">
+        <div class="col">
+          <div class="card w-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title mb-0">{{ selectedProfile.secAccountHolder.preferredName }}</h5>
+              <small class="card-subtitle mb-2 text-muted mb-2"><i>Secondary Account Holder</i></small>
+              <div class="sec-info-cont">
+                <table class="table my-4">
+                  <tbody>
+                    <tr>
+                      <td>Relationship to main account holder</td>
+                      <td>{{ selectedProfile.secAccountHolder.relationshipToPrimary }}</td>
+                    </tr>
+                    <tr *ngIf="selectedProfile.secAccountHolder.pronouns">
+                      <td>Pronouns</td>
+                      <td>{{ selectedProfile.secAccountHolder.pronouns }}</td>
+                    </tr>
+                    <tr>
+                      <td>Gender</td>
+                      <td>{{ selectedProfile.secAccountHolder.gender }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <a href="#" class="card-link">Contact Secondary Account Holder</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isOwnProfile" class="row edit-row">
+        <div class="col-md-2 col-lg-3"></div>
+        <div class="col-sm-12 col-md-8 col-lg-6">
+          <a class="btn btn-secondary w-100" [routerLink]="'/user/update'">Edit Profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 profile-desc-col">
+      <div class="row bio row">
+        <div class="col">
+          <h3>About {{ selectedProfile.preferredName }}</h3>
+          <p>{{ selectedProfile.biography }}</p>
+        </div>
+      </div>
+      <div class="row accordion-row mt-5">
+        <div class="col">
+          <h4>Additional Information</h4>
+          <div class="mt-3 shadow-sm">
+            <ngb-accordion [closeOthers]="true" activeIds="static-1">
+              <ngb-panel id="static-1" title="Foster Background">
+                <ng-template ngbPanelContent>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Years as a foster parent</td>
+                        <td>{{ selectedProfile.respiteBackground.fosterYearsExperience }}</td>
+                      </tr>
+                      <tr>
+                        <td>Total foster children cared for</td>
+                        <td>{{ selectedProfile.respiteBackground.totalChildrenCaredFor }}</td>
+                      </tr>
+                      <tr>
+                        <td>Can you provide respite care?</td>
+                        <td>{{ selectedProfile.respiteBackground.canProvideRespite ? "Yes" : "No" }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel
+                id="static-2"
+                title="Respite Provider Info"
+                *ngIf="
+                  selectedProfile.respiteBackground.canProvideRespite &&
+                  selectedProfile.respiteBackground.respiteProviderInfo
+                "
+              >
+                <ng-template ngbPanelContent>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>City able to provide respite in</td>
+                        <td>{{ selectedProfile.respiteBackground.respiteProviderInfo.cityCanProvideRespiteIn }}</td>
+                      </tr>
+                      <tr>
+                        <td>Distance able to travel to provide respite</td>
+                        <td>{{ selectedProfile.respiteBackground.respiteProviderInfo.respiteTravelDistance }} miles</td>
+                      </tr>
+                      <tr>
+                        <td>Age range of children able to care for</td>
+                        <td>
+                          {{ selectedProfile.respiteBackground.respiteProviderInfo.careForMinAge }} -
+                          {{ selectedProfile.respiteBackground.respiteProviderInfo.careForMaxAge }} years old
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Max # of children able to care for</td>
+                        <td>{{ selectedProfile.respiteBackground.respiteProviderInfo.maxNumCareFor }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="static-3" title="Household Background">
+                <ng-template ngbPanelContent>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Size of parental unit</td>
+                        <td>{{ selectedProfile.householdBackground.parentalUnitSize }}</td>
+                      </tr>
+                      <tr>
+                        <td># children already in household</td>
+                        <td>{{ selectedProfile.householdBackground.childrenInHousehold }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.vehicleAccess !== undefined">
+                        <td>Has reliable access to a vehicle</td>
+                        <td>{{ selectedProfile.householdBackground.vehicleAccess ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.lgbtCareExperience !== undefined">
+                        <td>Experience caring for LGBTQ+ children</td>
+                        <td>{{ selectedProfile.householdBackground.lgbtCareExperience ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.caredForMedicallyFragile !== undefined">
+                        <td>Experience caring for medically fragile children</td>
+                        <td>{{ selectedProfile.householdBackground.caredForMedicallyFragile ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.caredForPhysDisabled !== undefined">
+                        <td>Experience caring for physically disabled children</td>
+                        <td>{{ selectedProfile.householdBackground.caredForPhysDisabled ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.caredForIntelDisabled !== undefined">
+                        <td>Experience caring for intellectually disabled children</td>
+                        <td>{{ selectedProfile.householdBackground.caredForIntelDisabled ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.ownsFirearm !== undefined">
+                        <td>Does any member of the household own a firearm?</td>
+                        <td>{{ selectedProfile.householdBackground.ownsFirearm ? "Yes" : "No" }}</td>
+                      </tr>
+                      <tr>
+                        <td>Children in the household</td>
+                        <td>{{ selectedProfile.householdBackground.childrenInfo }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.additionalDetails">
+                        <td>Additional relevant information</td>
+                        <td>{{ selectedProfile.householdBackground.additionalDetails }}</td>
+                      </tr>
+                      <tr *ngIf="selectedProfile.householdBackground.petInfo">
+                        <td>Pets in the household</td>
+                        <td>{{ selectedProfile.householdBackground.petInfo }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row avail-row">
+    <span class="mt-5 mb-3"
+      ><i>This user has indicated that they are available to provide respite care at the following times.</i></span
+    >
+    <div class="col">
+      <app-availability-grid [availability]="availability"></app-availability-grid>
+    </div>
+  </div>
+  <div class="row mt-5 mb-5">
+    <div class="col-md-3"></div>
+    <div class="col-sm-12 col-md-6">
+      <button type="button" class="btn btn-primary btn-lg btn-block text-white contact-grid" (click)="open(content)">
+        Contact
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!selectedProfile">Loading profile...</div>
+
+<!-- Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Contact Information</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-append contact-modal">
+            <span
+              ><span>Email: </span
+              ><a href="mailto:{{ selectedProfile.account.email }}"> {{ selectedProfile.account.email }}</a></span
+            >
+            <br />
+            <div class="spacer"></div>
+            <span
+              ><span>{{ selectedProfile.account.primaryPhoneNumber.type }}: </span>
+              <a href="tel:{{ selectedProfile.account.primaryPhoneNumber.phoneNumber }}">
+                {{ formatPhoneNumber(selectedProfile.account.primaryPhoneNumber.phoneNumber) }}</a
+              ></span
+            >
+            <br />
+            <div class="spacer"></div>
+            <span *ngIf="selectedProfile.account.secondaryPhoneNumber"
+              ><span>{{ selectedProfile.account.secondaryPhoneNumber?.type }}: </span
+              ><a href="tel:{{ selectedProfile.account.secondaryPhoneNumber?.phoneNumber }}">
+                {{ formatPhoneNumber(selectedProfile.account.secondaryPhoneNumber.phoneNumber) }}</a
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>

@@ -132,7 +132,7 @@ export interface FinishProfileReq {
   pronouns?: string;
   maritalStatus?: string;
   biography: string;
-  secondaryAccountHolder?: SecondaryAccountHolderReq;
+  secAccountHolder?: SecondaryAccountHolderReq;
   respiteBackground: RespiteBackgroundReq;
   householdBackground: HouseholdBackground;
 }

@@ -170,7 +170,7 @@ export class FinishAccountModalComponent implements OnInit {
         biography: this.finishProfileForm.get('biography')!.value,
         pronouns: this.getOptionalStringFromForm('pronouns'),
         maritalStatus: this.getOptionalStringFromForm('maritalStatus'),
-        secondaryAccountHolder: this.getSecondaryAccountHolderInfo(),
+        secAccountHolder: this.getSecondaryAccountHolderInfo(),
         respiteBackground: this.getRespiteBackground(),
         householdBackground: this.getHouseholdBackground(),
       };
