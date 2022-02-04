@@ -1,0 +1,7 @@
+<div *ngIf="announcements" class="container">
+  <h3 class="my-5">Past Announcements From Foster Source</h3>
+  <div *ngFor="let announcement of announcements">
+    <app-announcement [announcement]="announcement"></app-announcement>
+  </div>
+</div>
+<!--TODO: No announcements found-->

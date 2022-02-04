@@ -1,4 +1,5 @@
 import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { FiltersReq } from '../../models/filters.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -15,8 +16,6 @@ import {
   UpdateRespiteBackgroundReq,
   UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
-import { FiltersReq } from '../../models/filters.model';
-import { Availability, SimpleAvailability } from '../../models/availability.model';
 
 @Injectable({
   providedIn: 'root',

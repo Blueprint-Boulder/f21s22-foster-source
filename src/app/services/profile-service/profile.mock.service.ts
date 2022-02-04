@@ -1,11 +1,12 @@
+import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
+import { profiles, searchResults } from '../../mock/database-entities';
+import { FiltersReq } from '../../models/filters.model';
 import { ProfileService } from './profile.service';
+import { Observable, of } from 'rxjs';
 import {
   CreateProfileReq,
   GetProfilesRes,
-  HouseholdBackground,
-  Profile,
   ProfileImages,
-  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -13,11 +14,6 @@ import {
   UpdateRespiteBackgroundReq,
   UpdateRespiteProviderInfo,
 } from '../../models/profile.model';
-import { Observable, of } from 'rxjs';
-import { profiles, searchResults } from '../../mock/database-entities';
-import { FiltersReq } from '../../models/filters.model';
-import { FullProfileRes, ProfileCompletionRes, UpdateSecAccountHolderReq } from '../../models/get-profile-by-id.models';
-import { Availability, SimpleAvailability } from '../../models/availability.model';
 
 export class ProfileMockService implements ProfileService {
   createProfile(params: CreateProfileReq): Observable<FullProfileRes> {

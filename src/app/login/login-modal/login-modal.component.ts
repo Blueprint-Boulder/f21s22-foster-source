@@ -42,7 +42,6 @@ export class LoginModalComponent implements OnInit {
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
       };
-
       this.accountService.login(data).subscribe(
         (res: string) => {
           this.authService.init();

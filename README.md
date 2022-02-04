@@ -10,10 +10,8 @@
   - [x] Capture frontend user when they have not yet completed their account
     - user should not be able to visit any other page until they complete their account
 - [ ] Deployment
-  - [ ] Make sure all configurations work in the cloud
-  - [ ] Dockerize the backend?
-  - [ ] Set up CI/CD
-  - [ ] Set up AWS database
+  - [ ] Bakend to Heroku
+  - [ ] Frontent to AWS
 - [ ] AWS
   - [ ] Re-add everyone to AWS
   - [ ] Get out of sandbox mode on emails
@@ -35,7 +33,7 @@
   - [ ] Change phone number back end
 - [ ] Profile Page
   - [x] Finish profile page
-  - [ ] Allow updating of attributes for profile
+  - [x] Allow updating of attributes for profile
 - [ ] Login
   - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [x] Logout
@@ -67,7 +65,7 @@
 - [ ] Get list of all staff accounts for admins
 - [ ] Periodically go through and get rid of unverified accounts
 - [ ] Reject address if not coords
-- [ ] Add temporary availabilities
+- [x] Add temporary availabilities
 
 ## Testing
 

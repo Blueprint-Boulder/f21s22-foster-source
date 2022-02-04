@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Token } from '../../models/account.model';
-import jwtDecode from 'jwt-decode';
+import jwtDecode, { JwtDecodeOptions } from 'jwt-decode';
 import * as moment from 'moment';
 
 export enum Privilege {

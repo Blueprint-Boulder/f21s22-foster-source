@@ -81,5 +81,10 @@
       <h3>Delete Your Account</h3>
       <p><button class="btn btn-danger mt-2 delete-button" (click)="deleteAccount()">Delete Account</button></p>
     </div>
+    <div class="col-sm-12 col-md-6" *ngIf="isUser && currentAccount.profileCompleted">
+      <h3>Profile</h3>
+      <p><i>To view and edit your profile details, navigate to the profile update page.</i></p>
+      <button class="btn btn-primary text-white" [routerLink]="'/user/update'">Visit Update Profile Page</button>
+    </div>
   </div>
 </div>
