@@ -309,8 +309,8 @@ export const temporaryAvailabilities: Availability[] = [
     friday: [true, true, true, false],
     saturday: [false, true, true, true],
     sunday: [false, true, true, true],
-    start: new Date(),
-    end: new Date(),
+    startDate: new Date(),
+    endDate: new Date(),
   },
 ];
 
@@ -337,11 +337,12 @@ export const phoneNumbersRes: PhoneNumbersRes[] = [
 export const profiles: FullProfileRes[] = [
   {
     id: 1,
-    biography: 'This is the biography of the profile.',
-    preferredName: 'Jace',
+    biography:
+      'Hi! My name is Jace Jackson and Im very passionate about childcare. Ive been fostering children for 12 years and I hope to be doing it for the rest of my life. Im very active, I love to ski, and I have 3 dogs that love kids too.',
+    preferredName: 'Jace Jackson',
     dob: new Date(),
-    profileLargeAwsKey: 'awskey_large',
-    profileSmallAwsKey: 'awskey_small',
+    profileLargeAwsKey: 'blank-profile-image',
+    profileSmallAwsKey: 'blank-profile-image',
     gender: 'male',
     pronouns: 'he/his',
     maritalStatus: 'single',
@@ -396,8 +397,8 @@ export const profiles: FullProfileRes[] = [
             friday: [true, false, true, true],
             saturday: [false, true, true, true],
             sunday: [false, false, false, false],
-            start: new Date(),
-            end: new Date(),
+            startDate: new Date(),
+            endDate: new Date(),
           },
         ],
       },
@@ -436,12 +437,12 @@ export const profiles: FullProfileRes[] = [
       },
       primaryPhoneNumber: {
         id: 1,
-        phoneNumber: '+193993921',
+        phoneNumber: '+17208837746',
         type: PhoneNumberType.Mobile,
       },
       secondaryPhoneNumber: {
         id: 1,
-        phoneNumber: '+8889999999',
+        phoneNumber: '+13033465534',
         type: PhoneNumberType.Mobile,
       },
     },

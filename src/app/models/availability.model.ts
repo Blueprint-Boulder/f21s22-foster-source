@@ -15,8 +15,8 @@ export interface Availability {
   friday: DayAvailability;
   saturday: DayAvailability;
   sunday: DayAvailability;
-  start?: Date;
-  end?: Date;
+  startDate?: Date;
+  endDate?: Date;
 }
 
 export interface AvailabilityFilters {

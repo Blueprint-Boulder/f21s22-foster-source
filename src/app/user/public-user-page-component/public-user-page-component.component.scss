@@ -148,3 +148,24 @@ span.second-contact-background {
 .e-accordian {
   background-color: #ea8a40;
 }
+
+::ng-deep .card .card-header button:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+  text-decoration: none !important;
+}
+::ng-deep .card .card-header button:active {
+  box-shadow: none !important;
+  outline: 0px !important;
+  text-decoration: none !important;
+}
+
+::ng-deep .card .card-header button:hover {
+  box-shadow: none !important;
+  outline: 0px !important;
+  text-decoration: none !important;
+}
+
+::ng-deep .card .card-header {
+  background-color: white !important;
+}

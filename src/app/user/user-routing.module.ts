@@ -10,7 +10,6 @@ import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add
 import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
-import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
 import { LoggedInGuard } from '../guards/logged-in/logged-in.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
