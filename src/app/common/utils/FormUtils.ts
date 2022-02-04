@@ -85,6 +85,12 @@ export class FormUtils {
     return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.E164);
   }
 
+  public static prettifyValidPhoneNumber(num: string): string {
+    const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+    const parsed = phoneUtil.parse(num, 'US');
+    return phoneUtil.format(parsed, libphonenumber.PhoneNumberFormat.NATIONAL);
+  }
+
   public static getPhoneTypes(): string[] {
     const types: string[] = [];
     Object.keys(PhoneNumberType).forEach((type) => {

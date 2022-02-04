@@ -12,7 +12,7 @@ export const environment = {
   useRealAvailabilityService: true,
   useRealBlacklistService: true,
   useRealPhoneNumberService: true,
-  useRealProfilePhotosService: false,
+  useRealProfilePhotosService: true,
   useRealAuthService: true,
   useRealImageService: true,
   useRealBugService: true,
