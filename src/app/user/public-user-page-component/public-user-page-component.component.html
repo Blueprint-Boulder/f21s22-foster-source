@@ -50,12 +50,14 @@
                   </tbody>
                 </table>
               </div>
-              <a href="#" class="card-link">Contact Secondary Account Holder</a>
+              <a href="javascript: void(0)" class="card-link" (click)="openPrimaryContactModal(secondaryContent)"
+                >Contact Secondary Account Holder</a
+              >
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="isOwnProfile" class="row edit-row">
+      <div *ngIf="isOwnProfile" class="row edit-row mt-5">
         <div class="col-md-2 col-lg-3"></div>
         <div class="col-sm-12 col-md-8 col-lg-6">
           <a class="btn btn-secondary w-100" [routerLink]="'/user/update'">Edit Profile</a>
@@ -197,7 +199,11 @@
   <div class="row mt-5 mb-5">
     <div class="col-md-3"></div>
     <div class="col-sm-12 col-md-6">
-      <button type="button" class="btn btn-primary btn-lg btn-block text-white contact-grid" (click)="open(content)">
+      <button
+        type="button"
+        class="btn btn-primary btn-lg btn-block text-white contact-grid"
+        (click)="openPrimaryContactModal(content)"
+      >
         Contact
       </button>
     </div>
@@ -245,5 +251,41 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #secondaryContent let-modal2>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-secondary">Secondary Account Holder Contact Information</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal2.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-append contact-modal" *ngIf="selectedProfile.secAccountHolder">
+            <span
+              ><span>Email: </span
+              ><a href="mailto:{{ selectedProfile.secAccountHolder?.email }}">
+                {{ selectedProfile.secAccountHolder?.email }}</a
+              ></span
+            >
+            <br />
+            <div class="spacer"></div>
+            <span
+              ><span>{{ selectedProfile.secAccountHolder!.secAccountHolderPhone!.type }}: </span>
+              <a href="tel:{{ (selectedProfile.secAccountHolder?.secAccountHolderPhone)!.phoneNumber }}">
+                {{ formatPhoneNumber((selectedProfile.secAccountHolder?.secAccountHolderPhone)!.phoneNumber) }}</a
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal2.close('Save click')">Close</button>
   </div>
 </ng-template>
