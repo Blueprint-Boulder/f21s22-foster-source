@@ -18,6 +18,7 @@ export interface FullProfileRes {
   photos: Photo[];
   secAccountHolder?: SecAccountHolderRes;
   account: PublicAccountFields;
+  distance?: number;
 }
 
 export interface HouseholdBackgroundRes {

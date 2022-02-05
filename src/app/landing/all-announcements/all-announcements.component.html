@@ -1,7 +1,19 @@
-<div *ngIf="announcements" class="container">
+<div *ngIf="announcements && announcements.length > 0" class="container">
   <h3 class="my-5">Past Announcements From Foster Source</h3>
   <div *ngFor="let announcement of announcements">
     <app-announcement [announcement]="announcement"></app-announcement>
   </div>
 </div>
-<!--TODO: No announcements found-->
+<div *ngIf="!announcements || announcements.length === 0" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="my-5">Past Announcements From Foster Source</h3>
+    </div>
+    <div class="col-12 text-center">
+      <i>No announcements found. Check back later!</i>
+    </div>
+    <div class="col-12 text-center mt-4">
+      <a class="btn btn-primary text-white" [routerLink]="'/'">Go Home</a>
+    </div>
+  </div>
+</div>
