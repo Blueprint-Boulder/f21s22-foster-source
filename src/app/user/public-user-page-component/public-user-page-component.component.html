@@ -18,8 +18,10 @@
                 <br />
                 <i *ngIf="selectedProfile.secAccountHolder" class="text-muted"><small>Primary Account Holder</small></i>
                 <br *ngIf="selectedProfile.secAccountHolder" />
-                <i class="text-muted">{{ getDistance() }} miles away</i>
-                <br />
+                <i *ngIf="selectedProfile.distance !== undefined" class="text-muted"
+                  >{{ selectedProfile.distance | number: "1.2-2" }} miles away</i
+                >
+                <br *ngIf="selectedProfile.distance !== undefined" />
                 <i class="text-muted">{{ getAge() }} years old</i>
               </p>
             </div>
