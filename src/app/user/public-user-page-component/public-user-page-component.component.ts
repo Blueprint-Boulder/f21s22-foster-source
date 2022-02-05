@@ -57,11 +57,6 @@ export class PublicUserPageComponentComponent implements OnInit {
     });
   }
 
-  public getDistance(): number {
-    // TODO: implement real distance!
-    return 12.4;
-  }
-
   public getAge(): number {
     const now = new Date().getFullYear();
     return now - this.selectedProfile.dob.getFullYear();

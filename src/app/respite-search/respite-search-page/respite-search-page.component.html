@@ -13,14 +13,23 @@
     </div>
   </div>
 </div>
-<div class="row mb-5">
-  <app-search-results class="w-100" [profiles]="results" [searching]="searching"></app-search-results>
+<div *ngIf="results && results.length > 0" class="w-100 h-100">
+  <div class="row mb-5">
+    <app-search-results class="w-100" [profiles]="results" [searching]="searching"></app-search-results>
+  </div>
+  <div class="page-footer">
+    <ngb-pagination
+      [(page)]="resultPage"
+      [pageSize]="resultsPerPage"
+      [collectionSize]="totalResults"
+      (pageChange)="changePage($event)"
+    ></ngb-pagination>
+  </div>
 </div>
-<div class="page-footer">
-  <ngb-pagination
-    [(page)]="resultPage"
-    [pageSize]="resultsPerPage"
-    [collectionSize]="totalResults"
-    (pageChange)="changePage($event)"
-  ></ngb-pagination>
+<div *ngIf="!results || results.length === 0" class="row">
+  <div class="col-12 text-center mt-5">
+    <p>We didn't find any profiles &nbsp;<i class="bi bi-emoji-frown"></i></p>
+    <br />
+    <i> Check back later!</i>
+  </div>
 </div>

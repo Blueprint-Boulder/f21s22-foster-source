@@ -18,8 +18,10 @@
                 <br />
                 <i *ngIf="selectedProfile.secAccountHolder" class="text-muted"><small>Primary Account Holder</small></i>
                 <br *ngIf="selectedProfile.secAccountHolder" />
-                <i class="text-muted">{{ getDistance() }} miles away</i>
-                <br />
+                <i *ngIf="selectedProfile.distance !== undefined" class="text-muted"
+                  >{{ selectedProfile.distance | number: "1.2-2" }} miles away</i
+                >
+                <br *ngIf="selectedProfile.distance !== undefined" />
                 <i class="text-muted">{{ getAge() }} years old</i>
               </p>
             </div>
@@ -30,7 +32,9 @@
         <div class="col">
           <div class="card w-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title mb-0">{{ selectedProfile.secAccountHolder.preferredName }}</h5>
+              <h5 class="card-title mb-0">
+                {{ selectedProfile.secAccountHolder.preferredName }}<i class="bi bi-person-circle float-right"></i>
+              </h5>
               <small class="card-subtitle mb-2 text-muted mb-2"><i>Secondary Account Holder</i></small>
               <div class="sec-info-cont">
                 <table class="table my-4">
@@ -64,10 +68,10 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 profile-desc-col">
+    <div class="col-md-8 profile-desc-col mt-5 mt-md-0">
       <div class="row bio row">
         <div class="col">
-          <h3>About {{ selectedProfile.preferredName }}</h3>
+          <h3>About {{ selectedProfile.preferredName }}<i class="bi bi-info-square float-right"></i></h3>
           <p>{{ selectedProfile.biography }}</p>
         </div>
       </div>
@@ -188,12 +192,23 @@
       </div>
     </div>
   </div>
-  <div class="row avail-row">
-    <span class="mt-5 mb-3"
-      ><i>This user has indicated that they are available to provide respite care at the following times.</i></span
-    >
+  <div class="row avail-row mt-5">
+    <div class="col-12 mb-2">
+      <span class="mt-5 mb-3"
+        ><i>This user has indicated that they are available to provide respite care at the following times.</i></span
+      >
+    </div>
     <div class="col">
       <app-availability-grid [availability]="availability"></app-availability-grid>
+    </div>
+    <div class="col text-center text-muted d-md-none">
+      <i class="bi bi-arrow-left"></i>
+      &nbsp;
+      <i class="bi bi-hand-index-thumb"></i>
+      &nbsp;
+      <i class="bi bi-arrow-right"></i>
+      <br />
+      <small><i>Scroll or swipe on the table to view more availabilites</i></small>
     </div>
   </div>
   <div class="row mt-5 mb-5">
