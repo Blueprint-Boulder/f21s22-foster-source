@@ -14,7 +14,7 @@ export const environment = {
   useRealPhoneNumberService: true,
   useRealProfilePhotosService: true,
   useRealAuthService: true,
-  useRealImageService: true,
+  useRealImageService: false,
   useRealBugService: true,
   imageBucket: 'respite-source-images-dev',
   bucketRegion: 'us-west-1',
