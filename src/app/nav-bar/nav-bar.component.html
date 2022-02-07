@@ -15,7 +15,7 @@
     ><img class="nav-respite-source m-2" src="assets/images/respite-source-logo.png" alt="Respite Source Logo" /></a
   ><small class="navbar-left"><i>BETA</i></small>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03" [ngbCollapse]="isCollapsed">
+  <div class="collapse navbar-collapsge" id="navbarTogglerDemo03" [ngbCollapse]="isCollapsed">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item home-link" [ngClass]="{ active: router.url === '/' }">
         <a class="nav-link" href="#" [routerLink]="'/'" (click)="collapse()"
@@ -57,7 +57,7 @@
             width="32px"
             height="32px"
             class="hidden-xs rounded-circle d-inline-block mr-2"
-          />Profile</a
+          /><i class="bi bi-person-circle d-sm-none">&nbsp;&nbsp;</i>Profile</a
         >
       </li>
     </ul>
