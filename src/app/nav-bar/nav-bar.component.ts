@@ -16,6 +16,8 @@ export class NavBarComponent implements OnInit {
 
   public currentAccount: Account | undefined;
   public isMod = false;
+  public isCollapsed = true;
+
   private isLoggedIn = false;
 
   constructor(
@@ -75,5 +77,10 @@ export class NavBarComponent implements OnInit {
         console.log('Failed to log out');
       }
     );
+  }
+
+  collapse(): void {
+    console.log(this.isCollapsed);
+    this.isCollapsed = true;
   }
 }

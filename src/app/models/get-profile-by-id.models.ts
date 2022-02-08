@@ -15,10 +15,10 @@ export interface FullProfileRes {
   accountId: number;
   householdBackground: HouseholdBackgroundRes;
   respiteBackground: RespiteBackgroundRes;
-  availabilities?: Availability[];
   photos: Photo[];
   secAccountHolder?: SecAccountHolderRes;
   account: PublicAccountFields;
+  distance?: number;
 }
 
 export interface HouseholdBackgroundRes {

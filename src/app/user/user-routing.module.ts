@@ -3,12 +3,14 @@ import { CreateSecondaryAccountHolderComponent } from './create-secondary-accoun
 import { UpdateRespiteProviderInfoComponent } from './update-respite-provider-info/update-respite-provider-info.component';
 import { UpdateHouseholdBackgroundComponent } from './update-household-background/update-household-background.component';
 import { UpdatePrimaryAvailabilityComponent } from './update-primary-availability/update-primary-availability.component';
+import { PublicUserPageComponentComponent } from './public-user-page-component/public-user-page-component.component';
 import { UpdateProfileCollectionComponent } from './update-profile-collection/update-profile-collection.component';
 import { UpdateRespiteBackgroundComponent } from './update-respite-background/update-respite-background.component';
 import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add-respite-provider-info.component';
 import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
+import { LoggedInGuard } from '../guards/logged-in/logged-in.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -61,6 +63,16 @@ const routes: Routes = [
   {
     path: 'create/respite-provider-info',
     component: AddRespiteProviderInfoComponent,
+    canActivate: [PureUserGuard],
+  },
+  {
+    path: ':id',
+    component: PublicUserPageComponentComponent,
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: '',
+    component: PublicUserPageComponentComponent,
     canActivate: [PureUserGuard],
   },
 ];

@@ -2,50 +2,11 @@
 
 ## TODO
 
-- [ ] Updating account
-  - [ ] Backend endpoints
-  - [x] Frontend forms
-- [x] Complete Profile
-  - [x] Backend Routes
-  - [x] Capture frontend user when they have not yet completed their account
-    - user should not be able to visit any other page until they complete their account
-- [ ] Deployment
-  - [ ] Bakend to Heroku
-  - [ ] Frontent to AWS
-- [ ] AWS
-  - [ ] Re-add everyone to AWS
-  - [ ] Get out of sandbox mode on emails
-- [ ] Images
-  - [ ] Implement actual S3 image fetching on front end instead of placeholder images
-- [ ] Account Page
-  - Different from profile page
-  - [x] View account page
-  - [x] Change case worker details front end
-  - [x] Change case worker details back end
-    - These two are on hold until we find out if users should be able to change this information.
-  - [x] Delete account front end
-  - [x] Delete account back end
-  - [x] Change password front end
-  - [ ] Change password back end
-  - [x] Change address front end
-  - [x] Change address back end
-  - [x] Change phone number front end
-  - [ ] Change phone number back end
-- [ ] Profile Page
-  - [x] Finish profile page
-  - [x] Allow updating of attributes for profile
 - [ ] Login
   - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
   - [x] Logout
   - [ ] Forgot your password?
   - [x] Does unchecking the remember me tab do anything?
-- [x] Announcements
-  - [x] Make recent announcements not return anything after maybe a week?
-- [x] Mod/Admin
-  - [x] Mod / Admin signup page
-  - [x] Mod / Admin approvals frontend
-  - [x] Mod / Admin approvals backend
-  - [x] Remove "Profile" tab on nav bar for mods and admins
 
 ### Known Bugs
 
