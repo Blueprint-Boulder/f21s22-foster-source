@@ -1,7 +1,7 @@
 .topic {
   padding-top: 15px;
-  border-radius: 25px;
   background: #fef4e8;
+  border-left: solid #ea8a40 5px;
   &:hover {
     background: #ffebd2;
     cursor: pointer;
@@ -13,8 +13,6 @@
 }
 
 .title {
-  border-radius: 25px;
   text-align: center;
-  padding: 7px;
-  background: #ffebd2;
+  padding-bottom: 7px;
 }
