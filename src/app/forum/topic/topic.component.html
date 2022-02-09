@@ -1,18 +1,24 @@
-<div class="container-fluid w-100 topic shadow-sm">
-  <h4>
-    <span class="title">{{ topic.title }}</span>
-  </h4>
-  <div class="row">
-    <div class="col description">
-      {{ topic.description }}
+<!-- #*ngIf="" -->
+<div>
+  <br />
+  <div class="container-fluid w-100 topic shadow-sm rounded">
+    <h3>
+      <span class="title">{{ topic.title }}</span>
+    </h3>
+    <div class="row">
+      <div class="col description">
+        {{ topic.description }}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-      <div class="row">
-        <div class="col text-right">{{ topic.replies }} Threads</div>
-        <div class="col text-right">Last Reply: {{ topic.lastReply.toLocaleDateString("en-US") }}</div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <div class="col text-right stats">
+          <i class="text-muted"
+            >{{ topic.replies }} <i class="bi bi-chat-dots"></i> | Last Reply:
+            {{ topic.lastReply.toLocaleDateString("en-US") }}</i
+          >
+        </div>
       </div>
     </div>
   </div>
