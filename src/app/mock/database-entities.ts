@@ -10,7 +10,7 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
-import { Topic, TopicSummary } from '../models/forum.models';
+import { FullThread, Reply, ThreadSummary, Topic, TopicSummary } from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -535,4 +535,101 @@ export const topics: Topic[] = [
 
 export const topicSummaries: TopicSummary[] = topics.map((t) => {
   return { ...t, threadCount: Math.random() * (100 - 50 + 1) + 50, lastPostDate: new Date() };
+});
+
+export const threadSummaries: ThreadSummary[] = [
+  {
+    id: 1,
+    likes: 15,
+    title: 'This is a thread and it is awesome. Anyone else?',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae magna euismod diam ornare ornare. Nunc id ex blandit, ultricies turpis eu, porta sapien. Proin ultricies eu dui nec egestas.',
+    edited: false,
+    updatedAt: new Date(),
+    replyCount: 9,
+    lastReplyDate: new Date(),
+    topicTitle: 'Parenting 101 Topic',
+    account: {
+      id: 1,
+      username: 'respiteuser1',
+      privilege: 'USER',
+      profileId: 2,
+    },
+  },
+  {
+    id: 2,
+    likes: 10291,
+    title: 'Does anyone else like to hang out',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi.',
+    edited: false,
+    updatedAt: new Date(),
+    replyCount: 104,
+    lastReplyDate: new Date(),
+    topicTitle: 'General Discussion',
+    account: {
+      id: 2,
+      username: 'iAmLegend3',
+      privilege: 'USER',
+      profileId: 3,
+    },
+  },
+  {
+    id: 3,
+    likes: 4,
+    title: 'Welcome to the forum. Be nice!',
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae magna euismod diam ornare ornare. Nunc id ex blandit, ultricies turpis eu, porta sapien. Proin ultricies eu dui nec egestas.',
+    edited: false,
+    updatedAt: new Date(),
+    replyCount: 3,
+    lastReplyDate: new Date(),
+    topicTitle: 'Parenting 101 Topic',
+    account: {
+      id: 3,
+      username: 'adminuser',
+      privilege: 'MOD',
+    },
+  },
+];
+
+export const replies: Reply[] = [
+  {
+    id: 1,
+    body: 'Suspendisse ornare et magna a molestie. Praesent tortor nisi, imperdiet gravida felis id, imperdiet dignissim risus.\n\nAliquam erat volutpat. Pellentesque rhoncus ligula non est fringilla congue. Suspendisse potenti. Nam lobortis mollis risus',
+    likes: 4,
+    replyingToText: 'Proin fermentum convallis justo elementum gravida. Nam fringilla euismod eleifend',
+    replyingToUsername: 'usertoreplyto',
+    edited: false,
+    account: {
+      id: 1,
+      username: 'replyguy.1',
+      privilege: 'USER',
+      profileId: 2,
+    },
+  },
+  {
+    id: 2,
+    body: 'second this! smiley emoji.',
+    likes: 102,
+    edited: true,
+    account: {
+      id: 2,
+      username: 'admin-man',
+      privilege: 'ADMIN',
+    },
+  },
+  {
+    id: 1,
+    body: 'Mauris in lectus nec lacus lobortis cursus. Maecenas velit neque, accumsan at lacinia sed, tincidunt a urna. Integer ex felis, lacinia et ipsum non, fermentum semper dui. Donec in eros ipsum. Curabitur id enim libero. Quisque gravida viverra tortor, a rhoncus sapien ultricies a. In ipsum lacus, placerat nec tristique sed, laoreet sit amet velit. In et risus dapibus, lobortis purus non, varius neque. Phasellus viverra libero vitae enim semper, consequat venenatis nibh dignissim. Aliquam quis laoreet arcu. Aliquam a luctus est. Proin ac congue mi. Proin volutpat consectetur justo, eu varius turpis gravida in. In sed tincidunt tortor.',
+    likes: 0,
+    edited: false,
+    account: {
+      id: 3,
+      username: 'randomdude',
+      privilege: 'USER',
+      profileId: 3,
+    },
+  },
+];
+
+export const fullThreads: FullThread[] = threadSummaries.map((t) => {
+  return { ...t, replies: replies };
 });

@@ -1,4 +1,15 @@
-import { CreateTopicReq, GetTopicSummariesRes, Topic, TopicSummary, UpdateTopicReq } from '../../models/forum.models';
+import {
+  CreateNewThreadReq,
+  CreateTopicReq,
+  FullThread,
+  GetThreadSummariesRes,
+  GetTopicSummariesRes,
+  ThreadSummary,
+  Topic,
+  TopicSummary,
+  UpdateThreadReq,
+  UpdateTopicReq,
+} from '../../models/forum.models';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ForumService } from './forum.service';
@@ -31,5 +42,64 @@ export class ForumImplService implements ForumService {
 
   deleteTopic(id: number): Observable<any> {
     return this.http.delete<any>(`${environment.backendHost}/api/db/forum/topics/${id}`, { withCredentials: true });
+  }
+
+  createNewThread(req: CreateNewThreadReq): Observable<ThreadSummary> {
+    return this.http.post<ThreadSummary>(`${environment.backendHost}/api/forum/threads`, req, {
+      withCredentials: true,
+    });
+  }
+
+  deleteThread(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}`, { withCredentials: true });
+  }
+
+  getAllThreads(limit: number, offset: number): Observable<GetThreadSummariesRes> {
+    return this.http.get<GetThreadSummariesRes>(
+      `${environment.backendHost}/api/db/forum/threads?limit=${limit}&offset=${offset}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getThreadsForTopic(topicId: number, limit: number, offset: number): Observable<GetThreadSummariesRes> {
+    return this.http.get<GetThreadSummariesRes>(
+      `${environment.backendHost}/api/db/forum/threads?topic=${topicId}&limit=${limit}&offset=${offset}`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getThreadById(id: number): Observable<ThreadSummary> {
+    return this.http.get<ThreadSummary>(`${environment.backendHost}/api/db/threads/${id}`, { withCredentials: true });
+  }
+
+  getThreadByIdWithReplies(id: number, replyLimit: number, replyOffset: number): Observable<FullThread> {
+    return this.http.get<FullThread>(
+      `${environment.backendHost}/api/db/forum/threads/${id}/replies?limit=${replyLimit}&offset=${replyOffset}`,
+      { withCredentials: true }
+    );
+  }
+
+  likeThread(id: number): Observable<any> {
+    return this.http.post<any>(
+      `${environment.backendHost}/api/db/forum/threads/${id}/likes`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  unlikeThread(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}/likes`, {
+      withCredentials: true,
+    });
+  }
+
+  updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
+    return this.http.put<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, req, {
+      withCredentials: true,
+    });
   }
 }
