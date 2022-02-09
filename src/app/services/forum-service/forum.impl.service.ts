@@ -1,12 +1,16 @@
 import {
   CreateNewThreadReq,
   CreateTopicReq,
+  DeleteThreadReq,
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  PostReplyReq,
+  Reply,
   ThreadSummary,
   Topic,
   TopicSummary,
+  UpdateReplyReq,
   UpdateThreadReq,
   UpdateTopicReq,
 } from '../../models/forum.models';
@@ -19,13 +23,13 @@ export class ForumImplService implements ForumService {
   constructor(private http: HttpClient) {}
 
   getTopicSummaryById(id: number): Observable<TopicSummary> {
-    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/topics/${id}?summary=true`, {
+    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/topics/${id}`, {
       withCredentials: true,
     });
   }
 
   getTopicSummaries(): Observable<GetTopicSummariesRes> {
-    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/topics?summary=true`, {
+    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/topics`, {
       withCredentials: true,
     });
   }
@@ -50,8 +54,11 @@ export class ForumImplService implements ForumService {
     });
   }
 
-  deleteThread(id: number): Observable<any> {
-    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}`, { withCredentials: true });
+  deleteThread(req: DeleteThreadReq): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, {
+      body: { reason: req.reason },
+      withCredentials: true,
+    });
   }
 
   getAllThreads(limit: number, offset: number): Observable<GetThreadSummariesRes> {
@@ -101,5 +108,31 @@ export class ForumImplService implements ForumService {
     return this.http.put<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, req, {
       withCredentials: true,
     });
+  }
+
+  deleteReply(threadId: number, replyId: number): Observable<any> {
+    return this.http.delete(`${environment.backendHost}/api/db/forum/threads/${threadId}/replies/${replyId}`, {
+      withCredentials: true,
+    });
+  }
+
+  getReplyById(replyId: number): Observable<Reply> {
+    return this.http.get<Reply>(`${environment.backendHost}/api/db/forum/threads/replies/${replyId}`, {
+      withCredentials: true,
+    });
+  }
+
+  postReply(req: PostReplyReq): Observable<Reply> {
+    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}`, req, {
+      withCredentials: true,
+    });
+  }
+
+  updateReply(req: UpdateReplyReq): Observable<Reply> {
+    return this.http.put<Reply>(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
+      req,
+      { withCredentials: true }
+    );
   }
 }

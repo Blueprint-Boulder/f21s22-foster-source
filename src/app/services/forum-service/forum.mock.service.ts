@@ -1,16 +1,20 @@
 import {
   CreateNewThreadReq,
   CreateTopicReq,
+  DeleteThreadReq,
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  PostReplyReq,
+  Reply,
   ThreadSummary,
   Topic,
   TopicSummary,
+  UpdateReplyReq,
   UpdateThreadReq,
   UpdateTopicReq,
 } from '../../models/forum.models';
-import { fullThreads, threadSummaries, topics, topicSummaries } from '../../mock/database-entities';
+import { fullThreads, replies, threadSummaries, topics, topicSummaries } from '../../mock/database-entities';
 import { ForumService } from './forum.service';
 import { Observable, of } from 'rxjs';
 
@@ -41,7 +45,7 @@ export class ForumMockService implements ForumService {
     return of(threadSummaries[0]);
   }
 
-  deleteThread(id: number): Observable<any> {
+  deleteThread(req: DeleteThreadReq): Observable<any> {
     return of({});
   }
 
@@ -75,5 +79,21 @@ export class ForumMockService implements ForumService {
 
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
     return of(threadSummaries[1]);
+  }
+
+  deleteReply(threadId: number, replyId: number): Observable<any> {
+    return of();
+  }
+
+  getReplyById(replyId: number): Observable<Reply> {
+    return of(replies[replyId % replies.length]);
+  }
+
+  postReply(req: PostReplyReq): Observable<Reply> {
+    return of(replies[0]);
+  }
+
+  updateReply(req: UpdateReplyReq): Observable<Reply> {
+    return of(replies[req.replyId % replies.length]);
   }
 }
