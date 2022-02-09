@@ -10,6 +10,7 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
+import { Topic, TopicSummary } from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -512,3 +513,26 @@ export const bugs: BugReport[] = [
     createdAt: new Date(),
   },
 ];
+
+export const topics: Topic[] = [
+  {
+    id: 1,
+    title: 'General Discussion',
+    description: 'Talk about whatever and build your sense of community.',
+  },
+  {
+    id: 2,
+    title: 'Foster Parenting',
+    description: 'For all questions, advice, and discussion regarding being or becoming a foster parent.',
+  },
+  {
+    id: 2,
+    title: 'Movies',
+    description:
+      'Not really sure why there would be a movie topic, but maybe foster parents just really really love movies and need a place to talk about them. This will also be a fairly large description as to fill up some more space than the others and make sure that it still looks good.',
+  },
+];
+
+export const topicSummaries: TopicSummary[] = topics.map((t) => {
+  return { ...t, threadCount: Math.random() * (100 - 50 + 1) + 50, lastPostDate: new Date() };
+});
