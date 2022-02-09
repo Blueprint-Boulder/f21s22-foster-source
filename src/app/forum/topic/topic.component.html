@@ -1,1 +1,25 @@
-<p>{{ topic.title }}</p>
+<!-- #*ngIf="" -->
+<div>
+  <br />
+  <div class="container-fluid w-100 topic shadow-sm rounded">
+    <h3>
+      <span class="title">{{ topic.title }}</span>
+    </h3>
+    <div class="row">
+      <div class="col description">
+        {{ topic.description }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <div class="col text-right stats">
+          <i class="text-muted"
+            >{{ topic.replies }} <i class="bi bi-chat-text"></i> | Last Reply:
+            {{ topic.lastReply.toLocaleDateString("en-US") }}</i
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
