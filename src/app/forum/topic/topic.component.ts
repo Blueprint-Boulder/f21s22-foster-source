@@ -20,7 +20,7 @@ export class TopicComponent implements OnInit {
   }
 
   navigateToTopic(): void {
-    if (this.topic !== undefined) {
+    if (this.topic !== undefined && this.clickable) {
       this.router.navigate([`/forum/topics/${this.topic.id}`]);
     }
   }
