@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FullTopicRes } from '../../models/forum.models';
-import { topics } from '../../mock/database-entities';
+import { topicSummaries } from '../../mock/database-entities';
+import { TopicSummary } from '../../models/forum.models';
 
 @Component({
   selector: 'app-forum',
@@ -8,7 +8,7 @@ import { topics } from '../../mock/database-entities';
   styleUrls: ['./forum.component.scss'],
 })
 export class ForumComponent implements OnInit {
-  public topic: FullTopicRes = topics[0];
+  public topic: TopicSummary = topicSummaries[0];
 
   ngOnInit(): void {
     return;

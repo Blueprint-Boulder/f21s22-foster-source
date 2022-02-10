@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FullTopicRes } from '../../models/forum.models';
+import { TopicSummary } from '../../models/forum.models';
 
 @Component({
   selector: 'app-topic',
@@ -7,7 +7,7 @@ import { FullTopicRes } from '../../models/forum.models';
   styleUrls: ['./topic.component.scss'],
 })
 export class TopicComponent implements OnInit {
-  @Input() topic: FullTopicRes;
+  @Input() topic: TopicSummary;
 
   constructor() {
     void 0;

@@ -1,5 +1,4 @@
-<!-- #*ngIf="" -->
-<div>
+<div *ngIf="topic">
   <br />
   <div class="container-fluid w-100 topic shadow-sm rounded">
     <h3>
@@ -15,8 +14,8 @@
       <div class="col">
         <div class="col text-right stats">
           <i class="text-muted"
-            >{{ topic.replies }} <i class="bi bi-chat-text"></i> | Last Reply:
-            {{ topic.lastReply.toLocaleDateString("en-US") }}</i
+            >{{ topic.threadCount }} <i class="bi bi-chat-text"></i> | Last Reply:
+            {{ topic.lastPostDate.toLocaleDateString("en-US") }}</i
           >
         </div>
       </div>
