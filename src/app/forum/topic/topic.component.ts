@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TopicSummary } from '../../models/forum.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-topic',
@@ -9,11 +10,17 @@ import { TopicSummary } from '../../models/forum.models';
 export class TopicComponent implements OnInit {
   @Input() topic: TopicSummary;
 
-  constructor() {
+  constructor(private router: Router) {
     void 0;
   }
 
   ngOnInit(): void {
     return;
+  }
+
+  navigateToTopic(): void {
+    if (this.topic !== undefined) {
+      this.router.navigate([`/forum/topics/${this.topic.id}`]);
+    }
   }
 }
