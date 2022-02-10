@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { topicSummaries } from '../../mock/database-entities';
 import { TopicSummary } from '../../models/forum.models';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { ToastService } from '../../services/toast-service/toast.service';
 
 @Component({
   selector: 'app-forum',
@@ -8,9 +9,18 @@ import { TopicSummary } from '../../models/forum.models';
   styleUrls: ['./forum.component.scss'],
 })
 export class ForumComponent implements OnInit {
-  public topic: TopicSummary = topicSummaries[0];
+  public topics: TopicSummary[];
+
+  constructor(private forumService: ForumService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    return;
+    this.forumService.getTopicSummaries().subscribe(
+      (res) => {
+        this.topics = res.topics;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 }
