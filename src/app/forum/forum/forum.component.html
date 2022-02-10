@@ -1,6 +1,5 @@
 <div class="container">
-  <app-topic [topic]="topic"></app-topic>
-  <app-topic [topic]="topic"></app-topic>
-  <app-topic [topic]="topic"></app-topic>
-  <app-topic [topic]="topic"></app-topic>
+  <div class="row" *ngFor="let topic of topics">
+    <app-topic [topic]="topic" class="w-100"></app-topic>
+  </div>
 </div>
