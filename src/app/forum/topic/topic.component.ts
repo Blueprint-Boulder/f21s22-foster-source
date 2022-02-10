@@ -8,6 +8,7 @@ import { TopicSummary } from '../../models/forum.models';
 })
 export class TopicComponent implements OnInit {
   @Input() topic: TopicSummary;
+  @Input() clickable = true;
 
   constructor() {
     void 0;
