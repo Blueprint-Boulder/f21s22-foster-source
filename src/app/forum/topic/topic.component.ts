@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TopicComponent implements OnInit {
   @Input() topic: TopicSummary;
+  @Input() clickable = true;
 
   constructor(private router: Router) {
     void 0;

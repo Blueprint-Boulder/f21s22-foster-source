@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicSummary } from '../../models/forum.models';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-forum',
@@ -10,8 +11,13 @@ import { ToastService } from '../../services/toast-service/toast.service';
 })
 export class ForumComponent implements OnInit {
   public topics: TopicSummary[];
+  public isMod = false;
 
-  constructor(private forumService: ForumService, private toastService: ToastService) {}
+  constructor(
+    private forumService: ForumService,
+    private toastService: ToastService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.forumService.getTopicSummaries().subscribe(
@@ -22,5 +28,7 @@ export class ForumComponent implements OnInit {
         this.toastService.httpError(err);
       }
     );
+
+    this.isMod = this.authService.isAtLeastMod();
   }
 }
