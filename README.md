@@ -28,6 +28,13 @@
 - [ ] Reject address if not coords
 - [x] Add temporary availabilities
 
+## Forum Routes
+
+- `/forum` should list all topics
+- `/forum/topics/:topicId` should list all threads under a topic
+- `/forum/topics/:topicId/threads/:threadId?limit=x&offset=y` should view a specific thread with `limit` number of replies, offset by `offset`
+  - If offset does not equal 0, don't show the main thread anymore, just the replies
+
 ## Testing
 
 Run the command `npm run test`.
