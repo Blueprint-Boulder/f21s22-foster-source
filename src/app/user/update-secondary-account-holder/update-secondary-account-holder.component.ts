@@ -125,7 +125,7 @@ export class UpdateSecondaryAccountHolderComponent implements OnInit {
             body: 'Successfully updated secondary account holder',
             preset: ToastPresets.SUCCESS,
           });
-          this.router.navigate([`/user/${profile.id}`]);
+          this.router.navigate([`/user/`]);
         },
         (err) => {
           this.toastService.httpError(err);

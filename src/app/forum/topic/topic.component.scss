@@ -1,0 +1,21 @@
+.topic {
+  padding-top: 15px;
+  background: #fef4e8;
+  &:hover {
+    background: #e5dcd1;
+    cursor: pointer;
+  }
+}
+
+.description {
+  padding-bottom: 15px;
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 7px;
+}
+
+.stats {
+  padding-bottom: 10px;
+}

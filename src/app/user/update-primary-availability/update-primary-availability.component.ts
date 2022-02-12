@@ -157,7 +157,7 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
     this.availService.updatePrimaryAvailability(req).subscribe(
       (profile) => {
         this.toastService.success('Successfully updated primary availability');
-        this.router.navigate([`/user/${profile.id}`]);
+        this.router.navigate([`/user/`]);
       },
       (err) => {
         this.toastService.httpError(err);
