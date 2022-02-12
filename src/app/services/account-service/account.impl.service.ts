@@ -62,6 +62,7 @@ export class AccountImplService implements AccountService {
   }
 
   login(params: LoginRequest): Observable<string> {
+    params.username = params.username.toLowerCase();
     return this.http
       .post<HttpResponse<any>>(`${environment.backendHost}/api/session/login`, params, {
         withCredentials: true,

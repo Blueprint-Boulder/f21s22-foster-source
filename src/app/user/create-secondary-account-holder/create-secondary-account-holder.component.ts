@@ -73,7 +73,7 @@ export class CreateSecondaryAccountHolderComponent {
             body: 'Successfully added secondary account holder.',
             preset: ToastPresets.SUCCESS,
           });
-          this.router.navigate([`/user/${profile.id}`]);
+          this.router.navigate([`/user`]);
         },
         (err) => {
           this.toastService.httpError(err);

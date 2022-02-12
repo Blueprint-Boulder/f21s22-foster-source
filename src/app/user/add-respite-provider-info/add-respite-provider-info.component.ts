@@ -106,7 +106,7 @@ export class AddRespiteProviderInfoComponent {
             body: 'Successfully added respite provider info.',
             preset: ToastPresets.SUCCESS,
           });
-          this.router.navigate([`/user/${profile.id}`]);
+          this.router.navigate([`/user/`]);
         },
         (err) => {
           this.toastService.httpError(err);

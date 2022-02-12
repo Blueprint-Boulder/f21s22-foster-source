@@ -71,7 +71,7 @@ export class UpdateRespiteBackgroundComponent implements OnInit {
             body: 'Successfully updated respite background.',
             preset: ToastPresets.SUCCESS,
           });
-          this.router.navigate([`/user/${profile.id}`]);
+          this.router.navigate([`/user/`]);
         },
         (err) => {
           this.toastService.httpError(err);
