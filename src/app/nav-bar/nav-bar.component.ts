@@ -5,6 +5,7 @@ import { Account } from '../models/account.model';
 import { AccountService } from '../services/account-service/account.service';
 import { ImageUtils } from '../common/utils/ImageUtils';
 import { ProfileService } from '../services/profile-service/profile.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,6 +14,7 @@ import { ProfileService } from '../services/profile-service/profile.service';
 })
 export class NavBarComponent implements OnInit {
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
+  public isProdEnv = environment.production;
 
   public currentAccount: Account | undefined;
   public isMod = false;
