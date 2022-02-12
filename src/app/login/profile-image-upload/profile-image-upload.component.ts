@@ -43,6 +43,7 @@ export class ProfileImageUploadComponent implements OnInit {
 
   uploadImage(): void {
     this.isUploading = true;
+    this.imageHasBeenUploaded = true;
 
     const file = ImageUtils.dataUrlToImageFile(this.croppedImageDataUrl, 'profile_image');
     this.imageService.uploadImage(file).subscribe(
@@ -55,7 +56,6 @@ export class ProfileImageUploadComponent implements OnInit {
           body: 'Image successfully uploaded',
           preset: ToastPresets.SUCCESS,
         });
-        this.imageHasBeenUploaded = true;
       },
       (err) => {
         this.toastService.httpError(err);

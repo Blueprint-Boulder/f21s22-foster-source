@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row title-row mt-5 border-bottom pb-4">
+    <div class="col-12">
+      <h1>Post A New Forum Topic</h1>
+      <p>
+        Topics are categories that users are able to create threads for in the forum. It's best to keep the number of
+        topics relatively small (if not only initially) so as to encourage discussion in existing topics. Note that
+        after creating a topic, if you or any other moderator chooses to delete it, it will permanently delete all of
+        the threads and replies associated with it.
+      </p>
+    </div>
+  </div>
+  <form [formGroup]="topicForm">
+    <div class="row form-row">
+      <div class="col-12 mt-5">
+        <div class="form-group">
+          <label for="title"
+            ><b>Topic Title</b><span class="required-star">*</span>
+            <br />
+          </label>
+          <input
+            class="form-control bottom-border-input"
+            id="title"
+            type="text"
+            placeholder="Parenting 101"
+            formControlName="title"
+          />
+          <div
+            *ngIf="
+              topicForm.get('title')?.invalid && (topicForm.get('title')?.dirty || topicForm.get('title')?.touched)
+            "
+          >
+            <small *ngIf="topicForm.get('title')?.errors?.required" class="input-error"
+              >Please enter a title for your topic.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-3">
+        <div class="form-group">
+          <label for="description"
+            ><b>Topic Description</b><span class="required-star">*</span>
+            <br />
+          </label>
+          <textarea
+            class="form-control bottom-border-input"
+            id="description"
+            rows="4"
+            placeholder="Ex: This topic is a place to discuss planes, trains, and automobiles."
+            formControlName="description"
+          ></textarea>
+          <div
+            *ngIf="
+              topicForm.get('description')?.invalid &&
+              (topicForm.get('description')?.dirty || topicForm.get('description')?.touched)
+            "
+          >
+            <small *ngIf="topicForm.get('description')?.errors?.required" class="input-error"
+              >Please enter a description for your topic.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 example-row mt-5">
+        <h4>Topic Preview</h4>
+        <app-topic [topic]="exampleTopic" [clickable]="false"></app-topic>
+      </div>
+      <div class="col-12 submit-row mt-5">
+        <button (click)="onSubmit()" class="btn btn-primary float-right text-white" [disabled]="submittingForm">
+          Create Topic
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

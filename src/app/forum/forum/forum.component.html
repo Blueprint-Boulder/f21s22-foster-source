@@ -1,3 +1,10 @@
-<div class="container">
-  <app-thread-reply></app-thread-reply>
+<div class="container px-5 px-sm-0">
+  <div class="row" *ngFor="let topic of topics">
+    <app-topic [topic]="topic" class="w-100"></app-topic>
+  </div>
+  <div class="row my-5" *ngIf="isMod">
+    <div class="col-12">
+      <a class="float-right" [routerLink]="'/forum/create-topic'">Create a New Topic</a>
+    </div>
+  </div>
 </div>

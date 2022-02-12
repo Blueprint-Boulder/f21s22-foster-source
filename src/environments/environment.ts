@@ -13,9 +13,10 @@ export const environment = {
   useRealBlacklistService: true,
   useRealPhoneNumberService: true,
   useRealProfilePhotosService: true,
-  useRealAuthService: true,
-  useRealImageService: true,
+  useRealAuthService: false,
+  useRealImageService: false,
   useRealBugService: true,
+  useRealForumService: false,
   imageBucket: 'respite-source-images-dev',
   bucketRegion: 'us-west-1',
 };

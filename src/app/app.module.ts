@@ -8,6 +8,7 @@ import { ToastContainerComponent } from './common/toast-container/toast-containe
 import { profileServiceProvider } from './services/profile-service/profile.service.provider';
 import { accountServiceProvider } from './services/account-service/account.service.provider';
 import { addressServiceProvider } from './services/address-service/address.service.provider';
+import { forumServiceProvider } from './services/forum-service/forum.service.provider';
 import { imageServiceProvider } from './services/image-service/image.service.provider';
 import { bugServiceProvider } from './services/bug-service/bug.service.provider';
 import { HttpDateService } from './services/http-date-service/http-date.service';
@@ -51,15 +52,15 @@ import { NgModule } from '@angular/core';
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+    announcementServiceProvider,
+    availabilityServiceProvider,
+    phoneNumberServiceProvider,
+    blacklistServiceProvider,
     profileServiceProvider,
     accountServiceProvider,
     addressServiceProvider,
-    phoneNumberServiceProvider,
-    blacklistServiceProvider,
-    announcementServiceProvider,
     imageServiceProvider,
-    announcementServiceProvider,
-    availabilityServiceProvider,
+    forumServiceProvider,
     bugServiceProvider,
   ],
   bootstrap: [AppComponent],

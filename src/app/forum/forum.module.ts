@@ -4,9 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ForumRoutingModule } from './forum-routing.module';
 import { ThreadReplyComponent } from './thread-reply/thread-reply.component';
 import { ForumComponent } from './forum/forum.component';
+import { TopicComponent } from './topic/topic.component';
+import { CreateTopicComponent } from './create-topic/create-topic.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ThreadReplyComponent, ForumComponent],
-  imports: [CommonModule, ForumRoutingModule],
+  declarations: [ThreadReplyComponent, ForumComponent, TopicComponent, CreateTopicComponent],
+  imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule],
 })
 export class ForumModule {}
