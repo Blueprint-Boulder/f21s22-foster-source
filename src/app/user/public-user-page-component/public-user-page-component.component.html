@@ -217,6 +217,11 @@
       <br />
       <small><i>Scroll or swipe on the table to view more availabilites</i></small>
     </div>
+    <div class="col-12" *ngIf="isOwnProfile">
+      <a class="float-right" [routerLink]="'/user/update/temporary-availability'"
+        >Add/Remove a Temporary Availability</a
+      >
+    </div>
   </div>
   <div class="row mt-5 mb-5">
     <div class="col-md-3"></div>
