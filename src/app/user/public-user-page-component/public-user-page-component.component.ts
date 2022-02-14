@@ -84,12 +84,10 @@ export class PublicUserPageComponentComponent implements OnInit {
   }
 
   getProfileSrc(): string {
-    console.log('getting');
     return ImageUtils.buildS3Url(this.selectedProfile.profileLargeAwsKey);
   }
 
   onImgError(event: any): void {
-    console.log('wtf');
     this.profileImgSrc = 'assets/images/blank-profile-photo.jpg';
   }
 
