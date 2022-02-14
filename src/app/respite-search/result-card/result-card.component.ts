@@ -29,4 +29,8 @@ export class ResultCardComponent implements OnInit {
       this.imageUrl = ImageUtils.buildS3Url(this.profile.profileLargeAwsKey);
     }
   }
+
+  onImageErr(event: any): void {
+    this.imageUrl = 'assets/images/blank-profile-photo.jpg';
+  }
 }

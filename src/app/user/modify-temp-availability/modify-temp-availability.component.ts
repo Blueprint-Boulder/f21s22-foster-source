@@ -6,6 +6,7 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
+import { ProfileUtils } from '../../common/utils/ProfileUtils';
 
 @Component({
   selector: 'app-modify-temp-availability',
@@ -84,10 +85,8 @@ export class ModifyTempAvailabilityComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getCurrentProfile().subscribe((profile) => {
       if (profile.respiteBackground.respiteProviderInfo) {
-        const avail = profile.respiteBackground.respiteProviderInfo.availabilities.find(
-          (avail) => avail.type === 'TEMPORARY'
-        );
-        if (avail) {
+        const avail = ProfileUtils.getAvailabilities(profile, this.availService);
+        if (avail && avail.type === 'TEMPORARY') {
           this.temporaryAvail = avail;
         }
       }

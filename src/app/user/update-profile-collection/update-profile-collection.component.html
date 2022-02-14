@@ -22,7 +22,7 @@
         >
       </p>
     </div>
-    <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0">
+    <div class="col-sm-12 col-md-6 mt-5 mt-md-0">
       <h3>Secondary Account Holder</h3>
       <div *ngIf="currentProfile.secAccountHolder">
         <p>
@@ -101,8 +101,13 @@
       <span *ngIf="currentProfile.householdBackground.ownsFirearm !== undefined"
         ><p><b>Owns a firearm:</b> {{ currentProfile.householdBackground.ownsFirearm ? "Yes" : "No" }}</p></span
       >
+      <p>
+        <a id="edit-house-back-link" [routerLink]="'/user/update/household-background'"
+          >Click here to update your household background</a
+        >
+      </p>
     </div>
-    <div class="col-sm-12 col-md-6 mt-sm-5 mt-md-0">
+    <div class="col-sm-12 col-md-6 mt-5 mt-md-0">
       <h3>Respite Background</h3>
       <p><b>Years of Foster Care Experience:</b> {{ currentProfile.respiteBackground.fosterYearsExperience }}</p>
       <p><b>Total # Children Cared For:</b> {{ currentProfile.respiteBackground.totalChildrenCaredFor }}</p>

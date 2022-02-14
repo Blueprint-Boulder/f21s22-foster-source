@@ -7,6 +7,8 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { SimpleAvailability } from '../../models/availability.model';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { ProfileUtils } from '../../common/utils/ProfileUtils';
+import { AvailabilityService } from '../../services/availability-service/availability.service';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -17,13 +19,15 @@ export class PublicUserPageComponentComponent implements OnInit {
   public selectedProfile: FullProfileRes;
   public availability: SimpleAvailability;
   public isOwnProfile = false;
+  public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
   constructor(
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private profileService: ProfileService,
     private toastService: ToastService,
-    private config: NgbAccordionConfig
+    private config: NgbAccordionConfig,
+    private availabilityService: AvailabilityService
   ) {
     config.closeOthers = true;
     config.type = 'light';
@@ -38,6 +42,7 @@ export class PublicUserPageComponentComponent implements OnInit {
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.getAvailability();
+            this.profileImgSrc = this.getProfileSrc();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -63,22 +68,11 @@ export class PublicUserPageComponentComponent implements OnInit {
   }
 
   private getAvailability(): void {
-    if (
-      !this.selectedProfile.respiteBackground.respiteProviderInfo ||
-      !this.selectedProfile.respiteBackground.canProvideRespite
-    ) {
+    const avail = ProfileUtils.getAvailabilities(this.selectedProfile, this.availabilityService);
+    if (!avail) {
       return;
     }
-
-    const providerInfo: RespiteProviderInfoRes = this.selectedProfile.respiteBackground.respiteProviderInfo;
-
-    if (providerInfo.availabilities.length < 1) {
-      return;
-    }
-
-    const avail = providerInfo.availabilities.find((avail) => avail.type === 'TEMPORARY');
-
-    this.availability = avail ? avail : providerInfo.availabilities[0];
+    this.availability = avail;
   }
 
   openPrimaryContactModal(content: any) {
@@ -90,6 +84,10 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   getProfileSrc(): string {
     return ImageUtils.buildS3Url(this.selectedProfile.profileLargeAwsKey);
+  }
+
+  onImgError(event: any): void {
+    this.profileImgSrc = 'assets/images/blank-profile-photo.jpg';
   }
 
   formatPhoneNumber(pn: string): string {

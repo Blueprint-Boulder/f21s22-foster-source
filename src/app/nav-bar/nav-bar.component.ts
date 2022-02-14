@@ -85,4 +85,8 @@ export class NavBarComponent implements OnInit {
     console.log(this.isCollapsed);
     this.isCollapsed = true;
   }
+
+  onProfileImgErr(event: any): void {
+    this.profileImageSrc = 'assets/images/blank-profile-photo.jpg';
+  }
 }
