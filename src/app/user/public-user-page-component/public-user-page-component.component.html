@@ -4,7 +4,7 @@
       <div class="row profile-image row">
         <div class="container-fluid">
           <div class="row profile-image text-center">
-            <img [src]="getProfileSrc()" class="rounded w-75 m-auto" alt="profile picture" />
+            <img [src]="profileImgSrc" class="rounded w-75 m-auto" alt="profile picture" (error)="onImgError($event)" />
           </div>
           <div class="row profile-image-info">
             <div class="col text-center mt-3">
@@ -192,7 +192,14 @@
       </div>
     </div>
   </div>
-  <div class="row avail-row mt-5">
+  <div
+    class="row avail-row mt-5"
+    *ngIf="
+      selectedProfile.respiteBackground.canProvideRespite &&
+      selectedProfile.respiteBackground.respiteProviderInfo &&
+      selectedProfile.respiteBackground.respiteProviderInfo.availabilities
+    "
+  >
     <div class="col-12 mb-2">
       <span class="mt-5 mb-3"
         ><i>This user has indicated that they are available to provide respite care at the following times.</i></span

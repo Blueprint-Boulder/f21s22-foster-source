@@ -17,6 +17,7 @@ export class PublicUserPageComponentComponent implements OnInit {
   public selectedProfile: FullProfileRes;
   public availability: SimpleAvailability;
   public isOwnProfile = false;
+  public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class PublicUserPageComponentComponent implements OnInit {
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.getAvailability();
+            this.profileImgSrc = this.getProfileSrc();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -90,6 +92,10 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   getProfileSrc(): string {
     return ImageUtils.buildS3Url(this.selectedProfile.profileLargeAwsKey);
+  }
+
+  onImgError(event: any): void {
+    this.profileImgSrc = 'assets/images/blank-profile-photo.jpg';
   }
 
   formatPhoneNumber(pn: string): string {
