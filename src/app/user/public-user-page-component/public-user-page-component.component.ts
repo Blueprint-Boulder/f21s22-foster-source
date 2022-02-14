@@ -41,8 +41,8 @@ export class PublicUserPageComponentComponent implements OnInit {
           (p) => {
             this.selectedProfile = p;
             this.isOwnProfile = true;
-            this.getAvailability();
             this.profileImgSrc = this.getProfileSrc();
+            this.getAvailability();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -53,6 +53,7 @@ export class PublicUserPageComponentComponent implements OnInit {
           (p: FullProfileRes) => {
             this.selectedProfile = p;
             this.getAvailability();
+            this.profileImgSrc = this.getProfileSrc();
           },
           (err) => {
             this.toastService.httpError(err);
