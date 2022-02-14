@@ -102,7 +102,7 @@ export class CreateAccountModalComponent implements OnInit {
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
         cwPhoneNumber: FormUtils.formatPhoneNumber(this.createAccountForm.get('caseworkerphone')!.value),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
-        email: this.createAccountForm.get('email')!.value,
+        email: this.createAccountForm.get('email')!.value.toLowerCase(),
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,
         password: this.createAccountForm.get('password')!.value,
@@ -116,7 +116,7 @@ export class CreateAccountModalComponent implements OnInit {
               type: this.createAccountForm.get('secondaryType')!.value,
             }
           : undefined,
-        username: this.createAccountForm.get('user')!.value,
+        username: this.createAccountForm.get('user')!.value.toLowerCase(),
       };
 
       this.accountService.createAccount(createAccountReq).subscribe(
