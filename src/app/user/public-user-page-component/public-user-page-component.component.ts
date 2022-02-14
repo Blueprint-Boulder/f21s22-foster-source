@@ -41,8 +41,8 @@ export class PublicUserPageComponentComponent implements OnInit {
           (p) => {
             this.selectedProfile = p;
             this.isOwnProfile = true;
-            this.getAvailability();
             this.profileImgSrc = this.getProfileSrc();
+            this.getAvailability();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -53,6 +53,7 @@ export class PublicUserPageComponentComponent implements OnInit {
           (p: FullProfileRes) => {
             this.selectedProfile = p;
             this.getAvailability();
+            this.profileImgSrc = this.getProfileSrc();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -83,10 +84,12 @@ export class PublicUserPageComponentComponent implements OnInit {
   }
 
   getProfileSrc(): string {
+    console.log('getting');
     return ImageUtils.buildS3Url(this.selectedProfile.profileLargeAwsKey);
   }
 
   onImgError(event: any): void {
+    console.log('wtf');
     this.profileImgSrc = 'assets/images/blank-profile-photo.jpg';
   }
 
