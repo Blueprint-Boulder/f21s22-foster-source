@@ -534,7 +534,7 @@ export const topics: Topic[] = [
 ];
 
 export const topicSummaries: TopicSummary[] = topics.map((t) => {
-  return { ...t, threadCount: Math.random() * (100 - 50 + 1) + 50, lastPostDate: new Date() };
+  return { ...t, threadCount: parseInt((Math.random() * (100 - 50 + 1) + 50).toString()), lastPostDate: new Date() };
 });
 
 export const threadSummaries: ThreadSummary[] = [
