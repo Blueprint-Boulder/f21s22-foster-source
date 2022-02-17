@@ -7,9 +7,10 @@ import { ForumComponent } from './forum/forum.component';
 import { TopicComponent } from './topic/topic.component';
 import { CreateTopicComponent } from './create-topic/create-topic.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [ThreadReplyComponent, ForumComponent, TopicComponent, CreateTopicComponent],
-  imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule, RouterModule],
 })
 export class ForumModule {}
