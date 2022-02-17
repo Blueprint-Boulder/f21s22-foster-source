@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FullProfileRes, RespiteProviderInfoRes } from 'src/app/models/get-profile-by-id.models';
+import { AvailabilityService } from '../../services/availability-service/availability.service';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
+import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { SimpleAvailability } from '../../models/availability.model';
+import { ProfileUtils } from '../../common/utils/ProfileUtils';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
-import { ProfileUtils } from '../../common/utils/ProfileUtils';
-import { AvailabilityService } from '../../services/availability-service/availability.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-public-user-page-component',
