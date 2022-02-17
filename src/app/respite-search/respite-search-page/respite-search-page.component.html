@@ -15,22 +15,13 @@
       <button class="btn btn-secondary w-100" (click)="filtersHidden ? openNav() : closeNav()">☰ Filters</button>
     </div>
   </div>
-  <div class="row" *ngIf="filtersReq">
+  <div class="row mt-2 mt-md-0" *ngIf="filtersReq">
     <div class="col-12">
       <app-show-filters [filters]="filtersReq" (clearFiltersEvent)="clearFilters()"></app-show-filters>
     </div>
   </div>
 </div>
 <div *ngIf="results && results.length > 0" class="w-100 h-100">
-  <div class="container my-3">
-    <div class="row">
-      <div class="col-12">
-        <small
-          ><i>{{ totalResults }} total results found</i></small
-        >
-      </div>
-    </div>
-  </div>
   <div class="row mb-5">
     <app-search-results class="w-100" [profiles]="results" [searching]="searching"></app-search-results>
   </div>

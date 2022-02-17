@@ -25,7 +25,7 @@
       </p>
       <p *ngIf="!isUser" id="account-level-p"><b>Account Level:</b> {{ currentAccount.privilege }}</p>
     </div>
-    <div *ngIf="isUser" id="cw-info-div" class="col-sm-12 col-md-6 mt-sm-5 mt-md-0">
+    <div *ngIf="isUser" id="cw-info-div" class="col-sm-12 col-md-6 mt-5 mt-md-0">
       <h3>Case Worker Information</h3>
       <p><b>Case Worker Name:</b> {{ currentAccount.cwFirstName }} {{ currentAccount.cwLastName }}</p>
       <p><b>Case Worker Email:</b> {{ currentAccount.cwEmail }}</p>
@@ -81,7 +81,7 @@
       <h3>Delete Your Account</h3>
       <p><button class="btn btn-danger mt-2 delete-button" (click)="deleteAccount()">Delete Account</button></p>
     </div>
-    <div class="col-sm-12 col-md-6" *ngIf="isUser && currentAccount.profileCompleted">
+    <div class="col-sm-12 col-md-6 mt-5 mt-md-0" *ngIf="isUser && currentAccount.profileCompleted">
       <h3>Profile</h3>
       <p><i>To view and edit your profile details, navigate to the profile update page.</i></p>
       <button class="btn btn-primary text-white" [routerLink]="'/user/update'">Visit Update Profile Page</button>
