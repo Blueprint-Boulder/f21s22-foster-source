@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { GetProfilesRes } from '../../models/profile.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { FiltersReq } from '../../models/filters.model';
@@ -14,16 +14,22 @@ export class RespiteSearchPageComponent implements OnInit {
   public results: SmallProfile[];
   public totalResults: number;
   public resultPage = 1;
-  public resultsPerPage = 25;
+  public resultsPerPage = 15;
   public filtersHidden = true;
-  public filtersReq: FiltersReq;
+  public filtersReq: FiltersReq | undefined;
   public searchTerm = '';
   public searching = true;
+  public filterResetEmitter: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private profileService: ProfileService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.getSearchResults();
+    const storedFilters = localStorage.getItem('filters');
+    if (storedFilters !== null) {
+      this.setFilters(JSON.parse(storedFilters));
+    } else {
+      this.getSearchResults();
+    }
   }
 
   getSearchResults() {
@@ -58,7 +64,24 @@ export class RespiteSearchPageComponent implements OnInit {
   }
 
   setFilters(filters: FiltersReq): void {
-    this.filtersReq = filters;
+    let isFilter = false;
+    Object.keys(filters).forEach((k) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (filters[k] !== undefined) {
+        isFilter = true;
+      }
+    });
+
+    this.filtersHidden = true;
+
+    if (!isFilter) {
+      this.filtersReq = undefined;
+      localStorage.removeItem('filters');
+    } else {
+      this.filtersReq = filters;
+      localStorage.setItem('filters', JSON.stringify(this.filtersReq));
+    }
     this.getSearchResults();
   }
 
@@ -75,5 +98,13 @@ export class RespiteSearchPageComponent implements OnInit {
         window.scrollTo(0, currentScroll - currentScroll / 8);
       }
     })();
+  }
+
+  clearFilters(): void {
+    this.filtersReq = undefined;
+    this.filtersHidden = true;
+    this.filterResetEmitter.emit();
+    localStorage.removeItem('filters');
+    this.getSearchResults();
   }
 }

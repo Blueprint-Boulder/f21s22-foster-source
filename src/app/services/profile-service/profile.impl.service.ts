@@ -51,6 +51,8 @@ export class ProfileImplService implements ProfileService {
       params = this.setFilterParams(params, filters);
     }
 
+    console.log(params);
+
     return this.http.get<GetProfilesRes>(`${environment.backendHost}/api/db/profiles`, {
       params: params,
       withCredentials: true,

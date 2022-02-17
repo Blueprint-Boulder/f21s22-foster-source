@@ -3,6 +3,7 @@ import { ToastService } from '../../services/toast-service/toast.service';
 import { Announcement } from '../../models/announcement.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,7 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
   public latestAnnouncement: Announcement;
-  constructor(private announcementService: AnnouncementService, private toastService: ToastService) {}
+  public isLoggedIn = false;
+  constructor(
+    private announcementService: AnnouncementService,
+    private toastService: ToastService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.announcementService.getLatestAnnouncement().subscribe(
@@ -25,5 +31,14 @@ export class LandingPageComponent implements OnInit {
         }
       }
     );
+
+    this.isLoggedIn = this.authService.isAtLeastUser();
+
+    this.authService.loggedInEvent.subscribe(() => {
+      this.isLoggedIn = true;
+    });
+    this.authService.loggedOutEvent.subscribe(() => {
+      this.isLoggedIn = false;
+    });
   }
 }

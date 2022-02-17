@@ -1,0 +1,8 @@
+<div class="mb-1">
+  <div class="chip mx-2 my-1" *ngFor="let f of appliedFilters">
+    <small class="text-muted">{{ f }}</small>
+  </div>
+  <div class="chip-button mx-2 my-1" (click)="clearFilters()">
+    <small class="text-white"><i class="bi bi-x-circle"></i>&nbsp;&nbsp;&nbsp;CLEAR FILTERS</small>
+  </div>
+</div>

@@ -1,15 +1,16 @@
-<div *ngIf="topic" class="w-100">
-  <br />
-  <div class="container-fluid w-100 topic shadow-sm rounded">
-    <h3>
-      <span class="title">{{ topic.title }}</span>
-    </h3>
+<div *ngIf="topic" class="w-100 my-2" (click)="navigateToTopic()">
+  <div class="container-fluid w-100 topic shadow-sm rounded p-3">
+    <div class="row mt-2">
+      <div class="col">
+        <h3>{{ topic.title }}</h3>
+      </div>
+    </div>
     <div class="row">
       <div class="col description">
         {{ topic.description }}
       </div>
     </div>
-    <div class="row">
+    <div class="row mt-4">
       <div class="col"></div>
       <div class="col">
         <div class="col text-right stats">
