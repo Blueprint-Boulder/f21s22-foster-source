@@ -15,7 +15,7 @@
       <button class="btn btn-secondary w-100" (click)="filtersHidden ? openNav() : closeNav()">☰ Filters</button>
     </div>
   </div>
-  <div class="row" *ngIf="filtersReq">
+  <div class="row mt-2 mt-md-0" *ngIf="filtersReq">
     <div class="col-12">
       <app-show-filters [filters]="filtersReq" (clearFiltersEvent)="clearFilters()"></app-show-filters>
     </div>
