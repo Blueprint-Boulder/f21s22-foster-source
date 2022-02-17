@@ -47,12 +47,13 @@
       <div class="row mt-5">
         <app-household-background-filters [radioModel]="householdRadios"></app-household-background-filters>
       </div>
-    </div>
-
-    <div class="panel-footer pr-3 pt-3 bg-light">
-      <button class="btn btn-secondary mb-2 w-100" (click)="resetRequestEmitter.emit()">Clear Filters</button>
-      <button class="btn btn-light mb-2 w-100 shadow-sm" (click)="closePanel.emit()">Cancel</button>
-      <button class="btn btn-primary text-white w-100" (click)="filterSubmit()">Filter</button>
+      <div class="row my-5">
+        <div class="panel-footer pr-3 pt-3 bg-light">
+          <button class="btn btn-secondary mb-2 w-100" (click)="resetRequestEmitter.emit()">Clear Filters</button>
+          <button class="btn btn-light mb-2 w-100 shadow-sm" (click)="closePanel.emit()">Cancel</button>
+          <button class="btn btn-primary text-white w-100" (click)="filterSubmit()">Filter</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
