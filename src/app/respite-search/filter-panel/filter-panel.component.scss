@@ -22,10 +22,11 @@
   position: absolute;
   top: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
   overflow-y: scroll;
   padding-right: 10px;
   overflow-x: hidden;
+  padding-bottom: 175px;
 }
 
 /* width */
@@ -89,7 +90,7 @@
 }
 
 .min-w-50 {
-  min-width: 400px;
+  min-width: 350px;
 }
 
 .black-overlay {

@@ -25,12 +25,18 @@
           offers.</i
         >
       </small>
-      <div class="text-center mt-5 mb-3">
+      <div class="text-center mt-5 mb-3" *ngIf="!isLoggedIn">
         <a [routerLink]="['/login/create-account']"
           ><button class="btn btn-primary w-50 text-white text-center">Create Profile</button></a
         >
         <br />
         <small>Already have a profile? <a [routerLink]="['/login']">Log in</a></small>
+      </div>
+      <div class="text-center mt-5 mb-3" *ngIf="isLoggedIn">
+        <a [routerLink]="['/respite']"
+          ><button class="btn btn-primary w-50 text-white text-center">Find Respite</button></a
+        >
+        <br />
       </div>
     </div>
   </div>

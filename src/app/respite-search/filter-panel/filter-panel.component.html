@@ -7,10 +7,13 @@
           <h5><b>Refine Your Search</b></h5>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-4">
         <div class="col">
           <div class="distance-slider">
-            <p>Distance</p>
+            <p>Distance (miles)</p>
+            <small><i>Distances are based on your address, not your current location.</i></small>
+            <br />
+            <br />
             <ngx-slider [(value)]="distanceValue" [options]="distanceSliderOptions"></ngx-slider>
           </div>
         </div>
@@ -19,6 +22,11 @@
         <div class="col">
           <div class="distance-slider mt-3">
             <p>Can Care for Kids in Age Range</p>
+            <small
+              ><i>If the values show "No Min" and "No Max", there will be no age restrictions in your search.</i></small
+            >
+            <br />
+            <br />
             <ngx-slider
               [(value)]="minAgeValue"
               [(highValue)]="maxAgeValue"
@@ -27,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="row mt-3">
+      <div class="row mt-5">
         <label for="maxKids" class="col-sm-12 col-md-7 col-form-label">Number of Kids Able To Care For</label>
         <div class="col-sm-12 col-md-5">
           <input type="number" class="form-control" id="maxKids" placeholder="# kids" [(ngModel)]="maxKids" />
@@ -41,8 +49,9 @@
       </div>
     </div>
 
-    <div class="panel-footer pr-3">
-      <button class="btn btn-light mb-2 w-100" (click)="closePanel.emit()">Cancel</button>
+    <div class="panel-footer pr-3 pt-3 bg-light">
+      <button class="btn btn-secondary mb-2 w-100" (click)="resetRequestEmitter.emit()">Clear Filters</button>
+      <button class="btn btn-light mb-2 w-100 shadow-sm" (click)="closePanel.emit()">Cancel</button>
       <button class="btn btn-primary text-white w-100" (click)="filterSubmit()">Filter</button>
     </div>
   </div>
