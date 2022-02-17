@@ -7,7 +7,6 @@ export class ProfileUtils {
     profile: FullProfileRes,
     availabilityService: AvailabilityService
   ): Availability | undefined {
-    console.log('Getting avail');
     if (!profile.respiteBackground.respiteProviderInfo || !profile.respiteBackground.canProvideRespite) {
       return undefined;
     }

@@ -1,0 +1,20 @@
+@import "src/styles";
+
+.chip {
+  display: inline-block;
+  padding: 15px;
+  line-height: 0;
+  border-radius: 20px;
+  background-color: #f1f1f1;
+}
+
+.chip-button {
+  display: inline-block;
+  padding: 10px 15px;
+  line-height: 0;
+  border-radius: 20px;
+  background-color: map-get($theme-colors, "secondary");
+  &:hover {
+    cursor: pointer;
+  }
+}

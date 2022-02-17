@@ -6,10 +6,14 @@ import { HouseholdBackgroundRadioFilters } from '../../models/filters.model';
   templateUrl: './household-background-filters.component.html',
   styleUrls: ['./household-background-filters.component.scss'],
 })
-export class HouseholdBackgroundFiltersComponent implements OnInit {
+export class HouseholdBackgroundFiltersComponent {
   @Input() radioModel: HouseholdBackgroundRadioFilters;
 
-  ngOnInit(): void {
-    return;
+  cleanModel(): void {
+    this.radioModel.vehicleAccess = this.radioModel.vehicleAccess ? true : null;
+    this.radioModel.lgbtExperience = this.radioModel.lgbtExperience ? true : null;
+    this.radioModel.physicalDisabilityExperience = this.radioModel.physicalDisabilityExperience ? true : null;
+    this.radioModel.intellectualDisabilityExperience = this.radioModel.intellectualDisabilityExperience ? true : null;
+    this.radioModel.medicallyFragileExperience = this.radioModel.medicallyFragileExperience ? true : null;
   }
 }

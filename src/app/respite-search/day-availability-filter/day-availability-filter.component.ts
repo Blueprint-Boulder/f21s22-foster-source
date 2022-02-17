@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DayAvailability } from '../../models/availability.model';
 
 @Component({
@@ -6,12 +6,8 @@ import { DayAvailability } from '../../models/availability.model';
   templateUrl: './day-availability-filter.component.html',
   styleUrls: ['./day-availability-filter.component.scss'],
 })
-export class DayAvailabilityFilterComponent implements OnInit {
+export class DayAvailabilityFilterComponent {
   @Input() day: string;
   @Input() dayModel: DayAvailability;
   @Input() index: number;
-
-  ngOnInit(): void {
-    return;
-  }
 }

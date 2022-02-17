@@ -22,7 +22,7 @@ export class FilterPanelComponent implements OnInit {
     floor: 0,
     ceil: 18,
     translate: (value: number, label: LabelType): string => {
-      return value === 18 ? '17+' : value === 0 ? 'Any' : '' + value;
+      return value === 18 ? 'No Max' : value === 0 ? 'No Min' : '' + value;
     },
   };
   public minAgeValue = 0;
@@ -50,11 +50,50 @@ export class FilterPanelComponent implements OnInit {
   };
 
   @Input() hidden = true;
+  @Input() resetEmitter: EventEmitter<void>;
+  @Input() initialValues: FiltersReq | undefined;
   @Output() closePanel: EventEmitter<void> = new EventEmitter<void>();
   @Output() filterResults: EventEmitter<FiltersReq> = new EventEmitter<FiltersReq>();
+  @Output() resetRequestEmitter: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
-    return;
+    this.resetEmitter.subscribe(() => {
+      this.reset();
+    });
+
+    if (this.initialValues) {
+      if (this.initialValues.distance) {
+        this.distanceValue = this.initialValues.distance;
+      }
+      if (this.initialValues.ageRange) {
+        this.minAgeValue = this.initialValues.ageRange[0];
+        this.maxAgeValue = this.initialValues.ageRange[1];
+      }
+      if (this.initialValues.maxKids) {
+        this.maxKids = this.initialValues.maxKids;
+      }
+      if (this.initialValues.availabilities) {
+        this.availabilityModel = this.initialValues.availabilities;
+      }
+      if (this.initialValues.vehicleAccess !== undefined) {
+        this.householdRadios.vehicleAccess = this.initialValues.vehicleAccess;
+      }
+      if (this.initialValues.lgbtExperience !== undefined) {
+        this.householdRadios.lgbtExperience = this.initialValues.lgbtExperience;
+      }
+      if (this.initialValues.physicalDisabilityExperience !== undefined) {
+        this.householdRadios.physicalDisabilityExperience = this.initialValues.physicalDisabilityExperience;
+      }
+      if (this.initialValues.intellectualDisabilityExperience !== undefined) {
+        this.householdRadios.intellectualDisabilityExperience = this.initialValues.intellectualDisabilityExperience;
+      }
+      if (this.initialValues.medicallyFragileExperience !== undefined) {
+        this.householdRadios.medicallyFragileExperience = this.initialValues.medicallyFragileExperience;
+      }
+      if (this.initialValues.ownFirearm !== undefined) {
+        this.householdRadios.ownFirearm = this.initialValues.ownFirearm;
+      }
+    }
   }
 
   filterSubmit() {
@@ -101,5 +140,29 @@ export class FilterPanelComponent implements OnInit {
       return undefined;
     }
     return this.availabilityModel;
+  }
+
+  private reset(): void {
+    this.distanceValue = 0;
+    this.minAgeValue = 0;
+    this.maxAgeValue = 18;
+    this.maxKids = 0;
+    this.availabilityModel = {
+      monday: [false, false, false, false],
+      tuesday: [false, false, false, false],
+      wednesday: [false, false, false, false],
+      thursday: [false, false, false, false],
+      friday: [false, false, false, false],
+      saturday: [false, false, false, false],
+      sunday: [false, false, false, false],
+    };
+    this.householdRadios = {
+      intellectualDisabilityExperience: null,
+      lgbtExperience: null,
+      ownFirearm: null,
+      physicalDisabilityExperience: null,
+      medicallyFragileExperience: null,
+      vehicleAccess: null,
+    };
   }
 }

@@ -14,6 +14,7 @@ import { HouseholdBackgroundFiltersComponent } from './household-background-filt
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppModule } from '../app.module';
 import { ResultCardComponent } from './result-card/result-card.component';
+import { ShowFiltersComponent } from './show-filters/show-filters.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ export const respiteRouting = RouterModule.forChild(routes);
     DayAvailabilityFilterComponent,
     HouseholdBackgroundFiltersComponent,
     ResultCardComponent,
+    ShowFiltersComponent,
   ],
   imports: [CommonModule, respiteRouting, NgxBootstrapSliderModule, NgxSliderModule, FormsModule, NgbPaginationModule],
 })
