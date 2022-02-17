@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AvailabilityFilters, DayAvailability } from '../../models/availability.model';
 
 @Component({
@@ -6,13 +6,26 @@ import { AvailabilityFilters, DayAvailability } from '../../models/availability.
   templateUrl: './availability-filters.component.html',
   styleUrls: ['./availability-filters.component.scss'],
 })
-export class AvailabilityFiltersComponent implements OnInit {
+export class AvailabilityFiltersComponent implements OnInit, OnChanges {
   public days: string[] = [];
   public availabilities: DayAvailability[] = [];
 
   @Input() availabilityModel: AvailabilityFilters;
 
   ngOnInit(): void {
+    if (this.availabilityModel) {
+      Object.keys(this.availabilityModel).forEach((key) => {
+        this.days.push(key);
+      });
+      Object.values(this.availabilityModel).forEach((availability) => {
+        this.availabilities.push(availability);
+      });
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.availabilities = [];
+    this.days = [];
     if (this.availabilityModel) {
       Object.keys(this.availabilityModel).forEach((key) => {
         this.days.push(key);

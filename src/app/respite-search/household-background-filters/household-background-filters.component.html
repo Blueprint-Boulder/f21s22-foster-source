@@ -14,8 +14,8 @@
             type="checkbox"
             name="vehicleAccessRadio"
             id="vehicleAccessRadioYes"
-            value="yes"
             [(ngModel)]="radioModel.vehicleAccess"
+            (change)="cleanModel()"
           />
           <label class="form-check-label" for="vehicleAccessRadioYes">Has reliable access to a vehicle</label>
         </div>
@@ -31,8 +31,8 @@
             type="checkbox"
             name="lgbtCared"
             id="lgbtCaredYes"
-            value=""
             [(ngModel)]="radioModel.lgbtExperience"
+            (change)="cleanModel()"
           />
           <label class="form-check-label" for="lgbtCaredYes">Has cared for LGBTQIA+ Children in the past</label>
         </div>
@@ -48,8 +48,8 @@
             type="checkbox"
             name="caredForPhysDisabled"
             id="caredForPhysDisabledYes"
-            value="yes"
             [(ngModel)]="radioModel.physicalDisabilityExperience"
+            (change)="cleanModel()"
           />
           <label class="form-check-label" for="caredForPhysDisabledYes"
             >Has cared for children with physical disabilities</label
@@ -67,8 +67,8 @@
             type="checkbox"
             name="caredForIntDisabled"
             id="caredForIntDisabledYes"
-            value="yes"
             [(ngModel)]="radioModel.intellectualDisabilityExperience"
+            (change)="cleanModel()"
           />
           <label class="form-check-label" for="caredForIntDisabledYes"
             >Has cared for children with intellectual disabilities</label
@@ -86,8 +86,8 @@
             type="checkbox"
             name="caredForMedFragile"
             id="caredForMedFragileYes"
-            value="yes"
             [(ngModel)]="radioModel.medicallyFragileExperience"
+            (change)="cleanModel()"
           />
           <label class="form-check-label" for="caredForMedFragileYes">Has cared for medically fragile children</label>
         </div>

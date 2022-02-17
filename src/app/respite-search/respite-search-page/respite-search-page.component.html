@@ -1,5 +1,8 @@
 <app-filter-panel
   [hidden]="filtersHidden"
+  [resetEmitter]="filterResetEmitter"
+  [initialValues]="filtersReq"
+  (resetRequestEmitter)="clearFilters()"
   (closePanel)="closeNav()"
   (filterResults)="setFilters($event)"
 ></app-filter-panel>
@@ -12,8 +15,22 @@
       <button class="btn btn-secondary w-100" (click)="filtersHidden ? openNav() : closeNav()">☰ Filters</button>
     </div>
   </div>
+  <div class="row" *ngIf="filtersReq">
+    <div class="col-12">
+      <app-show-filters [filters]="filtersReq" (clearFiltersEvent)="clearFilters()"></app-show-filters>
+    </div>
+  </div>
 </div>
 <div *ngIf="results && results.length > 0" class="w-100 h-100">
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-12">
+        <small
+          ><i>{{ totalResults }} total results found</i></small
+        >
+      </div>
+    </div>
+  </div>
   <div class="row mb-5">
     <app-search-results class="w-100" [profiles]="results" [searching]="searching"></app-search-results>
   </div>
@@ -30,6 +47,6 @@
   <div class="col-12 text-center mt-5">
     <p>We didn't find any profiles &nbsp;<i class="bi bi-emoji-frown"></i></p>
     <br />
-    <i> Check back later!</i>
+    <i> Check back later or try removing some filters to broaden your search.</i>
   </div>
 </div>
