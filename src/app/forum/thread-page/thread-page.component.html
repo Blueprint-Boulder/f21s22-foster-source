@@ -1,0 +1,69 @@
+<div class="container" *ngIf="thread">
+  <div class="row my-5">
+    <div class="col-sm-12 col-md-10">
+      <h6 class="text-muted">{{ thread.topicTitle }}</h6>
+      <h2>{{ thread.title }}</h2>
+    </div>
+    <div class="col-sm-12 col-md-2">
+      <button class="btn btn-primary float-right text-white">Reply to Thread</button>
+    </div>
+  </div>
+  <div class="row author-and-info-row mb-4">
+    <div class="col-2 col-sm-2 col-md-2 col-lg-1">
+      <img [src]="profileImageSrc" class="w-100 rounded-circle" (error)="imgError()" />
+    </div>
+    <div class="col-10 col-sm-10 col md-10 col-lg-11">
+      <p class="my-0 mb-2">
+        <a (click)="visitProfile()" [class]="{ pointer: thread.account.profileId !== undefined }" class="text-dark">{{
+          thread.account.username
+        }}</a
+        >&nbsp;&nbsp;<span class="author-tag">Author</span>&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">{{
+          getParsedDate()
+        }}</small>
+        <span class="float-right text-muted"
+          ><i class="bi bi-flag-fill pointer" title="Report This Thread" (click)="reportThread()"></i
+          ><span *ngIf="isMod"
+            >&nbsp;&nbsp;&nbsp;<i
+              class="bi bi-shield-fill-x text-muted pointer"
+              title="Remove This Thread"
+              (click)="modRemoveThread()"
+            ></i></span
+        ></span>
+      </p>
+      <p>
+        <i
+          class="bi bi-heart-fill heart-icon"
+          [class]="{
+            'text-danger': userHasLiked,
+            'text-muted': !userHasLiked
+          }"
+          (click)="likeUnlikeThread()"
+        ></i
+        >&nbsp;&nbsp;{{ thread.likes }}
+      </p>
+      <p>{{ thread.body }}</p>
+    </div>
+  </div>
+  <div class="row reply-row mx-sm-5" *ngFor="let reply of thread.replies">
+    <div class="col-12">This is a reply: {{ reply.body }}</div>
+  </div>
+  <div class="row page-row mt-5">
+    <div class="col-12">
+      <div class="page-wrapper text-center">
+        <ngb-pagination
+          [(page)]="resultPage"
+          [pageSize]="REPLY_LIMIT"
+          [collectionSize]="thread.replyCount"
+          (pageChange)="changePage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!thread">
+  <div class="d-flex justify-content-center mt-5 h-100">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
