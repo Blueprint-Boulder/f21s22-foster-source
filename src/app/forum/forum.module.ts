@@ -8,9 +8,18 @@ import { TopicComponent } from './topic/topic.component';
 import { CreateTopicComponent } from './create-topic/create-topic.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ThreadSummaryComponent } from './thread-summary/thread-summary.component';
+import { TopicPageComponent } from './topic-page/topic-page.component';
 
 @NgModule({
-  declarations: [ThreadReplyComponent, ForumComponent, TopicComponent, CreateTopicComponent],
+  declarations: [
+    ThreadReplyComponent,
+    ForumComponent,
+    TopicComponent,
+    CreateTopicComponent,
+    ThreadSummaryComponent,
+    TopicPageComponent,
+  ],
   imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule, RouterModule],
 })
 export class ForumModule {}

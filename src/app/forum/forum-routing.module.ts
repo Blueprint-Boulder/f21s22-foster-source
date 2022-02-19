@@ -2,6 +2,7 @@ import { CreateTopicComponent } from './create-topic/create-topic.component';
 import { ForumComponent } from './forum/forum.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { TopicPageComponent } from './topic-page/topic-page.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,16 @@ const routes: Routes = [
     component: ForumComponent,
   },
   {
+    path: 'topics',
+    component: ForumComponent,
+  },
+  {
     path: 'create-topic',
     component: CreateTopicComponent,
+  },
+  {
+    path: 'topics/:id',
+    component: TopicPageComponent,
   },
 ];
 
