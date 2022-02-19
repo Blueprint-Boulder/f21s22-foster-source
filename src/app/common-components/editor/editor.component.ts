@@ -8,10 +8,10 @@ import { Editor, toHTML } from 'ngx-editor';
 })
 export class EditorComponent implements OnInit, OnDestroy {
   editor: Editor;
-  html: '';
   wordCount = 0;
   characterCount = 0;
 
+  @Input() html = '';
   @Input() characterLimit = -1;
   @Output() richTextChange: EventEmitter<string> = new EventEmitter<string>();
 

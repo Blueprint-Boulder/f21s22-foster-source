@@ -14,7 +14,9 @@
         <input class="form-control bottom-border-input" id="title" type="text" [(ngModel)]="thread.title" />
       </div>
     </div>
-    <div class="col-12 mt-3"></div>
+    <div class="col-12 mt-3">
+      <app-editor (richTextChange)="bodyChange($event)" [html]="thread.body"> </app-editor>
+    </div>
     <!--      <div class="col-12 example-row mt-5">-->
     <!--        <h4>Topic Preview</h4>-->
     <!--        <app-topic [topic]="exampleTopic" [clickable]="false"></app-topic>-->

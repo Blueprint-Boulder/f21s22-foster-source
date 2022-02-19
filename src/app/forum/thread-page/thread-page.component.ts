@@ -84,6 +84,7 @@ export class ThreadPageComponent implements OnInit {
       this.forumService.likeThread(this.thread.id).subscribe(
         () => {
           this.userHasLiked = true;
+          this.thread.likes += 1;
         },
         (err) => {
           this.toastService.httpError(err);
@@ -93,6 +94,7 @@ export class ThreadPageComponent implements OnInit {
       this.forumService.unlikeThread(this.thread.id).subscribe(
         () => {
           this.userHasLiked = false;
+          this.thread.likes -= 1;
         },
         (err) => {
           this.toastService.httpError(err);

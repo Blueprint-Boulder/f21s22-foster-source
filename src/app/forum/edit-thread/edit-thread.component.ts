@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ActivatedRoute } from '@angular/router';
-import { ThreadSummary } from '../../models/forum.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ThreadSummary, UpdateThreadReq } from '../../models/forum.models';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,7 @@ export class EditThreadComponent implements OnInit {
     private forumService: ForumService,
     private toastService: ToastService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +48,27 @@ export class EditThreadComponent implements OnInit {
   }
 
   onSubmit(): void {
-    return;
+    const req: UpdateThreadReq = {
+      id: this.thread.id,
+      title: this.thread.title !== undefined && this.thread.title !== null ? this.thread.title : undefined,
+      body: this.thread.body !== undefined && this.thread.body !== null ? this.thread.body : undefined,
+    };
+
+    this.submittingForm = true;
+
+    this.forumService.updateThread(req).subscribe(
+      (thread) => {
+        this.toastService.success('Successfully updated thread.');
+        this.router.navigate(['/forum/threads/' + thread.id.toString()]);
+      },
+      (err) => {
+        this.submittingForm = false;
+        this.toastService.httpError(err);
+      }
+    );
+  }
+
+  bodyChange(text: string): void {
+    this.thread.body = text;
   }
 }

@@ -13,6 +13,7 @@ import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditThreadComponent } from './edit-thread/edit-thread.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { CommonComponentsModule } from '../common-components/common-components.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NgxEditorModule } from 'ngx-editor';
     NgbPaginationModule,
     FormsModule,
     NgxEditorModule,
+    CommonComponentsModule,
   ],
 })
 export class ForumModule {}

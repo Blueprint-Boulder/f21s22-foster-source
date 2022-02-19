@@ -70,11 +70,11 @@ export class ForumMockService implements ForumService {
   }
 
   likeThread(id: number): Observable<any> {
-    return of();
+    return of({});
   }
 
   unlikeThread(id: number): Observable<any> {
-    return of();
+    return of({});
   }
 
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {

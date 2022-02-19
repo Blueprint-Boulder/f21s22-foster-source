@@ -4,10 +4,12 @@ import { DayAvailabilityInputComponent } from './day-availability-input/day-avai
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AvailabilityGridComponent } from './availability-grid/availability-grid.component';
+import { EditorComponent } from './editor/editor.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
-  declarations: [DayAvailabilityInputComponent, AvailabilityGridComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule],
-  exports: [DayAvailabilityInputComponent, AvailabilityGridComponent],
+  declarations: [DayAvailabilityInputComponent, AvailabilityGridComponent, EditorComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule, NgxEditorModule],
+  exports: [DayAvailabilityInputComponent, AvailabilityGridComponent, EditorComponent],
 })
 export class CommonComponentsModule {}
