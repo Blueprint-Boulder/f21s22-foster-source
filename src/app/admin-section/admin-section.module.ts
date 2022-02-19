@@ -32,5 +32,6 @@ import { NgModule } from '@angular/core';
     NgxEditorModule,
     LandingModule,
   ],
+  exports: [EditorComponent],
 })
 export class AdminSectionModule {}

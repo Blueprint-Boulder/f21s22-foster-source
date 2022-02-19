@@ -1,0 +1,28 @@
+<div class="container" *ngIf="thread">
+  <div class="row title-row mt-5 border-bottom pb-4">
+    <div class="col-12">
+      <h1>Edit Your Thread</h1>
+    </div>
+  </div>
+  <div class="row form-row">
+    <div class="col-12 mt-5">
+      <div class="form-group">
+        <label for="title"
+          ><b>Thread Title</b><span class="required-star">*</span>
+          <br />
+        </label>
+        <input class="form-control bottom-border-input" id="title" type="text" [(ngModel)]="thread.title" />
+      </div>
+    </div>
+    <div class="col-12 mt-3"></div>
+    <!--      <div class="col-12 example-row mt-5">-->
+    <!--        <h4>Topic Preview</h4>-->
+    <!--        <app-topic [topic]="exampleTopic" [clickable]="false"></app-topic>-->
+    <!--      </div>-->
+    <div class="col-12 submit-row mt-5">
+      <button (click)="onSubmit()" class="btn btn-primary float-right text-white" [disabled]="submittingForm">
+        Update Thread
+      </button>
+    </div>
+  </div>
+</div>

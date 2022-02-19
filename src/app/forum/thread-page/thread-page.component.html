@@ -20,6 +20,9 @@
         >&nbsp;&nbsp;<span class="author-tag">Author</span>&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">{{
           getParsedDate()
         }}</small>
+        <small *ngIf="isOwnThread"
+          >&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<a [routerLink]="'/forum/edit-thread/' + thread.id">Edit</a></small
+        >
         <span class="float-right text-muted"
           ><i class="bi bi-flag-fill pointer" title="Report This Thread" (click)="reportThread()"></i
           ><span *ngIf="isMod"

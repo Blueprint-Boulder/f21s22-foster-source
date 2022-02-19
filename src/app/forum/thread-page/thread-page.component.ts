@@ -19,6 +19,7 @@ export class ThreadPageComponent implements OnInit {
   public userHasLiked = false;
   public isMod = false;
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
+  public isOwnThread = false;
 
   public thread: FullThread;
 
@@ -58,6 +59,7 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
+              this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
             },
             (err) => {
               this.toastService.httpError(err);
