@@ -23,13 +23,13 @@ export class ForumImplService implements ForumService {
   constructor(private http: HttpClient) {}
 
   getTopicSummaryById(id: number): Observable<TopicSummary> {
-    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/topics/${id}`, {
+    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/forum/topics/${id}`, {
       withCredentials: true,
     });
   }
 
   getTopicSummaries(): Observable<GetTopicSummariesRes> {
-    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/topics`, {
+    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/forum/topics`, {
       withCredentials: true,
     });
   }
