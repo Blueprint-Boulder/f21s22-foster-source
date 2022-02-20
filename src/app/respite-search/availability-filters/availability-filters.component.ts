@@ -13,6 +13,8 @@ export class AvailabilityFiltersComponent implements OnInit, OnChanges {
   @Input() availabilityModel: AvailabilityFilters;
 
   ngOnInit(): void {
+    this.availabilities = [];
+    this.days = [];
     if (this.availabilityModel) {
       Object.keys(this.availabilityModel).forEach((key) => {
         this.days.push(key);

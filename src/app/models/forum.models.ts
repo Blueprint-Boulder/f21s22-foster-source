@@ -32,7 +32,7 @@ export interface ThreadSummary {
   likes: number;
   title: string;
   body: string;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
@@ -70,7 +70,7 @@ export interface FullThread {
   title: string;
   body: string;
   edited: boolean;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
@@ -91,8 +91,8 @@ export interface CreateNewThreadReq {
 
 export interface UpdateThreadReq {
   id: number;
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
 }
 
 export interface DeleteThreadReq {
@@ -111,4 +111,17 @@ export interface UpdateReplyReq {
   threadId: number;
   replyId: number;
   body?: string;
+}
+
+export interface ReportThreadReq {
+  id: number;
+  description: string;
+}
+
+export interface ModRemoveThreadReq {
+  id: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
 }
