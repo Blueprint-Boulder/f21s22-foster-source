@@ -88,7 +88,9 @@ export class ForumImplService implements ForumService {
   }
 
   getThreadById(id: number): Observable<ThreadSummary> {
-    return this.http.get<ThreadSummary>(`${environment.backendHost}/api/db/threads/${id}`, { withCredentials: true });
+    return this.http.get<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${id}`, {
+      withCredentials: true,
+    });
   }
 
   getThreadByIdWithReplies(id: number, replyLimit: number, replyOffset: number): Observable<FullThread> {

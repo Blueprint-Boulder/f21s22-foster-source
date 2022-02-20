@@ -32,7 +32,7 @@ export interface ThreadSummary {
   likes: number;
   title: string;
   body: string;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
@@ -70,7 +70,7 @@ export interface FullThread {
   title: string;
   body: string;
   edited: boolean;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;

@@ -1,4 +1,4 @@
-<div class="container shadow-sm mt-5 pb-5 px-4" *ngIf="thread">
+<div class="container border mt-5 pb-5 pt-1 px-4" *ngIf="thread">
   <div class="row my-5">
     <div class="col-sm-12 col-md-10">
       <h6 class="text-muted">{{ thread.topicTitle }}</h6>
@@ -26,7 +26,7 @@
             >Remove</a
           ></small
         >
-        <span class="float-right text-muted"
+        <span *ngIf="!isOwnThread" class="float-right text-muted"
           ><i class="bi bi-flag-fill pointer" title="Report This Thread" (click)="openModal(reportModal)"></i
           ><span *ngIf="isMod"
             >&nbsp;&nbsp;&nbsp;<i
@@ -47,7 +47,7 @@
         ></i
         >&nbsp;&nbsp;{{ thread.likes }}
       </p>
-      <p>{{ thread.body }}</p>
+      <p [innerHTML]="thread.body"></p>
       <p class="text-right text-muted my-0" *ngIf="thread.edited"><small>(edited)</small></p>
     </div>
   </div>

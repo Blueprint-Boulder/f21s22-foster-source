@@ -70,11 +70,13 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
-              console.log(ft);
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
             },
             (err) => {
               this.toastService.httpError(err);
+              if (err?.error?.code === 404) {
+                this.router.navigate(['/not-found']);
+              }
             }
           );
       });
@@ -82,7 +84,7 @@ export class ThreadPageComponent implements OnInit {
   }
 
   getParsedDate(): string {
-    return formatDate(this.thread.updatedAt, 'MM/dd/yyyy - hh:mm', 'en-US');
+    return formatDate(this.thread.createdAt, 'MM/dd/yyyy - hh:mm', 'en-US');
   }
 
   changePage(newPage: number): void {
@@ -183,6 +185,8 @@ export class ThreadPageComponent implements OnInit {
       () => {
         this.toastService.success('Successfully removed the thread.');
         this.router.navigate(['/forum']);
+        this.modalService.dismissAll();
+        this.submittingRemove = false;
       },
       (err) => {
         this.toastService.httpError(err);
@@ -245,6 +249,7 @@ export class ThreadPageComponent implements OnInit {
     this.forumService.removeOwnThread(this.thread.id).subscribe(
       () => {
         this.toastService.success('Successfully deleted thread.');
+        this.modalService.dismissAll();
         this.router.navigate(['/forum']);
       },
       (err) => {
