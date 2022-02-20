@@ -1,4 +1,4 @@
-<div class="container" *ngIf="thread">
+<div class="container shadow-sm mt-5 pb-5 px-4" *ngIf="thread">
   <div class="row my-5">
     <div class="col-sm-12 col-md-10">
       <h6 class="text-muted">{{ thread.topicTitle }}</h6>
@@ -54,7 +54,18 @@
   <div class="row reply-row mx-sm-5" *ngFor="let reply of thread.replies">
     <div class="col-12">This is a reply: {{ reply.body }}</div>
   </div>
-  <div class="row page-row mt-5">
+  <div class="row empty-row mt-5" *ngIf="thread.replies.length <= 0 && resultPage === 0">
+    <div class="col-12 text-center">
+      <i class="text-muted">No one's replied yet. <a href="javascript: void(0)">Be the first!</a></i>
+    </div>
+  </div>
+  <div class="row empty-row mt-5" *ngIf="thread.replies.length <= 0 && resultPage !== 0">
+    <div class="col-12 text-center">
+      <i class="text-muted">No results.</i>
+    </div>
+  </div>
+  <div class="row my-5"></div>
+  <div class="row page-row mt-5 mb-2">
     <div class="col-12">
       <div class="page-wrapper text-center">
         <ngb-pagination

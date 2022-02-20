@@ -70,6 +70,7 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
+              console.log(ft);
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
             },
             (err) => {
