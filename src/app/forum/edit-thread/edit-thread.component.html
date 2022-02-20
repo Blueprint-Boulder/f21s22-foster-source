@@ -2,6 +2,7 @@
   <div class="row title-row mt-5 border-bottom pb-4">
     <div class="col-12">
       <h1>Edit Your Thread</h1>
+      <p>Other users will be able to see that your post has been edited. Replies to your post will not be affected.</p>
     </div>
   </div>
   <div class="row form-row">
@@ -17,6 +18,7 @@
     <div class="col-12 mt-3">
       <app-editor (richTextChange)="bodyChange($event)" [html]="thread.body"> </app-editor>
     </div>
+    <!--    TODO: THREAD preview -->
     <!--      <div class="col-12 example-row mt-5">-->
     <!--        <h4>Topic Preview</h4>-->
     <!--        <app-topic [topic]="exampleTopic" [clickable]="false"></app-topic>-->

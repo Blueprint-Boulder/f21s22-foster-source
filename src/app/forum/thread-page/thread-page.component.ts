@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { FullThread } from '../../models/forum.models';
+import { FullThread, ModRemoveThreadReq, ReportThreadReq } from '../../models/forum.models';
 import { formatDate } from '@angular/common';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-thread-page',
@@ -23,13 +25,22 @@ export class ThreadPageComponent implements OnInit {
 
   public thread: FullThread;
 
+  public reportDescription: string;
+  public submittingReport = false;
+
+  public removeForm: FormGroup;
+  public shouldShowSuspendForm = false;
+  public submittingRemove = false;
+
   constructor(
     private forumService: ForumService,
     private route: ActivatedRoute,
     private toastService: ToastService,
     private router: Router,
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -120,11 +131,63 @@ export class ThreadPageComponent implements OnInit {
   }
 
   reportThread(): void {
-    alert('Well get this taken care of');
+    this.submittingReport = true;
+    const req: ReportThreadReq = {
+      id: this.thread.id,
+      description: this.reportDescription,
+    };
+    this.forumService.reportThread(req).subscribe(
+      () => {
+        this.toastService.success('Thank you for submitting your report, staff will look into it shortly.');
+        this.reportDescription = '';
+        this.modalService.dismissAll();
+        this.submittingReport = false;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingReport = false;
+      }
+    );
   }
 
   modRemoveThread(): void {
-    alert('Removing thread');
+    if (this.removeForm.invalid) {
+      this.removeForm.markAllAsTouched();
+      return;
+    }
+
+    if (
+      this.removeForm.get('adminAction')?.value === 'blacklist' &&
+      prompt(
+        'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
+      ) !== 'confirm'
+    ) {
+      return;
+    }
+
+    this.submittingRemove = true;
+
+    const req: ModRemoveThreadReq = {
+      id: this.thread.id,
+      reason: this.removeForm.get('reason')!.value,
+      shouldBlacklist: this.removeForm.get('adminAction')!.value === 'blacklist' ? true : undefined,
+      shouldSuspend: this.removeForm.get('adminAction')!.value === 'suspend' ? true : undefined,
+      suspendForDays:
+        this.removeForm.get('adminAction')!.value === 'suspend' && this.removeForm.get('suspendForDays')!.value
+          ? this.removeForm.get('suspendForDays')!.value
+          : undefined,
+    };
+
+    this.forumService.modRemoveThread(req).subscribe(
+      () => {
+        this.toastService.success('Successfully removed the thread.');
+        this.router.navigate(['/forum']);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingRemove = false;
+      }
+    );
   }
 
   imgError(): void {
@@ -136,5 +199,56 @@ export class ThreadPageComponent implements OnInit {
       return;
     }
     this.router.navigate([`/user/${this.thread.account.profileId}`]);
+  }
+
+  openModal(modal: any): void {
+    this.modalService.open(modal, {
+      backdropClass: 'modal-background',
+    });
+
+    this.resetForms();
+  }
+
+  private resetForms(): void {
+    this.reportDescription = '';
+
+    this.removeForm = this.formBuilder.group({
+      reason: [null, Validators.required],
+      adminAction: [null, Validators.required],
+      suspendForDays: [null, Validators.min(1)],
+    });
+
+    this.removeForm.get('adminAction')?.valueChanges.subscribe((value) => {
+      if (value === 'suspend') {
+        this.removeForm.get('suspendForDays')?.addValidators(Validators.required);
+        this.shouldShowSuspendForm = true;
+      } else {
+        this.removeForm.get('suspendForDays')?.removeValidators(Validators.required);
+        this.shouldShowSuspendForm = false;
+      }
+      this.removeForm.get('suspendForDays')?.updateValueAndValidity();
+    });
+  }
+
+  removeOwnThread(): void {
+    if (
+      !(
+        prompt(
+          'Are you sure that you\'d like to delete your thread? This action cannot be undone, and the thread (along with all its associated replies) will be lost forever. To continue, type "confirm"'
+        ) === 'confirm'
+      )
+    ) {
+      return;
+    }
+
+    this.forumService.removeOwnThread(this.thread.id).subscribe(
+      () => {
+        this.toastService.success('Successfully deleted thread.');
+        this.router.navigate(['/forum']);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 }

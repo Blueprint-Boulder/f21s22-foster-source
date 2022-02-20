@@ -112,3 +112,16 @@ export interface UpdateReplyReq {
   replyId: number;
   body?: string;
 }
+
+export interface ReportThreadReq {
+  id: number;
+  description: string;
+}
+
+export interface ModRemoveThreadReq {
+  id: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
+}

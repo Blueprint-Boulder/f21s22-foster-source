@@ -9,6 +9,7 @@ import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-public-user-page-component',
