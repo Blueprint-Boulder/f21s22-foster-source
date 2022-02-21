@@ -5,7 +5,9 @@
       <h2>{{ thread.title }}</h2>
     </div>
     <div class="col-sm-12 col-md-2">
-      <button class="btn btn-primary float-right text-white">Reply to Thread</button>
+      <button class="btn btn-primary float-right text-white" (click)="scrollTo('reply-section')">
+        Reply to Thread
+      </button>
     </div>
   </div>
   <div class="row author-and-info-row mb-4">
@@ -64,8 +66,7 @@
       <i class="text-muted">No results.</i>
     </div>
   </div>
-  <div class="row my-5"></div>
-  <div class="row page-row mt-5 mb-2">
+  <div class="row page-row mt-5 mb-2" *ngIf="thread.replyCount > 0">
     <div class="col-12">
       <div class="page-wrapper text-center">
         <ngb-pagination
@@ -75,6 +76,39 @@
           (pageChange)="changePage($event)"
         ></ngb-pagination>
       </div>
+    </div>
+  </div>
+</div>
+<div class="container" id="reply-section">
+  <div class="row my-5">
+    <div class="col-12">
+      <h5 class="text-muted" *ngIf="!isReplyingToSomeone">Reply to This Thread</h5>
+      <h5 class="text-muted" *ngIf="isReplyingToSomeone">Reply to Someone Else</h5>
+      <p>
+        Please ensure that you have read and understand the <a href="/help#forum-rules">forum rules</a> before posting.
+      </p>
+      <small class="text-muted" *ngIf="isReplyingToSomeone"><i>You are replying to another comment.</i></small>
+      <div class="bg-light-grey pt-3 pb-2 px-3 mb-3 rounded shadow-sm" *ngIf="isReplyingToSomeone">
+        <p><b>username</b></p>
+        <p>this is the part of the text that I am replying to!</p>
+      </div>
+      <app-editor [html]="replyReq.body" (richTextChange)="replyChange($event)"></app-editor>
+      <button
+        class="btn btn-primary float-right text-white mt-4"
+        [disabled]="
+          submittingReply || replyReq.body === undefined || replyReq.body === '' || replyReq.body === '<p></p>'
+        "
+        (click)="submitReply()"
+      >
+        Submit Reply
+      </button>
+      <button
+        *ngIf="isReplyingToSomeone"
+        class="btn btn-secondary float-right text-white mt-4 mr-5"
+        (click)="fullyClearReplyForm()"
+      >
+        Cancel Reply
+      </button>
     </div>
   </div>
 </div>

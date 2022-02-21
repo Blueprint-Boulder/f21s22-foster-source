@@ -25,6 +25,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgModule } from '@angular/core';
     ToastContainerComponent,
     NavBarComponent,
     BugReportModalComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

@@ -51,7 +51,7 @@ export class ForumImplService implements ForumService {
   }
 
   createNewThread(req: CreateNewThreadReq): Observable<ThreadSummary> {
-    return this.http.post<ThreadSummary>(`${environment.backendHost}/api/forum/threads`, req, {
+    return this.http.post<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads`, req, {
       withCredentials: true,
     });
   }

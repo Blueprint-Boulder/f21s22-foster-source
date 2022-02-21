@@ -3,7 +3,7 @@ import { ProfileService } from 'src/app/services/profile-service/profile.service
 import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
-import { SimpleAvailability } from '../../models/availability.model';
+import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { ProfileUtils } from '../../common/utils/ProfileUtils';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
@@ -20,6 +20,7 @@ export class PublicUserPageComponentComponent implements OnInit {
   public selectedProfile: FullProfileRes;
   public availability: SimpleAvailability;
   public isOwnProfile = false;
+  public isAvailable = false;
   public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
   constructor(
@@ -75,6 +76,19 @@ export class PublicUserPageComponentComponent implements OnInit {
       return;
     }
     this.availability = avail;
+
+    this.checkIsAvailable(avail);
+  }
+
+  private checkIsAvailable(avail: Availability): void {
+    this.isAvailable =
+      avail.monday.includes(true) ||
+      avail.tuesday.includes(true) ||
+      avail.wednesday.includes(true) ||
+      avail.thursday.includes(true) ||
+      avail.friday.includes(true) ||
+      avail.saturday.includes(true) ||
+      avail.sunday.includes(true);
   }
 
   openPrimaryContactModal(content: any) {

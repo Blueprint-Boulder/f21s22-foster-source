@@ -7,6 +7,7 @@ import { ModGuard } from '../guards/mod/mod.guard';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
 import { ThreadPageComponent } from './thread-page/thread-page.component';
 import { EditThreadComponent } from './edit-thread/edit-thread.component';
+import { CreateThreadComponent } from './create-thread/create-thread.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     path: 'edit-topic/:id',
     component: EditTopicComponent,
     canActivate: [ModGuard],
+  },
+  {
+    path: 'create-thread',
+    component: CreateThreadComponent,
+    canActivate: [LoggedInGuard],
   },
   {
     path: 'threads/:id',

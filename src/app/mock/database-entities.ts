@@ -548,6 +548,7 @@ export const threadSummaries: ThreadSummary[] = [
     replyCount: 9,
     lastReplyDate: new Date(),
     topicTitle: 'Parenting 101 Topic',
+    requesterHasLiked: true,
     account: {
       id: 51,
       username: 'respiteuser1',
@@ -565,6 +566,8 @@ export const threadSummaries: ThreadSummary[] = [
     replyCount: 104,
     lastReplyDate: new Date(),
     topicTitle: 'General Discussion',
+    requesterHasLiked: false,
+
     account: {
       id: 51,
       username: 'iAmLegend3',
@@ -582,6 +585,8 @@ export const threadSummaries: ThreadSummary[] = [
     replyCount: 3,
     lastReplyDate: new Date(),
     topicTitle: 'Parenting 101 Topic',
+    requesterHasLiked: true,
+
     account: {
       id: 51,
       username: 'adminuser',
@@ -598,6 +603,7 @@ export const replies: Reply[] = [
     replyingToText: 'Proin fermentum convallis justo elementum gravida. Nam fringilla euismod eleifend',
     replyingToUsername: 'usertoreplyto',
     edited: false,
+    requesterHasLiked: true,
     account: {
       id: 1,
       username: 'replyguy.1',
@@ -610,6 +616,7 @@ export const replies: Reply[] = [
     body: 'second this! smiley emoji.',
     likes: 102,
     edited: true,
+    requesterHasLiked: true,
     account: {
       id: 2,
       username: 'admin-man',
@@ -621,6 +628,7 @@ export const replies: Reply[] = [
     body: 'Mauris in lectus nec lacus lobortis cursus. Maecenas velit neque, accumsan at lacinia sed, tincidunt a urna. Integer ex felis, lacinia et ipsum non, fermentum semper dui. Donec in eros ipsum. Curabitur id enim libero. Quisque gravida viverra tortor, a rhoncus sapien ultricies a. In ipsum lacus, placerat nec tristique sed, laoreet sit amet velit. In et risus dapibus, lobortis purus non, varius neque. Phasellus viverra libero vitae enim semper, consequat venenatis nibh dignissim. Aliquam quis laoreet arcu. Aliquam a luctus est. Proin ac congue mi. Proin volutpat consectetur justo, eu varius turpis gravida in. In sed tincidunt tortor.',
     likes: 0,
     edited: false,
+    requesterHasLiked: true,
     account: {
       id: 3,
       username: 'randomdude',

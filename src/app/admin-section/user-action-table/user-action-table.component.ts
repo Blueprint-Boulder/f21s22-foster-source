@@ -69,14 +69,10 @@ export class UserActionTableComponent implements OnInit {
         shouldNotifyApplicant: params['sendCopy' + denied.index],
         shouldBlacklist: params['ban' + denied.index],
       };
-
       this.accountService.denyApplicant(denyRequest).subscribe(
         (res: any) => {
+          this.toastService.success(`Successfully denied applicant ${denied.firstName} ${denied.lastName}.`);
           this.getAndRemoveApplicantByIndex(index);
-          this.toastService.show({
-            body: `Successfully denied applicant ${denied.firstName} ${denied.lastName}.`,
-            preset: ToastPresets.SUCCESS,
-          });
         },
         (error: HttpErrorResponse) => {
           this.toastService.httpError(error);
