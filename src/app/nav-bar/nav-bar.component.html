@@ -31,7 +31,12 @@
       </li>
       <li *ngIf="isMod" class="nav-item admin-link" [ngClass]="{ active: router.url === '/admin' }">
         <a class="nav-link" href="#" [routerLink]="'/admin'" (click)="collapse()"
-          ><i class="bi bi-clipboard-data d-lg-none">&nbsp;&nbsp;</i>Administration
+          ><i class="bi bi-clipboard-data d-lg-none">&nbsp;&nbsp;</i>Administration<span
+            *ngIf="status && status.adminNotifications"
+            >&nbsp;<sup class="notification-number rounded text-white bg-danger px-1">{{
+              status.adminNotifications
+            }}</sup></span
+          >
           <span *ngIf="router.url === '/admin'" class="sr-only">(current)</span></a
         >
       </li>

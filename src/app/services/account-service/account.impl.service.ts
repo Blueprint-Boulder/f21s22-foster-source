@@ -18,6 +18,7 @@ import { FinishProfileReq } from '../../models/profile.model';
 import { AuthService } from '../auth-service/auth.service';
 import { ChangePasswordReq } from '../../models/change-password';
 import { switchMap } from 'rxjs/operators';
+import { NavBarStatus } from '../../models/nav-bar.models';
 
 export class AccountImplService implements AccountService {
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -148,6 +149,12 @@ export class AccountImplService implements AccountService {
 
   updateCwInfo(req: CaseWorkerInfo): Observable<any> {
     return this.http.put(`${environment.backendHost}/api/db/accounts/case-worker-info`, req, {
+      withCredentials: true,
+    });
+  }
+
+  getNavBarStatus(): Observable<NavBarStatus> {
+    return this.http.get<NavBarStatus>(`${environment.backendHost}/api/utils/nav-status`, {
       withCredentials: true,
     });
   }
