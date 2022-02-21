@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { FullThread, ModRemoveThreadReq, ReportThreadReq } from '../../models/forum.models';
-import { formatDate } from '@angular/common';
+import { FullThread, ModRemoveThreadReq, PostReplyReq, ReportThreadReq } from '../../models/forum.models';
+import { formatDate, ViewportScroller } from '@angular/common';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-thread-page',
@@ -32,6 +33,10 @@ export class ThreadPageComponent implements OnInit {
   public shouldShowSuspendForm = false;
   public submittingRemove = false;
 
+  public isReplyingToSomeone = true;
+  public submittingReply = false;
+  public replyReq: PostReplyReq;
+
   constructor(
     private forumService: ForumService,
     private route: ActivatedRoute,
@@ -40,7 +45,8 @@ export class ThreadPageComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private viewportScroller: ViewportScroller
   ) {}
 
   ngOnInit(): void {
@@ -51,14 +57,14 @@ export class ThreadPageComponent implements OnInit {
       const id = parseInt(params['id']);
 
       if (!id || isNaN(id)) {
-        this.toastService.error('Invalid thread id.');
+        this.router.navigate(['/not-found']);
         return;
       }
 
       this.route.queryParamMap.subscribe((map) => {
         const replyOffset = map.get('replyOffset');
         if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
-          this.resultPage = parseInt(replyOffset);
+          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString());
         }
 
         this.forumService
@@ -71,6 +77,11 @@ export class ThreadPageComponent implements OnInit {
             (ft) => {
               this.thread = ft;
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
+              this.userHasLiked = this.thread.requesterHasLiked;
+              this.replyReq = {
+                threadId: ft.id,
+                body: '',
+              };
             },
             (err) => {
               this.toastService.httpError(err);
@@ -256,5 +267,38 @@ export class ThreadPageComponent implements OnInit {
         this.toastService.httpError(err);
       }
     );
+  }
+
+  submitReply(): void {
+    this.submittingReply = true;
+
+    this.forumService.postReply(this.replyReq).subscribe(
+      (res) => {
+        this.toastService.success('Successfully posted reply.');
+        this.submittingReply = false;
+        this.replyReq.body = '';
+        this.replyReq.replyingToUsername = undefined;
+        this.replyReq.replyingToText = undefined;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingReply = false;
+      }
+    );
+  }
+
+  replyChange(text: string): void {
+    this.replyReq.body = text;
+  }
+
+  scrollTo(elementId: string): void {
+    this.viewportScroller.scrollToAnchor(elementId);
+  }
+
+  fullyClearReplyForm(): void {
+    this.isReplyingToSomeone = false;
+    this.replyReq.replyingToUsername = undefined;
+    this.replyReq.replyingToText = undefined;
+    this.replyReq.body = '';
   }
 }

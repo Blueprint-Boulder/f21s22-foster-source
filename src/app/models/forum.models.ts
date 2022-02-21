@@ -37,6 +37,7 @@ export interface ThreadSummary {
   lastReplyDate: Date;
   topicTitle: string;
   edited: boolean;
+  requesterHasLiked: boolean;
   account: {
     id: number;
     username: string;
@@ -56,6 +57,7 @@ export interface Reply {
   replyingToText?: string;
   replyingToUsername?: string;
   edited: boolean;
+  requesterHasLiked: boolean;
   account: {
     id: number;
     username: string;
@@ -74,6 +76,7 @@ export interface FullThread {
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
+  requesterHasLiked: boolean;
   account: {
     id: number;
     username: string;
