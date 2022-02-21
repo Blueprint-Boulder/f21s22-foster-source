@@ -65,7 +65,7 @@
     </div>
   </div>
   <div class="row my-5"></div>
-  <div class="row page-row mt-5 mb-2">
+  <div class="row page-row mt-5 mb-2" *ngIf="thread.replyCount > 0">
     <div class="col-12">
       <div class="page-wrapper text-center">
         <ngb-pagination

@@ -9,6 +9,7 @@ import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-thread-page',
@@ -51,14 +52,14 @@ export class ThreadPageComponent implements OnInit {
       const id = parseInt(params['id']);
 
       if (!id || isNaN(id)) {
-        this.toastService.error('Invalid thread id.');
+        this.router.navigate(['/not-found']);
         return;
       }
 
       this.route.queryParamMap.subscribe((map) => {
         const replyOffset = map.get('replyOffset');
         if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
-          this.resultPage = parseInt(replyOffset);
+          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString());
         }
 
         this.forumService
@@ -71,6 +72,7 @@ export class ThreadPageComponent implements OnInit {
             (ft) => {
               this.thread = ft;
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
+              this.userHasLiked = this.thread.requesterHasLiked;
             },
             (err) => {
               this.toastService.httpError(err);

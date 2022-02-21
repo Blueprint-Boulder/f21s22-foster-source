@@ -14,6 +14,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditThreadComponent } from './edit-thread/edit-thread.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { CommonComponentsModule } from '../common-components/common-components.module';
+import { CreateThreadComponent } from './create-thread/create-thread.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CommonComponentsModule } from '../common-components/common-components.m
     EditTopicComponent,
     ThreadPageComponent,
     EditThreadComponent,
+    CreateThreadComponent,
   ],
   imports: [
     CommonModule,
