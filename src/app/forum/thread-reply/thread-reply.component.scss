@@ -1,5 +1,8 @@
+@import "../../../styles";
+
 .replying-to-container {
   background-color: #eceaf0;
+  border-left: 4px solid map-get($theme-colors, "secondary");
 }
 .author-tag {
   background-color: #c5c5c5;

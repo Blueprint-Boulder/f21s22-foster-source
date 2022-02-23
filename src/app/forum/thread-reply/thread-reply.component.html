@@ -1,4 +1,4 @@
-<div class="card py-3 w-100 border mt-1" *ngIf="reply">
+<div class="card py-3 w-100 border mt-1" *ngIf="reply" (click)="clicked($event)">
   <div class="container-fluid w-100">
     <div class="row">
       <div class="col-2 col-lg-1 justify-content-center">
@@ -13,19 +13,37 @@
               class="text-dark"
               >{{ reply.account.username }}</a
             ><span *ngIf="author && author === reply.account.username" class="author-tag ml-2">Author</span
-            >&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">{{ getParsedDate() }}</small>
+            >&nbsp;&nbsp;&nbsp;&nbsp;<small class="text-muted">{{ getParsedDate() }}</small
+            ><small *ngIf="isOwnReply"
+              >&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<a [routerLink]="'/forum/edit-reply/' + reply.id">Edit</a
+              >&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<a href="javascript: void(0)" (click)="removeOwnReply()"
+                >Remove</a
+              ></small
+            >
           </div>
           <div class="col-12">
             <div class="row mt-2" *ngIf="reply.replyingToUsername && reply.replyingToText">
               <div class="col-12">
-                <div class="replying-to-container w-100 py-2 px-3 rounded">
+                <div class="replying-to-container shadow-sm w-100 py-2 px-3 rounded">
                   <span>{{ reply.replyingToUsername }} said:</span><br />
                   <i class="text-muted">{{ reply.replyingToText }}</i>
                 </div>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-12" [innerHTML]="reply.body"></div>
+              <div class="col-12 inner-text" [innerHTML]="reply.body" (mouseup)="doSomethingWithSelectedText()"></div>
+            </div>
+            <button
+              class="btn btn-secondary selected-txt-btn mt-4 w-100"
+              *ngIf="textSelected"
+              (click)="replyToSelected()"
+            >
+              Reply To Selected Text
+            </button>
+            <div class="row">
+              <div class="col-12 text-right">
+                <p class="text-right text-muted my-0" *ngIf="reply.edited"><small>(edited)</small></p>
+              </div>
             </div>
           </div>
         </div>
