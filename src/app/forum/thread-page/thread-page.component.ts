@@ -65,7 +65,7 @@ export class ThreadPageComponent implements OnInit {
       this.route.queryParamMap.subscribe((map) => {
         const replyOffset = map.get('replyOffset');
         if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
-          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString());
+          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString()) + 1;
         }
 
         this.forumService
@@ -323,5 +323,9 @@ export class ThreadPageComponent implements OnInit {
       body: '',
     };
     this.scrollTo('reply-section');
+  }
+
+  getPageCount(): number {
+    return Math.ceil(this.thread.replyCount / this.REPLY_LIMIT);
   }
 }

@@ -605,6 +605,7 @@ export const replies: Reply[] = [
     edited: false,
     requesterHasLiked: true,
     createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 1,
       username: 'replyguy.1',
@@ -619,6 +620,7 @@ export const replies: Reply[] = [
     edited: true,
     requesterHasLiked: true,
     createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 2,
       username: 'admin-man',
@@ -632,6 +634,7 @@ export const replies: Reply[] = [
     edited: false,
     requesterHasLiked: true,
     createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 3,
       username: 'randomdude',

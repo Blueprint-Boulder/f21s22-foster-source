@@ -59,6 +59,7 @@ export interface Reply {
   edited: boolean;
   requesterHasLiked: boolean;
   createdAt: Date;
+  threadId: number;
   account: {
     id: number;
     username: string;

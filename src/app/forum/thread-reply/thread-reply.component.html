@@ -65,36 +65,38 @@
         >&nbsp;&nbsp;{{ reply.likes }}
       </div>
       <div class="col-4">
-        <i class="bi bi-flag-fill pointer text-muted" title="Report This Thread"></i>
+        <i class="bi bi-flag-fill pointer text-muted" title="Report This Thread" (click)="openModal(reportModal)"></i>
       </div>
     </div>
   </div>
 </div>
-<!--</div>-->
-<!--<div class="container col-sm-11">-->
-<!--  <div class="card-body">-->
-<!--    <div-->
-<!--      class="container mb-3"-->
-<!--      *ngIf="reply.replyingToText"-->
-<!--      style="background-color: #eceaf0; border-radius: 5px; float: left"-->
-<!--    >-->
-<!--      <h6 class="mb-1 mt-3">{{ reply.replyingToUsername }} said:</h6>-->
-<!--      <h6 class="mt-3">{{ reply.replyingToText }}</h6>-->
-<!--    </div>-->
-<!--    <h6 class="mb-4" style="float: left">{{ reply.body }}</h6>-->
-<!--    <br /><br /><br />-->
-<!--    <div class="row">-->
-<!--      <div class="col-2">-->
-<!--        <img class="ml-3" src="assets/images/reply-symbol.png" width="20" />&nbsp;-->
-<!--        <small>Reply</small>-->
-<!--      </div>-->
-<!--      <div class="col-2">-->
-<!--        <img class="ml-3" src="assets/images/like.png" width="20" />&nbsp;-->
-<!--        <small>Like</small>-->
-<!--      </div>-->
-<!--      <div class="col-2">-->
-<!--        <small>Report</small>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+
+<ng-template #reportModal let-reportModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-report">Report This Reply</h4>
+    <button type="button" class="close" aria-label="Close" (click)="reportModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="report-body"
+        >Why are you reporting this reply?<br /><small
+          >Please include as much detail as possible so that staff can accurately assess whether to remove the reply,
+          and/or take administrative action against the poster (if necessary).</small
+        ></label
+      >
+      <textarea class="form-control" id="report-body" rows="4" [(ngModel)]="reportDescription"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="reportModal.close('Save click')">Close</button>
+    <button
+      class="btn btn-secondary"
+      (click)="reportReply()"
+      [disabled]="reportDescription === '' || !reportDescription || submittingReport"
+    >
+      Report Reply
+    </button>
+  </div>
+</ng-template>

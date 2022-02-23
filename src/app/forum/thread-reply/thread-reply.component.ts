@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface ReplyEvent {
   replyingToUsername: string;
@@ -21,6 +22,8 @@ export class ThreadReplyComponent implements OnInit {
   public userHasLiked = false;
   public isOwnReply = false;
   public textSelected = false;
+  public reportDescription: string;
+  public submittingReport = false;
 
   @Input() reply: Reply;
   @Input() author: string;
@@ -31,12 +34,14 @@ export class ThreadReplyComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private forumService: ForumService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
     if (this.reply) {
       this.isOwnReply = this.authService.getToken()?.id === this.reply.account.id;
+      this.userHasLiked = this.reply.requesterHasLiked;
     }
   }
   getParsedDate(): string {
@@ -56,7 +61,7 @@ export class ThreadReplyComponent implements OnInit {
 
   likeUnlikeReply(): void {
     if (!this.userHasLiked) {
-      this.forumService.likeReply(this.reply.id).subscribe(
+      this.forumService.likeReply(this.reply.threadId, this.reply.id).subscribe(
         () => {
           this.userHasLiked = true;
           this.reply.likes += 1;
@@ -66,7 +71,7 @@ export class ThreadReplyComponent implements OnInit {
         }
       );
     } else {
-      this.forumService.unlikeReply(this.reply.id).subscribe(
+      this.forumService.unlikeReply(this.reply.threadId, this.reply.id).subscribe(
         () => {
           this.userHasLiked = false;
           this.reply.likes -= 1;
@@ -136,5 +141,17 @@ export class ThreadReplyComponent implements OnInit {
       // @ts-ignore
       document.getSelection().removeAllRanges();
     }
+  }
+
+  reportReply(): void {
+    return;
+  }
+
+  openModal(modal: any): void {
+    this.modalService.open(modal, {
+      backdropClass: 'modal-background',
+    });
+
+    this.reportDescription = '';
   }
 }

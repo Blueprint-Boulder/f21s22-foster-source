@@ -49,7 +49,11 @@
         ></i
         >&nbsp;&nbsp;{{ thread.likes }}
       </p>
-      <p [innerHTML]="thread.body"></p>
+      <p *ngIf="resultPage <= 1" [innerHTML]="thread.body"></p>
+      <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">...</p>
+      <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">
+        <i>Viewing page {{ resultPage }} / {{ getPageCount() | number: "1.0-0" }}</i>
+      </p>
       <p class="text-right text-muted my-0" *ngIf="thread.edited"><small>(edited)</small></p>
     </div>
   </div>
