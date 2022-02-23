@@ -5,8 +5,12 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
+  ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportReplyReq,
+  ReportThreadReq,
   ThreadSummary,
   Topic,
   TopicSummary,
@@ -23,13 +27,13 @@ export class ForumImplService implements ForumService {
   constructor(private http: HttpClient) {}
 
   getTopicSummaryById(id: number): Observable<TopicSummary> {
-    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/topics/${id}`, {
+    return this.http.get<TopicSummary>(`${environment.backendHost}/api/db/forum/topics/${id}`, {
       withCredentials: true,
     });
   }
 
   getTopicSummaries(): Observable<GetTopicSummariesRes> {
-    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/topics`, {
+    return this.http.get<GetTopicSummariesRes>(`${environment.backendHost}/api/db/forum/topics`, {
       withCredentials: true,
     });
   }
@@ -49,14 +53,20 @@ export class ForumImplService implements ForumService {
   }
 
   createNewThread(req: CreateNewThreadReq): Observable<ThreadSummary> {
-    return this.http.post<ThreadSummary>(`${environment.backendHost}/api/forum/threads`, req, {
+    return this.http.post<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads`, req, {
       withCredentials: true,
     });
   }
 
-  deleteThread(req: DeleteThreadReq): Observable<any> {
+  modRemoveThread(req: ModRemoveThreadReq): Observable<any> {
     return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, {
-      body: { reason: req.reason },
+      body: req,
+      withCredentials: true,
+    });
+  }
+
+  removeOwnThread(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}`, {
       withCredentials: true,
     });
   }
@@ -80,7 +90,9 @@ export class ForumImplService implements ForumService {
   }
 
   getThreadById(id: number): Observable<ThreadSummary> {
-    return this.http.get<ThreadSummary>(`${environment.backendHost}/api/db/threads/${id}`, { withCredentials: true });
+    return this.http.get<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${id}`, {
+      withCredentials: true,
+    });
   }
 
   getThreadByIdWithReplies(id: number, replyLimit: number, replyOffset: number): Observable<FullThread> {
@@ -88,6 +100,12 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads/${id}/replies?limit=${replyLimit}&offset=${replyOffset}`,
       { withCredentials: true }
     );
+  }
+
+  reportThread(req: ReportThreadReq): Observable<any> {
+    return this.http.post<any>(`${environment.backendHost}/api/db/forum/threads/${req.id}/reports`, req, {
+      withCredentials: true,
+    });
   }
 
   likeThread(id: number): Observable<any> {
@@ -102,6 +120,23 @@ export class ForumImplService implements ForumService {
     return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}/likes`, {
       withCredentials: true,
     });
+  }
+
+  likeReply(threadId: number, replyId: number): Observable<any> {
+    return this.http.post<any>(
+      `${environment.backendHost}/api/db/forum/threads/${threadId}/replies/${replyId}/likes`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  unlikeReply(threadId: number, replyId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.backendHost}/api/db/forum/threads/${threadId}/replies/${replyId}/likes`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
@@ -123,7 +158,7 @@ export class ForumImplService implements ForumService {
   }
 
   postReply(req: PostReplyReq): Observable<Reply> {
-    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}`, req, {
+    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies`, req, {
       withCredentials: true,
     });
   }
@@ -133,6 +168,26 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
       req,
       { withCredentials: true }
+    );
+  }
+
+  reportReply(req: ReportReplyReq): Observable<any> {
+    return this.http.post(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}/reports`,
+      req,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  modRemoveReply(req: ModRemoveReplyReq): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
+      {
+        body: req,
+        withCredentials: true,
+      }
     );
   }
 }

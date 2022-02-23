@@ -71,7 +71,7 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.privilegeLevel === Privilege.USER && this.validTime();
+    return this.privilegeLevel === Privilege.ADMIN && this.validTime();
   }
 
   isAtLeastAdmin(): boolean {

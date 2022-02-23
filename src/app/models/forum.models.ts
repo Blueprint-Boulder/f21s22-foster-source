@@ -32,11 +32,12 @@ export interface ThreadSummary {
   likes: number;
   title: string;
   body: string;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
   edited: boolean;
+  requesterHasLiked: boolean;
   account: {
     id: number;
     username: string;
@@ -56,11 +57,15 @@ export interface Reply {
   replyingToText?: string;
   replyingToUsername?: string;
   edited: boolean;
+  requesterHasLiked: boolean;
+  createdAt: Date;
+  threadId: number;
   account: {
     id: number;
     username: string;
     privilege: string;
     profileId?: number;
+    profileSmallAwsKey: string;
   };
 }
 
@@ -70,10 +75,11 @@ export interface FullThread {
   title: string;
   body: string;
   edited: boolean;
-  updatedAt: Date;
+  createdAt: Date;
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
+  requesterHasLiked: boolean;
   account: {
     id: number;
     username: string;
@@ -91,8 +97,8 @@ export interface CreateNewThreadReq {
 
 export interface UpdateThreadReq {
   id: number;
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
 }
 
 export interface DeleteThreadReq {
@@ -111,4 +117,32 @@ export interface UpdateReplyReq {
   threadId: number;
   replyId: number;
   body?: string;
+}
+
+export interface ReportThreadReq {
+  id: number;
+  description: string;
+}
+
+export interface ReportReplyReq {
+  threadId: number;
+  replyId: number;
+  description: string;
+}
+
+export interface ModRemoveThreadReq {
+  id: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
+}
+
+export interface ModRemoveReplyReq {
+  threadId: number;
+  replyId: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
 }
