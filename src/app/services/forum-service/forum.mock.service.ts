@@ -5,6 +5,7 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
@@ -117,6 +118,10 @@ export class ForumMockService implements ForumService {
   }
 
   reportReply(req: ReportReplyReq): Observable<any> {
+    return of({});
+  }
+
+  modRemoveReply(req: ModRemoveReplyReq): Observable<any> {
     return of({});
   }
 }

@@ -5,6 +5,7 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
@@ -58,4 +59,5 @@ export abstract class ForumService {
   public abstract likeReply(threadId: number, replyId: number): Observable<any>;
   public abstract unlikeReply(threadId: number, replyId: number): Observable<any>;
   public abstract reportReply(req: ReportReplyReq): Observable<any>;
+  public abstract modRemoveReply(req: ModRemoveReplyReq): Observable<any>;
 }

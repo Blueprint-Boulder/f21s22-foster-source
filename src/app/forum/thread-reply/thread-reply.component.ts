@@ -1,11 +1,18 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Reply, ReportReplyReq, ReportThreadReq } from '../../models/forum.models';
+import {
+  ModRemoveReplyReq,
+  ModRemoveThreadReq,
+  Reply,
+  ReportReplyReq,
+  ReportThreadReq,
+} from '../../models/forum.models';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface ReplyEvent {
   replyingToUsername: string;
@@ -24,6 +31,11 @@ export class ThreadReplyComponent implements OnInit {
   public textSelected = false;
   public reportDescription: string;
   public submittingReport = false;
+  public isMod = false;
+
+  public removeForm: FormGroup;
+  public shouldShowSuspendForm = false;
+  public submittingRemove = false;
 
   @Input() reply: Reply;
   @Input() author: string;
@@ -35,13 +47,15 @@ export class ThreadReplyComponent implements OnInit {
     private authService: AuthService,
     private forumService: ForumService,
     private toastService: ToastService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     if (this.reply) {
       this.isOwnReply = this.authService.getToken()?.id === this.reply.account.id;
       this.userHasLiked = this.reply.requesterHasLiked;
+      this.isMod = this.authService.isAtLeastMod();
     }
   }
   getParsedDate(): string {
@@ -91,7 +105,26 @@ export class ThreadReplyComponent implements OnInit {
   }
 
   removeOwnReply(): void {
-    return;
+    if (
+      !(
+        prompt(
+          'Are you sure that you\'d like to delete your reply? This action cannot be undone, and the reply will be lost forever. To continue, type "confirm"'
+        ) === 'confirm'
+      )
+    ) {
+      return;
+    }
+
+    this.forumService.deleteReply(this.reply.threadId, this.reply.id).subscribe(
+      () => {
+        this.toastService.success('Successfully deleted reply.');
+        this.modalService.dismissAll();
+        this.router.navigate([`/forum/threads/${this.reply.threadId}`]);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   clicked(event: Event): void {
@@ -168,7 +201,70 @@ export class ThreadReplyComponent implements OnInit {
     this.modalService.open(modal, {
       backdropClass: 'modal-background',
     });
+    this.resetForms();
+  }
 
+  resetForms(): void {
     this.reportDescription = '';
+
+    this.removeForm = this.formBuilder.group({
+      reason: [null, Validators.required],
+      adminAction: [null, Validators.required],
+      suspendForDays: [null, Validators.min(1)],
+    });
+
+    this.removeForm.get('adminAction')?.valueChanges.subscribe((value) => {
+      if (value === 'suspend') {
+        this.removeForm.get('suspendForDays')?.addValidators(Validators.required);
+        this.shouldShowSuspendForm = true;
+      } else {
+        this.removeForm.get('suspendForDays')?.removeValidators(Validators.required);
+        this.shouldShowSuspendForm = false;
+      }
+      this.removeForm.get('suspendForDays')?.updateValueAndValidity();
+    });
+  }
+
+  modRemoveReply(): void {
+    if (this.removeForm.invalid) {
+      this.removeForm.markAllAsTouched();
+      return;
+    }
+
+    if (
+      this.removeForm.get('adminAction')?.value === 'blacklist' &&
+      prompt(
+        'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
+      ) !== 'confirm'
+    ) {
+      return;
+    }
+
+    this.submittingRemove = true;
+
+    const req: ModRemoveReplyReq = {
+      threadId: this.reply.threadId,
+      replyId: this.reply.id,
+      reason: this.removeForm.get('reason')!.value,
+      shouldBlacklist: this.removeForm.get('adminAction')!.value === 'blacklist' ? true : undefined,
+      shouldSuspend: this.removeForm.get('adminAction')!.value === 'suspend' ? true : undefined,
+      suspendForDays:
+        this.removeForm.get('adminAction')!.value === 'suspend' && this.removeForm.get('suspendForDays')!.value
+          ? this.removeForm.get('suspendForDays')!.value
+          : undefined,
+    };
+
+    this.forumService.modRemoveReply(req).subscribe(
+      () => {
+        this.toastService.success('Successfully removed the reply.');
+        this.router.navigate([`/forum/threads/${this.reply.threadId}`]);
+        this.modalService.dismissAll();
+        this.submittingRemove = false;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingRemove = false;
+      }
+    );
   }
 }

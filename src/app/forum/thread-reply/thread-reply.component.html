@@ -19,7 +19,14 @@
               >&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;<a href="javascript: void(0)" (click)="removeOwnReply()"
                 >Remove</a
               ></small
-            >
+            ><span *ngIf="!isOwnReply" class="float-right text-muted"
+              ><span *ngIf="isMod"
+                >&nbsp;&nbsp;&nbsp;<i
+                  class="bi bi-shield-fill-x text-muted pointer"
+                  title="Remove This Reply"
+                  (click)="openModal(modRemoveModal)"
+                ></i></span
+            ></span>
           </div>
           <div class="col-12">
             <div class="row mt-2" *ngIf="reply.replyingToUsername && reply.replyingToText">
@@ -98,5 +105,114 @@
     >
       Report Reply
     </button>
+  </div>
+</ng-template>
+
+<ng-template #modRemoveModal let-modRemoveModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-remove">Remove This Reply (Moderate)</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modRemoveModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Ensure that you are certain that you'd like to remove this reply. This action cannot be undone.</p>
+    <form [formGroup]="removeForm">
+      <div class="form-group">
+        <label for="remove-reason"><b>Reason for removal of reply</b><span class="required-star">*</span></label>
+        <textarea class="form-control" id="remove-reason" rows="3" formControlName="reason"></textarea>
+        <div
+          *ngIf="
+            removeForm.get('reason')?.invalid && (removeForm.get('reason')?.dirty || removeForm.get('reason')?.touched)
+          "
+        >
+          <small *ngIf="removeForm.get('reason')?.errors?.required" class="input-error"
+            >Please enter a reason for removal.<br
+          /></small>
+        </div>
+      </div>
+      <div class="form-group">
+        <p></p>
+        <p>
+          <b>Would you like to take administrative action against the poster?</b><span class="required-star">*</span
+          ><br /><small
+            >If no action is taken, the user will still be notified that their post has been removed and they will be
+            provided with the reason that is entered above.</small
+          >
+        </p>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="adminAction"
+            formControlName="adminAction"
+            value="none"
+            id="noAction"
+          />
+          <label class="form-check-label" for="noAction">No Administrative Action</label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="adminAction"
+            formControlName="adminAction"
+            value="blacklist"
+            id="shouldBlacklist"
+          />
+          <label class="form-check-label" for="shouldBlacklist">Blacklist User</label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="adminAction"
+            formControlName="adminAction"
+            value="suspend"
+            id="shouldSuspend"
+          />
+          <label class="form-check-label" for="shouldSuspend">Suspend User</label>
+        </div>
+        <div
+          *ngIf="
+            removeForm.get('adminAction')?.invalid &&
+            (removeForm.get('adminAction')?.dirty || removeForm.get('adminAction')?.touched)
+          "
+        >
+          <small *ngIf="removeForm.get('adminAction')?.errors?.required" class="input-error"
+            >Please pick an administrative action.<br
+          /></small>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="shouldShowSuspendForm">
+        <label for="suspendTime"
+          ><b>How many days would you like to suspend the user for?</b><span class="required-star">*</span></label
+        >
+        <input
+          class="form-control p-1 m-0 bottom-border-input"
+          id="suspendTime"
+          type="number"
+          placeholder="# of days"
+          formControlName="suspendForDays"
+        />
+        <div
+          *ngIf="
+            removeForm.get('suspendForDays')?.invalid &&
+            (removeForm.get('suspendForDays')?.dirty || removeForm.get('suspendForDays')?.touched)
+          "
+        >
+          <small *ngIf="removeForm.get('suspendForDays')?.errors?.required" class="input-error"
+            >Please enter how long you'd like to suspend the user for.<br
+          /></small>
+          <small *ngIf="removeForm.get('suspendForDays')?.errors?.min" class="input-error"
+            >Value must be at least 1 day.<br
+          /></small>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modRemoveModal.close('Save click')">Close</button>
+    <button class="btn btn-secondary" (click)="modRemoveReply()" [disabled]="submittingRemove">Remove Reply</button>
   </div>
 </ng-template>

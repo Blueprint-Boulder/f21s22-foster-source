@@ -9,7 +9,6 @@ import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ReplyEvent } from '../thread-reply/thread-reply.component';
 
 @Component({

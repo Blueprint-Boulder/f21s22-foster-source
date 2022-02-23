@@ -136,3 +136,12 @@ export interface ModRemoveThreadReq {
   shouldSuspend?: boolean;
   suspendForDays?: number;
 }
+
+export interface ModRemoveReplyReq {
+  threadId: number;
+  replyId: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
+}

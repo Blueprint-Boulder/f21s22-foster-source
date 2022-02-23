@@ -5,6 +5,7 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
@@ -157,7 +158,7 @@ export class ForumImplService implements ForumService {
   }
 
   postReply(req: PostReplyReq): Observable<Reply> {
-    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}`, req, {
+    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies`, req, {
       withCredentials: true,
     });
   }
@@ -175,6 +176,16 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}/reports`,
       req,
       {
+        withCredentials: true,
+      }
+    );
+  }
+
+  modRemoveReply(req: ModRemoveReplyReq): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
+      {
+        body: req,
         withCredentials: true,
       }
     );
