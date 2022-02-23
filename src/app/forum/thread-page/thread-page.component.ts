@@ -34,7 +34,7 @@ export class ThreadPageComponent implements OnInit {
   public shouldShowSuspendForm = false;
   public submittingRemove = false;
 
-  public isReplyingToSomeone = true;
+  public isReplyingToSomeone = false;
   public submittingReply = false;
   public replyReq: PostReplyReq;
 

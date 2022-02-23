@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Reply } from '../../models/forum.models';
+import { Reply, ReportReplyReq, ReportThreadReq } from '../../models/forum.models';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
@@ -144,7 +144,24 @@ export class ThreadReplyComponent implements OnInit {
   }
 
   reportReply(): void {
-    return;
+    this.submittingReport = true;
+    const req: ReportReplyReq = {
+      threadId: this.reply.threadId,
+      replyId: this.reply.id,
+      description: this.reportDescription,
+    };
+    this.forumService.reportReply(req).subscribe(
+      () => {
+        this.toastService.success('Thank you for submitting your report, staff will look into it shortly.');
+        this.reportDescription = '';
+        this.modalService.dismissAll();
+        this.submittingReport = false;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingReport = false;
+      }
+    );
   }
 
   openModal(modal: any): void {

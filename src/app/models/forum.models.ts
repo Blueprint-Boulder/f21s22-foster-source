@@ -123,6 +123,12 @@ export interface ReportThreadReq {
   description: string;
 }
 
+export interface ReportReplyReq {
+  threadId: number;
+  replyId: number;
+  description: string;
+}
+
 export interface ModRemoveThreadReq {
   id: number;
   reason: string;

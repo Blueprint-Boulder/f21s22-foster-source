@@ -8,6 +8,7 @@ import {
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportReplyReq,
   ReportThreadReq,
   ThreadSummary,
   Topic,
@@ -166,6 +167,16 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
       req,
       { withCredentials: true }
+    );
+  }
+
+  reportReply(req: ReportReplyReq): Observable<any> {
+    return this.http.post(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}/reports`,
+      req,
+      {
+        withCredentials: true,
+      }
     );
   }
 }

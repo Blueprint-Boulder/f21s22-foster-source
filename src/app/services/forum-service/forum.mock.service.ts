@@ -8,6 +8,7 @@ import {
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportReplyReq,
   ReportThreadReq,
   ThreadSummary,
   Topic,
@@ -112,6 +113,10 @@ export class ForumMockService implements ForumService {
   }
 
   reportThread(req: ReportThreadReq): Observable<any> {
+    return of({});
+  }
+
+  reportReply(req: ReportReplyReq): Observable<any> {
     return of({});
   }
 }
