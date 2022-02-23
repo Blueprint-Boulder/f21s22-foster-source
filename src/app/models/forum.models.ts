@@ -65,6 +65,7 @@ export interface Reply {
     username: string;
     privilege: string;
     profileId?: number;
+    profileSmallAwsKey: string;
   };
 }
 

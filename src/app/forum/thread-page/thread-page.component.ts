@@ -51,7 +51,6 @@ export class ThreadPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMod = this.authService.isAtLeastMod();
-    this.generateProfileImageSrc();
 
     this.route.params.subscribe((params) => {
       const id = parseInt(params['id']);
@@ -76,6 +75,7 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
+              this.generateProfileImageSrc();
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
               this.userHasLiked = this.thread.requesterHasLiked;
               this.replyReq = {
@@ -130,7 +130,7 @@ export class ThreadPageComponent implements OnInit {
   }
 
   generateProfileImageSrc(): void {
-    if (this.isMod) {
+    if (this.thread.account.privilege === 'MOD' || this.thread.account.privilege === 'ADMIN') {
       this.profileImageSrc = 'assets/images/modShield.png';
       return;
     }

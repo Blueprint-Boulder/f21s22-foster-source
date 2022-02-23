@@ -611,6 +611,7 @@ export const replies: Reply[] = [
       username: 'replyguy.1',
       privilege: 'USER',
       profileId: 2,
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -625,6 +626,7 @@ export const replies: Reply[] = [
       id: 2,
       username: 'admin-man',
       privilege: 'ADMIN',
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -640,6 +642,7 @@ export const replies: Reply[] = [
       username: 'randomdude',
       privilege: 'USER',
       profileId: 3,
+      profileSmallAwsKey: 'test',
     },
   },
 ];

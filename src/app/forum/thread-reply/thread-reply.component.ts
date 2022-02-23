@@ -13,6 +13,7 @@ import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ImageUtils } from '../../common/utils/ImageUtils';
 
 export interface ReplyEvent {
   replyingToUsername: string;
@@ -56,6 +57,7 @@ export class ThreadReplyComponent implements OnInit {
       this.isOwnReply = this.authService.getToken()?.id === this.reply.account.id;
       this.userHasLiked = this.reply.requesterHasLiked;
       this.isMod = this.authService.isAtLeastMod();
+      this.generateProfileImageSrc();
     }
   }
   getParsedDate(): string {
@@ -266,5 +268,14 @@ export class ThreadReplyComponent implements OnInit {
         this.submittingRemove = false;
       }
     );
+  }
+
+  generateProfileImageSrc(): void {
+    if (this.reply.account.privilege === 'MOD' || this.reply.account.privilege === 'ADMIN') {
+      this.profileImageSrc = 'assets/images/modShield.png';
+      return;
+    }
+
+    this.profileImageSrc = ImageUtils.buildS3Url(this.reply.account.profileSmallAwsKey);
   }
 }
