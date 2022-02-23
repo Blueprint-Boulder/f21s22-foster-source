@@ -3,6 +3,8 @@ import { Reply } from '../../models/forum.models';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { ToastService } from '../../services/toast-service/toast.service';
 
 export interface ReplyEvent {
   replyingToUsername: string;
@@ -25,7 +27,12 @@ export class ThreadReplyComponent implements OnInit {
 
   @Output() replyEvent: EventEmitter<ReplyEvent> = new EventEmitter<ReplyEvent>();
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private forumService: ForumService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     if (this.reply) {
@@ -48,7 +55,27 @@ export class ThreadReplyComponent implements OnInit {
   }
 
   likeUnlikeReply(): void {
-    this.userHasLiked = !this.userHasLiked;
+    if (!this.userHasLiked) {
+      this.forumService.likeReply(this.reply.id).subscribe(
+        () => {
+          this.userHasLiked = true;
+          this.reply.likes += 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
+    } else {
+      this.forumService.unlikeReply(this.reply.id).subscribe(
+        () => {
+          this.userHasLiked = false;
+          this.reply.likes -= 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
+    }
   }
 
   clickReply() {

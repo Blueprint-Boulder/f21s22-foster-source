@@ -315,8 +315,13 @@ export class ThreadPageComponent implements OnInit {
   }
 
   replyToReplyEvent(event: ReplyEvent): void {
-    this.replyReq.replyingToUsername = event.replyingToUsername;
-    this.replyReq.replyingToText = event.replyingToText;
+    this.isReplyingToSomeone = true;
+    this.replyReq = {
+      threadId: this.thread.id,
+      replyingToUsername: event.replyingToUsername,
+      replyingToText: event.replyingToText,
+      body: '',
+    };
     this.scrollTo('reply-section');
   }
 }

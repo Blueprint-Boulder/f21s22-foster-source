@@ -120,6 +120,20 @@ export class ForumImplService implements ForumService {
     });
   }
 
+  likeReply(id: number): Observable<any> {
+    return this.http.post<any>(
+      `${environment.backendHost}/api/db/forum/threads/${id}/likes`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  unlikeReply(id: number): Observable<any> {
+    return this.http.delete<any>(`${environment.backendHost}/api/db/forum/threads/${id}/likes`, {
+      withCredentials: true,
+    });
+  }
+
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
     return this.http.put<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, req, {
       withCredentials: true,

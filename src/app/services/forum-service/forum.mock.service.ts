@@ -83,6 +83,14 @@ export class ForumMockService implements ForumService {
     return of({});
   }
 
+  likeReply(id: number): Observable<any> {
+    return of({});
+  }
+
+  unlikeReply(id: number): Observable<any> {
+    return of({});
+  }
+
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
     return of(threadSummaries[1]);
   }

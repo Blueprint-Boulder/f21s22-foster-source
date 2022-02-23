@@ -54,4 +54,6 @@ export abstract class ForumService {
   public abstract updateReply(req: UpdateReplyReq): Observable<Reply>;
   public abstract deleteReply(threadId: number, replyId: number): Observable<any>;
   public abstract getReplyById(replyId: number): Observable<Reply>;
+  public abstract likeReply(id: number): Observable<any>;
+  public abstract unlikeReply(id: number): Observable<any>;
 }
