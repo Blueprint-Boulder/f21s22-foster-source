@@ -271,6 +271,7 @@ export class ThreadPageComponent implements OnInit {
   }
 
   submitReply(): void {
+    // TODO: Make it navigate to the last page of the thread so you can see it.
     this.submittingReply = true;
 
     this.forumService.postReply(this.replyReq).subscribe(
