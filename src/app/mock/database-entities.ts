@@ -604,11 +604,14 @@ export const replies: Reply[] = [
     replyingToUsername: 'usertoreplyto',
     edited: false,
     requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 1,
       username: 'replyguy.1',
       privilege: 'USER',
       profileId: 2,
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -617,10 +620,13 @@ export const replies: Reply[] = [
     likes: 102,
     edited: true,
     requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 2,
       username: 'admin-man',
       privilege: 'ADMIN',
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -629,11 +635,14 @@ export const replies: Reply[] = [
     likes: 0,
     edited: false,
     requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 3,
       username: 'randomdude',
       privilege: 'USER',
       profileId: 3,
+      profileSmallAwsKey: 'test',
     },
   },
 ];

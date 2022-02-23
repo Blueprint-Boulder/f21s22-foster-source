@@ -5,9 +5,11 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
   ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportReplyReq,
   ReportThreadReq,
   ThreadSummary,
   Topic,
@@ -120,6 +122,23 @@ export class ForumImplService implements ForumService {
     });
   }
 
+  likeReply(threadId: number, replyId: number): Observable<any> {
+    return this.http.post<any>(
+      `${environment.backendHost}/api/db/forum/threads/${threadId}/replies/${replyId}/likes`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  unlikeReply(threadId: number, replyId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.backendHost}/api/db/forum/threads/${threadId}/replies/${replyId}/likes`,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
     return this.http.put<ThreadSummary>(`${environment.backendHost}/api/db/forum/threads/${req.id}`, req, {
       withCredentials: true,
@@ -139,7 +158,7 @@ export class ForumImplService implements ForumService {
   }
 
   postReply(req: PostReplyReq): Observable<Reply> {
-    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}`, req, {
+    return this.http.post<Reply>(`${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies`, req, {
       withCredentials: true,
     });
   }
@@ -149,6 +168,26 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
       req,
       { withCredentials: true }
+    );
+  }
+
+  reportReply(req: ReportReplyReq): Observable<any> {
+    return this.http.post(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}/reports`,
+      req,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  modRemoveReply(req: ModRemoveReplyReq): Observable<any> {
+    return this.http.delete<any>(
+      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
+      {
+        body: req,
+        withCredentials: true,
+      }
     );
   }
 }
