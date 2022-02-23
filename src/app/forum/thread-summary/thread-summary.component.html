@@ -1,5 +1,3 @@
-<p>thread-summary works! Title: {{ thread.title }}</p>
-
 <!--
 For the profile picture, in the image tag just do [src]="getProfileImage()" and make that function
   just return the src for the blank profile picture "/assets/images/blank-profile-image" (or something like that).
@@ -8,3 +6,47 @@ For the profile picture, in the image tag just do [src]="getProfileImage()" and 
 <!--
 This component should look very similar to the topic component you made last time.
 -->
+<!-- (click)="" -->
+
+<div *ngIf="thread" class="w-100 my-2">
+  <div class="container-fluid w-100 topic shadow-sm rounded p-3">
+    <div class="row mt-2">
+      <div class="col">
+        <h3>{{ thread.title }}</h3>
+      </div>
+    </div>
+    <div class="image_and_stats">
+      <img
+        [src]="getProfileImage()"
+        [height]="90"
+        [width]="90"
+        alt="{{ thread.account.username }}'s profile picture"
+        class="rounded-circle"
+      />
+      <div class="col-sm-20">
+        {{ thread.account.username }}<br /><br /><span style="color: red"><i class="bi bi-heart-fill"></i></span>
+        {{ thread.likes }}
+      </div>
+      <div class="col-sm-20">{{ thread.updatedAt.toLocaleDateString("en-US") }}</div>
+    </div>
+    <div class="row">
+      <div class="col description">
+        {{ thread.body }}
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col"></div>
+      <div class="col">
+        <div class="col text-right stats">
+          <i class="text-muted"
+            >{{ thread.replyCount }} <i class="bi bi-chat-text"></i> | Last Reply:
+            {{ thread.lastReplyDate.toLocaleDateString("en-US") }}</i
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--.threadCount-->
+<!--.lastPostDate.toLocaleDateString("en-US") -->

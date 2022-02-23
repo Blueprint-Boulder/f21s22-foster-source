@@ -12,4 +12,8 @@ export class ThreadSummaryComponent implements OnInit {
   ngOnInit(): void {
     return;
   }
+
+  getProfileImage() {
+    return 'assets/images/blank-profile-photo.jpg';
+  }
 }
