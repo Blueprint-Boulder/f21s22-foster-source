@@ -1,14 +1,26 @@
 <div class="container px-5 px-sm-0">
-  <h1 class="pt-3">Foster Source Forum</h1>
-  <p>
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  </p>
-  <h5><b>Click Topics Below to Read</b></h5>
+  <div class="row title-row my-3">
+    <div class="col-12">
+      <h1>Community Forum</h1>
+      <p>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum."
+      </p>
+      <p>
+        <i
+          >Please make sure that you have read the <a href="javascript: void(0)">forum rules</a> before posting or
+          replying.</i
+        >
+      </p>
+    </div>
+  </div>
   <div class="row" *ngFor="let topic of topics">
-    <app-topic [topic]="topic" class="w-100"></app-topic>
+    <div class="col col-12">
+      <app-topic [topic]="topic" class="w-100"></app-topic>
+    </div>
   </div>
   <div class="row my-5" *ngIf="isMod">
     <div class="col-12">

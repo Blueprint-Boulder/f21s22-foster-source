@@ -5,13 +5,12 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
 import { AdminSectionRoutingModule } from './admin-section-routing.module';
 import { BugReportsComponent } from './bug-reports/bug-reports.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { EditorComponent } from '../common/editor/editor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { LandingModule } from '../landing/landing.module';
 import { CommonModule } from '@angular/common';
-import { NgxEditorModule } from 'ngx-editor';
 import { NgModule } from '@angular/core';
+import { CommonComponentsModule } from '../common-components/common-components.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { NgModule } from '@angular/core';
     UserActionTableComponent,
     BlacklistTableComponent,
     AnnouncementsComponent,
-    EditorComponent,
     StaffAccountRequestsComponent,
     BugReportsComponent,
   ],
@@ -29,8 +27,8 @@ import { NgModule } from '@angular/core';
     NgbCollapseModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxEditorModule,
     LandingModule,
+    CommonComponentsModule,
   ],
 })
 export class AdminSectionModule {}

@@ -5,8 +5,10 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportThreadReq,
   ThreadSummary,
   Topic,
   TopicSummary,
@@ -39,9 +41,11 @@ export abstract class ForumService {
   public abstract getThreadByIdWithReplies(id: number, replyLimit: number, replyOffset: number): Observable<FullThread>;
   public abstract createNewThread(req: CreateNewThreadReq): Observable<ThreadSummary>;
   public abstract updateThread(req: UpdateThreadReq): Observable<ThreadSummary>;
-  public abstract deleteThread(req: DeleteThreadReq): Observable<any>;
+  public abstract modRemoveThread(req: ModRemoveThreadReq): Observable<any>;
+  public abstract removeOwnThread(id: number): Observable<any>;
   public abstract likeThread(id: number): Observable<any>;
   public abstract unlikeThread(id: number): Observable<any>;
+  public abstract reportThread(req: ReportThreadReq): Observable<any>;
 
   /**
    * REPLIES

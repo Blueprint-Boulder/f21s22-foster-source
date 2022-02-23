@@ -5,8 +5,10 @@ import {
   FullThread,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportThreadReq,
   ThreadSummary,
   Topic,
   TopicSummary,
@@ -45,7 +47,11 @@ export class ForumMockService implements ForumService {
     return of(threadSummaries[0]);
   }
 
-  deleteThread(req: DeleteThreadReq): Observable<any> {
+  modRemoveThread(req: ModRemoveThreadReq): Observable<any> {
+    return of({});
+  }
+
+  removeOwnThread(id: number): Observable<any> {
     return of({});
   }
 
@@ -70,11 +76,11 @@ export class ForumMockService implements ForumService {
   }
 
   likeThread(id: number): Observable<any> {
-    return of();
+    return of({});
   }
 
   unlikeThread(id: number): Observable<any> {
-    return of();
+    return of({});
   }
 
   updateThread(req: UpdateThreadReq): Observable<ThreadSummary> {
@@ -95,5 +101,9 @@ export class ForumMockService implements ForumService {
 
   updateReply(req: UpdateReplyReq): Observable<Reply> {
     return of(replies[req.replyId % replies.length]);
+  }
+
+  reportThread(req: ReportThreadReq): Observable<any> {
+    return of({});
   }
 }
