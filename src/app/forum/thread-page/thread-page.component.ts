@@ -10,6 +10,7 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { ReplyEvent } from '../thread-reply/thread-reply.component';
 
 @Component({
   selector: 'app-thread-page',
@@ -102,6 +103,7 @@ export class ThreadPageComponent implements OnInit {
     this.router.navigate([`/forum/threads/${this.thread.id}`], {
       queryParams: { replyOffset: (newPage - 1) * this.REPLY_LIMIT },
     });
+    this.scrollToTop();
   }
 
   likeUnlikeThread(): void {
@@ -300,5 +302,21 @@ export class ThreadPageComponent implements OnInit {
     this.replyReq.replyingToUsername = undefined;
     this.replyReq.replyingToText = undefined;
     this.replyReq.body = '';
+  }
+
+  private scrollToTop(): void {
+    (function smoothScroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothScroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
+  }
+
+  replyToReplyEvent(event: ReplyEvent): void {
+    this.replyReq.replyingToUsername = event.replyingToUsername;
+    this.replyReq.replyingToText = event.replyingToText;
+    this.scrollTo('reply-section');
   }
 }

@@ -58,6 +58,7 @@ export interface Reply {
   replyingToUsername?: string;
   edited: boolean;
   requesterHasLiked: boolean;
+  createdAt: Date;
   account: {
     id: number;
     username: string;
