@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Reply } from '../../models/forum.models';
 
 @Component({
   selector: 'app-thread-reply',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./thread-reply.component.scss'],
 })
 export class ThreadReplyComponent implements OnInit {
+  @Input() reply: Reply;
   ngOnInit(): void {
     return;
   }

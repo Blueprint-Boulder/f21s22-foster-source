@@ -1,1 +1,41 @@
-<p>thread-reply works!</p>
+<div class="row mt-5" *ngIf="reply">
+  <div class="card pt-3 w-100" style="border-width: 1px">
+    <div class="row">
+      <div class="col-sm-1 justify-content-center">
+        <div class="row ml-3">
+          <img src="assets/images/blank-profile-photo.jpg" width="75" style="border-radius: 50%" />
+        </div>
+        <div class="row ml-3">
+          <small class="mt-1 mb-1">{{ reply.account.username }}</small>
+        </div>
+      </div>
+      <div class="container col-sm-11">
+        <div class="card-body">
+          <div
+            class="container mb-3"
+            *ngIf="reply.replyingToText"
+            style="background-color: #eceaf0; border-radius: 5px; float: left"
+          >
+            <h6 class="mb-1 mt-3">{{ reply.replyingToUsername }} said:</h6>
+            <h6 class="mt-3">{{ reply.replyingToText }}</h6>
+          </div>
+          <h6 class="mb-4" style="float: left">{{ reply.body }}</h6>
+          <br /><br /><br />
+          <div class="row">
+            <div class="col-2">
+              <img class="ml-3" src="assets/images/reply-symbol.png" width="20" />&nbsp;
+              <small>Reply</small>
+            </div>
+            <div class="col-2">
+              <img class="ml-3" src="assets/images/like.png" width="20" />&nbsp;
+              <small>Like</small>
+            </div>
+            <div class="col-2">
+              <small>Report</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
