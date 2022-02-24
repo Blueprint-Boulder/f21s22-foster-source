@@ -8,19 +8,17 @@ This component should look very similar to the topic component you made last tim
 -->
 <!-- (click)="" -->
 
-<!--{{ thread.title }}-->
-
-<!--{{ thread.account.username }}<span style="color: red"><i class="bi bi-heart-fill"></i></span>-->
+<!--{{ thread.account.username }}-->
 <!--{{ thread.likes }}-->
 <!--{{ thread.body }}-->
 <!--{{ thread.updatedAt.toLocaleDateString("en-US") }}-->
 
 <!--<i class="text-muted"-->
-<!--&gt;{{ thread.replyCount }} <i class="bi bi-chat-text"></i> | Last Reply:-->
+<!--&gt; | Last Reply:-->
 <!--  {{ thread.lastReplyDate.toLocaleDateString("en-US") }}</i-->
 <!--&gt;-->
 
-<!-- Issue with resizing :\-->
+<!-- Issue with inline :\-->
 
 <div *ngIf="thread" class="w-100 my-2">
   <div class="container-fluid w-100 topic shadow-sm rounded pt-4 pb-3 summary-layout">
@@ -32,10 +30,21 @@ This component should look very similar to the topic component you made last tim
       class="rounded-circle"
     />
     <div>
-      <h3>{{ thread.title }}</h3>
-      <div class="user_and_date pb-2">
-        <div>{{ thread.account.username }}</div>
-        <div>{{ thread.updatedAt.toLocaleDateString("en-US") }}</div>
+      <div class="test">
+        <div>
+          <h3>{{ thread.title }}</h3>
+          <div class="user_and_date pb-2">
+            <div>{{ thread.account.username }}</div>
+            <div>{{ thread.updatedAt.toLocaleDateString("en-US") }}</div>
+          </div>
+        </div>
+        <div>
+          <div style="display: inline; padding-bottom: 40px">
+            <span style="color: red"><i class="bi bi-heart-fill"></i></span> {{ thread.likes }}
+          </div>
+          <br />
+          <div style="display: inline"><i class="bi bi-chat-text"></i> {{ thread.replyCount }}</div>
+        </div>
       </div>
       <div class="p-0">
         <p>

@@ -12,6 +12,12 @@
   grid-column-gap: 60px;
 }
 
+.test {
+  display: grid;
+  grid-template-columns: calc(100% - 100px) 100px;
+  grid-column-gap: 0%;
+}
+
 inline-spacing {
   padding-top: 700px;
 }
