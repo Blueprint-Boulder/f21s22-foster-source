@@ -1,7 +1,7 @@
 <div class="container border mt-5 pb-5 pt-1 px-4" *ngIf="thread">
   <div class="row my-5">
     <div class="col-sm-12 col-md-10">
-      <h6 class="text-muted">{{ thread.topicTitle }}</h6>
+      <h6 class="text-muted pointer" (click)="goToTopic()">{{ thread.topicTitle }}</h6>
       <h2>{{ thread.title }}</h2>
     </div>
     <div class="col-sm-12 col-md-2">

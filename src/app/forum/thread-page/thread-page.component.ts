@@ -281,6 +281,7 @@ export class ThreadPageComponent implements OnInit {
         this.replyReq.body = '';
         this.replyReq.replyingToUsername = undefined;
         this.replyReq.replyingToText = undefined;
+        this.isReplyingToSomeone = false;
       },
       (err) => {
         this.toastService.httpError(err);
@@ -327,5 +328,9 @@ export class ThreadPageComponent implements OnInit {
 
   getPageCount(): number {
     return Math.ceil(this.thread.replyCount / this.REPLY_LIMIT);
+  }
+
+  goToTopic(): void {
+    this.router.navigate(['/forum/topics/' + this.thread.topicId]);
   }
 }

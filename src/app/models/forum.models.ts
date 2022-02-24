@@ -79,6 +79,7 @@ export interface FullThread {
   replyCount: number;
   lastReplyDate: Date;
   topicTitle: string;
+  topicId: number;
   requesterHasLiked: boolean;
   account: {
     id: number;

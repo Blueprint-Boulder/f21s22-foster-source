@@ -648,5 +648,5 @@ export const replies: Reply[] = [
 ];
 
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
-  return { ...t, replies: replies };
+  return { ...t, replies: replies, topicId: 1 };
 });
