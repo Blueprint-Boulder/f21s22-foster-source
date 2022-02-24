@@ -9,7 +9,7 @@ import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { ReplyEvent } from '../thread-reply/thread-reply.component';
 
 @Component({
   selector: 'app-thread-page',
@@ -33,7 +33,7 @@ export class ThreadPageComponent implements OnInit {
   public shouldShowSuspendForm = false;
   public submittingRemove = false;
 
-  public isReplyingToSomeone = true;
+  public isReplyingToSomeone = false;
   public submittingReply = false;
   public replyReq: PostReplyReq;
 
@@ -51,7 +51,6 @@ export class ThreadPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMod = this.authService.isAtLeastMod();
-    this.generateProfileImageSrc();
 
     this.route.params.subscribe((params) => {
       const id = parseInt(params['id']);
@@ -64,7 +63,7 @@ export class ThreadPageComponent implements OnInit {
       this.route.queryParamMap.subscribe((map) => {
         const replyOffset = map.get('replyOffset');
         if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
-          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString());
+          this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString()) + 1;
         }
 
         this.forumService
@@ -76,6 +75,7 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
+              this.generateProfileImageSrc();
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
               this.userHasLiked = this.thread.requesterHasLiked;
               this.replyReq = {
@@ -102,6 +102,7 @@ export class ThreadPageComponent implements OnInit {
     this.router.navigate([`/forum/threads/${this.thread.id}`], {
       queryParams: { replyOffset: (newPage - 1) * this.REPLY_LIMIT },
     });
+    this.scrollToTop();
   }
 
   likeUnlikeThread(): void {
@@ -129,7 +130,7 @@ export class ThreadPageComponent implements OnInit {
   }
 
   generateProfileImageSrc(): void {
-    if (this.isMod) {
+    if (this.thread.account.privilege === 'MOD' || this.thread.account.privilege === 'ADMIN') {
       this.profileImageSrc = 'assets/images/modShield.png';
       return;
     }
@@ -270,6 +271,7 @@ export class ThreadPageComponent implements OnInit {
   }
 
   submitReply(): void {
+    // TODO: Make it navigate to the last page of the thread so you can see it.
     this.submittingReply = true;
 
     this.forumService.postReply(this.replyReq).subscribe(
@@ -300,5 +302,30 @@ export class ThreadPageComponent implements OnInit {
     this.replyReq.replyingToUsername = undefined;
     this.replyReq.replyingToText = undefined;
     this.replyReq.body = '';
+  }
+
+  private scrollToTop(): void {
+    (function smoothScroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothScroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
+  }
+
+  replyToReplyEvent(event: ReplyEvent): void {
+    this.isReplyingToSomeone = true;
+    this.replyReq = {
+      threadId: this.thread.id,
+      replyingToUsername: event.replyingToUsername,
+      replyingToText: event.replyingToText,
+      body: '',
+    };
+    this.scrollTo('reply-section');
+  }
+
+  getPageCount(): number {
+    return Math.ceil(this.thread.replyCount / this.REPLY_LIMIT);
   }
 }

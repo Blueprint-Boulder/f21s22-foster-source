@@ -58,11 +58,14 @@ export interface Reply {
   replyingToUsername?: string;
   edited: boolean;
   requesterHasLiked: boolean;
+  createdAt: Date;
+  threadId: number;
   account: {
     id: number;
     username: string;
     privilege: string;
     profileId?: number;
+    profileSmallAwsKey: string;
   };
 }
 
@@ -121,8 +124,23 @@ export interface ReportThreadReq {
   description: string;
 }
 
+export interface ReportReplyReq {
+  threadId: number;
+  replyId: number;
+  description: string;
+}
+
 export interface ModRemoveThreadReq {
   id: number;
+  reason: string;
+  shouldBlacklist?: boolean; // takes priority over suspension if both are provided
+  shouldSuspend?: boolean;
+  suspendForDays?: number;
+}
+
+export interface ModRemoveReplyReq {
+  threadId: number;
+  replyId: number;
   reason: string;
   shouldBlacklist?: boolean; // takes priority over suspension if both are provided
   shouldSuspend?: boolean;

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { TopicSummary } from '../../models/forum.models';
+import { Component, Input, OnInit } from '@angular/core';
+import { Reply, TopicSummary } from '../../models/forum.models';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { AuthService } from '../../services/auth-service/auth.service';
-
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
@@ -12,7 +11,6 @@ import { AuthService } from '../../services/auth-service/auth.service';
 export class ForumComponent implements OnInit {
   public topics: TopicSummary[];
   public isMod = false;
-
   constructor(
     private forumService: ForumService,
     private toastService: ToastService,

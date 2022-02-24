@@ -49,12 +49,22 @@
         ></i
         >&nbsp;&nbsp;{{ thread.likes }}
       </p>
-      <p [innerHTML]="thread.body"></p>
+      <p *ngIf="resultPage <= 1" [innerHTML]="thread.body"></p>
+      <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">...</p>
+      <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">
+        <i>Viewing page {{ resultPage }} / {{ getPageCount() | number: "1.0-0" }}</i>
+      </p>
       <p class="text-right text-muted my-0" *ngIf="thread.edited"><small>(edited)</small></p>
     </div>
   </div>
-  <div class="row reply-row mx-sm-5" *ngFor="let reply of thread.replies">
-    <div class="col-12">This is a reply: {{ reply.body }}</div>
+  <div class="row reply-row ml-sm-5" *ngFor="let reply of thread.replies">
+    <div class="col-12">
+      <app-thread-reply
+        [reply]="reply"
+        [author]="thread.account.username"
+        (replyEvent)="replyToReplyEvent($event)"
+      ></app-thread-reply>
+    </div>
   </div>
   <div class="row empty-row mt-5" *ngIf="thread.replies.length <= 0 && resultPage === 0">
     <div class="col-12 text-center">
@@ -89,8 +99,10 @@
       </p>
       <small class="text-muted" *ngIf="isReplyingToSomeone"><i>You are replying to another comment.</i></small>
       <div class="bg-light-grey pt-3 pb-2 px-3 mb-3 rounded shadow-sm" *ngIf="isReplyingToSomeone">
-        <p><b>username</b></p>
-        <p>this is the part of the text that I am replying to!</p>
+        <p>
+          <b>{{ replyReq.replyingToUsername }}</b>
+        </p>
+        <p [innerHTML]="replyReq.replyingToText"></p>
       </div>
       <app-editor [html]="replyReq.body" (richTextChange)="replyChange($event)"></app-editor>
       <button
@@ -107,7 +119,7 @@
         class="btn btn-secondary float-right text-white mt-4 mr-5"
         (click)="fullyClearReplyForm()"
       >
-        Cancel Reply
+        Cancel Response
       </button>
     </div>
   </div>
@@ -258,6 +270,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modRemoveModal.close('Save click')">Close</button>
-    <button class="btn btn-secondary" (click)="modRemoveThread()" [disabled]="submittingRemove">Report Thread</button>
+    <button class="btn btn-secondary" (click)="modRemoveThread()" [disabled]="submittingRemove">Remove Thread</button>
   </div>
 </ng-template>
