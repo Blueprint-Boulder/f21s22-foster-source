@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ThreadSummary, TopicSummary } from '../../models/forum.models';
+import { FullProfileRes } from '../../models/get-profile-by-id.models';
 
 @Component({
   selector: 'app-topic-page',
@@ -12,17 +13,31 @@ import { ThreadSummary, TopicSummary } from '../../models/forum.models';
 export class TopicPageComponent implements OnInit {
   public topic: TopicSummary;
   public threads: ThreadSummary[];
+  public id: number;
 
   // TODO: WILL DELETE THIS
   public testThreadForThreadSummaryComponent: ThreadSummary;
 
-  constructor(private forumService: ForumService, private toastService: ToastService, private router: Router) {}
+  constructor(
+    private forumService: ForumService,
+    private route: ActivatedRoute,
+    private toastService: ToastService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      const id = params['id'];
+      this.forumService.getTopicSummaryById(id).subscribe((topic: TopicSummary) => {
+        this.topic = topic;
+        console.log(topic);
+      });
+    });
     // TODO: WE WILL DELETE THIS WHEN YOU ARE FINISHED CREATING THE THREADSUMMARY COMPONENT. THIS IS JUST
     // SO THAT YOU CAN SEE THE COMPONENT AS YOU ARE DEVELOPING IT, SAME AS LAST TIME.
 
-    this.forumService.getThreadById(1).subscribe((t) => {
+    // using getThreadsForTopic(topicId: number, limit: number, offset: number)?
+    this.forumService.getThreadById(this.id).subscribe((t) => {
       this.testThreadForThreadSummaryComponent = t;
     });
 
