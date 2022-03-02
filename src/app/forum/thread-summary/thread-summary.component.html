@@ -20,12 +20,13 @@ This component should look very similar to the topic component you made last tim
 
 <!-- Issue with inline :\-->
 
-<div *ngIf="thread" class="w-100 my-2">
+<div *ngIf="thread" (click)="navigateToThread()" class="w-100 my-2 hover">
   <div class="container-fluid w-100 topic shadow-sm rounded pt-4 pb-3 summary-layout threads">
     <img
-      [src]="getProfileImage()"
+      [src]="profileImageSrc"
       [height]="90"
       [width]="90"
+      (error)="imgError()"
       alt="{{ thread.account.username }}'s profile picture"
       class="rounded-circle"
     />

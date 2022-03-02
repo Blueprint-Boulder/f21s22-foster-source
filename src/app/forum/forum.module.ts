@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ThreadSummaryComponent } from './thread-summary/thread-summary.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,6 @@ import { TopicPageComponent } from './topic-page/topic-page.component';
     ThreadSummaryComponent,
     TopicPageComponent,
   ],
-  imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ForumRoutingModule, ReactiveFormsModule, RouterModule, NgbPaginationModule],
 })
 export class ForumModule {}

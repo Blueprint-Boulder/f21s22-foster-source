@@ -25,3 +25,10 @@ inline-spacing {
 .threads {
   background: #fef4e8;
 }
+
+.hover {
+  &:hover {
+    background: #e5dcd1;
+    cursor: pointer;
+  }
+}

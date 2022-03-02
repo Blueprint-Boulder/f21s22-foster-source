@@ -14,9 +14,12 @@ export class TopicPageComponent implements OnInit {
   public topic: TopicSummary;
   public threads: ThreadSummary[];
   public id: number;
+  public totalResults: number;
 
   // TODO: WILL DELETE THIS
   public testThreadForThreadSummaryComponent: ThreadSummary;
+  public readonly THREAD_LIMIT = 25;
+  public resultPage = 0;
 
   constructor(
     private forumService: ForumService,
@@ -28,24 +31,50 @@ export class TopicPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
+      // console.log(id)
       this.forumService.getTopicSummaryById(id).subscribe((topic: TopicSummary) => {
         this.topic = topic;
-        console.log(topic);
+        // console.log(topic);
       });
+      this.route.queryParamMap.subscribe(
+        (map) => {
+          const replyOffset = map.get('replyOffset');
+          if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
+            this.resultPage = parseInt((parseInt(replyOffset) / this.THREAD_LIMIT).toString()) + 1;
+          }
+          this.forumService
+            .getThreadsForTopic(
+              id,
+              this.THREAD_LIMIT,
+              replyOffset === null ? 0 : isNaN(parseInt(replyOffset)) ? 0 : parseInt(replyOffset)
+            )
+            .subscribe((res) => {
+              this.threads = res.threads;
+              this.totalResults = res.totalResults;
+            });
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          if (err?.error?.code === 404) {
+            this.router.navigate(['/not-found']);
+          }
+        }
+      );
     });
-    // TODO: WE WILL DELETE THIS WHEN YOU ARE FINISHED CREATING THE THREADSUMMARY COMPONENT. THIS IS JUST
-    // SO THAT YOU CAN SEE THE COMPONENT AS YOU ARE DEVELOPING IT, SAME AS LAST TIME.
-
-    // using getThreadsForTopic(topicId: number, limit: number, offset: number)?
-    this.forumService.getThreadById(this.id).subscribe((t) => {
-      this.testThreadForThreadSummaryComponent = t;
+  }
+  changePage(newPage: number): void {
+    this.router.navigate([`/forum/topics/${this.topic.id}`], {
+      queryParams: { replyOffset: (newPage - 1) * this.THREAD_LIMIT },
     });
-
-    // TODO: END DELETE SECTION
-
-    // forum service: getTopicSummaryById to display topic at top of page, returns TopicSummary
-    // forum service: getThreadsForTopic, which returns GetThreadSummariesRes
-    //                just set limit=25 and offset = 0, and I'll help out getting that stuff up and running
-    return;
+    this.scrollToTop();
+  }
+  private scrollToTop(): void {
+    (function smoothScroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothScroll);
+        window.scrollTo(0, currentScroll - currentScroll / 8);
+      }
+    })();
   }
 }
