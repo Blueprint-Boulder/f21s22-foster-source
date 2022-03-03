@@ -1,0 +1,31 @@
+<div [formGroup]="form">
+  <div class="form-check">
+    <input
+      (change)="prin($event)"
+      value="true"
+      class="form-check-input"
+      type="checkbox"
+      [id]="field"
+      [name]="field"
+      [formControlName]="field"
+    />
+    <label [for]="field"
+      ><i *ngIf="italic">{{ title }}</i
+      ><span *ngIf="!italic">{{ title }}</span
+      ><span *ngIf="isRequired()" class="required-star">*</span></label
+    >
+    <app-field-invalid-message
+      *ngIf="errors && errorMessages"
+      [form]="form"
+      [field]="field"
+      [errors]="errors"
+      [messages]="errorMessages"
+    ></app-field-invalid-message>
+    <div *ngIf="formErrors && formErrorMessages">
+      <span *ngFor="let message of formErrorMessages; index as i"
+        ><small *ngIf="form && formErrors[i] && form?.getError(formErrors[i])" class="input-error"
+          >{{ message }}<br /></small
+      ></span>
+    </div>
+  </div>
+</div>

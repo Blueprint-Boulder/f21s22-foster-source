@@ -6,207 +6,109 @@
     </div>
     <div class="row name-row">
       <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-          <label for="fname"><b>First Name</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="fname"
-            placeholder="Enter first name"
-            formControlName="fname"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('fname')?.invalid &&
-              (createAccountForm.get('fname')?.dirty || createAccountForm.get('fname')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('fname')?.errors?.required" class="input-error"
-              >Please enter your first name.</small
-            >
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'fname'"
+          [title]="'First Name'"
+          [placeholder]="'Enter first name'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter your first name.']"
+        >
+        </app-basic-text-field>
       </div>
       <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-          <label for="lname"><b>Last Name</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="lname"
-            placeholder="Enter Last Name"
-            formControlName="lname"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('lname')?.invalid &&
-              (createAccountForm.get('lname')?.dirty || createAccountForm.get('lname')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('lname')?.errors?.required" class="input-error"
-              >Please enter your first name.</small
-            >
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'lname'"
+          [title]="'Last Name'"
+          [placeholder]="'Enter last name'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter your last name.']"
+        >
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row username-row">
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="user"><b>Username</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="user"
-            placeholder="Enter username"
-            formControlName="user"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('user')?.invalid &&
-              (createAccountForm.get('user')?.dirty || createAccountForm.get('user')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('user')?.errors?.required" class="input-error"
-              >Please enter a username.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('user')?.errors?.minlength" class="input-error"
-              >Please enter a longer username.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('user')?.errors?.maxlength" class="input-error"
-              >Please enter a shorter username.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('user')?.errors?.pattern" class="input-error"
-              >Invalid characters in username.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'user'"
+          [title]="'Username'"
+          [placeholder]="'Enter username'"
+          [errors]="['required', 'minlength', 'maxlength', 'pattern']"
+          [errorMessages]="[
+            'Please enter your first name.',
+            'Please enter a longer username.',
+            'Please enter a shorter username.',
+            'Invalid characters in username.'
+          ]"
+        >
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row email-row">
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="email"><b>Email</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="email"
-            placeholder="Enter Email"
-            formControlName="email"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('email')?.invalid &&
-              (createAccountForm.get('email')?.dirty || createAccountForm.get('email')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('email')?.errors?.required" class="input-error"
-              >Please enter your email.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('email')?.errors?.email" class="input-error"
-              >Please enter a valid email.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'email'"
+          [title]="'Email'"
+          [placeholder]="'Enter email'"
+          [errors]="['required', 'email']"
+          [errorMessages]="['Please enter your email.', 'Please enter a valid email.']"
+        >
+        </app-basic-text-field>
       </div>
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="confirmEmail"><b>Confirm Email</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="confirmEmail"
-            placeholder="Confirm Email"
-            formControlName="confirmEmail"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('confirmEmail')?.invalid &&
-              (createAccountForm.get('confirmEmail')?.dirty || createAccountForm.get('confirmEmail')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('confirmEmail')?.errors?.required" class="input-error"
-              >Please confirm your email.<br
-            /></small>
-          </div>
-          <small *ngIf="createAccountForm.errors?.emailMatch" class="input-error">Emails do not match</small>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'confirmEmail'"
+          [title]="'Confirm Email'"
+          [placeholder]="'Confirm email'"
+          [errors]="['required']"
+          [errorMessages]="['Please confirm your email.']"
+          [formErrors]="['emailMatch']"
+          [formErrorMessages]="['Emails do not match.']"
+        >
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row pass-row">
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="password"><b>Password</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="password"
-            id="password"
-            placeholder="Enter Password"
-            formControlName="password"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('password')?.invalid &&
-              (createAccountForm.get('password')?.dirty || createAccountForm.get('password')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('password')?.errors?.required" class="input-error"
-              >Please enter a password.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('password')?.errors?.minlength" class="input-error"
-              >Please enter a password that is at least 8 characters.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'password'"
+          [title]="'Password'"
+          [placeholder]="'Enter password'"
+          [errors]="['required', 'minlength']"
+          [errorMessages]="['Please enter your password.', 'Please enter a password that is at least 8 characters.']"
+        >
+        </app-basic-text-field>
       </div>
       <div class="col-md-6">
-        <label for="confirmpassword"><b>Confirm Password</b><span class="required-star">*</span></label>
-        <input
-          class="form-control p-1 m-0 bottom-border-input"
-          type="password"
-          id="confirmpassword"
-          placeholder="Enter Password"
-          formControlName="confirmpassword"
-          required
-        />
-        <div
-          *ngIf="
-            createAccountForm.get('confirmpassword')?.invalid &&
-            (createAccountForm.get('confirmpassword')?.dirty || createAccountForm.get('confirmpassword')?.touched)
-          "
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'confirmpassword'"
+          [title]="'Confirm Password'"
+          [placeholder]="'Confirm password'"
+          [errors]="['required']"
+          [errorMessages]="['Please confirm your password.']"
+          [formErrors]="['passwordMatch']"
+          [formErrorMessages]="['Passwords do not match.']"
         >
-          <small *ngIf="createAccountForm.get('confirmpassword')?.errors?.required" class="input-error"
-            >Please confirm your password.<br
-          /></small>
-        </div>
-        <small *ngIf="createAccountForm.errors?.passwordMatch" class="input-error">Passwords do not match</small>
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row phones-row">
       <div class="col-xs-8 col-md-4">
-        <label for="primaryPhone"><b>Enter Primary Phone Number</b><span class="required-star">*</span></label>
-        <input
-          class="form-control p-1 ml-0 bottom-border-input"
-          type="tel"
-          id="primaryPhone"
-          placeholder="Enter Phone Number"
-          formControlName="primaryPhone"
-          required
-        />
-        <div
-          *ngIf="
-            createAccountForm.get('primaryPhone')?.invalid &&
-            (createAccountForm.get('primaryPhone')?.dirty || createAccountForm.get('primaryPhone')?.touched)
-          "
-        >
-          <small *ngIf="createAccountForm.get('primaryPhone')?.errors?.required" class="input-error"
-            >Please enter your primary phone number.<br
-          /></small>
-          <small *ngIf="createAccountForm.get('primaryPhone')?.errors?.invalidPhone" class="input-error"
-            >Please enter a valid phone number.<br
-          /></small>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [type]="'tel'"
+          [field]="'primaryPhone'"
+          [title]="'Enter Primary Phone Number'"
+          [placeholder]="'Enter phone number'"
+          [errors]="['required', 'invalidPhone']"
+          [errorMessages]="['Please enter your primary phone number.', 'Please enter a valid phone number.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-xs-4 col-md-2">
         <div class="form-group">
@@ -235,26 +137,15 @@
         </div>
       </div>
       <div class="col-xs-8 col-md-4">
-        <div class="form-group">
-          <label for="secondaryPhone"><b>Enter Secondary Phone Number</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="tel"
-            id="secondaryPhone"
-            placeholder="Enter Phone Number"
-            formControlName="secondaryPhone"
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('secondaryPhone')?.invalid &&
-              (createAccountForm.get('secondaryPhone')?.dirty || createAccountForm.get('secondaryPhone')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('secondaryPhone')?.errors?.invalidPhone" class="input-error"
-              >Please enter a valid phone number.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [type]="'tel'"
+          [field]="'secondaryPhone'"
+          [title]="'Enter Secondary Phone Number'"
+          [placeholder]="'Enter phone number'"
+          [errors]="['invalidPhone']"
+          [errorMessages]="['Please enter a valid phone number.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-xs-4 col-md-2">
         <div class="form-group">
@@ -285,64 +176,31 @@
     </div>
     <div class="row address-1-row">
       <div class="col-xs-12 col-sm-12 col-12">
-        <div class="form-group">
-          <label class="mt-4" for="address"><b>Address Line 1</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="address"
-            placeholder="Address Line 1"
-            formControlName="address"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('address')?.invalid &&
-              (createAccountForm.get('address')?.dirty || createAccountForm.get('address')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('address')?.errors?.required" class="input-error"
-              >Please enter your address.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'address'"
+          [title]="'Address Line 1'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter your address.']"
+        >
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row address-2-row">
       <div class="col-sm-8">
-        <div class="form-group">
-          <label class="mt-4" for="address2"><b>Address Line 2</b></label>
-          <input
-            class="form-control p-1 bottom-border-input"
-            id="address2"
-            placeholder="Address Line 2"
-            formControlName="address2"
-          />
-        </div>
+        <app-basic-text-field [form]="createAccountForm" [field]="'address2'" [title]="'Address Line 2'">
+        </app-basic-text-field>
       </div>
     </div>
     <div class="row address-info-row">
       <div class="col-md-5">
-        <div class="form-group">
-          <label for="city"><b>City</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="text"
-            id="city"
-            placeholder="Enter City"
-            formControlName="city"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('city')?.invalid &&
-              (createAccountForm.get('city')?.dirty || createAccountForm.get('city')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('city')?.errors?.required" class="input-error"
-              >Please enter a city.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'city'"
+          [title]="'City'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter a city.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-md-4">
         <div class="form-group">
@@ -371,31 +229,13 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <label for="zipCode"><b>Zip Code</b><span class="required-star">*</span></label>
-          <div class="container"></div>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="text"
-            id="zipCode"
-            placeholder="Enter Zip"
-            formControlName="zip"
-            required
-          />
-          <div
-            *ngIf="
-              createAccountForm.get('zip')?.invalid &&
-              (createAccountForm.get('zip')?.dirty || createAccountForm.get('zip')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('zip')?.errors?.required" class="input-error"
-              >Please enter a zip code.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('zip')?.errors?.pattern" class="input-error"
-              >Please enter a valid zip code.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'zip'"
+          [title]="'Zip Code'"
+          [errors]="['required', 'pattern']"
+          [errorMessages]="['Please enter a zip code.', 'Please enter a valid zip code.']"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row mt-5">
@@ -403,131 +243,76 @@
     </div>
     <div class="row cw-name-row">
       <div class="col-sm-6">
-        <div class="form-group">
-          <label class="mt-4" for="caseworkerfname"
-            ><b>Case Worker First Name</b><span class="required-star">*</span></label
-          >
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="caseworkerfname"
-            placeholder="Enter Case Worker's First Name"
-            formControlName="caseworkerfname"
-            required
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'caseworkerfname'"
-            [errors]="['required']"
-            [messages]="['Please enter case worker\'s first name.']"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'caseworkerfname'"
+          [title]="'Case Worker First Name'"
+          [placeholder]="'Enter case worker\'s first name'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter case worker\'s first name.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-sm-6">
-        <div class="form-group">
-          <label class="mt-4" for="caseworkerlname"
-            ><b>Case Worker Last Name</b><span class="required-star">*</span></label
-          >
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="caseworkerlname"
-            placeholder="Enter Case Worker's First Name"
-            formControlName="caseworkerlname"
-            required
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'caseworkerlname'"
-            [errors]="['required']"
-            [messages]="['Please enter case worker\'s last name.']"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'caseworkerlname'"
+          [title]="'Case Worker Last Name'"
+          [placeholder]="'Enter case worker\'s last name'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter case worker\'s last name.']"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row cw-contact-row">
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="caseworkeremail"><b>Case Worker Email</b><span class="required-star">*</span></label>
-          <input
-            type="email"
-            class="form-control p-1 m-0 bottom-border-input"
-            id="caseworkeremail"
-            placeholder="Enter Case Worker's Email"
-            formControlName="caseworkeremail"
-            required
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'caseworkeremail'"
-            [errors]="['required', 'email']"
-            [messages]="['Please enter case worker\'s email.', 'Please enter a valid email.']"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'caseworkeremail'"
+          [title]="'Case Worker Email'"
+          [placeholder]="'Enter case worker\'s email'"
+          [errors]="['required', 'email']"
+          [errorMessages]="['Please enter case worker\'s email.', 'Please enter a valid email.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-md-6">
-        <div class="form-group">
-          <label for="caseworkerphone"><b>Case Worker Phone Number</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="tel"
-            id="caseworkerphone"
-            placeholder="Enter Case Worker's Phone Number"
-            formControlName="caseworkerphone"
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'caseworkerphone'"
-            [errors]="['required', 'invalidPhone']"
-            [messages]="['Please enter case worker\'s phone number.', 'Please enter a valid phone number.']"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'caseworkerphone'"
+          [type]="'tel'"
+          [title]="'Case Worker Phone Number'"
+          [placeholder]="'Enter case worker\'s phone number'"
+          [errors]="['required', 'invalidPhone']"
+          [errorMessages]="['Please enter case worker\'s phone number.', 'Please enter a valid phone number.']"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <div class="form-group">
-          <label class="mt-4" for="certifiedBy"
-            ><b>County or Child Placement Agency Certified With</b><span class="required-star">*</span></label
-          >
-          <input
-            class="form-control p-1 bottom-border-input"
-            id="certifiedBy"
-            placeholder="Enter county or child placement agency"
-            formControlName="certifiedBy"
-            required
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'certifiedBy'"
-            [errors]="['required']"
-            [messages]="['Please enter the county or child placement agency you are certified by.']"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'certifiedBy'"
+          [title]="'County or Child Placement Agency Certified With'"
+          [placeholder]="'Enter county or child placement agency'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter the county or child placement agency you are certified by.']"
+        >
+        </app-basic-text-field>
       </div>
       <div class="col-sm-6">
-        <div class="form-group">
-          <label class="mt-4" for="certExpiry"
-            ><b>Expiration date of certification:</b><span class="required-star">*</span><br /><small
-              >(The date must be entered in the format MM/DD/YYYY)</small
-            ></label
-          >
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="certExpiry"
-            placeholder="MM/DD/YYYY"
-            formControlName="certExpiry"
-            required
-          />
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'certExpiry'"
-            [errors]="['required', 'pattern', 'invalidDate']"
-            [messages]="[
-              'Please enter expiration date.',
-              'Please enter date in format MM/DD/YYYY.',
-              'Please enter a valid date.'
-            ]"
-          ></app-field-invalid-message>
-        </div>
+        <app-basic-text-field
+          [form]="createAccountForm"
+          [field]="'certExpiry'"
+          [title]="'Expiration date of certification'"
+          [subtitle]="'(The date must be entered in the format MM/DD/YYYY)'"
+          [placeholder]="'MM/DD/YYYY'"
+          [errors]="['required', 'pattern', 'invalidDate']"
+          [errorMessages]="[
+            'Please enter expiration date.',
+            'Please enter date in format MM/DD/YYYY.',
+            'Please enter a valid date.'
+          ]"
+        >
+        </app-basic-text-field>
       </div>
     </div>
 
@@ -538,134 +323,49 @@
         </div>
       </div>
       <div class="col-12">
-        <div class="row">
-          <div class="form-check m-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              formControlName="approvalResponsibility"
-              name="approvalResponsibility"
-              value="true"
-              id="approvalResponsibilityCheck"
-            />
-            <label class="form-check-label" for="approvalResponsibilityCheck">
-              <i>
-                I understand that it is my responsibility to get any respite arrangement approved by my county/agency
-                certification worker before providing or accepting respite for or from another RespiteSource user.<span
-                  class="required-star"
-                  >*</span
-                >
-              </i>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div
-            *ngIf="
-              createAccountForm.get('approvalResponsibility')?.invalid &&
-              (createAccountForm.get('approvalResponsibility')?.dirty ||
-                createAccountForm.get('approvalResponsibility')?.touched)
-            "
-          >
-            <small
-              *ngIf="
-                createAccountForm.get('approvalResponsibility')?.errors?.required ||
-                createAccountForm.get('approvalResponsibility')?.errors?.requiredTrue
-              "
-              class="input-error"
-              >You must acknowledge and accept the above statement before creating your account.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-check-field
+          [form]="createAccountForm"
+          [field]="'approvalResponsibility'"
+          [title]="
+            ' I understand that it is my responsibility to get any respite arrangement approved by my county/agency certification worker before providing or accepting respite for or from another RespiteSource user.'
+          "
+          [italic]="true"
+          [errors]="['required', 'requiredTrue']"
+          [errorMessages]="[
+            'You must acknowledge the above statement before creating your account.',
+            'You must accept the above statement before creating your account.'
+          ]"
+        ></app-basic-check-field>
       </div>
       <div class="col-12">
-        <div class="row">
-          <div class="form-check m-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              formControlName="confidentialInformation"
-              name="confidentialInformation"
-              value="true"
-              id="confidentialInformationCheck"
-            />
-            <label class="form-check-label" for="confidentialInformationCheck">
-              <i>
-                I understand that RespiteSource is a private community and that it is my responsibility to keep any and
-                all information learned about other users (whether learned directly from another person or via the
-                forum) confidential.<span class="required-star">*</span>
-              </i>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <div
-            *ngIf="
-              createAccountForm.get('confidentialInformation')?.invalid &&
-              (createAccountForm.get('confidentialInformation')?.dirty ||
-                createAccountForm.get('confidentialInformation')?.touched)
-            "
-          >
-            <small
-              *ngIf="
-                createAccountForm.get('confidentialInformation')?.errors?.required ||
-                createAccountForm.get('confidentialInformation')?.errors?.requiredTrue
-              "
-              class="input-error"
-              >You must acknowledge and accept the above statement before creating your account.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-check-field
+          [form]="createAccountForm"
+          [field]="'confidentialInformation'"
+          [title]="
+            'I understand that RespiteSource is a private community and that it is my responsibility to keep any and all information learned about other users (whether learned directly from another person or via the forum) confidential.'
+          "
+          [italic]="true"
+          [errors]="['required', 'requiredTrue']"
+          [errorMessages]="[
+            'You must acknowledge the above statement before creating your account.',
+            'You must accept the above statement before creating your account.'
+          ]"
+        ></app-basic-check-field>
       </div>
       <div class="col-12">
-        <div class="row">
-          <div class="form-check m-2">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              formControlName="potentialShareInfo"
-              name="potentialShareInfo"
-              value="true"
-              id="potentialShareInfoCheck"
-            />
-            <label class="form-check-label" for="potentialShareInfoCheck">
-              <i>
-                I understand and accept the risk that any information that I share via RespiteSource (though instructed
-                to be confidential) still has the potential to be shared outside of RespiteSource.<span
-                  class="required-star"
-                  >*</span
-                >
-              </i>
-            </label>
-          </div>
-        </div>
-        <div class="row">
-          <app-field-invalid-message
-            [form]="createAccountForm"
-            [field]="'potentialShareInfo'"
-            [errors]="['required', 'requiredTrue']"
-            [messages]="[
-              'You must acknowledge and accept the above statement before creating your account.',
-              'You must acknowledge and accept the above statement before creating your account.'
-            ]"
-          ></app-field-invalid-message>
-          <!--          <div-->
-          <!--            *ngIf="-->
-          <!--              createAccountForm.get('potentialShareInfo')?.invalid &&-->
-          <!--              (createAccountForm.get('potentialShareInfo')?.dirty ||-->
-          <!--                createAccountForm.get('potentialShareInfo')?.touched)-->
-          <!--            "-->
-          <!--          >-->
-          <!--            <small-->
-          <!--              *ngIf="-->
-          <!--                createAccountForm.get('potentialShareInfo')?.errors?.required ||-->
-          <!--                createAccountForm.get('potentialShareInfo')?.errors?.requiredTrue-->
-          <!--              "-->
-          <!--              class="input-error"-->
-          <!--              >You must acknowledge and accept the above statement before creating your account.<br-->
-          <!--            /></small>-->
-          <!--          </div>-->
-        </div>
+        <app-basic-check-field
+          [form]="createAccountForm"
+          [field]="'potentialShareInfo'"
+          [title]="
+            ' I understand and accept the risk that any information that I share via RespiteSource (though instructed to be confidential) still has the potential to be shared outside of RespiteSource.'
+          "
+          [italic]="true"
+          [errors]="['required', 'requiredTrue']"
+          [errorMessages]="[
+            'You must acknowledge the above statement before creating your account.',
+            'You must accept the above statement before creating your account.'
+          ]"
+        ></app-basic-check-field>
       </div>
     </div>
 

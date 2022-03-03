@@ -7,6 +7,8 @@ import { AvailabilityGridComponent } from './availability-grid/availability-grid
 import { EditorComponent } from './editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { FieldInvalidMessageComponent } from './field-invalid-message/field-invalid-message.component';
+import { BasicTextFieldComponent } from './basic-text-field/basic-text-field.component';
+import { BasicCheckFieldComponent } from './basic-check-field/basic-check-field.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +16,18 @@ import { FieldInvalidMessageComponent } from './field-invalid-message/field-inva
     AvailabilityGridComponent,
     EditorComponent,
     FieldInvalidMessageComponent,
+    BasicTextFieldComponent,
+    BasicTextFieldComponent,
+    BasicCheckFieldComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule, NgxEditorModule],
-  exports: [DayAvailabilityInputComponent, AvailabilityGridComponent, EditorComponent, FieldInvalidMessageComponent],
+  exports: [
+    DayAvailabilityInputComponent,
+    AvailabilityGridComponent,
+    EditorComponent,
+    FieldInvalidMessageComponent,
+    BasicTextFieldComponent,
+    BasicCheckFieldComponent,
+  ],
 })
 export class CommonComponentsModule {}

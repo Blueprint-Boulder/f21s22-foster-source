@@ -16,11 +16,6 @@ export class FieldInvalidMessageComponent {
     if (this.errors.length - 1 <= i) {
       return undefined;
     }
-    console.log(
-      this.errors[i],
-      this.form.get(this.field)?.errors,
-      (this.form.get(this.field)?.errors as any)[this.errors[i]]
-    );
     if (this.form && this.form.get(this.field) && this.form.get(this.field)?.errors) {
       const errors = this.form!.get(this.field)!.errors;
       return (errors as any)[this.errors[i]] === undefined || (errors as any)[this.errors[i]] === null;

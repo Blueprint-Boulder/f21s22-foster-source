@@ -64,7 +64,7 @@ export class CreateAccountModalComponent implements OnInit {
       ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmpassword: ['', Validators.compose([Validators.required])],
-      approvalResponsibility: [null, Validators.compose([Validators.required, Validators.requiredTrue])],
+      approvalResponsibility: [false, Validators.compose([Validators.required, Validators.requiredTrue])],
       confidentialInformation: [null, Validators.compose([Validators.required, Validators.requiredTrue])],
       potentialShareInfo: [null, Validators.compose([Validators.required, Validators.requiredTrue])],
     });
