@@ -32,6 +32,7 @@ export interface CreateAccountRequest {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
+  certExpiry: string;
   primaryPhoneNumber: PhoneNumber;
   secondaryPhoneNumber?: PhoneNumber;
   address: SimpleAddressReq;

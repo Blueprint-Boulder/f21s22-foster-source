@@ -463,19 +463,12 @@
             formControlName="caseworkeremail"
             required
           />
-          <div
-            *ngIf="
-              createAccountForm.get('caseworkeremail')?.invalid &&
-              (createAccountForm.get('caseworkeremail')?.dirty || createAccountForm.get('caseworkeremail')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('caseworkeremail')?.errors?.required" class="input-error"
-              >Please enter case worker's email.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('caseworkeremail')?.errors?.email" class="input-error"
-              >Please enter a valid email.<br
-            /></small>
-          </div>
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'caseworkeremail'"
+            [errors]="['required', 'email']"
+            [messages]="['Please enter case worker\'s email.', 'Please enter a valid email.']"
+          ></app-field-invalid-message>
         </div>
       </div>
       <div class="col-md-6">
@@ -507,7 +500,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label class="mt-4" for="address2"
+          <label class="mt-4" for="certifiedBy"
             ><b>County or Child Placement Agency Certified With</b><span class="required-star">*</span></label
           >
           <input
@@ -517,19 +510,180 @@
             formControlName="certifiedBy"
             required
           />
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'certifiedBy'"
+            [errors]="['required']"
+            [messages]="['Please enter the county or child placement agency you are certified by.']"
+          ></app-field-invalid-message>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label class="mt-4" for="certExpiry"
+            ><b>Expiration date of certification:</b><span class="required-star">*</span><br /><small
+              >(The date must be entered in the format MM/DD/YYYY)</small
+            ></label
+          >
+          <input
+            class="form-control p-1 m-0 bottom-border-input"
+            id="certExpiry"
+            placeholder="MM/DD/YYYY"
+            formControlName="certExpiry"
+            required
+          />
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'certExpiry'"
+            [errors]="['required', 'pattern', 'invalidDate']"
+            [messages]="[
+              'Please enter expiration date.',
+              'Please enter date in format MM/DD/YYYY.',
+              'Please enter a valid date.'
+            ]"
+          ></app-field-invalid-message>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-5">
+      <div class="col-12">
+        <div class="row">
+          <p><b>Please read and acknowledge the following statements:</b></p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="approvalResponsibility"
+              name="approvalResponsibility"
+              value="true"
+              id="approvalResponsibilityCheck"
+            />
+            <label class="form-check-label" for="approvalResponsibilityCheck">
+              <i>
+                I understand that it is my responsibility to get any respite arrangement approved by my county/agency
+                certification worker before providing or accepting respite for or from another RespiteSource user.<span
+                  class="required-star"
+                  >*</span
+                >
+              </i>
+            </label>
+          </div>
+        </div>
+        <div class="row">
           <div
             *ngIf="
-              createAccountForm.get('certifiedBy')?.invalid &&
-              (createAccountForm.get('certifiedBy')?.dirty || createAccountForm.get('certifiedBy')?.touched)
+              createAccountForm.get('approvalResponsibility')?.invalid &&
+              (createAccountForm.get('approvalResponsibility')?.dirty ||
+                createAccountForm.get('approvalResponsibility')?.touched)
             "
           >
-            <small *ngIf="createAccountForm.get('certifiedBy')?.errors?.required" class="input-error"
-              >Please enter the county or child placement agency you are certified by.<br
+            <small
+              *ngIf="
+                createAccountForm.get('approvalResponsibility')?.errors?.required ||
+                createAccountForm.get('approvalResponsibility')?.errors?.requiredTrue
+              "
+              class="input-error"
+              >You must acknowledge and accept the above statement before creating your account.<br
             /></small>
           </div>
         </div>
       </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="confidentialInformation"
+              name="confidentialInformation"
+              value="true"
+              id="confidentialInformationCheck"
+            />
+            <label class="form-check-label" for="confidentialInformationCheck">
+              <i>
+                I understand that RespiteSource is a private community and that it is my responsibility to keep any and
+                all information learned about other users (whether learned directly from another person or via the
+                forum) confidential.<span class="required-star">*</span>
+              </i>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            *ngIf="
+              createAccountForm.get('confidentialInformation')?.invalid &&
+              (createAccountForm.get('confidentialInformation')?.dirty ||
+                createAccountForm.get('confidentialInformation')?.touched)
+            "
+          >
+            <small
+              *ngIf="
+                createAccountForm.get('confidentialInformation')?.errors?.required ||
+                createAccountForm.get('confidentialInformation')?.errors?.requiredTrue
+              "
+              class="input-error"
+              >You must acknowledge and accept the above statement before creating your account.<br
+            /></small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="form-check m-2">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              formControlName="potentialShareInfo"
+              name="potentialShareInfo"
+              value="true"
+              id="potentialShareInfoCheck"
+            />
+            <label class="form-check-label" for="potentialShareInfoCheck">
+              <i>
+                I understand and accept the risk that any information that I share via RespiteSource (though instructed
+                to be confidential) still has the potential to be shared outside of RespiteSource.<span
+                  class="required-star"
+                  >*</span
+                >
+              </i>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'potentialShareInfo'"
+            [errors]="['required', 'requiredTrue']"
+            [messages]="[
+              'You must acknowledge and accept the above statement before creating your account.',
+              'You must acknowledge and accept the above statement before creating your account.'
+            ]"
+          ></app-field-invalid-message>
+          <!--          <div-->
+          <!--            *ngIf="-->
+          <!--              createAccountForm.get('potentialShareInfo')?.invalid &&-->
+          <!--              (createAccountForm.get('potentialShareInfo')?.dirty ||-->
+          <!--                createAccountForm.get('potentialShareInfo')?.touched)-->
+          <!--            "-->
+          <!--          >-->
+          <!--            <small-->
+          <!--              *ngIf="-->
+          <!--                createAccountForm.get('potentialShareInfo')?.errors?.required ||-->
+          <!--                createAccountForm.get('potentialShareInfo')?.errors?.requiredTrue-->
+          <!--              "-->
+          <!--              class="input-error"-->
+          <!--              >You must acknowledge and accept the above statement before creating your account.<br-->
+          <!--            /></small>-->
+          <!--          </div>-->
+        </div>
+      </div>
     </div>
+
     <div class="row">
       <div class="col-6 mx-auto">
         <button

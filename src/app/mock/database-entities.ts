@@ -87,6 +87,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwEmail: 'gCloon@aol.com',
     cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
+    certExpiry: '10/31/2022',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
