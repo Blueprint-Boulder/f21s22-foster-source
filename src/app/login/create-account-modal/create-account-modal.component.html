@@ -414,16 +414,12 @@
             formControlName="caseworkerfname"
             required
           />
-          <div
-            *ngIf="
-              createAccountForm.get('caseworkerfname')?.invalid &&
-              (createAccountForm.get('caseworkerfname')?.dirty || createAccountForm.get('caseworkerfname')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('caseworkerfname')?.errors?.required" class="input-error"
-              >Please enter case worker's first name.<br
-            /></small>
-          </div>
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'caseworkerfname'"
+            [errors]="['required']"
+            [messages]="['Please enter case worker\'s first name.']"
+          ></app-field-invalid-message>
         </div>
       </div>
       <div class="col-sm-6">
@@ -438,16 +434,12 @@
             formControlName="caseworkerlname"
             required
           />
-          <div
-            *ngIf="
-              createAccountForm.get('caseworkerlname')?.invalid &&
-              (createAccountForm.get('caseworkerlname')?.dirty || createAccountForm.get('caseworkerlname')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('caseworkerlname')?.errors?.required" class="input-error"
-              >Please enter case worker's last name.<br
-            /></small>
-          </div>
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'caseworkerlname'"
+            [errors]="['required']"
+            [messages]="['Please enter case worker\'s last name.']"
+          ></app-field-invalid-message>
         </div>
       </div>
     </div>
@@ -481,19 +473,12 @@
             placeholder="Enter Case Worker's Phone Number"
             formControlName="caseworkerphone"
           />
-          <div
-            *ngIf="
-              createAccountForm.get('caseworkerphone')?.invalid &&
-              (createAccountForm.get('caseworkerphone')?.dirty || createAccountForm.get('caseworkerphone')?.touched)
-            "
-          >
-            <small *ngIf="createAccountForm.get('caseworkerphone')?.errors?.required" class="input-error"
-              >Please enter case worker's phone number.<br
-            /></small>
-            <small *ngIf="createAccountForm.get('caseworkerphone')?.errors?.invalidPhone" class="input-error"
-              >Please enter a valid phone number.<br
-            /></small>
-          </div>
+          <app-field-invalid-message
+            [form]="createAccountForm"
+            [field]="'caseworkerphone'"
+            [errors]="['required', 'invalidPhone']"
+            [messages]="['Please enter case worker\'s phone number.', 'Please enter a valid phone number.']"
+          ></app-field-invalid-message>
         </div>
       </div>
     </div>
