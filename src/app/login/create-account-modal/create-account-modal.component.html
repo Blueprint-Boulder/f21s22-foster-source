@@ -1,10 +1,14 @@
 <div class="container p-5 bg-white mt-5 mb-5">
-  <h1 class="mt-5 text-center">Create An Account</h1>
+  <h1 class="mt-5 text-center">Apply For An Account</h1>
+  <h6 class="text-center">
+    Make sure that you have read through the <a href="/help" target="_blank" rel="noopener">help section</a> to ensure
+    that you are eligible and ready to request a RespiteSource account.
+  </h6>
   <form [formGroup]="createAccountForm" (ngSubmit)="createAccountSubmit()">
     <div class="row mt-5 mb-2">
       <h3>Personal Information</h3>
     </div>
-    <div class="row name-row">
+    <div class="row my-1 name-row my-1">
       <div class="col-sm-12 col-md-6">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -28,7 +32,7 @@
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row username-row">
+    <div class="row my-1 username-row">
       <div class="col-md-6">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -46,7 +50,7 @@
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row email-row">
+    <div class="row my-1 email-row">
       <div class="col-md-6">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -72,7 +76,7 @@
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row pass-row">
+    <div class="row my-1 pass-row">
       <div class="col-md-6">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -98,7 +102,7 @@
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row phones-row">
+    <div class="row my-1 phones-row">
       <div class="col-xs-8 col-md-4">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -174,7 +178,7 @@
         </div>
       </div>
     </div>
-    <div class="row address-1-row">
+    <div class="row my-1 address-1-row">
       <div class="col-xs-12 col-sm-12 col-12">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -186,13 +190,13 @@
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row address-2-row">
+    <div class="row my-1 address-2-row">
       <div class="col-sm-8">
         <app-basic-text-field [form]="createAccountForm" [field]="'address2'" [title]="'Address Line 2'">
         </app-basic-text-field>
       </div>
     </div>
-    <div class="row address-info-row">
+    <div class="row my-1 address-info-row">
       <div class="col-md-5">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -238,10 +242,10 @@
         ></app-basic-text-field>
       </div>
     </div>
-    <div class="row mt-5">
+    <div class="row my-1 mt-5">
       <h3>Case Worker Information</h3>
     </div>
-    <div class="row cw-name-row">
+    <div class="row my-1 cw-name-row">
       <div class="col-sm-6">
         <app-basic-text-field
           [form]="createAccountForm"
@@ -263,7 +267,7 @@
         ></app-basic-text-field>
       </div>
     </div>
-    <div class="row cw-contact-row">
+    <div class="row my-1 cw-contact-row">
       <div class="col-md-6">
         <app-basic-text-field
           [form]="createAccountForm"
