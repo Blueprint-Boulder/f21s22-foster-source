@@ -139,8 +139,6 @@ export class ModifyTempAvailabilityComponent implements OnInit {
         const avail = profile.respiteBackground.respiteProviderInfo?.availabilities.find(
           (avail) => avail.type === 'TEMPORARY'
         );
-        console.log(profile);
-        console.log(avail);
         if (avail) {
           this.temporaryAvail = avail;
         }

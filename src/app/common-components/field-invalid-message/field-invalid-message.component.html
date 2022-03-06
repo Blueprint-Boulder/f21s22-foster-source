@@ -1,0 +1,8 @@
+<div
+  style="margin-top: 0; padding-top: 0"
+  *ngIf="form.get(field)?.invalid && (form.get(field)?.dirty || form.get(field)?.touched)"
+>
+  <span *ngFor="let message of messages; index as i"
+    ><small *ngIf="form && errors[i] && form?.getError(errors[i], field)" class="input-error">{{ message }}<br /></small
+  ></span>
+</div>

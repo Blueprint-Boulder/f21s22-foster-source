@@ -87,6 +87,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwEmail: 'gCloon@aol.com',
     cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
+    certExpiry: '10/31/2022',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
@@ -123,6 +124,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -155,6 +157,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',

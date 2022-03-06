@@ -61,7 +61,6 @@ export class NavBarComponent implements OnInit {
         }
 
         this.accountService.getNavBarStatus().subscribe((status) => {
-          console.log(status);
           this.status = status;
         });
       },
@@ -89,7 +88,6 @@ export class NavBarComponent implements OnInit {
   }
 
   collapse(): void {
-    console.log(this.isCollapsed);
     this.isCollapsed = true;
   }
 

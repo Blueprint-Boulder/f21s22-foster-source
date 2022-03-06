@@ -174,7 +174,6 @@ export class FinishAccountModalComponent implements OnInit {
         respiteBackground: this.getRespiteBackground(),
         householdBackground: this.getHouseholdBackground(),
       };
-
       this.accountService.completeProfile(req).subscribe(
         (res) => {
           this.toastService.show({
@@ -199,8 +198,8 @@ export class FinishAccountModalComponent implements OnInit {
   }
 
   private getOptionalBooleanFromForm(name: string): boolean | undefined {
-    const val = this.finishProfileForm.get(name)?.value === 'true';
-    return val === undefined || val === null ? undefined : val;
+    const val = this.finishProfileForm.get(name)?.value;
+    return val === undefined || val === null ? undefined : val === 'true' || val;
   }
 
   private getSecondaryAccountHolderInfo(): SecondaryAccountHolderReq | undefined {

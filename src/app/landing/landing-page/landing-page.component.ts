@@ -25,7 +25,6 @@ export class LandingPageComponent implements OnInit {
         this.latestAnnouncement = a;
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
         if (error.status !== 404) {
           this.toastService.httpError(error);
         }
