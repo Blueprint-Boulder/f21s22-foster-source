@@ -24,9 +24,4 @@ export class BasicCheckFieldComponent {
       this.errors?.filter((e) => e === 'required').length > 0
     );
   }
-
-  prin(s: any) {
-    console.log(s);
-    console.log('val', this.form.get(this.field)?.value);
-  }
 }

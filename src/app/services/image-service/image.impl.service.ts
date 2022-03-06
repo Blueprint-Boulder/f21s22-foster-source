@@ -11,7 +11,6 @@ export class ImageImplService implements ImageService {
   public uploadImage(image: File): Observable<ImagePostRes> {
     const formData = new FormData();
     formData.append('image', image, image.name);
-    console.log(image);
     return this.http.post<ImagePostRes>(`${environment.backendHost}/api/utils/images`, formData, {
       withCredentials: true,
     });
