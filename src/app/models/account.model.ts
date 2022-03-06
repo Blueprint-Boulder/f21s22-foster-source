@@ -13,6 +13,7 @@ export interface Account {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
+  certExpiry: Date;
   privilege: string;
   primaryPhoneNumber: PhoneNumber;
   secondaryPhoneNumber?: PhoneNumber;
@@ -93,4 +94,5 @@ export interface CaseWorkerInfo {
   cwEmail: string;
   cwPhoneNumber: string;
   certifiedBy: string;
+  certExpiry: Date;
 }

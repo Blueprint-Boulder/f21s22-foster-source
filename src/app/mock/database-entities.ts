@@ -124,6 +124,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -156,6 +157,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',

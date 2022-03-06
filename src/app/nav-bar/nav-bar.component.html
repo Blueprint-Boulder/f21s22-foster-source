@@ -25,7 +25,7 @@
       </li>
       <li class="nav-item help-link" [ngClass]="{ active: router.url === '/help' }">
         <a class="nav-link" href="#" [routerLink]="'/help'" (click)="collapse()"
-          ><i class="bi bi-question d-lg-none">&nbsp;&nbsp;</i>Help
+          ><i class="bi bi-question-circle d-lg-none">&nbsp;&nbsp;</i>Help
           <span *ngIf="router.url === '/help'" class="sr-only">(current)</span></a
         >
       </li>
