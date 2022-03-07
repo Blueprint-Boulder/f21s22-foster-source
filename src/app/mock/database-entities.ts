@@ -10,7 +10,15 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
-import { FullThread, Reply, ThreadReport, ThreadSummary, Topic, TopicSummary } from '../models/forum.models';
+import {
+  FullThread,
+  Reply,
+  ReplyReport,
+  ThreadReport,
+  ThreadSummary,
+  Topic,
+  TopicSummary,
+} from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -651,6 +659,7 @@ export const replies: Reply[] = [
 ];
 
 export const threadReports: ThreadReport[] = [];
+export const replyReports: ReplyReport[] = [];
 
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
   return { ...t, replies: replies, topicId: 1 };

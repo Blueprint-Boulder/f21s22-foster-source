@@ -3,6 +3,7 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
@@ -22,6 +23,7 @@ import {
 import {
   fullThreads,
   replies,
+  replyReports,
   threadReports,
   threadSummaries,
   topics,
@@ -140,6 +142,14 @@ export class ForumMockService implements ForumService {
   }
 
   deleteThreadReport(id: number): Observable<any> {
+    return of({});
+  }
+
+  getReplyReports(): Observable<GetReplyReportsRes> {
+    return of({ replyReports: replyReports });
+  }
+
+  deleteReplyReport(id: number): Observable<any> {
     return of({});
   }
 }

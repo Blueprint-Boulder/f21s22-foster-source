@@ -163,3 +163,20 @@ export interface ThreadReport {
 export interface GetThreadReportsRes {
   threadReports: ThreadReport[];
 }
+
+export interface ReplyReport {
+  id: number;
+  description: string;
+  threadId: number;
+  replyId: string;
+  replyBody: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface GetReplyReportsRes {
+  replyReports: ReplyReport[];
+}

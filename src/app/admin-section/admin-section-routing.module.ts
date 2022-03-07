@@ -8,6 +8,7 @@ import { AdminGuard } from '../guards/admin/admin.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ThreadReportsComponent } from './thread-reports/thread-reports.component';
+import { ReplyReportsComponent } from './reply-reports/reply-reports.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'thread-reports',
         component: ThreadReportsComponent,
+      },
+      {
+        path: 'reply-reports',
+        component: ReplyReportsComponent,
       },
     ],
   },

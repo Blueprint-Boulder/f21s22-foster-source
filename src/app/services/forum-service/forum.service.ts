@@ -3,6 +3,7 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
@@ -66,5 +67,7 @@ export abstract class ForumService {
    * Thread Reports
    */
   public abstract getThreadReports(): Observable<GetThreadReportsRes>;
+  public abstract getReplyReports(): Observable<GetReplyReportsRes>;
   public abstract deleteThreadReport(id: number): Observable<any>;
+  public abstract deleteReplyReport(id: number): Observable<any>;
 }

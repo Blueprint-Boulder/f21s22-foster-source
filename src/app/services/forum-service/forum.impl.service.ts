@@ -3,6 +3,7 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
@@ -200,5 +201,17 @@ export class ForumImplService implements ForumService {
 
   deleteThreadReport(id: number): Observable<any> {
     return this.http.delete(`${environment.backendHost}/api/db/forum/threads/reports/${id}`, { withCredentials: true });
+  }
+
+  deleteReplyReport(id: number): Observable<any> {
+    return this.http.delete(`${environment.backendHost}/api/db/forum/threads/replies/reports/${id}`, {
+      withCredentials: true,
+    });
+  }
+
+  getReplyReports(): Observable<GetReplyReportsRes> {
+    return this.http.get<GetReplyReportsRes>(`${environment.backendHost}/api/db/forum/threads/replies/reports`, {
+      withCredentials: true,
+    });
   }
 }

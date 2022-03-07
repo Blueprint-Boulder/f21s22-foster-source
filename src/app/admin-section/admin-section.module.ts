@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { ThreadReportsComponent } from './thread-reports/thread-reports.component';
+import { ReplyReportsComponent } from './reply-reports/reply-reports.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ThreadReportsComponent } from './thread-reports/thread-reports.componen
     StaffAccountRequestsComponent,
     BugReportsComponent,
     ThreadReportsComponent,
+    ReplyReportsComponent,
   ],
   imports: [
     CommonModule,
