@@ -16,6 +16,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PasswordRecoveryChangeComponent } from './password-recovery-change/password-recovery-change.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
     path: 'create-account/staff',
     component: ModRegisterComponent,
   },
+  {
+    path: 'recovery/update-password',
+    component: PasswordRecoveryChangeComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -59,6 +64,7 @@ export const loginRouting = RouterModule.forChild(routes);
     ProfileImageUploadComponent,
     VerifyEmailActionComponent,
     ModRegisterComponent,
+    PasswordRecoveryChangeComponent,
   ],
   imports: [
     CommonModule,
