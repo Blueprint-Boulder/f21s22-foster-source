@@ -11,6 +11,7 @@ import { LandingModule } from '../landing/landing.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CommonComponentsModule } from '../common-components/common-components.module';
+import { ThreadReportsComponent } from './thread-reports/thread-reports.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CommonComponentsModule } from '../common-components/common-components.m
     AnnouncementsComponent,
     StaffAccountRequestsComponent,
     BugReportsComponent,
+    ThreadReportsComponent,
   ],
   imports: [
     CommonModule,

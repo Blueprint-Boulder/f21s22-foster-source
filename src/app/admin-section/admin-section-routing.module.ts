@@ -7,6 +7,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminGuard } from '../guards/admin/admin.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ThreadReportsComponent } from './thread-reports/thread-reports.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
         path: 'bug-reports',
         component: BugReportsComponent,
         canActivate: [AdminGuard],
+      },
+      {
+        path: 'thread-reports',
+        component: ThreadReportsComponent,
       },
     ],
   },
