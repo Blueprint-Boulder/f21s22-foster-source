@@ -1,4 +1,13 @@
 <div class="container border mt-5 pb-5 pt-1 px-4" *ngIf="thread">
+  <div class="row mt-3" *ngIf="inspectingReplyId">
+    <div class="col-12 text-center">
+      <span class="text-center"
+        ><i class="text-danger"
+          >You are currently inspecting a reply that has been reported. It will be highlighted when you find it.</i
+        ></span
+      >
+    </div>
+  </div>
   <div class="row my-5">
     <div class="col-sm-12 col-md-10">
       <h6 class="text-muted pointer" (click)="goToTopic()">{{ thread.topicTitle }}</h6>
@@ -62,6 +71,7 @@
       <app-thread-reply
         [reply]="reply"
         [author]="thread.account.username"
+        [beingInspected]="inspectingReplyId === reply.id"
         (replyEvent)="replyToReplyEvent($event)"
       ></app-thread-reply>
     </div>

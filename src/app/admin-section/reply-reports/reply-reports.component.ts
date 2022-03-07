@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ReplyReport } from '../../models/forum.models';
-import { formatDate } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReplyReport } from '../../models/forum.models';
+import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reply-reports',
@@ -13,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ReplyReportsComponent implements OnInit {
   public reports: ReplyReport[];
 
-  constructor(private forumService: ForumService, private toastService: ToastService) {}
+  constructor(private forumService: ForumService, private toastService: ToastService, private router: Router) {}
 
   ngOnInit(): void {
     this.forumService.getReplyReports().subscribe(
@@ -52,5 +53,11 @@ export class ReplyReportsComponent implements OnInit {
 
   private removeReportByIndex(index: number): void {
     this.reports.splice(index, 1);
+  }
+
+  public inspectReply(index: number): void {
+    this.router.navigate(['/forum/threads/' + this.reports[index].threadId], {
+      queryParams: { replyOffset: 0, inspecting: this.reports[index].replyId },
+    });
   }
 }
