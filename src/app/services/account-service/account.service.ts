@@ -20,7 +20,7 @@ import {
   GetApplicantsRes,
 } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
-import { ChangePasswordReq } from '../../models/change-password';
+import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
 import { NavBarStatus } from '../../models/nav-bar.models';
 
 @Injectable({
@@ -47,4 +47,5 @@ export abstract class AccountService {
   public abstract getCwInfo(): Observable<CaseWorkerInfo>;
   public abstract updateCwInfo(req: CaseWorkerInfo): Observable<any>;
   public abstract getNavBarStatus(): Observable<NavBarStatus>;
+  public abstract recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any>;
 }

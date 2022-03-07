@@ -12,13 +12,10 @@ export class FieldInvalidMessageComponent {
   @Input() errors: string[];
   @Input() messages: string[];
 
-  getErrorByIndex(i: number): boolean | undefined {
-    if (this.errors.length - 1 <= i) {
-      return undefined;
-    }
+  getErrorByIndex(i: number): any | undefined {
     if (this.form && this.form.get(this.field) && this.form.get(this.field)?.errors) {
       const errors = this.form!.get(this.field)!.errors;
-      return (errors as any)[this.errors[i]] === undefined || (errors as any)[this.errors[i]] === null;
+      return (errors as any)[this.errors[i]];
     }
     return undefined;
   }
