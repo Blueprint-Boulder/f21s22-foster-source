@@ -1,4 +1,4 @@
-# Foster Source Respite App
+# Foster Source Respite App (Respite Source)
 
 ## About
 
@@ -40,6 +40,8 @@ Services that make calls to the backend should be created and developed with the
   - This service will make actual HTTP REST calls to the backend.
 - `[service name].service.provider.ts`
   - This is a simple factory to assist Angular with providing your app with the correct version. The version to provide is determined by the environment variables in `src/environments/environment.ts` and `src/environments/environment.prod.ts` (though of course the production version should have all of the options set to `true`)
+
+The provider will then have to be listed in `app.module.ts`.
 
 ## CI/CD
 
