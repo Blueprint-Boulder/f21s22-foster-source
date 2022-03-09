@@ -20,9 +20,9 @@ This component should look very similar to the topic component you made last tim
 
 <!-- Issue with inline :\-->
 
-<div *ngIf="thread" (click)="navigateToThread()" class="w-100 my-2 hover">
-  <div class="container-fluid w-100 shadow-sm rounded pt-4 pb-3 threads row">
-    <div class="col-2">
+<div *ngIf="thread" (click)="navigateToThread()" class="w-100 my-2">
+  <div class="container-fluid w-100 shadow-sm rounded pt-4 pb-3 threads row hover">
+    <div class="col-sm-2 col-md-2">
       <img
         [src]="profileImageSrc"
         (error)="imgError()"
@@ -30,7 +30,7 @@ This component should look very similar to the topic component you made last tim
         class="rounded-circle img-fluid"
       />
     </div>
-    <div class="col-9">
+    <div class="col-sm-7 col-md-8 col-lg-9">
       <div>
         <h3>{{ thread.title }}</h3>
         <div class="user_and_date pb-2">
@@ -45,12 +45,17 @@ This component should look very similar to the topic component you made last tim
         </p>
       </div>
     </div>
-    <div class="col-1">
+    <div class="col-12 col-sm-2 col-md-2 col-lg-1 metrics">
       <div style="display: inline; padding-bottom: 40px">
-        <span style="color: red"><i class="bi bi-heart-fill"></i></span> {{ thread.likes }}
+        <div class="d-flex justify-content-end">
+          <span style="white-space: nowrap"
+            ><span style="color: red"><i class="bi bi-heart-fill"></i></span> {{ thread.likes }}</span
+          >
+        </div>
       </div>
-      <br />
-      <div style="display: inline"><i class="bi bi-chat-text"></i> {{ thread.replyCount }}</div>
+      <div class="d-flex justify-content-end" style="display: inline; white-space: nowrap">
+        <p><i class="bi bi-chat-text"></i> {{ thread.replyCount }}</p>
+      </div>
     </div>
   </div>
 </div>
