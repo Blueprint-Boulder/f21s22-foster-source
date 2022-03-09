@@ -116,6 +116,17 @@ export class FormUtils {
     };
   }
 
+  public static strictlyIncreasingFieldsValidator(
+    field1: string,
+    field2: string
+  ): (control: AbstractControl) => ValidationErrors | null {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return parseInt(control.get(field1)?.value) < parseInt(control.get(field2)?.value)
+        ? null
+        : { notLargerThan: `${field2} must be larger than ${field1}` };
+    };
+  }
+
   public static validateDate(control: AbstractControl): ValidationErrors | null {
     const err = { invalidDate: 'Please enter a valid date.' };
 

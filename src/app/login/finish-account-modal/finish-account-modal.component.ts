@@ -132,8 +132,8 @@ export class FinishAccountModalComponent implements OnInit {
       hasProvidedInPast: [null, Validators.required],
       respiteCity: [null],
       respiteRange: [null],
-      minAge: [null],
-      maxAge: [null],
+      minAge: [null, Validators.compose([Validators.min(0), Validators.max(17)])],
+      maxAge: [null, Validators.compose([Validators.min(0), Validators.max(17)])],
       howManyCareFor: [null],
       parentalUnitSize: [null, Validators.required],
       householdSize: [null, Validators.required],
@@ -150,6 +150,7 @@ export class FinishAccountModalComponent implements OnInit {
       dob: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
       biography: ['', Validators.required],
     });
+    this.finishProfileForm.addValidators(FormUtils.strictlyIncreasingFieldsValidator('minAge', 'maxAge'));
   }
 
   public onSubmit() {
