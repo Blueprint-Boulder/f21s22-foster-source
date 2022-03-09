@@ -1,5 +1,22 @@
 # Foster Source Respite App
 
+## About
+
+This is the frontend component of the Respite Source web app. The backend lives in the `fs-service` repository.
+
+## CI/CD
+
+This project is set up with a (admittedly fairly rudimentary) CI/CD pipeline that automatically builds and deploys the project to production. The steps are as follows:
+
+1. A pull request is merged into the `main` branch on the Github
+2. A Github webhook tells AWS codebuild that the project has been updated
+3. AWS Codebuild uses the `buildspec.yaml` file to compile the TypeScript project into static HTML and JS files
+4. The produced artifacts are automatically dumped into the `respite.fostersource.org` AWS S3 bucket
+5. AWS Cloudfront detects that the files in the bucket have been updated, and redeploys the site
+6. When AWS Cloudfront finishes its deployment, an AWS Lambda function invalidates the cache (which results in new requests to the site fetching it directly from the newly updated bucket) so the newly deployed site is available to end users.
+
+![Frontend CI/CD Diagram](readme-resources/frontend-cicd.png?raw=true)
+
 ## TODO
 
 - [ ] Login
