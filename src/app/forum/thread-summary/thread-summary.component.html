@@ -22,7 +22,7 @@ This component should look very similar to the topic component you made last tim
 
 <div *ngIf="thread" (click)="navigateToThread()" class="w-100 my-2 hover">
   <div class="container-fluid w-100 shadow-sm rounded pt-4 pb-3 threads row">
-    <div class="col-sm-2">
+    <div class="col-2">
       <img
         [src]="profileImageSrc"
         (error)="imgError()"
@@ -30,21 +30,12 @@ This component should look very similar to the topic component you made last tim
         class="rounded-circle img-fluid"
       />
     </div>
-    <div class="col-sm-10">
-      <div class="test">
-        <div>
-          <h3>{{ thread.title }}</h3>
-          <div class="user_and_date pb-2">
-            <div>{{ thread.account.username }}</div>
-            <div>{{ thread.updatedAt.toLocaleDateString("en-US") }}</div>
-          </div>
-        </div>
-        <div>
-          <div style="display: inline; padding-bottom: 40px">
-            <span style="color: red"><i class="bi bi-heart-fill"></i></span> {{ thread.likes }}
-          </div>
-          <br />
-          <div style="display: inline"><i class="bi bi-chat-text"></i> {{ thread.replyCount }}</div>
+    <div class="col-9">
+      <div>
+        <h3>{{ thread.title }}</h3>
+        <div class="user_and_date pb-2">
+          <div>{{ thread.account.username }}</div>
+          <div>{{ thread.updatedAt.toLocaleDateString("en-US") }}</div>
         </div>
       </div>
       <div class="p-0">
@@ -53,6 +44,13 @@ This component should look very similar to the topic component you made last tim
           consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque...
         </p>
       </div>
+    </div>
+    <div class="col-1">
+      <div style="display: inline; padding-bottom: 40px">
+        <span style="color: red"><i class="bi bi-heart-fill"></i></span> {{ thread.likes }}
+      </div>
+      <br />
+      <div style="display: inline"><i class="bi bi-chat-text"></i> {{ thread.replyCount }}</div>
     </div>
   </div>
 </div>
