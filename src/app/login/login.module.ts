@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PasswordRecoveryChangeComponent } from './password-recovery-change/password-recovery-change.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordConfirmationComponent } from './forgot-password-confirmation/forgot-password-confirmation.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,14 @@ const routes: Routes = [
     path: 'recovery/update-password',
     component: PasswordRecoveryChangeComponent,
   },
+  {
+    path: 'recover',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'recover/confirmation',
+    component: ForgotPasswordConfirmationComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -65,6 +75,8 @@ export const loginRouting = RouterModule.forChild(routes);
     VerifyEmailActionComponent,
     ModRegisterComponent,
     PasswordRecoveryChangeComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordConfirmationComponent,
   ],
   imports: [
     CommonModule,
