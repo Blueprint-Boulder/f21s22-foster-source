@@ -147,3 +147,36 @@ export interface ModRemoveReplyReq {
   shouldSuspend?: boolean;
   suspendForDays?: number;
 }
+
+export interface ThreadReport {
+  id: number;
+  description: string;
+  threadId: number;
+  threadTitle: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface GetThreadReportsRes {
+  threadReports: ThreadReport[];
+}
+
+export interface ReplyReport {
+  id: number;
+  description: string;
+  threadId: number;
+  replyId: string;
+  replyBody: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface GetReplyReportsRes {
+  replyReports: ReplyReport[];
+}

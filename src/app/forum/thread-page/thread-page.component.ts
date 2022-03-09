@@ -23,6 +23,7 @@ export class ThreadPageComponent implements OnInit {
   public isMod = false;
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   public isOwnThread = false;
+  public inspectingReplyId: number;
 
   public thread: FullThread;
 
@@ -66,6 +67,12 @@ export class ThreadPageComponent implements OnInit {
           this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString()) + 1;
         }
 
+        const inspecting = map.get('inspecting');
+
+        if (inspecting) {
+          this.inspectingReplyId = parseInt(inspecting);
+        }
+
         this.forumService
           .getThreadByIdWithReplies(
             id,
@@ -101,6 +108,7 @@ export class ThreadPageComponent implements OnInit {
   changePage(newPage: number): void {
     this.router.navigate([`/forum/threads/${this.thread.id}`], {
       queryParams: { replyOffset: (newPage - 1) * this.REPLY_LIMIT },
+      queryParamsHandling: 'merge',
     });
     this.scrollToTop();
   }

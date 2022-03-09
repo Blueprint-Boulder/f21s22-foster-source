@@ -40,6 +40,7 @@ export class ThreadReplyComponent implements OnInit {
 
   @Input() reply: Reply;
   @Input() author: string;
+  @Input() beingInspected = false;
 
   @Output() replyEvent: EventEmitter<ReplyEvent> = new EventEmitter<ReplyEvent>();
 
