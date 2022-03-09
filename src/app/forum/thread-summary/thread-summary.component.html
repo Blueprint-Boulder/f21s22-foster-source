@@ -21,16 +21,16 @@ This component should look very similar to the topic component you made last tim
 <!-- Issue with inline :\-->
 
 <div *ngIf="thread" (click)="navigateToThread()" class="w-100 my-2 hover">
-  <div class="container-fluid w-100 topic shadow-sm rounded pt-4 pb-3 summary-layout threads">
-    <img
-      [src]="profileImageSrc"
-      [height]="90"
-      [width]="90"
-      (error)="imgError()"
-      alt="{{ thread.account.username }}'s profile picture"
-      class="rounded-circle"
-    />
-    <div>
+  <div class="container-fluid w-100 shadow-sm rounded pt-4 pb-3 threads row">
+    <div class="col-sm-2">
+      <img
+        [src]="profileImageSrc"
+        (error)="imgError()"
+        alt="{{ thread.account.username }}'s profile picture"
+        class="rounded-circle img-fluid"
+      />
+    </div>
+    <div class="col-sm-10">
       <div class="test">
         <div>
           <h3>{{ thread.title }}</h3>

@@ -1,11 +1,5 @@
 // add padding above and below content of div to make it look more like the figma drawing
 
-.summary-layout {
-  display: inline-grid;
-  grid-template-columns: 105px calc(100% - 120px);
-  grid-column-gap: 0%;
-}
-
 .user_and_date {
   display: grid;
   grid-template-columns: 50px 50px;
@@ -16,10 +10,6 @@
   display: grid;
   grid-template-columns: calc(100% - 100px) 100px;
   grid-column-gap: 0%;
-}
-
-inline-spacing {
-  padding-top: 700px;
 }
 
 .threads {
