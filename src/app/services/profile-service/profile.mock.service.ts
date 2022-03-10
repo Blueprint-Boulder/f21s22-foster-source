@@ -7,6 +7,7 @@ import {
   CreateProfileReq,
   GetProfilesRes,
   ProfileImages,
+  ReportProfileReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -69,5 +70,9 @@ export class ProfileMockService implements ProfileService {
 
   getCurrentProfile(): Observable<FullProfileRes> {
     return of(profiles[0]);
+  }
+
+  reportProfile(req: ReportProfileReq): Observable<any> {
+    return of({});
   }
 }

@@ -9,6 +9,7 @@ import {
   CreateProfileReq,
   GetProfilesRes,
   ProfileImages,
+  ReportProfileReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -107,6 +108,12 @@ export class ProfileImplService implements ProfileService {
 
   getCurrentProfile(): Observable<FullProfileRes> {
     return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/current`, {
+      withCredentials: true,
+    });
+  }
+
+  reportProfile(req: ReportProfileReq): Observable<any> {
+    return this.http.post(`${environment.backendHost}/api/db/profiles/${req.profileId}`, req, {
       withCredentials: true,
     });
   }

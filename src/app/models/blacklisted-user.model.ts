@@ -24,3 +24,14 @@ export interface RemoveFromBlacklistRequest {
 export interface RemoveFromBlacklistResponse {
   error?: string;
 }
+
+export interface SuspendUserReq {
+  accountId: number;
+  suspendForDays: number;
+  reason: string;
+}
+
+export interface BlacklistAccountReq {
+  accountId: number;
+  reason: string;
+}

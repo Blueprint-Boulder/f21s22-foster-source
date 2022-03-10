@@ -9,7 +9,9 @@ import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -23,13 +25,26 @@ export class PublicUserPageComponentComponent implements OnInit {
   public isAvailable = false;
   public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
+  // TODO: FOR TREVOR
+  public reportDescription: string; // SHOULD BE ASSIGNED TO THE MODAL'S [(ngModel)]
+  public submittingReport = false; // Used to disable the button when developing
+
+  // TODO: FOR TAHIRA
+  public banForm: FormGroup; // SET AS FORM GROUP (note that the names are different than in the thread-reply example!)
+  public shouldShowSuspendForm = false; // When the user chooses to suspend, another text field pops up that asks how long they'd like to suspend for
+  public submittingBan = false; // Used for disabling the button when waiting on the network call to ban the user
+  public isMod = false;
+
   constructor(
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private profileService: ProfileService,
     private toastService: ToastService,
     private config: NgbAccordionConfig,
-    private availabilityService: AvailabilityService
+    private availabilityService: AvailabilityService,
+    private blacklistService: BlacklistService,
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {
     config.closeOthers = true;
     config.type = 'light';
@@ -45,6 +60,7 @@ export class PublicUserPageComponentComponent implements OnInit {
             this.isOwnProfile = true;
             this.profileImgSrc = this.getProfileSrc();
             this.getAvailability();
+            this.isMod = this.authService.isAtLeastMod();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -108,5 +124,54 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   formatPhoneNumber(pn: string): string {
     return FormUtils.prettifyValidPhoneNumber(pn);
+  }
+
+  // TODO: FOR BOTH: the openModal and form reset functions have been provided!
+
+  // TODO: TREVOR
+  reportProfile(): void {
+    // thread-reply.component.ts line 182
+    // Utilize this.profileService.reportProfile
+    // on success, use toast service to say successful, then close modal
+  }
+
+  // TODO: TAHIRA
+  // TODO: Look at the resetForm function: your form is instantiated there.
+  moderateProfile(): void {
+    // check if form is invalid
+    // if valid
+    // determine if they've chosen to blacklist
+    // if they want to blacklist, confirm! thread-reply.component.ts line 237
+    // if they confirm, utilize this.blacklistService.blacklistUserByAccountId
+    // if they want to suspend, utilize this.blacklistService.suspendUserReq
+    // On success of either, show a toastService success message and navigate to /respite
+  }
+
+  openModal(modal: any): void {
+    this.modalService.open(modal, {
+      backdropClass: 'modal-background',
+    });
+    this.resetForms();
+  }
+
+  resetForms(): void {
+    this.reportDescription = '';
+
+    this.banForm = this.formBuilder.group({
+      reason: [null, Validators.required],
+      adminAction: [null, Validators.required],
+      suspendForDays: [null, Validators.min(1)],
+    });
+
+    this.banForm.get('adminAction')?.valueChanges.subscribe((value) => {
+      if (value === 'suspend') {
+        this.banForm.get('suspendForDays')?.addValidators(Validators.required);
+        this.shouldShowSuspendForm = true;
+      } else {
+        this.banForm.get('suspendForDays')?.removeValidators(Validators.required);
+        this.shouldShowSuspendForm = false;
+      }
+      this.banForm.get('suspendForDays')?.updateValueAndValidity();
+    });
   }
 }

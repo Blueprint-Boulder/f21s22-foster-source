@@ -141,3 +141,8 @@ export interface ProfileImages {
   profileLargeAwsKey: string;
   profileSmallAwsKey: string;
 }
+
+export interface ReportProfileReq {
+  profileId: number;
+  description: string;
+}
