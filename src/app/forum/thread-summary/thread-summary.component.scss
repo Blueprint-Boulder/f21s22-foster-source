@@ -1,10 +1,5 @@
 // add padding above and below content of div to make it look more like the figma drawing
 
-@media (min-width: 576px) {
-  .metrics {
-  }
-}
-
 .body {
   overflow: hidden;
   white-space: nowrap;
@@ -24,6 +19,12 @@
 .hover {
   &:hover {
     background: #e5dcd1;
+    cursor: pointer;
+  }
+}
+
+.pointer {
+  &:hover {
     cursor: pointer;
   }
 }

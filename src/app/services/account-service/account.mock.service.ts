@@ -15,7 +15,8 @@ import { Observable, of } from 'rxjs';
 import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
-import { ChangePasswordReq } from '../../models/change-password';
+import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
+import { NavBarStatus } from '../../models/nav-bar.models';
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
@@ -95,6 +96,16 @@ export class AccountMockService implements AccountService {
   }
 
   updateCwInfo(req: CaseWorkerInfo): Observable<any> {
+    return of({});
+  }
+
+  getNavBarStatus(): Observable<NavBarStatus> {
+    return of({
+      adminNotifications: 4,
+    });
+  }
+
+  recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any> {
     return of({});
   }
 }

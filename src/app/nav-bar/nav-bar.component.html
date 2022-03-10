@@ -23,6 +23,12 @@
           <span *ngIf="router.url === '/'" class="sr-only">(current)</span></a
         >
       </li>
+      <li class="nav-item help-link" [ngClass]="{ active: router.url === '/help' }">
+        <a class="nav-link" href="#" [routerLink]="'/help'" (click)="collapse()"
+          ><i class="bi bi-question-circle d-lg-none">&nbsp;&nbsp;</i>Help
+          <span *ngIf="router.url === '/help'" class="sr-only">(current)</span></a
+        >
+      </li>
       <li *ngIf="currentAccount" class="nav-item respite-link" [ngClass]="{ active: router.url === '/respite' }">
         <a class="nav-link" href="#" [routerLink]="'/respite'" (click)="collapse()"
           ><i class="bi bi-search d-lg-none">&nbsp;&nbsp;</i>Find Respite
@@ -31,7 +37,12 @@
       </li>
       <li *ngIf="isMod" class="nav-item admin-link" [ngClass]="{ active: router.url === '/admin' }">
         <a class="nav-link" href="#" [routerLink]="'/admin'" (click)="collapse()"
-          ><i class="bi bi-clipboard-data d-lg-none">&nbsp;&nbsp;</i>Administration
+          ><i class="bi bi-clipboard-data d-lg-none">&nbsp;&nbsp;</i>Administration<span
+            *ngIf="status && status.adminNotifications"
+            >&nbsp;<sup class="notification-number rounded text-white bg-danger px-1">{{
+              status.adminNotifications
+            }}</sup></span
+          >
           <span *ngIf="router.url === '/admin'" class="sr-only">(current)</span></a
         >
       </li>

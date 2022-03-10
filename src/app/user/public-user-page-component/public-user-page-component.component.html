@@ -54,7 +54,11 @@
                   </tbody>
                 </table>
               </div>
-              <a href="javascript: void(0)" class="card-link" (click)="openPrimaryContactModal(secondaryContent)"
+              <a
+                *ngIf="isAvailable"
+                href="javascript: void(0)"
+                class="card-link"
+                (click)="openPrimaryContactModal(secondaryContent)"
                 >Contact Secondary Account Holder</a
               >
             </div>
@@ -146,27 +150,57 @@
                         <td># children already in household</td>
                         <td>{{ selectedProfile.householdBackground.childrenInHousehold }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.vehicleAccess !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.vehicleAccess !== undefined &&
+                          selectedProfile.householdBackground.vehicleAccess !== null
+                        "
+                      >
                         <td>Has reliable access to a vehicle</td>
                         <td>{{ selectedProfile.householdBackground.vehicleAccess ? "Yes" : "No" }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.lgbtCareExperience !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.lgbtCareExperience !== undefined &&
+                          selectedProfile.householdBackground.lgbtCareExperience !== null
+                        "
+                      >
                         <td>Experience caring for LGBTQ+ children</td>
                         <td>{{ selectedProfile.householdBackground.lgbtCareExperience ? "Yes" : "No" }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.caredForMedicallyFragile !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.caredForMedicallyFragile !== undefined &&
+                          selectedProfile.householdBackground.caredForMedicallyFragile !== null
+                        "
+                      >
                         <td>Experience caring for medically fragile children</td>
                         <td>{{ selectedProfile.householdBackground.caredForMedicallyFragile ? "Yes" : "No" }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.caredForPhysDisabled !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.caredForPhysDisabled !== undefined &&
+                          selectedProfile.householdBackground.caredForPhysDisabled !== null
+                        "
+                      >
                         <td>Experience caring for physically disabled children</td>
                         <td>{{ selectedProfile.householdBackground.caredForPhysDisabled ? "Yes" : "No" }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.caredForIntelDisabled !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.caredForIntelDisabled !== undefined &&
+                          selectedProfile.householdBackground.caredForIntelDisabled !== null
+                        "
+                      >
                         <td>Experience caring for intellectually disabled children</td>
                         <td>{{ selectedProfile.householdBackground.caredForIntelDisabled ? "Yes" : "No" }}</td>
                       </tr>
-                      <tr *ngIf="selectedProfile.householdBackground.ownsFirearm !== undefined">
+                      <tr
+                        *ngIf="
+                          selectedProfile.householdBackground.ownsFirearm !== undefined &&
+                          selectedProfile.householdBackground.ownsFirearm !== null
+                        "
+                      >
                         <td>Does any member of the household own a firearm?</td>
                         <td>{{ selectedProfile.householdBackground.ownsFirearm ? "Yes" : "No" }}</td>
                       </tr>
@@ -223,7 +257,7 @@
       >
     </div>
   </div>
-  <div class="row mt-5 mb-5">
+  <div class="row mt-5 mb-5" *ngIf="isAvailable">
     <div class="col-md-3"></div>
     <div class="col-sm-12 col-md-6">
       <button
@@ -251,6 +285,13 @@
       <div class="form-group">
         <div class="input-group">
           <div class="input-group-append contact-modal">
+            <h3>Contact Information</h3>
+            <p>
+              <i
+                >Ensure that you have read and fully understand the <a href="/help">site rules</a> before contacting
+                users.</i
+              >
+            </p>
             <span
               ><span>Email: </span
               ><a href="mailto:{{ selectedProfile.account.email }}"> {{ selectedProfile.account.email }}</a></span

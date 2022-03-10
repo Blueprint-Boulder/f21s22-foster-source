@@ -1,0 +1,29 @@
+<div [formGroup]="form" class="form-group">
+  <label [for]="field"
+    ><b>{{ title }}</b
+    ><span *ngIf="isRequired()" class="required-star">*</span
+    ><span *ngIf="subtitle"
+      ><br /><small>{{ subtitle }}</small></span
+    ></label
+  >
+  <input
+    class="form-control p-1 m-0 bottom-border-input"
+    [type]="type"
+    [id]="field"
+    [placeholder]="placeholder"
+    [formControlName]="field"
+  />
+  <app-field-invalid-message
+    *ngIf="errors && errorMessages"
+    [form]="form"
+    [field]="field"
+    [errors]="errors"
+    [messages]="errorMessages"
+  ></app-field-invalid-message>
+  <div *ngIf="formErrors && formErrorMessages">
+    <span *ngFor="let message of formErrorMessages; index as i"
+      ><small *ngIf="form && formErrors[i] && form?.getError(formErrors[i])" class="input-error"
+        >{{ message }}<br /></small
+    ></span>
+  </div>
+</div>

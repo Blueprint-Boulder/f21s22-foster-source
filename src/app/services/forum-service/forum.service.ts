@@ -3,10 +3,16 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
+  GetThreadReportsRes,
   GetThreadSummariesRes,
   GetTopicSummariesRes,
+  ModRemoveReplyReq,
+  ModRemoveThreadReq,
   PostReplyReq,
   Reply,
+  ReportReplyReq,
+  ReportThreadReq,
   ThreadSummary,
   Topic,
   TopicSummary,
@@ -39,9 +45,11 @@ export abstract class ForumService {
   public abstract getThreadByIdWithReplies(id: number, replyLimit: number, replyOffset: number): Observable<FullThread>;
   public abstract createNewThread(req: CreateNewThreadReq): Observable<ThreadSummary>;
   public abstract updateThread(req: UpdateThreadReq): Observable<ThreadSummary>;
-  public abstract deleteThread(req: DeleteThreadReq): Observable<any>;
+  public abstract modRemoveThread(req: ModRemoveThreadReq): Observable<any>;
+  public abstract removeOwnThread(id: number): Observable<any>;
   public abstract likeThread(id: number): Observable<any>;
   public abstract unlikeThread(id: number): Observable<any>;
+  public abstract reportThread(req: ReportThreadReq): Observable<any>;
 
   /**
    * REPLIES
@@ -50,4 +58,16 @@ export abstract class ForumService {
   public abstract updateReply(req: UpdateReplyReq): Observable<Reply>;
   public abstract deleteReply(threadId: number, replyId: number): Observable<any>;
   public abstract getReplyById(replyId: number): Observable<Reply>;
+  public abstract likeReply(threadId: number, replyId: number): Observable<any>;
+  public abstract unlikeReply(threadId: number, replyId: number): Observable<any>;
+  public abstract reportReply(req: ReportReplyReq): Observable<any>;
+  public abstract modRemoveReply(req: ModRemoveReplyReq): Observable<any>;
+
+  /**
+   * Thread Reports
+   */
+  public abstract getThreadReports(): Observable<GetThreadReportsRes>;
+  public abstract getReplyReports(): Observable<GetReplyReportsRes>;
+  public abstract deleteThreadReport(id: number): Observable<any>;
+  public abstract deleteReplyReport(id: number): Observable<any>;
 }

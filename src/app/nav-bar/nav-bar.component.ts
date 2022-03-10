@@ -6,6 +6,7 @@ import { AccountService } from '../services/account-service/account.service';
 import { ImageUtils } from '../common/utils/ImageUtils';
 import { ProfileService } from '../services/profile-service/profile.service';
 import { environment } from '../../environments/environment';
+import { NavBarStatus } from '../models/nav-bar.models';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,6 +20,7 @@ export class NavBarComponent implements OnInit {
   public currentAccount: Account | undefined;
   public isMod = false;
   public isCollapsed = true;
+  public status: NavBarStatus;
 
   private isLoggedIn = false;
 
@@ -57,6 +59,10 @@ export class NavBarComponent implements OnInit {
             }
           );
         }
+
+        this.accountService.getNavBarStatus().subscribe((status) => {
+          this.status = status;
+        });
       },
       (err) => {
         console.log(err);
@@ -82,7 +88,6 @@ export class NavBarComponent implements OnInit {
   }
 
   collapse(): void {
-    console.log(this.isCollapsed);
     this.isCollapsed = true;
   }
 

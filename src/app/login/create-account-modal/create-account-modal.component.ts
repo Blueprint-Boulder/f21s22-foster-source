@@ -48,6 +48,7 @@ export class CreateAccountModalComponent implements OnInit {
       zip: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/)])],
       state: ['', Validators.required],
       certifiedBy: ['', Validators.required],
+      certExpiry: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
       caseworkerfname: ['', Validators.required],
       caseworkerlname: ['', Validators.required],
       caseworkeremail: ['', Validators.compose([Validators.required, Validators.email])],
@@ -63,6 +64,9 @@ export class CreateAccountModalComponent implements OnInit {
       ],
       password: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       confirmpassword: ['', Validators.compose([Validators.required])],
+      approvalResponsibility: [false, Validators.compose([Validators.required, Validators.requiredTrue])],
+      confidentialInformation: [null, Validators.compose([Validators.required, Validators.requiredTrue])],
+      potentialShareInfo: [null, Validators.compose([Validators.required, Validators.requiredTrue])],
     });
     this.createAccountForm.setValidators([
       FormUtils.confirmEmailValidator,
@@ -102,6 +106,7 @@ export class CreateAccountModalComponent implements OnInit {
         cwLastName: this.createAccountForm.get('caseworkerlname')!.value,
         cwPhoneNumber: FormUtils.formatPhoneNumber(this.createAccountForm.get('caseworkerphone')!.value),
         certifiedBy: this.createAccountForm!.get('certifiedBy')!.value,
+        certExpiry: this.createAccountForm!.get('certExpiry')!.value,
         email: this.createAccountForm.get('email')!.value.toLowerCase(),
         firstName: this.createAccountForm.get('fname')!.value,
         lastName: this.createAccountForm.get('lname')!.value,

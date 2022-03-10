@@ -1,0 +1,50 @@
+<div class="container" *ngIf="topics">
+  <div class="row title-row my-5">
+    <div class="col-12">
+      <h3>Post a Thread</h3>
+      <h5 class="text-muted">
+        Remember to read the <a href="/help#forum-rules">forum rules</a> before posting your thread.
+      </h5>
+    </div>
+  </div>
+  <div class="row topics-row">
+    <div class="col-12">
+      <p><b>Select a topic for your thread</b></p>
+      <select class="form-select w-100" [(ngModel)]="topicId" (change)="changeTopic($event)">
+        <option *ngFor="let topic of topics" [value]="topic.id" [title]="topic.description">{{ topic.title }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row form-row">
+    <div class="col-12 mt-5">
+      <div class="form-group">
+        <label for="title"
+          ><b>Thread Title</b><span class="required-star">*</span>
+          <br />
+        </label>
+        <input class="form-control bottom-border-input" id="title" type="text" [(ngModel)]="threadTitle" />
+      </div>
+    </div>
+    <div class="col-12 mt-3">
+      <p><b>Thread Body</b><span class="required-star">*</span></p>
+      <app-editor (richTextChange)="bodyChange($event)"> </app-editor>
+    </div>
+    <div class="col-12 submit-row mt-5">
+      <button
+        (click)="onSubmit()"
+        class="btn btn-primary float-right text-white"
+        [disabled]="formIsInvalid() || submittingForm"
+      >
+        Post Thread
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!topics">
+  <div class="d-flex justify-content-center mt-5 h-100">
+    <div class="spinner-border text-primary" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>

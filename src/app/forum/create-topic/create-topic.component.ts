@@ -56,6 +56,7 @@ export class CreateTopicComponent implements OnInit {
 
       this.forumService.createTopic(req).subscribe(
         (res) => {
+          console.log(res);
           this.toastService.success('Successfully created a new forum topic.');
           this.router.navigate(['/forum']);
         },

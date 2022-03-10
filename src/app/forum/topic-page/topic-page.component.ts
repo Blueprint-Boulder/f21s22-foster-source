@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ThreadSummary, TopicSummary } from '../../models/forum.models';
-import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-topic-page',
@@ -11,15 +10,13 @@ import { FullProfileRes } from '../../models/get-profile-by-id.models';
   styleUrls: ['./topic-page.component.scss'],
 })
 export class TopicPageComponent implements OnInit {
+  public readonly THREAD_LIMIT = 25;
+
   public topic: TopicSummary;
   public threads: ThreadSummary[];
   public id: number;
   public totalResults: number;
-
-  // TODO: WILL DELETE THIS
-  public testThreadForThreadSummaryComponent: ThreadSummary;
-  public readonly THREAD_LIMIT = 25;
-  public resultPage = 0;
+  public resultPage = 1;
 
   constructor(
     private forumService: ForumService,
@@ -31,10 +28,8 @@ export class TopicPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const id = params['id'];
-      // console.log(id)
       this.forumService.getTopicSummaryById(id).subscribe((topic: TopicSummary) => {
         this.topic = topic;
-        // console.log(topic);
       });
       this.route.queryParamMap.subscribe(
         (map) => {

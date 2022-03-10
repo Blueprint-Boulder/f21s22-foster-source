@@ -4,11 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserGuard } from './guards/user/user.guard';
 import { ModGuard } from './guards/mod/mod.guard';
 import { NgModule } from '@angular/core';
+import { HelpComponent } from './help/help.component';
 
 const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./landing/landing.module').then((m) => m.LandingModule),
+  },
+  {
+    path: 'help',
+    component: HelpComponent,
   },
   {
     path: 'login',
@@ -50,7 +55,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { anchorScrolling: 'enabled' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

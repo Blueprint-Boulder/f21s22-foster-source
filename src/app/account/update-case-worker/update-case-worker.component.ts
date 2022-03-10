@@ -7,6 +7,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import * as libphonenumber from 'google-libphonenumber';
 import { Router } from '@angular/router';
 import { ToastPresets } from '../../models/toast.model';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-update-case-worker',
@@ -32,6 +33,7 @@ export class UpdateCaseWorkerComponent implements OnInit {
       caseworkeremail: ['', Validators.compose([Validators.required, Validators.email])],
       caseworkerphone: ['', Validators.compose([Validators.required, UpdateCaseWorkerComponent.validatePhoneNumber])],
       certifiedBy: ['', Validators.required],
+      certExpiry: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
     });
     this.accountService.getCwInfo().subscribe(
       (cwInfo) => {
@@ -54,6 +56,7 @@ export class UpdateCaseWorkerComponent implements OnInit {
         cwLastName: this.updateCwInfoForm.get('caseworkerlname')!.value,
         cwPhoneNumber: UpdateCaseWorkerComponent.formatPhoneNumber(this.updateCwInfoForm.get('caseworkerphone')!.value),
         certifiedBy: this.updateCwInfoForm.get('certifiedBy')!.value,
+        certExpiry: this.updateCwInfoForm.get('certExpiry')!.value,
       };
       this.accountService.updateCwInfo(req).subscribe(
         (_) => {

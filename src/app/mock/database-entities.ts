@@ -10,7 +10,15 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
-import { FullThread, Reply, ThreadSummary, Topic, TopicSummary } from '../models/forum.models';
+import {
+  FullThread,
+  Reply,
+  ReplyReport,
+  ThreadReport,
+  ThreadSummary,
+  Topic,
+  TopicSummary,
+} from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -87,6 +95,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwEmail: 'gCloon@aol.com',
     cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
+    certExpiry: '10/31/2022',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
@@ -123,6 +132,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -155,6 +165,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -544,12 +555,13 @@ export const threadSummaries: ThreadSummary[] = [
     title: 'This is a thread and it is awesome. Anyone else?',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae magna euismod diam ornare ornare. Nunc id ex blandit, ultricies turpis eu, porta sapien. Proin ultricies eu dui nec egestas.',
     edited: false,
-    updatedAt: new Date(),
+    createdAt: new Date(),
     replyCount: 9,
     lastReplyDate: new Date(),
     topicTitle: 'Parenting 101 Topic',
+    requesterHasLiked: true,
     account: {
-      id: 1,
+      id: 51,
       username: 'respiteuser1',
       privilege: 'USER',
       profileId: 2,
@@ -561,12 +573,14 @@ export const threadSummaries: ThreadSummary[] = [
     title: 'Does anyone else like to hang out',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi.',
     edited: false,
-    updatedAt: new Date(),
+    createdAt: new Date(),
     replyCount: 104,
     lastReplyDate: new Date(),
     topicTitle: 'General Discussion',
+    requesterHasLiked: false,
+
     account: {
-      id: 2,
+      id: 51,
       username: 'iAmLegend3',
       privilege: 'USER',
       profileId: 3,
@@ -578,12 +592,14 @@ export const threadSummaries: ThreadSummary[] = [
     title: 'Welcome to the forum. Be nice!',
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt, ligula at dignissim finibus, ante nisi consequat est, sit amet tincidunt turpis odio et velit. Nullam eget condimentum neque, ut tincidunt enim. Aenean at varius nibh. Vestibulum quam tellus, laoreet ut cursus in, lacinia id lectus. Nullam egestas libero sit amet egestas hendrerit. Donec rutrum ultrices ex, sit amet porttitor erat hendrerit in. Aenean rhoncus enim nec est blandit pulvinar. Duis consequat vehicula felis, ac maximus dolor euismod vel. Pellentesque eu nulla neque. Vestibulum non ex sit amet tellus sagittis mattis vel id dolor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae magna euismod diam ornare ornare. Nunc id ex blandit, ultricies turpis eu, porta sapien. Proin ultricies eu dui nec egestas.',
     edited: false,
-    updatedAt: new Date(),
+    createdAt: new Date(),
     replyCount: 3,
     lastReplyDate: new Date(),
     topicTitle: 'Parenting 101 Topic',
+    requesterHasLiked: true,
+
     account: {
-      id: 3,
+      id: 51,
       username: 'adminuser',
       privilege: 'MOD',
     },
@@ -598,11 +614,15 @@ export const replies: Reply[] = [
     replyingToText: 'Proin fermentum convallis justo elementum gravida. Nam fringilla euismod eleifend',
     replyingToUsername: 'usertoreplyto',
     edited: false,
+    requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 1,
       username: 'replyguy.1',
       privilege: 'USER',
       profileId: 2,
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -610,10 +630,14 @@ export const replies: Reply[] = [
     body: 'second this! smiley emoji.',
     likes: 102,
     edited: true,
+    requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 2,
       username: 'admin-man',
       privilege: 'ADMIN',
+      profileSmallAwsKey: 'test',
     },
   },
   {
@@ -621,15 +645,22 @@ export const replies: Reply[] = [
     body: 'Mauris in lectus nec lacus lobortis cursus. Maecenas velit neque, accumsan at lacinia sed, tincidunt a urna. Integer ex felis, lacinia et ipsum non, fermentum semper dui. Donec in eros ipsum. Curabitur id enim libero. Quisque gravida viverra tortor, a rhoncus sapien ultricies a. In ipsum lacus, placerat nec tristique sed, laoreet sit amet velit. In et risus dapibus, lobortis purus non, varius neque. Phasellus viverra libero vitae enim semper, consequat venenatis nibh dignissim. Aliquam quis laoreet arcu. Aliquam a luctus est. Proin ac congue mi. Proin volutpat consectetur justo, eu varius turpis gravida in. In sed tincidunt tortor.',
     likes: 0,
     edited: false,
+    requesterHasLiked: true,
+    createdAt: new Date(),
+    threadId: 2,
     account: {
       id: 3,
       username: 'randomdude',
       privilege: 'USER',
       profileId: 3,
+      profileSmallAwsKey: 'test',
     },
   },
 ];
 
+export const threadReports: ThreadReport[] = [];
+export const replyReports: ReplyReport[] = [];
+
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
-  return { ...t, replies: replies };
+  return { ...t, replies: replies, topicId: 1 };
 });
