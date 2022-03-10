@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forgot-password-confirmation.component.scss'],
 })
 export class ForgotPasswordConfirmationComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    return;
+  }
 }

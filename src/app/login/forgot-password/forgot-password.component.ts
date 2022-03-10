@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ForgotPasswordComponent implements OnInit {
   public forgotPassForm = this.formBuilder.group({
-    email: ['', Validators.required],
+    email: [null, Validators.compose([Validators.required, Validators.email])],
   });
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
