@@ -715,7 +715,7 @@
                       >Please the min age.<br
                     /></small>
                     <small *ngIf="finishProfileForm.get('minAge')?.errors?.min" class="input-error"
-                      >Please enter a value more than 0.<br
+                      >Please enter a value of at least 0.<br
                     /></small>
                     <small *ngIf="finishProfileForm.get('minAge')?.errors?.max" class="input-error"
                       >Please enter a value less than 18.<br
@@ -743,7 +743,7 @@
                       >Please the max age.<br
                     /></small>
                     <small *ngIf="finishProfileForm.get('maxAge')?.errors?.min" class="input-error"
-                      >Please enter a value more than 0.<br
+                      >Please enter a value of at least 0.<br
                     /></small>
                     <small *ngIf="finishProfileForm.get('maxAge')?.errors?.max" class="input-error"
                       >Please enter a value less than 18.<br
