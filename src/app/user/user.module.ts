@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserForumActivityComponent } from './user-forum-activity/user-forum-activity.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
     ModifyTempAvailabilityComponent,
     PublicUserPageComponentComponent,
     UpdateProfileCollectionComponent,
+    UserForumActivityComponent,
   ],
   imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule, NgbAccordionModule],
 })

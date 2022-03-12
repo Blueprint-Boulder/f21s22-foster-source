@@ -1,0 +1,10 @@
+.thread-container {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}

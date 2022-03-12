@@ -6,6 +6,7 @@ import {
   GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -50,6 +51,7 @@ export abstract class ForumService {
   public abstract likeThread(id: number): Observable<any>;
   public abstract unlikeThread(id: number): Observable<any>;
   public abstract reportThread(req: ReportThreadReq): Observable<any>;
+  public abstract getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount>;
 
   /**
    * REPLIES

@@ -6,6 +6,7 @@ import {
   GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -151,5 +152,9 @@ export class ForumMockService implements ForumService {
 
   deleteReplyReport(id: number): Observable<any> {
     return of({});
+  }
+
+  getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount> {
+    return of({ threads: threadSummaries, totalResults: threadSummaries.length });
   }
 }

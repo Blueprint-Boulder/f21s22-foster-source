@@ -50,6 +50,11 @@ export interface GetThreadSummariesRes {
   threads: ThreadSummary[];
 }
 
+export interface GetThreadSummariesWCount {
+  threads: ThreadSummary[];
+  totalResults: number;
+}
+
 export interface Reply {
   id: number;
   body: string;
