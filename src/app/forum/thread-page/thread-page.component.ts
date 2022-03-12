@@ -23,6 +23,8 @@ export class ThreadPageComponent implements OnInit {
   public isMod = false;
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   public isOwnThread = false;
+  
+  public inspectingReplyId: number;
 
   public inspectingReplyId: number;
 
