@@ -68,4 +68,10 @@ export class ThreadSummaryComponent implements OnInit {
       );
     }
   }
+
+  getBody(): string {
+    const span = document.createElement('span');
+    span.innerHTML = this.thread.body;
+    return span.textContent || span.innerText;
+  }
 }

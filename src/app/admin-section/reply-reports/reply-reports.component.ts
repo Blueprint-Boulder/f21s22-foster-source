@@ -31,7 +31,6 @@ export class ReplyReportsComponent implements OnInit {
   getBodyForIndex(index: number): string {
     const tempDivElement = document.createElement('div');
     tempDivElement.innerHTML = this.reports[index].replyBody;
-    console.log(tempDivElement.textContent || tempDivElement.innerText || '');
     return tempDivElement.textContent || tempDivElement.innerText || '';
   }
 

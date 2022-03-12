@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgModule } from '@angular/core';
 import { ThreadSummaryComponent } from './thread-summary/thread-summary.component';
+import { AppModule } from '../app.module';
 
 @NgModule({
   declarations: [

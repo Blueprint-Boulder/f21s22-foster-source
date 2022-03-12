@@ -72,4 +72,10 @@ export class TopicPageComponent implements OnInit {
       }
     })();
   }
+
+  goToCreateThread(): void {
+    this.router.navigate(['/forum/create-thread'], {
+      queryParams: { topic: this.topic.id },
+    });
+  }
 }
