@@ -43,11 +43,13 @@ export interface ThreadSummary {
     username: string;
     privilege: string;
     profileId?: number;
+    profileSmallAwsKey?: string;
   };
 }
 
 export interface GetThreadSummariesRes {
   threads: ThreadSummary[];
+  totalResults: number;
 }
 
 export interface GetThreadSummariesWCount {

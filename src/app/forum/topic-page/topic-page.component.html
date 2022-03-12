@@ -1,0 +1,24 @@
+<div class="container" *ngIf="threads">
+  <h1 class="pt-3">{{ topic.title }}</h1>
+  <p>
+    {{ topic.description }}
+  </p>
+  <h5><b>Click Threads Below to Read</b></h5>
+  <div class="row" *ngFor="let thread of threads">
+    <div class="col-12">
+      <app-thread-summary [thread]="thread"></app-thread-summary>
+    </div>
+  </div>
+  <div class="row page-row mt-5 mb-2">
+    <div class="col-12">
+      <div class="page-wrapper text-center">
+        <ngb-pagination
+          [(page)]="resultPage"
+          [pageSize]="THREAD_LIMIT"
+          [collectionSize]="totalResults"
+          (pageChange)="changePage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

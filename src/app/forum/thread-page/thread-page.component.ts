@@ -115,6 +115,17 @@ export class ThreadPageComponent implements OnInit {
     this.scrollToTop();
   }
 
+  goToLastPage(): void {
+    const replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+    const lastPage = replyCount - (replyCount % this.REPLY_LIMIT);
+
+    this.router.navigate([`/forum/threads/${this.thread.id}`], {
+      queryParams: { replyOffset: lastPage },
+      queryParamsHandling: 'merge',
+    });
+    this.scrollToTop();
+  }
+
   likeUnlikeThread(): void {
     if (!this.userHasLiked) {
       this.forumService.likeThread(this.thread.id).subscribe(
@@ -281,17 +292,18 @@ export class ThreadPageComponent implements OnInit {
   }
 
   submitReply(): void {
-    // TODO: Make it navigate to the last page of the thread so you can see it.
     this.submittingReply = true;
 
     this.forumService.postReply(this.replyReq).subscribe(
       (res) => {
         this.toastService.success('Successfully posted reply.');
         this.submittingReply = false;
-        this.replyReq.body = '';
-        this.replyReq.replyingToUsername = undefined;
-        this.replyReq.replyingToText = undefined;
-        this.isReplyingToSomeone = false;
+
+        this.thread.replies.push(res);
+        this.thread.replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+
+        this.fullyClearReplyForm();
+        this.goToLastPage();
       },
       (err) => {
         this.toastService.httpError(err);
