@@ -1,15 +1,15 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { ForumService } from '../../services/forum-service/forum.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastService } from '../../services/toast-service/toast.service';
 import { FullThread, ModRemoveThreadReq, PostReplyReq, ReportThreadReq } from '../../models/forum.models';
-import { formatDate, ViewportScroller } from '@angular/common';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReplyEvent } from '../thread-reply/thread-reply.component';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { formatDate, ViewportScroller } from '@angular/common';
+import { ImageUtils } from '../../common/utils/ImageUtils';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-thread-page',

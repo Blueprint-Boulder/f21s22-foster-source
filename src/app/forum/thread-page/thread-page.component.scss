@@ -46,3 +46,7 @@ html {
 .required-star {
   color: red;
 }
+
+.reset-text * {
+  all: revert;
+}

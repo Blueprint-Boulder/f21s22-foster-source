@@ -9,6 +9,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { FieldInvalidMessageComponent } from './field-invalid-message/field-invalid-message.component';
 import { BasicTextFieldComponent } from './basic-text-field/basic-text-field.component';
 import { BasicCheckFieldComponent } from './basic-check-field/basic-check-field.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BasicCheckFieldComponent } from './basic-check-field/basic-check-field.
     BasicTextFieldComponent,
     BasicTextFieldComponent,
     BasicCheckFieldComponent,
+    SafeHtmlPipe,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgbModule, NgxEditorModule],
   exports: [
@@ -28,6 +30,7 @@ import { BasicCheckFieldComponent } from './basic-check-field/basic-check-field.
     FieldInvalidMessageComponent,
     BasicTextFieldComponent,
     BasicCheckFieldComponent,
+    SafeHtmlPipe,
   ],
 })
 export class CommonComponentsModule {}
