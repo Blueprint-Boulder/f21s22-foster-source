@@ -9,12 +9,6 @@ import { ForumComponent } from './forum/forum.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ModGuard } from '../guards/mod/mod.guard';
 import { NgModule } from '@angular/core';
-import { LoggedInGuard } from '../guards/logged-in/logged-in.guard';
-import { ModGuard } from '../guards/mod/mod.guard';
-import { EditTopicComponent } from './edit-topic/edit-topic.component';
-import { ThreadPageComponent } from './thread-page/thread-page.component';
-import { EditThreadComponent } from './edit-thread/edit-thread.component';
-import { CreateThreadComponent } from './create-thread/create-thread.component';
 
 const routes: Routes = [
   {
