@@ -1,0 +1,43 @@
+<div class="table-container">
+  <div class="my-5">
+    <p>
+      To take action on a report (such as looking into it further, deleting the reply, and/or suspending the poster),
+      click the "inspect" button. Currently, you will have to manually find the reply within the thread in order to
+      inspect and take action on it.
+    </p>
+  </div>
+  <div *ngFor="let report of reports; index as i">
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
+      <div class="col-sm-8 m-auto">
+        <span
+          >Reported Reply:<br />
+          <div class="ml-1 bug-desc pl-2 mb-1">
+            <span
+              ><i>{{ getBodyForIndex(i) }}</i></span
+            ><br />
+          </div>
+          <span><b>Reason:</b><br /></span
+        ></span>
+        <div class="ml-1 bug-desc pl-2 mb-1">
+          <span
+            ><i>{{ report.description }}</i></span
+          ><br />
+        </div>
+        <small>Report submitted on {{ getFormattedDateForReplyReport(i) }} by {{ report.account.username }}</small>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-sm-auto my-2 my-sm-0">
+        <button class="btn btn-secondary w-100" (click)="dismissReport(i)">Dismiss</button>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-sm-auto my-2 my-sm-0">
+        <a class="btn btn-primary text-white w-100 w-100" href="javascript: void(0)" (click)="inspectReply(i)">
+          Inspect
+        </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!reports || reports.length == 0" class="row">
+    <div class="col-xs-12 mx-auto bg-light rounded mt-5">
+      <div class="p-5">No Reply Reports Found</div>
+    </div>
+  </div>
+</div>

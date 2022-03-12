@@ -11,16 +11,16 @@
       <span *ngIf="currentProviderInfo.cityCanProvideRespiteIn"
         ><b>City Can Provide Respite In: </b> {{ currentProviderInfo.cityCanProvideRespiteIn }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.respiteTravelDistance"
+      <span *ngIf="currentProviderInfo.respiteTravelDistance !== undefined"
         ><b>Travel Distance: </b> {{ currentProviderInfo.respiteTravelDistance }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.careForMinAge"
+      <span *ngIf="currentProviderInfo.careForMinAge !== undefined"
         ><b>Min Age Able to Care For: </b> {{ currentProviderInfo.careForMinAge }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.careForMaxAge"
+      <span *ngIf="currentProviderInfo.careForMaxAge !== undefined"
         ><b>Max Age Able to Care For: </b> {{ currentProviderInfo.careForMaxAge }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.maxNumCareFor"
+      <span *ngIf="currentProviderInfo.maxNumCareFor !== undefined"
         ><b>Max # of Children Able to Care For: </b> {{ currentProviderInfo.maxNumCareFor }} <br
       /></span>
       <p>
@@ -81,6 +81,23 @@
                     placeholder="Enter minimum age"
                     formControlName="careForMinAge"
                   />
+                  <div
+                    *ngIf="
+                      updateProviderInfoForm.get('careForMinAge')?.invalid &&
+                      (updateProviderInfoForm.get('careForMinAge')?.dirty ||
+                        updateProviderInfoForm.get('careForMinAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.required" class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.min" class="input-error"
+                      >Please enter a value of at least 0.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.max" class="input-error"
+                      >Please enter a value less than 18.<br
+                    /></small>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
@@ -93,6 +110,28 @@
                     placeholder="Enter maximum age"
                     formControlName="careForMaxAge"
                   />
+                  <div
+                    *ngIf="
+                      updateProviderInfoForm.get('careForMaxAge')?.invalid &&
+                      (updateProviderInfoForm.get('careForMaxAge')?.dirty ||
+                        updateProviderInfoForm.get('careForMaxAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.required" class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.min" class="input-error"
+                      >Please enter a value of at least 0.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.max" class="input-error"
+                      >Please enter a value less than 18.<br
+                    /></small>
+                  </div>
+                  <div *ngIf="updateProviderInfoForm.get('careForMaxAge')?.touched">
+                    <small *ngIf="updateProviderInfoForm.getError('notLargerThan')" class="input-error"
+                      >Value must be larger than min age value.<br
+                    /></small>
+                  </div>
                 </div>
               </div>
             </div>

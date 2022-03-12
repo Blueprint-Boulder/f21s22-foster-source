@@ -16,7 +16,7 @@ import { environment } from '../../../environments/environment';
 import { ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
 import { AuthService } from '../auth-service/auth.service';
-import { ChangePasswordReq } from '../../models/change-password';
+import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
 import { switchMap } from 'rxjs/operators';
 import { NavBarStatus } from '../../models/nav-bar.models';
 
@@ -157,5 +157,9 @@ export class AccountImplService implements AccountService {
     return this.http.get<NavBarStatus>(`${environment.backendHost}/api/utils/nav-status`, {
       withCredentials: true,
     });
+  }
+  
+  recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any> {
+    return this.http.put(`${environment.backendHost}/api/db/accounts/recovery`, req, { withCredentials: true });
   }
 }

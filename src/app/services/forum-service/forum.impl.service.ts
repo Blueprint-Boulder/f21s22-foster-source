@@ -3,7 +3,10 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
+  GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -188,6 +191,35 @@ export class ForumImplService implements ForumService {
         body: req,
         withCredentials: true,
       }
+    );
+  }
+
+  getThreadReports(): Observable<GetThreadReportsRes> {
+    return this.http.get<GetThreadReportsRes>(`${environment.backendHost}/api/db/forum/threads/reports`, {
+      withCredentials: true,
+    });
+  }
+
+  deleteThreadReport(id: number): Observable<any> {
+    return this.http.delete(`${environment.backendHost}/api/db/forum/threads/reports/${id}`, { withCredentials: true });
+  }
+
+  deleteReplyReport(id: number): Observable<any> {
+    return this.http.delete(`${environment.backendHost}/api/db/forum/threads/replies/reports/${id}`, {
+      withCredentials: true,
+    });
+  }
+
+  getReplyReports(): Observable<GetReplyReportsRes> {
+    return this.http.get<GetReplyReportsRes>(`${environment.backendHost}/api/db/forum/threads/replies/reports`, {
+      withCredentials: true,
+    });
+  }
+
+  getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount> {
+    return this.http.get<GetThreadSummariesWCount>(
+      `${environment.backendHost}/api/db/forum/threads?limit=${count}&offset=0&account=${id}`,
+      { withCredentials: true }
     );
   }
 }

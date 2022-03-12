@@ -3,7 +3,10 @@ import {
   CreateTopicReq,
   DeleteThreadReq,
   FullThread,
+  GetReplyReportsRes,
+  GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -48,6 +51,7 @@ export abstract class ForumService {
   public abstract likeThread(id: number): Observable<any>;
   public abstract unlikeThread(id: number): Observable<any>;
   public abstract reportThread(req: ReportThreadReq): Observable<any>;
+  public abstract getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount>;
 
   /**
    * REPLIES
@@ -60,4 +64,12 @@ export abstract class ForumService {
   public abstract unlikeReply(threadId: number, replyId: number): Observable<any>;
   public abstract reportReply(req: ReportReplyReq): Observable<any>;
   public abstract modRemoveReply(req: ModRemoveReplyReq): Observable<any>;
+
+  /**
+   * Thread Reports
+   */
+  public abstract getThreadReports(): Observable<GetThreadReportsRes>;
+  public abstract getReplyReports(): Observable<GetReplyReportsRes>;
+  public abstract deleteThreadReport(id: number): Observable<any>;
+  public abstract deleteReplyReport(id: number): Observable<any>;
 }

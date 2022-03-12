@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserForumActivityComponent } from './user-forum-activity/user-forum-activity.component';
+import { UpdateProfilePhotoComponent } from './update-profile-photo/update-profile-photo.component';
+import { LoginModule } from '../login/login.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,16 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
     ModifyTempAvailabilityComponent,
     PublicUserPageComponentComponent,
     UpdateProfileCollectionComponent,
+    UserForumActivityComponent,
+    UpdateProfilePhotoComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, ReactiveFormsModule, CommonComponentsModule, NgbAccordionModule],
+  imports: [
+    CommonModule,
+    UserRoutingModule,
+    ReactiveFormsModule,
+    CommonComponentsModule,
+    NgbAccordionModule,
+    LoginModule,
+  ],
 })
 export class UserModule {}

@@ -10,7 +10,15 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
-import { FullThread, Reply, ThreadSummary, Topic, TopicSummary } from '../models/forum.models';
+import {
+  FullThread,
+  Reply,
+  ReplyReport,
+  ThreadReport,
+  ThreadSummary,
+  Topic,
+  TopicSummary,
+} from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -87,6 +95,7 @@ export const createAccountRequests: CreateAccountRequest[] = [
     cwEmail: 'gCloon@aol.com',
     cwPhoneNumber: '+17208388843',
     certifiedBy: 'Araphaoe',
+    certExpiry: '10/31/2022',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
       type: PhoneNumberType.Mobile,
@@ -123,6 +132,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -155,6 +165,7 @@ export const accounts: Account[] = [
     cwEmail: 'noreply@google.com',
     cwPhoneNumber: '+17208839921',
     certifiedBy: 'Arapahoe County',
+    certExpiry: new Date('10/31/2032'),
     privilege: 'USER',
     primaryPhoneNumber: {
       phoneNumber: '+17209938821',
@@ -425,6 +436,7 @@ export const profiles: FullProfileRes[] = [
       lastName: 'Crowson',
       email: 'jettcrowson@colorado.gov',
       username: 'jcrowson',
+      lastLogin: new Date(),
       address: {
         id: 1,
         addressLine1: '741 Danbury St',
@@ -647,6 +659,9 @@ export const replies: Reply[] = [
   },
 ];
 
+export const threadReports: ThreadReport[] = [];
+export const replyReports: ReplyReport[] = [];
+
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
-  return { ...t, replies: replies };
+  return { ...t, replies: replies, topicId: 1 };
 });

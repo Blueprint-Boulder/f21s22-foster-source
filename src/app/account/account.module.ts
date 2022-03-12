@@ -9,6 +9,7 @@ import { DeleteAccountComponent } from './delete-account/delete-account.componen
 import { UpdateAddressComponent } from './update-address/update-address.component';
 import { UpdatePhoneComponent } from './update-phone/update-phone.component';
 import { UpdateCaseWorkerComponent } from './update-case-worker/update-case-worker.component';
+import { CommonComponentsModule } from '../common-components/common-components.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { UpdateCaseWorkerComponent } from './update-case-worker/update-case-work
     UpdatePhoneComponent,
     UpdateCaseWorkerComponent,
   ],
-  imports: [CommonModule, AccountRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, AccountRoutingModule, ReactiveFormsModule, CommonComponentsModule],
 })
 export class AccountModule {}

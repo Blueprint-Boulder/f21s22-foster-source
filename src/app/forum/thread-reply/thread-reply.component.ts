@@ -40,6 +40,8 @@ export class ThreadReplyComponent implements OnInit {
 
   @Input() reply: Reply;
   @Input() author: string;
+  @Input() beingInspected = false;
+  @Input() clickEvent: EventEmitter<void>;
 
   @Output() replyEvent: EventEmitter<ReplyEvent> = new EventEmitter<ReplyEvent>();
 
@@ -59,6 +61,12 @@ export class ThreadReplyComponent implements OnInit {
       this.isMod = this.authService.isAtLeastMod();
       this.generateProfileImageSrc();
     }
+
+    this.clickEvent.subscribe((_) => {
+      if (!this.getSelectedText() || this.getSelectedText() === '') {
+        this.textSelected = false;
+      }
+    });
   }
   getParsedDate(): string {
     return formatDate(this.reply.createdAt, 'MM/dd/yyyy - hh:mm', 'en-US');

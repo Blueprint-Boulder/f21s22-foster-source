@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
@@ -23,6 +23,8 @@ export class ThreadPageComponent implements OnInit {
   public isMod = false;
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   public isOwnThread = false;
+  
+  public inspectingReplyId: number;
 
   public thread: FullThread;
 
@@ -36,6 +38,8 @@ export class ThreadPageComponent implements OnInit {
   public isReplyingToSomeone = false;
   public submittingReply = false;
   public replyReq: PostReplyReq;
+
+  public clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private forumService: ForumService,
@@ -64,6 +68,12 @@ export class ThreadPageComponent implements OnInit {
         const replyOffset = map.get('replyOffset');
         if (replyOffset !== null && !isNaN(parseInt(replyOffset))) {
           this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString()) + 1;
+        }
+
+        const inspecting = map.get('inspecting');
+
+        if (inspecting) {
+          this.inspectingReplyId = parseInt(inspecting);
         }
 
         this.forumService
@@ -101,6 +111,18 @@ export class ThreadPageComponent implements OnInit {
   changePage(newPage: number): void {
     this.router.navigate([`/forum/threads/${this.thread.id}`], {
       queryParams: { replyOffset: (newPage - 1) * this.REPLY_LIMIT },
+      queryParamsHandling: 'merge',
+    });
+    this.scrollToTop();
+  }
+
+  goToLastPage(): void {
+    const replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+    const lastPage = replyCount - (replyCount % this.REPLY_LIMIT);
+
+    this.router.navigate([`/forum/threads/${this.thread.id}`], {
+      queryParams: { replyOffset: lastPage },
+      queryParamsHandling: 'merge',
     });
     this.scrollToTop();
   }
@@ -271,16 +293,18 @@ export class ThreadPageComponent implements OnInit {
   }
 
   submitReply(): void {
-    // TODO: Make it navigate to the last page of the thread so you can see it.
     this.submittingReply = true;
 
     this.forumService.postReply(this.replyReq).subscribe(
       (res) => {
         this.toastService.success('Successfully posted reply.');
         this.submittingReply = false;
-        this.replyReq.body = '';
-        this.replyReq.replyingToUsername = undefined;
-        this.replyReq.replyingToText = undefined;
+
+        this.thread.replies.push(res);
+        this.thread.replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+
+        this.fullyClearReplyForm();
+        this.goToLastPage();
       },
       (err) => {
         this.toastService.httpError(err);
@@ -327,5 +351,9 @@ export class ThreadPageComponent implements OnInit {
 
   getPageCount(): number {
     return Math.ceil(this.thread.replyCount / this.REPLY_LIMIT);
+  }
+
+  goToTopic(): void {
+    this.router.navigate(['/forum/topics/' + this.thread.topicId]);
   }
 }

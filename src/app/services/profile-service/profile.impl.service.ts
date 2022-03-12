@@ -51,8 +51,6 @@ export class ProfileImplService implements ProfileService {
       params = this.setFilterParams(params, filters);
     }
 
-    console.log(params);
-
     return this.http.get<GetProfilesRes>(`${environment.backendHost}/api/db/profiles`, {
       params: params,
       withCredentials: true,
@@ -111,6 +109,14 @@ export class ProfileImplService implements ProfileService {
     return this.http.get<FullProfileRes>(`${environment.backendHost}/api/db/profiles/current`, {
       withCredentials: true,
     });
+  }
+
+  updateProfileImgKey(key: string): Observable<any> {
+    return this.http.put(
+      `${environment.backendHost}/api/db/profiles/profile-image`,
+      { key: key },
+      { withCredentials: true }
+    );
   }
 
   private setFilterParams(params: HttpParams, filters: FiltersReq): HttpParams {

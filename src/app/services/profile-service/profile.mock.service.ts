@@ -70,4 +70,8 @@ export class ProfileMockService implements ProfileService {
   getCurrentProfile(): Observable<FullProfileRes> {
     return of(profiles[0]);
   }
+
+  updateProfileImgKey(key: string): Observable<any> {
+    return of({});
+  }
 }

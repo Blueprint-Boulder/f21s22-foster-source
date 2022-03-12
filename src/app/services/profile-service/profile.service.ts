@@ -39,4 +39,5 @@ export abstract class ProfileService {
   public abstract addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes>;
   public abstract updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes>;
   public abstract updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes>;
+  public abstract updateProfileImgKey(key: string): Observable<any>;
 }

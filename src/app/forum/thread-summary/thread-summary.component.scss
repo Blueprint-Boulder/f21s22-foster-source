@@ -1,0 +1,30 @@
+// add padding above and below content of div to make it look more like the figma drawing
+
+.body {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user_and_date {
+  display: grid;
+  grid-template-columns: 50px 50px;
+  grid-column-gap: 60px;
+}
+
+.threads {
+  background: #fef4e8;
+}
+
+.hover {
+  &:hover {
+    background: #e5dcd1;
+    cursor: pointer;
+  }
+}
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}

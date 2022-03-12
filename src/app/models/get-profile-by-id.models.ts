@@ -89,6 +89,7 @@ export interface PublicAccountFields {
   address: AddressRes;
   primaryPhoneNumber: PhoneNumber;
   secondaryPhoneNumber?: PhoneNumber;
+  lastLogin: Date;
 }
 
 export interface AddressRes {

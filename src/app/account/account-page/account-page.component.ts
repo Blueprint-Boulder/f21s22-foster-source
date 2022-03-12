@@ -5,6 +5,7 @@ import { accountServiceProvider } from '../../services/account-service/account.s
 import { Account } from '../../models/account.model';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-account-page',
@@ -14,6 +15,8 @@ import { Router } from '@angular/router';
 export class AccountPageComponent implements OnInit {
   public currentAccount: Account;
   public isUser = true;
+  public certExpiresSoon = false;
+  public certExpired = false;
 
   constructor(
     private accountService: AccountService,
@@ -27,6 +30,14 @@ export class AccountPageComponent implements OnInit {
       (acc: Account) => {
         this.currentAccount = acc;
         this.isUser = this.authService.getToken()?.privilegeLevel === 1;
+
+        if (this.isUser) {
+          this.certExpired = this.isCertExpired(this.currentAccount.certExpiry);
+
+          if (!this.certExpired) {
+            this.certExpiresSoon = this.doesCertExpireSoon(this.currentAccount.certExpiry);
+          }
+        }
       },
       (err) => {
         this.toastService.httpError(err);
@@ -42,5 +53,21 @@ export class AccountPageComponent implements OnInit {
     if (verify) {
       this.router.navigate(['/account/delete-account']);
     }
+  }
+
+  getFormattedCertExpiryDate(): string {
+    if (this.currentAccount) {
+      return formatDate(this.currentAccount.certExpiry, 'MM/dd/yyyy', 'en-US');
+    } else {
+      return '';
+    }
+  }
+
+  doesCertExpireSoon(expirationDate: Date): boolean {
+    return (expirationDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24) <= 30;
+  }
+
+  isCertExpired(expirationDate: Date): boolean {
+    return expirationDate.getTime() <= new Date().getTime();
   }
 }

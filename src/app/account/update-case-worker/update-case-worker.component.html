@@ -12,6 +12,7 @@
       <p><b>Case Worker Email:</b> {{ cwInfo.cwEmail }}</p>
       <p><b>Case Worker Phone Number:</b> {{ cwInfo.cwPhoneNumber }}</p>
       <p><b>County or Agency Certified By:</b> {{ cwInfo.certifiedBy }}</p>
+      <p><b>Certification Expiration Date:</b> {{ cwInfo.certExpiry.toLocaleDateString("en-US") }}</p>
       <hr />
     </div>
   </div>
@@ -143,6 +144,18 @@
             /></small>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
+        <app-basic-text-field
+          [field]="'certExpiry'"
+          [title]="'Certification expiration date'"
+          [placeholder]="'MM/DD/YYYY'"
+          [errors]="['required', 'invalidDate']"
+          [errorMessages]="[
+            'Please enter the date that your certification expires.',
+            'Please ensure that the expiration date is exactly the format MM/DD/YYYY'
+          ]"
+        ></app-basic-text-field>
       </div>
     </div>
   </form>
