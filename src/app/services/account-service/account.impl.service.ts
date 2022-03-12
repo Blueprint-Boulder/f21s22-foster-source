@@ -158,7 +158,7 @@ export class AccountImplService implements AccountService {
       withCredentials: true,
     });
   }
-  
+
   recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any> {
     return this.http.put(`${environment.backendHost}/api/db/accounts/recovery`, req, { withCredentials: true });
   }
