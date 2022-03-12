@@ -70,6 +70,7 @@ export class ForumMockService implements ForumService {
   getAllThreads(limit: number, offset: number): Observable<GetThreadSummariesRes> {
     return of({
       threads: threadSummaries,
+      totalResults: 200,
     });
   }
 
@@ -84,6 +85,7 @@ export class ForumMockService implements ForumService {
   getThreadsForTopic(topicId: number, limit: number, offset: number): Observable<GetThreadSummariesRes> {
     return of({
       threads: threadSummaries,
+      totalResults: 200,
     });
   }
 

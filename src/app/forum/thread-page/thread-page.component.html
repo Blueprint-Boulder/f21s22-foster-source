@@ -94,6 +94,7 @@
           [pageSize]="REPLY_LIMIT"
           [collectionSize]="thread.replyCount"
           (pageChange)="changePage($event)"
+          [boundaryLinks]="true"
         ></ngb-pagination>
       </div>
     </div>
