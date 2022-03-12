@@ -23,6 +23,10 @@
                 >
                 <br *ngIf="selectedProfile.distance !== undefined" />
                 <i class="text-muted">{{ getAge() }} years old</i>
+                <br />
+                <small class="text-muted"
+                  ><i>Last online {{ getLastActiveDate() }}</i></small
+                >
               </p>
             </div>
           </div>

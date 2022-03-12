@@ -10,6 +10,7 @@ import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -41,6 +42,7 @@ export class PublicUserPageComponentComponent implements OnInit {
       if (id === undefined || id === null) {
         this.profileService.getCurrentProfile().subscribe(
           (p) => {
+            console.log(p);
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.profileImgSrc = this.getProfileSrc();
@@ -108,5 +110,9 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   formatPhoneNumber(pn: string): string {
     return FormUtils.prettifyValidPhoneNumber(pn);
+  }
+
+  getLastActiveDate(): string {
+    return formatDate(this.selectedProfile.account.lastLogin, 'MM/dd/yyyy', 'en-US');
   }
 }

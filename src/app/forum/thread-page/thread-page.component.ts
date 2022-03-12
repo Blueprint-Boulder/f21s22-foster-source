@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
@@ -37,6 +37,8 @@ export class ThreadPageComponent implements OnInit {
   public isReplyingToSomeone = false;
   public submittingReply = false;
   public replyReq: PostReplyReq;
+
+  public clickEvent: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private forumService: ForumService,
