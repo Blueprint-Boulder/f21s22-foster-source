@@ -1,0 +1,12 @@
+<div class="container border rounded my-5">
+  <div class="row">
+    <div class="col-12 col-md-4 py-3 text-center">
+      <h5>Your Current Profile Photo</h5>
+      <img [src]="profileImgSrc" class="rounded w-50 m-auto" alt="profile picture" (error)="onImgError($event)" />
+    </div>
+    <div class="col-12 col-md-8 py-3 text-center">
+      <h5>Upload Your New Profile Photo</h5>
+      <app-profile-image-upload (imageUploaded)="imageUploaded($event)" class="m-auto"></app-profile-image-upload>
+    </div>
+  </div>
+</div>

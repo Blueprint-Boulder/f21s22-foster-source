@@ -14,7 +14,7 @@ export class ProfilePhotosImplService implements ProfilePhotosService {
   }
 
   postProfilePhoto(key: string): Observable<Photo> {
-    return this.http.post<Photo>(`${environment.backendHost}/api/db/profile.photos`, JSON.stringify(key), {
+    return this.http.post<Photo>(`${environment.backendHost}/api/db/profile/photos`, JSON.stringify(key), {
       withCredentials: true,
     });
   }
