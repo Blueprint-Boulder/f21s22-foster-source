@@ -5,6 +5,7 @@ import { ProfileService } from './profile.service';
 import { Observable, of } from 'rxjs';
 import {
   CreateProfileReq,
+  GetProfileReportsRes,
   GetProfilesRes,
   ProfileImages,
   ReportProfileReq,
@@ -78,5 +79,13 @@ export class ProfileMockService implements ProfileService {
 
   updateProfileImgKey(key: string): Observable<any> {
     return of({});
+  }
+
+  deleteProfileReport(id: number): Observable<any> {
+    return of({});
+  }
+
+  getProfileReports(): Observable<GetProfileReportsRes> {
+    return of({ reports: [] });
   }
 }

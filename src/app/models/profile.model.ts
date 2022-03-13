@@ -146,3 +146,28 @@ export interface ReportProfileReq {
   profileId: number;
   description: string;
 }
+
+export interface ProfileReportSummary {
+  id: number;
+  description: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    cwFirstName: string;
+    cwLastName: string;
+    cwEmail: string;
+    cwPhoneNumber: string;
+  };
+  profile: {
+    id: number;
+    preferredName: string;
+  };
+}
+
+export interface GetProfileReportsRes {
+  reports: ProfileReportSummary[];
+}
