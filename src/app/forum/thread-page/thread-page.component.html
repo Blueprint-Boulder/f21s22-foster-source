@@ -1,4 +1,4 @@
-<div class="container border mt-5 pb-5 pt-1 px-4" *ngIf="thread">
+<div class="container border mt-5 pb-5 pt-1 px-4" *ngIf="thread" (click)="clickEvent.emit()">
   <div class="row mt-3" *ngIf="inspectingReplyId">
     <div class="col-12 text-center">
       <span class="text-center"
@@ -58,7 +58,7 @@
         ></i
         >&nbsp;&nbsp;{{ thread.likes }}
       </p>
-      <p *ngIf="resultPage <= 1" [innerHTML]="thread.body"></p>
+      <div *ngIf="resultPage <= 1" [innerHTML]="thread.body | safeHtml"></div>
       <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">...</p>
       <p *ngIf="resultPage > 1" class="text-center w-100 text-muted">
         <i>Viewing page {{ resultPage }} / {{ getPageCount() | number: "1.0-0" }}</i>
@@ -72,13 +72,16 @@
         [reply]="reply"
         [author]="thread.account.username"
         [beingInspected]="inspectingReplyId === reply.id"
+        [clickEvent]="clickEvent"
         (replyEvent)="replyToReplyEvent($event)"
       ></app-thread-reply>
     </div>
   </div>
   <div class="row empty-row mt-5" *ngIf="thread.replies.length <= 0 && resultPage === 0">
     <div class="col-12 text-center">
-      <i class="text-muted">No one's replied yet. <a href="javascript: void(0)">Be the first!</a></i>
+      <i class="text-muted"
+        >No one's replied yet. <a href="javascript: void(0)" (click)="scrollTo('reply-section')">Be the first!</a></i
+      >
     </div>
   </div>
   <div class="row empty-row mt-5" *ngIf="thread.replies.length <= 0 && resultPage !== 0">

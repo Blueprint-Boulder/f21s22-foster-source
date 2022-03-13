@@ -1,17 +1,18 @@
 import { AvailabilityService } from '../../services/availability-service/availability.service';
+import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
+import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
 import { NgbAccordionConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
-import { Availability, SimpleAvailability } from '../../models/availability.model';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileUtils } from '../../common/utils/ProfileUtils';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
-import { AuthService } from '../../services/auth-service/auth.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -56,6 +57,7 @@ export class PublicUserPageComponentComponent implements OnInit {
       if (id === undefined || id === null) {
         this.profileService.getCurrentProfile().subscribe(
           (p) => {
+            console.log(p);
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.profileImgSrc = this.getProfileSrc();
@@ -173,5 +175,9 @@ export class PublicUserPageComponentComponent implements OnInit {
       }
       this.banForm.get('suspendForDays')?.updateValueAndValidity();
     });
+  }
+
+  getLastActiveDate(): string {
+    return formatDate(this.selectedProfile.account.lastLogin, 'MM/dd/yyyy', 'en-US');
   }
 }

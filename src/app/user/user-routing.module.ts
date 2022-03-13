@@ -8,6 +8,7 @@ import { UpdateProfileCollectionComponent } from './update-profile-collection/up
 import { UpdateRespiteBackgroundComponent } from './update-respite-background/update-respite-background.component';
 import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add-respite-provider-info.component';
 import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
+import { UpdateProfilePhotoComponent } from './update-profile-photo/update-profile-photo.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PureUserGuard } from '../guards/pure-user/pure-user.guard';
 import { LoggedInGuard } from '../guards/logged-in/logged-in.guard';
@@ -53,6 +54,11 @@ const routes: Routes = [
   {
     path: 'update/temporary-availability',
     component: ModifyTempAvailabilityComponent,
+    canActivate: [PureUserGuard],
+  },
+  {
+    path: 'update/profile-photo',
+    component: UpdateProfilePhotoComponent,
     canActivate: [PureUserGuard],
   },
   {

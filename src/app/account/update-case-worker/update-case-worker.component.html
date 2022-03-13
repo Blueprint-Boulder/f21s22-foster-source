@@ -12,7 +12,7 @@
       <p><b>Case Worker Email:</b> {{ cwInfo.cwEmail }}</p>
       <p><b>Case Worker Phone Number:</b> {{ cwInfo.cwPhoneNumber }}</p>
       <p><b>County or Agency Certified By:</b> {{ cwInfo.certifiedBy }}</p>
-      <p><b>Certification Expiration Date:</b> {{ cwInfo.certExpiry }}</p>
+      <p><b>Certification Expiration Date:</b> {{ cwInfo.certExpiry.toLocaleDateString("en-US") }}</p>
       <hr />
     </div>
   </div>

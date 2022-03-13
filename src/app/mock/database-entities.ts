@@ -436,6 +436,7 @@ export const profiles: FullProfileRes[] = [
       lastName: 'Crowson',
       email: 'jettcrowson@colorado.gov',
       username: 'jcrowson',
+      lastLogin: new Date(),
       address: {
         id: 1,
         addressLine1: '741 Danbury St',

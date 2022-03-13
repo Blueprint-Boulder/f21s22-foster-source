@@ -5,11 +5,8 @@ import { Observable } from 'rxjs';
 import {
   CreateProfileReq,
   GetProfilesRes,
-  HouseholdBackground,
-  Profile,
   ProfileImages,
   ReportProfileReq,
-  RespiteBackgroundReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -41,4 +38,5 @@ export abstract class ProfileService {
   public abstract updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes>;
   public abstract updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes>;
   public abstract reportProfile(req: ReportProfileReq): Observable<any>;
+  public abstract updateProfileImgKey(key: string): Observable<any>;
 }

@@ -118,6 +118,14 @@ export class ProfileImplService implements ProfileService {
     });
   }
 
+  updateProfileImgKey(key: string): Observable<any> {
+    return this.http.put(
+      `${environment.backendHost}/api/db/profiles/profile-image`,
+      { key: key },
+      { withCredentials: true }
+    );
+  }
+
   private setFilterParams(params: HttpParams, filters: FiltersReq): HttpParams {
     const filtersWNoUndefined = JSON.parse(JSON.stringify(filters));
     let p: HttpParams = params;

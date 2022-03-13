@@ -75,4 +75,8 @@ export class ProfileMockService implements ProfileService {
   reportProfile(req: ReportProfileReq): Observable<any> {
     return of({});
   }
+
+  updateProfileImgKey(key: string): Observable<any> {
+    return of({});
+  }
 }

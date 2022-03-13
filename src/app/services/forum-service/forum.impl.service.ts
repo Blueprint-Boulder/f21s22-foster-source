@@ -6,6 +6,7 @@ import {
   GetReplyReportsRes,
   GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -213,5 +214,12 @@ export class ForumImplService implements ForumService {
     return this.http.get<GetReplyReportsRes>(`${environment.backendHost}/api/db/forum/threads/replies/reports`, {
       withCredentials: true,
     });
+  }
+
+  getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount> {
+    return this.http.get<GetThreadSummariesWCount>(
+      `${environment.backendHost}/api/db/forum/threads?limit=${count}&offset=0&account=${id}`,
+      { withCredentials: true }
+    );
   }
 }

@@ -121,7 +121,9 @@ export class FormUtils {
     field2: string
   ): (control: AbstractControl) => ValidationErrors | null {
     return (control: AbstractControl): ValidationErrors | null => {
-      return parseInt(control.get(field1)?.value) < parseInt(control.get(field2)?.value)
+      return !control.get(field1)?.value ||
+        !control.get(field2)?.value ||
+        parseInt(control.get(field1)?.value) < parseInt(control.get(field2)?.value)
         ? null
         : { notLargerThan: `${field2} must be larger than ${field1}` };
     };

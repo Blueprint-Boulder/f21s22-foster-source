@@ -75,6 +75,6 @@ export const loginRouting = RouterModule.forChild(routes);
     ImageCropperModule,
     CommonComponentsModule,
   ],
-  exports: [],
+  exports: [ProfileImageUploadComponent],
 })
 export class LoginModule {}
