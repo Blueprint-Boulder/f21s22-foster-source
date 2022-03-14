@@ -28,9 +28,14 @@ export class UpdateRespiteBackgroundComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe((profile) => {
-      this.currentRespiteBackground = profile.respiteBackground;
-    }, this.toastService.httpError);
+    this.profileService.getCurrentProfile().subscribe(
+      (profile) => {
+        this.currentRespiteBackground = profile.respiteBackground;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   onSubmit(): void {

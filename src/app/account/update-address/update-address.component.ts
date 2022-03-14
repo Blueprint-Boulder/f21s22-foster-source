@@ -35,9 +35,14 @@ export class UpdateAddressComponent implements OnInit {
       state: ['', Validators.required],
       zip: [null, Validators.compose([Validators.required, Validators.pattern(/^[0-9]{5}(?:-[0-9]{4})?$/)])],
     });
-    this.addressService.getCurrentAddress().subscribe((add) => {
-      this.currentAddress = add;
-    }, this.toastService.httpError);
+    this.addressService.getCurrentAddress().subscribe(
+      (add) => {
+        this.currentAddress = add;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   onSubmit(): void {

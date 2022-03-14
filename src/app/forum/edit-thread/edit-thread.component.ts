@@ -30,13 +30,18 @@ export class EditThreadComponent implements OnInit {
         return;
       }
 
-      this.forumService.getThreadById(parseInt(id)).subscribe((ts) => {
-        if (this.authService.getToken()?.id !== ts.account.id) {
-          this.toastService.error('Access denied. You can only edit your own threads.');
-        } else {
-          this.thread = ts;
+      this.forumService.getThreadById(parseInt(id)).subscribe(
+        (ts) => {
+          if (this.authService.getToken()?.id !== ts.account.id) {
+            this.toastService.error('Access denied. You can only edit your own threads.');
+          } else {
+            this.thread = ts;
+          }
+        },
+        (err) => {
+          this.toastService.httpError(err);
         }
-      }, this.toastService.httpError);
+      );
     });
   }
 

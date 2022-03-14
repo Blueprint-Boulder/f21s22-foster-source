@@ -34,9 +34,14 @@ export class UpdateCaseWorkerComponent implements OnInit {
       certifiedBy: ['', Validators.required],
       certExpiry: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
     });
-    this.accountService.getCwInfo().subscribe((cwInfo) => {
-      this.cwInfo = cwInfo;
-    }, this.toastService.httpError);
+    this.accountService.getCwInfo().subscribe(
+      (cwInfo) => {
+        this.cwInfo = cwInfo;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   onSubmit(): void {

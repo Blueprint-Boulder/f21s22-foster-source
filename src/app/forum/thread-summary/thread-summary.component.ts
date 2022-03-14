@@ -46,15 +46,25 @@ export class ThreadSummaryComponent implements OnInit {
 
   likeUnlikeThread(): void {
     if (!this.userHasLiked) {
-      this.forumService.likeThread(this.thread.id).subscribe(() => {
-        this.userHasLiked = true;
-        this.thread.likes += 1;
-      }, this.toastService.httpError);
+      this.forumService.likeThread(this.thread.id).subscribe(
+        () => {
+          this.userHasLiked = true;
+          this.thread.likes += 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     } else {
-      this.forumService.unlikeThread(this.thread.id).subscribe(() => {
-        this.userHasLiked = false;
-        this.thread.likes -= 1;
-      }, this.toastService.httpError);
+      this.forumService.unlikeThread(this.thread.id).subscribe(
+        () => {
+          this.userHasLiked = false;
+          this.thread.likes -= 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     }
   }
 

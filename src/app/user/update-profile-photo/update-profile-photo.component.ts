@@ -18,10 +18,15 @@ export class UpdateProfilePhotoComponent implements OnInit {
   constructor(private profileService: ProfileService, private toastService: ToastService, private router: Router) {}
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe((res) => {
-      this.currentProfile = res;
-      this.profileImgSrc = this.getProfileSrc();
-    }, this.toastService.httpError);
+    this.profileService.getCurrentProfile().subscribe(
+      (res) => {
+        this.currentProfile = res;
+        this.profileImgSrc = this.getProfileSrc();
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   getProfileSrc(): string {
@@ -34,8 +39,13 @@ export class UpdateProfilePhotoComponent implements OnInit {
 
   imageUploaded(event: string): void {
     this.imgKey = event;
-    this.profileService.updateProfileImgKey(event).subscribe((_) => {
-      this.toastService.successAndNavigate('Successfully updated your profile photo.', '/user');
-    }, this.toastService.httpError);
+    this.profileService.updateProfileImgKey(event).subscribe(
+      (_) => {
+        this.toastService.successAndNavigate('Successfully updated your profile photo.', '/user');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 }

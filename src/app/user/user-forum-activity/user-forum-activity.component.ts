@@ -19,25 +19,40 @@ export class UserForumActivityComponent implements OnInit {
   constructor(private forumService: ForumService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.forumService.getLatestThreadsForAccount(this.accountId, this.FETCH_COUNT).subscribe((res) => {
-      this.threads = res.threads;
-      this.totalCount = res.totalResults;
-    }, this.toastService.httpError);
+    this.forumService.getLatestThreadsForAccount(this.accountId, this.FETCH_COUNT).subscribe(
+      (res) => {
+        this.threads = res.threads;
+        this.totalCount = res.totalResults;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   likeUnlikeThread(index: number): void {
     const userHasLiked = this.threads[index].requesterHasLiked;
 
     if (!userHasLiked) {
-      this.forumService.likeThread(this.threads[index].id).subscribe(() => {
-        this.threads[index].requesterHasLiked = true;
-        this.threads[index].likes += 1;
-      }, this.toastService.httpError);
+      this.forumService.likeThread(this.threads[index].id).subscribe(
+        () => {
+          this.threads[index].requesterHasLiked = true;
+          this.threads[index].likes += 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     } else {
-      this.forumService.unlikeThread(this.threads[index].id).subscribe(() => {
-        this.threads[index].requesterHasLiked = false;
-        this.threads[index].likes -= 1;
-      }, this.toastService.httpError);
+      this.forumService.unlikeThread(this.threads[index].id).subscribe(
+        () => {
+          this.threads[index].requesterHasLiked = false;
+          this.threads[index].likes -= 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     }
   }
 }

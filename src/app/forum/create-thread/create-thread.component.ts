@@ -24,20 +24,25 @@ export class CreateThreadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.forumService.getTopicSummaries().subscribe((ts) => {
-      this.topics = ts.topics;
-      this.route.queryParamMap.subscribe((map) => {
-        const requestedTopic = map.get('topic');
+    this.forumService.getTopicSummaries().subscribe(
+      (ts) => {
+        this.topics = ts.topics;
+        this.route.queryParamMap.subscribe((map) => {
+          const requestedTopic = map.get('topic');
 
-        if (!requestedTopic || isNaN(parseInt(requestedTopic))) {
-          return;
-        }
+          if (!requestedTopic || isNaN(parseInt(requestedTopic))) {
+            return;
+          }
 
-        if (this.topics.find((t) => t.id === parseInt(requestedTopic))) {
-          this.topicId = parseInt(requestedTopic);
-        }
-      });
-    }, this.toastService.httpError);
+          if (this.topics.find((t) => t.id === parseInt(requestedTopic))) {
+            this.topicId = parseInt(requestedTopic);
+          }
+        });
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   bodyChange(text: string): void {

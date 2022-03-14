@@ -36,9 +36,14 @@ export class UpdateHouseholdBackgroundComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe((profile) => {
-      this.currentHouseholdBackground = profile.householdBackground;
-    }, this.toastService.httpError);
+    this.profileService.getCurrentProfile().subscribe(
+      (profile) => {
+        this.currentHouseholdBackground = profile.householdBackground;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   onSubmit(): void {

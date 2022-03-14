@@ -19,9 +19,14 @@ export class ForumComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.forumService.getTopicSummaries().subscribe((res) => {
-      this.topics = res.topics;
-    }, this.toastService.httpError);
+    this.forumService.getTopicSummaries().subscribe(
+      (res) => {
+        this.topics = res.topics;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
 
     this.isMod = this.authService.isAtLeastMod();
   }

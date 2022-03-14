@@ -16,10 +16,15 @@ export class ProfileReportsComponent implements OnInit {
   constructor(private profileService: ProfileService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.profileService.getProfileReports().subscribe((res) => {
-      this.reports = res.profileReports;
-      console.log(res);
-    }, this.toastService.httpError);
+    this.profileService.getProfileReports().subscribe(
+      (res) => {
+        this.reports = res.profileReports;
+        console.log(res);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   public getFormattedDateForProfileReport(index: number): string {
@@ -27,10 +32,15 @@ export class ProfileReportsComponent implements OnInit {
   }
 
   public dismissReport(index: number): void {
-    this.profileService.deleteProfileReport(this.reports[index].id).subscribe((_) => {
-      this.removeReportByIndex(index);
-      this.toastService.success('Successfully dismissed the profile report.');
-    }, this.toastService.httpError);
+    this.profileService.deleteProfileReport(this.reports[index].id).subscribe(
+      (_) => {
+        this.removeReportByIndex(index);
+        this.toastService.success('Successfully dismissed the profile report.');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   private removeReportByIndex(index: number): void {

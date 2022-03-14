@@ -87,15 +87,25 @@ export class ThreadReplyComponent implements OnInit {
 
   likeUnlikeReply(): void {
     if (!this.userHasLiked) {
-      this.forumService.likeReply(this.reply.threadId, this.reply.id).subscribe(() => {
-        this.userHasLiked = true;
-        this.reply.likes += 1;
-      }, this.toastService.httpError);
+      this.forumService.likeReply(this.reply.threadId, this.reply.id).subscribe(
+        () => {
+          this.userHasLiked = true;
+          this.reply.likes += 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     } else {
-      this.forumService.unlikeReply(this.reply.threadId, this.reply.id).subscribe(() => {
-        this.userHasLiked = false;
-        this.reply.likes -= 1;
-      }, this.toastService.httpError);
+      this.forumService.unlikeReply(this.reply.threadId, this.reply.id).subscribe(
+        () => {
+          this.userHasLiked = false;
+          this.reply.likes -= 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     }
   }
 
@@ -117,10 +127,15 @@ export class ThreadReplyComponent implements OnInit {
       return;
     }
 
-    this.forumService.deleteReply(this.reply.threadId, this.reply.id).subscribe(() => {
-      this.modalService.dismissAll();
-      this.toastService.successAndNavigate('Successfully deleted reply.', `/forum/threads/${this.reply.threadId}`);
-    }, this.toastService.httpError);
+    this.forumService.deleteReply(this.reply.threadId, this.reply.id).subscribe(
+      () => {
+        this.modalService.dismissAll();
+        this.toastService.successAndNavigate('Successfully deleted reply.', `/forum/threads/${this.reply.threadId}`);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   clicked(event: Event): void {

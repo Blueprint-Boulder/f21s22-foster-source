@@ -41,10 +41,15 @@ export class AnnouncementComponent implements OnInit {
 
   public deleteAnnouncement(): void {
     if (this.announcement) {
-      this.announcementService.deleteAnnouncement(this.announcement.id).subscribe((_) => {
-        this.toastService.success('Successfully deleted the announcement.');
-        this.announcement = undefined;
-      }, this.toastService.httpError);
+      this.announcementService.deleteAnnouncement(this.announcement.id).subscribe(
+        (_) => {
+          this.toastService.success('Successfully deleted the announcement.');
+          this.announcement = undefined;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     }
   }
 
@@ -56,10 +61,15 @@ export class AnnouncementComponent implements OnInit {
           title: this.announcement.title,
           bodyHtml: this.announcement.bodyHtml,
         })
-        .subscribe((_) => {
-          this.toastService.success('Successfully updated the announcement.');
-          this.editMode = false;
-        }, this.toastService.httpError);
+        .subscribe(
+          (_) => {
+            this.toastService.success('Successfully updated the announcement.');
+            this.editMode = false;
+          },
+          (err) => {
+            this.toastService.httpError(err);
+          }
+        );
     }
   }
 

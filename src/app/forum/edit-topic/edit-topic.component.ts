@@ -31,29 +31,34 @@ export class EditTopicComponent implements OnInit {
         this.toastService.error('Must provide valid id parameter in route.');
         return;
       }
-      this.forumService.getTopicSummaryById(topicId).subscribe((ts) => {
-        this.topic = ts;
-        this.editForm = this.formBuilder.group({
-          title: ts.title,
-          description: ts.description,
-        });
+      this.forumService.getTopicSummaryById(topicId).subscribe(
+        (ts) => {
+          this.topic = ts;
+          this.editForm = this.formBuilder.group({
+            title: ts.title,
+            description: ts.description,
+          });
 
-        this.exampleTopic = {
-          id: 1,
-          title: ts.title,
-          description: ts.description,
-          threadCount: 321,
-          lastPostDate: new Date(),
-        };
+          this.exampleTopic = {
+            id: 1,
+            title: ts.title,
+            description: ts.description,
+            threadCount: 321,
+            lastPostDate: new Date(),
+          };
 
-        this.editForm.get('title')!.valueChanges.subscribe((newVal) => {
-          this.exampleTopic.title = newVal;
-        });
+          this.editForm.get('title')!.valueChanges.subscribe((newVal) => {
+            this.exampleTopic.title = newVal;
+          });
 
-        this.editForm.get('description')!.valueChanges.subscribe((newVal) => {
-          this.exampleTopic.description = newVal;
-        });
-      }, this.toastService.httpError);
+          this.editForm.get('description')!.valueChanges.subscribe((newVal) => {
+            this.exampleTopic.description = newVal;
+          });
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     });
   }
 

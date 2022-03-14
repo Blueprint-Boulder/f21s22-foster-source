@@ -140,15 +140,25 @@ export class ThreadPageComponent implements OnInit {
 
   likeUnlikeThread(): void {
     if (!this.userHasLiked) {
-      this.forumService.likeThread(this.thread.id).subscribe(() => {
-        this.userHasLiked = true;
-        this.thread.likes += 1;
-      }, this.toastService.httpError);
+      this.forumService.likeThread(this.thread.id).subscribe(
+        () => {
+          this.userHasLiked = true;
+          this.thread.likes += 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     } else {
-      this.forumService.unlikeThread(this.thread.id).subscribe(() => {
-        this.userHasLiked = false;
-        this.thread.likes -= 1;
-      }, this.toastService.httpError);
+      this.forumService.unlikeThread(this.thread.id).subscribe(
+        () => {
+          this.userHasLiked = false;
+          this.thread.likes -= 1;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+        }
+      );
     }
   }
 
@@ -278,10 +288,15 @@ export class ThreadPageComponent implements OnInit {
       return;
     }
 
-    this.forumService.removeOwnThread(this.thread.id).subscribe(() => {
-      this.modalService.dismissAll();
-      this.toastService.successAndNavigate('Successfully deleted thread.', '/forum');
-    }, this.toastService.httpError);
+    this.forumService.removeOwnThread(this.thread.id).subscribe(
+      () => {
+        this.modalService.dismissAll();
+        this.toastService.successAndNavigate('Successfully deleted thread.', '/forum');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   submitReply(): void {
