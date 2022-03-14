@@ -8,16 +8,16 @@ import { UpdateProfileCollectionComponent } from './update-profile-collection/up
 import { UpdateRespiteBackgroundComponent } from './update-respite-background/update-respite-background.component';
 import { AddRespiteProviderInfoComponent } from './add-respite-provider-info/add-respite-provider-info.component';
 import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modify-temp-availability.component';
+import { UpdateProfilePhotoComponent } from './update-profile-photo/update-profile-photo.component';
+import { UserForumActivityComponent } from './user-forum-activity/user-forum-activity.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserRoutingModule } from './user-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginModule } from '../login/login.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserForumActivityComponent } from './user-forum-activity/user-forum-activity.component';
-import { UpdateProfilePhotoComponent } from './update-profile-photo/update-profile-photo.component';
-import { LoginModule } from '../login/login.module';
 
 @NgModule({
   declarations: [

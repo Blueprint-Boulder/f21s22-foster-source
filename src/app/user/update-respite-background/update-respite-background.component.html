@@ -34,28 +34,22 @@
   <form [formGroup]="updateRespiteBackgroundForm">
     <div class="row how-many-years-how-many-children-row">
       <div class="col-sm-6">
-        <div class="form-group">
-          <label for="fosterYearsExperience"><b>How many years have you been a foster parent?</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="fosterYearsExperience"
-            type="number"
-            placeholder="Enter number of years"
-            formControlName="fosterYearsExperience"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'How many years have you been a foster parent?'"
+          [field]="'fosterYearsExperience'"
+          [type]="'number'"
+          [form]="updateRespiteBackgroundForm"
+          [placeholder]="'Enter number of years'"
+        ></app-basic-text-field>
       </div>
       <div class="col-sm-6">
-        <div class="form-group">
-          <label for="totalChildrenCaredFor"><b>In total, how many children have you cared for?</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="totalChildrenCaredFor"
-            type="number"
-            placeholder="Enter number of children"
-            formControlName="totalChildrenCaredFor"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'In total, how many children have you cared for?'"
+          [field]="'totalChildrenCaredFor'"
+          [type]="'number'"
+          [form]="updateRespiteBackgroundForm"
+          [placeholder]="'Enter number of children'"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row respite-backround-checkboxes-row my-3 px-3">
