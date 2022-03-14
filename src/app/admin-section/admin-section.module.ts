@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { ThreadReportsComponent } from './thread-reports/thread-reports.component';
 import { ReplyReportsComponent } from './reply-reports/reply-reports.component';
+import { ProfileReportsComponent } from './profile-reports/profile-reports.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReplyReportsComponent } from './reply-reports/reply-reports.component';
     BugReportsComponent,
     ThreadReportsComponent,
     ReplyReportsComponent,
+    ProfileReportsComponent,
   ],
   imports: [
     CommonModule,

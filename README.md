@@ -115,3 +115,5 @@ Run `ng generate service services/[service name]/[service name]` to generate a s
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+Note that there is a date interceptor! // TODO!

@@ -7,7 +7,7 @@
             <img [src]="profileImgSrc" class="rounded w-75 m-auto" alt="profile picture" (error)="onImgError($event)" />
           </div>
           <div class="row profile-image-info">
-            <div class="col text-center mt-3">
+            <div class="col-12 text-center mt-3">
               <p>
                 <b>{{ selectedProfile.preferredName }}</b
                 ><br />
@@ -29,6 +29,12 @@
                 >
               </p>
             </div>
+
+            <!--    // TODO: TREVOR        -->
+            <div class="col-6 report-col"></div>
+
+            <!--    // TODO: TAHIRA        -->
+            <div class="col-6 moderate-col"></div>
           </div>
         </div>
       </div>
