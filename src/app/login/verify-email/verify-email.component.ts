@@ -43,17 +43,9 @@ export class VerifyEmailComponent implements OnInit {
   public resendEmail(): void {
     this.verificationEmailReSent = true;
     if (this.email) {
-      this.accountService.resendVerificationEmail(this.email).subscribe(
-        () => {
-          this.toastService.show({
-            body: 'Email successfully re-sent.',
-            preset: ToastPresets.SUCCESS,
-          });
-        },
-        (err) => {
-          this.toastService.httpError(err);
-        }
-      );
+      this.accountService.resendVerificationEmail(this.email).subscribe(() => {
+        this.toastService.success('Email was successfully re-sent.');
+      }, this.toastService.httpError);
     }
   }
 }

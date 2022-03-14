@@ -26,15 +26,6 @@ export class AvailabilityFiltersComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.availabilities = [];
-    this.days = [];
-    if (this.availabilityModel) {
-      Object.keys(this.availabilityModel).forEach((key) => {
-        this.days.push(key);
-      });
-      Object.values(this.availabilityModel).forEach((availability) => {
-        this.availabilities.push(availability);
-      });
-    }
+    this.ngOnInit();
   }
 }
