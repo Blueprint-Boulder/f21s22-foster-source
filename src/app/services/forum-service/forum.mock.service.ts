@@ -2,6 +2,7 @@ import {
   CreateNewThreadReq,
   CreateTopicReq,
   DeleteThreadReq,
+  ForumStats,
   FullThread,
   GetReplyReportsRes,
   GetThreadReportsRes,
@@ -22,6 +23,7 @@ import {
   UpdateTopicReq,
 } from '../../models/forum.models';
 import {
+  forumStats,
   fullThreads,
   replies,
   replyReports,
@@ -158,5 +160,9 @@ export class ForumMockService implements ForumService {
 
   getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount> {
     return of({ threads: threadSummaries, totalResults: threadSummaries.length });
+  }
+
+  getStatsForAccount(id: number): Observable<ForumStats> {
+    return of(forumStats[0]);
   }
 }

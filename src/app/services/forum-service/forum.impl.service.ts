@@ -2,6 +2,7 @@ import {
   CreateNewThreadReq,
   CreateTopicReq,
   DeleteThreadReq,
+  ForumStats,
   FullThread,
   GetReplyReportsRes,
   GetThreadReportsRes,
@@ -221,5 +222,11 @@ export class ForumImplService implements ForumService {
       `${environment.backendHost}/api/db/forum/threads?limit=${count}&offset=0&account=${id}`,
       { withCredentials: true }
     );
+  }
+
+  getStatsForAccount(id: number): Observable<ForumStats> {
+    return this.http.get<ForumStats>(`${environment.backendHost}/api/db/forum/utils/account-stats?account=${id}`, {
+      withCredentials: true,
+    });
   }
 }
