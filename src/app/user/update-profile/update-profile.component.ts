@@ -33,61 +33,51 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe(
-      (profile) => {
-        this.currentProfile = profile;
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.profileService.getCurrentProfile().subscribe((profile) => {
+      this.currentProfile = profile;
+    }, this.toastService.httpError);
   }
 
   onSubmit(): void {
     if (this.updateProfileForm.invalid) {
       this.updateProfileForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-
-      const req: UpdateProfileReq = {
-        preferredName:
-          this.updateProfileForm.get('preferredName')?.value === '' ||
-          this.updateProfileForm.get('preferredName')?.value === null
-            ? undefined
-            : this.updateProfileForm.get('preferredName')?.value,
-        biography:
-          this.updateProfileForm.get('biography')?.value === '' ||
-          this.updateProfileForm.get('biography')?.value === null
-            ? undefined
-            : this.updateProfileForm.get('biography')?.value,
-        gender:
-          this.updateProfileForm.get('gender')?.value === '' || this.updateProfileForm.get('gender')?.value === null
-            ? undefined
-            : this.updateProfileForm.get('gender')?.value,
-        pronouns:
-          this.updateProfileForm.get('pronouns')?.value === '' || this.updateProfileForm.get('gender')?.value === null
-            ? undefined
-            : this.updateProfileForm.get('pronouns')?.value,
-        maritalStatus:
-          this.updateProfileForm.get('maritalStatus')?.value === '' ||
-          this.updateProfileForm.get('maritalStatus')?.value === null
-            ? undefined
-            : this.updateProfileForm.get('maritalStatus')?.value,
-      };
-
-      this.profileService.updateProfile(req).subscribe(
-        (res) => {
-          this.toastService.show({
-            body: 'Profile information successfully updated.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/${res.id}`]);
-        },
-        (err) => {
-          this.toastService.httpError(err);
-          this.submittingForm = false;
-        }
-      );
+      return;
     }
+    this.submittingForm = true;
+
+    const req: UpdateProfileReq = {
+      preferredName:
+        this.updateProfileForm.get('preferredName')?.value === '' ||
+        this.updateProfileForm.get('preferredName')?.value === null
+          ? undefined
+          : this.updateProfileForm.get('preferredName')?.value,
+      biography:
+        this.updateProfileForm.get('biography')?.value === '' || this.updateProfileForm.get('biography')?.value === null
+          ? undefined
+          : this.updateProfileForm.get('biography')?.value,
+      gender:
+        this.updateProfileForm.get('gender')?.value === '' || this.updateProfileForm.get('gender')?.value === null
+          ? undefined
+          : this.updateProfileForm.get('gender')?.value,
+      pronouns:
+        this.updateProfileForm.get('pronouns')?.value === '' || this.updateProfileForm.get('gender')?.value === null
+          ? undefined
+          : this.updateProfileForm.get('pronouns')?.value,
+      maritalStatus:
+        this.updateProfileForm.get('maritalStatus')?.value === '' ||
+        this.updateProfileForm.get('maritalStatus')?.value === null
+          ? undefined
+          : this.updateProfileForm.get('maritalStatus')?.value,
+    };
+
+    this.profileService.updateProfile(req).subscribe(
+      (res) => {
+        this.toastService.successAndNavigate('Profile information successfully updated.', `/user/${res.id}`);
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingForm = false;
+      }
+    );
   }
 }

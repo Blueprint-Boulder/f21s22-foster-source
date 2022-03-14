@@ -14,13 +14,8 @@ export class UpdateProfileCollectionComponent implements OnInit {
   constructor(private profileService: ProfileService, private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe(
-      (profile) => {
-        this.currentProfile = profile;
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.profileService.getCurrentProfile().subscribe((profile) => {
+      this.currentProfile = profile;
+    }, this.toastService.httpError);
   }
 }
