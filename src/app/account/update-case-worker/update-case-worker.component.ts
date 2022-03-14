@@ -22,8 +22,7 @@ export class UpdateCaseWorkerComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private toastService: ToastService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -35,43 +34,37 @@ export class UpdateCaseWorkerComponent implements OnInit {
       certifiedBy: ['', Validators.required],
       certExpiry: [null, Validators.compose([Validators.required, FormUtils.validateDate])],
     });
-    this.accountService.getCwInfo().subscribe(
-      (cwInfo) => {
-        this.cwInfo = cwInfo;
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.accountService.getCwInfo().subscribe((cwInfo) => {
+      this.cwInfo = cwInfo;
+    }, this.toastService.httpError);
   }
 
   onSubmit(): void {
     if (this.updateCwInfoForm.invalid) {
       this.updateCwInfoForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-      const req: CaseWorkerInfo = {
-        cwEmail: this.updateCwInfoForm.get('caseworkeremail')!.value,
-        cwFirstName: this.updateCwInfoForm.get('caseworkerfname')!.value,
-        cwLastName: this.updateCwInfoForm.get('caseworkerlname')!.value,
-        cwPhoneNumber: UpdateCaseWorkerComponent.formatPhoneNumber(this.updateCwInfoForm.get('caseworkerphone')!.value),
-        certifiedBy: this.updateCwInfoForm.get('certifiedBy')!.value,
-        certExpiry: this.updateCwInfoForm.get('certExpiry')!.value,
-      };
-      this.accountService.updateCwInfo(req).subscribe(
-        (_) => {
-          this.toastService.show({
-            body: 'Successfully updated case worker information.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate(['/account']);
-        },
-        (err) => {
-          this.submittingForm = false;
-          this.toastService.httpError(err);
-        }
-      );
+      return;
     }
+
+    this.submittingForm = true;
+
+    const req: CaseWorkerInfo = {
+      cwEmail: this.updateCwInfoForm.get('caseworkeremail')!.value,
+      cwFirstName: this.updateCwInfoForm.get('caseworkerfname')!.value,
+      cwLastName: this.updateCwInfoForm.get('caseworkerlname')!.value,
+      cwPhoneNumber: UpdateCaseWorkerComponent.formatPhoneNumber(this.updateCwInfoForm.get('caseworkerphone')!.value),
+      certifiedBy: this.updateCwInfoForm.get('certifiedBy')!.value,
+      certExpiry: this.updateCwInfoForm.get('certExpiry')!.value,
+    };
+
+    this.accountService.updateCwInfo(req).subscribe(
+      (_) => {
+        this.toastService.successAndNavigate('Successfully updated case worker information.', '/account');
+      },
+      (err) => {
+        this.submittingForm = false;
+        this.toastService.httpError(err);
+      }
+    );
   }
 
   private static validatePhoneNumber(control: AbstractControl): ValidationErrors | null {
