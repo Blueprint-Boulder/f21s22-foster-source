@@ -10,7 +10,7 @@
   <div class="row topics-row">
     <div class="col-12">
       <p><b>Select a topic for your thread</b></p>
-      <select class="form-select w-100" [(ngModel)]="topicId" (change)="changeTopic($event)">
+      <select class="form-select w-100" [(ngModel)]="topicId">
         <option *ngFor="let topic of topics" [value]="topic.id" [title]="topic.description">{{ topic.title }}</option>
       </select>
     </div>

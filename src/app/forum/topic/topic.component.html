@@ -1,5 +1,5 @@
 <div *ngIf="topic" class="w-100 my-2">
-  <div class="container-fluid w-100 topic shadow-sm rounded p-3">
+  <div class="container-fluid w-100 topic shadow-sm rounded p-3 border">
     <div class="row mt-2" (click)="navigateToTopic()">
       <div class="col">
         <h3>{{ topic.title }}</h3>
@@ -16,8 +16,8 @@
         <div class="col text-right stats">
           <i class="text-muted"
             >{{ topic.threadCount }} <i class="bi bi-chat-text"></i>
-            <span *ngIf="topic.lastPostDate">
-              | Last Reply: {{ topic.lastPostDate.toLocaleDateString("en-US") }}</span
+            <span *ngIf="topic.lastPostDate"
+              >&nbsp;&nbsp;-&nbsp;&nbsp;Last Reply: {{ topic.lastPostDate.toLocaleDateString("en-US") }}</span
             ></i
           >
         </div>

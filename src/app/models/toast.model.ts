@@ -8,6 +8,7 @@ export interface Toast {
 }
 
 export enum ToastPresets {
+  NONE,
   REGULAR,
   SUCCESS,
   ERROR,
@@ -23,10 +24,10 @@ export function getClassListFromPreset(preset: ToastPresets) {
       classlist = 'bg-danger text-light rounded mt-2';
       break;
     case ToastPresets.REGULAR:
-      classlist = 'bg-primary rounded mt-2';
+      classlist = 'bg-light border rounded mt-2 shadow-sm';
       break;
     default:
-      classlist = 'bg-light rounded mt-2';
+      classlist = 'bg-light border rounded mt-2';
       break;
   }
   return classlist;

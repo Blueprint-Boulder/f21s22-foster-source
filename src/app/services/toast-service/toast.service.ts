@@ -22,7 +22,7 @@ export class ToastService {
   }
 
   httpError(err: any) {
-    // Standard error response from fs-service
+    // Standard http error response from fs-service
     if (err.error && err.error.code && err.error.message) {
       this.show({
         body: `[${err.error.code}] ${err.error.message}`,

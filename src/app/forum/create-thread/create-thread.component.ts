@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ForumService } from '../../services/forum-service/forum.service';
-import { ToastService } from '../../services/toast-service/toast.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CreateNewThreadReq, TopicSummary } from '../../models/forum.models';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-thread',
@@ -24,25 +24,20 @@ export class CreateThreadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.forumService.getTopicSummaries().subscribe(
-      (ts) => {
-        this.topics = ts.topics;
-        this.route.queryParamMap.subscribe((map) => {
-          const requestedTopic = map.get('topic');
+    this.forumService.getTopicSummaries().subscribe((ts) => {
+      this.topics = ts.topics;
+      this.route.queryParamMap.subscribe((map) => {
+        const requestedTopic = map.get('topic');
 
-          if (!requestedTopic || isNaN(parseInt(requestedTopic))) {
-            return;
-          }
+        if (!requestedTopic || isNaN(parseInt(requestedTopic))) {
+          return;
+        }
 
-          if (this.topics.find((t) => t.id === parseInt(requestedTopic))) {
-            this.topicId = parseInt(requestedTopic);
-          }
-        });
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+        if (this.topics.find((t) => t.id === parseInt(requestedTopic))) {
+          this.topicId = parseInt(requestedTopic);
+        }
+      });
+    }, this.toastService.httpError);
   }
 
   bodyChange(text: string): void {
@@ -65,8 +60,7 @@ export class CreateThreadComponent implements OnInit {
 
     this.forumService.createNewThread(req).subscribe(
       (res) => {
-        this.toastService.success('Successfully posted your thread.');
-        this.router.navigate([`/forum/threads/${res.id}`]);
+        this.toastService.successAndNavigate('Successfully posted your thread.', `/forum/threads/${res.id}`);
       },
       (err) => {
         this.toastService.httpError(err);
@@ -77,9 +71,5 @@ export class CreateThreadComponent implements OnInit {
 
   formIsInvalid(): boolean {
     return !this.threadTitle || this.threadTitle === '' || !this.threadBody || this.threadBody === '' || !this.topicId;
-  }
-
-  changeTopic(value: any) {
-    console.log(this.topicId);
   }
 }
