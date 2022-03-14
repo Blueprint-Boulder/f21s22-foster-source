@@ -12,12 +12,6 @@ import { environment } from '../../../environments/environment';
 export class BlacklistImplService implements BlacklistService {
   constructor(private http: HttpClient) {}
 
-  blacklistUser(user: BlacklistedUser): Observable<BlacklistedUser> {
-    return this.http.post<BlacklistedUser>(`${environment.backendHost}/api/db/blacklist`, JSON.stringify(user), {
-      withCredentials: true,
-    });
-  }
-
   deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return this.http.delete<void>(
       `${environment.backendHost}/api/db/blacklist/?phoneNumber=${encodeURIComponent(
@@ -39,7 +33,7 @@ export class BlacklistImplService implements BlacklistService {
     });
   }
 
-  blacklistUserByAccountId(req: BlacklistAccountReq): Observable<any> {
+  blacklistAndDeleteAccount(req: BlacklistAccountReq): Observable<any> {
     return this.http.post(`${environment.backendHost}/api/db/blacklist`, req, {
       withCredentials: true,
     });

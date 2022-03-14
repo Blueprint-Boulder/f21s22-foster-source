@@ -12,8 +12,7 @@ import { Observable } from 'rxjs';
 })
 export abstract class BlacklistService {
   public abstract getBlacklistedUsers(): Observable<GetBlacklistedUsersRes>;
-  public abstract blacklistUser(user: BlacklistedUser): Observable<BlacklistedUser>;
   public abstract deleteFromBlacklist(phoneNumber: string, email: string): Observable<any>;
   public abstract suspendUser(req: SuspendUserReq): Observable<any>;
-  public abstract blacklistUserByAccountId(req: BlacklistAccountReq): Observable<any>;
+  public abstract blacklistAndDeleteAccount(req: BlacklistAccountReq): Observable<any>;
 }
