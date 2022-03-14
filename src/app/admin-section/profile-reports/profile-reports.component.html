@@ -1,0 +1,62 @@
+<div class="table-container">
+  <div class="my-5">
+    <p>
+      To take action on a report (such as looking into it further and/or suspending/blacklisting the profile), click the
+      "inspect" button.
+    </p>
+  </div>
+  <div *ngFor="let report of reports; index as i">
+    <div class="row fs-tan-background user-row p-4" [ngClass]="{ 'mt-4': i != 0 }">
+      <div class="col-sm-8 m-auto">
+        <div class="row mb-4">
+          <div class="col-12">
+            <span
+              >Reported Profile: <a [href]="'/user/' + report.profile.id">{{ report.profile.preferredName }}</a>
+            </span>
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-12">
+            <b>Reason:</b><br />
+            <div class="ml-1 bug-desc pl-2 mb-1">
+              <span
+                ><i>{{ report.description }}</i></span
+              ><br />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <p>
+              <i>Account Info:</i><br />
+              <b>Name: </b>{{ report.profile.account.firstName }} {{ report.profile.account.lastName }}<br />
+              <b>Username: </b>{{ report.profile.account.username }}<br />
+              <b>Email: </b>{{ report.profile.account.email }}<br />
+            </p>
+          </div>
+          <div class="col-12 col-md-6">
+            <p>
+              <i>Case Worker Info:</i><br />
+              <b>Name: </b>{{ report.profile.account.cwFirstName }} {{ report.profile.account.cwLastName }}<br />
+              <b>Email: </b>{{ report.profile.account.cwEmail }}<br />
+              <b>Phone: </b>{{ report.profile.account.cwPhoneNumber }}<br />
+            </p>
+          </div>
+        </div>
+
+        <small>Report submitted on {{ getFormattedDateForProfileReport(i) }} by {{ report.account.username }}</small>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-sm-auto my-2 my-sm-0">
+        <button class="btn btn-secondary w-100" (click)="dismissReport(i)">Dismiss</button>
+      </div>
+      <div class="col-xs-6 col-sm-2 m-sm-auto my-2 my-sm-0">
+        <a class="btn btn-primary text-white w-100 w-100" [href]="'/user/' + report.profile.id"> Inspect </a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!reports || reports.length == 0" class="row">
+    <div class="col-xs-12 mx-auto bg-light rounded mt-5">
+      <div class="p-5">No Reply Reports Found</div>
+    </div>
+  </div>
+</div>

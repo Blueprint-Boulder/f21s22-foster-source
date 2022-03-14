@@ -13,28 +13,14 @@
   <form [formGroup]="topicForm">
     <div class="row form-row">
       <div class="col-12 mt-5">
-        <div class="form-group">
-          <label for="title"
-            ><b>Topic Title</b><span class="required-star">*</span>
-            <br />
-          </label>
-          <input
-            class="form-control bottom-border-input"
-            id="title"
-            type="text"
-            placeholder="Parenting 101"
-            formControlName="title"
-          />
-          <div
-            *ngIf="
-              topicForm.get('title')?.invalid && (topicForm.get('title')?.dirty || topicForm.get('title')?.touched)
-            "
-          >
-            <small *ngIf="topicForm.get('title')?.errors?.required" class="input-error"
-              >Please enter a title for your topic.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [title]="'Topic Title'"
+          [field]="'title'"
+          [form]="topicForm"
+          [placeholder]="'ex. Parenting 101'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter a title for your topic.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-12 mt-3">
         <div class="form-group">

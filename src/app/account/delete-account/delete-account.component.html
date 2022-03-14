@@ -14,27 +14,14 @@
     <div class="row mt-5">
       <div class="col-md-3 col-lg-4"></div>
       <div class="col-sm-12 col-md-6 col-lg-4">
-        <div class="form-group">
-          <label for="password"><b>Password</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="password"
-            id="password"
-            placeholder="Enter Password"
-            formControlName="password"
-            required
-          />
-          <div
-            *ngIf="
-              deleteAccountForm.get('password')?.invalid &&
-              (deleteAccountForm.get('password')?.dirty || deleteAccountForm.get('password')?.touched)
-            "
-          >
-            <small *ngIf="deleteAccountForm.get('password')?.errors?.required" class="input-error"
-              >Please enter your current password.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [title]="'Password'"
+          [field]="'password'"
+          [type]="'password'"
+          [errors]="['required']"
+          [form]="deleteAccountForm"
+          [errorMessages]="['Please enter your current password.']"
+        ></app-basic-text-field>
       </div>
     </div>
   </form>

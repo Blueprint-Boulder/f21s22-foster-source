@@ -4,7 +4,6 @@ import { AddressService } from '../../services/address-service/address.service';
 import { Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { AddressRes, SimpleAddressReq } from '../../models/adress.model';
-import { ToastPresets } from '../../models/toast.model';
 import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
@@ -49,30 +48,29 @@ export class UpdateAddressComponent implements OnInit {
   onSubmit(): void {
     if (this.updateAddressForm.invalid) {
       this.updateAddressForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-      const req: SimpleAddressReq = {
-        addressLine1: this.updateAddressForm.get('address')!.value,
-        addressLine2: this.updateAddressForm!.get('address2')?.value
-          ? this.updateAddressForm!.get('address2')!.value
-          : undefined,
-        city: this.updateAddressForm!.get('city')!.value,
-        zipcode: this.updateAddressForm!.get('zip')!.value,
-        state: this.updateAddressForm!.get('state')!.value,
-      };
-      this.addressService.updateAddress(req).subscribe(
-        (_) => {
-          this.toastService.show({
-            body: 'Successfully updated address.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate(['/account']);
-        },
-        (err) => {
-          this.toastService.httpError(err);
-          this.submittingForm = false;
-        }
-      );
+      return;
     }
+
+    this.submittingForm = true;
+
+    const req: SimpleAddressReq = {
+      addressLine1: this.updateAddressForm.get('address')!.value,
+      addressLine2: this.updateAddressForm!.get('address2')?.value
+        ? this.updateAddressForm!.get('address2')!.value
+        : undefined,
+      city: this.updateAddressForm!.get('city')!.value,
+      zipcode: this.updateAddressForm!.get('zip')!.value,
+      state: this.updateAddressForm!.get('state')!.value,
+    };
+
+    this.addressService.updateAddress(req).subscribe(
+      (_) => {
+        this.toastService.successAndNavigate('Successfully updated address.', '/account');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingForm = false;
+      }
+    );
   }
 }

@@ -187,3 +187,9 @@ export interface ReplyReport {
 export interface GetReplyReportsRes {
   replyReports: ReplyReport[];
 }
+
+export interface ForumStats {
+  likes: number;
+  threads: number;
+  replies: number;
+}

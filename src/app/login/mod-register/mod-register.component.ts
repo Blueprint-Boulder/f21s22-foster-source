@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { AccountService } from '../../services/account-service/account.service';
-import { Router } from '@angular/router';
-import { ToastService } from '../../services/toast-service/toast.service';
 import { CreateAccountRequest, CreateStaffAccountRequest } from '../../models/account.model';
-import { ToastPresets } from '../../models/toast.model';
-import * as libphonenumber from 'google-libphonenumber';
-import { PhoneNumberType } from '../../models/phonenumber.model';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
+import { AccountService } from '../../services/account-service/account.service';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mod-register',

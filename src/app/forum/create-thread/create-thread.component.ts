@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ForumService } from '../../services/forum-service/forum.service';
-import { ToastService } from '../../services/toast-service/toast.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CreateNewThreadReq, TopicSummary } from '../../models/forum.models';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-create-thread',
@@ -65,8 +65,7 @@ export class CreateThreadComponent implements OnInit {
 
     this.forumService.createNewThread(req).subscribe(
       (res) => {
-        this.toastService.success('Successfully posted your thread.');
-        this.router.navigate([`/forum/threads/${res.id}`]);
+        this.toastService.successAndNavigate('Successfully posted your thread.', `/forum/threads/${res.id}`);
       },
       (err) => {
         this.toastService.httpError(err);
@@ -77,9 +76,5 @@ export class CreateThreadComponent implements OnInit {
 
   formIsInvalid(): boolean {
     return !this.threadTitle || this.threadTitle === '' || !this.threadBody || this.threadBody === '' || !this.topicId;
-  }
-
-  changeTopic(value: any) {
-    console.log(this.topicId);
   }
 }

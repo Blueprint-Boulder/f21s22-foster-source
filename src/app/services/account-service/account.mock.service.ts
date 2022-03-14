@@ -1,22 +1,20 @@
+import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
+import { ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
+import { accounts, tokenString, createAccountRequests } from '../../mock/database-entities';
 import { AccountService } from './account.service';
+import { FinishProfileReq } from '../../models/profile.model';
+import { NavBarStatus } from '../../models/nav-bar.models';
+import { Observable, of } from 'rxjs';
 import {
   Account,
   CaseWorkerInfo,
-  Token,
   CreateAccountRequest,
   CreateStaffAccountRequest,
   DeleteAccountReq,
   GetAccountsReq,
   LoginRequest,
-  UpdateAccountReq,
   VerifyReq,
 } from '../../models/account.model';
-import { Observable, of } from 'rxjs';
-import { accounts, applicants, tokenString, createAccountRequests } from '../../mock/database-entities';
-import { ApproveApplicantRequest, DenyApplicantRequest, GetApplicantsRes } from '../../models/applicant.model';
-import { FinishProfileReq } from '../../models/profile.model';
-import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
-import { NavBarStatus } from '../../models/nav-bar.models';
 
 export class AccountMockService implements AccountService {
   createAccount(accountReq: CreateAccountRequest): Observable<CreateAccountRequest> {
@@ -24,10 +22,6 @@ export class AccountMockService implements AccountService {
   }
 
   createStaffAccount(accountReq: CreateStaffAccountRequest): Observable<any> {
-    return of({});
-  }
-
-  deleteAccount(id: number): Observable<any> {
     return of({});
   }
 
@@ -41,10 +35,6 @@ export class AccountMockService implements AccountService {
 
   logout(): Observable<any> {
     return of({});
-  }
-
-  updateAccount(params: UpdateAccountReq): Observable<Account> {
-    return of(accounts[0]);
   }
 
   getApplicants(): Observable<GetAccountsReq> {
