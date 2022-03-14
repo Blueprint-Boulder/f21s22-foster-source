@@ -9,10 +9,6 @@ import {
 import { blacklist } from '../../mock/database-entities';
 
 export class BlacklistMockService implements BlacklistService {
-  blacklistUser(user: BlacklistedUser): Observable<BlacklistedUser> {
-    return of(blacklist[0]);
-  }
-
   deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return of({});
   }
@@ -23,7 +19,7 @@ export class BlacklistMockService implements BlacklistService {
     });
   }
 
-  blacklistUserByAccountId(req: BlacklistAccountReq): Observable<any> {
+  blacklistAndDeleteAccount(req: BlacklistAccountReq): Observable<any> {
     return of({});
   }
 
