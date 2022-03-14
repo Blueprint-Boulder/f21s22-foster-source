@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from '../login/login.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { UserForumStatsComponent } from './user-forum-stats/user-forum-stats.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NgModule } from '@angular/core';
     UpdateProfileCollectionComponent,
     UserForumActivityComponent,
     UpdateProfilePhotoComponent,
+    UserForumStatsComponent,
   ],
   imports: [
     CommonModule,
