@@ -86,6 +86,6 @@ export class ProfileMockService implements ProfileService {
   }
 
   getProfileReports(): Observable<GetProfileReportsRes> {
-    return of({ reports: [] });
+    return of({ profileReports: [] });
   }
 }
