@@ -16,66 +16,38 @@
     </div>
   </div>
   <form [formGroup]="updateAddressForm">
-    <div class="row address-1-row">
+    <div class="row address-1-row mt-4">
       <div class="col-xs-12 col-sm-12 col-12">
-        <div class="form-group">
-          <label class="mt-4" for="address"><b>Address Line 1</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="address"
-            placeholder="Address Line 1"
-            formControlName="address"
-            required
-          />
-          <div
-            *ngIf="
-              updateAddressForm.get('address')?.invalid &&
-              (updateAddressForm.get('address')?.dirty || updateAddressForm.get('address')?.touched)
-            "
-          >
-            <small *ngIf="updateAddressForm.get('address')?.errors?.required" class="input-error"
-              >Please enter your address.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [title]="'Address Line 1'"
+          [field]="'address'"
+          [placeholder]="'Address line 1'"
+          [form]="updateAddressForm"
+          [errors]="['required']"
+          [errorMessages]="['Please enter your address.']"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row address-2-row">
       <div class="col-sm-8">
-        <div class="form-group">
-          <label class="mt-4" for="address2"><b>Address Line 2</b></label>
-          <input
-            class="form-control p-1 bottom-border-input"
-            id="address2"
-            placeholder="Address Line 2"
-            formControlName="address2"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'Address Line 2'"
+          [field]="'address2'"
+          [form]="updateAddressForm"
+          [placeholder]="'Apt, house number, unit, etc.'"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row address-info-row">
       <div class="col-md-5">
-        <div class="form-group">
-          <label for="city"><b>City</b><span class="required-star">*</span></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="text"
-            id="city"
-            placeholder="Enter City"
-            formControlName="city"
-            required
-          />
-          <div
-            *ngIf="
-              updateAddressForm.get('city')?.invalid &&
-              (updateAddressForm.get('city')?.dirty || updateAddressForm.get('city')?.touched)
-            "
-          >
-            <small *ngIf="updateAddressForm.get('city')?.errors?.required" class="input-error"
-              >Please enter a city.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [title]="'City'"
+          [field]="'city'"
+          [form]="updateAddressForm"
+          [placeholder]="'Enter your city'"
+          [errors]="['required']"
+          [errorMessages]="['Please enter a city.']"
+        ></app-basic-text-field>
       </div>
       <div class="col-md-4">
         <div class="form-group">
@@ -104,31 +76,14 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <label for="zipCode"><b>Zip Code</b><span class="required-star">*</span></label>
-          <div class="container"></div>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            type="text"
-            id="zipCode"
-            placeholder="Enter Zip"
-            formControlName="zip"
-            required
-          />
-          <div
-            *ngIf="
-              updateAddressForm.get('zip')?.invalid &&
-              (updateAddressForm.get('zip')?.dirty || updateAddressForm.get('zip')?.touched)
-            "
-          >
-            <small *ngIf="updateAddressForm.get('zip')?.errors?.required" class="input-error"
-              >Please enter a zip code.<br
-            /></small>
-            <small *ngIf="updateAddressForm.get('zip')?.errors?.pattern" class="input-error"
-              >Please enter a valid zip code.<br
-            /></small>
-          </div>
-        </div>
+        <app-basic-text-field
+          [title]="'Zip Code'"
+          [field]="'zip'"
+          [placeholder]="'Enter zip'"
+          [form]="updateAddressForm"
+          [errors]="['required', 'pattern']"
+          [errorMessages]="['Please enter your zip code.', 'Please enter a valid zip code.']"
+        ></app-basic-text-field>
       </div>
     </div>
   </form>
