@@ -1,11 +1,11 @@
 import { DayModel } from '../../common-components/day-availability-input/day-availability-input.component';
+import { AvailabilityService } from '../../services/availability-service/availability.service';
 import { AvailabilityType, SimpleAvailability } from '../../models/availability.model';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AvailabilityService } from '../../services/availability-service/availability.service';
 
 @Component({
   selector: 'app-update-primary-availability',
@@ -156,8 +156,7 @@ export class UpdatePrimaryAvailabilityComponent implements OnInit {
 
     this.availService.updatePrimaryAvailability(req).subscribe(
       (profile) => {
-        this.toastService.success('Successfully updated primary availability');
-        this.router.navigate([`/user/`]);
+        this.toastService.successAndNavigate('Successfully updated primary availability', '/user');
       },
       (err) => {
         this.toastService.httpError(err);

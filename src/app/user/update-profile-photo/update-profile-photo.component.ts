@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { Router } from '@angular/router';
 import { FullProfileRes } from '../../models/get-profile-by-id.models';
+import { ImageUtils } from '../../common/utils/ImageUtils';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-profile-photo',
@@ -18,15 +18,10 @@ export class UpdateProfilePhotoComponent implements OnInit {
   constructor(private profileService: ProfileService, private toastService: ToastService, private router: Router) {}
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe(
-      (res) => {
-        this.currentProfile = res;
-        this.profileImgSrc = this.getProfileSrc();
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.profileService.getCurrentProfile().subscribe((res) => {
+      this.currentProfile = res;
+      this.profileImgSrc = this.getProfileSrc();
+    }, this.toastService.httpError);
   }
 
   getProfileSrc(): string {
@@ -39,14 +34,8 @@ export class UpdateProfilePhotoComponent implements OnInit {
 
   imageUploaded(event: string): void {
     this.imgKey = event;
-    this.profileService.updateProfileImgKey(event).subscribe(
-      (_) => {
-        this.toastService.success('Successfully updated your profile photo.');
-        this.router.navigate(['/user']);
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.profileService.updateProfileImgKey(event).subscribe((_) => {
+      this.toastService.successAndNavigate('Successfully updated your profile photo.', '/user');
+    }, this.toastService.httpError);
   }
 }

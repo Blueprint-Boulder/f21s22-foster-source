@@ -1,25 +1,19 @@
+import { environment } from '../../../environments/environment';
 import { AnnouncementService } from './announcement.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {
   Announcement,
   GetAnnouncementsRes,
   OptionalAnnouncement,
   PostAnnouncementRequest,
 } from '../../models/announcement.model';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 
 export class AnnouncementImplService implements AnnouncementService {
   constructor(private http: HttpClient) {}
 
   getAnnouncements(): Observable<GetAnnouncementsRes> {
     return this.http.get<GetAnnouncementsRes>(`${environment.backendHost}/api/db/announcements`, {
-      withCredentials: true,
-    });
-  }
-
-  getAnnouncementById(id: number): Observable<Announcement> {
-    return this.http.get<Announcement>(`${environment.backendHost}/api/db/announcements/${encodeURIComponent(id)}`, {
       withCredentials: true,
     });
   }

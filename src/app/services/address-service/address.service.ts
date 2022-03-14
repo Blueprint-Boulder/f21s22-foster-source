@@ -1,5 +1,5 @@
+import { AddressRes, SimpleAddressReq } from '../../models/adress.model';
 import { Injectable } from '@angular/core';
-import { AddressReq, AddressRes, SimpleAddressReq } from '../../models/adress.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

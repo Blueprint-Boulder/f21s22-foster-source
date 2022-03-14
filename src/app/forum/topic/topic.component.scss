@@ -1,8 +1,11 @@
+@import "../../../styles";
+
 .topic {
   padding-top: 15px;
-  background: #fef4e8;
+  background: white;
+  border-left: 10px solid map-get($theme-colors, "secondary") !important;
   &:hover {
-    background: #e5dcd1;
+    background: #f0ebf6;
     cursor: pointer;
   }
 }

@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhoneNumberService } from '../../services/phone-number-service/phone-number.service';
+import { PhoneNumber, PhoneNumbersUpdateReq } from '../../models/phonenumber.model';
 import { ToastService } from '../../services/toast-service/toast.service';
-import { PhoneNumber, PhoneNumbersUpdateReq, PhoneNumberType } from '../../models/phonenumber.model';
-import { ToastPresets } from '../../models/toast.model';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormUtils } from '../../common/utils/FormUtils';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-update-phone',
@@ -23,8 +21,7 @@ export class UpdatePhoneComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private phoneService: PhoneNumberService,
-    private router: Router
+    private phoneService: PhoneNumberService
   ) {
     this.PHONE_TYPES = FormUtils.getPhoneTypes();
   }
@@ -69,35 +66,34 @@ export class UpdatePhoneComponent implements OnInit {
   onSubmit(): void {
     if (this.updatePhoneForm.invalid) {
       this.updatePhoneForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-      const req: PhoneNumbersUpdateReq = {
-        primaryPhoneNumber: this.updatePhoneForm.get('primaryType')?.value
-          ? {
-              phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('primaryPhone')!.value),
-              type: this.updatePhoneForm.get('primaryType')!.value,
-            }
-          : undefined,
-        secondaryPhoneNumber: this.updatePhoneForm.get('secondaryType')?.value
-          ? {
-              phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('secondaryPhone')!.value),
-              type: this.updatePhoneForm.get('secondaryType')!.value,
-            }
-          : undefined,
-      };
-      this.phoneService.updatePhoneNumber(req).subscribe(
-        (_) => {
-          this.toastService.show({
-            body: 'Phone numbers successfully updated.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate(['/account']);
-        },
-        (err) => {
-          this.toastService.httpError(err);
-          this.submittingForm = false;
-        }
-      );
+      return;
     }
+
+    this.submittingForm = true;
+
+    const req: PhoneNumbersUpdateReq = {
+      primaryPhoneNumber: this.updatePhoneForm.get('primaryType')?.value
+        ? {
+            phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('primaryPhone')!.value),
+            type: this.updatePhoneForm.get('primaryType')!.value,
+          }
+        : undefined,
+      secondaryPhoneNumber: this.updatePhoneForm.get('secondaryType')?.value
+        ? {
+            phoneNumber: FormUtils.formatPhoneNumber(this.updatePhoneForm.get('secondaryPhone')!.value),
+            type: this.updatePhoneForm.get('secondaryType')!.value,
+          }
+        : undefined,
+    };
+
+    this.phoneService.updatePhoneNumber(req).subscribe(
+      (_) => {
+        this.toastService.successAndNavigate('Phone numbers successfully updated.', '/account');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingForm = false;
+      }
+    );
   }
 }

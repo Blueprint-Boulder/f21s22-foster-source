@@ -25,17 +25,13 @@
   <form [formGroup]="updateProfileForm">
     <div class="row preferred-name-row">
       <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-          <label for="preferredName"
-            ><b>Preferred Name</b><br /><small>This is the name that will appear publicly to others.</small></label
-          >
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="preferredName"
-            placeholder="Enter preferred name"
-            formControlName="preferredName"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'Preferred Name'"
+          [subtitle]="'This is the name that will appear publicly to others.'"
+          [field]="'preferredName'"
+          [placeholder]="'Enter preferred name'"
+          [form]="updateProfileForm"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row gender-pronouns-marital-row">

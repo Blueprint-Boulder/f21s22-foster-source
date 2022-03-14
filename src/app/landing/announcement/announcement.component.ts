@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Announcement } from '../../models/announcement.model';
-import { formatDate } from '@angular/common';
 import { AnnouncementService } from '../../services/announcement-service/announcement.service';
-import { ToastService } from '../../services/toast-service/toast.service';
-import { ToastPresets } from '../../models/toast.model';
 import { AuthService, Privilege } from '../../services/auth-service/auth.service';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { Announcement } from '../../models/announcement.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-announcement',
@@ -24,7 +23,7 @@ export class AnnouncementComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const cookie = this.authService.getToken();
 
     if (cookie) {
@@ -42,18 +41,10 @@ export class AnnouncementComponent implements OnInit {
 
   public deleteAnnouncement(): void {
     if (this.announcement) {
-      this.announcementService.deleteAnnouncement(this.announcement.id).subscribe(
-        (_) => {
-          this.toastService.show({
-            body: 'Successfully deleted the announcement.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.announcement = undefined;
-        },
-        (e) => {
-          this.toastService.httpError(e);
-        }
-      );
+      this.announcementService.deleteAnnouncement(this.announcement.id).subscribe((_) => {
+        this.toastService.success('Successfully deleted the announcement.');
+        this.announcement = undefined;
+      }, this.toastService.httpError);
     }
   }
 
@@ -65,18 +56,10 @@ export class AnnouncementComponent implements OnInit {
           title: this.announcement.title,
           bodyHtml: this.announcement.bodyHtml,
         })
-        .subscribe(
-          (_) => {
-            this.toastService.show({
-              body: 'Successfully updated the announcement.',
-              preset: ToastPresets.SUCCESS,
-            });
-            this.editMode = false;
-          },
-          (e) => {
-            this.toastService.httpError(e);
-          }
-        );
+        .subscribe((_) => {
+          this.toastService.success('Successfully updated the announcement.');
+          this.editMode = false;
+        }, this.toastService.httpError);
     }
   }
 

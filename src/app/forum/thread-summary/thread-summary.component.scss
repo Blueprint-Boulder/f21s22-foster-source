@@ -1,4 +1,5 @@
 // add padding above and below content of div to make it look more like the figma drawing
+@import "../../../styles";
 
 .body {
   overflow: hidden;
@@ -13,7 +14,8 @@
 }
 
 .threads {
-  background: #fef4e8;
+  //background: #fef4e8;
+  border-left: 10px solid map-get($theme-colors, "primary") !important;
 }
 
 .hover {

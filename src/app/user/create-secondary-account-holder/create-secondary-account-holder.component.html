@@ -13,72 +13,37 @@
       <div class="col-sm-12">
         <div class="row secNameRow">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="firstName"><b>First Name</b><span class="required-star">*</span></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="firstName"
-                placeholder="Enter first name"
-                formControlName="firstName"
-              />
-              <div
-                *ngIf="
-                  createSecAccountHolderForm.get('firstName')?.invalid &&
-                  (createSecAccountHolderForm.get('firstName')?.dirty ||
-                    createSecAccountHolderForm.get('firstName')?.touched)
-                "
-              >
-                <small *ngIf="createSecAccountHolderForm.get('firstName')?.errors?.required" class="input-error"
-                  >Please enter the first name of the secondary account holder.</small
-                >
-              </div>
-            </div>
+            <app-basic-text-field
+              [title]="'First Name'"
+              [field]="'firstName'"
+              [placeholder]="'Enter first name'"
+              [form]="createSecAccountHolderForm"
+              [errors]="['required']"
+              [errorMessages]="['Please enter the first name of the secondary account holder.']"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="lastName"><b>Last Name</b><span class="required-star">*</span></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="lastName"
-                placeholder="Enter Last Name"
-                formControlName="lastName"
-              />
-              <div
-                *ngIf="
-                  createSecAccountHolderForm.get('lastName')?.invalid &&
-                  (createSecAccountHolderForm.get('lastName')?.dirty ||
-                    createSecAccountHolderForm.get('lastName')?.touched)
-                "
-              >
-                <small *ngIf="createSecAccountHolderForm.get('lastName')?.errors?.required" class="input-error"
-                  >Please enter the last name of the secondary account holder.</small
-                >
-              </div>
-            </div>
+            <app-basic-text-field
+              [title]="'Last Name'"
+              [field]="'lastName'"
+              [placeholder]="'Enter last name'"
+              [form]="createSecAccountHolderForm"
+              [errors]="['required']"
+              [errorMessages]="['Please enter the last name of the secondary account holder.']"
+            ></app-basic-text-field>
           </div>
         </div>
         <div class="row sec-pref-name-row">
           <div class="col-xs-12 col-sm-12, col-md-6">
-            <div class="form-group">
-              <label for="preferredName"><b>Preferred Name</b><span class="required-star">*</span></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="preferredName"
-                placeholder="Enter preferred name"
-                formControlName="preferredName"
-              />
-              <div
-                *ngIf="
-                  createSecAccountHolderForm.get('preferredName')?.invalid &&
-                  (createSecAccountHolderForm.get('preferredName')?.dirty ||
-                    createSecAccountHolderForm.get('preferredName')?.touched)
-                "
-              >
-                <small *ngIf="createSecAccountHolderForm.get('preferredName')?.errors?.required" class="input-error"
-                  >Please enter the secondary account holder's preferred name.<br
-                /></small>
-              </div>
-            </div>
+            <app-basic-text-field
+              [title]="'Preferred Name'"
+              [subtitle]="'This is the name that will appear publicly to others.'"
+              [field]="'preferredName'"
+              [placeholder]="'Enter preferred name'"
+              [form]="createSecAccountHolderForm"
+              [errors]="['required']"
+              [errorMessages]="['Please enter the secondary account holder\'s preferred name.']"
+            ></app-basic-text-field>
           </div>
         </div>
         <div class="row sec-gender-pronouns-marital-row">
@@ -109,15 +74,12 @@
             </div>
           </div>
           <div class="col-sm-6 col-md-4">
-            <div class="form-group">
-              <label class="mt-4" for="pronouns"><b>Pronouns</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="pronouns"
-                placeholder="Enter their pronouns (e.g. she/her)"
-                formControlName="pronouns"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'Pronouns'"
+              [field]="'pronouns'"
+              [placeholder]="'Enter their pronouns (e.g. she/her)'"
+              [form]="createSecAccountHolderForm"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-6 col-md-4 my-auto">
             <div class="form-group my-auto">
@@ -138,56 +100,29 @@
         </div>
         <div class="row sec-contact-row">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="email"><b>Email</b><span class="required-star">*</span></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="email"
-                placeholder="Enter email"
-                formControlName="email"
-              />
-              <div
-                *ngIf="
-                  createSecAccountHolderForm.get('email')?.invalid &&
-                  (createSecAccountHolderForm.get('email')?.dirty || createSecAccountHolderForm.get('email')?.touched)
-                "
-              >
-                <small *ngIf="createSecAccountHolderForm.get('email')?.errors?.required" class="input-error"
-                  >Please enter the secondary account holder's email.<br
-                /></small>
-                <small *ngIf="createSecAccountHolderForm.get('email')?.errors?.email" class="input-error"
-                  >Please enter a valid email.<br
-                /></small>
-              </div>
-            </div>
+            <app-basic-text-field
+              [form]="createSecAccountHolderForm"
+              [field]="'email'"
+              [title]="'Email'"
+              [placeholder]="'Enter email'"
+              [errors]="['required', 'email']"
+              [errorMessages]="['Please enter the secondary account holder\'s email.', 'Please enter a valid email.']"
+            >
+            </app-basic-text-field>
           </div>
           <div class="col-sm-8 col-md-4">
-            <label for="secAccountHolderPhone"><b>Phone Number</b><span class="required-star">*</span></label>
-            <input
-              class="form-control p-1 ml-0 bottom-border-input"
-              type="tel"
-              id="secAccountHolderPhone"
-              placeholder="Enter phone number"
-              formControlName="secAccountHolderPhone"
-            />
-            <div
-              *ngIf="
-                createSecAccountHolderForm.get('secAccountHolderPhone')?.invalid &&
-                (createSecAccountHolderForm.get('secAccountHolderPhone')?.dirty ||
-                  createSecAccountHolderForm.get('secAccountHolderPhone')?.touched)
-              "
-            >
-              <small
-                *ngIf="createSecAccountHolderForm.get('secAccountHolderPhone')?.errors?.required"
-                class="input-error"
-                >Please enter the secondary account holder's phone number.<br
-              /></small>
-              <small
-                *ngIf="createSecAccountHolderForm.get('secAccountHolderPhone')?.errors?.invalidPhone"
-                class="input-error"
-                >Please enter a valid phone number.<br
-              /></small>
-            </div>
+            <app-basic-text-field
+              [form]="createSecAccountHolderForm"
+              [type]="'tel'"
+              [field]="'secAccountHolderPhone'"
+              [title]="'Enter Phone Number'"
+              [placeholder]="'Enter phone number'"
+              [errors]="['required', 'invalidPhone']"
+              [errorMessages]="[
+                'Please enter the secondary account holder\'s phone number.',
+                'Please enter a valid phone number.'
+              ]"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-4 col-md-2">
             <div class="form-group">
@@ -221,30 +156,14 @@
         </div>
         <div class="row sec-relation-row">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="relationshipToPrimary"
-                ><b>Relationship to Primary Account Holder</b><span class="required-star">*</span></label
-              >
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="relationshipToPrimary"
-                placeholder="Enter relationship"
-                formControlName="relationshipToPrimary"
-              />
-              <div
-                *ngIf="
-                  createSecAccountHolderForm.get('relationshipToPrimary')?.invalid &&
-                  (createSecAccountHolderForm.get('relationshipToPrimary')?.dirty ||
-                    createSecAccountHolderForm.get('relationshipToPrimary')?.touched)
-                "
-              >
-                <small
-                  *ngIf="createSecAccountHolderForm.get('relationshipToPrimary')?.errors?.required"
-                  class="input-error"
-                  >Please enter your relation to the secondary account holder.</small
-                >
-              </div>
-            </div>
+            <app-basic-text-field
+              [title]="'Relationship to Primary Account Holder'"
+              [field]="'relationshipToPrimary'"
+              [placeholder]="'Enter relationship'"
+              [form]="createSecAccountHolderForm"
+              [errors]="['required']"
+              [errorMessages]="['Please enter your relation to the secondary account holder.']"
+            ></app-basic-text-field>
           </div>
         </div>
       </div>

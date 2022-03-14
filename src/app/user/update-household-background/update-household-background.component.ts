@@ -2,9 +2,7 @@ import { HouseholdBackground, UpdateHouseholdBackground } from '../../models/pro
 import { ProfileService } from '../../services/profile-service/profile.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ToastPresets } from '../../models/toast.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-update-household-background',
@@ -19,8 +17,7 @@ export class UpdateHouseholdBackgroundComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private formBuilder: FormBuilder,
-    private toastService: ToastService,
-    private router: Router
+    private toastService: ToastService
   ) {
     this.updateHouseholdBackgroundForm = this.formBuilder.group({
       parentalUnitSize: [null],
@@ -39,14 +36,9 @@ export class UpdateHouseholdBackgroundComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getCurrentProfile().subscribe(
-      (profile) => {
-        this.currentHouseholdBackground = profile.householdBackground;
-      },
-      (err) => {
-        this.toastService.httpError(err);
-      }
-    );
+    this.profileService.getCurrentProfile().subscribe((profile) => {
+      this.currentHouseholdBackground = profile.householdBackground;
+    }, this.toastService.httpError);
   }
 
   onSubmit(): void {
@@ -120,11 +112,7 @@ export class UpdateHouseholdBackgroundComponent implements OnInit {
 
       this.profileService.updateHouseholdBackground(req).subscribe(
         (res) => {
-          this.toastService.show({
-            body: 'Successfully updated household background',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/${res.id}`]);
+          this.toastService.successAndNavigate('Successfully updated household background', `/user/${res.id}`);
         },
         (err) => {
           this.toastService.httpError(err);

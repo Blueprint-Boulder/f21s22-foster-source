@@ -19,22 +19,21 @@ export class ThreadSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.thread) {
-      console.log(this.thread);
       this.userHasLiked = this.thread.requesterHasLiked;
       this.generateProfileImageSrc();
     }
-    return;
   }
 
   generateProfileImageSrc(): void {
     if (this.thread.account.privilege === 'MOD' || this.thread.account.privilege === 'ADMIN') {
       this.profileImageSrc = 'assets/images/modShield.png';
-      return;
     }
+
     if (this.thread.account.profileSmallAwsKey) {
       this.profileImageSrc = ImageUtils.buildS3Url(this.thread.account.profileSmallAwsKey);
     }
   }
+
   imgError(): void {
     this.profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   }
@@ -47,25 +46,15 @@ export class ThreadSummaryComponent implements OnInit {
 
   likeUnlikeThread(): void {
     if (!this.userHasLiked) {
-      this.forumService.likeThread(this.thread.id).subscribe(
-        () => {
-          this.userHasLiked = true;
-          this.thread.likes += 1;
-        },
-        (err) => {
-          this.toastService.httpError(err);
-        }
-      );
+      this.forumService.likeThread(this.thread.id).subscribe(() => {
+        this.userHasLiked = true;
+        this.thread.likes += 1;
+      }, this.toastService.httpError);
     } else {
-      this.forumService.unlikeThread(this.thread.id).subscribe(
-        () => {
-          this.userHasLiked = false;
-          this.thread.likes -= 1;
-        },
-        (err) => {
-          this.toastService.httpError(err);
-        }
-      );
+      this.forumService.unlikeThread(this.thread.id).subscribe(() => {
+        this.userHasLiked = false;
+        this.thread.likes -= 1;
+      }, this.toastService.httpError);
     }
   }
 

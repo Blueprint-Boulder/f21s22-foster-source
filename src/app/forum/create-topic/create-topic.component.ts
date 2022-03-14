@@ -46,25 +46,23 @@ export class CreateTopicComponent implements OnInit {
   onSubmit(): void {
     if (this.topicForm.invalid) {
       this.topicForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-
-      const req: CreateTopicReq = {
-        title: this.topicForm.get('title')!.value,
-        description: this.topicForm.get('description')!.value,
-      };
-
-      this.forumService.createTopic(req).subscribe(
-        (res) => {
-          console.log(res);
-          this.toastService.success('Successfully created a new forum topic.');
-          this.router.navigate(['/forum']);
-        },
-        (err) => {
-          this.toastService.httpError(err);
-          this.submittingForm = false;
-        }
-      );
+      return;
     }
+    this.submittingForm = true;
+
+    const req: CreateTopicReq = {
+      title: this.topicForm.get('title')!.value,
+      description: this.topicForm.get('description')!.value,
+    };
+
+    this.forumService.createTopic(req).subscribe(
+      (res) => {
+        this.toastService.successAndNavigate('Successfully created a new forum topic.', '/forum');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingForm = false;
+      }
+    );
   }
 }

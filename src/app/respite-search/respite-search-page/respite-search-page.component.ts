@@ -32,7 +32,7 @@ export class RespiteSearchPageComponent implements OnInit {
     }
   }
 
-  getSearchResults() {
+  getSearchResults(): void {
     this.searching = true;
     this.profileService
       .getProfiles(this.resultsPerPage, (this.resultPage - 1) * this.resultsPerPage, this.filtersReq, this.searchTerm)
@@ -49,11 +49,11 @@ export class RespiteSearchPageComponent implements OnInit {
       );
   }
 
-  closeNav() {
+  closeNav(): void {
     this.filtersHidden = true;
   }
 
-  openNav() {
+  openNav(): void {
     this.filtersHidden = false;
   }
 

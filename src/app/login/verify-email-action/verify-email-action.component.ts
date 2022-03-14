@@ -1,15 +1,12 @@
+import { AccountService } from '../../services/account-service/account.service';
+import { ToastService } from '../../services/toast-service/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ToastService } from '../../services/toast-service/toast.service';
-import { ToastPresets } from '../../models/toast.model';
-import { AccountService } from '../../services/account-service/account.service';
-import { accountServiceProvider } from '../../services/account-service/account.service.provider';
 
 @Component({
   selector: 'app-verify-email-action',
   templateUrl: './verify-email-action.component.html',
   styleUrls: ['./verify-email-action.component.scss'],
-  providers: [accountServiceProvider],
 })
 export class VerifyEmailActionComponent implements OnInit {
   public isError = true;
@@ -26,10 +23,7 @@ export class VerifyEmailActionComponent implements OnInit {
       if (params.key) {
         this.accountService.verifyAccount({ key: params.key }).subscribe(
           () => {
-            this.toastService.show({
-              body: 'Success! Account verified.',
-              preset: ToastPresets.SUCCESS,
-            });
+            this.toastService.success('Success! Account verified.');
             this.isError = false;
           },
           (err) => {
@@ -38,10 +32,7 @@ export class VerifyEmailActionComponent implements OnInit {
           }
         );
       } else {
-        this.toastService.show({
-          body: 'Invalid verification URL, missing key.',
-          preset: ToastPresets.ERROR,
-        });
+        this.toastService.error('Invalid verification URL, missing key.');
         this.isError = true;
         this.errorMessage = 'Invalid email verification link.';
       }
