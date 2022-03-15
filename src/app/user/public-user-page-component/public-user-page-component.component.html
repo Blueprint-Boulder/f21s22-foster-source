@@ -11,6 +11,8 @@
               <p>
                 <b>{{ selectedProfile.preferredName }}</b
                 ><br />
+                <span>{{ selectedProfile.account.username }}</span>
+                <br />
                 <i
                   >{{ selectedProfile.gender
                   }}<span *ngIf="selectedProfile.pronouns"> | {{ selectedProfile.pronouns }}</span></i
