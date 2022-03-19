@@ -10,7 +10,16 @@ import { Applicant } from '../models/applicant.model';
 import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
-import { FullThread, Reply, ThreadSummary, Topic, TopicSummary } from '../models/forum.models';
+import {
+  ForumStats,
+  FullThread,
+  Reply,
+  ReplyReport,
+  ThreadReport,
+  ThreadSummary,
+  Topic,
+  TopicSummary,
+} from '../models/forum.models';
 
 const announcements: Announcement[] = [
   {
@@ -428,6 +437,7 @@ export const profiles: FullProfileRes[] = [
       lastName: 'Crowson',
       email: 'jettcrowson@colorado.gov',
       username: 'jcrowson',
+      lastLogin: new Date(),
       address: {
         id: 1,
         addressLine1: '741 Danbury St',
@@ -650,6 +660,17 @@ export const replies: Reply[] = [
   },
 ];
 
+export const threadReports: ThreadReport[] = [];
+export const replyReports: ReplyReport[] = [];
+
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
   return { ...t, replies: replies, topicId: 1 };
 });
+
+export const forumStats: ForumStats[] = [
+  {
+    likes: 1003,
+    threads: 14,
+    replies: 882,
+  },
+];

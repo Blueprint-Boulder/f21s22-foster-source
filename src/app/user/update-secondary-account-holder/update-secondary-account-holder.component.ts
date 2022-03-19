@@ -73,66 +73,62 @@ export class UpdateSecondaryAccountHolderComponent implements OnInit {
   onSubmit(): void {
     if (this.updateSecAccountHolderForm.invalid) {
       this.updateSecAccountHolderForm.markAllAsTouched();
-    } else {
-      this.submittingForm = true;
-      const req: UpdateSecAccountHolderReq = {
-        relationshipToPrimary:
-          this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value === '' ||
-          this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value,
-        firstName:
-          this.updateSecAccountHolderForm.get('firstName')!.value === '' ||
-          this.updateSecAccountHolderForm.get('firstName')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('firstName')!.value,
-        lastName:
-          this.updateSecAccountHolderForm.get('lastName')!.value === '' ||
-          this.updateSecAccountHolderForm.get('lastName')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('lastName')!.value,
-        email:
-          this.updateSecAccountHolderForm.get('email')!.value === '' ||
-          this.updateSecAccountHolderForm.get('email')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('email')!.value,
-        preferredName:
-          this.updateSecAccountHolderForm.get('preferredName')!.value === '' ||
-          this.updateSecAccountHolderForm.get('preferredName')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('preferredName')!.value,
-        pronouns:
-          this.updateSecAccountHolderForm.get('pronouns')!.value === '' ||
-          this.updateSecAccountHolderForm.get('pronouns')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('pronouns')!.value,
-        gender:
-          this.updateSecAccountHolderForm.get('gender')!.value === '' ||
-          this.updateSecAccountHolderForm.get('gender')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('gender')!.value,
-        maritalStatus:
-          this.updateSecAccountHolderForm.get('maritalStatus')!.value === '' ||
-          this.updateSecAccountHolderForm.get('maritalStatus')!.value === null
-            ? undefined
-            : this.updateSecAccountHolderForm.get('maritalStatus')!.value,
-        secAccountHolderPhone: this.getPhoneNumberFromForm(),
-      };
-
-      this.profileService.updateSecondaryAccountHolder(req).subscribe(
-        (profile) => {
-          this.toastService.show({
-            body: 'Successfully updated secondary account holder',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/`]);
-        },
-        (err) => {
-          this.toastService.httpError(err);
-          this.submittingForm = false;
-        }
-      );
+      return;
     }
+    this.submittingForm = true;
+    const req: UpdateSecAccountHolderReq = {
+      relationshipToPrimary:
+        this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value === '' ||
+        this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('relationshipToPrimary')!.value,
+      firstName:
+        this.updateSecAccountHolderForm.get('firstName')!.value === '' ||
+        this.updateSecAccountHolderForm.get('firstName')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('firstName')!.value,
+      lastName:
+        this.updateSecAccountHolderForm.get('lastName')!.value === '' ||
+        this.updateSecAccountHolderForm.get('lastName')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('lastName')!.value,
+      email:
+        this.updateSecAccountHolderForm.get('email')!.value === '' ||
+        this.updateSecAccountHolderForm.get('email')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('email')!.value,
+      preferredName:
+        this.updateSecAccountHolderForm.get('preferredName')!.value === '' ||
+        this.updateSecAccountHolderForm.get('preferredName')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('preferredName')!.value,
+      pronouns:
+        this.updateSecAccountHolderForm.get('pronouns')!.value === '' ||
+        this.updateSecAccountHolderForm.get('pronouns')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('pronouns')!.value,
+      gender:
+        this.updateSecAccountHolderForm.get('gender')!.value === '' ||
+        this.updateSecAccountHolderForm.get('gender')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('gender')!.value,
+      maritalStatus:
+        this.updateSecAccountHolderForm.get('maritalStatus')!.value === '' ||
+        this.updateSecAccountHolderForm.get('maritalStatus')!.value === null
+          ? undefined
+          : this.updateSecAccountHolderForm.get('maritalStatus')!.value,
+      secAccountHolderPhone: this.getPhoneNumberFromForm(),
+    };
+
+    this.profileService.updateSecondaryAccountHolder(req).subscribe(
+      (profile) => {
+        this.toastService.successAndNavigate('Successfully updated secondary account holder', '/user');
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingForm = false;
+      }
+    );
   }
 
   private getPhoneNumberFromForm(): PhoneNumber | undefined {

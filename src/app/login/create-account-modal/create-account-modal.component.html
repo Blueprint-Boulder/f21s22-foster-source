@@ -123,6 +123,7 @@
             id="primaryType"
             formControlName="primaryType"
             style="border-top: 0px; border-right: 0px; border-left: 0px"
+            autocomplete="off"
           >
             <option *ngFor="let phoneType of PHONE_TYPES" [value]="phoneType">
               {{ phoneType }}
@@ -160,6 +161,7 @@
             id="secondaryType"
             formControlName="secondaryType"
             style="border-top: 0px; border-right: 0px; border-left: 0px"
+            autocomplete="off"
           >
             <option value="Home">Home</option>
             <option value="Mobile">Mobile</option>

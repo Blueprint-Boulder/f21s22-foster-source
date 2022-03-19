@@ -141,3 +141,37 @@ export interface ProfileImages {
   profileLargeAwsKey: string;
   profileSmallAwsKey: string;
 }
+
+export interface ReportProfileReq {
+  profileId: number;
+  description: string;
+}
+
+export interface ProfileReportSummary {
+  id: number;
+  description: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+  profile: {
+    id: number;
+    preferredName: string;
+    account: {
+      id: number;
+      username: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      cwFirstName: string;
+      cwLastName: string;
+      cwEmail: string;
+      cwPhoneNumber: string;
+    };
+  };
+}
+
+export interface GetProfileReportsRes {
+  profileReports: ProfileReportSummary[];
+}

@@ -43,11 +43,18 @@ export interface ThreadSummary {
     username: string;
     privilege: string;
     profileId?: number;
+    profileSmallAwsKey?: string;
   };
 }
 
 export interface GetThreadSummariesRes {
   threads: ThreadSummary[];
+  totalResults: number;
+}
+
+export interface GetThreadSummariesWCount {
+  threads: ThreadSummary[];
+  totalResults: number;
 }
 
 export interface Reply {
@@ -146,4 +153,43 @@ export interface ModRemoveReplyReq {
   shouldBlacklist?: boolean; // takes priority over suspension if both are provided
   shouldSuspend?: boolean;
   suspendForDays?: number;
+}
+
+export interface ThreadReport {
+  id: number;
+  description: string;
+  threadId: number;
+  threadTitle: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface GetThreadReportsRes {
+  threadReports: ThreadReport[];
+}
+
+export interface ReplyReport {
+  id: number;
+  description: string;
+  threadId: number;
+  replyId: string;
+  replyBody: string;
+  createdAt: Date;
+  account: {
+    id: number;
+    username: string;
+  };
+}
+
+export interface GetReplyReportsRes {
+  replyReports: ReplyReport[];
+}
+
+export interface ForumStats {
+  likes: number;
+  threads: number;
+  replies: number;
 }

@@ -1,13 +1,14 @@
 import { BlacklistService } from './blacklist.service';
 import { Observable, of } from 'rxjs';
-import { BlacklistedUser, GetBlacklistedUsersRes } from '../../models/blacklisted-user.model';
+import {
+  BlacklistAccountReq,
+  BlacklistedUser,
+  GetBlacklistedUsersRes,
+  SuspendUserReq,
+} from '../../models/blacklisted-user.model';
 import { blacklist } from '../../mock/database-entities';
 
 export class BlacklistMockService implements BlacklistService {
-  blacklistUser(user: BlacklistedUser): Observable<BlacklistedUser> {
-    return of(blacklist[0]);
-  }
-
   deleteFromBlacklist(phoneNumber: string, email: string): Observable<any> {
     return of({});
   }
@@ -16,5 +17,13 @@ export class BlacklistMockService implements BlacklistService {
     return of({
       blacklist: blacklist,
     });
+  }
+
+  blacklistAndDeleteAccount(req: BlacklistAccountReq): Observable<any> {
+    return of({});
+  }
+
+  suspendUser(req: SuspendUserReq): Observable<any> {
+    return of({});
   }
 }

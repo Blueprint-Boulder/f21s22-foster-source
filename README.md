@@ -1,39 +1,60 @@
-# Foster Source Respite App
+# Foster Source Respite App (Respite Source)
 
-## TODO
+## About
 
-- [ ] Login
-  - [x] Work out bugs in login and sessions (ex. If you are insufficient privilege to go to a page it takes you back to the login page sometimes, whereas it should show you a 404)
-  - [x] Logout
-  - [ ] Forgot your password?
-  - [x] Does unchecking the remember me tab do anything?
+This is the frontend component of the Respite Source web app. The backend lives in the `fs-service` repository. The site is deployed to https://respite.fostersource.org
 
-### Known Bugs
+![Architecture Diagram](readme-resources/RS-Architecture.drawio.png)
 
-- [ ] When user creates account, says they are logged in
+## System Set-Up
 
-### Stretch Goals
+This project is going to be built in angular, so to develop you will need to properly set up your environment.
+The commands that I'll write in this document will be geared towards Linux, and are tested on WSL 2 (Windows subsystem for linux, a Ubuntu linux terminal for Windows).
 
-- [ ] Reporting functionality
-- [ ] User Forum
-- [ ] Feature requests + bug reporting
+1. Ensure that you have Node and NPM (node package manager) installed.
+2. Make sure that your npm version is 7.5.2 with `sudo npm install npm@7.5.2 -g`
+3. Ensure that `npx` is installed globally on your machine with `sudo npm install -g npx`
+4. Install the Angular command line tool with `sudo npm install -g @angular/cli`
+5. Run `npm install` when cloning the fresh repository.
+6. Run `npx husky install` to enable any commit/push hooks
+7. I **VERY** strongly recommend using the ![Webstorm](https://www.jetbrains.com/webstorm/) IDE. You are provided a free JetBrains educational license that you can acquire ![here](https://www.jetbrains.com/community/education/#students). If you choose not to use this, ensure that you at the very least have Typescript extensions and error checking in your code editor. This IDE can (and should) be used for the frontend and backend.
 
-### Feature Backlog
+## Automatic Formatting + Code Quality
 
-- [ ] Allow user after account creation to choose to provide respite, rescind their current offering
-- [ ] Hide profile temporarily
-- [ ] Get list of all accounts for admins
-- [ ] Get list of all staff accounts for admins
-- [ ] Periodically go through and get rid of unverified accounts
-- [ ] Reject address if not coords
-- [x] Add temporary availabilities
+When you commit, your terminal should automatically run `prettier` (which formats your code) and `ESLint` (which checks for code quality and makes improvements when possible). If there are issues that the linter cannot fix, it will give you and error, and you will have to fix the issues and recommit.
 
-## Forum Routes
+## Service Dependency Injection (Mock vs Real Backend)
 
-- `/forum` should list all topics
-- `/forum/topics/:topicId` should list all threads under a topic
-- `/forum/topics/:topicId/threads/:threadId?limit=x&offset=y` should view a specific thread with `limit` number of replies, offset by `offset`
-  - If offset does not equal 0, don't show the main thread anymore, just the replies
+Services (primarily referring to services that make HTTP calls to the backend) have been developed in a way where they can be configured to either make real calls to the backend, or return mock data of the same promised type. This way, the frontend and backend teams can concurrently develop (or at the very least, the frontend team can develop) without waiting on each other. In other words, the frontend team can develop functionality without yet having a corresponding backend endpoint.
+
+These mock services also provide convenient, accurate mocks to unit test the components with.
+
+Services that make calls to the backend should be created and developed with the following pattern:
+
+- `[service name].service.ts`
+  - The abstract class that provides an interface for the implementation and mock versions of the service
+- `[service name].mock.service.ts`
+  - This service should implement the aforementioned interface but make no calls to the backend. Instead, it should provide functions that return mock data from the `mock/database-entities.ts` file.
+  - While this service will not exactly mimic the real implementation (for example, making a call with different parameters may return the exact same mock result), it can be used for development and testing purposes
+- `[service name].impl.service.ts`
+  - This service will make actual HTTP REST calls to the backend.
+- `[service name].service.provider.ts`
+  - This is a simple factory to assist Angular with providing your app with the correct version. The version to provide is determined by the environment variables in `src/environments/environment.ts` and `src/environments/environment.prod.ts` (though of course the production version should have all of the options set to `true`)
+
+The provider will then have to be listed in `app.module.ts`.
+
+## CI/CD
+
+This project is set up with a (admittedly fairly rudimentary) CI/CD pipeline that automatically builds and deploys the project to production. The steps are as follows:
+
+1. A pull request is merged into the `main` branch on the Github
+2. A Github webhook tells AWS codebuild that the project has been updated
+3. AWS Codebuild uses the `buildspec.yaml` file to compile the TypeScript project into static HTML and JS files
+4. The produced artifacts are automatically dumped into the `respite.fostersource.org` AWS S3 bucket
+5. AWS Cloudfront detects that the files in the bucket have been updated, and redeploys the site
+6. When AWS Cloudfront finishes its deployment, an AWS Lambda function invalidates the cache (which results in new requests to the site fetching it directly from the newly updated bucket) so the newly deployed site is available to end users.
+
+![Frontend CI/CD Diagram](readme-resources/frontend-cicd.png?raw=true)
 
 ## Testing
 
@@ -43,19 +64,6 @@ If you are using Windows + WSL (Windows Subsystem for Linux):
 
 - The angular testing system uses Google Chrome to run the tests. If you are on a virtual subsystem like WSL, it is likely that there is no chrome installed and so you will not be able to run tests.
 - Use [this link](https://www.gregbrisebois.com/posts/chromedriver-in-wsl2/) to setup to run tests. You may skip "The X Server" step
-
-## System Set-Up
-
-This project is going to be built in angular, so to develop you will need to properly set up your environment.
-The commands that I'll write in this document will be geared towards Linux, but should also work on MacOS.
-If you are running Windows, there are equivalent commands that you will need to translate to. (It may be easier to
-develop within a virtual Linux environment if you are on Windows).
-
-1. Ensure that you have Node and NPM (node package manager) installed.
-2. Make sure that your npm version is 7.5.2 with `sudo npm install npm@7.5.2 -g`
-3. Ensure that `npx` is installed globally on your machine with `sudo npm install -g npx`
-4. Install the Angular command line tool with `sudo npm install -g @angular/cli`
-5. Run `npm install` when cloning the fresh repository.
 
 ## Git
 
@@ -88,7 +96,9 @@ When pushing, the test suite will be run. You will not be able to push until all
 All pull requests will need to pass through a code review and receive two OK's before they are merged into current sprint, one from Jett and one from another team member.
 Merges/pull requests can be initiated from the Github web interface. Make sure to detail all of the changes you've made in your branch in the description.
 
-### _The following is automatically generated documentation by Angular:_
+...
+
+### Angular Help
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
@@ -106,14 +116,4 @@ Run `ng generate service services/[service name]/[service name]` to generate a s
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Note that there is a date interceptor! // TODO!

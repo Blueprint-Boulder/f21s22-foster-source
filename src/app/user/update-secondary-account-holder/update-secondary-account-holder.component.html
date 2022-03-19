@@ -50,39 +50,31 @@
       <div class="col-sm-12">
         <div class="row secNameRow">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="firstName"><b>First Name</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="firstName"
-                placeholder="Enter first name"
-                formControlName="firstName"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'First Name'"
+              [field]="'firstName'"
+              [placeholder]="'Enter first name'"
+              [form]="updateSecAccountHolderForm"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="lastName"><b>Last Name</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="lastName"
-                placeholder="Enter Last Name"
-                formControlName="lastName"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'Last Name'"
+              [field]="'lastName'"
+              [placeholder]="'Enter last name'"
+              [form]="updateSecAccountHolderForm"
+            ></app-basic-text-field>
           </div>
         </div>
         <div class="row sec-pref-name-row">
           <div class="col-xs-12 col-sm-12, col-md-6">
-            <div class="form-group">
-              <label for="preferredName"><b>Preferred Name</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="preferredName"
-                placeholder="Enter preferred name"
-                formControlName="preferredName"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'Preferred Name'"
+              [subtitle]="'This is the name that will appear publicly to others.'"
+              [field]="'preferredName'"
+              [placeholder]="'Enter preferred name'"
+              [form]="updateSecAccountHolderForm"
+            ></app-basic-text-field>
           </div>
         </div>
         <div class="row sec-gender-pronouns-marital-row">
@@ -132,48 +124,26 @@
         </div>
         <div class="row sec-contact-row">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="email"><b>Email</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="email"
-                placeholder="Enter email"
-                formControlName="email"
-              />
-              <div
-                *ngIf="
-                  updateSecAccountHolderForm.get('email')?.invalid &&
-                  (updateSecAccountHolderForm.get('email')?.dirty || updateSecAccountHolderForm.get('email')?.touched)
-                "
-              >
-                <small *ngIf="updateSecAccountHolderForm.get('email')?.errors?.email" class="input-error"
-                  >Please enter a valid email.<br
-                /></small>
-              </div>
-            </div>
+            <app-basic-text-field
+              [form]="updateSecAccountHolderForm"
+              [field]="'email'"
+              [title]="'Email'"
+              [placeholder]="'Enter email'"
+              [errors]="['email']"
+              [errorMessages]="['Please enter a valid email.']"
+            >
+            </app-basic-text-field>
           </div>
           <div class="col-sm-8 col-md-4">
-            <label for="secAccountHolderPhone"><b>Phone Number</b></label>
-            <input
-              class="form-control p-1 ml-0 bottom-border-input"
-              type="tel"
-              id="secAccountHolderPhone"
-              placeholder="Enter phone number"
-              formControlName="secAccountHolderPhone"
-            />
-            <div
-              *ngIf="
-                updateSecAccountHolderForm.get('secAccountHolderPhone')?.invalid &&
-                (updateSecAccountHolderForm.get('secAccountHolderPhone')?.dirty ||
-                  updateSecAccountHolderForm.get('secAccountHolderPhone')?.touched)
-              "
-            >
-              <small
-                *ngIf="updateSecAccountHolderForm.get('secAccountHolderPhone')?.errors?.invalidPhone"
-                class="input-error"
-                >Please enter a valid phone number.<br
-              /></small>
-            </div>
+            <app-basic-text-field
+              [form]="updateSecAccountHolderForm"
+              [type]="'tel'"
+              [field]="'secAccountHolderPhone'"
+              [title]="'Enter Phone Number'"
+              [placeholder]="'Enter phone number'"
+              [errors]="['invalidPhone']"
+              [errorMessages]="['Please enter a valid phone number.']"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-4 col-md-2">
             <div class="form-group">
@@ -207,15 +177,12 @@
         </div>
         <div class="row sec-relation-row">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="relationshipToPrimary"><b>Relationship to Primary Account Holder</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="relationshipToPrimary"
-                placeholder="Enter relationship"
-                formControlName="relationshipToPrimary"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'Relationship to Primary Account Holder'"
+              [field]="'relationshipToPrimary'"
+              [placeholder]="'Enter relationship'"
+              [form]="updateSecAccountHolderForm"
+            ></app-basic-text-field>
           </div>
         </div>
       </div>

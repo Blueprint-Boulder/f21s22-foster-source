@@ -7,10 +7,12 @@
             <img [src]="profileImgSrc" class="rounded w-75 m-auto" alt="profile picture" (error)="onImgError($event)" />
           </div>
           <div class="row profile-image-info">
-            <div class="col text-center mt-3">
+            <div class="col-12 text-center mt-3">
               <p>
                 <b>{{ selectedProfile.preferredName }}</b
                 ><br />
+                <span>{{ selectedProfile.account.username }}</span>
+                <br />
                 <i
                   >{{ selectedProfile.gender
                   }}<span *ngIf="selectedProfile.pronouns"> | {{ selectedProfile.pronouns }}</span></i
@@ -23,8 +25,18 @@
                 >
                 <br *ngIf="selectedProfile.distance !== undefined" />
                 <i class="text-muted">{{ getAge() }} years old</i>
+                <br />
+                <small class="text-muted"
+                  ><i>Last online {{ getLastActiveDate() }}</i></small
+                >
               </p>
             </div>
+
+            <!--    // TODO: TREVOR        -->
+            <div class="col-6 report-col"></div>
+
+            <!--    // TODO: TAHIRA        -->
+            <div class="col-6 moderate-col"></div>
           </div>
         </div>
       </div>
@@ -63,6 +75,11 @@
               >
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row user-forum-row mt-3">
+        <div class="col-12">
+          <app-user-forum-stats [accountId]="selectedProfile.accountId"></app-user-forum-stats>
         </div>
       </div>
       <div *ngIf="isOwnProfile" class="row edit-row mt-5">
@@ -224,6 +241,11 @@
           </div>
         </div>
       </div>
+      <div class="row user-forum-row mt-3">
+        <div class="col-12">
+          <app-user-forum-activity [accountId]="selectedProfile.accountId"></app-user-forum-activity>
+        </div>
+      </div>
     </div>
   </div>
   <div
@@ -252,9 +274,11 @@
       <small><i>Scroll or swipe on the table to view more availabilites</i></small>
     </div>
     <div class="col-12" *ngIf="isOwnProfile">
-      <a class="float-right" [routerLink]="'/user/update/temporary-availability'"
-        >Add/Remove a Temporary Availability</a
-      >
+      <p class="float-right">
+        <span><a [routerLink]="'/user/update/primary-availability'">Edit Your Primary Availability</a></span
+        ><span class="text-muted">&nbsp;&nbsp;|&nbsp;&nbsp;</span
+        ><span><a [routerLink]="'/user/update/temporary-availability'">Add/Remove a Temporary Availability</a></span>
+      </p>
     </div>
   </div>
   <div class="row mt-5 mb-5" *ngIf="isAvailable">

@@ -2,10 +2,11 @@ import { ProfileService } from '../../services/profile-service/profile.service';
 import { RespiteProviderInfoRes } from '../../models/get-profile-by-id.models';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { UpdateRespiteProviderInfo } from '../../models/profile.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastPresets } from '../../models/toast.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormUtils } from '../../common/utils/FormUtils';
 
 @Component({
   selector: 'app-update-respite-provider-info',
@@ -26,8 +27,8 @@ export class UpdateRespiteProviderInfoComponent implements OnInit {
     this.updateProviderInfoForm = this.formBuilder.group({
       cityCanProvideRespiteIn: [null],
       respiteTravelDistance: [null],
-      careForMinAge: [null],
-      careForMaxAge: [null],
+      careForMinAge: [null, Validators.compose([Validators.min(0), Validators.max(17)])],
+      careForMaxAge: [null, Validators.compose([Validators.min(0), Validators.max(17)])],
       maxNumCareFor: [null],
     });
   }
@@ -44,11 +45,25 @@ export class UpdateRespiteProviderInfoComponent implements OnInit {
         this.router.navigate(['/user/create/respite-provider-info']);
       }
     });
+    this.updateProviderInfoForm.addValidators(
+      FormUtils.strictlyIncreasingFieldsValidator('careForMinAge', 'careForMaxAge')
+    );
   }
 
   onSubmit(): void {
     if (this.updateProviderInfoForm.invalid) {
       this.updateProviderInfoForm.markAllAsTouched();
+      return;
+    } else if (this.updateProviderInfoForm.get('careForMaxAge')!.value <= this.currentProviderInfo.careForMinAge) {
+      this.toastService.error(
+        'Max age must be more than your current min age able to care for. To use your requested value, update both fields.'
+      );
+      return;
+    } else if (this.updateProviderInfoForm.get('careForMinAge')!.value >= this.currentProviderInfo.careForMaxAge) {
+      this.toastService.error(
+        'Min age must be less than your current max age able to care for. To use your requested value, update both fields.'
+      );
+      return;
     } else {
       this.submittingForm = true;
 
@@ -82,11 +97,7 @@ export class UpdateRespiteProviderInfoComponent implements OnInit {
 
       this.profileService.updateRespiteProviderInfo(req).subscribe(
         (profile) => {
-          this.toastService.show({
-            body: 'Successfully updated respite provider information.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/`]);
+          this.toastService.successAndNavigate('Successfully updated respite provider information.', '/user');
         },
         (err) => {
           this.toastService.httpError(err);

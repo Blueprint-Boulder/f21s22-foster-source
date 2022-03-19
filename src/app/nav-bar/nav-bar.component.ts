@@ -53,6 +53,7 @@ export class NavBarComponent implements OnInit {
           this.profileService.getProfileImages().subscribe(
             (imageKeys) => {
               this.profileImageSrc = ImageUtils.buildS3Url(imageKeys.profileSmallAwsKey);
+              console.log(imageKeys);
             },
             (err) => {
               console.log('Error fetching profile images.', err);

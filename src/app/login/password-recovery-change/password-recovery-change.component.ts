@@ -63,8 +63,7 @@ export class PasswordRecoveryChangeComponent implements OnInit {
 
     this.accountService.recoveryUpdatePassword(req).subscribe(
       (_) => {
-        this.toastService.success('Successfully updated your password.');
-        this.router.navigate(['/login']);
+        this.toastService.successAndNavigate('Successfully updated your password.', '/login');
       },
       (err) => {
         this.toastService.httpError(err);

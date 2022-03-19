@@ -1,0 +1,46 @@
+<div *ngIf="thread" class="w-100 my-2">
+  <div class="container-fluid w-100 shadow-sm rounded pt-4 pb-3 threads hover m-0 border">
+    <div (click)="navigateToThread()" class="row pl-3">
+      <div class="col-2 col-sm-1 p-1 text-center">
+        <img
+          [src]="profileImageSrc"
+          (error)="imgError()"
+          alt="{{ thread.account.username }}'s profile picture"
+          class="rounded-circle w-100 my-auto p-0 d-block"
+        />
+      </div>
+      <div class="col-10 col-sm-11">
+        <div>
+          <h5>{{ thread.title }}</h5>
+          <div class="pb-2">
+            <span class="text-muted"
+              >{{ thread.account.username }} -
+              <span class="text-muted">{{ thread.createdAt.toLocaleDateString("en-US") }}</span></span
+            >
+          </div>
+        </div>
+        <div class="p-0">
+          <p class="body">
+            {{ getBody() }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row likes-row text-center border-top pt-3">
+      <div class="col-12 text-right pr-5">
+        <i
+          class="bi bi-heart-fill"
+          [class]="{
+            'text-muted': !userHasLiked,
+            'text-danger': userHasLiked
+          }"
+          (click)="likeUnlikeThread()"
+        ></i
+        >&nbsp;&nbsp;{{ thread.likes }}&nbsp;&nbsp;<span class="text-muted">&#183;</span>&nbsp;&nbsp;<i
+          class="bi bi-chat-text"
+        ></i
+        >&nbsp;&nbsp;{{ thread.replyCount }}
+      </div>
+    </div>
+  </div>
+</div>

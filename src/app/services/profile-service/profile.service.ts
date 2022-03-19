@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   CreateProfileReq,
+  GetProfileReportsRes,
   GetProfilesRes,
-  HouseholdBackground,
-  Profile,
   ProfileImages,
-  RespiteBackgroundReq,
+  ProfileReportSummary,
+  ReportProfileReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -39,4 +39,8 @@ export abstract class ProfileService {
   public abstract addRespiteProviderInfo(req: RespiteProviderInfoReq): Observable<FullProfileRes>;
   public abstract updateRespiteBackground(req: UpdateRespiteBackgroundReq): Observable<FullProfileRes>;
   public abstract updateRespiteProviderInfo(req: UpdateRespiteProviderInfo): Observable<FullProfileRes>;
+  public abstract reportProfile(req: ReportProfileReq): Observable<any>;
+  public abstract getProfileReports(): Observable<GetProfileReportsRes>;
+  public abstract deleteProfileReport(id: number): Observable<any>;
+  public abstract updateProfileImgKey(key: string): Observable<any>;
 }

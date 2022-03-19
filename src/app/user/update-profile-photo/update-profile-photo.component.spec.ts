@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateAccountPageComponent } from './create-account-page.component';
+import { UpdateProfilePhotoComponent } from './update-profile-photo.component';
 
-describe('CreateAccountPageComponent', () => {
-  let component: CreateAccountPageComponent;
-  let fixture: ComponentFixture<CreateAccountPageComponent>;
+describe('UpdateProfilePhotoComponent', () => {
+  let component: UpdateProfilePhotoComponent;
+  let fixture: ComponentFixture<UpdateProfilePhotoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateAccountPageComponent ]
+      declarations: [ UpdateProfilePhotoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateAccountPageComponent);
+    fixture = TestBed.createComponent(UpdateProfilePhotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

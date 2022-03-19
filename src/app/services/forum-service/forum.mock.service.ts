@@ -2,8 +2,12 @@ import {
   CreateNewThreadReq,
   CreateTopicReq,
   DeleteThreadReq,
+  ForumStats,
   FullThread,
+  GetReplyReportsRes,
+  GetThreadReportsRes,
   GetThreadSummariesRes,
+  GetThreadSummariesWCount,
   GetTopicSummariesRes,
   ModRemoveReplyReq,
   ModRemoveThreadReq,
@@ -18,7 +22,16 @@ import {
   UpdateThreadReq,
   UpdateTopicReq,
 } from '../../models/forum.models';
-import { fullThreads, replies, threadSummaries, topics, topicSummaries } from '../../mock/database-entities';
+import {
+  forumStats,
+  fullThreads,
+  replies,
+  replyReports,
+  threadReports,
+  threadSummaries,
+  topics,
+  topicSummaries,
+} from '../../mock/database-entities';
 import { ForumService } from './forum.service';
 import { Observable, of } from 'rxjs';
 
@@ -60,6 +73,7 @@ export class ForumMockService implements ForumService {
   getAllThreads(limit: number, offset: number): Observable<GetThreadSummariesRes> {
     return of({
       threads: threadSummaries,
+      totalResults: 200,
     });
   }
 
@@ -74,6 +88,7 @@ export class ForumMockService implements ForumService {
   getThreadsForTopic(topicId: number, limit: number, offset: number): Observable<GetThreadSummariesRes> {
     return of({
       threads: threadSummaries,
+      totalResults: 200,
     });
   }
 
@@ -123,5 +138,31 @@ export class ForumMockService implements ForumService {
 
   modRemoveReply(req: ModRemoveReplyReq): Observable<any> {
     return of({});
+  }
+
+  getThreadReports(): Observable<GetThreadReportsRes> {
+    return of({
+      threadReports: threadReports,
+    });
+  }
+
+  deleteThreadReport(id: number): Observable<any> {
+    return of({});
+  }
+
+  getReplyReports(): Observable<GetReplyReportsRes> {
+    return of({ replyReports: replyReports });
+  }
+
+  deleteReplyReport(id: number): Observable<any> {
+    return of({});
+  }
+
+  getLatestThreadsForAccount(id: number, count: number): Observable<GetThreadSummariesWCount> {
+    return of({ threads: threadSummaries, totalResults: threadSummaries.length });
+  }
+
+  getStatsForAccount(id: number): Observable<ForumStats> {
+    return of(forumStats[0]);
   }
 }

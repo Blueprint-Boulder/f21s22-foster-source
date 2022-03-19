@@ -11,16 +11,16 @@
       <span *ngIf="currentProviderInfo.cityCanProvideRespiteIn"
         ><b>City Can Provide Respite In: </b> {{ currentProviderInfo.cityCanProvideRespiteIn }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.respiteTravelDistance"
+      <span *ngIf="currentProviderInfo.respiteTravelDistance !== undefined"
         ><b>Travel Distance: </b> {{ currentProviderInfo.respiteTravelDistance }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.careForMinAge"
+      <span *ngIf="currentProviderInfo.careForMinAge !== undefined"
         ><b>Min Age Able to Care For: </b> {{ currentProviderInfo.careForMinAge }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.careForMaxAge"
+      <span *ngIf="currentProviderInfo.careForMaxAge !== undefined"
         ><b>Max Age Able to Care For: </b> {{ currentProviderInfo.careForMaxAge }} <br
       /></span>
-      <span *ngIf="currentProviderInfo.maxNumCareFor"
+      <span *ngIf="currentProviderInfo.maxNumCareFor !== undefined"
         ><b>Max # of Children Able to Care For: </b> {{ currentProviderInfo.maxNumCareFor }} <br
       /></span>
       <p>
@@ -40,29 +40,21 @@
       <div class="col-12">
         <div class="row city-and-miles-row my-3">
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="cityCanProvideRespiteIn"><b>City/town you can provide respite in</b></label>
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="cityCanProvideRespiteIn"
-                placeholder="Enter city/town"
-                formControlName="cityCanProvideRespiteIn"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'City/town you can provide respite in'"
+              [field]="'cityCanProvideRespiteIn'"
+              [form]="updateProviderInfoForm"
+              [placeholder]="'Enter city'"
+            ></app-basic-text-field>
           </div>
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="respiteTravelDistance"
-                ><b>How far are you willing to travel to provide respite (miles)?</b></label
-              >
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="respiteTravelDistance"
-                type="number"
-                placeholder="Enter distance (miles)"
-                formControlName="respiteTravelDistance"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'How far are you willing to travel to provide respite (miles)?'"
+              [field]="'respiteTravelDistance'"
+              [type]="'number'"
+              [form]="updateProviderInfoForm"
+              [placeholder]="'Enter distance (miles)'"
+            ></app-basic-text-field>
           </div>
         </div>
         <div class="row age-range-max-num-row">
@@ -81,6 +73,23 @@
                     placeholder="Enter minimum age"
                     formControlName="careForMinAge"
                   />
+                  <div
+                    *ngIf="
+                      updateProviderInfoForm.get('careForMinAge')?.invalid &&
+                      (updateProviderInfoForm.get('careForMinAge')?.dirty ||
+                        updateProviderInfoForm.get('careForMinAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.required" class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.min" class="input-error"
+                      >Please enter a value of at least 0.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMinAge')?.errors?.max" class="input-error"
+                      >Please enter a value less than 18.<br
+                    /></small>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
@@ -93,23 +102,40 @@
                     placeholder="Enter maximum age"
                     formControlName="careForMaxAge"
                   />
+                  <div
+                    *ngIf="
+                      updateProviderInfoForm.get('careForMaxAge')?.invalid &&
+                      (updateProviderInfoForm.get('careForMaxAge')?.dirty ||
+                        updateProviderInfoForm.get('careForMaxAge')?.touched)
+                    "
+                  >
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.required" class="input-error"
+                      >Please the max age.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.min" class="input-error"
+                      >Please enter a value of at least 0.<br
+                    /></small>
+                    <small *ngIf="updateProviderInfoForm.get('careForMaxAge')?.errors?.max" class="input-error"
+                      >Please enter a value less than 18.<br
+                    /></small>
+                  </div>
+                  <div *ngIf="updateProviderInfoForm.get('careForMaxAge')?.touched">
+                    <small *ngIf="updateProviderInfoForm.getError('notLargerThan')" class="input-error"
+                      >Value must be larger than min age value.<br
+                    /></small>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-sm-12 col-md-6">
-            <div class="form-group">
-              <label for="maxNumCareFor"
-                ><b>What is the maximum number of children you are able to care for at one time?</b></label
-              >
-              <input
-                class="form-control p-1 m-0 bottom-border-input"
-                id="maxNumCareFor"
-                type="number"
-                placeholder="Enter number of children"
-                formControlName="maxNumCareFor"
-              />
-            </div>
+            <app-basic-text-field
+              [title]="'What is the maximum number of children you are able to care for at one time?'"
+              [field]="'maxNumCareFor'"
+              [type]="'number'"
+              [form]="updateProviderInfoForm"
+              [placeholder]="'Enter number of children'"
+            ></app-basic-text-field>
           </div>
         </div>
       </div>

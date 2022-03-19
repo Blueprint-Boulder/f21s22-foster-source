@@ -5,8 +5,10 @@ import { ProfileService } from './profile.service';
 import { Observable, of } from 'rxjs';
 import {
   CreateProfileReq,
+  GetProfileReportsRes,
   GetProfilesRes,
   ProfileImages,
+  ReportProfileReq,
   RespiteProviderInfoReq,
   SecondaryAccountHolderReq,
   UpdateHouseholdBackground,
@@ -69,5 +71,21 @@ export class ProfileMockService implements ProfileService {
 
   getCurrentProfile(): Observable<FullProfileRes> {
     return of(profiles[0]);
+  }
+
+  reportProfile(req: ReportProfileReq): Observable<any> {
+    return of({});
+  }
+
+  updateProfileImgKey(key: string): Observable<any> {
+    return of({});
+  }
+
+  deleteProfileReport(id: number): Observable<any> {
+    return of({});
+  }
+
+  getProfileReports(): Observable<GetProfileReportsRes> {
+    return of({ profileReports: [] });
   }
 }

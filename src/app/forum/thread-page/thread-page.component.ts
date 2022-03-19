@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { ForumService } from '../../services/forum-service/forum.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastService } from '../../services/toast-service/toast.service';
 import { FullThread, ModRemoveThreadReq, PostReplyReq, ReportThreadReq } from '../../models/forum.models';
-import { formatDate, ViewportScroller } from '@angular/common';
-import { AuthService } from '../../services/auth-service/auth.service';
-import { ImageUtils } from '../../common/utils/ImageUtils';
 import { ProfileService } from '../../services/profile-service/profile.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../services/toast-service/toast.service';
+import { ForumService } from '../../services/forum-service/forum.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReplyEvent } from '../thread-reply/thread-reply.component';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { formatDate, ViewportScroller } from '@angular/common';
+import { ImageUtils } from '../../common/utils/ImageUtils';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-thread-page',
@@ -17,25 +17,38 @@ import { ReplyEvent } from '../thread-reply/thread-reply.component';
   styleUrls: ['./thread-page.component.scss'],
 })
 export class ThreadPageComponent implements OnInit {
+  // Pagination
   public readonly REPLY_LIMIT = 25;
   public resultPage = 0;
+
+  // For determining how the user should interact with/see this thread
   public userHasLiked = false;
   public isMod = false;
-  public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   public isOwnThread = false;
+  public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
 
-  public thread: FullThread;
+  // For if an administrator is inspecting a thread report.
+  public inspectingReplyId: number;
 
+  // For the report modal
   public reportDescription: string;
   public submittingReport = false;
 
+  // For the moderation modal
   public removeForm: FormGroup;
   public shouldShowSuspendForm = false;
   public submittingRemove = false;
 
+  // For constructing replies to the current thread
   public isReplyingToSomeone = false;
   public submittingReply = false;
   public replyReq: PostReplyReq;
+
+  // Used to propagate all click events to child reply component
+  // See: app-thread-reply for handler, addresses buggy behavior of text highlighting
+  public clickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  public thread: FullThread;
 
   constructor(
     private forumService: ForumService,
@@ -66,6 +79,12 @@ export class ThreadPageComponent implements OnInit {
           this.resultPage = parseInt((parseInt(replyOffset) / this.REPLY_LIMIT).toString()) + 1;
         }
 
+        const inspecting = map.get('inspecting');
+
+        if (inspecting) {
+          this.inspectingReplyId = parseInt(inspecting);
+        }
+
         this.forumService
           .getThreadByIdWithReplies(
             id,
@@ -75,7 +94,9 @@ export class ThreadPageComponent implements OnInit {
           .subscribe(
             (ft) => {
               this.thread = ft;
+
               this.generateProfileImageSrc();
+
               this.isOwnThread = this.authService.getToken()?.id === this.thread.account.id;
               this.userHasLiked = this.thread.requesterHasLiked;
               this.replyReq = {
@@ -101,6 +122,18 @@ export class ThreadPageComponent implements OnInit {
   changePage(newPage: number): void {
     this.router.navigate([`/forum/threads/${this.thread.id}`], {
       queryParams: { replyOffset: (newPage - 1) * this.REPLY_LIMIT },
+      queryParamsHandling: 'merge',
+    });
+    this.scrollToTop();
+  }
+
+  goToLastPage(): void {
+    const replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+    const lastPage = replyCount - (replyCount % this.REPLY_LIMIT);
+
+    this.router.navigate([`/forum/threads/${this.thread.id}`], {
+      queryParams: { replyOffset: lastPage },
+      queryParamsHandling: 'merge',
     });
     this.scrollToTop();
   }
@@ -135,28 +168,25 @@ export class ThreadPageComponent implements OnInit {
       return;
     }
 
-    this.profileService.getProfileImages().subscribe(
-      (images) => {
-        this.profileImageSrc = ImageUtils.buildS3Url(images.profileSmallAwsKey);
-      },
-      (err) => {
-        this.profileImageSrc = 'assets/images/blank-profile-photo.jpg';
-      }
-    );
+    this.profileService.getProfileImages().subscribe((images) => {
+      this.profileImageSrc = ImageUtils.buildS3Url(images.profileSmallAwsKey);
+    });
   }
 
   reportThread(): void {
     this.submittingReport = true;
+
     const req: ReportThreadReq = {
       id: this.thread.id,
       description: this.reportDescription,
     };
+
     this.forumService.reportThread(req).subscribe(
       () => {
         this.toastService.success('Thank you for submitting your report, staff will look into it shortly.');
-        this.reportDescription = '';
-        this.modalService.dismissAll();
         this.submittingReport = false;
+        this.modalService.dismissAll();
+        this.resetForms();
       },
       (err) => {
         this.toastService.httpError(err);
@@ -195,10 +225,9 @@ export class ThreadPageComponent implements OnInit {
 
     this.forumService.modRemoveThread(req).subscribe(
       () => {
-        this.toastService.success('Successfully removed the thread.');
-        this.router.navigate(['/forum']);
         this.modalService.dismissAll();
         this.submittingRemove = false;
+        this.toastService.successAndNavigate('Successfully removed the thread.', '/forum');
       },
       (err) => {
         this.toastService.httpError(err);
@@ -213,6 +242,7 @@ export class ThreadPageComponent implements OnInit {
 
   visitProfile(): void {
     if (!this.thread.account.profileId) {
+      this.toastService.info('This user does not have a profile.');
       return;
     }
     this.router.navigate([`/user/${this.thread.account.profileId}`]);
@@ -260,9 +290,8 @@ export class ThreadPageComponent implements OnInit {
 
     this.forumService.removeOwnThread(this.thread.id).subscribe(
       () => {
-        this.toastService.success('Successfully deleted thread.');
         this.modalService.dismissAll();
-        this.router.navigate(['/forum']);
+        this.toastService.successAndNavigate('Successfully deleted thread.', '/forum');
       },
       (err) => {
         this.toastService.httpError(err);
@@ -271,17 +300,18 @@ export class ThreadPageComponent implements OnInit {
   }
 
   submitReply(): void {
-    // TODO: Make it navigate to the last page of the thread so you can see it.
     this.submittingReply = true;
 
     this.forumService.postReply(this.replyReq).subscribe(
       (res) => {
         this.toastService.success('Successfully posted reply.');
         this.submittingReply = false;
-        this.replyReq.body = '';
-        this.replyReq.replyingToUsername = undefined;
-        this.replyReq.replyingToText = undefined;
-        this.isReplyingToSomeone = false;
+
+        this.thread.replies.push(res);
+        this.thread.replyCount = parseInt(this.thread.replyCount.toString()) + 1;
+
+        this.fullyClearReplyForm();
+        this.goToLastPage();
       },
       (err) => {
         this.toastService.httpError(err);
@@ -305,6 +335,7 @@ export class ThreadPageComponent implements OnInit {
     this.replyReq.body = '';
   }
 
+  // From stackoverflow
   private scrollToTop(): void {
     (function smoothScroll() {
       const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;

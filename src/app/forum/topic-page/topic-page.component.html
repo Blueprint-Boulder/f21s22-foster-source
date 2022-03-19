@@ -1,0 +1,43 @@
+<div class="container pt-5" *ngIf="threads">
+  <div class="row title-row">
+    <div class="col-12">
+      <span class="text-muted">Viewing Topic - <a href="/forum">Go back to topic list</a></span>
+      <h1 class="mt-2">{{ topic.title }}</h1>
+      <p>
+        {{ topic.description }}
+      </p>
+    </div>
+  </div>
+  <div class="row user-action-row mb-2">
+    <div class="col-6"><i>Click a Thread Below to Read</i></div>
+    <div class="col-6 text-right">
+      <button class="btn btn-secondary text-white" (click)="goToCreateThread()">Open a New Discussion</button>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let thread of threads">
+    <div class="col-12">
+      <app-thread-summary [thread]="thread"></app-thread-summary>
+    </div>
+  </div>
+  <div class="row" *ngIf="!threads || (threads && threads.length < 1)">
+    <div class="col col-12 text-center my-5">
+      <i
+        >There are currently no threads posted under this topic.
+        <a href="javascript:void(0)" (click)="goToCreateThread()">Get the conversation started!</a></i
+      >
+    </div>
+  </div>
+  <div class="row page-row mt-5 mb-2" *ngIf="totalResults > 0">
+    <div class="col-12">
+      <div class="page-wrapper text-center">
+        <ngb-pagination
+          [(page)]="resultPage"
+          [pageSize]="THREAD_LIMIT"
+          [collectionSize]="totalResults"
+          (pageChange)="changePage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

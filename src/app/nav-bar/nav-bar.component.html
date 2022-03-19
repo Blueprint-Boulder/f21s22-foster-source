@@ -51,7 +51,7 @@
           >Login <span *ngIf="router.url === '/login'" class="sr-only">(current)</span></a
         >
       </li>
-      <li *ngIf="currentAccount && !isProdEnv" class="nav-item" [ngClass]="{ active: router.url === '/forum' }">
+      <li *ngIf="currentAccount" class="nav-item" [ngClass]="{ active: router.url === '/forum' }">
         <a class="nav-link" href="javascript:void(0)" [routerLink]="'/forum'" (click)="collapse()"
           ><i class="bi bi-chat-dots d-lg-none">&nbsp;&nbsp;</i>Forum</a
         >
