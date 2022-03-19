@@ -49,11 +49,11 @@ const routes: Routes = [
     component: PasswordRecoveryChangeComponent,
   },
   {
-    path: 'recover',
+    path: 'recovery',
     component: ForgotPasswordComponent,
   },
   {
-    path: 'recover/confirmation',
+    path: 'recovery/confirmation',
     component: ForgotPasswordConfirmationComponent,
   },
 ];

@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5 p-5">
+<div class="container mt-5 mb-5 p-5 border shadow-sm">
   <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
       <div class="jumbotron bg-white" id="login-modal">
@@ -52,11 +52,13 @@
             <label class="form-check-label" for="remember"> Remember me </label>
           </div>
         </form>
-        <div class="container">
+        <div>
           <span class="psw p-2 float-right"
             >Don't have an account? <a [routerLink]="['/login/create-account']">Sign up here</a></span
           >
-          <span class="psw p-2 float-right"><a [routerLink]="['/login/recover']">Forgot Password?</a></span>
+          <span class="psw p-2 float-right"
+            ><small>Forgot your password? <a [routerLink]="['/login/recovery']">Click here</a></small></span
+          >
         </div>
       </div>
     </div>

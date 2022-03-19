@@ -98,4 +98,8 @@ export class AccountMockService implements AccountService {
   recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any> {
     return of({});
   }
+
+  requestRecoverPassword(email: string): Observable<any> {
+    return of({});
+  }
 }
