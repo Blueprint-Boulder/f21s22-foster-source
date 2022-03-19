@@ -1,3 +1,4 @@
+import { ForgotPasswordConfirmationComponent } from './forgot-password-confirmation/forgot-password-confirmation.component';
 import { PasswordRecoveryChangeComponent } from './password-recovery-change/password-recovery-change.component';
 import { ProfileNotCompletedGuard } from '../guards/profile-not-completed/profile-not-completed.guard';
 import { ProfileImageUploadComponent } from './profile-image-upload/profile-image-upload.component';
@@ -6,6 +7,7 @@ import { FinishAccountModalComponent } from './finish-account-modal/finish-accou
 import { FinishAccountPageComponent } from './finish-account-page/finish-account-page.component';
 import { VerifyEmailActionComponent } from './verify-email-action/verify-email-action.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ModRegisterComponent } from './mod-register/mod-register.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
@@ -46,6 +48,14 @@ const routes: Routes = [
     path: 'recovery/update-password',
     component: PasswordRecoveryChangeComponent,
   },
+  {
+    path: 'recovery',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'recovery/confirmation',
+    component: ForgotPasswordConfirmationComponent,
+  },
 ];
 
 export const loginRouting = RouterModule.forChild(routes);
@@ -61,6 +71,8 @@ export const loginRouting = RouterModule.forChild(routes);
     ModRegisterComponent,
     LoginModalComponent,
     PasswordRecoveryChangeComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordConfirmationComponent,
   ],
   imports: [
     CommonModule,

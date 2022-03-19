@@ -39,4 +39,5 @@ export abstract class AccountService {
   public abstract updateCwInfo(req: CaseWorkerInfo): Observable<any>;
   public abstract getNavBarStatus(): Observable<NavBarStatus>;
   public abstract recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any>;
+  public abstract requestRecoverPassword(email: string): Observable<any>;
 }
