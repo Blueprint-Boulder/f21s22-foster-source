@@ -11,7 +11,7 @@ import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modi
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { UserRoutingModule } from './user-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
@@ -42,6 +42,7 @@ import { LoginModule } from '../login/login.module';
     CommonComponentsModule,
     NgbAccordionModule,
     LoginModule,
+    FormsModule,
   ],
 })
 export class UserModule {}
