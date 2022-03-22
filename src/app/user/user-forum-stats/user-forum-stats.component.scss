@@ -1,0 +1,12 @@
+@import "../../../styles";
+
+.stats-box {
+  border-bottom: 4px solid map-get($theme-colors, "secondary") !important;
+}
+.stat-icon {
+  font-size: 2em;
+}
+
+.red {
+  color: red;
+}

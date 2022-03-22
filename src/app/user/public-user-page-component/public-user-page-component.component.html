@@ -9,15 +9,10 @@
           <div class="row profile-image-info">
             <div class="col-12 text-center mt-3">
               <p>
-                <b
-                  >{{ selectedProfile.preferredName }}
-                  <div style="color: red" class="report-col float-sm-right">
-                    <i
-                      class="bi bi-flag-fill pointer text-muted"
-                      title="Report This Thread"
-                      (click)="openModal(reportModal)"
-                    ></i></div></b
-                ><br />
+                <b>{{ selectedProfile.preferredName }}</b>
+                <br />
+                <span>{{ selectedProfile.account.username }}</span>
+                <br />
                 <i
                   >{{ selectedProfile.gender
                   }}<span *ngIf="selectedProfile.pronouns"> | {{ selectedProfile.pronouns }}</span></i
@@ -36,13 +31,15 @@
                 >
               </p>
             </div>
-
-            <!--    // TODO: TREVOR        -->
-
-            <!--(click)="openModal(reportModal)"-->
-
-            <!--    // TODO: TAHIRA        -->
-            <div class="col-6 moderate-col"></div>
+          </div>
+          <div class="row mb-3 mt-1">
+            <div class="col report-col col-12 text-center">
+              <i
+                class="bi bi-flag-fill pointer text-muted"
+                title="Report This Profile"
+                (click)="openModal(reportModal)"
+              ></i>
+            </div>
           </div>
         </div>
       </div>
@@ -81,6 +78,11 @@
               >
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row user-forum-row mt-3">
+        <div class="col-12">
+          <app-user-forum-stats [accountId]="selectedProfile.accountId"></app-user-forum-stats>
         </div>
       </div>
       <div *ngIf="isOwnProfile" class="row edit-row mt-5">
@@ -396,8 +398,8 @@
     <div class="form-group">
       <label for="report-body"
         >Why are you reporting this profile?<br /><small
-          >Please include as much detail as possible so that staff can accurately assess whether to remove the reply,
-          and/or take administrative action against the poster (if necessary).</small
+          >Please include as much detail as possible so that staff can accurately assess whether to take administrative
+          action against the profile (if necessary).</small
         ></label
       >
       <textarea class="form-control" id="report-body" rows="4" [(ngModel)]="reportDescription"></textarea>

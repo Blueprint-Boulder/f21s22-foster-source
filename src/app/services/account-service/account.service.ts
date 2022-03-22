@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   Account,
   CaseWorkerInfo,
-  Token,
   CreateAccountRequest,
   CreateStaffAccountRequest,
   DeleteAccountReq,
@@ -12,13 +11,7 @@ import {
   VerifyReq,
 } from '../../models/account.model';
 import { Observable } from 'rxjs';
-import {
-  ApproveApplicantRequest,
-  ApproveApplicantResponse,
-  DenyApplicantRequest,
-  DenyApplicantResponse,
-  GetApplicantsRes,
-} from '../../models/applicant.model';
+import { ApproveApplicantRequest, DenyApplicantRequest } from '../../models/applicant.model';
 import { FinishProfileReq } from '../../models/profile.model';
 import { ChangePasswordReq, RecoveryChangePasswordReq } from '../../models/change-password';
 import { NavBarStatus } from '../../models/nav-bar.models';
@@ -34,9 +27,7 @@ export abstract class AccountService {
   public abstract login(params: LoginRequest): Observable<string>;
   public abstract logout(): Observable<any>;
   public abstract completeProfile(params: FinishProfileReq): Observable<any>;
-  public abstract updateAccount(params: UpdateAccountReq): Observable<Account>;
   public abstract deleteOwnAccount(req: DeleteAccountReq): Observable<any>;
-  public abstract deleteAccount(id: number): Observable<any>;
   public abstract getApplicants(): Observable<GetAccountsReq>;
   public abstract getStaffApplicants(): Observable<GetAccountsReq>;
   public abstract denyApplicant(params: DenyApplicantRequest): Observable<any>;
@@ -48,4 +39,5 @@ export abstract class AccountService {
   public abstract updateCwInfo(req: CaseWorkerInfo): Observable<any>;
   public abstract getNavBarStatus(): Observable<NavBarStatus>;
   public abstract recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any>;
+  public abstract requestRecoverPassword(email: string): Observable<any>;
 }

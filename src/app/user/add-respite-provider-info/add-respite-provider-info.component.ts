@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RespiteProviderInfoReq } from '../../models/profile.model';
 import { AvailabilityType } from '../../models/availability.model';
 import { FormUtils } from '../../common/utils/FormUtils';
-import { ToastPresets } from '../../models/toast.model';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -102,11 +101,7 @@ export class AddRespiteProviderInfoComponent {
 
       this.profileService.addRespiteProviderInfo(req).subscribe(
         (profile) => {
-          this.toastService.show({
-            body: 'Successfully added respite provider info.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/`]);
+          this.toastService.successAndNavigate('Successfully added respite provider info.', '/user');
         },
         (err) => {
           this.toastService.httpError(err);

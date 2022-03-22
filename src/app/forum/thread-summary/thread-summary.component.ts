@@ -19,22 +19,21 @@ export class ThreadSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.thread) {
-      console.log(this.thread);
       this.userHasLiked = this.thread.requesterHasLiked;
       this.generateProfileImageSrc();
     }
-    return;
   }
 
   generateProfileImageSrc(): void {
     if (this.thread.account.privilege === 'MOD' || this.thread.account.privilege === 'ADMIN') {
       this.profileImageSrc = 'assets/images/modShield.png';
-      return;
     }
+
     if (this.thread.account.profileSmallAwsKey) {
       this.profileImageSrc = ImageUtils.buildS3Url(this.thread.account.profileSmallAwsKey);
     }
   }
+
   imgError(): void {
     this.profileImageSrc = 'assets/images/blank-profile-photo.jpg';
   }

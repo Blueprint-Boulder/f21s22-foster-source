@@ -4,7 +4,6 @@ import { ForumService } from '../../services/forum-service/forum.service';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThreadSummary, UpdateThreadReq } from '../../models/forum.models';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-thread',
@@ -13,7 +12,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class EditThreadComponent implements OnInit {
   public thread: ThreadSummary;
-  public editForm: FormGroup;
   public submittingForm = false;
 
   constructor(
@@ -58,8 +56,7 @@ export class EditThreadComponent implements OnInit {
 
     this.forumService.updateThread(req).subscribe(
       (thread) => {
-        this.toastService.success('Successfully updated thread.');
-        this.router.navigate(['/forum/threads/' + thread.id.toString()]);
+        this.toastService.successAndNavigate('Successfully updated thread.', '/forum/threads/' + thread.id.toString());
       },
       (err) => {
         this.submittingForm = false;

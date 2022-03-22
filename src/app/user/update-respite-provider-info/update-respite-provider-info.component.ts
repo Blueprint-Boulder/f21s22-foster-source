@@ -97,11 +97,7 @@ export class UpdateRespiteProviderInfoComponent implements OnInit {
 
       this.profileService.updateRespiteProviderInfo(req).subscribe(
         (profile) => {
-          this.toastService.show({
-            body: 'Successfully updated respite provider information.',
-            preset: ToastPresets.SUCCESS,
-          });
-          this.router.navigate([`/user/`]);
+          this.toastService.successAndNavigate('Successfully updated respite provider information.', '/user');
         },
         (err) => {
           this.toastService.httpError(err);
