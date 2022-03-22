@@ -9,7 +9,14 @@
           <div class="row profile-image-info">
             <div class="col-12 text-center mt-3">
               <p>
-                <b>{{ selectedProfile.preferredName }}</b
+                <b
+                  >{{ selectedProfile.preferredName }}
+                  <div style="color: red" class="report-col float-sm-right">
+                    <i
+                      class="bi bi-flag-fill pointer text-muted"
+                      title="Report This Thread"
+                      (click)="openModal(reportModal)"
+                    ></i></div></b
                 ><br />
                 <i
                   >{{ selectedProfile.gender
@@ -31,13 +38,7 @@
             </div>
 
             <!--    // TODO: TREVOR        -->
-            <div class="col-6 report-col">
-              <i
-                class="bi bi-flag-fill pointer text-muted"
-                title="Report This Thread"
-                (click)="openModal(reportModal)"
-              ></i>
-            </div>
+
             <!--(click)="openModal(reportModal)"-->
 
             <!--    // TODO: TAHIRA        -->

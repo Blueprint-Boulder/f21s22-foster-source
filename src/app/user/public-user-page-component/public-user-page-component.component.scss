@@ -50,6 +50,7 @@ span.second-contact-background {
   display: inline-block;
   text-align: center;
 } */
+
 .e-accordian {
   background-color: #ea8a40;
 }
@@ -73,4 +74,10 @@ span.second-contact-background {
 
 ::ng-deep .card .card-header {
   background-color: white !important;
+}
+
+.report-col {
+  &:hover {
+    cursor: pointer;
+  }
 }
