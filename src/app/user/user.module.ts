@@ -11,14 +11,14 @@ import { ModifyTempAvailabilityComponent } from './modify-temp-availability/modi
 import { UpdateProfilePhotoComponent } from './update-profile-photo/update-profile-photo.component';
 import { UserForumActivityComponent } from './user-forum-activity/user-forum-activity.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
+import { UserForumStatsComponent } from './user-forum-stats/user-forum-stats.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserRoutingModule } from './user-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { LoginModule } from '../login/login.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { UserForumStatsComponent } from './user-forum-stats/user-forum-stats.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { UserForumStatsComponent } from './user-forum-stats/user-forum-stats.com
     CommonComponentsModule,
     NgbAccordionModule,
     LoginModule,
+    FormsModule,
   ],
 })
 export class UserModule {}

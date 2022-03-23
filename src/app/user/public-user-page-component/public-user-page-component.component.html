@@ -9,8 +9,8 @@
           <div class="row profile-image-info">
             <div class="col-12 text-center mt-3">
               <p>
-                <b>{{ selectedProfile.preferredName }}</b
-                ><br />
+                <b>{{ selectedProfile.preferredName }}</b>
+                <br />
                 <span>{{ selectedProfile.account.username }}</span>
                 <br />
                 <i
@@ -31,12 +31,15 @@
                 >
               </p>
             </div>
-
-            <!--    // TODO: TREVOR        -->
-            <div class="col-6 report-col"></div>
-
-            <!--    // TODO: TAHIRA        -->
-            <div class="col-6 moderate-col"></div>
+          </div>
+          <div class="row mb-3 mt-1">
+            <div class="col report-col col-12 text-center">
+              <i
+                class="bi bi-flag-fill pointer text-muted"
+                title="Report This Profile"
+                (click)="openModal(reportModal)"
+              ></i>
+            </div>
           </div>
         </div>
       </div>
@@ -310,6 +313,7 @@
         <div class="input-group">
           <div class="input-group-append contact-modal">
             <h3>Contact Information</h3>
+            <!-- {{ selectedProfile.preferredName }} add this maybe?-->
             <p>
               <i
                 >Ensure that you have read and fully understand the <a href="/help">site rules</a> before contacting
@@ -379,5 +383,36 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal2.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- Report Modal -->
+<ng-template #reportModal let-reportModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-report">Report This Profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="reportModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="report-body"
+        >Why are you reporting this profile?<br /><small
+          >Please include as much detail as possible so that staff can accurately assess whether to take administrative
+          action against the profile (if necessary).</small
+        ></label
+      >
+      <textarea class="form-control" id="report-body" rows="4" [(ngModel)]="reportDescription"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="reportModal.close('Save click')">Close</button>
+    <button
+      class="btn btn-secondary"
+      (click)="reportProfile()"
+      [disabled]="reportDescription === '' || !reportDescription || submittingReport"
+    >
+      Report Profile
+    </button>
   </div>
 </ng-template>
