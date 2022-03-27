@@ -13,6 +13,9 @@ import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+
+import { ReportReplyReq } from '../../models/forum.models';
+import { ReportProfileReq } from '../../models/profile.model';
 import { BlacklistAccountReq, SuspendUserReq } from '../../models/blacklisted-user.model';
 import { ModRemoveReplyReq } from '../../models/forum.models';
 
@@ -56,11 +59,10 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = params['id'];
+      const id = params['id']; // is this still needed?
       if (id === undefined || id === null) {
         this.profileService.getCurrentProfile().subscribe(
           (p) => {
-            console.log(p);
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.profileImgSrc = this.getProfileSrc();
@@ -135,9 +137,23 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   // TODO: TREVOR
   reportProfile(): void {
-    // thread-reply.component.ts line 182
-    // Utilize this.profileService.reportProfile
-    // on success, use toast service to say successful, then close modal
+    this.submittingReport = true;
+    const req: ReportProfileReq = {
+      description: this.reportDescription,
+      profileId: this.selectedProfile.id, // figure out what you need to do to get the profile id
+    };
+    this.profileService.reportProfile(req).subscribe(
+      () => {
+        this.toastService.success('Thank you for submitting your report, staff will look into it shortly.');
+        this.reportDescription = '';
+        this.modalService.dismissAll();
+        this.submittingReport = false;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingReport = false;
+      }
+    );
   }
 
   // TODO: TAHIRA

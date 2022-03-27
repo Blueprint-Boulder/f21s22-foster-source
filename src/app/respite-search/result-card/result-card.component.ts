@@ -1,6 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { SmallProfile } from '../../models/small-profile.model';
 import { ImageUtils } from '../../common/utils/ImageUtils';
+import { Component, Input, OnInit } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 
 @Component({
@@ -14,7 +14,7 @@ export class ResultCardComponent implements OnInit {
 
   @Input() profile: SmallProfile;
 
-  ngOnInit() {
+  ngOnInit(): void {
     const element = document.getElementById(this.id);
     if (element) {
       element.addEventListener('error', () => {

@@ -1,10 +1,25 @@
+@import "../../../styles";
+.thread-small {
+  border-left: 5px solid map-get($theme-colors, "secondary") !important;
+}
+
 .thread-container {
-  height: 200px;
+  max-height: 200px;
   overflow-y: scroll;
 }
 
 .pointer {
   &:hover {
     cursor: pointer;
+  }
+}
+
+.link-secondary {
+  color: map-get($theme-colors, "secondary");
+  &:hover {
+    color: map-get($theme-colors, "secondary");
+  }
+  &:focus {
+    color: map-get($theme-colors, "secondary");
   }
 }

@@ -2,6 +2,7 @@ import {
   CreateNewThreadReq,
   CreateTopicReq,
   DeleteThreadReq,
+  ForumStats,
   FullThread,
   GetReplyReportsRes,
   GetThreadReportsRes,
@@ -72,4 +73,6 @@ export abstract class ForumService {
   public abstract getReplyReports(): Observable<GetReplyReportsRes>;
   public abstract deleteThreadReport(id: number): Observable<any>;
   public abstract deleteReplyReport(id: number): Observable<any>;
+
+  public abstract getStatsForAccount(id: number): Observable<ForumStats>;
 }

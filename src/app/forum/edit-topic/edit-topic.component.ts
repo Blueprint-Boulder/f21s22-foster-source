@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../../services/forum-service/forum.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../services/toast-service/toast.service';
 import { TopicSummary, UpdateTopicReq } from '../../models/forum.models';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -87,15 +87,14 @@ export class EditTopicComponent implements OnInit {
     };
 
     if (req.title === undefined && req.description === undefined) {
-      this.toastService.info('No changes detected, so topic not updated.');
+      this.toastService.info('No changes detected, topic not updated.');
       this.submittingForm = false;
       return;
     }
 
     this.forumService.updateTopic(req).subscribe(
       (res) => {
-        this.toastService.success('Topic successfully updated.');
-        this.router.navigate(['/forum']);
+        this.toastService.successAndNavigate('Topic successfully updated.', '/forum');
       },
       (err) => {
         this.toastService.httpError(err);

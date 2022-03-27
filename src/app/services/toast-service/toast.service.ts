@@ -1,11 +1,14 @@
 import { getClassListFromPreset, Toast, ToastPresets } from '../../models/toast.model';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
   public toasts: Toast[] = [];
+
+  constructor(private router: Router) {}
 
   show(toast: Toast): void {
     if (toast.preset) {
@@ -19,7 +22,7 @@ export class ToastService {
   }
 
   httpError(err: any) {
-    // Standard error response from fs-service
+    // Standard http error response from fs-service
     if (err.error && err.error.code && err.error.message) {
       this.show({
         body: `[${err.error.code}] ${err.error.message}`,
@@ -56,5 +59,10 @@ export class ToastService {
       body: body,
       preset: ToastPresets.REGULAR,
     });
+  }
+
+  successAndNavigate(message: string, navigateTo: string): void {
+    this.success(message);
+    this.router.navigate([navigateTo]);
   }
 }

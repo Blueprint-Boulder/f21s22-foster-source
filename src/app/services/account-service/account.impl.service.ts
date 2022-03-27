@@ -49,12 +49,6 @@ export class AccountImplService implements AccountService {
     );
   }
 
-  deleteAccount(id: number): Observable<any> {
-    return this.http.delete<void>(`${environment.backendHost}/api/db/accounts/${encodeURIComponent(id)}`, {
-      withCredentials: true,
-    });
-  }
-
   deleteOwnAccount(req: DeleteAccountReq): Observable<any> {
     return this.http.delete<void>(`${environment.backendHost}/api/db/accounts/`, {
       body: req,
@@ -79,12 +73,6 @@ export class AccountImplService implements AccountService {
 
   logout(): Observable<any> {
     return this.http.post<any>(`${environment.backendHost}/api/session/logout`, {
-      withCredentials: true,
-    });
-  }
-
-  updateAccount(params: UpdateAccountReq): Observable<Account> {
-    return this.http.put<Account>(`${environment.backendHost}/api/db/accounts`, JSON.stringify(params), {
       withCredentials: true,
     });
   }
@@ -161,5 +149,15 @@ export class AccountImplService implements AccountService {
 
   recoveryUpdatePassword(req: RecoveryChangePasswordReq): Observable<any> {
     return this.http.put(`${environment.backendHost}/api/db/accounts/recovery`, req, { withCredentials: true });
+  }
+
+  requestRecoverPassword(email: string): Observable<any> {
+    return this.http.post(
+      `${environment.backendHost}/api/db/accounts/recovery`,
+      { email: email },
+      {
+        withCredentials: true,
+      }
+    );
   }
 }

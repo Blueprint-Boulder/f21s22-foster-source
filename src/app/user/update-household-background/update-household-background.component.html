@@ -64,40 +64,31 @@
   <form [formGroup]="updateHouseholdBackgroundForm">
     <div class="row how-many-row mt-5">
       <div class="col-sm-4">
-        <div class="form-group">
-          <label for="parentalUnitSize"><b>How many individuals are in your parental unit?</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="parentalUnitSize"
-            type="number"
-            placeholder="Enter number individuals"
-            formControlName="parentalUnitSize"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'How many individuals are in your parental unit?'"
+          [field]="'parentalUnitSize'"
+          [placeholder]="'Enter number individuals'"
+          [form]="updateHouseholdBackgroundForm"
+          [type]="'number'"
+        ></app-basic-text-field>
       </div>
       <div class="col-sm-4">
-        <div class="form-group">
-          <label for="householdSize"><b>How many total individuals are in your household?</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="householdSize"
-            type="number"
-            placeholder="Enter number individuals"
-            formControlName="householdSize"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'How many total individuals are in your household?'"
+          [field]="'householdSize'"
+          [placeholder]="'Enter number individuals'"
+          [form]="updateHouseholdBackgroundForm"
+          [type]="'number'"
+        ></app-basic-text-field>
       </div>
       <div class="col-sm-4">
-        <div class="form-group">
-          <label for="childrenInHousehold"><b>How many children are in your household?</b></label>
-          <input
-            class="form-control p-1 m-0 bottom-border-input"
-            id="childrenInHousehold"
-            type="number"
-            placeholder="Enter number of children"
-            formControlName="childrenInHousehold"
-          />
-        </div>
+        <app-basic-text-field
+          [title]="'How many children are in your household?'"
+          [field]="'childrenInHousehold'"
+          [placeholder]="'Enter number of children'"
+          [form]="updateHouseholdBackgroundForm"
+          [type]="'number'"
+        ></app-basic-text-field>
       </div>
     </div>
     <div class="row children-info-row">

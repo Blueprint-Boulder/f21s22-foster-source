@@ -1,11 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  ModRemoveReplyReq,
-  ModRemoveThreadReq,
-  Reply,
-  ReportReplyReq,
-  ReportThreadReq,
-} from '../../models/forum.models';
+import { ModRemoveReplyReq, Reply, ReportReplyReq } from '../../models/forum.models';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service/auth.service';
@@ -27,21 +21,28 @@ export interface ReplyEvent {
 })
 export class ThreadReplyComponent implements OnInit {
   public profileImageSrc = 'assets/images/blank-profile-photo.jpg';
+
+  // Determines how user will view/interact with the reply
   public userHasLiked = false;
   public isOwnReply = false;
-  public textSelected = false;
-  public reportDescription: string;
-  public submittingReport = false;
   public isMod = false;
 
+  // If there is text selected, the reply button will show.
+  public textSelected = false;
+
+  // For report modal
+  public reportDescription: string;
+  public submittingReport = false;
+
+  // For moderation modal
   public removeForm: FormGroup;
   public shouldShowSuspendForm = false;
   public submittingRemove = false;
 
   @Input() reply: Reply;
-  @Input() author: string;
-  @Input() beingInspected = false;
-  @Input() clickEvent: EventEmitter<void>;
+  @Input() author: string; // For showing author tag if the author of the thread is the author of this reply
+  @Input() beingInspected = false; // Highlight reply if being inspected
+  @Input() clickEvent: EventEmitter<void>; // Propagates full page click events to reply
 
   @Output() replyEvent: EventEmitter<ReplyEvent> = new EventEmitter<ReplyEvent>();
 
@@ -74,6 +75,7 @@ export class ThreadReplyComponent implements OnInit {
 
   visitProfile(): void {
     if (!this.reply.account.profileId) {
+      this.toastService.info('This user does not yet have a profile.');
       return;
     }
     this.router.navigate([`/user/${this.reply.account.profileId}`]);
@@ -107,7 +109,7 @@ export class ThreadReplyComponent implements OnInit {
     }
   }
 
-  clickReply() {
+  clickReply(): void {
     this.replyEvent.emit({
       replyingToUsername: this.reply.account.username,
       replyingToText: this.reply.body,
@@ -127,9 +129,8 @@ export class ThreadReplyComponent implements OnInit {
 
     this.forumService.deleteReply(this.reply.threadId, this.reply.id).subscribe(
       () => {
-        this.toastService.success('Successfully deleted reply.');
         this.modalService.dismissAll();
-        this.router.navigate([`/forum/threads/${this.reply.threadId}`]);
+        this.toastService.successAndNavigate('Successfully deleted reply.', `/forum/threads/${this.reply.threadId}`);
       },
       (err) => {
         this.toastService.httpError(err);
@@ -148,7 +149,7 @@ export class ThreadReplyComponent implements OnInit {
     }
   }
 
-  getSelectedText() {
+  getSelectedText(): string {
     let text = '';
     if (typeof window.getSelection !== 'undefined') {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -165,13 +166,8 @@ export class ThreadReplyComponent implements OnInit {
     return text;
   }
 
-  doSomethingWithSelectedText() {
-    const selectedText = this.getSelectedText();
-    if (selectedText) {
-      this.textSelected = true;
-    } else {
-      this.textSelected = false;
-    }
+  setSelectedVar(): void {
+    this.textSelected = !!this.getSelectedText();
   }
 
   replyToSelected(): void {

@@ -1,30 +1,3 @@
-.availability-table {
-  background-color: #fef4e8;
-  min-width: 220px;
-  border-radius: 10px;
-}
-
-hr.line {
-  border: 1px solid #000000;
-  margin-top: 0px;
-}
-
-h5.day {
-  text-align: center;
-}
-
-.word-wrap {
-  overflow-wrap: break-word;
-}
-
-.profile-column {
-  min-width: 223.5px;
-}
-
-.about-height {
-  height: 22vw;
-}
-
 .contact-modal {
   display: block;
 }
@@ -36,53 +9,6 @@ h5.day {
   display: inline-block;
 }
 
-.grid-custom {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  grid-auto-rows: minmax(100px, auto);
-}
-
-.monday {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.tuesday {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.wednesday {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.thursday {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.friday {
-  grid-column: 1;
-  grid-row: 3;
-}
-
-.saturday {
-  grid-column: 2;
-  grid-row: 3;
-}
-
-.sunday {
-  grid-column: 1;
-  grid-row: 4;
-}
-
-.contact-grid {
-  grid-column: 2;
-  grid-row: 4;
-}
-
 .contact-quick-facts-background {
   background-color: #e4e6e8;
   border-radius: 10px;
@@ -90,29 +16,8 @@ h5.day {
   width: 100%;
 }
 
-.first-contact {
-  background-color: #ffe2bf;
-  border-radius: 10px;
-  padding: 8px;
-  display: inline-block;
-}
-
-.first-contact-background {
-  background-color: #fff2e3;
-  border-radius: 10px;
-  display: inline-block;
-  width: 100%;
-}
-
 .spacer {
   padding: 10px;
-}
-
-.second-contact {
-  background-color: #dabfff;
-  border-radius: 10px;
-  padding: 8px;
-  display: inline-block;
 }
 
 .second-contact-background {
@@ -145,6 +50,7 @@ span.second-contact-background {
   display: inline-block;
   text-align: center;
 } */
+
 .e-accordian {
   background-color: #ea8a40;
 }
@@ -168,6 +74,12 @@ span.second-contact-background {
 
 ::ng-deep .card .card-header {
   background-color: white !important;
+}
+
+.report-col {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .required-star {

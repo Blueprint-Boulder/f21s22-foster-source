@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
 import { isObject } from 'rxjs/internal-compatibility';
+import { filter, map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+// Automatically intercepts all http responses and replaces any ISO date strings with date objects.
 
 @Injectable({
   providedIn: 'root',

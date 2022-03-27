@@ -11,6 +11,7 @@ import { BugReport } from '../models/bug.model';
 import { Photo } from '../models/profile.model';
 import { User } from '../models/user.model';
 import {
+  ForumStats,
   FullThread,
   Reply,
   ReplyReport,
@@ -665,3 +666,11 @@ export const replyReports: ReplyReport[] = [];
 export const fullThreads: FullThread[] = threadSummaries.map((t) => {
   return { ...t, replies: replies, topicId: 1 };
 });
+
+export const forumStats: ForumStats[] = [
+  {
+    likes: 1003,
+    threads: 14,
+    replies: 882,
+  },
+];

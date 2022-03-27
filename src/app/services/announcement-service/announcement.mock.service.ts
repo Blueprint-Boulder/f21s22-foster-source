@@ -13,10 +13,6 @@ export class AnnouncementMockService implements AnnouncementService {
     return of({});
   }
 
-  getAnnouncementById(id: number): Observable<Announcement> {
-    return of(announcements[0]);
-  }
-
   getAnnouncements(): Observable<GetAnnouncementsRes> {
     return of(getAnnouncementResponses[0]);
   }

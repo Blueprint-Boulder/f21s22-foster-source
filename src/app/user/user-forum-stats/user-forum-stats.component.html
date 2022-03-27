@@ -1,0 +1,45 @@
+<div class="card w-100 shadow-sm" *ngIf="stats">
+  <div class="card-body">
+    <div class="my-2 px-2 container-fluid w-100">
+      <div class="row mb-2 mb-lg-4">
+        <div class="col-12">
+          <h6 class="card-title mb-1">
+            Forum Stats<i class="bi bi-trophy-fill float-right text-right text-muted"></i>
+          </h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 mt-lg-0 px-1">
+          <div class="m-0 stats-box rounded border text-center h-100 p-2">
+            <span class="stat-icon"><i class="bi bi-pencil-square"></i></span>
+            <br />
+            <b class="text-muted">{{ stats.threads }}</b>
+            <br />
+            <small class="text-muted">threads posted</small>
+            <br />
+          </div>
+        </div>
+        <div class="col-4 mt-lg-0 px-1">
+          <div class="m-0 stats-box rounded border text-center h-100 p-2">
+            <span class="stat-icon"><i class="bi bi-chat-text"></i></span>
+            <br />
+            <b class="text-muted">{{ stats.replies }}</b>
+            <br />
+            <small class="text-muted">replies posted</small>
+            <br />
+          </div>
+        </div>
+        <div class="col-4 mt-lg-0 px-1">
+          <div class="m-0 stats-box rounded border text-center h-100 p-2">
+            <span class="stat-icon"><i class="bi bi-heart-fill red"></i></span>
+            <br />
+            <b class="text-muted">{{ stats.likes }}</b>
+            <br />
+            <small class="text-muted">hearts received</small>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
