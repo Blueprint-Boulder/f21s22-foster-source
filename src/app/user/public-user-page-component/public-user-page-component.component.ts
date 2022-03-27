@@ -11,10 +11,13 @@ import { ProfileUtils } from '../../common/utils/ProfileUtils';
 import { ImageUtils } from '../../common/utils/ImageUtils';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+
 import { ReportReplyReq } from '../../models/forum.models';
 import { ReportProfileReq } from '../../models/profile.model';
+import { BlacklistAccountReq, SuspendUserReq } from '../../models/blacklisted-user.model';
+import { ModRemoveReplyReq } from '../../models/forum.models';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -39,6 +42,7 @@ export class PublicUserPageComponentComponent implements OnInit {
   public isMod = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private profileService: ProfileService,
@@ -162,6 +166,59 @@ export class PublicUserPageComponentComponent implements OnInit {
     // if they confirm, utilize this.blacklistService.blacklistUserByAccountId
     // if they want to suspend, utilize this.blacklistService.suspendUserReq
     // On success of either, show a toastService success message and navigate to /respite
+    if (this.banForm.invalid) {
+      this.banForm.markAllAsTouched();
+    } else {
+      if (
+        this.banForm.get('adminAction')?.value === 'blacklist' &&
+        prompt(
+          'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
+        ) !== 'confirm'
+      ) {
+        return;
+      } else if (this.banForm.get('adminAction')?.value === 'blacklist') {
+        this.submittingBan = true;
+        const req: BlacklistAccountReq = {
+          accountId: this.selectedProfile.accountId,
+          reason: this.banForm.get('reason')!.value,
+        };
+        this.blacklistService.blacklistAndDeleteAccount(req).subscribe(
+          () => {
+            this.toastService.success('Successfully removed the user.');
+            this.router.navigate([`/respite`]);
+            this.modalService.dismissAll();
+            this.submittingBan = false;
+          },
+          (err) => {
+            this.toastService.httpError(err);
+            this.submittingBan = false;
+          }
+        );
+      }
+      if (this.banForm.get('adminAction')?.value === 'suspend') {
+        const susreq: SuspendUserReq = {
+          accountId: this.selectedProfile.accountId,
+          reason: this.banForm.get('reason')!.value,
+          suspendForDays:
+            this.banForm.get('adminAction')!.value === 'suspend' && this.banForm.get('suspendForDays')!.value
+              ? this.banForm.get('suspendForDays')!.value
+              : undefined,
+        };
+
+        this.blacklistService.suspendUser(susreq).subscribe(
+          () => {
+            this.toastService.success('Successfully suspended the user.');
+            this.router.navigate([`/respite`]);
+            this.modalService.dismissAll();
+            this.submittingBan = false;
+          },
+          (err) => {
+            this.toastService.httpError(err);
+            this.submittingBan = false;
+          }
+        );
+      }
+    }
   }
 
   openModal(modal: any): void {
