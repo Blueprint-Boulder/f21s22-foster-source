@@ -27,6 +27,8 @@ export class AuthService {
 
   init(): void {
     const token = this.getToken();
+    console.log('init');
+    console.log(token);
     if (token) {
       this.expiresAt = moment().add(token.exp, 'second');
       this.privilegeLevel = token.privilegeLevel;
@@ -39,8 +41,11 @@ export class AuthService {
   getToken(): Token | undefined {
     try {
       const token = this.cookieService.get('access-token');
+      console.log('About to decode');
+      console.log(jwtDecode(token));
       return jwtDecode(token);
     } catch (e) {
+      console.log(e);
       return undefined;
     }
   }
