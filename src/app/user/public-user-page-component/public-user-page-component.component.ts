@@ -1,4 +1,5 @@
 import { AvailabilityService } from '../../services/availability-service/availability.service';
+import { BlacklistAccountReq, SuspendUserReq } from '../../models/blacklisted-user.model';
 import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
 import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
@@ -8,16 +9,12 @@ import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileUtils } from '../../common/utils/ProfileUtils';
+import { ReportProfileReq } from '../../models/profile.model';
 import { ImageUtils } from '../../common/utils/ImageUtils';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { formatDate } from '@angular/common';
-
-import { ReportReplyReq } from '../../models/forum.models';
-import { ReportProfileReq } from '../../models/profile.model';
-import { BlacklistAccountReq, SuspendUserReq } from '../../models/blacklisted-user.model';
-import { ModRemoveReplyReq } from '../../models/forum.models';
 
 @Component({
   selector: 'app-public-user-page-component',
@@ -31,14 +28,12 @@ export class PublicUserPageComponentComponent implements OnInit {
   public isAvailable = false;
   public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
-  // TODO: FOR TREVOR
-  public reportDescription: string; // SHOULD BE ASSIGNED TO THE MODAL'S [(ngModel)]
-  public submittingReport = false; // Used to disable the button when developing
+  public reportDescription: string;
+  public submittingReport = false;
 
-  // TODO: FOR TAHIRA
-  public banForm: FormGroup; // SET AS FORM GROUP (note that the names are different than in the thread-reply example!)
-  public shouldShowSuspendForm = false; // When the user chooses to suspend, another text field pops up that asks how long they'd like to suspend for
-  public submittingBan = false; // Used for disabling the button when waiting on the network call to ban the user
+  public banForm: FormGroup;
+  public shouldShowSuspendForm = false;
+  public submittingBan = false;
   public isMod = false;
 
   constructor(
@@ -79,6 +74,7 @@ export class PublicUserPageComponentComponent implements OnInit {
             this.selectedProfile = p;
             this.getAvailability();
             this.profileImgSrc = this.getProfileSrc();
+            this.isMod = this.authService.isAtLeastMod();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -133,9 +129,6 @@ export class PublicUserPageComponentComponent implements OnInit {
     return FormUtils.prettifyValidPhoneNumber(pn);
   }
 
-  // TODO: FOR BOTH: the openModal and form reset functions have been provided!
-
-  // TODO: TREVOR
   reportProfile(): void {
     this.submittingReport = true;
     const req: ReportProfileReq = {
@@ -156,68 +149,53 @@ export class PublicUserPageComponentComponent implements OnInit {
     );
   }
 
-  // TODO: TAHIRA
-  // TODO: Look at the resetForm function: your form is instantiated there.
   moderateProfile(): void {
-    // check if form is invalid
-    // if valid
-    // determine if they've chosen to blacklist
-    // if they want to blacklist, confirm! thread-reply.component.ts line 237
-    // if they confirm, utilize this.blacklistService.blacklistUserByAccountId
-    // if they want to suspend, utilize this.blacklistService.suspendUserReq
-    // On success of either, show a toastService success message and navigate to /respite
     if (this.banForm.invalid) {
       this.banForm.markAllAsTouched();
-    } else {
-      if (
-        this.banForm.get('adminAction')?.value === 'blacklist' &&
-        prompt(
-          'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
-        ) !== 'confirm'
-      ) {
-        return;
-      } else if (this.banForm.get('adminAction')?.value === 'blacklist') {
-        this.submittingBan = true;
-        const req: BlacklistAccountReq = {
-          accountId: this.selectedProfile.accountId,
-          reason: this.banForm.get('reason')!.value,
-        };
-        this.blacklistService.blacklistAndDeleteAccount(req).subscribe(
-          () => {
-            this.toastService.success('Successfully removed the user.');
-            this.router.navigate([`/respite`]);
-            this.modalService.dismissAll();
-            this.submittingBan = false;
-          },
-          (err) => {
-            this.toastService.httpError(err);
-            this.submittingBan = false;
-          }
-        );
-      }
-      if (this.banForm.get('adminAction')?.value === 'suspend') {
-        const susreq: SuspendUserReq = {
-          accountId: this.selectedProfile.accountId,
-          reason: this.banForm.get('reason')!.value,
-          suspendForDays:
-            this.banForm.get('adminAction')!.value === 'suspend' && this.banForm.get('suspendForDays')!.value
-              ? this.banForm.get('suspendForDays')!.value
-              : undefined,
-        };
+      return;
+    }
+    if (
+      this.banForm.get('adminAction')?.value === 'blacklist' &&
+      prompt(
+        'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
+      ) !== 'confirm'
+    ) {
+      return;
+    } else if (this.banForm.get('adminAction')?.value === 'blacklist') {
+      this.submittingBan = true;
+      const req: BlacklistAccountReq = {
+        accountId: this.selectedProfile.accountId,
+        reason: this.banForm.get('reason')!.value,
+      };
+      this.blacklistService.blacklistAndDeleteAccount(req).subscribe(
+        () => {
+          this.modalService.dismissAll();
+          this.submittingBan = false;
+          this.toastService.successAndNavigate('Successfully blacklisted the user.', '/respite');
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          this.submittingBan = false;
+        }
+      );
+    } else if (this.banForm.get('adminAction')?.value === 'suspend') {
+      const suspendReq: SuspendUserReq = {
+        accountId: this.selectedProfile.accountId,
+        reason: this.banForm.get('reason')!.value,
+        suspendForDays: this.banForm.get('suspendForDays')!.value,
+      };
 
-        this.blacklistService.suspendUser(susreq).subscribe(
-          () => {
-            this.toastService.success('Successfully suspended the user.');
-            this.router.navigate([`/respite`]);
-            this.modalService.dismissAll();
-            this.submittingBan = false;
-          },
-          (err) => {
-            this.toastService.httpError(err);
-            this.submittingBan = false;
-          }
-        );
-      }
+      this.blacklistService.suspendUser(suspendReq).subscribe(
+        () => {
+          this.toastService.successAndNavigate('Successfully suspended the user.', '/respite');
+          this.modalService.dismissAll();
+          this.submittingBan = false;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          this.submittingBan = false;
+        }
+      );
     }
   }
 
