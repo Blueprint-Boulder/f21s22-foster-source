@@ -9,8 +9,8 @@
           <div class="row profile-image-info">
             <div class="col-12 text-center mt-3">
               <p>
-                <b>{{ selectedProfile.preferredName }}</b
-                ><br />
+                <b>{{ selectedProfile.preferredName }}</b>
+                <br />
                 <span>{{ selectedProfile.account.username }}</span>
                 <br />
                 <i
@@ -31,12 +31,22 @@
                 >
               </p>
             </div>
-
-            <!--    // TODO: TREVOR        -->
-            <div class="col-6 report-col"></div>
-
-            <!--    // TODO: TAHIRA        -->
-            <div class="col-6 moderate-col"></div>
+          </div>
+          <div class="row mb-3 mt-1" *ngIf="!isOwnProfile">
+            <div class="col report-col col-12 text-center">
+              <i
+                class="bi bi-flag-fill pointer text-muted"
+                title="Report This Profile"
+                (click)="openModal(reportModal)"
+              ></i>
+              <span *ngIf="isMod">
+                &nbsp;&nbsp;&nbsp;&nbsp;<i
+                  class="bi bi-shield-fill-x text-muted pointer"
+                  title="Remove This User"
+                  (click)="openModal(modRemoveModal)"
+                ></i>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -310,6 +320,7 @@
         <div class="input-group">
           <div class="input-group-append contact-modal">
             <h3>Contact Information</h3>
+            <!-- {{ selectedProfile.preferredName }} add this maybe?-->
             <p>
               <i
                 >Ensure that you have read and fully understand the <a href="/help">site rules</a> before contacting
@@ -379,5 +390,123 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal2.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- Report Modal -->
+<ng-template #reportModal let-reportModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-report">Report This Profile</h4>
+    <button type="button" class="close" aria-label="Close" (click)="reportModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="report-body"
+        >Why are you reporting this profile?<br /><small
+          >Please include as much detail as possible so that staff can accurately assess whether to take administrative
+          action against the profile (if necessary).</small
+        ></label
+      >
+      <textarea class="form-control" id="report-body" rows="4" [(ngModel)]="reportDescription"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="reportModal.close('Save click')">Close</button>
+    <button
+      class="btn btn-secondary"
+      (click)="reportProfile()"
+      [disabled]="reportDescription === '' || !reportDescription || submittingReport"
+    >
+      Report Profile
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #modRemoveModal let-modRemoveModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title-remove">Moderate This User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modRemoveModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Ensure that you are certain that you'd like to moderate this user. This action cannot be undone.</p>
+    <form [formGroup]="banForm">
+      <div class="form-group">
+        <label for="remove-reason"><b>Reason for moderation of user</b><span class="required-star">*</span></label>
+        <textarea class="form-control" id="remove-reason" rows="3" formControlName="reason"></textarea>
+        <div *ngIf="banForm.get('reason')?.invalid && (banForm.get('reason')?.dirty || banForm.get('reason')?.touched)">
+          <small *ngIf="banForm.get('reason')?.errors?.required" class="input-error"
+            >Please enter a reason for removal.<br
+          /></small>
+        </div>
+      </div>
+      <div class="form-group">
+        <p></p>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="adminAction"
+            formControlName="adminAction"
+            value="blacklist"
+            id="shouldBlacklist"
+          />
+          <label class="form-check-label" for="shouldBlacklist">Blacklist User</label>
+        </div>
+        <div class="form-check m-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="adminAction"
+            formControlName="adminAction"
+            value="suspend"
+            id="shouldSuspend"
+          />
+          <label class="form-check-label" for="shouldSuspend">Suspend User</label>
+        </div>
+        <div
+          *ngIf="
+            banForm.get('adminAction')?.invalid &&
+            (banForm.get('adminAction')?.dirty || banForm.get('adminAction')?.touched)
+          "
+        >
+          <small *ngIf="banForm.get('adminAction')?.errors?.required" class="input-error"
+            >Please pick an administrative action.<br
+          /></small>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="shouldShowSuspendForm">
+        <label for="suspendTime"
+          ><b>How many days would you like to suspend the user for?</b><span class="required-star">*</span></label
+        >
+        <input
+          class="form-control p-1 m-0 bottom-border-input"
+          id="suspendTime"
+          type="number"
+          placeholder="# of days"
+          formControlName="suspendForDays"
+        />
+        <div
+          *ngIf="
+            banForm.get('suspendForDays')?.invalid &&
+            (banForm.get('suspendForDays')?.dirty || banForm.get('suspendForDays')?.touched)
+          "
+        >
+          <small *ngIf="banForm.get('suspendForDays')?.errors?.required" class="input-error"
+            >Please enter how long you'd like to suspend the user for.<br
+          /></small>
+          <small *ngIf="banForm.get('suspendForDays')?.errors?.min" class="input-error"
+            >Value must be at least 1 day.<br
+          /></small>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modRemoveModal.close('Save click')">Close</button>
+    <button class="btn btn-secondary" (click)="moderateProfile()" [disabled]="submittingBan">Remove User</button>
   </div>
 </ng-template>

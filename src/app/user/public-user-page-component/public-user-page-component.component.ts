@@ -1,4 +1,5 @@
 import { AvailabilityService } from '../../services/availability-service/availability.service';
+import { BlacklistAccountReq, SuspendUserReq } from '../../models/blacklisted-user.model';
 import { BlacklistService } from '../../services/blacklist-service/blacklist.service';
 import { Availability, SimpleAvailability } from '../../models/availability.model';
 import { ProfileService } from 'src/app/services/profile-service/profile.service';
@@ -8,10 +9,11 @@ import { FullProfileRes } from 'src/app/models/get-profile-by-id.models';
 import { AuthService } from '../../services/auth-service/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProfileUtils } from '../../common/utils/ProfileUtils';
+import { ReportProfileReq } from '../../models/profile.model';
 import { ImageUtils } from '../../common/utils/ImageUtils';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormUtils } from '../../common/utils/FormUtils';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { formatDate } from '@angular/common';
 
 @Component({
@@ -26,17 +28,16 @@ export class PublicUserPageComponentComponent implements OnInit {
   public isAvailable = false;
   public profileImgSrc = 'assets/images/blank-profile-photo.jpg';
 
-  // TODO: FOR TREVOR
-  public reportDescription: string; // SHOULD BE ASSIGNED TO THE MODAL'S [(ngModel)]
-  public submittingReport = false; // Used to disable the button when developing
+  public reportDescription: string;
+  public submittingReport = false;
 
-  // TODO: FOR TAHIRA
-  public banForm: FormGroup; // SET AS FORM GROUP (note that the names are different than in the thread-reply example!)
-  public shouldShowSuspendForm = false; // When the user chooses to suspend, another text field pops up that asks how long they'd like to suspend for
-  public submittingBan = false; // Used for disabling the button when waiting on the network call to ban the user
+  public banForm: FormGroup;
+  public shouldShowSuspendForm = false;
+  public submittingBan = false;
   public isMod = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private profileService: ProfileService,
@@ -53,11 +54,10 @@ export class PublicUserPageComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = params['id'];
+      const id = params['id']; // is this still needed?
       if (id === undefined || id === null) {
         this.profileService.getCurrentProfile().subscribe(
           (p) => {
-            console.log(p);
             this.selectedProfile = p;
             this.isOwnProfile = true;
             this.profileImgSrc = this.getProfileSrc();
@@ -74,6 +74,7 @@ export class PublicUserPageComponentComponent implements OnInit {
             this.selectedProfile = p;
             this.getAvailability();
             this.profileImgSrc = this.getProfileSrc();
+            this.isMod = this.authService.isAtLeastMod();
           },
           (err) => {
             this.toastService.httpError(err);
@@ -128,25 +129,74 @@ export class PublicUserPageComponentComponent implements OnInit {
     return FormUtils.prettifyValidPhoneNumber(pn);
   }
 
-  // TODO: FOR BOTH: the openModal and form reset functions have been provided!
-
-  // TODO: TREVOR
   reportProfile(): void {
-    // thread-reply.component.ts line 182
-    // Utilize this.profileService.reportProfile
-    // on success, use toast service to say successful, then close modal
+    this.submittingReport = true;
+    const req: ReportProfileReq = {
+      description: this.reportDescription,
+      profileId: this.selectedProfile.id, // figure out what you need to do to get the profile id
+    };
+    this.profileService.reportProfile(req).subscribe(
+      () => {
+        this.toastService.success('Thank you for submitting your report, staff will look into it shortly.');
+        this.reportDescription = '';
+        this.modalService.dismissAll();
+        this.submittingReport = false;
+      },
+      (err) => {
+        this.toastService.httpError(err);
+        this.submittingReport = false;
+      }
+    );
   }
 
-  // TODO: TAHIRA
-  // TODO: Look at the resetForm function: your form is instantiated there.
   moderateProfile(): void {
-    // check if form is invalid
-    // if valid
-    // determine if they've chosen to blacklist
-    // if they want to blacklist, confirm! thread-reply.component.ts line 237
-    // if they confirm, utilize this.blacklistService.blacklistUserByAccountId
-    // if they want to suspend, utilize this.blacklistService.suspendUserReq
-    // On success of either, show a toastService success message and navigate to /respite
+    if (this.banForm.invalid) {
+      this.banForm.markAllAsTouched();
+      return;
+    }
+    if (
+      this.banForm.get('adminAction')?.value === 'blacklist' &&
+      prompt(
+        'Are you certain you\'d like to blacklist this user? Their account (along with all associated forum posts and replies) will be deleted and they will be unable to reapply. To verify that this is the correct action, type "confirm"'
+      ) !== 'confirm'
+    ) {
+      return;
+    } else if (this.banForm.get('adminAction')?.value === 'blacklist') {
+      this.submittingBan = true;
+      const req: BlacklistAccountReq = {
+        accountId: this.selectedProfile.accountId,
+        reason: this.banForm.get('reason')!.value,
+      };
+      this.blacklistService.blacklistAndDeleteAccount(req).subscribe(
+        () => {
+          this.modalService.dismissAll();
+          this.submittingBan = false;
+          this.toastService.successAndNavigate('Successfully blacklisted the user.', '/respite');
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          this.submittingBan = false;
+        }
+      );
+    } else if (this.banForm.get('adminAction')?.value === 'suspend') {
+      const suspendReq: SuspendUserReq = {
+        accountId: this.selectedProfile.accountId,
+        reason: this.banForm.get('reason')!.value,
+        suspendForDays: this.banForm.get('suspendForDays')!.value,
+      };
+
+      this.blacklistService.suspendUser(suspendReq).subscribe(
+        () => {
+          this.toastService.successAndNavigate('Successfully suspended the user.', '/respite');
+          this.modalService.dismissAll();
+          this.submittingBan = false;
+        },
+        (err) => {
+          this.toastService.httpError(err);
+          this.submittingBan = false;
+        }
+      );
+    }
   }
 
   openModal(modal: any): void {
