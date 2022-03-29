@@ -18,8 +18,7 @@ export class EditThreadComponent implements OnInit {
     private authService: AuthService,
     private forumService: ForumService,
     private toastService: ToastService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
