@@ -122,7 +122,6 @@ export interface PostReplyReq {
 }
 
 export interface UpdateReplyReq {
-  threadId: number;
   replyId: number;
   body?: string;
 }
