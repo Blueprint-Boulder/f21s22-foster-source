@@ -17,6 +17,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { NgModule } from '@angular/core';
 import { ThreadSummaryComponent } from './thread-summary/thread-summary.component';
 import { AppModule } from '../app.module';
+import { EditReplyComponent } from './edit-reply/edit-reply.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AppModule } from '../app.module';
     EditThreadComponent,
     CreateThreadComponent,
     TopicPageComponent,
+    EditReplyComponent,
   ],
   imports: [
     CommonModule,

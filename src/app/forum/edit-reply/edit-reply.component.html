@@ -1,0 +1,19 @@
+<div class="container" *ngIf="reply">
+  <div class="row title-row mt-5 border-bottom pb-4">
+    <div class="col-12">
+      <h1>Edit Your Reply</h1>
+      <p>
+        Other users will be able to see that your reply has been edited. Replies to your reply will not reflect any
+        changes that you make here.
+      </p>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <app-editor (richTextChange)="bodyChange($event)" [html]="reply.body"> </app-editor>
+  </div>
+  <div class="col-12 submit-row mt-5">
+    <button (click)="onSubmit()" class="btn btn-primary float-right text-white" [disabled]="submittingForm">
+      Update Reply
+    </button>
+  </div>
+</div>

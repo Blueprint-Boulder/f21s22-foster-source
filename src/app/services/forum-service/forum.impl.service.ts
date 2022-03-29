@@ -168,11 +168,9 @@ export class ForumImplService implements ForumService {
   }
 
   updateReply(req: UpdateReplyReq): Observable<Reply> {
-    return this.http.put<Reply>(
-      `${environment.backendHost}/api/db/forum/threads/${req.threadId}/replies/${req.replyId}`,
-      req,
-      { withCredentials: true }
-    );
+    return this.http.put<Reply>(`${environment.backendHost}/api/db/forum/threads/replies/${req.replyId}`, req, {
+      withCredentials: true,
+    });
   }
 
   reportReply(req: ReportReplyReq): Observable<any> {

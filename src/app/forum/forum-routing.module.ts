@@ -9,6 +9,7 @@ import { ForumComponent } from './forum/forum.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ModGuard } from '../guards/mod/mod.guard';
 import { NgModule } from '@angular/core';
+import { EditReplyComponent } from './edit-reply/edit-reply.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: 'edit-thread/:id',
     component: EditThreadComponent,
+    canActivate: [LoggedInGuard],
+  },
+  {
+    path: 'edit-reply/:id',
+    component: EditReplyComponent,
     canActivate: [LoggedInGuard],
   },
   {
